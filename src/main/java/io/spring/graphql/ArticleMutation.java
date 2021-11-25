@@ -50,7 +50,7 @@ public class ArticleMutation {
             .title(input.getTitle())
             .description(input.getDescription())
             .body(input.getBody())
-            .header(input.getHeader())
+            .address(input.getAddress())
             .tagList(input.getTagList() == null ? Collections.emptyList() : input.getTagList())
             .build();
     Article article = articleCommandService.createArticle(newArticleParam, user);
@@ -72,7 +72,7 @@ public class ArticleMutation {
     article =
         articleCommandService.updateArticle(
             article,
-            new UpdateArticleParam(params.getTitle(), params.getBody(),params.getHeader(),params.getDescription()));
+            new UpdateArticleParam(params.getTitle(), params.getBody(), params.getDescription()));
     return DataFetcherResult.<ArticlePayload>newResult()
         .data(ArticlePayload.newBuilder().build())
         .localContext(article)
