@@ -17,12 +17,12 @@ public class ArticleData implements io.spring.application.Node {
   private String title;
   private String description;
   private String body;
-  private String header;
   private boolean favorited;
   private int favoritesCount;
   private DateTime createdAt;
   private DateTime updatedAt;
   private List<String> tagList;
+ // private String address;
 
   @JsonProperty("author")
   private ProfileData profileData;
