@@ -15,7 +15,7 @@ public class Todo {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+	private long todoId;
 
 	private String userName;
 
@@ -28,42 +28,69 @@ public class Todo {
 		super();
 	}
 
-	public Todo(String user, String desc, Date targetDate, boolean isDone) {
+	public Todo(final String user, final String desc,final Date targetDate, final boolean isDone) {
 		super();
 		this.userName = user;
 		this.description = desc;
 		this.targetDate = targetDate;
 	}
 
-	public long getId() {
-		return id;
+	/**
+	 * @return the todoId
+	 */
+	public long getTodoId() {
+		return todoId;
 	}
 
-	public void setId(long id) {
-		this.id = id;
+	/**
+	 * @param todoId the todoId to set
+	 */
+	public void setTodoId(final long todoId) {
+		this.todoId = todoId;
 	}
 
+	/**
+	 * @return the userName
+	 */
 	public String getUserName() {
 		return userName;
 	}
 
+	/**
+	 * @param userName the userName to set
+	 */
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
 
+	/**
+	 * @return the description
+	 */
 	public String getDescription() {
 		return description;
 	}
 
+	/**
+	 * @param description the description to set
+	 */
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
+	/**
+	 * @return the targetDate
+	 */
 	public Date getTargetDate() {
 		return targetDate;
 	}
 
-	public void setTargetDate(Date targetDate) {
+	/**
+	 * @param targetDate the targetDate to set
+	 */
+	public void setTargetDate(final Date targetDate) {
 		this.targetDate = targetDate;
 	}
+
+	
+
 }
