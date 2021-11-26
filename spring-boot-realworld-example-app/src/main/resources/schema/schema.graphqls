@@ -47,7 +47,6 @@ schema {
 type Article {
     author: Profile!
     body: String!
-    header:String!
     comments(first: Int, after: String, last: Int, before: String): CommentsConnection
     createdAt: String!
     description: String!
@@ -57,6 +56,7 @@ type Article {
     tagList: [String],
     title: String!
     updatedAt: String!
+    address:String!
 }
 
 type ArticleEdge {
@@ -109,7 +109,6 @@ type Profile {
     articles(first: Int, after: String, last: Int, before: String): ArticlesConnection
     favorites(first: Int, after: String, last: Int, before: String): ArticlesConnection
     feed(first: Int, after: String, last: Int, before: String): ArticlesConnection
-   
 }
 
 ### User
@@ -136,17 +135,17 @@ type ErrorItem {
 # Input types.
 input UpdateArticleInput {
     body: String
-    header:String
     description: String
     title: String
+    address:String
 }
 
 input CreateArticleInput {
     body: String!
-    header:String!
     description: String!
     tagList: [String]
     title: String!
+    address:String!
 }
 
 type ArticlePayload {

@@ -14,9 +14,9 @@ create table articles (
   title varchar(255),
   description text,
   body text,
-  header text,
   created_at TIMESTAMP NOT NULL,
-  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  address varchar(255)
 );
 
 create table article_favorites (
