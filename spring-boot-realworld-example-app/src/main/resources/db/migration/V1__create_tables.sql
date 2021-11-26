@@ -14,9 +14,9 @@ create table articles (
   title varchar(255),
   description text,
   body text,
-  header text,  created_at TIMESTAMP NOT NULL,
-  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  address varchar(255)
+  header text,
+  created_at TIMESTAMP NOT NULL,
+  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
 create table article_favorites (
@@ -30,7 +30,7 @@ create table follows (
   follow_id varchar(255) not null
 );
 
-create table tags ( 
+create table tags (
   id varchar(255) primary key,
   name varchar(255) not null
 );

@@ -21,36 +21,39 @@ public class Article {
   private String title;
   private String description;
   private String body;
-  private String address;
   private List<Tag> tags;
   private DateTime createdAt;
   private DateTime updatedAt;
-
+  private String header;
+  
+ 
+  
   public Article(
-      String title, String description, String body, List<String> tagList, String userId) {
-    this(title, description, body, tagList, userId, new DateTime());
+      String title,String header, String description, String body, List<String> tagList, String userId) {
+    this(title,header, description, body, tagList, userId, new DateTime());
   }
 
   public Article(
       String title,
       String description,
       String body,
+       String header,
       List<String> tagList,
       String userId,
       DateTime createdAt) {
     this.id = UUID.randomUUID().toString();
     this.slug = toSlug(title);
     this.title = title;
+    this.header = header;
     this.description = description;
     this.body = body;
     this.tags = new HashSet<>(tagList).stream().map(Tag::new).collect(toList());
     this.userId = userId;
-    this.createdAt = createdAt; 
+    this.createdAt = createdAt;
     this.updatedAt = createdAt;
-    this.address=address;
   }
 
-  public void update(String title, String description, String body) {
+  public void update(String title, String description, String body,String header) {
     if (!Util.isEmpty(title)) {
       this.title = title;
       this.slug = toSlug(title);
@@ -64,30 +67,12 @@ public class Article {
       this.body = body;
       this.updatedAt = new DateTime();
     }
+    if (!Util.isEmpty(header)) {
+        this.header = header;
+        this.updatedAt = new DateTime();
+      }
   }
 
-  public Article(
-	      String title, String description, String body, List<String> tagList, String userId,String address) {
-	    this(title, description, body, tagList, userId, new DateTime(),address);
-	  }
-  public Article(
-	      String title,
-	      String description,
-	      String body,
-	      List<String> tagList,
-	      String userId,
-	      DateTime createdAt,String address) {
-	    this.id = UUID.randomUUID().toString();
-	    this.slug = toSlug(title);
-	    this.title = title;
-	    this.description = description;
-	    this.body = body;
-	    this.tags = new HashSet<>(tagList).stream().map(Tag::new).collect(toList());
-	    this.userId = userId;
-	    this.createdAt = createdAt; 
-	    this.updatedAt = createdAt;
-	    this.address=address;
-	  }
   public static String toSlug(String title) {
     return title.toLowerCase().replaceAll("[\\&|[\\uFE30-\\uFFA0]|\\â€™|\\â€�|\\s\\?\\,\\.]+", "-");
   }
