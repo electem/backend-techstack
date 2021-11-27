@@ -15,7 +15,7 @@ public class Todo {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long todoId;
+	private long id;
 
 	private String userName;
 
@@ -38,15 +38,15 @@ public class Todo {
 	/**
 	 * @return the todoId
 	 */
-	public long getTodoId() {
-		return todoId;
+	public long getId() {
+		return id;
 	}
 
 	/**
 	 * @param todoId the todoId to set
 	 */
-	public void setTodoId(final long todoId) {
-		this.todoId = todoId;
+	public void setId(final long id) {
+		this.id = id;
 	}
 
 	/**
