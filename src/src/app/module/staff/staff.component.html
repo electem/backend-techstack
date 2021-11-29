@@ -1,0 +1,23 @@
+<html>
+  <body>
+    <div>
+      FIRST NAME
+      <input type="text" #ID (keyup)="T(ID.value)" />
+      <br />
+      <br />
+      SECOND NAME
+      <input type="text" #ID1 (keydown)="T(ID1.value)" />
+      <br />
+      <br />
+      THIRD NAME
+      <input type="text" #ID2 (input)="T(ID2.value)" />
+      <br />
+      <br />
+      FIFTH NAME
+      <input type="text" #ID3 (blur)="T(ID3.value)" />
+      <br />
+      <br />
+      <button (click)="T('JOHN')">click</button>
+    </div>
+  </body>
+</html>
