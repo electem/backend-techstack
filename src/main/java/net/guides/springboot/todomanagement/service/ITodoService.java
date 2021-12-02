@@ -7,18 +7,22 @@ import java.util.Optional;
 
 import net.guides.springboot.todomanagement.model.Todo;
 
+/**
+ * @author elect
+ *
+ */
 public interface ITodoService {
 
-	List<Todo> getTodosByUser(String user);
+	List<Todo> getTodosByUser(final String user);
 
-	Optional<Todo> getTodoById(long id);
+	Optional<Todo> getTodoById(final long todoId);
 
 	void updateTodo(Todo todo);
 
-	void addTodo(String name, String desc, Date targetDate, boolean isDone);
+	void addTodo(final String name,final  String desc, final Date targetDate, final boolean isDone);
 
-	void deleteTodo(long id);
+	void deleteTodo(final long todoId);
 	
-	void saveTodo(Todo todo);
+	void saveTodo(final Todo todo);
 
 }
