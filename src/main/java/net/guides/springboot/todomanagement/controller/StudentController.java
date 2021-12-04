@@ -2,7 +2,7 @@
  * 
  */
 package net.guides.springboot.todomanagement.controller;
-
+import java.io.IOException;
 import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import net.guides.springboot.todomanagement.model.Student;
 import net.guides.springboot.todomanagement.service.RoleService;
@@ -47,7 +48,6 @@ public class StudentController {
 			if (roleName.equals("admin") && student!=null) {
 				createStudent = studentService.createStudent(student);
 				studentService.sendMail(student);
-				
 			}
 		} catch (Exception exception) {
 			logger.error("StudentController :: createStudent :: student details Required "+exception.getMessage());
@@ -61,7 +61,7 @@ public class StudentController {
 	 * @return
 	 */
 	@RequestMapping(value = "/update-student/{studentId}", method = RequestMethod.GET)
-	public Student updateStudent(final @PathVariable long studentId)
+	public void updateStudent(final @PathVariable long studentId)
 	{
 		logger.info("Start of StudentController :: updateStudent ");
 		try {
@@ -69,10 +69,30 @@ public class StudentController {
 				studentService.updateStudent(studentId);
 				studentService.saveToFile(studentId);
 			}
-		} catch (Exception e) {
-			logger.error("StudentController :: updateStudent :: student Id Required " + e.getMessage());
+		} catch (Exception exception) {
+			logger.error("StudentController :: updateStudent :: student Id Required " + exception.getMessage());
 		}
 		logger.info("end of StudentController :: updateStudent ");
-		return null;
+	}
+	/**
+	 * @param studentName
+	 * @return
+	 * @throws IOException 
+	 */
+	@RequestMapping(value = "/readFile", method = RequestMethod.GET)
+	public String readFile(final @RequestParam String name) throws IOException
+	{
+		logger.info("start of StudentController :: readFile "+name);
+		String json = null;
+		try {
+			if(name !=null)
+			{
+				json = studentService.readFile(name);
+			}
+		} catch (Exception exception) {
+			logger.error("StudentController :: readFile :: name is Required " + exception.getMessage());
+		}
+		logger.info("end of StudentController :: readFile "+name);
+		return json;
 	}
 }

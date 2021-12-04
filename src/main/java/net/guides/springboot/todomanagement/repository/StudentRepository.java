@@ -35,4 +35,10 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
 	 */
 	@Query(value = "SELECT s.student_id,s.status,s.student_email,s.student_name FROM student s WHERE s.student_id=:studentId", nativeQuery = true)
 	public Student findStudentId(@Valid long studentId);
+	/**
+	 * search student name
+	 * @param studentName
+	 */
+	@Query(value = "SELECT  s.student_name FROM student s WHERE s.student_name=:studentName", nativeQuery = true)
+	public String searchStudent(String studentName);
 }

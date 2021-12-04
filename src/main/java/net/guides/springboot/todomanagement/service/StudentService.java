@@ -54,7 +54,6 @@ public class StudentService {
      * javaMailSender
      */
     private final JavaMailSender javaMailSender; 
-    
 	/**
 	 * creating the student
 	 * @param student
@@ -88,7 +87,7 @@ public class StudentService {
 		logger.info("start of StudentService :: sendMail ");
         final Context context = new Context();
         context.setVariable("student", student);
-        final String process = templateEngine.process("emails/welcome.html", context);
+        final String process = templateEngine.process("emails/students.html", context);
         logger.info("thymleaf "+process);
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
         final  MimeMessageHelper helper = new MimeMessageHelper(mimeMessage);
@@ -129,13 +128,12 @@ public class StudentService {
 	 */
 	public void saveToFile(final @Valid Long studentId) throws IOException, ParseException {
 		logger.info("start of StudentService :: saveToFile " + studentId);
-		final File directoryPath = new File(path);
 		try {
 			if(studentId!=0)
 			{
 				final String studentName = studentRepository.finByStudentId(studentId);
 				final List<String> subjects = studentRepository.finSubjectByStudentId(studentId);
-				final File filePath = new File(directoryPath, studentName + ".Json");
+				final File filePath = new File(new File(path), studentName + ".Json");
 				if (!filePath.exists()) {
 					filePath.createNewFile();
 				}
@@ -143,12 +141,30 @@ public class StudentService {
 				final String jsonList = gson.toJson(subjects);
 				// write the file
 				FileUtils.write(filePath, jsonList);
-				// read the file
-				final String readFileToString = FileUtils.readFileToString(filePath);
 			}
 		} catch (Exception exception) {
 			logger.error("StudentService :: saveToFile :: student Id require " + exception.getMessage());
 		}
 		logger.info("End of StudentService :: saveToFile " + studentId);
+	}
+	/**
+	 * @param name
+	 * @return 
+	 * @throws IOException 
+	 */
+	public String readFile(final String studentName) {
+		logger.info("End of StudentService :: readFile " + studentName);
+		final File filePath = new File(new File(path), studentName + ".Json");
+		final String searchStudent = studentRepository.searchStudent(studentName);
+		String readFileToString = null;
+		try {
+			if (filePath.exists() && searchStudent.equals(studentName)) {
+				//read the file
+				readFileToString = FileUtils.readFileToString(filePath);
+			}
+		} catch (Exception exception) {
+			logger.error("StudentService :: readFile :: student name not available" + exception.getMessage());
+		}
+		return readFileToString;
 	}
 }
