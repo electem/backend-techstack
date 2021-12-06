@@ -15,26 +15,19 @@ import net.guides.springboot.todomanagement.model.Student;
 @Repository
 public interface StudentRepository extends JpaRepository<Student, Long> {
 	/**
-	 * search student name 
-	 * @param studentId
-	 * @return
-	 */
-	@Query(value = "SELECT s.student_name FROM student s  WHERE s.student_id =:studentId ", nativeQuery = true)
-	public String finByStudentId(@Valid Long studentId);
-	/**
 	 * fetch subjects
-	 * @param 
-	 * @return
+	 * @param takes student Id
+	 * @return list of subjects
 	 */
 	@Query(value = "SELECT s.name FROM subject s WHERE s.st_id =:studentId ", nativeQuery = true)
-	public List<String> finSubjectByStudentId(@Valid Long studentId);
+	public List<String> finSubjectByStudentId(@Valid final Long studentId);
 	/**
 	 * find student
 	 * @param studentId
 	 * @return
 	 */
-	@Query(value = "SELECT s.student_id,s.status,s.student_email,s.student_name FROM student s WHERE s.student_id=:studentId", nativeQuery = true)
-	public Student findStudentId(@Valid long studentId);
+	@Query("SELECT s FROM Student s WHERE s.studentId=:studentId")
+	public Student findStudentId(@Valid final Long studentId);
 	/**
 	 * search student name
 	 * @param studentName

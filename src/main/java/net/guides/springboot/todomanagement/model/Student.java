@@ -26,18 +26,17 @@ public class Student {
 	/**
 	 * status 
 	 */
-	private String status = "register";
+	private String status = "REGISTER";
 	/**
 	 * @return the studentId
 	 */
 	public long getStudentId() {
 		return studentId;
 	}
-
 	/**
 	 * @param studentId the studentId to set
 	 */
-	public void setStudentId(long studentId) {
+	public void setStudentId(final Long studentId) {
 		this.studentId = studentId;
 	}
 
@@ -50,10 +49,9 @@ public class Student {
 	/**
 	 * @param studentName the studentName to set
 	 */
-	public void setStudentName(String studentName) {
+	public void setStudentName(final String studentName) {
 		this.studentName = studentName;
 	}
-
 	/**
 	 * @return the studentEmail
 	 */
@@ -63,15 +61,14 @@ public class Student {
 	/**
 	 * @param studentEmail the studentEmail to set
 	 */
-	public void setStudentEmail(String studentEmail) {
+	public void setStudentEmail(final String studentEmail) {
 		this.studentEmail = studentEmail;
 	}
-
 	/**
 	 * @param studentName
 	 * @param studentEmail
 	 */
-	public Student(String studentName, String studentEmail, String status) {
+	public Student(final String studentName,final String studentEmail, final String status) {
 		super();
 		this.studentName = studentName;
 		this.studentEmail = studentEmail;
@@ -86,7 +83,7 @@ public class Student {
 	/**
 	 * @param status the status to set
 	 */
-	public void setStatus(String status) {
+	public void setStatus(final String status) {
 		this.status = status;
 	}
 	/**
@@ -94,5 +91,6 @@ public class Student {
 	 */
 	public Student() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
 }
