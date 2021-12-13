@@ -3,6 +3,8 @@
  */
 package net.guides.springboot.todomanagement.exception;
 
+import lombok.Data;
+
 /**
  * @author elect
  *
@@ -10,15 +12,10 @@ package net.guides.springboot.todomanagement.exception;
 public class RoleNotFountExcpetion extends RuntimeException {
 
 	/**
-	 * serialVersionUID
+	 * 
 	 */
-	private static final long serialVersionUID = -6872848307079954189L;
+	private static final long serialVersionUID = 1L;
+
+
 	
-	public RoleNotFountExcpetion(final String exception) {
-	    super(exception);
-	  }
-
-	public RoleNotFountExcpetion() {	
-	}
-
 }

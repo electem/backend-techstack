@@ -6,10 +6,9 @@ import java.io.IOException;
 
 import javax.mail.MessagingException;
 import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
 
 import org.json.simple.parser.ParseException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import lombok.extern.slf4j.Slf4j;
 import net.guides.springboot.todomanagement.exception.RoleNotFountExcpetion;
 import net.guides.springboot.todomanagement.exception.StudentNotFoundException;
 import net.guides.springboot.todomanagement.model.Student;
@@ -28,8 +29,8 @@ import net.guides.springboot.todomanagement.service.StudentService;
  */
 @RestController
 @RequestMapping("/api")
+@Slf4j
 public class StudentController {
-    final private Logger logger = LoggerFactory.getLogger(StudentController.class);
 	/**
 	 * Inject studentService
 	 */
@@ -41,6 +42,14 @@ public class StudentController {
 	@Autowired
 	private RoleService roleService;
 	/**
+	 * roleName
+	 */
+	private String roleName;
+	/**
+	 * createStudent
+	 */
+	private Student createStudent;
+	/**
 	 * create student
 	 * @param takes student details
 	 * @return the student
@@ -48,29 +57,21 @@ public class StudentController {
 	 */
 	@RequestMapping(value = "/add-student/{roleId}", method = RequestMethod.POST)
 	public Student createStudent(@Valid @RequestBody final Student student,final @PathVariable long roleId) throws MessagingException {
-		logger.info("Start of StudentController :: createStudent ");
-		if(roleId == 0 || student == null) {
-			throw new RoleNotFountExcpetion("Role id or student fields required");
+		log.info("Start of StudentController :: createStudent ");
+		if(roleId != 0) {
+			roleName = roleService.getRoleName(roleId);
 		}
-		else {
-		final String roleName = roleService.getRoleName(roleId);
-		Student createStudent = null;
-		try {
-			if (roleName.equals("admin")) {
-				createStudent = studentService.createStudent(student);
-				studentService.sendMail(student);
-			}
-			else {
-				throw new RoleNotFountExcpetion();
-			}
+		if (roleName == null ||roleId ==0) {
+			throw new RoleNotFountExcpetion();
 		}
-		catch (RoleNotFountExcpetion exception) {
-			logger.error("StudentController :: createStudent :: role name not found " + exception.getMessage());
-			throw new RoleNotFountExcpetion("Sorry do not have permission !");
+		if ("ADMIN".equals(roleName)) {
+			createStudent = studentService.createStudent(student);
+			studentService.sendMail(student);
+		} else {
+			throw new RoleNotFountExcpetion();
 		}
-		logger.info("End of StudentController :: createStudent " + createStudent.getStudentId());
+		log.info("End of StudentController :: createStudent " + createStudent.getStudentId());
 		return createStudent;
-		}
 	}
 	/**
 	 * In this method update student status
@@ -79,21 +80,19 @@ public class StudentController {
 	 * @throws IOException 
 	 */
 	@RequestMapping(value = "/update-student", method = RequestMethod.GET)
-	public void updateStudent(final @RequestParam long studentId) throws IOException, ParseException {
-		logger.info("Start of StudentController :: updateStudent ");
+	public void updateStudent(final @RequestParam long studentId)  {
+		log.info("Start of StudentController :: updateStudent ");
 		try {
 			if (studentId != 0) {
 				studentService.updateStudent(studentId);
 				studentService.saveToFile(studentId);
-			}
-			else {
+			} else {
 				throw new StudentNotFoundException();
 			}
-		} catch (StudentNotFoundException exception) {
-			logger.error("StudentController :: updateStudent :: student Id Required " + exception.getMessage());
-			throw new StudentNotFoundException("Student id is required ");
+		} catch (IOException | ParseException exception) {
+			log.error("StudentController :: updateStudent :: student Id Required " + exception.getMessage());
 		}
-		logger.info("End of StudentController :: updateStudent ");
+		log.info("End of StudentController :: updateStudent ");
 	}
 	/**
 	 * @param studentName
@@ -101,21 +100,19 @@ public class StudentController {
 	 * @throws IOException 
 	 */
 	@RequestMapping(value = "/readFile", method = RequestMethod.GET)
-	public String readFile(final @RequestParam String name) throws IOException {
-		logger.info("Start of StudentController :: readFile " + name);
+	public String readFile(final @RequestParam(required = false) @Valid @NotEmpty String name) throws IOException {
+		log.info("Start of StudentController :: readFile " + name);
 		String subjects = null;
 		try {
 			if (name != null) {
 				subjects = studentService.readFile(name);
-			}
-			else {
+			} else {
 				throw new StudentNotFoundException();
 			}
-		} catch (Exception exception) {
-			logger.error("StudentController :: readFile :: name is Required " + exception.getMessage());
-			throw new StudentNotFoundException("Student name is required ");
+		} catch (IOException exception) {
+			log.error("StudentController :: readFile " + exception.getMessage());
+			throw new IOException(exception);
 		}
-		logger.info("End of StudentController :: readFile " + name);
 		return subjects;
 	}
 }

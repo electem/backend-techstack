@@ -6,6 +6,7 @@
 		<a type="button" class="btn btn-primary btn-md" href="/add-todo">Add Todo</a>
 	</div>
 	<br>
+	
 	<div class="panel panel-primary">
 		<div class="panel-heading">
 			<h3>List of TODO's</h3>
