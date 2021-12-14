@@ -70,11 +70,11 @@ public class StudentService {
 	public Student createStudent(final Student student) throws StudentNotFoundException {
 		log.info("Start of StudentService :: createStudent ");
 		Student saveStudent = null;
-		// Email check.
+		// Email is need.
 		if (student.getStudentEmail() != null) {
 			saveStudent = studentRepository.save(student);
 		} else {
-			throw new StudentNotFoundException("Student email id required");
+			throw new StudentNotFoundException("Student email id miss");
 		}
 		log.info("End of StudentService :: createStudent " + saveStudent);
 		return student;
@@ -144,9 +144,12 @@ public class StudentService {
 		final String jsonList = gson.toJson(subjects);
 		// write the file
 		try {
-			FileUtils.write(filePath, jsonList);
+			if (filePath.canWrite()) {
+				FileUtils.write(filePath, jsonList);
+			}
 		} catch (Exception e) {
 			throw new FileNotFoundException("File is not save");
+
 		}
 		log.info("End of StudentService :: saveToFile " + studentId);
 	}
@@ -159,7 +162,7 @@ public class StudentService {
 		final File filePath = new File(new File(path), studentName + ".Json");
 		String readFileToString = null;
 		//Checking file exists or not
-		if (filePath.exists()) {
+		if (filePath.exists() && filePath.canRead()) {
 			// read the file
 			try {
 				readFileToString = FileUtils.readFileToString(filePath);
