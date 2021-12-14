@@ -1,21 +1,16 @@
 /**
- * 
+ * @author elect
  */
 package net.guides.springboot.todomanagement.model;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-/**
- * @author elect
- *
- */
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 @Data
@@ -29,16 +24,17 @@ public class Student {
 	/**
 	 * student Name
 	 */
-	@NotBlank @Size(max = 100)
+	@NotBlank
+	@Size(max = 100)
 	private String studentName;
 	/**
-	 * student Email 
+	 * student Email
 	 */
 	@NotBlank(message = "Email is mandatory")
-    @Email
+	@Email
 	private String studentEmail;
 	/**
-	 * status 
+	 * status
 	 */
-	private String status="REGISTER";
+	private String status = "REGISTER";
 }
