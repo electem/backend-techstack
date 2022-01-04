@@ -1,0 +1,33 @@
+<p>Learning *ngForm </p>
+<p>{{title}}</p>
+<ul>
+    <li *ngFor = "let contact of contacts ;index as i ;first as fst;last as lst">
+        <div *ngIf ="fst" style="background-color: green;">this is first record</div>
+        {{ i }} {{ contact.firstName }} {{ contact.lastname }}
+        <div *ngIf ="lst" style="background-color: green;">this is last record</div>
+    </li>
+</ul>
+<p>new table with even and odd </p>
+<ul>
+    <li *ngFor = "let contact of contacts ;index as i ;even as e ;first as fst;odd as o">
+        <div *ngIf ="o" style="background-color: green">
+        {{ i }} {{ contact.firstName }} {{ contact.lastname }}</div>
+        <div *ngIf ="e" style="background-color: red"> {{ i }} {{ contact.firstName }} {{ contact.lastname }}</div>
+    </li>
+</ul>
+<div *ngIf ="isUserLogIn">
+    <div *ngFor = "let contact of contacts">{{ contact.firstName }} {{ contact.lastname }}</div>
+    </div>
+<h1>Contacts list</h1>
+    <table >
+        <tr>
+          <th>First name</th>
+          <th>Last name </th>
+          <th>Conatact number</th>
+        </tr>
+        <tr *ngFor = "let contact of contacts">
+          <td>{{ contact.firstName }}</td>
+          <td>{{ contact.lastname }}</td>
+          <td>{{ contact.number }}</td>
+        </tr>
+      </table>
