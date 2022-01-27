@@ -1,0 +1,32 @@
+
+<p>demo works!</p>
+
+<h1>{{ username }}</h1>
+
+<span>Change Name: </span><input (ngModel)="username">
+
+<h3>Posts: {{ allPosts }}</h3>
+<div>The value of the component class member 'value' is {{username}}.</div>
+<ul>
+    <div *ngFor="let post of allPosts; let i=index">
+    <button (click)="deletePost(i)">button</button>
+    <h6>{{ post.name }}</h6>
+    <h5>{{ post.groupID }}</h5>
+    <p>{{ post. delivery }}</p>
+
+</div>
+</ul>
+
+<h1>Structural Directive</h1>
+<!-- renders “<h1>Hello!</h1>” -->
+<div *ngIf="true">
+    <h1>Hello!</h1>
+  </div>
+
+  <!-- does not render -->
+<div *ngIf="false">
+    <h1>Hi!</h1>
+  </div>
+
+
+  <h1>Data binding</h1>
