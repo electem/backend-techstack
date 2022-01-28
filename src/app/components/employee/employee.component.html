@@ -1,0 +1,39 @@
+<p>employee works!</p>
+
+
+<div class ="container">
+    <div class = "card">
+        <h3 class="text-center"> Employee List</h3>
+        <div class = "card-body">
+            <table class="table table-striped">
+                <thead>
+                    <th >EmployeeId </th>
+                     <th >FirstName </th>
+                     <th >lastName</th>
+                      <th >Email</th>
+                      <th >Action</th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let employee of employees">
+                        <td>{{ employee.employeeId}}</td>
+                        <td>{{ employee.firstName }}</td>
+                        <td>{{ employee.lastName }}</td>
+                       <td>{{ employee.emailId }}</td>
+                       <td>
+                           <button (click)="deleteEmployee(employee.employeeId)"
+                            class='btn btn-primary'>
+                            <i class="fa fa-futboll-1">Delete</i>
+                        </button>
+                        </td>
+                        <td>
+                            <button (click)="updateEmployee(employee.employeeId)"
+                             class='btn btn-info'  routerLink="/edit/employee" >
+                             <i class="fa fa-futboll-0">Edit</i>
+                         </button>
+                         </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

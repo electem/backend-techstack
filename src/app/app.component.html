@@ -1,0 +1,53 @@
+﻿  
+<!-- nav -->
+    <!--
+<nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="user">
+    <div class="navbar-nav">
+        <a class="nav-item nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
+        <a class="nav-item nav-link" routerLink="/users" routerLinkActive="active">Users</a>
+        <a class="nav-item nav-link" routerLink="/menu" routerLinkActive="active">Menu</a>
+        <a class="nav-item nav-link" (click)="logout()">Logout</a>
+    </div>
+</nav>
+
+<!-- main app container -->
+    <!--
+<div class="app-container" [ngClass]="{ 'bg-light': user }">
+    <alert></alert>
+    <router-outlet></router-outlet>
+</div>
+
+<!-- credits -->
+    <!--
+<div class="text-center mt-4">
+    <p>
+        <a href="https://jasonwatmore.com/post/2020/07/18/angular-10-user-registration-and-login-example-tutorial" target="_top">User Registration and Login Example & Tutorial</a>
+    </p>
+    <p>
+        <a href="https://jasonwatmore.com" target="_top">electem.com</a>
+    </p>
+</div>
+ -->
+<div>
+    <nav class="navbar navbar-expand navbar-dark bg-dark">
+      <a href="#" class="navbar-brand">Electem</a>
+      <div class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a routerLink="tutorials" class="nav-link">Tutorials</a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="add" class="nav-link">Add</a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="employee" class="nav-link">Employee</a>
+        </li>
+        
+        <li class="nav-item">
+          <a routerLink="edit/employee" class="nav-link">Edit Employee</a>
+        </li>
+      </div>
+    </nav>
+    <div class="container mt-3">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
