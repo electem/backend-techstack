@@ -1,0 +1,49 @@
+<h1>student Registration</h1>
+<div class="submit-form">
+    <div *ngIf="!submitted">
+      <div class="form-group">
+        <label for="studentName">Student name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="studentName"
+          required
+          [(ngModel)]="student.studentName"
+          name="studentName"
+        />
+        <div class="form-group">
+            <label for="studentEmail">Email</label>
+            <input
+              class="form-control"
+              id="studentEmail"
+              required
+              [(ngModel)]="student.studentEmail"
+              name="emailId"
+            />
+      </div>
+      <div class="form-group">
+        <label for="password">password</label>
+        <input
+          class="form-control"
+          id="password"
+          required
+          [(ngModel)]="student.password"
+          name="password"
+        />
+      </div>
+    <div  class="form-group">
+      <label for="Course">course </label>
+     <select [(ngModel)]="selectedCourse" class="form-control" >
+      <option  disabled>Select course</option>
+      <option *ngFor="let course of listCourse" [ngValue]="course.courceName">{{course.courceName}}</option>
+    </select>
+  </div>
+      </div>
+      <button  type="button"  (click)="saveStudent()"  class="btn btn-outline-success">Submit</button>
+      <button type="button"  (click)="cancel()" class="btn btn-outline-danger" >Cancel</button>
+     </div>
+    </div>
+
+
+
+   
