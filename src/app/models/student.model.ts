@@ -3,5 +3,5 @@ export class Student {
     studentName?: string;
     studentEmail?: string;
     password?:string;
-    courceIdFK?:any;
+    courceFK?:any;
 }

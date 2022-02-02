@@ -8,6 +8,8 @@ import { Observable } from 'rxjs';
 export class StudentService {
   private  courseUrl ='http://localhost:8080/api/course/get/all';
   private  baseUrl = 'http://localhost:8080/api/add-student/1';
+  private  logIn='http://localhost:8080/api/logIn';
+  private   semester='http://localhost:8080/student/semester/get/all';
   constructor(private http: HttpClient) { }
   //get course
   getCource()
@@ -18,5 +20,14 @@ export class StudentService {
   //save employee
   create(data: any): Observable<Student> {
     return this.http.post(`${this.baseUrl}`, data);
+  }
+  //Login
+  login(data:any):Observable<any> {
+    return this.http.post(`${this.logIn}`, data);
+  }
+
+  //get semster
+  getSemester():any {
+    this.http.get(`${this.semester}`)
   }
 }
