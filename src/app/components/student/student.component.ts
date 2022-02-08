@@ -10,48 +10,45 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class StudentComponent implements OnInit {
   studentForm: FormGroup;
-  selectedCourse = null;
+  courseFk = null;
   students: Student[];
   submitted = false;
-  errorMsg='';
+  address = '';
+  errorMsg = '';
   listCourse;
   student: Student = {
-    studentId:'',
-    studentName: '',
-    studentEmail: '',
-    password:'',
-    courceIdFK :''
+    studentId : '',
+    studentName : '',
+    studentEmail : '',
+    password : ''
   };
   constructor(private studentService: StudentService,
-    private formBuilder: FormBuilder) { }
+              private formBuilder: FormBuilder) { }
 
   ngOnInit() {
     this.courseName();
-  };
+  }
 
-  courseName(): void
-  {
+  // fetch course
+  courseName(): void {
     this.studentService.getCource().subscribe((data) => {
       console.log(data);
       this.listCourse = data;
-       }); 
+       });
   }
-  //save the student 
-  saveStudent(){
+
+  // save the student
+  saveStudent() {
+    // course.subjectList = this.selectedSubjects;
+    // var courseIndex= this.listCourse.findIndex(course=>course.courceId===this.courseFk)
     const data = {
      studentName: this.student.studentName,
-     studentEmail: this.student.studentEmail, 
-     password:this.student.password,
-    course : {
-      courceName: this.selectedCourse
+     studentEmail: this.student.studentEmail,
+     password: this.student.password,
+     course: this.listCourse.find( cours => cours.courceId === this.courseFk),
+     address: {address: this.address
     }
     };
-    /* const data = {
-      "studentName": "anffand",
-       "studentEmail": "abdddc@gmail",
-       "password": "abcd",
-       "course": null,
-    };*/
     this.studentService.create(data)
       .subscribe(
         response => {
@@ -60,6 +57,6 @@ export class StudentComponent implements OnInit {
         },
         error => {
           console.log(error);
-        });     
+        });
   }
 }

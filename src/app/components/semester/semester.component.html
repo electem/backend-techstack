@@ -1,0 +1,23 @@
+<h1>Semester</h1>  
+  <div class='row'>
+    <div class='col'>
+       <!-- multi select drop down  subjects -->
+  <div> 
+    <label *ngFor="let sem of semesterList" [ngValue]="sem.semesterId" >{{ sem.semesterName }} SEM
+    <ng-multiselect-dropdown
+    [placeholder]="'select subjects'"
+    [settings]="dropdownSettings"
+    [data]="subjectList"
+    [(ngModel)]="selectedSubjects"
+    (onSelect)="onItemSelect($event)"
+    (onSelectAll)="onSelectAll($event)"
+    >
+  </ng-multiselect-dropdown>
+</label>
+</div>
+    </div>
+  </div>
+
+
+
+

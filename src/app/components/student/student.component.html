@@ -31,18 +31,36 @@
           name="password"
         />
       </div>
+    <!-- single select drop down  course -->
     <div  class="form-group">
       <label for="Course">course </label>
-     <select [(ngModel)]="selectedCourse" class="form-control" >
+     <select [(ngModel)]="courseFk" class="form-control" >
       <option  disabled>Select course</option>
-      <option *ngFor="let course of listCourse" [ngValue]="course.courceName">{{course.courceName}}</option>
+      <option *ngFor="let course of listCourse" [ngValue]="course.courceId">{{course.courceName}}</option>
     </select>
+   </div>
+    <div class="form-group">
+      <label for="address">Address</label>
+      <input
+        type="text"
+        class="form-control"
+        id="address"
+        required
+        [(ngModel)]="address"
+        name="address"
+      />
   </div>
       </div>
-      <button  type="button"  (click)="saveStudent()"  class="btn btn-outline-success">Submit</button>
-      <button type="button"  (click)="cancel()" class="btn btn-outline-danger" >Cancel</button>
+      <button  type="button"  (click)="saveStudent()"  class="btn btn-outline-success">Register</button>
+      <button type="button" class="btn btn-outline-success" routerLink="/log-in"  >Log In</button>
      </div>
     </div>
+    <div *ngIf="submitted" class="alert alert-success">
+      Successfully Register
+    </div>
+
+    
+    
 
 
 
