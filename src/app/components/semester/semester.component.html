@@ -7,7 +7,7 @@
     <ng-multiselect-dropdown
     [placeholder]="'select subjects'"
     [settings]="dropdownSettings"
-    [data]="subjectList"
+    [data]="getSubjectsListBysemester(sem.semesterId)"
     [(ngModel)]="selectedSubjects"
     (onSelect)="onItemSelect($event)"
     (onSelectAll)="onSelectAll($event)"
@@ -17,7 +17,3 @@
 </div>
     </div>
   </div>
-
-
-
-

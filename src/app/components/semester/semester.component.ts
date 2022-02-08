@@ -11,6 +11,8 @@ import { IDropdownSettings } from 'ng-multiselect-dropdown';
 export class SemesterComponent implements OnInit {
    semesterList = [];
    subjectList = [];
+   active;
+   sbjLst: any;
    semFk = null;
    course = [];
    condition = true;
@@ -54,17 +56,33 @@ export class SemesterComponent implements OnInit {
               allowSearchFilter: true
             };
            }
-
         onItemSelect(subject: any): void {
           console.log(this.selectedSubjects);
           }
           onSelectAll(subject: any): void {
            // this.selectedSubjects = this.selectedSubjects.filter(item => item !== item);
-            console.log(this.selectedSubjects);
+           console.log(this.selectedSubjects);
           }
           // fetch Semester List.
           getSemList(): void {
             // this.semesterList = this.subjectList.map(Data => Data.semester);
           }
 
+           // get subjests by semester Id
+          getSubjectsListBysemester(id: number): any {
+            this.active = true;
+            const subjects = new Array();
+            this.subjectList.map(subject => {
+            if (subject.semester.semesterId === id){
+            const sbjLst = (`{"subjectId":${subject.subjectId},"subjecName":"${subject.subjecName}"}`);
+            subjects.push(sbjLst);
+             }});
+            console.log('Before json ' + subjects);
+            const subjectBySemester = new Array();
+            // tslint:disable-next-line:forin
+            for (const index in subjects) {
+              subjectBySemester.push(JSON.parse(subjects[index]));
+                }
+            return subjectBySemester;
+          }
 }
