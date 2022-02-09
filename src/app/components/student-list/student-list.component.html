@@ -1,0 +1,37 @@
+<h1>Student-list!</h1>
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table">
+    <!-- Position Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef> Student Id No. </th>
+      <td mat-cell *matCellDef="let student"> {{student.studentId}} </td>
+    </ng-container>
+  
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let student"> {{student.studentName}} </td>
+    </ng-container>
+  
+    <!-- Weight Column -->
+    <ng-container matColumnDef="courseName">
+      <th mat-header-cell *matHeaderCellDef> Course </th>
+      <td mat-cell *matCellDef="let student"> {{student.course.courceName}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Action">
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        class="text-bold"
+        style="font-size: 14px; color: #778d9b"
+      >
+        Action
+      </th>
+      <td mat-cell *matCellDef="let student">
+        <button mdbBtn type="button" class="btn btn-outline-success" mdbWavesEffect >Edit</button>
+        <button type="button" mdbBtn color="danger" mdbWavesEffect (click)="deleteRow(student.studentId)">Delete</button>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>

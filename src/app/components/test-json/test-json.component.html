@@ -1,0 +1,22 @@
+<h1>Tables </h1>
+<mat-table #table [dataSource]="dataSource" class="mat-elevation-z8">
+      <ng-container
+        matColumnDef="{{ column }}"
+        *ngFor="let column of displayedColumns"
+      >
+        <mat-header-cell
+          class="custom-mat-header-styling tableHeaderCellDiv"
+          *matHeaderCellDef
+        >
+          {{ column }}
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            <div [innerHTML]="element[column]">
+            </div>
+            &nbsp;
+          </mat-cell>
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+    </mat-table>
+
