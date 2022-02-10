@@ -1,22 +1,37 @@
-<h1>Tables </h1>
-<mat-table #table [dataSource]="dataSource" class="mat-elevation-z8">
-      <ng-container
-        matColumnDef="{{ column }}"
-        *ngFor="let column of displayedColumns"
-      >
-        <mat-header-cell
-          class="custom-mat-header-styling tableHeaderCellDiv"
-          *matHeaderCellDef
-        >
-          {{ column }}
-        </mat-header-cell>
-        <mat-cell *matCellDef="let element">
-            <div [innerHTML]="element[column]">
-            </div>
-            &nbsp;
-          </mat-cell>
-      </ng-container>
-      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
-    </mat-table>
-
+<div>
+  <article class="table-header">
+    <button class="button-add-row" mat-button (click)="addRow()">Add Row</button>
+  </article>
+<table mat-table [dataSource]="dataSource">
+    <ng-container [matColumnDef]="col" *ngFor="let col of displayedColumns">
+      <th mat-header-cell *matHeaderCellDef>
+        <span *ngIf="col !== 'isEdit'">
+          {{col}}
+        </span>
+      </th>
+      <td mat-cell *matCellDef="let element">
+        <div [ngSwitch]="dataSchema[col]" *ngIf="!element.isEdit">
+          <div class="btn-edit" *ngSwitchCase="'isEdit'" >
+            <button (click)="element.isEdit = !element.isEdit">Edit</button>
+            <button (click)="deleteRow(element.CustomerID)">Delete</button>
+          </div>
+          <span *ngSwitchDefault>
+            {{element[col]}}
+          </span>
+        </div>
+        <div *ngIf="element.isEdit">
+          <div class="btn-edit" *ngIf="col === 'isEdit'; else dataField">
+            <button (click)="updateRow(element) ; element.isEdit = !element.isEdit" >Done</button>
+          </div>
+          <ng-template #dataField>
+            <mat-form-field *ngIf="col !== 'RowID'">
+              <input [type]="dataSchema[col]" matInput [(ngModel)]="element[col]">
+            </mat-form-field>
+          </ng-template>
+        </div>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>

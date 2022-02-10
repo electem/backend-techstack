@@ -19,10 +19,22 @@ import { TutorialsListComponent } from './components/tutorials-list/tutorials-li
 import { EmployeeComponent } from './components/employee/employee.component';
 import { EditEmployeeComponent } from './components/edit-employee/edit-employee.component';
 import { MessageBoxComponent } from './components/message-box/message-box.component';
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { MatDialogModule } from "@angular/material/dialog";
-import { MatButtonModule } from "@angular/material/button";;
-import { StudentComponent } from './components/student/student.component'
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { MatDialogModule } from '@angular/material/dialog';
+
+import { MatButtonModule } from '@angular/material/button';
+
+import { StudentComponent } from './components/student/student.component';
+import {MatTableModule} from '@angular/material/table'
+import { LoginComponent } from './components/login/login.component';
+import { SemesterComponent } from './components/semester/semester.component';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { StudentListComponent } from './components/student-list/student-list.component';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import { TestJsonComponent } from './components/test-json/test-json.component';
+import { DynamicTableComponent } from './components/dynamic-table/dynamic-table.component';
 @NgModule({
     imports: [
         BrowserModule,
@@ -33,7 +45,10 @@ import { StudentComponent } from './components/student/student.component'
         BrowserModule,
         MatDialogModule,
         MatButtonModule,
-        BrowserAnimationsModule
+        BrowserAnimationsModule,
+        MatTableModule,
+        MatPaginatorModule,
+        NgMultiSelectDropDownModule.forRoot()
     ],
     declarations: [
         AppComponent,
@@ -46,8 +61,12 @@ import { StudentComponent } from './components/student/student.component'
         EmployeeComponent ,
         EditEmployeeComponent,
         MessageBoxComponent,
-        StudentComponent],
-        
+        StudentComponent,
+        LoginComponent,
+        SemesterComponent,
+        StudentListComponent,
+        TestJsonComponent,
+        DynamicTableComponent],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
