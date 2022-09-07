@@ -1,0 +1,49 @@
+below are the topics covered in angular:
+1) Angular Basics, Installation and Routings
+ Folder Structure, usage of packageJson and Assets
+Create Components, Service, Html and css [Using Commands]
+2) Build and Run Existing projectBuild
+Run commands to build/run app--npm install, npm start, npm build --prod,
+3) Declare Variables and Types, Methods, Access Service methods
+4)BuiltIn Directive : ngOnInit, ngFor, ngModel, ngClick
+5) Input Field, Select Dropdown, Multiselect Dropdown
+6) Component and Routing >
+7) 	Creating routing module
+	Roter-outlet declaration, Routing component configuration
+	Creating new menu and navigate
+8)Input Form declaration
+9) Data binding two-way, Event Clicks
+10) Form validation
+11) success, info,error, warning, display message(toaster)
+12)  Declare an object, Injecting service and its methods , Assign data to object, reading object in html
+13)  Declare an Array, Assign data to array, reading array in html , Looping object and array
+14) Stringify and Parse the data with JsonStringify, JsonParse method
+15)  Delete popup implementation, Delete rest api
+16)  Create Intercept component, Inject in NgModule
+17) Angular crud
+18) data table
+19 ) pagination
+20) searching
+21)String Functions
+22) Array Functions
+23) File upload,download,dispaly
+24) wizard implementation (need to resolve issue)
+
+`
+ 1) Aync flow, Subscribe , Observables, Error
+ 2) Pass data between component
+ 3)Search and selection of plugins
+ 4)Angular Maps/Google Map
+ 5)Angular Charts/Plugins
+ 6) centralize object in application
+ 7)cascade update and delete
+ 
+ 
+ 
+ 
+ Shivraj
+ Today Status:
+studied about the Rack Management system project
+ 
+ https://www.bezkoder.com/angular-12-multiple-image-upload-preview/
+ https://material.angular.io/components/form-field/overview#custom-form-field-controls

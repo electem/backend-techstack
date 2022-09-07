@@ -1,0 +1,26 @@
+<div class="form-group">
+    <label for="title">Comment Description</label>
+    <input type="text" id="commentDescription" class="form-control" [(ngModel)]="this.comment.commentDescription">
+</div>
+<button type="submit" class="btn btn-info btn-sm mr-2" (click)="saveComments()"> Submit </button>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">CommentDescription</th>
+            <th scope="col">CreatDate</th>
+            <th scope="col">Tutorial_id</th>
+            <th scope="col">Convertion</th>
+        </tr>
+
+    </thead>
+    <tbody *ngFor="let comment of commentdetails; let i = index">
+        <tr>
+            <th scope="row">{{comment.id}}</th>
+            <td>{{comment.commentDescription}}</td>
+            <td>{{comment.creatDate}}</td>
+            <td>{{comment.tutorial_id}}</td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
