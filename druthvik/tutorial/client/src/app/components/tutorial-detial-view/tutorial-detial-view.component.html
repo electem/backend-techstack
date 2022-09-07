@@ -1,0 +1,19 @@
+<label><strong>Title:</strong></label> {{ tutorial.title }}
+
+<label><strong>description:</strong></label> {{ tutorial.description }}
+
+<label><strong>published:</strong></label> {{ tutorial.published }}
+
+<label><strong>categories:</strong></label> {{ tutorial.categories | json }}
+
+<label><strong>timeZone:</strong></label> {{ tutorial.timeZone }}
+
+<label><strong>createdAt:</strong></label>
+{{ tutorial.createdAt | date: "full" }}
+
+<div>
+  <label><strong>Conversion:</strong></label
+  >{{ tutorial.createdAt | date: "full":tutorial.timeZone }}
+</div>
+
+<app-comment-post [tutorialId]="tutorialId"></app-comment-post>
