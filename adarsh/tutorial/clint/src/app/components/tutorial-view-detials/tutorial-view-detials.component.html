@@ -1,0 +1,13 @@
+<h4>Tutorial Details</h4>
+<label><strong>Title:</strong></label>{{ currentTutorial.title }}
+<label><strong>Description:</strong></label>{{ currentTutorial.description }}
+<label><strong>Categories:</strong></label> {{ currentTutorial.categories | json }}
+<label><strong>Timezone:</strong></label> {{ currentTutorial.timeZone }}
+<label><strong>CreatedDate:</strong></label> {{ currentTutorial.creatDate }}
+
+<label><strong>createdAt:</strong></label> {{ currentTutorial.creatDate | date }}
+
+<div>
+    <label><strong>Conversion:</strong></label>{{ currentTutorial.creatDate | date: "full":"ist" }}
+</div>
+<app-comment-post [tutorialId]="tutorialId"></app-comment-post>
