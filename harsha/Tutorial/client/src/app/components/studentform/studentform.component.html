@@ -1,0 +1,66 @@
+<div class="container">
+    <div class="row">
+      <div class="col-md-12 mt-4">
+        <h1 class="text-center">Student List</h1>
+        <div class="filter-wrap">
+         <input [(ngModel)]="searchTerm" placeholder="Filter Users Based on First Name" class="filter-input">
+        </div>
+        <table class="table table-bordered table-striped table-hover">
+          <thead>
+            <tr>
+              <th class="text-center">FirstName</th>
+              <th class="text-center" >Address</th>
+              <th class="text-center">Phone No</th>
+              <th class="text-center">Courses</th>
+              <th class="text-center">&nbsp;</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let student of filterStudent">
+              <td>{{ student.firstName }}</td>
+              <td>{{ student.address }}</td>
+              <td>{{ student.phoneNo }}</td>
+              <td>{{ student.course }}</td>
+              <td>
+                <button [routerLink]="'student'" class="btn btn-info btn-sm mr-2" (click)="showEditStudentForm(student)" >Edit</button> 
+                <button type="button" class="btn btn-danger btn-sm" (click)="removeStudent(student)">Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <button class="btn btn-success" (click)="showAddStudentForm()">Add New Student</button>
+        <div class="mt-4">
+          <form *ngIf="studentForm" >
+            <h2>Add New Student</h2>
+            <div class=" form-group">
+              <form class="form" #registerForm="ngForm">        
+            <p>First Name: <input type="text" name="firstName"  [(ngModel)]="newStudent.firstName"  #firstName="ngModel" required />
+               <span class="text-danger"
+                *ngIf="(firstName.touched || registerForm.submitted) && firstName.errors?.required">First Name is required
+               </span>
+            </p>
+            <p>Address : <textarea type="text" name="address"  #address="ngModel" required [(ngModel)]="newStudent.address" ></textarea>
+              <span class="text-danger"
+              *ngIf="(address.touched || registerForm.submitted) && address.errors?.required">Address is required
+              </span>
+            </p>
+            <p> Phone No : <input type="text" name="phoneNo" #phoneNo="ngModel" required  [(ngModel)]="newStudent.phoneNo" />
+              <span class="text-danger"
+               *ngIf="(phoneNo.touched || registerForm.submitted) && phoneNo.errors?.required">Phone No is required
+              </span>
+            </p>
+            <p>Courses :  <select placeholder="Choose Courses" style="width: 20%;" name="course" [(ngModel)]="newStudent.course">
+              <option value="Choose Courses">Choose Courses</option>
+              <option *ngFor="let course of courses" >{{course.name}}</option> 
+            </select> </p>
+            </form>
+            <p>
+              <button type="button" class="btn btn-primary mr-2" (click)="saveStudent(newStudent)">Submit</button>
+              <button type="button" class="btn btn-warning" (click)="cancelNewStudent()">Cancel</button>
+            </p>
+          </div>
+          </form> 
+        </div>
+      </div>
+    </div>
+  </div>

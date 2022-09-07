@@ -1,0 +1,26 @@
+<div class="col-md-6">
+  <h4>Tutorials List</h4>
+  <button class="m-3 btn btn-sm btn-danger" routerLink="/tutorials/add">Add</button>
+  
+  <ul class="list-group">
+    <li class="list-group-item"s  *ngFor="let tutorial of tutorial; let i = index"
+      [class.active]="i == currentIndex"  (click)="setActiveTutorial(tutorial, i)" >
+      {{ tutorial.title }} <a class="btn btn-info btn-sm mr-2" routerLink="/tutorials-details/{{ tutorial.id }}" > View Details </a>
+    </li>
+  </ul>
+</div>
+<div class="col-md-6">
+  <div *ngIf="currentTutorial.id" class="edit-form">
+    <h4>Tutorial</h4>
+    <div>
+      <label><strong>Title:</strong></label>{{ currentTutorial.title }}
+    </div>
+    <div>
+      <label><strong>Description:</strong></label>{{ currentTutorial.description }}
+    </div>
+   <a class="btn btn-info btn-sm mr-2" routerLink="/tutorials/{{ currentTutorial.id }}" > Edit </a>
+  </div>
+  <div *ngIf="!currentTutorial">
+    <br/>
+    <p>Please click on a Tutorial...</p>
+  </div>
