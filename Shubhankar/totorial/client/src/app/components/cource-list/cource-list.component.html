@@ -1,0 +1,33 @@
+<div class="col-md-6">
+  <h4>cource List</h4>
+  <ul class="list-group" *ngFor="let cource of cources">
+    <li (click)="setActiveCource(cource)" class="list-group-item">
+      {{ cource.title }}
+    </li>
+  </ul>
+</div>
+<div class="col-md-6">
+  <div *ngIf="currentCources.id">
+    <h4>Student</h4>
+    <div>
+      <label><strong>Title:</strong></label>
+      {{ currentCources.title }}
+    </div>
+    <div>
+      <label><strong>Description:</strong></label>
+      {{ currentCources.description }}
+    </div>
+    <div>
+      <label><strong>Status:</strong></label>
+      {{ currentCources.published ? 'Published' : 'Pending' }}
+    </div>
+    <a class="badge badge-warning" routerLink="/cource/{{ currentCources.id }}">
+      Edit
+    </a>
+  </div>
+
+  <div *ngIf="!currentCources">
+    <br />
+    <p>Please click on a Student...</p>
+  </div>
+</div>

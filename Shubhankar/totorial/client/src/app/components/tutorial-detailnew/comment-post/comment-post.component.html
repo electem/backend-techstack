@@ -1,0 +1,48 @@
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" 
+  integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <img src="pic_trulli.jpg" alt="Italian Trulli" class="img-fluid" alt="Responsive image">
+</head>
+<div class="form-group">
+    <h5>Comments:</h5>
+    <input
+      type="content"
+      class="form-control"
+      id="content"
+      required
+      name="content"
+      [(ngModel)]="currentComment.content"
+     />
+  <button  (click)="saveComment()"  class="btn btn-outline-success float-right"  >Save</button>
+  </div>
+
+  <head>
+    <style>
+       tr {
+            text-align: center;
+            border-collapse: collapse;
+        }
+        /* setting the text-align property to center*/
+        td {
+            padding: 5px;
+            text-align: center;
+        }
+    </style>
+</head>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Comments</th>
+      </tr>
+    </thead>
+    <tbody  scope="col">
+      <tr *ngFor="let comment of comments">
+         <td >{{ comment.id }}</td>
+         <td>{{ comment.content }}</td>
+    </tr>          
+   </tbody>
+</table>
+

@@ -1,0 +1,22 @@
+<div>
+  <div class="form-group">
+    <label for="title">Title</label>
+    <input
+      type="text"
+      class="form-control"
+      id="title"
+      required
+      [(ngModel)]="title"
+      name="title"
+    />
+  </div>
+
+  <!--Using items input-->
+  <ng-select
+    [items]="cars"
+    bindLabel="name"
+    bindValue="id"
+    [(ngModel)]="selectedCar"
+  ></ng-select>
+  <button (click)="saveTest()" class="btn btn-success">Save</button>
+</div>

@@ -1,0 +1,93 @@
+<div class="container">
+    <div class="row">
+      <div class="col-md-12 mt-4">
+        <h1 class="text-center">STUDENT LIST</h1>
+        <div class="filter-wrap">
+       <input [(ngModel)]="searchTerm" placeholder="Filter Users Based on First Name" class="filter-input">
+       </div>
+       
+        <table class="table table-bordered table-striped table-hover">
+          <thead>
+            <tr>
+              
+              <th class="text-center">First Name</th>
+              <th class="text-center">Address</th>
+              <th class="text-center">Phoneno</th>
+              <th class="text-center">course</th>
+              <th class="text-center">&nbsp;</th>
+              
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let student of filterStudent">
+              <td>{{ student.firstName }}</td>
+              <td>{{ student.Address }}</td>
+              <td>{{ student.Phoneno }}</td>
+              <td>{{ student.course }}</td>
+              <td>
+                <button type="button" class="btn btn-info btn-sm mr-2" (click)="showEditStudentForm(student)" routerLink="/Studentform/:id">Edit</button>
+                <!-- <button  class="btn btn-info btn-sm mr-2"  >Edit</button> -->
+                <button type="button" class="btn btn-danger btn-sm" (click)="removeStudent(student)">Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <button class="btn btn-success" (click)="  showAddStudentForm()">Add New Student</button>
+  
+        <div class="mt-4">
+          <form *ngIf="studentForm">
+            <h2>Add New student</h2>
+          <div class=" form-group"> 
+          <form class="form" #registerForm="ngForm"></form> 
+          </div> 
+          <p>First Name: <input type="text" name="firstName"  [(ngModel)]="newstudent.firstName" #name="ngModel" required /> 
+          <span class="text-danger" 
+          *ngIf="(name.touched || registerForm.submitted) && name.errors?.required">  FirstName is required </span> 
+          </p>
+           <p>Address: <input type="text" name="Address" [(ngModel)]="newstudent.Address" #name="ngModel" required/>
+              <span class="text-danger" 
+              *ngIf="(name.touched || registerForm.submitted) && name.errors?.required">  address is required </span> </p>
+            <p>Phoneno: <input type="text" name="Phoneno" [(ngModel)]="newstudent.Phoneno" #name="ngModel" required />
+                <span class="text-danger" 
+              *ngIf="(name.touched || registerForm.submitted) && name.errors?.required">  Phoneno is required </span> </p>
+            <p>course :<select name="course" [(ngModel)]="newstudent.course">
+              <option>Select course</option>
+              <option *ngFor="let course of courses"  >{{course.name}}</option>
+              </select></p>
+            <p>
+              <button type="button" class="btn btn-primary mr-2" (click)="savestudent(newstudent)">Submit</button>
+
+              <button type="button" class="btn btn-warning" (click)="cancelNewstudent()">Cancel</button>
+            </p> 
+          </form>
+  
+           <div class="mt-4">
+            <form *ngIf="editstudentForm">
+              <h2> Edit student</h2>
+            <div class=" form-group"> 
+            <form class="form" #editForm="ngForm"></form> 
+            </div> 
+           <p>First Name: <input type="text" name="firstName"  [(ngModel)]="newstudent.firstName" #name="ngModel" required /> 
+          <span class="text-danger" 
+          *ngIf="(name.touched || editForm.submitted) && name.errors?.required">  FirstName is required </span> 
+              </p>
+                 <p>Address: <input type="text" name="Address" [(ngModel)]="newstudent.Address" #name="ngModel" required/>
+              <span class="text-danger" 
+              *ngIf="(name.touched || editForm.submitted) && name.errors?.required">  address is required </span> </p>
+                    <p>Phoneno: <input type="number" name="Phoneno" [(ngModel)]="newstudent.Phoneno" #name="ngModel" required />
+                <span class="text-danger" 
+              *ngIf="(name.touched || editForm.submitted) && name.errors?.required">  Phoneno is required </span> </p>
+            <p>course :<select name="course" [(ngModel)]="newstudent.course">
+              <option>Select course</option>
+              <option *ngFor="let course of courses"  >{{course.name}}</option>
+              </select></p>
+            <p>
+              <button type="button" class="btn btn-primary mr-2" (click)="savestudent(newstudent)">Submit</button>
+
+              <button type="button" class="btn btn-warning" (click)="cancelNewstudent()">Cancel</button>
+            </p> 
+         </form>
+        </div>
+      </div>
+   </div>
+   

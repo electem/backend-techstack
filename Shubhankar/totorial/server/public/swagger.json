@@ -1,0 +1,1714 @@
+{
+	"components": {
+		"examples": {},
+		"headers": {},
+		"parameters": {},
+		"requestBodies": {},
+		"responses": {},
+		"schemas": {
+			"PingResponse": {
+				"properties": {
+					"message": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"Post": {
+				"properties": {
+					"id": {
+						"type": "number",
+						"format": "double"
+					},
+					"title": {
+						"type": "string"
+					},
+					"content": {
+						"type": "string"
+					},
+					"userId": {
+						"type": "number",
+						"format": "double"
+					},
+					"user": {
+						"$ref": "#/components/schemas/User"
+					},
+					"createdAt": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"updatedAt": {
+						"type": "string",
+						"format": "date-time"
+					}
+				},
+				"required": [
+					"id",
+					"title",
+					"content",
+					"userId",
+					"user",
+					"createdAt",
+					"updatedAt"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"User": {
+				"properties": {
+					"id": {
+						"type": "number",
+						"format": "double"
+					},
+					"firstName": {
+						"type": "string"
+					},
+					"lastName": {
+						"type": "string"
+					},
+					"email": {
+						"type": "string"
+					},
+					"posts": {
+						"items": {
+							"$ref": "#/components/schemas/Post"
+						},
+						"type": "array"
+					},
+					"createdAt": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"updatedAt": {
+						"type": "string",
+						"format": "date-time"
+					}
+				},
+				"required": [
+					"id",
+					"firstName",
+					"lastName",
+					"email",
+					"posts",
+					"createdAt",
+					"updatedAt"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IUserPayload": {
+				"properties": {
+					"firstName": {
+						"type": "string"
+					},
+					"lastName": {
+						"type": "string"
+					},
+					"email": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"firstName",
+					"lastName",
+					"email"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"Tutorials": {
+				"properties": {
+					"id": {
+						"type": "number",
+						"format": "double"
+					},
+					"title": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					},
+					"timezone": {
+						"type": "string"
+					},
+					"createdAt": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"categories": {
+						"items": {
+							"$ref": "#/components/schemas/Category"
+						},
+						"type": "array"
+					},
+					"comments": {
+						"items": {
+							"$ref": "#/components/schemas/Comment"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"id",
+					"title",
+					"description",
+					"timezone",
+					"createdAt",
+					"categories",
+					"comments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"Category": {
+				"properties": {
+					"id": {
+						"type": "number",
+						"format": "double"
+					},
+					"title": {
+						"type": "string"
+					},
+					"tutorials": {
+						"items": {
+							"$ref": "#/components/schemas/Tutorials"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"id",
+					"title",
+					"tutorials"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"Comment": {
+				"properties": {
+					"id": {
+						"type": "number",
+						"format": "double"
+					},
+					"content": {
+						"type": "string"
+					},
+					"tutorialId": {
+						"type": "number",
+						"format": "double"
+					},
+					"tutorials": {
+						"items": {
+							"$ref": "#/components/schemas/Tutorials"
+						},
+						"type": "array"
+					},
+					"createdAt": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"updatedAt": {
+						"type": "string",
+						"format": "date-time"
+					}
+				},
+				"required": [
+					"id",
+					"content",
+					"tutorialId",
+					"tutorials",
+					"createdAt",
+					"updatedAt"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"ICommentPayload": {
+				"properties": {
+					"content": {
+						"type": "string"
+					},
+					"userId": {
+						"type": "number",
+						"format": "double"
+					},
+					"postId": {
+						"type": "number",
+						"format": "double"
+					},
+					"tutorialId": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"content",
+					"userId",
+					"postId",
+					"tutorialId"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"Product": {
+				"properties": {
+					"id": {
+						"type": "number",
+						"format": "double"
+					},
+					"name": {
+						"type": "string"
+					},
+					"resid": {
+						"type": "number",
+						"format": "double"
+					},
+					"resource": {
+						"$ref": "#/components/schemas/Resource"
+					},
+					"createdAt": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"updatedAt": {
+						"type": "string",
+						"format": "date-time"
+					}
+				},
+				"required": [
+					"id",
+					"name",
+					"resid",
+					"resource",
+					"createdAt",
+					"updatedAt"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"Resource": {
+				"properties": {
+					"id": {
+						"type": "number",
+						"format": "double"
+					},
+					"firstName": {
+						"type": "string"
+					},
+					"lastName": {
+						"type": "string"
+					},
+					"email": {
+						"type": "string"
+					},
+					"Products": {
+						"items": {
+							"$ref": "#/components/schemas/Product"
+						},
+						"type": "array"
+					},
+					"createdAt": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"updatedAt": {
+						"type": "string",
+						"format": "date-time"
+					}
+				},
+				"required": [
+					"id",
+					"firstName",
+					"lastName",
+					"email",
+					"Products",
+					"createdAt",
+					"updatedAt"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IProductPayload": {
+				"properties": {
+					"content": {
+						"type": "string"
+					},
+					"resid": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"content",
+					"resid"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IResourcePayload": {
+				"properties": {
+					"firstName": {
+						"type": "string"
+					},
+					"lastName": {
+						"type": "string"
+					},
+					"email": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"firstName",
+					"lastName",
+					"email"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"ICategoryPayload": {
+				"properties": {
+					"title": {
+						"type": "string"
+					},
+					"tutorialId": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"title",
+					"tutorialId"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"Question": {
+				"properties": {
+					"id": {
+						"type": "number",
+						"format": "double"
+					},
+					"title": {
+						"type": "string"
+					},
+					"text": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"id",
+					"title",
+					"text"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IQuestionPayload": {
+				"properties": {
+					"content": {
+						"type": "string"
+					},
+					"resid": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"content",
+					"resid"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"Company": {
+				"properties": {
+					"id": {
+						"type": "number",
+						"format": "double"
+					},
+					"name": {
+						"type": "string"
+					},
+					"address": {
+						"type": "string"
+					},
+					"email": {
+						"type": "string"
+					},
+					"employees": {
+						"items": {
+							"$ref": "#/components/schemas/Employee"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"id",
+					"name",
+					"address",
+					"email",
+					"employees"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"Employee": {
+				"properties": {
+					"id": {
+						"type": "number",
+						"format": "double"
+					},
+					"firstName": {
+						"type": "string"
+					},
+					"lastName": {
+						"type": "string"
+					},
+					"content": {
+						"type": "string"
+					},
+					"companyid": {
+						"type": "number",
+						"format": "double"
+					},
+					"company": {
+						"$ref": "#/components/schemas/Company"
+					}
+				},
+				"required": [
+					"id",
+					"firstName",
+					"lastName",
+					"content",
+					"companyid",
+					"company"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"ICompanyData": {
+				"properties": {
+					"Name": {
+						"type": "string"
+					},
+					"Address": {
+						"type": "string"
+					},
+					"email": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"Name",
+					"Address",
+					"email"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IEmployeeData": {
+				"properties": {
+					"firstName": {
+						"type": "string"
+					},
+					"lastName": {
+						"type": "string"
+					},
+					"Companyid": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"firstName",
+					"lastName",
+					"Companyid"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"Games": {
+				"properties": {
+					"id": {
+						"type": "number",
+						"format": "double"
+					},
+					"name": {
+						"type": "string"
+					},
+					"players": {
+						"items": {
+							"$ref": "#/components/schemas/Player"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"id",
+					"name",
+					"players"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"Player": {
+				"properties": {
+					"id": {
+						"type": "number",
+						"format": "double"
+					},
+					"name": {
+						"type": "string"
+					},
+					"address": {
+						"type": "string"
+					},
+					"games": {
+						"items": {
+							"$ref": "#/components/schemas/Games"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"id",
+					"name",
+					"address",
+					"games"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IPlayerPayload": {
+				"properties": {
+					"title": {
+						"type": "string"
+					},
+					"tutorialId": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"title",
+					"tutorialId"
+				],
+				"type": "object",
+				"additionalProperties": false
+			}
+		},
+		"securitySchemes": {}
+	},
+	"info": {
+		"title": "express-typescript",
+		"version": "1.1.1",
+		"license": {
+			"name": "ISC"
+		},
+		"contact": {}
+	},
+	"openapi": "3.0.0",
+	"paths": {
+		"/ping": {
+			"get": {
+				"operationId": "GetMessage",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/PingResponse"
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": []
+			}
+		},
+		"/posts": {
+			"get": {
+				"operationId": "GetPosts",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/Post"
+									},
+									"type": "array"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Post"
+				],
+				"security": [],
+				"parameters": []
+			}
+		},
+		"/posts/{id}": {
+			"get": {
+				"operationId": "GetPost",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"allOf": [
+										{
+											"$ref": "#/components/schemas/Post"
+										}
+									],
+									"nullable": true
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Post"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/users": {
+			"get": {
+				"operationId": "GetUsers",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/User"
+									},
+									"type": "array"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"User"
+				],
+				"security": [],
+				"parameters": []
+			},
+			"post": {
+				"operationId": "CreateUser",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/User"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"User"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/IUserPayload"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/users/{id}": {
+			"get": {
+				"operationId": "GetUser",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"allOf": [
+										{
+											"$ref": "#/components/schemas/User"
+										}
+									],
+									"nullable": true
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"User"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/comments": {
+			"get": {
+				"operationId": "GetComments",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/Comment"
+									},
+									"type": "array"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Comment"
+				],
+				"security": [],
+				"parameters": []
+			},
+			"post": {
+				"operationId": "CreateComment",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Comment"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Comment"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/ICommentPayload"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/comments/{id}": {
+			"get": {
+				"operationId": "GetComment",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Comment"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Comment"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/products": {
+			"get": {
+				"operationId": "GetProducts",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/Product"
+									},
+									"type": "array"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Product"
+				],
+				"security": [],
+				"parameters": []
+			},
+			"post": {
+				"operationId": "CreateProduct",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Product"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Product"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/IProductPayload"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/products/{id}": {
+			"get": {
+				"operationId": "GetProdProfile",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/Product"
+									},
+									"type": "array"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Product"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/resources": {
+			"get": {
+				"operationId": "GetResources",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/Resource"
+									},
+									"type": "array"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"resource"
+				],
+				"security": [],
+				"parameters": []
+			},
+			"post": {
+				"operationId": "CreateResource",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Resource"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"resource"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/IResourcePayload"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/resources/{id}": {
+			"get": {
+				"operationId": "GetResource",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"allOf": [
+										{
+											"$ref": "#/components/schemas/Resource"
+										}
+									],
+									"nullable": true
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"resource"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/tutorials": {
+			"post": {
+				"operationId": "CreateTutorial",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Tutorials"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Tutorials"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {}
+						}
+					}
+				}
+			},
+			"get": {
+				"operationId": "GetTutorials",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/Tutorials"
+									},
+									"type": "array"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Tutorials"
+				],
+				"security": [],
+				"parameters": []
+			},
+			"put": {
+				"operationId": "UpdateTutorial",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Tutorials"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Tutorials"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {}
+						}
+					}
+				}
+			}
+		},
+		"/tutorials/{id}": {
+			"get": {
+				"operationId": "GetTutorial",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Tutorials"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Tutorials"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/categorys": {
+			"post": {
+				"operationId": "CreateCategory",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Category"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"category"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/ICategoryPayload"
+							}
+						}
+					}
+				}
+			},
+			"get": {
+				"operationId": "GetCategory",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/Category"
+									},
+									"type": "array"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"category"
+				],
+				"security": [],
+				"parameters": []
+			}
+		},
+		"/categorys/{id}": {
+			"get": {
+				"operationId": "GetCategorys",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"allOf": [
+										{
+											"$ref": "#/components/schemas/Category"
+										}
+									],
+									"nullable": true
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"category"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/questions": {
+			"post": {
+				"operationId": "CreateQuestion",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Question"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"question"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/IQuestionPayload"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/Companys": {
+			"get": {
+				"operationId": "GetCompany",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/Company"
+									},
+									"type": "array"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Company"
+				],
+				"security": [],
+				"parameters": []
+			},
+			"post": {
+				"operationId": "CreateCompany",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Company"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Company"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/ICompanyData"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/Companys/{id}": {
+			"get": {
+				"operationId": "GetCompanys",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"allOf": [
+										{
+											"$ref": "#/components/schemas/Company"
+										}
+									],
+									"nullable": true
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Company"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			},
+			"delete": {
+				"operationId": "DeleteCompanys",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"allOf": [
+										{
+											"$ref": "#/components/schemas/Company"
+										}
+									],
+									"nullable": true
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Company"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/employees": {
+			"get": {
+				"operationId": "GetEmployee",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/Employee"
+									},
+									"type": "array"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"employee"
+				],
+				"security": [],
+				"parameters": []
+			},
+			"post": {
+				"operationId": "CreateEmployee",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Employee"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"employee"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/IEmployeeData"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/employees/{id}": {
+			"get": {
+				"operationId": "GetEmployees",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"allOf": [
+										{
+											"$ref": "#/components/schemas/Employee"
+										}
+									],
+									"nullable": true
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"employee"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/games": {
+			"post": {
+				"operationId": "CreateGame",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Games"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"games"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {}
+						}
+					}
+				}
+			},
+			"get": {
+				"operationId": "GetGames",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/Games"
+									},
+									"type": "array"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"games"
+				],
+				"security": [],
+				"parameters": []
+			},
+			"put": {
+				"operationId": "UpdateGame",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Games"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"games"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {}
+						}
+					}
+				}
+			}
+		},
+		"/games/{id}": {
+			"get": {
+				"operationId": "GetGame",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {},
+									"type": "array"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"games"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/players": {
+			"post": {
+				"operationId": "CreatePlayer",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Player"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"players"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/IPlayerPayload"
+							}
+						}
+					}
+				}
+			},
+			"get": {
+				"operationId": "GetPlayers",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/Player"
+									},
+									"type": "array"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"players"
+				],
+				"security": [],
+				"parameters": []
+			}
+		},
+		"/players/{id}": {
+			"get": {
+				"operationId": "GetPlayer",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"allOf": [
+										{
+											"$ref": "#/components/schemas/Player"
+										}
+									],
+									"nullable": true
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"players"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		}
+	},
+	"servers": [
+		{
+			"url": "/"
+		}
+	]
+}
