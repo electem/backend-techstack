@@ -1,0 +1,31 @@
+<span>{{ tutorialId }}</span>
+<div class="form-group">
+  <label for="title">Content</label>
+  <input
+    class="form-control width"
+    id="content"
+    required
+    [(ngModel)]="comment.content"
+    name="content"
+  />
+  <button (click)="saveComment()" class="btn btn-success">Submit</button>
+</div>
+<table class="table table-bordered table-striped table-hover">
+  <thead>
+    <tr>
+      <th class="text-center">ID</th>
+      <th class="text-center">content</th>
+      <th class="text-center">createdAt</th>
+      <th class="text-center">tutorialId</th>
+      <th class="text-center">&nbsp;</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let comment of commentDetails">
+      <td>{{ comment.id }}</td>
+      <td>{{ comment.content }}</td>
+      <td>{{ comment.createdAt }}</td>
+      <td>{{ comment.tutorialId }}</td>
+    </tr>
+  </tbody>
+</table>

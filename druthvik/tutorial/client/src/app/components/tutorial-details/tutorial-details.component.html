@@ -1,0 +1,67 @@
+<div>
+  <div *ngIf="currentTutorial.id" class="edit-form">
+    <h4>Tutorial</h4>
+    <form>
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input
+          type="text"
+          class="form-control"
+          id="title"
+          [(ngModel)]="currentTutorial.title"
+          name="title"
+        />
+      </div>
+      <div class="form-group">
+        <label for="description">Description</label>
+        <input
+          type="text"
+          class="form-control"
+          id="description"
+          [(ngModel)]="currentTutorial.description"
+          name="description"
+        />
+      </div>
+
+      <div class="form-group">
+        <label><strong>Status:</strong></label>
+        {{ currentTutorial.published ? "Published" : "Pending" }}
+      </div>
+    </form>
+    <div class="col-md-6">
+      <select class="custom-select">
+        [(ngModel)]="currentTutorial.categories
+        <option *ngFor="let category of categories" [ngValue]="category">
+          {{ category.title }}
+        </option>
+      </select>
+      <br />
+    </div>
+    <br />
+
+    <button
+      class=""
+      *ngIf="currentTutorial.published"
+      (click)="updatePublished(false)"
+    >
+      UnPublish
+    </button>
+    <button
+      *ngIf="!currentTutorial.published"
+      class=""
+      (click)="updatePublished(true)"
+    >
+      Publish
+    </button>
+
+    <button (click)="deletebyid()" routerLink="/tutorials">Delete</button>
+
+    <!-- <button type="submit" class="" (click)="updateTutorial()">Update</button> -->
+    <p>{{ message }}</p>
+  </div>
+
+  <div *ngIf="!currentTutorial.id">
+    <br />
+    <p>Cannot access this Tutorial...</p>
+  </div>
+</div>
