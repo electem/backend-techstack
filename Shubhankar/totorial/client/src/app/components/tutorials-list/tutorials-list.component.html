@@ -1,0 +1,52 @@
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" 
+  integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <img src="pic_trulli.jpg" alt="Italian Trulli" class="img-fluid" alt="Responsive image">
+</head>
+<div class="container-fluid">
+  <div class="col-md-8">
+  </div>
+  </div>
+  <div class="col-md-6">
+    <h4>Tutorials List</h4>
+    <button type="button" class="btn btn-secondary btn-lg float-center" routerLink="/add" >Add</button>
+      <ul class="list-group">
+      <li
+        class="container border"
+        *ngFor="let tutorial of tutorials; let i = index"
+        [class.active]="i == currentIndex"
+        (click)="setActiveTutorial(tutorial, i)">
+      {{ tutorial.title }}{{ tutorial.categories | json }}
+      <button type="button" class="btn btn-outline-success float-right" routerLink="/tutorial-detailnew/{{ currentTutorial.id }}" > view details</button>
+      </li>
+    </ul>
+  </div>
+    <div class ="col-sm-9 bg-success"> 
+     <div *ngIf="currentTutorial.id">
+      <h4>Tutorial</h4>
+      <div>
+        <label><strong>Title:</strong></label>
+        {{ currentTutorial.title }}
+      </div>
+      <div>
+        <label><strong>Description:</strong></label>
+        {{ currentTutorial.description }}
+      
+        <label><strong>Status:</strong></label>
+        {{ currentTutorial.published ? 'Published' : 'Pending' }}
+      </div>
+      
+      <a
+        class="badge badge-warning"
+        routerLink="/tutorials/{{ currentTutorial.id }}"
+        >
+        Edit
+      </a>
+      </div>
+      <div *ngIf="!currentTutorial">
+      <br />
+      <p>Please click on a Tutorial...</p>
+    </div>
+  
