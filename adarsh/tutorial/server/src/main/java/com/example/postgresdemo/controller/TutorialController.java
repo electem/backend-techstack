@@ -21,13 +21,8 @@ import com.example.postgresdemo.repository.TutorialRepository;
 @CrossOrigin
 public class TutorialController {
 	// this is the fild that taken from tutorial repository
-	private TutorialRepository tutorialRepo;
-
-	// constructor to the controller class
 	@Autowired
-	public TutorialController(TutorialRepository tutorialRepo) {
-		this.tutorialRepo = tutorialRepo;
-	}
+	private TutorialRepository tutorialRepo;
 
 	// this mathod will get the tutorials based on its id
 	@GetMapping("/tutorials/{id}")

@@ -20,12 +20,8 @@ import com.example.postgresdemo.repository.CategoryRepository;
 @CrossOrigin
 public class CategoryController {
 
-	private final CategoryRepository categoryRepository;
-
 	@Autowired
-	public CategoryController(CategoryRepository categoryRepository) {
-		this.categoryRepository = categoryRepository;
-	}
+	private CategoryRepository categoryRepository;
 
 	// This method is used to get components data from the Database.
 	@CrossOrigin(origins = "http://localhost:4200")

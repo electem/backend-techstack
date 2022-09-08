@@ -11,20 +11,17 @@ import com.example.postgresdemo.repository.CommentRepository;
 @Service
 public class CommintService {
 	
-
+	@Autowired
 	private CommentRepository commentRepo;
 	
 
-	// Constructor for controller class
-	@Autowired
-	public CommintService(CommentRepository commentRepo) {
-		this.commentRepo = commentRepo;
-	}
+	
 	
 	public List<Comment> getCommentByTutorialId(@PathVariable(value = "id") Integer tutorialId) {
         List<Comment> commentList = commentRepo.findAllCommentsBasedOnTutorialId(tutorialId);
         return commentList;
     }
+	
 		
 	}
 

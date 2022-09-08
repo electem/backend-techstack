@@ -15,14 +15,9 @@ import com.example.postgresdemo.repository.StudentRepository;
 
 @RestController
 public class StudentController {
-
-	private final StudentRepository studentRepository;
-
+	
 	@Autowired
-	public StudentController(StudentRepository studentRepository) {
-		super();
-		this.studentRepository = studentRepository;
-	}
+	private StudentRepository studentRepository;
 
 	// This method is used to get students data from the Database.
 	@GetMapping("/studentData")
