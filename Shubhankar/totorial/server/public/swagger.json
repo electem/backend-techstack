@@ -197,7 +197,7 @@
 					"content": {
 						"type": "string"
 					},
-					"tutorialId": {
+					"tutorialsId": {
 						"type": "number",
 						"format": "double"
 					},
@@ -219,7 +219,7 @@
 				"required": [
 					"id",
 					"content",
-					"tutorialId",
+					"tutorialsId",
 					"tutorials",
 					"createdAt",
 					"updatedAt"
@@ -232,24 +232,14 @@
 					"content": {
 						"type": "string"
 					},
-					"userId": {
-						"type": "number",
-						"format": "double"
-					},
-					"postId": {
-						"type": "number",
-						"format": "double"
-					},
-					"tutorialId": {
+					"tutorialsId": {
 						"type": "number",
 						"format": "double"
 					}
 				},
 				"required": [
 					"content",
-					"userId",
-					"postId",
-					"tutorialId"
+					"tutorialsId"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -599,6 +589,51 @@
 				],
 				"type": "object",
 				"additionalProperties": false
+			},
+			"LoginUser": {
+				"properties": {
+					"id": {
+						"type": "number",
+						"format": "double"
+					},
+					"username": {
+						"type": "string"
+					},
+					"password": {
+						"type": "string"
+					},
+					"role": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"id",
+					"username",
+					"password",
+					"role"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IloginUserPayload": {
+				"properties": {
+					"username": {
+						"type": "string"
+					},
+					"password": {
+						"type": "string"
+					},
+					"role": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"username",
+					"password",
+					"role"
+				],
+				"type": "object",
+				"additionalProperties": false
 			}
 		},
 		"securitySchemes": {}
@@ -848,7 +883,10 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/Comment"
+									"items": {
+										"$ref": "#/components/schemas/Comment"
+									},
+									"type": "array"
 								}
 							}
 						}
@@ -1703,6 +1741,38 @@
 						}
 					}
 				]
+			}
+		},
+		"/loginusers": {
+			"post": {
+				"operationId": "CreateUser",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/LoginUser"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"loginUser"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/IloginUserPayload"
+							}
+						}
+					}
+				}
 			}
 		}
 	},

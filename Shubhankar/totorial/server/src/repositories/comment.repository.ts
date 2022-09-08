@@ -3,8 +3,8 @@ import {Comment, Tutorials} from '../models'
 
 export interface ICommentPayload {
   content: string;
-  userId: number;
-  postId: number;
+  // userId: number;
+  // postId: number;
   tutorialsId: number;
 }
 

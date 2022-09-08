@@ -65,10 +65,10 @@ export function generateCommentData(overide = {}) {
   return {
     id: faker.random.number(),
     content: faker.lorem.paragraph(),
-    userId: faker.random.number(),
-    user: new User(),
-    postId: faker.random.number(),
-    post: new Post(),
+    tutorialsId: faker.random.number(),
+    // user: new User(),
+    // postId: faker.random.number(),
+    // post: new Post(),
     createdAt: new Date(),
     updatedAt: new Date(),
     ...overide
@@ -86,26 +86,34 @@ export function generateCommentsData(n: number = 1, overide = {}) {
 
 export function generateCommentPayload() {
   return {
+    
     content: faker.lorem.paragraph(),
-    userId: faker.random.number(),
-    postId: faker.random.number(),
+    tutorialsId: faker.random.number(),
+    // postId: faker.random.number(),
   }
 }
 
-// export function generateTutorialData(overide = {}) {
-//   return {
-//     id: faker.random.number(),
-//     title: faker.lorem.word(),
-//     description: faker.lorem.sentences(),
-//     timezone: faker.lorem.paragraph(),
-//     createdAt: new Date(),
-//     ...overide
-//   }
-// }
-// export function generateTutorialsData(n: number = 1, overide = {}) {
-//   return Array.from({
-//     length: n
-//   }, (_, i) => {
-//     return generateTutData(overide)
-//   });
-// }
+export function generateTutorialData(overide = {}) {
+  return {
+    id: faker.random.number(),
+    title: faker.lorem.word(),
+    description: faker.lorem.sentences(),
+    timezone: faker.lorem.paragraph(),
+    createdAt: new Date(),
+    ...overide
+  }
+}
+export function generateTutorialsData(n: number = 1, overide = {}) {
+  return Array.from({
+    length: n
+  }, (_, i) => {
+    return generateTutorialData(overide)
+  });
+}
+export function generateTutorialPayload() {
+  return {
+    title: faker.name.title(),
+    description: faker.lorem.word(),
+    timezone: faker.lorem.paragraph(),
+  }
+}

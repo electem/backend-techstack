@@ -6,6 +6,7 @@ export interface ITutorialsrPayload {
   description: string;
   
   
+  
 }
 export const createTutorial  = async (payload: ITutorialsrPayload) :Promise<Tutorials> => {
   const tutorialsRepository = getRepository(Tutorials);
