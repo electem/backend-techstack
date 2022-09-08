@@ -6,12 +6,18 @@ import { Comment } from '../models/comment.model';
 const baseUrl = 'http://localhost:8000/tutorial';
 const baseUrl1 = 'http://localhost:8000/category';
 const baseUrl2 = 'http://localhost:8000/comments';
+const baseUrl3 = 'http://localhost:8000/userlogin';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TutorialService {
+  private roles = [{ name: 'author' }, { name: 'comment' }];
   constructor(private http: HttpClient) {}
+
+  getRoles() {
+    return this.roles;
+  }
 
   async getAll(): Promise<Tutorial[]> {
     return await this.http.get<Tutorial[]>(baseUrl).toPromise();
@@ -64,5 +70,9 @@ export class TutorialService {
 
   async getCommentByTutorial(id: Number) {
     return await this.http.get(`${baseUrl2}/${id}`).toPromise();
+  }
+
+  async getUserById(id: Number) {
+    return await this.http.get(`${baseUrl3}/${id}`).toPromise();
   }
 }
