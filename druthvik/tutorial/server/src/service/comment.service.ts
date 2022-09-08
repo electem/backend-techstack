@@ -1,17 +1,28 @@
-import { getManager } from 'typeorm';
+import { getManager, getRepository } from 'typeorm';
 import { Comment } from '../models';
 import moment from 'moment';
 
-export const getTutorialComment = async (tutorialId: number) => {
+let timezone: string;
+export const getTutorialComment1 = async (
+  tutorialId: number,
+  timeZone: string,
+) => {
   const entityManager = getManager();
+  timezone = timeZone;
   const query = entityManager.createQueryBuilder(Comment, 'comments');
-  const getComment = await query
-    .select(['comments', 'tutorial'])
-    .leftJoinAndSelect('comments.tutorial', 'tutorial')
+  const comments = await query
+    .select(['comments'])
     .where('comments.tutorialId = :tutorialId', { tutorialId: tutorialId })
     .getMany();
-  getComment.map((a) => {
-    a.content = moment.utc(a.createdAt, a.tutorial.timeZone).toString();
-  });
-  return getComment;
+  //comments.map(convert);
+  return comments;
 };
+
+function convert(comment: Comment): Comment {
+  const commentConverted: Comment = comment;
+  commentConverted.createdAtStr = moment
+    .utc(comment.createdAt)
+    .utcOffset(timezone, true)
+    .toLocaleString();
+  return comment;
+}

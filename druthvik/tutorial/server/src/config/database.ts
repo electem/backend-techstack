@@ -7,7 +7,7 @@ import { Product } from '../controllers/canbrowser/model/product';
 import { Resources } from '../controllers/canbrowser/model/resource';
 import { Tutorial } from '../models';
 import { Category } from '../models';
-
+import { userLogin } from '../models';
 const config: ConnectionOptions = {
   type: 'postgres',
   host: process.env.POSTGRES_HOST || 'localhost',
@@ -26,6 +26,7 @@ const config: ConnectionOptions = {
     Resources,
     Tutorial,
     Category,
+    userLogin,
   ],
   synchronize: true,
 };
