@@ -1,0 +1,43 @@
+<div>
+    <div class="edit-form">
+        <h4>Tutorial</h4>
+        <form [formGroup]="loginForm" (ngSubmit)="submitUser()">
+            <div class="form-group">
+                <label for="userName">User Name</label>
+                <input type="text" formControlName="userName" class="form-control" [(ngModel)]="loginUser.userName"
+                    [ngClass]="{ 'is-invalid': submitted && fval.username.errors }" />
+                <div *ngIf="this.submitted && fval.userName.errors" class="invalid-feedback">
+                    <div *ngIf="fval.userName.errors.required" style="color: red">
+                        Title is required
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="text" formControlName="password" class="form-control" [(ngModel)]="loginUser.password"
+                    [ngClass]="{ 'is-invalid': submitted && fval.password.errors }" />
+                <div *ngIf="this.submitted && fval.password.errors " class="invalid-feedback">
+                    <div *ngIf="fval.password.errors.required" style="color: red">
+                        Description is required
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="form-group">
+                <p>Role : <select formControlName="role" class="form-control" placeholder="Choose Category"
+                        style="width: 50%;" [(ngModel)]="loginUser.role" name="role"
+                        [ngClass]="{ 'is-invalid': submitted && fval.role.errors }">
+                        <option value="Choose Role">Choose Category</option>
+                        <option *ngFor="let role of roles" [ngValue]="role">{{role.name}}</option>
+                    </select>
+                <div *ngIf="this.submitted  && fval.role.errors" style="color: red">
+                    <div *ngIf="fval.role.errors.required">
+                        Selecting atleast one Category is required
+                    </div>
+                </div>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-info btn-sm mr-2" (click)=" loginToUser()">
+                Submit </button>
+        </form>
+    </div>

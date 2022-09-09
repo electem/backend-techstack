@@ -9,7 +9,6 @@
             <th scope="col">Id</th>
             <th scope="col">CommentDescription</th>
             <th scope="col">CreatDate</th>
-            <th scope="col">Tutorial_id</th>
             <th scope="col">Convertion</th>
         </tr>
 
@@ -18,8 +17,9 @@
         <tr>
             <th scope="row">{{comment.id}}</th>
             <td>{{comment.commentDescription}}</td>
-            <td>{{comment.creatDate}}</td>
-            <td>{{comment.tutorial_id}}</td>
+            <td>{{comment.creatDate | date: "full"}}</td>
+            <td>{{comment.creatDate | date: "full":timeZone}}</td>
+
             <td></td>
         </tr>
     </tbody>
