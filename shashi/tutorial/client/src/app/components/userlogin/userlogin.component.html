@@ -1,0 +1,48 @@
+<div class="container">
+   <div class="row">
+    <div class="col-md-4 offset-md-4">
+               <div class="card mb-3">
+                    <div class="card-body">
+    
+                      <div class="pt-4 pb-2">
+                        <h5 class="card-title text-center pb-0 fs-4">login to your Account</h5>
+                      </div>
+                      <form action="/action_page.php" [formGroup]="registerForm" (ngSubmit)="loginUser();">
+                        <div class="form-group">
+                          <label for="username">username</label>
+                        <input type="text" formControlName="username" class="form-control"  placeholder="username" [ngClass]="{ 'is-invalid': submitted && fval.username.errors }" [(ngModel)]="userlogin.userName"/>
+                        <div *ngIf="submitted && fval.username.errors" class="invalid-feedback">
+                        <div *ngIf="fval.username.errors.required">
+                          username is required and must be a valid name
+                        </div>
+                        </div>
+                        </div>   
+                        <div class="form-group">
+                          <label for="password">password</label>
+                        <input type="text" formControlName="password" class="form-control"  placeholder="password" [ngClass]="{ 'is-invalid': submitted && fval.password.errors }" [(ngModel)]="userlogin.password"/>
+                        <div *ngIf="submitted && fval.password.errors" class="invalid-feedback">
+                        <div *ngIf="fval.password.errors.required">
+                          password is required
+                        </div>
+                        </div>
+                        </div> 
+                       
+                          <div class="form-group">
+                            <p>Roles :  <select class="form-control" style="width: 50%;" aria-placeholder="choose role" name="Role"      
+                              [ngClass]="{ 'is-invalid': submitted && fval.role.errors }">      
+                              <option value="Choose Role">Choose Role</option>      
+                              <option *ngFor="let role of roles">{{role.name}}</option>      
+                            </select> 
+                            <div *ngIf="submitted && fval.role.errors" class="invalid-feedback">
+                              <div *ngIf="fval.role.errors.required">
+                                role is required
+                              </div>
+                              </div>          
+                          </div>         
+                          <button class="btn btn-primary w-100" type="submit">Login</button>
+                      </form>
+                    </div>
+                  </div>
+    </div>
+  </div>
+</div>
