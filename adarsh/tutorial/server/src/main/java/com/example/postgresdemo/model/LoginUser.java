@@ -9,8 +9,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
 @Entity
-@Table(name = "users")
-public class User {
+@Table(name = "loginUsers")
+public class LoginUser {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -27,11 +27,11 @@ public class User {
 
 	private String role;
 
-	public User() {
+	public LoginUser() {
 
 	}
 
-	public User(int id, String userName, String password, String role) {
+	public LoginUser(int id, String userName, String password, String role) {
 		super();
 		this.id = id;
 		this.userName = userName;
