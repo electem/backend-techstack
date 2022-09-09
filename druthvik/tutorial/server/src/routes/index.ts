@@ -9,6 +9,7 @@ import ProductRouter from '../controllers/canbrowser/product.router';
 import ResourcesRouter from '../controllers/canbrowser/resource.router';
 import TutorialRouter from '../routes/tutorial.router';
 import CategoryRouter from '../routes/category.router';
+import UserLoginRouter from '../routes/userlogin.router';
 
 const router = express.Router();
 
@@ -27,4 +28,5 @@ router.use('/products', ProductRouter);
 router.use('/resources', ResourcesRouter);
 router.use('/tutorial', TutorialRouter);
 router.use('/category', CategoryRouter);
+router.use('/userlogin', UserLoginRouter);
 export default router;

@@ -24,6 +24,8 @@ export class Comment {
   @CreateDateColumn()
   createdAt!: Date;
 
+  createdAtStr: string;
+
   // @Column({ nullable: true })
   // userId!: number;
   // @ManyToOne((_type) => User, (user: User) => user.comments)
@@ -40,4 +42,5 @@ export class Comment {
   @ManyToOne((_type) => Tutorial, (tutorial: Tutorial) => tutorial.comments)
   @JoinColumn()
   tutorial!: Tutorial;
+  comment: any;
 }

@@ -11,6 +11,7 @@ import moment from 'moment';
 export interface ICommentPayload {
   content: string;
   tutorialId: number;
+  timeZone: string;
 }
 
 export const getComments = async (): Promise<Array<Comment>> => {
@@ -33,21 +34,18 @@ export const createComment = async (
 //   const commentRepository = getRepository(Comment);
 //   const comment = await commentRepository.findOne({ id: id });
 // };
-// export const getTutorialComment = async (tutorialId: number) => {
-//   const entityManager = getManager();
-//   const query = entityManager.createQueryBuilder(Comment, 'comments');
-//   const getComment = await query
-//     .select(['comments', 'tutorial'])
-//     .leftJoinAndSelect('comments.tutorial', 'tutorial')
-//     .where('comments.tutorialId = :tutorialId', { tutorialId: tutorialId })
-//     .getMany();
-//   console.log(getTutorialComment);
-//   getComment.map((a) => {
-//     a.content = moment.utc(a.createdAt, a.tutorial.timeZone).toString();
-//   });
-//   console.log(getComment);
-//   return getComment;
-// };
+export const getTutorialComment1 = async (tutorialId: number) => {
+  const entityManager = getManager();
+  const query = entityManager.createQueryBuilder(Comment, 'comments');
+  const getComment = await query
+    .select(['comments', 'tutorial'])
+    .leftJoinAndSelect('comments.tutorial', 'tutorial')
+    .where('comments.tutorialId = :tutorialId', { tutorialId: tutorialId })
+    .getMany();
+  console.log(getTutorialComment1);
+  console.log(getComment);
+  return getComment;
+};
 
 // export const getComment = async (id: number): Promise<Comment | null> => {
 //   const commentRepository = getRepository(Comment);
