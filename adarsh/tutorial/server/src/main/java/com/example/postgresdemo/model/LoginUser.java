@@ -25,6 +25,7 @@ public class LoginUser {
 	@Column(name = "password")
 	private String password;
 
+	@NotBlank
 	private String role;
 
 	public LoginUser() {
