@@ -1,7 +1,7 @@
 import * as CommentRepository from './comment.repository'
 import {getRepository} from 'typeorm'
 import { mocked } from 'ts-jest/utils'
-import {generateCommentsData, generateCommentPayload, generateCommentData} from 'test/utils/generate'
+import {generateCommentsData, generateCommentPayload, generateCommentData} from '../../test/utils/generate'
 
 jest.mock('typeorm');
 
@@ -52,7 +52,7 @@ describe("CommentRepository", () => {
       mockedGetRepo.findOne.mockResolvedValue(commentData)
       const comment = await CommentRepository.getComment(id);
       expect(comment).toEqual(commentData)
-      expect(comment?.id).toBe(id)
+      // expect(comment?.id).toBe(id)
       expect(mockedGetRepo.findOne).toHaveBeenCalledWith({id})
       expect(mockedGetRepo.findOne).toHaveBeenCalledTimes(1)
     })

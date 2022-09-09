@@ -12,6 +12,7 @@ import CompanyRouter from "./company.router";
 import EmployeeRouter from "./employee.router";
 import GamesRouter from "./game.router";
 import PlayerRouter from "./player.router"
+import loginUserRouter from "./loginuser.router"
 
 
 const router = express.Router();
@@ -34,6 +35,7 @@ router.use("/company", CompanyRouter)
 router.use("/employee", EmployeeRouter)
 router.use("/games", GamesRouter)
 router.use("/players", PlayerRouter)
+router.use("/loginusers", loginUserRouter)
 
 
 

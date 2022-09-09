@@ -1,6 +1,6 @@
 import CommentController from './comment.controller'
 import * as CommentRepository from '../repositories/comment.repository'
-import {generateCommentsData, generateCommentPayload, generateCommentData} from 'test/utils/generate'
+import {generateCommentsData, generateCommentPayload, generateCommentData} from '../../test/utils/generate'
 
 afterEach(() => {
   jest.resetAllMocks()

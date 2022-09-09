@@ -10,6 +10,7 @@ import { Company} from './company'
 import { Employee } from './employee'
 import { Games } from './game'
 import { Player } from './player'
+import { LoginUser } from './loginuser'
 
 
-export {User, Post, Comment,Product, Resource, Tutorials,Category ,Question,Company,Employee,Games,Player}
+export {User, Post, Comment,Product, Resource, Tutorials,Category ,Question,Company,Employee,Games,Player,LoginUser}
