@@ -2,11 +2,17 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Tutorial } from '../models/tutorial.model';
 import { Category } from '../models/categoryTask.model';
+import { Userlogin } from '../models/userlogin.model';
+import { Comment } from '../models/comment.model';
 
 const baseUrl = 'http://localhost:8000/tutorials';
 const baseUrl2 = 'http://localhost:8000/category';
 const baseUrl3 = 'http://localhost:8000/comments';
 const baseUrl4 = 'http://localhost:8000/login';
+
+export class Role {
+  name?: string;
+}
 
 @Injectable({
   providedIn: 'root',
@@ -26,34 +32,29 @@ export class TutorialService {
     { id: 3, title: 'Angular' },
   ];
 
-  private Roles = [{ name: 'author' }, { name: 'comment' }];
+  private roles: Role[] = [{ name: 'author' }, { name: 'comment' }];
   constructor(private http: HttpClient) {}
 
   getCountryFromData() {
     return this.Countrys;
   }
   getRoles() {
-    return this.Roles;
+    return this.roles;
   }
 
   async getAll(): Promise<Tutorial[]> {
     return await this.http.get<Tutorial[]>(baseUrl).toPromise();
   }
 
-  // async getAllCategory(): Promise<Category[]> {
-  //   // return await this.http.get<Category[]>(baseUrl2).toPromise();
-  //   return this.categorysLocal;
-  // }
   async getAllCategory() {
     return await this.http.get<Category[]>(baseUrl2).toPromise();
-    //return this.categorysLocal;
   }
 
-  createTutorial(data: any) {
+  createTutorial(data: Tutorial) {
     return this.http.post(baseUrl, data).toPromise();
   }
 
-  updateTutorial(data: any) {
+  updateTutorial(data: Tutorial) {
     return this.http.put(baseUrl, data).toPromise();
   }
 
@@ -61,18 +62,16 @@ export class TutorialService {
     return await this.http.get(`${baseUrl}/${id}`).toPromise();
   }
 
-  //comment
-  createComment(data: any) {
-    return this.http.post(baseUrl3, data).toPromise();
+  //This method is used to create the Comment
+  createComment(comment: Comment) {
+    return this.http.post(baseUrl3, comment).toPromise();
   }
   async getCommentByTutorialId(tutorialId: Number) {
     return await this.http.get(`${baseUrl3}/${tutorialId}`).toPromise();
   }
 
-  createUserlogin(data: any) {
-    return this.http.post(baseUrl4, data).toPromise();
-  }
-  async getUserloginById(id: Number) {
-    return await this.http.get(`${baseUrl4}/${id}`).toPromise();
+  //userlogin
+  createUserlogin(user: Userlogin) {
+    return this.http.post(baseUrl4, user).toPromise();
   }
 }
