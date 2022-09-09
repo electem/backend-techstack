@@ -18,12 +18,12 @@ import { UserListComponent } from './components/user-list/user-list.component'
 import { NewTutorialComponent } from './components/new-tutorial/new-tutorial.component'
 import { StudentformComponent } from './components/studentform/studentform.component'
 import { EditStudentFormComponent } from './components/edit-student-form/edit-student-form.component'
-import { ComponentsComponent } from './components/components/components.component'
 import { TutorialDetailsNewComponent } from './components/tutorial-details-new/tutorial-details-new.component'
+import { UserLoginComponent } from './components/user-login/user-login.component'
 
 const routes: Routes = [
   { path: '', redirectTo: 'tutorials', pathMatch: 'full' },
-  { path: 'components', component: ComponentsComponent},
+  { path: 'userLogin', component: UserLoginComponent},
   { path: 'studentForm', component: StudentformComponent },
   { path: 'studentForm/:id', component: EditStudentFormComponent },
   { path: 'tutorials', component: TutorialsListComponent },
