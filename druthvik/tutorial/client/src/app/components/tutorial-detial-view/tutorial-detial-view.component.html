@@ -9,11 +9,11 @@
 <label><strong>timeZone:</strong></label> {{ tutorial.timeZone }}
 
 <label><strong>createdAt:</strong></label>
-{{ tutorial.createdAt | date: "full" }}
+{{ tutorial.createdAt | date: 'full' }}
 
 <div>
   <label><strong>Conversion:</strong></label
-  >{{ tutorial.createdAt | date: "full":tutorial.timeZone }}
+  >{{ tutorial.createdAt | date: 'full':tutorial.timeZone }}
 </div>
 
 <app-comment-post [tutorialId]="tutorialId"></app-comment-post>

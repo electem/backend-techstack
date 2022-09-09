@@ -40,7 +40,7 @@ export class FormTutorialComponent implements OnInit {
   constructor(
     private tutorialService: TutorialService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
   ) {
     this.timeZoneNames = moment.tz.names();
     this.timeZoneChanged('America/New_York');
