@@ -23,7 +23,7 @@ export class TutorialDetialViewComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private tutorialService: TutorialService
+    private tutorialService: TutorialService,
   ) {}
 
   ngOnInit(): void {

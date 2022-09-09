@@ -22,7 +22,7 @@ export class TutorialsListComponent implements OnInit {
 
   constructor(
     private tutorialService: TutorialService,
-    private router: Router
+    private router: Router,
   ) {}
 
   ngOnInit(): void {

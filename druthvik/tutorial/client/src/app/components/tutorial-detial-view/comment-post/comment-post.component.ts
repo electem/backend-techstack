@@ -27,7 +27,7 @@ export class CommentPostComponent implements OnInit {
 
   constructor(
     private tutorialService: TutorialService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
   ) {}
 
   ngOnInit(): void {
