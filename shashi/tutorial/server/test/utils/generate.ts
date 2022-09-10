@@ -103,29 +103,55 @@ export function generateCommentPayload() {
 
 //tutorial
 
-// export function generateTutorialData(overide = {}) {
-//   return {
-//     id: faker.random.number(),
-//     title: faker.name.title(),
-//     description: faker.lorem.text(),
-//     ...overide,
-//   };
-// }
+export function generateTutorialData(overide = {}) {
+  return {
+    id: faker.random.number(),
+    title: faker.name.title(),
+    description: faker.lorem.text(),
+    ...overide,
+  };
+}
 
-// export function generateTutorialsData(n: number = 1, overide = {}) {
-//   return Array.from(
-//     {
-//       length: n,
-//     },
-//     (_, i) => {
-//       return generateTutorialData(overide);
-//     }
-//   );
-// }
+export function generateTutorialsData(n: number = 1, overide = {}) {
+  return Array.from(
+    {
+      length: n,
+    },
+    (_, i) => {
+      return generateTutorialData(overide);
+    }
+  );
+}
 
-// export function generateTutorialPayload() {
-//   return {
-//     title: faker.name.title(),
-//     description: faker.lorem.text(),
-//   };
-// }
+export function generateTutorialPayload() {
+  return {
+    title: faker.name.title(),
+    description: faker.lorem.text(),
+  };
+}
+//login
+export function generateLoginData(overide = {}) {
+  return {
+    userName: faker.name.title(),
+    password: faker.name.title(),
+    role: faker.lorem.word(),
+    ...overide,
+  };
+}
+export function generateLoginsData(n: number = 1) {
+  return Array.from(
+    {
+      length: n,
+    },
+    (_, i) => {
+      return generateLoginData();
+    }
+  );
+}
+export function generateLoginPayload() {
+  return {
+    userName: faker.name.title(),
+    password: faker.name.title(),
+    role: faker.lorem.word(),
+  };
+}
