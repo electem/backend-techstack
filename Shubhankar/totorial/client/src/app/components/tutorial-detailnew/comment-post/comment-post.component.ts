@@ -11,25 +11,23 @@ import { TutorialService } from 'src/app/services/tutorial.service';
 })
 export class CommentPostComponent implements OnInit {
  
- currentComment: Comment = { 
-     id:'',   
-    content: '',
-    tutorialId: 0,
+ comment: Comment = { 
+     content: '',
   };
   tutorial:Tutorial ={
     title: '',
     description:'',
     published: false,
     categories: [],
-
-  };
+   };
   @Input() tutorialId:any
-  comments?: any;
+  @Input() timezone:any
+  commentDetails?: any;
   
   constructor( private tutorialService: TutorialService, private route: ActivatedRoute) { }
 
  ngOnInit(): void {
-   this.getTutorialbyId(this.route.snapshot.params.id);
+   //this.getTutorialbyId(this.route.snapshot.params.id);
     this.getCommentTutorialbyId(this.tutorialId)
   }
 
@@ -39,14 +37,15 @@ export class CommentPostComponent implements OnInit {
 
   async saveComment() {
    
-    const data = {
-      content: this.currentComment.content,
+    const  data = {
+      content: this.comment.content,
       tutorialId: this.tutorialId
        };
        await this.tutorialService.createComment(data);
   }
   async getCommentTutorialbyId(id: number) {
-    this.comments = await this.tutorialService.getcomment(id);
+    const comments = await this.tutorialService.getcomment(id);
+    this.commentDetails =  comments;
 
   }
 }

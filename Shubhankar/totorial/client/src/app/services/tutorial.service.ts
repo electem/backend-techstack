@@ -4,10 +4,11 @@ import { Observable } from 'rxjs'
 import { Tutorial } from '../models/tutorial.model'
 import { Category } from '../models/category'
 import { Comment } from '../models/comment'
+import { LoginUser } from '../models/login'
 const baseUrl1 = 'http://localhost:8000/category'
 const baseUrl2 = 'http://localhost:8000/tutorials'
 const baseUrlComments = 'http://localhost:8000/comments'
-
+const baseurllogin = 'http://localhost:8000/loginusers'
 
 
 @Injectable({
@@ -29,8 +30,7 @@ export class TutorialService {
 // ]
 
   private country = [
-
-    {
+   {
       "name":'INDIA'
       
     },
@@ -42,31 +42,38 @@ export class TutorialService {
     }
   ];
 
- 
+  private roles = [
+    {
+      "role":"Actor"
+    },
+    {
+      "role":"comment"
+    }]
 
+    
+createlogin(data: any): Promise<Object> {
+return this.http.post(baseurllogin, data).toPromise();
+}
+
+getRole(){
+    return this.roles
+}
  
- getCountryData(){
+getCountryData(){
     return this.country;
   }
 
-  // getCategoriesHard(){
-  //   return this.categories
-  // }
-  
- 
   constructor(private http: HttpClient) {}
 
   createComment(data: any): Promise<Object> {
     return this.http.post(baseUrlComments, data).toPromise();
   }
 
-  async getcomment(id: number): Promise<Comment[]> {
-    return await this.http.get<Comment[]>(baseUrlComments).toPromise();
+  async getcomment(id: number){
+    return await this.http.get(`${baseUrlComments}/${id}`).toPromise();
   }
-
-
-  
-    async getAllCategory(): Promise<Category[]> {
+ 
+  async getAllCategory(): Promise<Category[]> {
       return await this.http.get<Category[]>(baseUrl1).toPromise();
   }
 
@@ -74,7 +81,6 @@ export class TutorialService {
     return await this.http.get<Category[]>(baseUrl1).toPromise();
   }
   
-
   async getAll(): Promise<Tutorial[]>{
     return await this.http.get<Tutorial[]>(baseUrl2).toPromise();
   }

@@ -24,19 +24,13 @@ currentTutorial: Tutorial = {
   selectedCategories: Category[] = [];
   countries!: { name: string; }[];
   tutorials?: Tutorial[];
-  selectedTz!: string;
   tutorial: any;
-  userTz: string;
-  utcTz: string;
-  tzNames: string[];
   tutorialId?:number;
-  
+  timezone?:String;
 constructor(
     private tutorialService: TutorialService,
     private route: ActivatedRoute,
-   ) {this.userTz = moment.tz.guess();
-    this.utcTz = 'UTC';
-    this.tzNames = moment.tz.names();}
+   ) {}
 
   ngOnInit() {
     this.getTutorialbyId(this.route.snapshot.params.id);
@@ -44,16 +38,13 @@ constructor(
    }
 
   async getTutorialbyId(id: number) {
-    this.currentTutorial = await this.tutorialService.getbyId(id);
-    if (this.currentTutorial.categories) {
-      this.selectedCategory = this.currentTutorial.categories[0];
-      
+    // this.currentTutorial = await this.tutorialService.getbyId(id);
+    // if (this.currentTutorial.categories) {
+    //   this.selectedCategory = this.currentTutorial.categories[0];
+    const data =await this.tutorialService.getbyId(id);
+    this.currentTutorial= data;
+    this.timezone=this.currentTutorial.timezone;
     }
  }
-   }
+   
   
-
-
-
-
-
