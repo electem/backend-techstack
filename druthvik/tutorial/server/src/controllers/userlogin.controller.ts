@@ -1,5 +1,9 @@
-import { Get, Route, Tags, Post, Body, Path } from 'tsoa';
+import { Next } from '@nestjs/common/decorators';
+import { NextFunction, response } from 'express';
+import { Get, Route, Tags, Post, Body, Path, Request, Response } from 'tsoa';
 import { userLogin } from '../models/userlogin';
+import { userLoginRepository } from '../repositories/userlogin.repository';
+
 import {
   createUser,
   getUser,
@@ -21,7 +25,10 @@ export default class UserLoginController {
   }
 
   @Get('/')
-  public async getAuth(): Promise<void | null> {
-    return mwBasicAuth('', '', '');
+  public async getAuth(
+    @Request() res: IUserLoginPayload,
+    @Request() userName: any,
+  ): Promise<boolean | null> {
+    return mwBasicAuth(res, userName);
   }
 }
