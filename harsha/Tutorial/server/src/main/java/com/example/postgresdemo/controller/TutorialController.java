@@ -21,7 +21,7 @@ import com.example.postgresdemo.repository.TutorialRepository;
 @CrossOrigin
 public class TutorialController {
 
-	private final TutorialRepository tutorialRepository;
+	private  TutorialRepository tutorialRepository;
 
 	@Autowired
 	public TutorialController(TutorialRepository tutorialRepository) {
