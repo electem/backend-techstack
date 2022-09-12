@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.postgresdemo.config.JwtTokenUtil;
 import com.example.postgresdemo.model.JwtRequest;
 import com.example.postgresdemo.model.JwtResponse;
+import com.example.postgresdemo.model.LoginUser;
 
 @RestController
 @CrossOrigin
@@ -32,12 +33,12 @@ public class JwtAuthenticationController {
 	private UserDetailsService jwtInMemoryUserDetailsService;
 
 	@RequestMapping(value = "/authenticate", method = RequestMethod.POST)
-	public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
+	public ResponseEntity<?> createAuthenticationToken(@RequestBody LoginUser authenticationRequest) throws Exception {
 
-		authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
+		authenticate(authenticationRequest.getUserName(), authenticationRequest.getPassword());
 
 		final UserDetails userDetails = jwtInMemoryUserDetailsService
-				.loadUserByUsername(authenticationRequest.getUsername());
+				.loadUserByUsername(authenticationRequest.getUserName());
 
 		final String token = jwtTokenUtil.generateToken(userDetails);
 
