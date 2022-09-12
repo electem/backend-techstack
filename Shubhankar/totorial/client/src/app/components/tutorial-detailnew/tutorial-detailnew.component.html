@@ -23,11 +23,11 @@
         {{ currentTutorial.timezone }}
       
         <label><strong>Created At:</strong></label>
-        {{ currentTutorial.createdAt }}
+        {{ currentTutorial.createdAt | date:'full'}}
 
         <label><strong>Conversion:</strong></label>
-        {{currentTutorial.createdAt | date:'full'}} 
+        {{currentTutorial.createdAt | date:'full' :currentTutorial.timezone}} 
 
-       <app-comment-post [tutorialId]="tutorialId">  
+       <app-comment-post [tutorialId]="tutorialId" [timezone]="timezone">  
         </app-comment-post>
-      
+      <button class="btn-outline-success btn-sm" routerLink="/tutorials">Cancel</button>

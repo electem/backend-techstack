@@ -13,35 +13,25 @@
       id="content"
       required
       name="content"
-      [(ngModel)]="currentComment.content"
+      [(ngModel)]="comment.content"
      />
   <button  (click)="saveComment()"  class="btn btn-outline-success float-right"  >Save</button>
   </div>
-
-  <head>
-    <style>
-       tr {
-            text-align: center;
-            border-collapse: collapse;
-        }
-        /* setting the text-align property to center*/
-        td {
-            padding: 5px;
-            text-align: center;
-        }
-    </style>
-</head>
-  <table class="table table-striped">
+ <table class="table table-striped">
     <thead>
       <tr>
         <th scope="col">Id</th>
         <th scope="col">Comments</th>
+        <th scope="col">CreatedDate</th>
+        <th scope="col">Converted-Date</th>
       </tr>
     </thead>
     <tbody  scope="col">
-      <tr *ngFor="let comment of comments">
+      <tr *ngFor="let comment of commentDetails">
          <td >{{ comment.id }}</td>
          <td>{{ comment.content }}</td>
+         <td>{{comment.createdAt | date: "full"}}</td>
+         <td>{{ comment.createdAt | date: "full":timezone}}</td>
     </tr>          
    </tbody>
 </table>
