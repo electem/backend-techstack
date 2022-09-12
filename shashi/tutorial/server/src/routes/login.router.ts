@@ -4,7 +4,7 @@ const router = express.Router();
 
 router.get("/", async (req, res) => {
   const controller = new UserloginController();
-  const response = await controller.getAuth();
+  const response = await controller.getAuth(req);
   return res.send(response);
 });
 router.post("/", async (req, res) => {

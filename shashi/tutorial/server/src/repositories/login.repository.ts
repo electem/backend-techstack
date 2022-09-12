@@ -1,5 +1,7 @@
 import { getRepository } from "typeorm";
 import { Userlogin } from "../models/userlogin";
+import auth from "basic-auth";
+import crypto from "crypto";
 
 export interface ILoginPayload {
   userName: string;
@@ -24,22 +26,25 @@ export const getLogin = async (id: number): Promise<Userlogin | null> => {
 };
 
 //auth
-const auth = require("basic-auth");
-export const mwBasicAuth = async (req: any, res: any, next: any):Promise<void | null> => {
+export const mwBasicAuth = async (userName: string): Promise<boolean> => {
   console.log("repository: basic auth");
-  const user = await auth(req);
-  const username: string = "test";
-  const password: string = "123456";
+  const loginRepository = getRepository(Userlogin);
+  const user = await loginRepository.findOne({ userName: userName });
+  console.log(user);
+  const username = user?.userName;
+  
+  const password = user?.password;
+  console.log(user?.password);
+  const hash = crypto.createHash("md5").update(user?.password!).digest("hex");
+  user!.password = hash;
+  console.log(user?.password);
   if (
     user &&
-    user.name.toLowerCase() === username.toLowerCase() &&
-    user.pass === password
+    user.userName?.toLowerCase() === username?.toLowerCase() &&
+    user.password != password
   ) {
-    console.log("Basic Auth: success");
-    next();
+    return true;
   } else {
-    console.log("Basic Auth: failure");
-    res.statusCode = 401;
-    res.end("Access denied");
+    return false;
   }
 };

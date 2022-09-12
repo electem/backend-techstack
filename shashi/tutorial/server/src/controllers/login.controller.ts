@@ -1,5 +1,5 @@
-import { next } from "inversify-express-utils";
-import { Route, Tags, Post, Body, Get, Path } from "tsoa";
+import { next, response, request } from "inversify-express-utils";
+import { Route, Tags, Post, Body, Get, Path, Request } from "tsoa";
 import { Userlogin } from "../models/userlogin";
 import {
   createLogin,
@@ -12,8 +12,8 @@ import {
 @Tags("login")
 export default class UserloginController {
   @Get("/")
-  public async getAuth(): Promise<void | null> {
-    return mwBasicAuth("", "", "");
+  public async getAuth(@Request() request: any): Promise<boolean> {
+    return mwBasicAuth(request);
   }
   @Post("/")
   public async createLogin(@Body() body: ILoginPayload): Promise<Userlogin> {
