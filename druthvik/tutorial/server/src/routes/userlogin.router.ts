@@ -18,9 +18,7 @@ router.get('/:id', async (req, res) => {
 
 router.get('/', async (req, res) => {
   const controller = new UserLoginController();
-
   const response = await controller.getAuth();
-
   return res.send(response);
 });
 

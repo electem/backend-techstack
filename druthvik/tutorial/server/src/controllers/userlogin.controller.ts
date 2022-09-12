@@ -1,6 +1,5 @@
 import { Get, Route, Tags, Post, Body, Path } from 'tsoa';
 import { userLogin } from '../models/userlogin';
-import { User } from '../models/user';
 import {
   createUser,
   getUser,
