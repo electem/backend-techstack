@@ -27,6 +27,7 @@ import { EditStudentFormComponent } from './components/edit-student-form/edit-st
 import { ComponentsComponent } from './components/components/components.component';
 import { CommentPostComponent } from './components/tutorial-view-detials/comment-post/commentPost.component';
 import { TutorialViewDetialsComponent } from './components/tutorial-view-detials/tutorial-view-detials.component';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { TutorialViewDetialsComponent } from './components/tutorial-view-detials
     ComponentsComponent,
     CommentPostComponent,
     TutorialViewDetialsComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,

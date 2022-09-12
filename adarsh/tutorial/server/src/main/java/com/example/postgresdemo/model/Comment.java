@@ -29,12 +29,10 @@ public class Comment {
 	private Date creatDate;
 
 	private Integer tutorial_id;
-
-	// empty constructor for entity class
-	public Comment() {
+	
+	public Comment(){
+		
 	}
-
-	// construtor of entity class
 
 	public Comment(int id, String commentDescription, Date creatDate, Integer tutorial_id) {
 		super();
@@ -44,10 +42,7 @@ public class Comment {
 		this.tutorial_id = tutorial_id;
 	}
 	
-	public Comment(String commentDescription,Integer tutorial_id) {
-		this.commentDescription = commentDescription;
-		this.tutorial_id = tutorial_id;
-	}
+	
 
 	// getter and setter to the filds
 	public int getId() {

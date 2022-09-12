@@ -23,6 +23,7 @@ export class TutorialViewDetialsComponent implements OnInit {
   };
   selectedCategory = new Category();
   tutorialId?: Number;
+  timeZone?: string;
 
   constructor(
     private tutorialService: TutorialService,
@@ -47,6 +48,7 @@ export class TutorialViewDetialsComponent implements OnInit {
   private async getTutorial(id: Number) {
     const data = await this.tutorialService.getTutor(id);
     this.currentTutorial = data;
+    this.timeZone = this.currentTutorial.timeZone;
     if (this.currentTutorial.categories) {
       this.selectedCategory = this.currentTutorial.categories[0];
     }

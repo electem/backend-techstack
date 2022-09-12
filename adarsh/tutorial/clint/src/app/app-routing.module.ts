@@ -21,6 +21,7 @@ import { EditStudentFormComponent } from './components/edit-student-form/edit-st
 import { ComponentsComponent } from './components/components/components.component';
 
 import { TutorialViewDetialsComponent } from './components/tutorial-view-detials/tutorial-view-detials.component';
+import { LoginComponent } from './components/login/login.component';
 const routes: Routes = [
   { path: '', redirectTo: 'tutorials', pathMatch: 'full' },
   { path: 'components', component: ComponentsComponent },
@@ -43,6 +44,7 @@ const routes: Routes = [
   { path: 'userListing', component: UserListComponent },
   { path: 'newTutorial/:id', component: NewTutorialComponent },
   { path: 'tutorials-view/:id', component: TutorialViewDetialsComponent },
+  { path: 'login', component: LoginComponent },
 ];
 
 @NgModule({
