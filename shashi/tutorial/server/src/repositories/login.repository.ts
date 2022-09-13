@@ -1,12 +1,16 @@
-import { getRepository } from "typeorm";
+import { Connection, getRepository } from "typeorm";
+import { Injectable } from "@nestjs/common/decorators";
 import { Userlogin } from "../models/userlogin";
-import auth from "basic-auth";
 import crypto from "crypto";
 
 export interface ILoginPayload {
   userName: string;
   password: string;
   role: string;
+}
+@Injectable()
+export class Userloginrepository {
+  constructor(private readonly connection: Connection) {}
 }
 export const createLogin = async (
   payload: ILoginPayload
@@ -26,23 +30,15 @@ export const getLogin = async (id: number): Promise<Userlogin | null> => {
 };
 
 //auth
-export const mwBasicAuth = async (userName: string): Promise<boolean> => {
-  console.log("repository: basic auth");
-  const loginRepository = getRepository(Userlogin);
-  const user = await loginRepository.findOne({ userName: userName });
-  console.log(user);
-  const username = user?.userName;
-  
-  const password = user?.password;
-  console.log(user?.password);
-  const hash = crypto.createHash("md5").update(user?.password!).digest("hex");
-  user!.password = hash;
-  console.log(user?.password);
-  if (
-    user &&
-    user.userName?.toLowerCase() === username?.toLowerCase() &&
-    user.password != password
-  ) {
+export const mwBasicAuth = async (
+  payload: ILoginPayload,
+  userName: string
+): Promise<boolean> => {
+  const userRepository = getRepository(Userlogin);
+  const userDB = await userRepository.findOne({ userName: userName });
+  const hash = crypto.createHash("md5").update(payload.password).digest("hex");
+  payload.password = hash;
+  if (userDB && userDB.password === payload.password) {
     return true;
   } else {
     return false;
