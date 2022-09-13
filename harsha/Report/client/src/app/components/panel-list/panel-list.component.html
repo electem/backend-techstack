@@ -1,0 +1,25 @@
+<div class="col-md-6">
+    <h4>Panels List</h4>
+    <button class="m-3 btn btn-sm btn-danger" (click)="savePanel()">Add</button>  
+       
+  <table class="table table-bordered table-striped table-hover">
+    <thead>
+      <tr>
+        <th class="text-center">Panel Id</th>
+        <th class="text-center" >Panel Name</th>
+        <th class="text-center">Panel Description</th>
+        <th class="text-center">&nbsp;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let panel of panels">
+        <td>{{ panel.id }}</td>
+        <td>{{ panel.name }}</td>
+        <td>{{ panel.description }}</td>
+        <td>
+          <button [routerLink]="'student'" class="btn btn-info btn-sm mr-2">Edit</button> 
+        </td>
+      </tr>
+    </tbody>
+  </table>
+    </div>
