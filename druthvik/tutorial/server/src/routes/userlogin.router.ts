@@ -9,9 +9,9 @@ router.use((req, res, next) => {
   next();
 });
 
-router.use('/', async (req, res, next) => {
+router.use((req, res, next) => {
   const controller = new UserLoginController();
-  const response = await controller.getAuth(req.body, req.body.userName);
+  controller.getAuth(req.body, req.body.userName);
   next();
 });
 router.post('/', async (req, res) => {

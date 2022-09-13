@@ -7,10 +7,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-  constructor(private router: Router) {}
-  ngOnInit(): void {
-    this.router.navigate(['/LoginComponentComponent']);
-    throw new Error('Method not implemented.');
-  }
+  constructor() {}
+  ngOnInit(): void {}
   title = 'Angular 11 Crud';
 }

@@ -1191,6 +1191,27 @@
 						}
 					}
 				}
+			},
+			"get": {
+				"operationId": "GetAuth",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "boolean",
+									"nullable": true
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"UserLogin"
+				],
+				"security": [],
+				"parameters": []
 			}
 		},
 		"/userlogin/{id}": {

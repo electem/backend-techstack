@@ -118,3 +118,24 @@ export function generateTutorialDatas(n: number = 1, overide = {}) {
     },
   );
 }
+export function generateLoginData(overide = {}) {
+  return {
+    userName: faker.name.title(),
+
+    password: faker.name.title(),
+
+    role: faker.lorem.word(),
+
+    ...overide,
+  };
+}
+
+export function generateLoginPayload() {
+  return {
+    userName: faker.name.title(),
+
+    password: faker.name.title(),
+
+    role: faker.lorem.word(),
+  };
+}
