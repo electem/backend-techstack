@@ -11,21 +11,31 @@ import { Test } from 'src/app/models/test.model';
 export class PanelListComponent implements OnInit {
   panels?: Panel[];
   showForm?: boolean;
+  Testdropdown?: boolean;
   currentPanel?: Panel;
   currentIndex = -1;
   submitted = false;
   panel: Panel = {
     name: '',
     description: '',
+    tests: [],
   };
+  test: Test = {
+    name: '',
+  };
+
   editPanelForm?: boolean;
-  test!: Test[];
+  showbutton?: boolean;
+  tests!: Test[];
+  selectedTests: Test[] = [];
+  public selectedtests = new Test();
   constructor(private panelService: PanelService) {}
 
   ngOnInit(): void {
     this.showForm = false;
     this.editPanelForm = false;
     this.retrievePanels();
+    this.retrieveTests();
   }
   onSubmit() {
     alert(
@@ -57,6 +67,7 @@ export class PanelListComponent implements OnInit {
     this.panel = panel;
     this.showForm = true;
     this.editPanelForm = true;
+    this.showbutton = true;
   }
   async savePanel() {
     this.submitted = true;
@@ -66,5 +77,33 @@ export class PanelListComponent implements OnInit {
     };
     await this.panelService.createPanel(panelData);
     this.retrievePanels();
+  }
+  async retrieveTests(): Promise<void> {
+    this.tests = await this.panelService.getAllTest();
+  }
+
+  onSelected(value: Test) {
+    if (this.tests) {
+      for (let test of this.tests) {
+        if (test.id == value.id) {
+          this.selectedTests.push(test);
+        }
+      }
+    }
+  }
+  addTest(test: Test): void {
+    this.test = test;
+    this.Testdropdown = true;
+  }
+
+  async updatePanel(): Promise<void> {
+    const panelData: Panel = {
+      id: this.panel.id,
+      name: this.panel.name,
+      description: this.panel.description,
+      tests: this.panel.tests,
+    };
+    panelData.tests = this.selectedTests;
+    await this.panelService.updatePanel(panelData);
   }
 }
