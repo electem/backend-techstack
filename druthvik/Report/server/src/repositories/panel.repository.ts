@@ -5,12 +5,6 @@ export interface IPanelPayload {
   name: string;
   description: string;
 }
-
-// export const getPanel = async (): Promise<Array<Panel>> => {
-//   const panelRepository = getRepository(Panel);
-//   return panelRepository.find();
-// };
-
 export const createPanel = async (payload: IPanelPayload): Promise<Panel> => {
   const panelRepository = getRepository(Panel);
   const panel = new Panel();
@@ -18,13 +12,6 @@ export const createPanel = async (payload: IPanelPayload): Promise<Panel> => {
     ...panel,
     ...payload,
   });
-};
-
-export const getpanelById = async (id: number): Promise<Panel | null> => {
-  const panelRepository = getRepository(Panel);
-  const panel = await panelRepository.findOne({ id: id });
-  if (!panel) return null;
-  return panel;
 };
 
 export const updatePanel = async (payload: IPanelPayload): Promise<Panel> => {
