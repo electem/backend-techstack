@@ -1,68 +1,90 @@
 import { Component, OnInit } from '@angular/core';
 import { Panel } from 'src/app/models/panel.model';
 import { PanelService } from 'src/app/services/panel.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Test } from 'src/app/models/test.model';
 
 @Component({
   selector: 'app-panel-list',
   templateUrl: './panel-list.component.html',
-  styleUrls: ['./panel-list.component.css']
+  styleUrls: ['./panel-list.component.css'],
 })
 export class PanelListComponent implements OnInit {
-panels: any;
-currentIndex= -1;
-registerForm!: FormGroup;
-submitted: boolean= false;
-panelForm: boolean = false;
-currentPanel: Panel = {
-  name: '',
-  description: '',
-  tests: []
-  
-}
+  panels: Panel[] = [];
+  currentIndex = -1;
+  tests: Test[] = [];
+  selectedTests: Test[] = [];
+  selectedTestNew = new Test();
+  selectedTest = new Test();
+  editForm: boolean = false;
+  panel: Panel = {
+    name: '',
+    description: '',
+    tests: [],
+  };
+  panelForm?: boolean;
+  testForm?: boolean;
 
-  constructor(
-    private panelService:PanelService,
-    private  formBuilder: FormBuilder,
-    private router: Router) { }
+  constructor(private panelService: PanelService) {}
 
   ngOnInit(): void {
-    this.registerForm = this.formBuilder.group({
-      description: ['', Validators.required],
-      title: ['', Validators.required],
-      categories:['', Validators.required],
-      author: ['', Validators.required],
-      countries: ['', Validators.required],
-      timezoneNames:['', Validators.required],
-     });
     this.retrievePanels();
+    this.getTests();
   }
 
   async retrievePanels(): Promise<void> {
     this.panels = await this.panelService.getPanels();
   }
 
-  get validation() {
-    return this.registerForm.controls;
-    }
+  async getTests(): Promise<void> {
+    this.tests = await this.panelService.getTests();
+  }
 
-  signup() {
-    this.submitted = true;
-    if (this.registerForm.invalid) {
-    return;
+  onSelected(value: Panel) {
+    if (this.tests) {
+      for (let test of this.tests) {
+        if (test.id == value.id) {
+          this.selectedTests.push(this.selectedTestNew);
+        }
+      }
     }
-    alert('form fields are validated successfully!');
-    this.savePanel()
-    }
-    
-    async savePanel():  Promise<void> {
-      if (this.panelForm=true){
-      const data = {
-        name: this.currentPanel.name,
-        description: this.currentPanel.description,
-     } 
-      await this.panelService.createPanel(data)
-      this.router.navigate(['panels']);
-     }}
+  }
+
+  addPanel() {
+    this.panelForm = true;
+  }
+
+  addTest() {
+    this.testForm = true;
+  }
+
+  editPanel(panel: Panel) {
+    this.panel = panel;
+    this.editForm = true;
+  }
+
+  async savePanel(): Promise<void> {
+    const panelData: Panel = {
+      name: this.panel.name,
+      description: this.panel.description,
+    };
+    await this.panelService.createPanel(panelData);
+  }
+
+  async updatePanel(): Promise<void> {
+    const panel = {
+      id: this.panel.id,
+      title: this.panel.name,
+      description: this.panel.description,
+      tests: this.selectedTests,
+    };
+    if (this.selectedTests.length) await this.panelService.updatePanel(panel);
+  }
+
+  cancelPanel() {
+    this.panelForm = false;
+    this.panel = {
+      name: '',
+      description: '',
+    };
+  }
 }

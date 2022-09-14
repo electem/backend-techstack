@@ -1,25 +1,115 @@
-<div class="col-md-6">
-    <h4>Panels List</h4>
-    <button class="m-3 btn btn-sm btn-danger" (click)="savePanel()">Add</button>  
-       
-  <table class="table table-bordered table-striped table-hover">
-    <thead>
-      <tr>
-        <th class="text-center">Panel Id</th>
-        <th class="text-center" >Panel Name</th>
-        <th class="text-center">Panel Description</th>
-        <th class="text-center">&nbsp;</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let panel of panels">
-        <td>{{ panel.id }}</td>
-        <td>{{ panel.name }}</td>
-        <td>{{ panel.description }}</td>
-        <td>
-          <button [routerLink]="'student'" class="btn btn-info btn-sm mr-2">Edit</button> 
-        </td>
-      </tr>
-    </tbody>
-  </table>
+<div>
+  <div *ngIf="this.panelForm">
+    <h4 class="text-center">Add Panel</h4>
+    <form>
+      <div class="form-group">
+        <label for="name">Panel Name</label>
+        <input
+          type="text"
+          formControlName="name"
+          class="form-control"
+          [(ngModel)]="panel.name"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="description">Panel Description</label>
+        <input
+          type="text"
+          formControlName="description"
+          class="form-control"
+          [(ngModel)]="panel.description"
+        />
+        <button class="m-3 btn btn-sm btn-danger" (click)="savePanel()">
+          Save Panel
+        </button>
+        <button class="btn btn-warning">Cancel</button>
+      </div>
+    </form>
+  </div>
+
+  <div *ngIf="this.editForm">
+    <h4 class="text-center">Edit Panel</h4>
+    <button class="m-3 btn btn-sm btn-danger" (click)="addTest()">
+      Add Test to Panel
+    </button>
+    <div *ngIf="this.testForm">
+      <form>
+        <div class="form-group">
+          <p class="text-center">
+            Tests
+            <select
+              class="form-control"
+              placeholder="Choose Test"
+              [(ngModel)]="selectedTest.id"
+              (ngModelChange)="onSelected(selectedTest)"
+            >
+              <option value="Choose Test">Choose Test</option>
+              <option *ngFor="let test of tests" [ngValue]="test">
+                {{ test.name }}
+              </option>
+            </select>
+          </p>
+        </div>
+      </form>
     </div>
+    <form>
+      <div class="form-group">
+        <label for="name">PANEL NAME</label>
+        <input
+          type="text"
+          name="name"
+          class="form-control"
+          [(ngModel)]="panel.name"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="description">Panel Description</label>
+        <input
+          type="text"
+          name="description"
+          class="form-control"
+          [(ngModel)]="panel.description"
+        />
+        <button class="btn btn-primary mr-2" (click)="updatePanel()">
+          Update Panel
+        </button>
+        <button class="btn btn-warning" (click)="cancelNewPanel()">
+          Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <div class="col-md-6">
+    <h4 class="text-center">Panels List</h4>
+    <button class="m-3 btn btn-sm btn-danger" (click)="addPanel()">
+      Add Panel
+    </button>
+    <table class="table table-bordered table-striped table-hover">
+      <thead>
+        <tr>
+          <th class="text-center">Panel Name</th>
+          <th class="text-center">Panel Description</th>
+          <th class="text-center">&nbsp;</th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let panel of panels; let i = index">
+        <tr class="success">
+          <td class="text-center">{{ panel.name }}</td>
+          <td class="text-center">{{ panel.description }}</td>
+          <td>
+            <button
+              type="button"
+              class="btn btn-info btn-sm mr-2"
+              (click)="editPanel(panel)"
+            >
+              Edit
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
