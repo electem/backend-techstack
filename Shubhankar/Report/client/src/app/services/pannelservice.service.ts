@@ -20,6 +20,10 @@ export class PannelserviceService {
     return this.http.post(baseUrl, data).toPromise();
   }
 
+  createTest(data: Test) {
+    return this.http.post(baseUrl2, data).toPromise();
+  }
+
   async getPanel(id: Number): Promise<Panel> {
     return await this.http.get(`${baseUrl}/${id}`).toPromise();
   }
@@ -31,4 +35,3 @@ export class PannelserviceService {
     return await this.http.get<Test[]>(baseUrl2).toPromise();
   }
 }
-

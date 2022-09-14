@@ -23,7 +23,7 @@ export const updatePanel = async (payload: IPanelPayload): Promise<Panel> => {
   });
 };
 
-//query builder query to get all the panels with their tests
+
 export const getPanels = async (): Promise<Array<Panel>> => {
   const entityManager = getManager();
   let tests = [];
@@ -35,7 +35,7 @@ export const getPanels = async (): Promise<Array<Panel>> => {
   return tests;
 };
 
-//query builder query to get panel by id with their associations
+
 export const getPanel = async (id: number) => {
   const entityManager = getManager();
   const query = entityManager.createQueryBuilder(Panel, "panels");

@@ -1,96 +1,124 @@
 <div class="list row">
-    <div class="col-md-8">
-      <div class="input-group mb-3"></div>
-    </div>
-    <div class="col-md-6">
-      <h4>Panels List</h4>
-      <td>
-        <button
-          *ngIf="!this.editPanelForm"
+  <div class="col-md-8">
+    <div class="input-group mb-3"></div>
+  </div>
+  <div class="col-md-6">
+    <h4>Panels List</h4>
+    <td>
+      <button
+        *ngIf="!this.editPanelForm"
+        type="button"
+        class="btn btn-secondary herramienta"
+        (click)="addPanel()"
+      >
+        ADD NEW PANEL
+      </button>
+      <button
+        *ngIf="this.editPanelForm"
+        type="button"
+        class="btn btn-secondary herramienta"
+        (click)="editPanel(panel)"
+      >
+        ADD TEST TO PANEL
+      </button>
+    </td>
+    <br />
+    <div *ngIf="this.showForm">
+      <form>
+        <div class="formbox">
+          <div class="form-group">
+            <select *ngIf="this.dropdown"
+              class="form-control"
+              [(ngModel)]="selectedTests"
+              (ngModelChange)="onSelected(selectedTests)"
+              name="title"
+            >
+              <option>Select Test</option>
+              <option *ngFor="let test of test">
+                {{ test.name }}
+              </option>
+              <button
           type="button"
-          class="btn btn-info btn-sm mr-2"
-          (click)="addPanel()"
+          class="btn btn-secondary herramienta"
+          (click)="updatePanel()"
         >
-          ADD NEW PANEL
+          Confirm Test
         </button>
-        <button
-          *ngIf="this.editPanelForm"
-          type="button"
-          class="btn btn-info btn-sm mr-2"
-          (click)="addPanel()"
-        >
-          ADD TEST TO PANEL
-        </button>
-      </td>
-      <br />
-      <div *ngIf="this.showForm">
-        <form>
-          <div class="formbox">
-            <div class="form-group">
-              <label for="name">PANEL NAME</label>
-              <input
-                type="text"
-                name="name"
-                class="form-control"
-                [(ngModel)]="panel.name"
-              />
-            </div>
-            <br />
-            <div class="form-group">
-              <label for="name">PANEL DESCRIPTION</label>
-              <input
-                name="description"
-                type="text"
-                class="form-control"
-                [(ngModel)]="panel.description"
-              />
-            </div>
+            </select>
+          </div>
+        </div>
+        <br />
+        
+        <br />
+      </form>
+
+      <form>
+        <div class="formbox">
+          <div class="form-group">
+            <label for="name">PANEL NAME</label>
+            <input
+              type="text"
+              name="name"
+              class="form-control"
+              [(ngModel)]="panel.name"
+            />
           </div>
           <br />
-          <button
-            type="button"
-            class="btn btn-info btn-sm mr-2"
-            (click)="canclePanel()"
-          >
-            CANCEL
-          </button>
-          <button
-            type="button"
-            class="btn btn-info btn-sm mr-2"
-            (click)="savePanel()"
-          >
-            SAVE PANEL
-          </button>
-          <br />
-        </form>
-      </div>
-      <br />
-      <ul class="list-group"></ul>
+          <div class="form-group">
+            <label for="name">PANEL DESCRIPTION</label>
+            <input
+              name="description"
+              type="text"
+              class="form-control"
+              [(ngModel)]="panel.description"
+            />
+          </div>
+        </div>
+        <br />
+        <button
+          type="button"
+          class="btn btn-secondary herramienta"
+          (click)="canclePanel()"
+        >
+          CANCEL
+        </button>
+        <button
+          type="button"
+          class="btn btn-secondary herramienta"
+          (click)="savePanel()"
+        >
+          SAVE PANEL
+        </button>
+        <br />
+      </form>
     </div>
-    <div class="container">
-      <table class="table table-bordered justify-content-center">
-        <thead class="thead-light">
-          <tr class="active">
-            <th class="text-center" scope="col">NAME</th>
-            <th class="text-center" scope="col">DESCRIPTION</th>
-            <th class="text-center" scope="col">EDIT</th>
-          </tr>
-        </thead>
-        <tbody *ngFor="let panel of panels; let i = index">
-          <tr class="success">
-            <th class="text-center" scope="row">{{ panel.name }}</th>
-            <th class="text-center" scope="row">{{ panel.description }}</th>
-            <th class="text-center" scope="row">
-              <button
-                type="button"
-                class="btn btn-info btn-sm mr-2"
-                (click)="editPanel(panel)"
-              >
-                Edit
-              </button>
-            </th>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    <br />
+    <ul class="list-group"></ul>
   </div>
+  <div class="container">
+    <table class="table table-bordered justify-content-center">
+      <thead class="thead-light">
+        <tr class="active">
+          <th class="text-center" scope="col">NAME</th>
+          <th class="text-center" scope="col">DESCRIPTION</th>
+          <th class="text-center" scope="col">EDIT</th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let panel of panels; let i = index">
+        <tr class="success">
+          <th class="text-center" scope="row">{{ panel.name }}</th>
+          <th class="text-center" scope="row">{{ panel.description }}</th>
+          <th class="text-center" scope="row">
+            <button
+              type="button"
+              class="btn btn-secondary herramienta"
+              (click)="editPanel(panel)"
+            >
+              Edit
+            </button>
+          </th>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
