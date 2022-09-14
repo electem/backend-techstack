@@ -22,15 +22,12 @@ export class PanelService {
   async getPanelById(id: number) {
     return await this.http.get(`${baseUrl}/${id}`).toPromise();
   }
-  // async getPanelById(id: Number): Promise<Panel> {
-  //   return await this.http.get(`${baseUrl}/${id}`).toPromise();
-  // }
 
   async createPanel(panel: Panel) {
     return await this.http.post(baseUrl, panel).toPromise();
   }
 
-  async updatePanel(panel: Panel) {
-    return this.http.put(baseUrl, panel).toPromise();
+  async update(data: Panel) {
+    return await this.http.put(baseUrl, data).toPromise();
   }
 }

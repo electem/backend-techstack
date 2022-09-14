@@ -8,8 +8,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PanelListComponent } from './components/panel-list/panel-list.component';
 import { HeadersInterceptor } from './headers.interceptor';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 @NgModule({
-  declarations: [AppComponent, PanelListComponent],
+  declarations: [AppComponent, PanelListComponent, PageNotFoundComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
