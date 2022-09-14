@@ -8,9 +8,10 @@
         text-align: right;
       }
     </style>
-    <h1>PANELS LIST</h1>
+    <h1 class="heading">PANELS LIST</h1>
     <td>
       <button
+        *ngIf="!this.editPanelForm"
         style="margin: 10px"
         type="button"
         class="btn btn-outline-primary btn-sm mr-2"
@@ -31,7 +32,6 @@
       <div class="form-group">
         <select
           *ngIf="this.Testdropdown"
-          style="margin: 10px"
           style="width: 100%"
           [(ngModel)]="selectedtests"
           (ngModelChange)="onSelected(selectedtests)"
@@ -59,6 +59,7 @@
           <div class="form-group">
             <label for="name">PANEL NAME</label>
             <input
+              placeholder="Panel name"
               type="text"
               name="name"
               class="form-control"
@@ -69,6 +70,7 @@
           <div class="form-group">
             <label for="name">PANEL DESCRIPTION</label>
             <input
+              placeholder="Panel description"
               name="description"
               type="text"
               class="form-control"
@@ -80,12 +82,13 @@
         <button
           style="margin: 10px"
           type="button"
-          class="btn btn-danger btn-sm mr-2"
+          class="btn btn-outline-danger btn-sm mr-2"
           (click)="canclePanel()"
         >
           CANCEL
         </button>
         <button
+          *ngIf="!this.editPanelForm"
           type="button"
           class="btn btn-info btn-sm mr-2"
           (click)="savePanel()"
@@ -101,20 +104,20 @@
   <div class="container">
     <table class="table table-bordered justify-content-center">
       <thead class="thead-light">
-        <tr class="active">
+        <tr class="active button2">
           <th class="text-center" scope="col">NAME</th>
           <th class="text-center" scope="col">DESCRIPTION</th>
           <th class="text-center" scope="col">OPTIONS</th>
         </tr>
       </thead>
       <tbody *ngFor="let panel of panels; let i = index">
-        <tr class="success">
+        <tr class="success head heading2">
           <th class="text-center" scope="row">{{ panel.name }}</th>
           <th class="text-center" scope="row">{{ panel.description }}</th>
           <th class="text-center" scope="row">
             <button
               type="button"
-              class="btn btn-info btn-sm mr-2"
+              class="btn-outline-secondary btn btn-sm mr-2"
               (click)="editPanel(panel)"
             >
               Edit

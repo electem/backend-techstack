@@ -103,6 +103,7 @@ export class PanelListComponent implements OnInit {
       description: this.panel.description,
       tests: this.panel.tests,
     };
+
     panelData.tests = this.selectedTests;
     await this.panelService.updatePanel(panelData);
   }
