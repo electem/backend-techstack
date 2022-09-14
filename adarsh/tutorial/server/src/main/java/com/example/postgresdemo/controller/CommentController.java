@@ -1,5 +1,6 @@
 package com.example.postgresdemo.controller;
 
+import java.text.ParseException;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -25,20 +26,16 @@ public class CommentController {
 	// repository class of comment model
 	@Autowired
 	private CommentRepository commentRepo;
-	
+
 	@Autowired
 	private CommintService commintService;
 
-	
-
 	// this method will get the comments based on the tutorial id
 	@GetMapping("/coments/{id}")
-	   public List<Comment> getCommentByTutorialId(@PathVariable(value = "id") Integer tutorialId) {
-        List<Comment> comments = commintService.getCommentByTutorialId(tutorialId);
-        return comments;
-    }
-
-	
+	public List<Comment> getCommentByTutorialId(@PathVariable(value = "id") Integer tutorialId) throws ParseException {
+		List<Comment> comments = commintService.getCommentByTutorialId(tutorialId);
+		return comments;
+	}
 
 	// this method will post the comments
 	@PostMapping("/addComment")

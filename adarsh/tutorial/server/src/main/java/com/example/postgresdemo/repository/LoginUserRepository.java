@@ -7,5 +7,6 @@ import com.example.postgresdemo.model.LoginUser;
 
 @Repository
 public interface LoginUserRepository extends CrudRepository<LoginUser, Long> {
+	public LoginUser findOneByUsername(String userName);
 
 }
