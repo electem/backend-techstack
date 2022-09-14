@@ -40,9 +40,10 @@ public class Comment {
 		this.tutorialId = tutorialId;
 	}
 	
-	public Comment(String commentDescription, Integer tutorialId) {
+	public Comment(String commentDescription, Integer tutorialId, Date createdAt) {
 		this.commentDescription = commentDescription;
 		this.tutorialId = tutorialId;
+		this.createdAt = createdAt;
 	}
 
 	public int getId() {

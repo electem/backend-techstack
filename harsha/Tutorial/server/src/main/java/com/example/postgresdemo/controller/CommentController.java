@@ -1,5 +1,6 @@
 package com.example.postgresdemo.controller;
 
+import java.text.ParseException;
 import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,16 +16,12 @@ import com.example.postgresdemo.service.CommentService;
 @RestController
 @CrossOrigin
 public class CommentController {
-
-	private final CommentService commentService;
-
+	
 	@Autowired
-	public CommentController(CommentService commentService) {
-		this.commentService = commentService;
-	}
+	CommentService commentService;
 
 	@GetMapping("comments/tutorials/{id}")
-	public List<Comment> getCommentByTutorialId(@PathVariable(value = "id") Integer tutorialId) {
+	public List<Comment> getCommentByTutorialId(@PathVariable(value = "id") Integer tutorialId) throws ParseException {
 		List<Comment> comments = commentService.getCommentByTutorialId(tutorialId);
 		return comments;
 	}
