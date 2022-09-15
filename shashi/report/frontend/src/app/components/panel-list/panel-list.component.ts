@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PanelService } from 'src/app/services/panel.serveice';
 import { Panel } from 'src/app/models/panel.model';
 import { Test } from 'src/app/models/test.model';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-panel-list',
@@ -15,6 +16,7 @@ export class PanelListComponent implements OnInit {
   currentPanel?: Panel;
   currentIndex = -1;
   submitted = false;
+
   panel: Panel = {
     name: '',
     description: '',
@@ -29,13 +31,17 @@ export class PanelListComponent implements OnInit {
   tests!: Test[];
   selectedTests: Test[] = [];
   public selectedtests = new Test();
-  constructor(private panelService: PanelService) {}
+  constructor(
+    private panelService: PanelService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     this.showForm = false;
     this.editPanelForm = false;
     this.retrievePanels();
     this.retrieveTests();
+  
   }
   onSubmit() {
     alert(
@@ -44,11 +50,6 @@ export class PanelListComponent implements OnInit {
   }
   async retrievePanels(): Promise<void> {
     this.panels = await this.panelService.getAll();
-  }
-
-  setActivePanel(panel: Panel, index: number): void {
-    this.currentPanel = panel;
-    this.currentIndex = index;
   }
 
   addPanel() {
@@ -107,4 +108,5 @@ export class PanelListComponent implements OnInit {
     panelData.tests = this.selectedTests;
     await this.panelService.updatePanel(panelData);
   }
+
 }

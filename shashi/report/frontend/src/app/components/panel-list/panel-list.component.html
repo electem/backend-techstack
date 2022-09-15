@@ -16,6 +16,7 @@
         type="button"
         class="btn btn-outline-primary btn-sm mr-2"
         (click)="addPanel()"
+        routerLink="/addpanel"
       >
         ADD NEW PANEL
       </button>
@@ -87,18 +88,9 @@
         >
           CANCEL
         </button>
-        <button
-          *ngIf="!this.editPanelForm"
-          type="button"
-          class="btn btn-info btn-sm mr-2"
-          (click)="savePanel()"
-        >
-          SAVE PANEL
-        </button>
         <br />
       </form>
     </div>
-    <br />
     <ul class="list-group"></ul>
   </div>
   <div class="container">
@@ -117,10 +109,18 @@
           <th class="text-center" scope="row">
             <button
               type="button"
+              style="margin: px"
               class="btn-outline-secondary btn btn-sm mr-2"
               (click)="editPanel(panel)"
             >
               Edit
+            </button>
+            <button
+              type="button"
+              class="btn-outline-secondary btn btn-sm mr-2"
+              routerLink="/testDetails"
+            >
+              View
             </button>
           </th>
         </tr>

@@ -1,0 +1,58 @@
+<div class="col-md-6">
+  <style>
+    h1 {
+      text-align: right;
+    }
+  </style>
+  <h1 class="heading">PANELS LIST</h1>
+  <td></td>
+  <br />
+  <div>
+    <form>
+      <div class="formbox">
+        <div class="form-group">
+          <label for="name">PANEL NAME</label>
+          <input
+            placeholder="Panel name"
+            type="text"
+            name="name"
+            class="form-control"
+            [(ngModel)]="panel.name"
+          />
+        </div>
+        <br />
+        <div class="form-group">
+          <label for="name">PANEL DESCRIPTION</label>
+          <input
+            placeholder="Panel description"
+            name="description"
+            type="text"
+            class="form-control"
+            [(ngModel)]="panel.description"
+          />
+        </div>
+      </div>
+      <br />
+      <button
+        style="margin: 10px"
+        type="button"
+        class="btn btn-outline-danger btn-sm mr-2"
+        (click)="canclePanel()"
+        routerLink="/panel"
+      >
+        CANCEL
+      </button>
+      <button
+        type="button"
+        class="btn btn-outline-info btn-sm mr-2"
+        (click)="savePanel()"
+        routerLink="/panel"
+      >
+        SAVE PANEL
+      </button>
+      <br />
+    </form>
+  </div>
+  <br />
+  <ul class="list-group"></ul>
+</div>

@@ -5,15 +5,27 @@
   margin-bottom: 10px;
 }
 .button2 {
-    
   background-color: rgba(236, 230, 171, 0.415);
 }
 .head {
   background-color: rgba(163, 211, 237, 0.228);
 }
-.heading{
-    color:rgba(196, 163, 239, 0.987);
+.heading {
+  color: rgba(196, 163, 239, 0.987);
 }
-.heading2{
-    color:rgba(15, 36, 31, 0.647);
+.heading2 {
+  color: rgba(0, 0, 0, 0.964);
+}
+
+.body {
+  font-family: Roboto, Arial, sans-serif;
+  margin: 20;
+}
+.basic-container {
+  padding: 30px;
+}
+.version-info {
+  font-size: 10pt;
+  float: none;
+  margin: 8px;
 }
