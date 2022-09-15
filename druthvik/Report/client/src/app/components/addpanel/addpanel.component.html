@@ -1,0 +1,60 @@
+<div class="list row">
+  <div class="col-md-8">
+    <div class="input-group mb-3"></div>
+  </div>
+  <div class="col-md-6">
+    <td>
+      <button
+        type="button"
+        class="btn btn-primary btn-sm mr-2"
+        (click)="addPanel()"
+      >
+        Add New Panel
+      </button>
+    </td>
+
+    <br />
+    <div *ngIf="this.showForm">
+      <form>
+        <div class="formbox">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input
+              type="text"
+              name="name"
+              class="form-control"
+              [(ngModel)]="panel.name"
+            />
+          </div>
+          <br />
+          <div class="form-group">
+            <label for="name">Description</label>
+            <input
+              name="description"
+              type="text"
+              class="form-control"
+              [(ngModel)]="panel.description"
+            />
+          </div>
+        </div>
+        <br />
+        <button
+          type="button"
+          class="btn btn-warning btn-sm mr-2 btn1"
+          (click)="canclePanel()"
+        >
+          Cancel
+        </button>
+        <button
+          type="button "
+          class="btn btn-success btn-sm mr-2"
+          (click)="savePanel()"
+        >
+          Save
+        </button>
+        <br />
+      </form>
+    </div>
+    <br />
+  </div>
+</div>

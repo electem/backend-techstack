@@ -9,8 +9,20 @@ import { AppComponent } from './app.component';
 import { PanelListComponent } from './components/panel-list/panel-list.component';
 import { HeadersInterceptor } from './headers.interceptor';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { ReporttableComponent } from './components/reporttable/reporttable.component';
+import { AddpanelComponent } from './components/addpanel/addpanel.component';
+import { EditpanelComponent } from './components/editpanel/editpanel.component';
+import { AdddtestComponent } from './components/editpanel/adddtest/adddtest.component';
 @NgModule({
-  declarations: [AppComponent, PanelListComponent, PageNotFoundComponent],
+  declarations: [
+    AppComponent,
+    PanelListComponent,
+    ReporttableComponent,
+    AddpanelComponent,
+    EditpanelComponent,
+    PageNotFoundComponent,
+    AdddtestComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

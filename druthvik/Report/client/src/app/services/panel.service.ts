@@ -19,6 +19,10 @@ export class PanelService {
   async getAllTests(): Promise<Test[]> {
     return await this.http.get<Test[]>(baseUrl1).toPromise();
   }
+
+  async getAllTests1(panel: Panel): Promise<Test[]> {
+    return await this.http.get<Test[]>(baseUrl1).toPromise();
+  }
   async getPanelById(id: number) {
     return await this.http.get(`${baseUrl}/${id}`).toPromise();
   }

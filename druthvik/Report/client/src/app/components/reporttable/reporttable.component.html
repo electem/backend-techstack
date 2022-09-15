@@ -1,0 +1,17 @@
+<div class="container">
+  <table class="table table-bordered justify-content-center">
+    <thead class="thead head">
+      <tr>
+        <th></th>
+
+        <th *ngFor="let test of tests; let i = index">{{ test.name }}</th>
+      </tr>
+    </thead>
+
+    <tbody *ngFor="let panel of panels; let i = index">
+      <tr>
+        <th class="text-center" scope="row">{{ panel.name }}</th>
+      </tr>
+    </tbody>
+  </table>
+</div>

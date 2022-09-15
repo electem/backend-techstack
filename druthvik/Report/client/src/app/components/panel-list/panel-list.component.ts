@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Panel } from 'src/app/models/panel.model';
 import { PanelService } from 'src/app/services/panel.service';
 import { Test } from '../../models/test.model';
@@ -28,7 +29,10 @@ export class PanelListComponent implements OnInit {
     name: '',
   };
 
-  constructor(private panelService: PanelService) {}
+  constructor(
+    private panelService: PanelService,
+    private route: ActivatedRoute,
+  ) {}
 
   ngOnInit(): void {
     this.listPanels();
@@ -52,13 +56,6 @@ export class PanelListComponent implements OnInit {
     this.showForm = false;
     this.addPanelForm = false;
     this.showButton = false;
-  }
-
-  editPanel(panel: Panel) {
-    this.panel = panel;
-    this.showForm = true;
-    this.addPanelForm = true;
-    this.showButton = true;
   }
 
   editTest(test: Test) {
