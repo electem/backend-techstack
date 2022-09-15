@@ -3,6 +3,7 @@ import { Panel } from 'src/app/models/panel.model';
 import { PanelService } from 'src/app/services/panel.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Test } from 'src/app/models/test.model';
 
 @Component({
   selector: 'app-panel-list',
@@ -10,53 +11,52 @@ import { Router } from '@angular/router';
   styleUrls: ['./panel-list.component.css'],
 })
 export class PanelListComponent implements OnInit {
-  panels: any;
+  panels?: Panel[];
+  showForm?: boolean;
+  currentPanel?: Panel;
   currentIndex = -1;
-  registerForm!: FormGroup;
-  submitted: boolean = false;
-  panelForm: boolean = false;
-  currentPanel: Panel = {
+  submitted = false;
+  panel: Panel = {
     name: '',
     description: '',
-    tests: [],
   };
-  constructor(
-    private panelService: PanelService,
-    private formBuilder: FormBuilder,
-    private router: Router
-  ) {}
+
+  editPanelForm?: boolean;
+  test!: Test[];
+  constructor(private panelService: PanelService) {}
 
   ngOnInit(): void {
-    this.registerForm = this.formBuilder.group({});
-
+    this.showForm = false;
+    this.editPanelForm = false;
     this.retrievePanels();
+  }
+  onSubmit() {
+    alert(
+      'Form Submitted succesfully!!!\n Check the values in browser console.'
+    );
   }
   async retrievePanels(): Promise<void> {
     this.panels = await this.panelService.getPanels();
   }
-
-  get validation() {
-    return this.registerForm.controls;
+  addPanel() {
+    this.showForm = true;
+  }
+  canclePanel() {
+    this.showForm = false;
+    this.panel = {
+      name: '',
+      description: '',
+    };
+    this.editPanelForm = false;
   }
 
-  signup() {
+  async savePanel() {
     this.submitted = true;
-    if (this.registerForm.invalid) {
-      return;
-    }
-
-    alert('form fields are validated successfully!');
-    this.savePanel();
-  }
-
-  async savePanel(): Promise<void> {
-    if ((this.panelForm = true)) {
-      const data = {
-        name: this.currentPanel.name,
-        description: this.currentPanel.description,
-      };
-      await this.panelService.createPanel(data);
-      this.router.navigate(['panels']);
-    }
+    const panelData: Panel = {
+      name: this.panel.name,
+      description: this.panel.description,
+    };
+    await this.panelService.createPanel(panelData);
+    this.retrievePanels();
   }
 }
