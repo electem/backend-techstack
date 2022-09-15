@@ -24,7 +24,7 @@ export class PannelserviceService {
     return this.http.post(baseUrl2, data).toPromise();
   }
 
-  async getPanel(id: Number): Promise<Panel> {
+  async getPanel(id: Number) {
     return await this.http.get(`${baseUrl}/${id}`).toPromise();
   }
 

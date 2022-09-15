@@ -1,3 +1,22 @@
+<head>
+  <meta charset="utf-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+    crossorigin="anonymous"
+  />
+  <img
+    src="pic_trulli.jpg"
+    alt="Italian Trulli"
+    class="img-fluid"
+    alt="Responsive image"
+  />
+</head>
 <div class="list row">
   <div class="col-md-8">
     <div class="input-group mb-3"></div>
@@ -8,10 +27,10 @@
       <button
         *ngIf="!this.editPanelForm"
         type="button"
-        class="btn btn-secondary herramienta"
-        (click)="addPanel()"
+        class="btn btn-primary btn-lg"
+        routerLink="/pannels/info"
       >
-        ADD NEW PANEL
+        Add Panel
       </button>
       <button
         *ngIf="this.editPanelForm"
@@ -19,7 +38,7 @@
         class="btn btn-secondary herramienta"
         (click)="editPanel(panel)"
       >
-        ADD TEST TO PANEL
+        Add Test To Panel
       </button>
     </td>
     <br />
@@ -27,7 +46,8 @@
       <form>
         <div class="formbox">
           <div class="form-group">
-            <select *ngIf="this.dropdown"
+            <select
+              *ngIf="this.dropdown"
               class="form-control"
               [(ngModel)]="selectedTests"
               (ngModelChange)="onSelected(selectedTests)"
@@ -38,20 +58,18 @@
                 {{ test.name }}
               </option>
               <button
-          type="button"
-          class="btn btn-secondary herramienta"
-          (click)="updatePanel()"
-        >
-          Confirm Test
-        </button>
+                type="button"
+                class="btn btn-secondary herramienta"
+                (click)="updatePanel()"
+              >
+                Confirm Test
+              </button>
             </select>
           </div>
         </div>
         <br />
-        
         <br />
       </form>
-
       <form>
         <div class="formbox">
           <div class="form-group">
@@ -78,7 +96,7 @@
         <button
           type="button"
           class="btn btn-secondary herramienta"
-          (click)="canclePanel()"
+          (click)="cancelPanel()"
         >
           CANCEL
         </button>
@@ -96,12 +114,12 @@
     <ul class="list-group"></ul>
   </div>
   <div class="container">
-    <table class="table table-bordered justify-content-center">
+    <table class="table table-striped table-bordered justify-content-center">
       <thead class="thead-light">
         <tr class="active">
-          <th class="text-center" scope="col">NAME</th>
-          <th class="text-center" scope="col">DESCRIPTION</th>
-          <th class="text-center" scope="col">EDIT</th>
+          <th class="text-center" scope="col">Name</th>
+          <th class="text-center" scope="col">description</th>
+          <th class="text-center" scope="col">Edit</th>
         </tr>
       </thead>
       <tbody *ngFor="let panel of panels; let i = index">
@@ -111,8 +129,8 @@
           <th class="text-center" scope="row">
             <button
               type="button"
-              class="btn btn-secondary herramienta"
-              (click)="editPanel(panel)"
+              class="btn btn-link"
+              routerLink="/edit/{{panel.id}}"
             >
               Edit
             </button>

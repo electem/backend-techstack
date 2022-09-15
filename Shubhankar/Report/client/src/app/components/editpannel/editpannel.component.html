@@ -1,0 +1,64 @@
+<h4>Edit Panel</h4>
+<button
+  *ngIf="this.editPanelForm"
+  type="button"
+  class="btn btn-primary"
+  (click)="editPanel(panel)">
+  Add Test To Panel
+</button>
+<div class="formbox">
+  <div class="form-group">
+    <select
+      class="form-control"
+      [(ngModel)]="selectedTests"
+      (ngModelChange)="onSelected(selectedTests)"
+      name="title"
+    >
+      <option>Select Test</option>
+      <option *ngFor="let test of test">
+        {{ test.name }}
+      </option>
+      <button
+        type="button"
+        class="btn btn-primary"
+        (click)="updatePanel()"
+      >
+        Confirm Test
+      </button>
+    </select>
+  </div>
+</div>
+<form>
+    <div class="formbox">
+      <div class="form-group">
+        <label for="name">Panel Name</label>
+        <input
+          type="text"
+          name="name"
+          class="form-control"
+          [(ngModel)]="panel.name"
+        />
+      </div>
+      <br />
+      <div class="form-group">
+        <label for="name">Panel Description</label>
+        <input
+          name="description"
+          type="text"
+          class="form-control"
+          [(ngModel)]="panel.description"
+        />
+      </div>
+    </div>
+    <br />
+    <button
+      type="button"
+      class="btn btn-primary"
+      (click)="updatePanel()"
+    >
+      Save Panel
+    </button>
+    <button  style="margin-left: 12px" class="btn btn-primary" routerLink="/pannels">Cancel</button>
+    <br />
+  </form>
+

@@ -2,58 +2,55 @@ import { Component, OnInit } from '@angular/core';
 import { PannelserviceService } from 'src/app/services/pannelservice.service';
 import { Panel } from 'src/app/models/pannel';
 import { Test } from 'src/app/models/test';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-pannellist',
-  templateUrl: './pannellist.component.html',
-  styleUrls: ['./pannellist.component.css'],
+  selector: 'app-editpannel',
+  templateUrl: './editpannel.component.html',
+  styleUrls: ['./editpannel.component.css']
 })
-export class PannellistComponent implements OnInit {
+export class EditpannelComponent implements OnInit {
   panels?: Panel[];
   showForm?: boolean;
-  currentPanel?: Panel[];
-  currentIndex = -1;
+  dropdown?: boolean;
+  editPanelForm?: boolean;
   submitted = false;
+  selectedTest: Test[] = [];
+  selectedTests = new Test();
+  test!: Test[];
   panel: Panel = {
     name: '',
     description: '',
     tests: [],
   };
-  editPanelForm?: boolean;
-  editTestForm?: boolean;
-  dropdown?: boolean;
-  test!: Test[];
-  selectedTests = new Test();
-  tests?: Test = {
-    name: '',
-  };
-  selectedTest: Test[] = [];
-  constructor(private PannelserviceService: PannelserviceService) {}
+  constructor(private PannelserviceService: PannelserviceService,private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.showForm = false;
-    this.editPanelForm = false;
-    this.retrievePanels();
+    // this.retrievePanels();
+    this.retrievePanelbyid(this.route.snapshot.params.id)
     this.retrieveTest();
   }
-  onSubmit() {
-    alert('Submitted Successfully');
-  }
+
   async retrievePanels(): Promise<void> {
     this.panels = await this.PannelserviceService.getAll();
   }
 
-  async retrieveTest(): Promise<void> {
-    this.test = await this.PannelserviceService.getAllTest();
+  async retrievePanelbyid(id: number){
+    this.panel = await this.PannelserviceService.getPanel(id);
   }
 
-  onSelected(value: Test) {
-    this.selectedTest.push(value);
-  }
 
   addPanel() {
     this.showForm = true;
   }
+  editPanel(panel: Panel) {
+    this.panel = panel;
+    this.showForm = true;
+    this.editPanelForm = true;
+    this.dropdown = true;
+  }
+
   cancelPanel() {
     this.showForm = false;
     this.panel = {
@@ -61,13 +58,6 @@ export class PannellistComponent implements OnInit {
       description: '',
     };
     this.editPanelForm = false;
-  }
-
-  editPanel(panel: Panel) {
-    this.panel = panel;
-    this.showForm = true;
-    this.editPanelForm = true;
-    this.dropdown = true;
   }
   async savePanel() {
     this.submitted = true;
@@ -78,13 +68,12 @@ export class PannellistComponent implements OnInit {
     await this.PannelserviceService.createPanel(panelData);
     this.retrievePanels();
   }
-  async saveTest() {
-    this.submitted = true;
-    const testData: Test = {
-      name: this.tests?.name,
-    };
-    await this.PannelserviceService.createTest(testData);
-    this.retrievePanels();
+  async retrieveTest(): Promise<void> {
+    this.test = await this.PannelserviceService.getAllTest();
+  }
+
+  onSelected(value: Test) {
+    this.selectedTest.push(value);
   }
   async updatePanel() {
     const updateData: Panel = {
@@ -97,11 +86,5 @@ export class PannellistComponent implements OnInit {
     await this.PannelserviceService.updatePanel(updateData);
   }
 
-  cancleTest() {
-    this.showForm = false;
-    this.tests = {
-      name: '',
-    };
-    this.editTestForm = false;
-  }
 }
+

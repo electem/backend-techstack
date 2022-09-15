@@ -8,9 +8,11 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HeadersInterceptor } from './headers.interceptor';
 import { PannellistComponent } from './components/pannellist/pannellist.component';
+import { AddpannelComponent } from './components/addpannel/addpannel.component';
+import { EditpannelComponent } from './components/editpannel/editpannel.component';
 
 @NgModule({
-  declarations: [AppComponent, PannellistComponent],
+  declarations: [AppComponent, PannellistComponent, AddpannelComponent, EditpannelComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
