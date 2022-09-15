@@ -26,12 +26,12 @@ public class Panel {
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "panels_tests", joinColumns = {
 			@JoinColumn(name = "panels_id") }, inverseJoinColumns = { @JoinColumn(name = "tests_id") })
-	private List<Test> tests;
+	private List<Tests> tests;
 
 	public Panel() {
 	}
 
-	public Panel(int id, String name, String description, List<Test> tests) {
+	public Panel(int id, String name, String description, List<Tests> tests) {
 		this.id = id;
 		this.name = name;
 		this.description = description;
@@ -62,11 +62,11 @@ public class Panel {
 		this.description = description;
 	}
 
-	public List<Test> getTests() {
+	public List<Tests> getTests() {
 		return tests;
 	}
 
-	public void setTests(List<Test> tests) {
+	public void setTests(List<Tests> tests) {
 		this.tests = tests;
 	}
 }

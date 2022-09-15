@@ -2,9 +2,10 @@ package com.example.onetoonemapping.repository;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
-import com.example.onetoonemapping.models.Test;
+
+import com.example.onetoonemapping.models.Tests;
 
 @Repository
-public interface TestRepository extends CrudRepository<Test, Integer> {
+public interface TestsRepository extends CrudRepository<Tests, Integer> {
 
 }
