@@ -117,3 +117,21 @@ export function generateTutorialPayload() {
     timezone: faker.lorem.paragraph(),
   }
 }
+
+export function generateloginUserData(overide = {}) {
+  return {
+    id: faker.random.number(),
+    username: faker.name.firstName(),
+    password: faker.lorem.sentence(),
+    role:faker.lorem.word(),
+    ...overide
+  }
+}
+
+export function generateloginUserPayload() {
+  return {
+    username: faker.name.firstName(),
+    password: faker.lorem.sentence(),
+    role:faker.lorem.word(),
+  }
+}

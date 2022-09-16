@@ -1,5 +1,5 @@
 import { Category } from "./category";
-import { Comment } from "./comment";
+import { Comment } from "./comment"
 export class Tutorial {
   id?: number
   title?: string

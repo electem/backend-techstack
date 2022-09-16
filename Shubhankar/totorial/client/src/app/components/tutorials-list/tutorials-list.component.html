@@ -23,7 +23,7 @@
       </li>
     </ul>
   </div>
-    <div class ="col-sm-9 bg-success"> 
+    <div class ="col-sm-9 "> 
      <div *ngIf="currentTutorial.id">
       <h4>Tutorial</h4>
       <div>
@@ -37,13 +37,9 @@
         <label><strong>Status:</strong></label>
         {{ currentTutorial.published ? 'Published' : 'Pending' }}
       </div>
-      
       <a
         class="badge badge-warning"
-        routerLink="/tutorials/{{ currentTutorial.id }}"
-        >
-        Edit
-      </a>
+        routerLink="/tutorials/{{ currentTutorial.id }}">Edit</a>
       </div>
       <div *ngIf="!currentTutorial">
       <br />
