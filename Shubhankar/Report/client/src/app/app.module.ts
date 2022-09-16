@@ -10,9 +10,10 @@ import { HeadersInterceptor } from './headers.interceptor';
 import { PannellistComponent } from './components/pannellist/pannellist.component';
 import { AddpannelComponent } from './components/addpannel/addpannel.component';
 import { EditpannelComponent } from './components/editpannel/editpannel.component';
+import { ReporttableComponent } from './components/reporttable/reporttable.component';
 
 @NgModule({
-  declarations: [AppComponent, PannellistComponent, AddpannelComponent, EditpannelComponent],
+  declarations: [AppComponent, PannellistComponent, AddpannelComponent, EditpannelComponent, ReporttableComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
