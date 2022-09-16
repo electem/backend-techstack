@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Panel } from 'src/app/models/panel.model';
+import { ReportPanelTest } from 'src/app/models/report-panel-test.model';
+import { Report } from 'src/app/models/report.model';
 import { Test } from 'src/app/models/test.model';
 import { PanelService } from 'src/app/services/panel.service';
 
@@ -23,6 +25,14 @@ export class ReportListComponent implements OnInit {
     this.getTests();
   }
 
+  onBlurMethod(event: any, panel: Panel, test: Test) {
+    const reportData: ReportPanelTest = {
+      data: event.target.value,
+      panelId: panel.id,
+      testId: test.id,
+    };
+    console.log(reportData);
+  }
   isTestPresentInPanel(currentPanel: Panel, currentTest: Test) {
     if (
       currentPanel &&
