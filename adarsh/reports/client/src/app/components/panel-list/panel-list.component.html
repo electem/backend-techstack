@@ -15,6 +15,19 @@
       </button>
     </td>
     <br />
+    <td>
+      <button
+        *ngIf="!this.editPanelForm"
+        type="button"
+        class="btn btn-info btn-sm mr-2"
+        (click)="saveReport()"
+        routerLink="/report"
+      >
+        CREATE REPORT
+      </button>
+    </td>
+    <br />
+
     <div *ngIf="this.showForm">
       <form>
         <div class="formbox">
@@ -43,6 +56,7 @@
           type="button"
           class="btn btn-info btn-sm mr-2"
           (click)="canclePanel()"
+          routerLink="/panel"
         >
           CANCEL
         </button>
@@ -50,6 +64,7 @@
           type="button"
           class="btn btn-info btn-sm mr-2"
           (click)="savePanel()"
+          routerLink="/panel"
         >
           SAVE
         </button>

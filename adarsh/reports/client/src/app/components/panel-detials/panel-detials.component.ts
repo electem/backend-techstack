@@ -10,19 +10,21 @@ import { PanelService } from 'src/app/services/panel.service';
   styleUrls: ['./panel-detials.component.css'],
 })
 export class PanelDetialsComponent implements OnInit {
+  panels: Panel[] = [];
+  tests: Test[] = [];
   panel: Panel = {
     name: '',
     description: '',
-    tests: [],
+    tests: new Test(),
   };
-  panels?: Panel[];
-  tests?: Test[];
-  selectedTest = new Test();
-  selectedTestNew = new Test();
-  selectedTests: Test[] = [];
+ 
+  
   editPanelForm?: boolean;
   showForm?: boolean;
   submitted?: boolean;
+  selectedTestNew = new Test();
+  selectedTests:Test[] = [];
+  selectedTest = new Test();
 
   constructor(
     private panelService: PanelService,
@@ -41,36 +43,38 @@ export class PanelDetialsComponent implements OnInit {
   }
   async retrieveTest(): Promise<void> {
     this.tests = await this.panelService.getAllTest();
-    console.log();
+    
   }
   editPanel(panel: Panel) {
     this.panel = panel;
   }
+
   onSelected(value: Test) {
+    this.showForm = true;
     if (this.tests) {
       for (let test of this.tests) {
         if (test.id == value.id) {
-          this.selectedTestNew.name = test.name;
-          this.selectedTests.push(this.selectedTestNew);
+          this.selectedTest = test;
         }
       }
     }
   }
+ 
+ 
   async savePanel() {
     this.submitted = true;
     const panelData: Panel = {
       name: this.panel.name,
       description: this.panel.description,
-      tests: this.selectedTests,
+      tests: this.selectedTest,
     };
     await this.panelService.createPanel(panelData);
     this.retrievePanels();
   }
   private async getPanelId(id: Number) {
     this.panel = await this.panelService.getPanelByID(id);
-    if (this.panel.tests) {
-      this.selectedTest = this.panel.tests[0];
-    }
+   
+   
   }
   addPanel() {
     this.showForm = true;

@@ -6,6 +6,8 @@ import { Test } from '../models/test.model';
 const panelUrl = 'http://localhost:8080/panels';
 const addPanelUrl = 'http://localhost:8080/createPanel';
 const getTest = 'http://localhost:8080/tests';
+const addReport = 'http://localhost:8080/createReport';
+
 
 @Injectable({
   providedIn: 'root',
@@ -24,6 +26,10 @@ export class PanelService {
   async createPanel(panel: Panel) {
     return await this.http.post(addPanelUrl, panel).toPromise();
   }
+  async createReport(panel: Panel) {
+    return await this.http.post(addReport, panel).toPromise();
+  }
+
   async getAllTest(): Promise<Test[]> {
     return await this.http.get<Test[]>(getTest).toPromise();
   }

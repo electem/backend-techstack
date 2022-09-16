@@ -14,18 +14,22 @@
     <div *ngIf="this.showForm">
       <form>
         <div class="form-group">
-          <select
-            formControlName="tests"
-            class="form-control"
-            placeholder="Choose Test"
-            style="width: 50%"
-            name="categories"
-          >
-            <option value="Choose Test">Choose Test</option>
-            <option *ngFor="let test of tests" [ngValue]="test.id">
-              {{ test.name }}
-            </option>
-          </select>
+          <p>
+            TEST :
+            <select
+              class="form-control"
+              placeholder="Choose test"
+              style="width: 50%"
+              [(ngModel)]="selectedTest"
+              (ngModelChange)="onSelected(selectedTest)"
+              name="tests"
+            >
+              <option value="Choose test">Choose Test</option>
+              <option *ngFor="let test of tests" [ngValue]="test.name">
+                {{ test.name }}
+              </option>
+            </select>
+          </p>
         </div>
       </form>
     </div>
