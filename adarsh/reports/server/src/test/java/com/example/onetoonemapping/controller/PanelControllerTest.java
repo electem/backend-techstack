@@ -20,7 +20,7 @@ class PanelControllerTest {
 
 	List<Tests> tests = new ArrayList<Tests>();
 	List<Panel> panels = new ArrayList<Panel>();
-	Panel panel = new Panel(1, "ABC", "xyz", tests);
+	Panel panel = new Panel(1, "adarsh", "angadi", tests);
 	Tests test = new Tests(1, "blood test", panels);
 	Tests test2 = new Tests(2, "sugar test", panels);
 
