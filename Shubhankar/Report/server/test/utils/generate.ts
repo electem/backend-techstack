@@ -1,137 +1,44 @@
 import faker from 'faker'
-import { User, Post } from '../../src/models';
 
-export function generateUserData(overide = {}) {
+export function generatePanelData(overide = {}) {
   return {
     id: faker.random.number(),
-    firstName: faker.name.firstName(),
-    lastName: faker.name.lastName(),
-    email: faker.internet.email(),
-    posts: [],
-    comments: [],
-    createdAt: new Date(),
-    updatedAt: new Date(),
+    name: faker.name.findName(),
+    description: faker.name.lastName(),
+    tests: [],
     ...overide
   }
 }
-
-export function generateUsersData(n: number = 1) {
+export function generatePanelsData(n: number = 1) {
   return Array.from({
     length: n
   }, (_, i) => {
-    return generateUserData()
+    return generatePanelData()
   });
 }
-
-export function generateUserPayload() {
+export function generatePanelPayload() {
   return {
-    firstName: faker.name.firstName(),
-    lastName: faker.name.lastName(),
-    email: faker.internet.email(),
-  }
+    name: faker.name.firstName(),
+    description: faker.name.firstName(),
+    }
 }
-
-export function generatePostData(overide = {}) {
+export function generateTestData(overide = {}) {
   return {
     id: faker.random.number(),
-    title: faker.lorem.sentence(),
-    content: faker.lorem.paragraph(),
-    userId: faker.random.number(),
-    comments: [],
-    user: new User(),
-    createdAt: new Date(),
-    updatedAt: new Date(),
+    name: faker.name.findName(),
+    panel:[],
     ...overide
   }
 }
-
-export function generatePostsData(n: number = 1, overide = {}) {
+export function generateTestsData(n: number = 1) {
   return Array.from({
     length: n
   }, (_, i) => {
-    return generatePostData(overide)
+    return generateTestData()
   });
 }
-
-export function generatePostPayload() {
+export function generateTestPayload() {
   return {
-    title: faker.lorem.sentence(),
-    content: faker.lorem.paragraph(),
-    userId: faker.random.number(),
-  }
-}
-
-export function generateCommentData(overide = {}) {
-  return {
-    id: faker.random.number(),
-    content: faker.lorem.paragraph(),
-    tutorialsId: faker.random.number(),
-    // user: new User(),
-    // postId: faker.random.number(),
-    // post: new Post(),
-    createdAt: new Date(),
-    updatedAt: new Date(),
-    ...overide
-  }
-}
-
-export function generateCommentsData(n: number = 1, overide = {}) {
-  return Array.from({
-    length: n
-  }, (_, i) => {
-    return generateCommentData(overide)
-  });
-}
-
-
-export function generateCommentPayload() {
-  return {
-    
-    content: faker.lorem.paragraph(),
-    tutorialsId: faker.random.number(),
-    // postId: faker.random.number(),
-  }
-}
-
-export function generateTutorialData(overide = {}) {
-  return {
-    id: faker.random.number(),
-    title: faker.lorem.word(),
-    description: faker.lorem.sentences(),
-    timezone: faker.lorem.paragraph(),
-    createdAt: new Date(),
-    ...overide
-  }
-}
-export function generateTutorialsData(n: number = 1, overide = {}) {
-  return Array.from({
-    length: n
-  }, (_, i) => {
-    return generateTutorialData(overide)
-  });
-}
-export function generateTutorialPayload() {
-  return {
-    title: faker.name.title(),
-    description: faker.lorem.word(),
-    timezone: faker.lorem.paragraph(),
-  }
-}
-
-export function generateloginUserData(overide = {}) {
-  return {
-    id: faker.random.number(),
-    username: faker.name.firstName(),
-    password: faker.lorem.sentence(),
-    role:faker.lorem.word(),
-    ...overide
-  }
-}
-
-export function generateloginUserPayload() {
-  return {
-    username: faker.name.firstName(),
-    password: faker.lorem.sentence(),
-    role:faker.lorem.word(),
-  }
+    name: faker.name.firstName(),
+    }
 }

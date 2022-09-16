@@ -70,6 +70,39 @@
 				],
 				"type": "object",
 				"additionalProperties": false
+			},
+			"Report": {
+				"properties": {
+					"id": {
+						"type": "number",
+						"format": "double"
+					},
+					"name": {
+						"type": "string"
+					},
+					"createdAt": {
+						"type": "string",
+						"format": "date-time"
+					}
+				},
+				"required": [
+					"id",
+					"createdAt"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IReportPayload": {
+				"properties": {
+					"name": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"name"
+				],
+				"type": "object",
+				"additionalProperties": false
 			}
 		},
 		"securitySchemes": {}
@@ -223,6 +256,38 @@
 				],
 				"security": [],
 				"parameters": []
+			}
+		},
+		"/reports": {
+			"post": {
+				"operationId": "CreateReport",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Report"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"report"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/IReportPayload"
+							}
+						}
+					}
+				}
 			}
 		}
 	},
