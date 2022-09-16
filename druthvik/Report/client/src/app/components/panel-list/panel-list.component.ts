@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Panel } from 'src/app/models/panel.model';
 import { PanelService } from 'src/app/services/panel.service';
 import { Test } from '../../models/test.model';
+import { Report } from '../../models/report.model';
 
 @Component({
   selector: 'app-panel-list',
@@ -19,6 +20,7 @@ export class PanelListComponent implements OnInit {
   showDropdown: boolean;
   selectedTests: Test[] = [];
   selectedTest = new Test();
+  savedReport = new Report();
   testTable: boolean;
   panel: Panel = {
     name: '',
@@ -27,6 +29,9 @@ export class PanelListComponent implements OnInit {
   };
   test: Test = {
     name: '',
+  };
+  report: Report = {
+    name: this.randomString(5),
   };
 
   constructor(
@@ -38,6 +43,18 @@ export class PanelListComponent implements OnInit {
     this.listPanels();
     this.listTests();
     this.showForm = false;
+  }
+
+  randomString(length) {
+    var randomChars =
+      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var result = '';
+    for (var i = 0; i < length; i++) {
+      result += randomChars.charAt(
+        Math.floor(Math.random() * randomChars.length),
+      );
+    }
+    return result;
   }
 
   async listPanels(): Promise<void> {
@@ -96,5 +113,13 @@ export class PanelListComponent implements OnInit {
     this.addPanelForm = false;
     this.showDropdown = false;
     this.testTable = true;
+  }
+
+  async saveReport() {
+    const reportData: Report = {
+      name: this.report.name,
+    };
+    this.savedReport = await this.panelService.createReport(reportData);
+    console.log(this.savedReport);
   }
 }

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Panel } from 'src/app/models/panel.model';
 import { Test } from 'src/app/models/test.model';
 import { PanelService } from 'src/app/services/panel.service';
+import { ReportTestPanel } from '../../models/reporttestpanel.model';
+import { Report } from '../../models/report.model';
 
 @Component({
   selector: 'app-report',
@@ -11,6 +13,12 @@ import { PanelService } from 'src/app/services/panel.service';
 export class ReportComponent implements OnInit {
   panels?: Panel[];
   tests: Test[];
+  report: ReportTestPanel[];
+  report1: ReportTestPanel = {
+    data: '',
+    panelFk: 0,
+    testFK: 0,
+  };
 
   constructor(private panelService: PanelService) {}
 
@@ -35,5 +43,16 @@ export class ReportComponent implements OnInit {
     } else {
       return false;
     }
+  }
+  onBlurMethod(event: any, panel: Panel, test: Test) {
+    const ReportTestPanel: ReportTestPanel = {
+      data: event.target.value,
+      panelFk: panel.id,
+      testFK: test.id,
+    };
+    console.log(ReportTestPanel);
+    console.log(event.target.value);
+    console.log(panel.id);
+    console.log(test.id);
   }
 }
