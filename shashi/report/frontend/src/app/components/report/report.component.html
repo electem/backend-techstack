@@ -7,7 +7,6 @@
 >
   back
 </button>
-
 <table class="table table-bordered justify-content-center">
   <tr>
     <th></th>
@@ -19,7 +18,11 @@
     <th>{{ panel.name }}</th>
     <td *ngFor="let test of tests; let j = index">
       <div *ngIf="TestPresentInPanelTextBox(panel, test)">
-        <input type="text" style="width: 100px" />
+        <input
+          type="text"
+          style="width: 100px"
+          (blur)="reportDetailsSave($event, panel, test)"
+        />
       </div>
     </td>
   </tr>

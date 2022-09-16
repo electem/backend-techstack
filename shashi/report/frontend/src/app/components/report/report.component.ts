@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Panel } from 'src/app/models/panel.model';
+import { Reportpaneltest } from 'src/app/models/reportpaneltest.model';
+import { Report } from 'src/app/models/report.model';
 import { Test } from 'src/app/models/test.model';
 import { PanelService } from 'src/app/services/panel.serveice';
 
@@ -18,6 +20,9 @@ export class ReportComponent implements OnInit {
     name: '',
     description: '',
     tests: [],
+  };
+  reportPanelTest: Reportpaneltest = {
+    data: '',
   };
 
   constructor(private panelService: PanelService) {}
@@ -43,5 +48,13 @@ export class ReportComponent implements OnInit {
     } else {
       return false;
     }
+  }
+  async reportDetailsSave(event: any, panel: Panel, test: Test) {
+    const reportPanelTest: Reportpaneltest = {
+      data: event.target.value,
+      panel_fk: panel.id,
+      test_fk: test.id,
+    };
+    console.log(reportPanelTest);
   }
 }
