@@ -14,7 +14,7 @@
 
       <td *ngFor="let test of tests; let j = index">
         <div *ngIf="isTestPresentInPanel(panel, test)">
-          <input type="text"  />
+          <input type="text" (blur)="onBlurEvent($event, panel, test)" />
         </div>
       </td>
     </tr>

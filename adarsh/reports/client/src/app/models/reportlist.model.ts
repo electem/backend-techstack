@@ -3,6 +3,7 @@ export class ReportPanelTest {
   data?: string;
   panelFk?: number;
   testFk?:number;
+  reportFk?:number;
   
 
 }

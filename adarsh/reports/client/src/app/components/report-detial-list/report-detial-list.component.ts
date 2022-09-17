@@ -6,7 +6,7 @@ import { PanelService } from 'src/app/services/panel.service';
 @Component({
   selector: 'app-report-detial-list',
   templateUrl: './report-detial-list.component.html',
-  styleUrls: ['./report-detial-list.component.css']
+  styleUrls: ['./report-detial-list.component.css'],
 })
 export class ReportDetialListComponent implements OnInit {
   reports: Report[] = [];
@@ -15,7 +15,7 @@ export class ReportDetialListComponent implements OnInit {
     private panelService: PanelService,
     private router: Router,
     private route: ActivatedRoute
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.retrieveReportrs();
@@ -23,5 +23,4 @@ export class ReportDetialListComponent implements OnInit {
   async retrieveReportrs(): Promise<void> {
     this.reports = await this.panelService.getAllReport();
   }
-
 }

@@ -22,7 +22,9 @@ export class ReportlistComponent implements OnInit {
     data: '',
     panelFk: 0,
     testFk: 0,
+    reportFk: 0,
   };
+  savedreportId: any;
 
   constructor(
     private panelService: PanelService,
@@ -52,5 +54,15 @@ export class ReportlistComponent implements OnInit {
       return false;
     }
   }
- 
+  onBlurEvent(event: any, panel: Panel, test: Test) {
+    const savedreportId = localStorage.getItem('reportId');
+    if (savedreportId != null) {
+      const reportList: ReportPanelTest = {
+        data: event.target.value,
+        panelFk: panel.id,
+        testFk: test.id,
+        reportFk: +this.savedreportId,
+      };
+    }
+  }
 }

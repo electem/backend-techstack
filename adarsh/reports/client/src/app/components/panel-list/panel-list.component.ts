@@ -68,11 +68,13 @@ export class PanelListComponent implements OnInit {
   }
   async saveReport() {
     this.submitted = true;
-    const panelData: Report = {
+    const reportData: Report = {
       name: this.randomString(10),
     };
-    await this.panelService.createReport(panelData);
-    this.retrievePanels();
+    this.savereports = await this.panelService.createReport(reportData);
+    if(this.savereports && this.savereports.id){
+      localStorage.setItem('reportId',this.savereports.id +'');    
+    }
     this.router.navigate(['report']);
   }
 
