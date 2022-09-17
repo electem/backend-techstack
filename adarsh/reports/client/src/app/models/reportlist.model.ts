@@ -1,4 +1,4 @@
-export class Reportlist {  
+export class ReportPanelTest {  
   id?: number;
   data?: string;
   panelFk?: number;

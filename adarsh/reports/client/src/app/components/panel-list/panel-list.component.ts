@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Panel } from 'src/app/models/panel.model';
 import { PanelService } from 'src/app/services/panel.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Test } from 'src/app/models/test.model';
 import { Report } from 'src/app/models/report.model';
 
@@ -13,7 +13,6 @@ import { Report } from 'src/app/models/report.model';
 })
 export class PanelListComponent implements OnInit {
   panels: Panel[] = [];
-  reports: Report[] = [];
   showForm?: boolean;
   currentPanel?: Panel;
   currentIndex = -1;
@@ -22,10 +21,14 @@ export class PanelListComponent implements OnInit {
     name: '',
     description: '',
   };
+  savereports = new Report();
 
   editPanelForm?: boolean;
   test!: Test[];
-  constructor(private panelService: PanelService) {}
+  constructor(private panelService: PanelService,
+    private router: Router,
+    private route: ActivatedRoute
+    ) {}
 
   ngOnInit(): void {
     this.showForm = false;
@@ -51,6 +54,7 @@ export class PanelListComponent implements OnInit {
       description: '',
     };
     this.editPanelForm = false;
+    this.router.navigate(['panel']);
   }
 
   async savePanel() {
@@ -60,7 +64,7 @@ export class PanelListComponent implements OnInit {
       description: this.panel.description,
     };
     await this.panelService.createPanel(panelData);
-    this.retrievePanels();
+    this.router.navigate(['panel']);
   }
   async saveReport() {
     this.submitted = true;
@@ -69,6 +73,7 @@ export class PanelListComponent implements OnInit {
     };
     await this.panelService.createReport(panelData);
     this.retrievePanels();
+    this.router.navigate(['report']);
   }
 
   randomString(length: number) {

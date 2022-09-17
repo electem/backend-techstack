@@ -4,5 +4,5 @@ export class Panel {
   id?: number;
   name?: string;
   description?: string;
-  tests?: Test;
+  tests?: Test[];
 }

@@ -14,9 +14,12 @@
 
       <td *ngFor="let test of tests; let j = index">
         <div *ngIf="isTestPresentInPanel(panel, test)">
-          <input type="text" (blur)="onBlurEvent($event,panel,test)" />
+          <input type="text"  />
         </div>
       </td>
     </tr>
   </table>
 </div>
+<button type="button" class="btn btn-info btn-sm mr-2" routerLink="/panel">
+  SAVE
+</button>

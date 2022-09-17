@@ -8,9 +8,13 @@ import { PanelListComponent } from './components/panel-list/panel-list.component
 import { PanelDetialsComponent } from './components/panel-detials/panel-detials.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { ReportlistComponent } from './components/reportlist/reportlist.component';
+import { ReportDetialListComponent } from './components/report-detial-list/report-detial-list.component';
+
+
+
 
 @NgModule({
-  declarations: [AppComponent, PanelListComponent, PanelDetialsComponent, ReportlistComponent],
+  declarations: [AppComponent, PanelListComponent, PanelDetialsComponent, ReportlistComponent, ReportDetialListComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

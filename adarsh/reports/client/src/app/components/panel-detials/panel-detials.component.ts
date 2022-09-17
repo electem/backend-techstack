@@ -15,15 +15,14 @@ export class PanelDetialsComponent implements OnInit {
   panel: Panel = {
     name: '',
     description: '',
-    tests: new Test(),
+    tests: [],
   };
- 
-  
+
   editPanelForm?: boolean;
   showForm?: boolean;
   submitted?: boolean;
   selectedTestNew = new Test();
-  selectedTests:Test[] = [];
+  selectedTests: Test[] = [];
   selectedTest = new Test();
 
   constructor(
@@ -43,7 +42,6 @@ export class PanelDetialsComponent implements OnInit {
   }
   async retrieveTest(): Promise<void> {
     this.tests = await this.panelService.getAllTest();
-    
   }
   editPanel(panel: Panel) {
     this.panel = panel;
@@ -54,27 +52,32 @@ export class PanelDetialsComponent implements OnInit {
     if (this.tests) {
       for (let test of this.tests) {
         if (test.id == value.id) {
-          this.selectedTest = test;
+          this.selectedTests.push(test);
         }
       }
     }
   }
- 
- 
+
   async savePanel() {
     this.submitted = true;
     const panelData: Panel = {
       name: this.panel.name,
       description: this.panel.description,
-      tests: this.selectedTest,
     };
     await this.panelService.createPanel(panelData);
     this.retrievePanels();
   }
+  async updatePanel(): Promise<void> {
+    const panelData: Panel = {
+      id: this.panel.id,
+      name: this.panel.name,
+      description: this.panel.description,
+      tests: this.selectedTests,
+    };
+    if (this.selectedTests.length) await this.panelService.updatePanel(panelData);
+  }
   private async getPanelId(id: Number) {
     this.panel = await this.panelService.getPanelByID(id);
-   
-   
   }
   addPanel() {
     this.showForm = true;
