@@ -4,8 +4,8 @@ import {
   getPanel,
   IPanelPayload,
   createPanel,
-  getpanelById,
   getPanels,
+  updatePanel,
 } from '../repositories/panel.repository';
 
 @Route('panels')
@@ -23,11 +23,11 @@ export default class PanelController {
 
   @Get('/:id')
   public async getPanelByID(@Path() id: string): Promise<Panel | null> {
-    return getpanelById(Number(id));
+    return getPanel(Number(id));
   }
 
   @Put('/')
   public async updatePanel(@Body() body: IPanelPayload): Promise<Panel> {
-    return this.updatePanel(body);
+    return updatePanel(body);
   }
 }

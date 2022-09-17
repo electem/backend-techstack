@@ -21,7 +21,6 @@ router.get('/:id', async (req, res) => {
   if (!response) res.status(404).send({ message: 'No user found' });
   return res.send(response);
 });
-
 router.put('/', async (req, res) => {
   const controller = new PanelController();
   const response = await controller.updatePanel(req.body);

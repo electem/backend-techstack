@@ -3,25 +3,45 @@
     <div class="input-group mb-3"></div>
   </div>
   <div class="col-md-6">
-    <h4>Panels List</h4>
     <td>
       <button
-        *ngIf="!this.addPanelForm"
         type="button"
-        class="btn btn-info btn-sm mr-2"
+        class="btn btn-primary btn-sm mr-2"
         (click)="addPanel()"
       >
         Add New Panel
       </button>
-      <button
-        *ngIf="this.addPanelForm"
-        type="button"
-        class="btn btn-info btn-sm mr-2"
-        (click)="addPanel()"
-      >
-        Add Test To Panel
-      </button>
     </td>
+    <br />
+    <button
+      *ngIf="this.showButton"
+      type="button"
+      class="btn btn btn-secondary dropdown btn2"
+      (click)="editTest(test)"
+    >
+      Add Test To Panel
+    </button>
+    <div class="form-group dropdown dropdownwidth" *ngIf="this.showDropdown">
+      <select
+        class="custom-select"
+        [(ngModel)]="selectedTest"
+        (ngModelChange)="onSelected(selectedTest)"
+      >
+        <option *ngFor="let test of tests" [ngValue]="test">
+          {{ test.name }}
+        </option>
+      </select>
+      <br />
+    </div>
+    <button
+      *ngIf="this.showDropdown"
+      type="button"
+      class="btn btn-info btn-sm mr-2"
+      (click)="updatePanel()"
+    >
+      Add Test
+    </button>
+
     <br />
     <div *ngIf="this.showForm">
       <form>
@@ -48,15 +68,16 @@
         </div>
         <br />
         <button
+          style="margin: 50"
           type="button"
-          class="btn btn-info btn-sm mr-2"
+          class="btn btn-warning btn-sm mr-2 btn1"
           (click)="canclePanel()"
         >
           Cancel
         </button>
         <button
-          type="button"
-          class="btn btn-info btn-sm mr-2"
+          type="button "
+          class="btn btn-success btn-sm mr-2"
           (click)="savePanel()"
         >
           Save
@@ -65,15 +86,33 @@
       </form>
     </div>
     <br />
-    <ul class="list-group"></ul>
   </div>
+  <div class="container" *ngIf="this.testTable">
+    <table class="table table-bordered justify-content-center">
+      <thead class="thead head">
+        <tr>
+          <th class="text-center" scope="col">id</th>
+          <th class="text-center" scope="col">name</th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let test of panel; let i = index">
+        <tr class="success">
+          <th class="text-center" scope="row">
+            {{ panel.test.id }}
+          </th>
+          <th class="text-center" scope="row">{{ panel.test.name }}</th>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <h4>Panels List</h4>
   <div class="container">
     <table class="table table-bordered justify-content-center">
-      <thead class="thead-light">
-        <tr class="active">
+      <thead class="thead head">
+        <tr>
           <th class="text-center" scope="col">Name</th>
-          <th class="text-center" scope="col">DESCRIPTION</th>
-          <th class="text-center" scope="col">edit</th>
+          <th class="text-center" scope="col">Description</th>
+          <th class="text-center" scope="col">Edit</th>
         </tr>
       </thead>
       <tbody *ngFor="let panel of panels; let i = index">
@@ -83,8 +122,8 @@
           <th class="text-center" scope="row">
             <button
               type="button"
-              class="btn btn-info btn-sm mr-2"
-              (click)="editPanel(panel)"
+              class="btn btn-warning btn-sm mr-2"
+              routerLink="/editpanels/{{ panel.id }}"
             >
               Edit
             </button>
