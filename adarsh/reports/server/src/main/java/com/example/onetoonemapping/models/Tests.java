@@ -1,16 +1,12 @@
 package com.example.onetoonemapping.models;
 
 import java.util.List;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -28,9 +24,6 @@ public class Tests {
 	@ManyToMany(mappedBy = "tests")
 	private List<Panel> panels;
 
-//	@OneToMany(mappedBy = "testId", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//	private Set<ReportPanelTest> reportlist;
-
 	public Tests() {
 	}
 
@@ -39,7 +32,7 @@ public class Tests {
 		this.id = id;
 		this.name = name;
 		this.panels = panels;
-		
+
 	}
 
 	/**
@@ -71,21 +64,5 @@ public class Tests {
 	public void setName(String name) {
 		this.name = name;
 	}
-
-	/**
-	 * @return the panels
-	 */
-	public List<Panel> getPanels() {
-		return panels;
-	}
-
-	/**
-	 * @param panels
-	 *            the panels to set
-	 */
-	public void setPanels(List<Panel> panels) {
-		this.panels = panels;
-	}
-
 
 }

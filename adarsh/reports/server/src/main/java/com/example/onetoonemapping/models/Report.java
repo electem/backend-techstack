@@ -1,6 +1,7 @@
 package com.example.onetoonemapping.models;
 
 import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
 import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
@@ -19,11 +21,14 @@ public class Report {
 	private int id;
 
 	private String name;
-	
+
 	@CreationTimestamp
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "createdAt", nullable = false, updatable = false)	
+	@Column(name = "createdAt", nullable = false, updatable = false)
 	private Date createdAt;
+	
+	
+	
 
 	public Report() {
 
@@ -34,14 +39,13 @@ public class Report {
 		this.id = id;
 		this.name = name;
 		this.createdAt = createdAt;
-
+		
 	}
 
 	public int getId() {
 		return id;
 	}
 
-	
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -50,7 +54,6 @@ public class Report {
 		return name;
 	}
 
-	
 	public void setName(String name) {
 		this.name = name;
 	}
