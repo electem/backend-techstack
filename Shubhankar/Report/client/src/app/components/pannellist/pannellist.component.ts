@@ -24,14 +24,14 @@ export class PannellistComponent implements OnInit {
   editTestForm?: boolean;
   dropdown?: boolean;
   test!: Test[];
-  reportName ?: string;
+  reportName?: string;
   selectedTests = new Test();
   tests?: Test = {
     name: '',
   };
-  report: Report ={
+  report: Report = {
     name: '',
-  }
+  };
   selectedTest: Test[] = [];
   constructor(private PannelserviceService: PannelserviceService) {}
 
@@ -40,17 +40,14 @@ export class PannellistComponent implements OnInit {
     this.editPanelForm = false;
     this.retrievePanels();
     this.retrieveTest();
-    
-    
   }
   async saveReport() {
-    this.reportName = this.randomString(10)
-     const reportData: Report = {
+    this.reportName = this.randomString(10);
+    const reportData: Report = {
       name: this.reportName,
     };
     await this.PannelserviceService.createReport(reportData);
   }
-
 
   onSubmit() {
     alert('Submitted Successfully');
@@ -62,7 +59,6 @@ export class PannellistComponent implements OnInit {
   async retrieveTest(): Promise<void> {
     this.test = await this.PannelserviceService.getAllTest();
   }
-
 
   onSelected(value: Test) {
     this.selectedTest.push(value);
@@ -121,10 +117,13 @@ export class PannellistComponent implements OnInit {
     this.editTestForm = false;
   }
   randomString(length: number) {
-    var randomChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var randomChars =
+      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     var result = '';
-    for ( var i = 0; i < length; i++ ) {
-        result += randomChars.charAt(Math.floor(Math.random() * randomChars.length));
+    for (var i = 0; i < length; i++) {
+      result += randomChars.charAt(
+        Math.floor(Math.random() * randomChars.length)
+      );
     }
     return result;
   }

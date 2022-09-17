@@ -1,35 +1,41 @@
 <h4>Add New Panel</h4>
 <form>
-    <div class="formbox">
-      <div class="form-group">
-        <label for="name">Panel Name</label>
-        <input
-          type="text"
-          name="name"
-          class="form-control"
-          [(ngModel)]="panel.name"
-        />
-      </div>
-      <br />
-      <div class="form-group">
-        <label for="name">Panel Description</label>
-        <input
-          name="description"
-          type="text"
-          class="form-control"
-          [(ngModel)]="panel.description"
-        />
-      </div>
+  <div class="formbox">
+    <div class="form-group">
+      <label for="name">Panel Name</label>
+      <input
+        type="text"
+        name="name"
+        class="form-control"
+        [(ngModel)]="panel.name"
+      />
     </div>
     <br />
-    <button
-      type="button"
-      class="btn btn-primary"
-      (click)="savePanel()" routerLink="/pannels">
-      Save Panel
-    </button>
-    <button style="margin-left: 12px"
-     class="btn btn-primary" routerLink="/pannels">Cancel
-    </button>
-    <br/>
-  </form>
+    <div class="form-group">
+      <label for="name">Panel Description</label>
+      <input
+        name="description"
+        type="text"
+        class="form-control"
+        [(ngModel)]="panel.description"
+      />
+    </div>
+  </div>
+  <br />
+  <button
+    type="button"
+    class="btn btn-primary"
+    (click)="savePanel()"
+    routerLink="/pannels"
+  >
+    Save Panel
+  </button>
+  <button
+    style="margin-left: 12px"
+    class="btn btn-primary"
+    routerLink="/pannels"
+  >
+    Cancel
+  </button>
+  <br />
+</form>

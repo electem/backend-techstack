@@ -1,4 +1,5 @@
 export class Report {
-   name?: string;
+  id?: number;
+  createdAt?: Date;
+  name?: string;
 }
-  

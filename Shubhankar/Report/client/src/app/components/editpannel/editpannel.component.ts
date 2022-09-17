@@ -7,7 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-editpannel',
   templateUrl: './editpannel.component.html',
-  styleUrls: ['./editpannel.component.css']
+  styleUrls: ['./editpannel.component.css'],
 })
 export class EditpannelComponent implements OnInit {
   panels?: Panel[];
@@ -23,12 +23,15 @@ export class EditpannelComponent implements OnInit {
     description: '',
     tests: [],
   };
-  constructor(private PannelserviceService: PannelserviceService,private route: ActivatedRoute) { }
+  constructor(
+    private PannelserviceService: PannelserviceService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     this.showForm = false;
     // this.retrievePanels();
-    this.retrievePanelbyid(this.route.snapshot.params.id)
+    this.retrievePanelbyid(this.route.snapshot.params.id);
     this.retrieveTest();
   }
 
@@ -36,10 +39,9 @@ export class EditpannelComponent implements OnInit {
     this.panels = await this.PannelserviceService.getAll();
   }
 
-  async retrievePanelbyid(id: number){
+  async retrievePanelbyid(id: number) {
     this.panel = await this.PannelserviceService.getPanel(id);
   }
-
 
   addPanel() {
     this.showForm = true;
@@ -73,7 +75,15 @@ export class EditpannelComponent implements OnInit {
   }
 
   onSelected(value: Test) {
-    this.selectedTest.push(value);
+    if (value != null) {
+      if (this.test) {
+        for (let test of this.test) {
+          if (test.id == value.id) {
+            this.selectedTest.push(test);
+          }
+        }
+      }
+    }
   }
   async updatePanel() {
     const updateData: Panel = {
@@ -85,6 +95,4 @@ export class EditpannelComponent implements OnInit {
     updateData.tests = this.selectedTest;
     await this.PannelserviceService.updatePanel(updateData);
   }
-
 }
-

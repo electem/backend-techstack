@@ -1,7 +1,6 @@
 export class Reporttestpanel {
-    id?:number;
-    panelid?:number;
-    data?: string;
-    testid?:number;
-
- }
+  id?: number;
+  panelid?: number;
+  data?: string;
+  testid?: number;
+}

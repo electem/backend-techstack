@@ -4,7 +4,7 @@ import { PannelserviceService } from 'src/app/services/pannelservice.service';
 @Component({
   selector: 'app-addpannel',
   templateUrl: './addpannel.component.html',
-  styleUrls: ['./addpannel.component.css']
+  styleUrls: ['./addpannel.component.css'],
 })
 export class AddpannelComponent implements OnInit {
   submitted = false;
@@ -15,10 +15,9 @@ export class AddpannelComponent implements OnInit {
     tests: [],
   };
 
-  constructor(private PannelserviceService: PannelserviceService) { }
+  constructor(private PannelserviceService: PannelserviceService) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   addPanel() {
     this.showForm = true;
@@ -37,7 +36,5 @@ export class AddpannelComponent implements OnInit {
       description: this.panel.description,
     };
     await this.PannelserviceService.createPanel(panelData);
-    
   }
 }
-
