@@ -1,0 +1,22 @@
+<h3><strong class="text-center">Report Details</strong></h3>
+<div>
+  <table class="table table-bordered table-striped table-hover">
+    <tr>
+      <th></th>
+      <th *ngFor="let test of tests; let j = index">
+        {{ test.name }}
+      </th>
+    </tr>
+    <tr *ngFor="let panel of panels; let i = index">
+      <th>{{ panel.name }}</th>
+      <td *ngFor="let test of tests; let j = index">
+        <div *ngIf="isTestPresentInPanel(panel, test)">
+          <input type="text" style=" width: 150px;" (blur)="onBlurMethod($event, panel, test)" />
+        </div>
+      </td>
+    </tr>
+  </table>
+  <button class="btn btn-primary mr-2" style=" float:right">
+    Save
+  </button>
+</div>
