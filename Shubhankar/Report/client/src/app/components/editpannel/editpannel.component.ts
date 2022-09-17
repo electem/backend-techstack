@@ -47,7 +47,7 @@ export class EditpannelComponent implements OnInit {
   editPanel(panel: Panel) {
     this.panel = panel;
     this.showForm = true;
-    this.editPanelForm = true;
+    this.editPanelForm = false;
     this.dropdown = true;
   }
 

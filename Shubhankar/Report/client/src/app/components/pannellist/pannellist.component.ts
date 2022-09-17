@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PannelserviceService } from 'src/app/services/pannelservice.service';
 import { Panel } from 'src/app/models/pannel';
 import { Test } from 'src/app/models/test';
+import { Report } from 'src/app/models/report';
 
 @Component({
   selector: 'app-pannellist',
@@ -23,10 +24,14 @@ export class PannellistComponent implements OnInit {
   editTestForm?: boolean;
   dropdown?: boolean;
   test!: Test[];
+  reportName ?: string;
   selectedTests = new Test();
   tests?: Test = {
     name: '',
   };
+  report: Report ={
+    name: '',
+  }
   selectedTest: Test[] = [];
   constructor(private PannelserviceService: PannelserviceService) {}
 
@@ -35,7 +40,18 @@ export class PannellistComponent implements OnInit {
     this.editPanelForm = false;
     this.retrievePanels();
     this.retrieveTest();
+    
+    
   }
+  async saveReport() {
+    this.reportName = this.randomString(10)
+     const reportData: Report = {
+      name: this.reportName,
+    };
+    await this.PannelserviceService.createReport(reportData);
+  }
+
+
   onSubmit() {
     alert('Submitted Successfully');
   }
@@ -47,10 +63,10 @@ export class PannellistComponent implements OnInit {
     this.test = await this.PannelserviceService.getAllTest();
   }
 
+
   onSelected(value: Test) {
     this.selectedTest.push(value);
   }
-
   addPanel() {
     this.showForm = true;
   }
@@ -103,5 +119,13 @@ export class PannellistComponent implements OnInit {
       name: '',
     };
     this.editTestForm = false;
+  }
+  randomString(length: number) {
+    var randomChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var result = '';
+    for ( var i = 0; i < length; i++ ) {
+        result += randomChars.charAt(Math.floor(Math.random() * randomChars.length));
+    }
+    return result;
   }
 }

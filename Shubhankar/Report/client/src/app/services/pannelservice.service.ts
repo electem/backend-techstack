@@ -2,15 +2,22 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Panel } from '../models/pannel';
 import { Test } from '../models/test';
+import { Report } from '../models/report';
 
 const baseUrl = 'http://localhost:8000/panels';
 const baseUrl2 = 'http://localhost:8000/tests';
+const baseUrl3 = 'http://localhost:8000/reports';
+
 @Injectable({
   providedIn: 'root',
 })
 export class PannelserviceService {
   panels!: Panel[];
   constructor(private http: HttpClient) {}
+
+  createReport(data: Report) {
+    return this.http.post(baseUrl3, data).toPromise();
+  }
 
   async getAll(): Promise<Panel[]> {
     return await this.http.get<Panel[]>(baseUrl).toPromise();
