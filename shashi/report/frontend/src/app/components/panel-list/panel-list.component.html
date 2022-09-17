@@ -3,23 +3,54 @@
     <div class="input-group mb-3"></div>
   </div>
   <div class="col-md-6">
-    <h4>Panels List</h4>
+    <style>
+      h1 {
+        text-align: right;
+      }
+    </style>
+    <h1 class="heading">PANELS LIST</h1>
     <td>
       <button
         *ngIf="!this.editPanelForm"
+        style="margin: 10px"
         type="button"
-        class="btn btn-info btn-sm mr-2"
+        class="btn btn-outline-primary btn-sm mr-2"
         (click)="addPanel()"
+        routerLink="/addpanel"
       >
         ADD NEW PANEL
       </button>
+      <br />
       <button
-        *ngIf="this.editPanelForm"
+        style="margin: 10px"
+        *ngIf="this.showbutton"
         type="button"
-        class="btn btn-info btn-sm mr-2"
-        (click)="addPanel()"
+        class="btn btn-outline-secondary btn-sm mr-2"
+        (click)="addTest(test)"
       >
         ADD TEST TO PANEL
+      </button>
+      <div class="form-group">
+        <select
+          *ngIf="this.Testdropdown"
+          style="width: 100%"
+          [(ngModel)]="selectedtests"
+          (ngModelChange)="onSelected(selectedtests)"
+        >
+          <option>Choose Test</option>
+          <option *ngFor="let test of tests" [ngValue]="test">
+            {{ test.name }}
+          </option>
+        </select>
+      </div>
+      <button
+        *ngIf="this.showbutton"
+        style="margin: 10px"
+        type="button"
+        class="btn btn-outline-success btn-sm mr-2"
+        (click)="updatePanel()"
+      >
+        CONFIRM TEST
       </button>
     </td>
     <br />
@@ -29,6 +60,7 @@
           <div class="form-group">
             <label for="name">PANEL NAME</label>
             <input
+              placeholder="Panel name"
               type="text"
               name="name"
               class="form-control"
@@ -39,6 +71,7 @@
           <div class="form-group">
             <label for="name">PANEL DESCRIPTION</label>
             <input
+              placeholder="Panel description"
               name="description"
               type="text"
               class="form-control"
@@ -48,45 +81,46 @@
         </div>
         <br />
         <button
+          style="margin: 10px"
           type="button"
-          class="btn btn-info btn-sm mr-2"
+          class="btn btn-outline-danger btn-sm mr-2"
           (click)="canclePanel()"
         >
           CANCEL
         </button>
-        <button
-          type="button"
-          class="btn btn-info btn-sm mr-2"
-          (click)="savePanel()"
-        >
-          SAVE PANEL
-        </button>
         <br />
       </form>
     </div>
-    <br />
     <ul class="list-group"></ul>
   </div>
   <div class="container">
     <table class="table table-bordered justify-content-center">
       <thead class="thead-light">
-        <tr class="active">
+        <tr class="active button2">
           <th class="text-center" scope="col">NAME</th>
           <th class="text-center" scope="col">DESCRIPTION</th>
-          <th class="text-center" scope="col">EDIT</th>
+          <th class="text-center" scope="col">OPTIONS</th>
         </tr>
       </thead>
       <tbody *ngFor="let panel of panels; let i = index">
-        <tr class="success">
+        <tr class="success head heading2">
           <th class="text-center" scope="row">{{ panel.name }}</th>
           <th class="text-center" scope="row">{{ panel.description }}</th>
           <th class="text-center" scope="row">
             <button
               type="button"
-              class="btn btn-info btn-sm mr-2"
+              style="margin: px"
+              class="btn-outline-secondary btn btn-sm mr-2"
               (click)="editPanel(panel)"
             >
               Edit
+            </button>
+            <button
+              type="button"
+              class="btn-outline-secondary btn btn-sm mr-2"
+              routerLink="/testDetails"
+            >
+              View
             </button>
           </th>
         </tr>
