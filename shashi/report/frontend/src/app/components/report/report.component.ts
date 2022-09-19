@@ -14,6 +14,7 @@ import { Target } from '@angular/compiler';
 export class ReportComponent implements OnInit {
   panels?: Panel[];
   tests?: Test[];
+  reportpaneltest?: Reportpaneltest[];
   currentPanel?: Panel;
   disableTextbox?: boolean;
   selectedTests: Test[] = [];
@@ -31,6 +32,11 @@ export class ReportComponent implements OnInit {
   ngOnInit(): void {
     this.retrievePanels();
     this.retrieveTests();
+    this.retrieveReportpaneltest();
+  }
+  async retrieveReportpaneltest(): Promise<void> {
+    this.reportpaneltest = await this.panelService.getAllReportpaneltest();
+    console.log(this.retrieveReportpaneltest);
   }
   async retrievePanels(): Promise<void> {
     this.panels = await this.panelService.getAllPanels();
@@ -48,6 +54,32 @@ export class ReportComponent implements OnInit {
       return true;
     } else {
       return false;
+    }
+  }
+
+  dataInsertInTextBox(currentPanel: Panel, currentTest: Test) {
+    if (currentPanel && currentTest && this.reportpaneltest) {
+      const tableData = this.reportpaneltest.find(
+        (reportpanel) =>
+          reportpanel.panel_fk == currentPanel.id &&
+          reportpanel.test_fk == currentTest.id
+      );
+      return tableData?.data;
+    } else {
+      return 'shashi ';
+    }
+  }
+
+  reportDetailsSave(event: any, panel: Panel, test: Test) {
+    const savedReportId = localStorage.getItem('reportId');
+    if (savedReportId != null) {
+      const reportPanelTest: Reportpaneltest = {
+        data: event.target.value,
+        panel_fk: panel.id,
+        test_fk: test.id,
+        report_fk: +savedReportId,
+      };
+      console.log(reportPanelTest);
     }
   }
 }
