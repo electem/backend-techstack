@@ -27,9 +27,6 @@ public class Report {
 	@Column(name = "createdAt", nullable = false, updatable = false)
 	private Date createdAt;
 	
-	
-	
-
 	public Report() {
 
 	}

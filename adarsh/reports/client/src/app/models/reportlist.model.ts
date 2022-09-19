@@ -1,9 +1,9 @@
 export class ReportPanelTest {  
   id?: number;
   data?: string;
-  panelFk?: number;
-  testFk?:number;
-  reportFk?:number;
+  reportID?: number;
+  panelID?:number;
+  testID?:number;
   
 
 }

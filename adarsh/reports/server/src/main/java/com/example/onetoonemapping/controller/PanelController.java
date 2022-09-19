@@ -5,7 +5,6 @@ import java.util.Optional;
 
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -15,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
 import com.example.onetoonemapping.models.Panel;
 import com.example.onetoonemapping.repository.PanelRepository;
 
@@ -23,7 +23,7 @@ import com.example.onetoonemapping.repository.PanelRepository;
 public class PanelController {
 
 	@Autowired
-	PanelRepository panelRepository;
+	private PanelRepository panelRepository;
 
 	@GetMapping("/panels")
 	public List<Panel> getPanelList() {

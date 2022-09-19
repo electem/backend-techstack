@@ -98,7 +98,7 @@
 				<version>2.1.9.RELEASE</version>
 				<configuration>
 					<jvmArguments>
-            -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=8090
+            -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=8484
           </jvmArguments>
 				</configuration>
 			</plugin>

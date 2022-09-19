@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Panel } from '../models/panel.model';
 import { Report } from '../models/report.model';
+import { ReportPanelTest } from '../models/reportlist.model';
 import { Test } from '../models/test.model';
 
 const panelUrl = 'http://localhost:8080/panels';
@@ -10,6 +11,8 @@ const getTest = 'http://localhost:8080/tests';
 const addReport = 'http://localhost:8080/createReport';
 const updatePanelUrl = 'http://localhost:8080/updatePanel';
 const getReport = 'http://localhost:8080/report';
+const creatReportList = 'http://localhost:8080/createReportPanelTests';
+const gettReportList = 'http://localhost:8080/ReportPanelTest';
 
 
 @Injectable({
@@ -20,6 +23,7 @@ export class PanelService {
   panel: Panel[] = [];
   test: Test[] = [];
   reports: Report[] = [];
+  reportList:ReportPanelTest[]=[];
 
   constructor(private http: HttpClient) {}
 
@@ -33,8 +37,6 @@ export class PanelService {
   async updatePanel(panel: Panel): Promise<any> {
     return await this.http.put(updatePanelUrl, panel).toPromise();
   }
-
-
   async createReport(panel: Panel) {
     return await this.http.post(addReport, panel).toPromise();
   }
@@ -47,6 +49,12 @@ export class PanelService {
   }
   async getAllReport(): Promise<Report[]> {
     return await this.http.get<Report[]>(getReport).toPromise();
+  }
+  async createReportList(reportList: ReportPanelTest) {
+    return await this.http.post(creatReportList, reportList).toPromise();
+  }
+  async getAllReportList(): Promise<ReportPanelTest[]> {
+    return await this.http.get<ReportPanelTest[]>(gettReportList).toPromise();
   }
 
 }
