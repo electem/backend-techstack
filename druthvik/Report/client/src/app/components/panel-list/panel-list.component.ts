@@ -120,6 +120,8 @@ export class PanelListComponent implements OnInit {
       name: this.report.name,
     };
     this.savedReport = await this.panelService.createReport(reportData);
-    console.log(this.savedReport);
+    if (this.savedReport && this.savedReport.id) {
+      localStorage.setItem('reportId', this.savedReport.id + '');
+    }
   }
 }
