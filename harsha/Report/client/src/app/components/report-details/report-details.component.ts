@@ -21,12 +21,14 @@ export class ReportDetailsComponent implements OnInit {
     description: '',
     tests: [],
   };
+  currentTest: Test = {
+    name: '',
+  };
   report: Report = {
     name: '',
   };
   savedreportId: any;
-   maps = new Map()
-
+  map = new Map();
 
   constructor(
     private panelService: PanelService,
@@ -37,18 +39,6 @@ export class ReportDetailsComponent implements OnInit {
     this.retrievePanels();
     this.getTests();
     this.getReportPanelTests();
-  }
-
-  getData(currentPanel: Panel, currentTest: Test) {
-    if (currentPanel && currentTest && this.reportPanelTests) {
-      const matchingData = this.reportPanelTests.find(
-        (repot) =>
-          repot.testId === currentTest.id && repot.panelId === currentPanel.id
-      );
-      return matchingData && matchingData.data;
-    } else {
-      return '';
-    }
   }
 
   async onBlurMethod(event: any, panel: Panel, test: Test) {
@@ -89,7 +79,14 @@ export class ReportDetailsComponent implements OnInit {
   async getReportPanelTests(): Promise<void> {
     const reportPanelTest = await this.panelService.getReportPanelTests();
     const mapObject = new Map(Object.entries(reportPanelTest));
-    this.maps = mapObject;
+    this.map = mapObject;
+  }
+
+  getData(currentPanel: Panel, currentTest: Test) {
+    if (currentPanel && currentTest) {
+      const reportValue = this.map.get(currentPanel.id + '_' + currentTest.id);
+      return reportValue;
+    }
   }
 
   async getReportById(id: Number) {

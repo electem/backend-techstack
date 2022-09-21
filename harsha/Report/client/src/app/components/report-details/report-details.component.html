@@ -3,27 +3,20 @@
   <table class="table table-bordered table-striped table-hover">
     <tr>
       <th></th>
-      <th *ngFor="let test of tests; let j = index">
+      <th *ngFor="let test of tests">
         {{ test.name }}
       </th>
     </tr>
-    <tr *ngFor="let panel of panels; let i = index">
+    <tr *ngFor="let panel of panels">
       <th>{{ panel.name }}</th>
-      <td *ngFor="let test of tests; let j = index">
-        <div *ngFor="let map of maps | keyvalue">
-          <div
-            *ngIf="
-              isTestPresentInPanel(panel, test) &&
-              map.key === panel.id + ' ' + test.id
-            "
-          >
-            <input
-              type="text"
-              [ngModel]="map.value"
-              (blur)="onBlurMethod($event, panel, test)"
-              style="width: 150px"
-            />
-          </div>
+      <td *ngFor="let test of tests">
+        <div *ngIf="isTestPresentInPanel(panel, test)">
+          <input
+            type="text"
+            [ngModel]="getData(panel, test)"
+            (blur)="onBlurMethod($event, panel, test)"
+            style="width: 150px"
+          />
         </div>
       </td>
     </tr>
