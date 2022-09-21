@@ -10,13 +10,23 @@
     <tr *ngFor="let panel of panels; let i = index">
       <th>{{ panel.name }}</th>
       <td *ngFor="let test of tests; let j = index">
-        <div *ngIf="isTestPresentInPanel(panel, test)">
-          <input type="text" style=" width: 150px;" (blur)="onBlurMethod($event, panel, test)" />
+        <div *ngFor="let map of maps | keyvalue">
+          <div
+            *ngIf="
+              isTestPresentInPanel(panel, test) &&
+              map.key === panel.id + ' ' + test.id
+            "
+          >
+            <input
+              type="text"
+              [ngModel]="map.value"
+              (blur)="onBlurMethod($event, panel, test)"
+              style="width: 150px"
+            />
+          </div>
         </div>
       </td>
     </tr>
   </table>
-  <button class="btn btn-primary mr-2" style=" float:right">
-    Save
-  </button>
+  <button class="btn btn-primary mr-2" style="float: right">Save</button>
 </div>

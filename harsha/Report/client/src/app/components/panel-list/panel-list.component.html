@@ -4,80 +4,16 @@
     <form>
       <div class="form-group">
         <label for="name">Panel Name</label>
-        <input
-          type="text"
-          formControlName="name"
-          class="form-control"
-          [(ngModel)]="panel.name"
-        />
+        <input type="text" name="name" class="form-control" [(ngModel)]="panel.name" />
       </div>
 
       <div class="form-group">
         <label for="description">Panel Description</label>
-        <input
-          type="text"
-          formControlName="description"
-          class="form-control"
-          [(ngModel)]="panel.description"
-        />
+        <input type="text" name="description" class="form-control" [(ngModel)]="panel.description" />
         <button class="m-3 btn btn-sm btn-danger" (click)="savePanel()">
           Save Panel
         </button>
-        <button class="btn btn-warning">Cancel</button>
-      </div>
-    </form>
-  </div>
-
-  <div *ngIf="this.editForm">
-    <h4 class="text-center">Edit Panel</h4>
-    <button class="m-3 btn btn-sm btn-danger" (click)="addTest()">
-      Add Test to Panel
-    </button>
-    <div *ngIf="this.testForm">
-      <form>
-        <div class="form-group">
-          <p class="text-center">
-            Tests
-            <select
-              class="form-control"
-              placeholder="Choose Test"
-              [(ngModel)]="selectedTest.id"
-              (ngModelChange)="onSelected(selectedTest)"
-            >
-              <option value="Choose Test">Choose Test</option>
-              <option *ngFor="let test of tests" [ngValue]="test">
-                {{ test.name }}
-              </option>
-            </select>
-          </p>
-        </div>
-      </form>
-    </div>
-    <form>
-      <div class="form-group">
-        <label for="name">PANEL NAME</label>
-        <input
-          type="text"
-          name="name"
-          class="form-control"
-          [(ngModel)]="panel.name"
-        />
-      </div>
-
-      <div class="form-group">
-        <label for="description">Panel Description</label>
-        <input
-          type="text"
-          name="description"
-          class="form-control"
-          [(ngModel)]="panel.description"
-        />
-        <button class="btn btn-primary mr-2" (click)="updatePanel()">
-          Update Panel
-        </button>
-        <button class="btn btn-warning" (click)="cancelNewPanel()">
-          Cancel
-        </button>
+        <button class="btn btn-warning" (click)="cancelPanel()">Cancel</button>
       </div>
     </form>
   </div>
@@ -87,6 +23,10 @@
     <button class="m-3 btn btn-sm btn-danger" (click)="addPanel()">
       Add Panel
     </button>
+    <button type="button" class="btn btn-primary mr-2" routerLink="/reports-details/{{report.id}}"
+      (click)="saveReport()">
+      Add Report
+    </button>
     <table class="table table-bordered table-striped table-hover">
       <thead>
         <tr>
@@ -95,16 +35,12 @@
           <th class="text-center">&nbsp;</th>
         </tr>
       </thead>
-      <tbody *ngFor="let panel of panels; let i = index">
+      <tbody *ngFor="let panel of panels">
         <tr class="success">
           <td class="text-center">{{ panel.name }}</td>
           <td class="text-center">{{ panel.description }}</td>
           <td>
-            <button
-              type="button"
-              class="btn btn-info btn-sm mr-2"
-              (click)="editPanel(panel)"
-            >
+            <button type="button" class="btn btn-info btn-sm mr-2" routerLink="/panels/{{ panel.id }}">
               Edit
             </button>
           </td>

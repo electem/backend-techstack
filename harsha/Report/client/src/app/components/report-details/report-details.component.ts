@@ -15,14 +15,18 @@ export class ReportDetailsComponent implements OnInit {
   panels: Panel[] = [];
   tests: Test[] = [];
   reports: Report[] = [];
+  reportPanelTests: ReportPanelTest[] = [];
   currentPanel: Panel = {
     name: '',
     description: '',
     tests: [],
   };
-  currentReport: Report = {
+  report: Report = {
     name: '',
   };
+  savedreportId: any;
+   maps = new Map()
+
 
   constructor(
     private panelService: PanelService,
@@ -32,17 +36,33 @@ export class ReportDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.retrievePanels();
     this.getTests();
-    this.getReportById(this.route.snapshot.params.id);
+    this.getReportPanelTests();
   }
 
-  onBlurMethod(event: any, panel: Panel, test: Test) {
-    const reportData: ReportPanelTest = {
-      data: event.target.value,
-      panelId: panel.id,
-      testId: test.id,
-      reportId: this.currentReport.id,
-    };
-    console.log(reportData);
+  getData(currentPanel: Panel, currentTest: Test) {
+    if (currentPanel && currentTest && this.reportPanelTests) {
+      const matchingData = this.reportPanelTests.find(
+        (repot) =>
+          repot.testId === currentTest.id && repot.panelId === currentPanel.id
+      );
+      return matchingData && matchingData.data;
+    } else {
+      return '';
+    }
+  }
+
+  async onBlurMethod(event: any, panel: Panel, test: Test) {
+    const savedreportId = localStorage.getItem('reportId');
+    if (savedreportId != null) {
+      const reportData: ReportPanelTest = {
+        data: event.target.value,
+        panelId: panel.id,
+        testId: test.id,
+        reportId: +savedreportId,
+      };
+      console.log(reportData);
+      await this.panelService.createReportPanelTests(reportData);
+    }
   }
 
   isTestPresentInPanel(currentPanel: Panel, currentTest: Test) {
@@ -66,7 +86,13 @@ export class ReportDetailsComponent implements OnInit {
     this.tests = await this.panelService.getTests();
   }
 
+  async getReportPanelTests(): Promise<void> {
+    const reportPanelTest = await this.panelService.getReportPanelTests();
+    const mapObject = new Map(Object.entries(reportPanelTest));
+    this.maps = mapObject;
+  }
+
   async getReportById(id: Number) {
-    this.currentReport = await this.panelService.getReportById(id);
+    this.report = await this.panelService.getReportById(id);
   }
 }

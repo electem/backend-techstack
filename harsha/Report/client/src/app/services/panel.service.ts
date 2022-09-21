@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Panel } from '../models/panel.model';
+import { ReportPanelTest } from '../models/report-panel-test.model';
 import { Report } from '../models/report.model';
 import { Test } from '../models/test.model';
 
@@ -14,6 +15,7 @@ export class PanelService {
   panel: Panel[] = [];
 
   constructor(private http: HttpClient) {}
+
   async getPanels(): Promise<Panel[]> {
     return await this.http.get<Panel[]>(baseUrl + '/panels').toPromise();
   }
@@ -46,5 +48,19 @@ export class PanelService {
 
   async createReport(report: Report): Promise<Report> {
     return await this.http.post(baseUrl + '/createReport', report).toPromise();
+  }
+
+  async createReportPanelTests(
+    reportPanelTest: ReportPanelTest
+  ): Promise<ReportPanelTest> {
+    return await this.http
+      .post(baseUrl + '/createReportPanelTests', reportPanelTest)
+      .toPromise();
+  }
+
+  async getReportPanelTests(): Promise<ReportPanelTest[]> {
+    return await this.http
+      .get<ReportPanelTest[]>(baseUrl + '/reportPanelTests')
+      .toPromise();
   }
 }
