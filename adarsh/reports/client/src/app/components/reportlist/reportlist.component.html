@@ -11,12 +11,14 @@
 
     <tr *ngFor="let panel of panels; let i = index">
       <th>{{ panel.name }}</th>
-
       <td *ngFor="let test of tests; let j = index">
-        <div *ngIf="isTestPresentInPanel(panel, test)">
-          <input type="text" [ngModel]="isPanelTestPresentInReport(panel, test)" (blur)="onBlurEvent($event, panel, test)" />
+        <div *ngFor="let reportMapDetail of reportMapDetails | keyvalue">
+          <div *ngIf="isTestPresentInPanel(panel, test) && (reportMapDetail.key === (panel.id+' '+test.id))" >
+            <input type="text"  [ngModel]="reportMapDetail.value" (blur)="onBlurEvent($event, panel, test)" style=" width: 150px;" />
         </div>
+      </div>
       </td>
+    
     </tr>
   </table>
 </div>

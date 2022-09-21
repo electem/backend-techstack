@@ -74,7 +74,8 @@ export class PanelDetialsComponent implements OnInit {
       description: this.panel.description,
       tests: this.selectedTests,
     };
-    if (this.selectedTests.length) await this.panelService.updatePanel(panelData);
+    if (this.selectedTests.length)
+      await this.panelService.updatePanel(panelData);
   }
   private async getPanelId(id: Number) {
     this.panel = await this.panelService.getPanelByID(id);

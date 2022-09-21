@@ -24,10 +24,12 @@ export class ReportlistComponent implements OnInit {
     reportID:0,
     panelID:0,
     testID:0,
-  };
+  }; 
+  reportTestPanelList:ReportPanelTest[]=[];
+  reportList: ReportPanelTest[]=[];
+  stringJson?: string;
+  reportMapDetails =  new Map();
   savedreportId:any;
-  reportList:ReportPanelTest[]=[];
- 
   constructor(
     private panelService: PanelService,
     private router: Router,
@@ -46,7 +48,8 @@ export class ReportlistComponent implements OnInit {
     this.tests = await this.panelService.getAllTest();
   }
   async retrieveReportList(): Promise<void> {
-    this.reportList = await this.panelService.getAllReportList();
+    const reportMap = await this.panelService.getAllReportList();
+    this.reportMapDetails = new Map(Object.entries(reportMap));
   }
   isTestPresentInPanel(currentPanel: Panel, currentTest: Test) {
     if (
@@ -71,8 +74,7 @@ export class ReportlistComponent implements OnInit {
         return "";
       }
    }
-      
-     
+ 
   async onBlurEvent(event: any, panel: Panel, test: Test) {
     const savedreportId = localStorage.getItem('reportId');
     if (savedreportId != null) {

@@ -25,10 +25,11 @@ export class PanelListComponent implements OnInit {
 
   editPanelForm?: boolean;
   test!: Test[];
-  constructor(private panelService: PanelService,
+  constructor(
+    private panelService: PanelService,
     private router: Router,
     private route: ActivatedRoute
-    ) {}
+  ) {}
 
   ngOnInit(): void {
     this.showForm = false;
@@ -72,8 +73,8 @@ export class PanelListComponent implements OnInit {
       name: this.randomString(10),
     };
     this.savereports = await this.panelService.createReport(reportData);
-    if(this.savereports && this.savereports.id){
-      localStorage.setItem('reportId',this.savereports.id +'');    
+    if (this.savereports && this.savereports.id) {
+      localStorage.setItem('reportId', this.savereports.id + '');
     }
     this.router.navigate(['report']);
   }
