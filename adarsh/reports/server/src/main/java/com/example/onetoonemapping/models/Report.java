@@ -27,6 +27,9 @@ public class Report {
 	@Column(name = "createdAt", nullable = false, updatable = false)
 	private Date createdAt;
 	
+
+	
+   
 	public Report() {
 
 	}
@@ -36,7 +39,7 @@ public class Report {
 		this.id = id;
 		this.name = name;
 		this.createdAt = createdAt;
-		
+
 	}
 
 	public int getId() {
