@@ -17,6 +17,7 @@ export class ReportComponent implements OnInit {
   reportpaneltest?: Reportpaneltest[];
   currentPanel?: Panel;
   disableTextbox?: boolean;
+  objectToMap = new Map();
   selectedTests: Test[] = [];
   panel: Panel = {
     name: '',
@@ -34,9 +35,10 @@ export class ReportComponent implements OnInit {
     this.retrieveTests();
     this.retrieveReportpaneltest();
   }
+
   async retrieveReportpaneltest(): Promise<void> {
-    this.reportpaneltest = await this.panelService.getAllReportpaneltest();
-    console.log(this.retrieveReportpaneltest);
+    const reportMapData = await this.panelService.getAllReportpaneltest();
+    this.objectToMap = new Map(Object.entries(reportMapData));
   }
   async retrievePanels(): Promise<void> {
     this.panels = await this.panelService.getAllPanels();
@@ -58,16 +60,12 @@ export class ReportComponent implements OnInit {
   }
 
   dataInsertInTextBox(currentPanel: Panel, currentTest: Test) {
-    if (currentPanel && currentTest && this.reportpaneltest) {
-      const tableData = this.reportpaneltest.find(
-        (reportpanel) =>
-          reportpanel.panel_fk == currentPanel.id &&
-          reportpanel.test_fk == currentTest.id
+    if (currentPanel && currentTest) {
+      const mapedData = this.objectToMap.get(
+        currentPanel.id + '_' + currentTest.id
       );
-      return tableData?.data;
-    } else {
-      return 'shashi ';
-    }
+      return mapedData;
+    } 
   }
 
   reportDetailsSave(event: any, panel: Panel, test: Test) {
