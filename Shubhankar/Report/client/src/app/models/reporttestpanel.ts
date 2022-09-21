@@ -1,6 +1,6 @@
 export class Reporttestpanel {
   id?: number;
-  panelid?: number;
+  panel_id?: number;
   data?: string;
-  testid?: number;
-}
+  test_id?: number;
+ }
