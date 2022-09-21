@@ -20,16 +20,16 @@ export class ReportlistComponent implements OnInit {
   };
   reportlist: ReportPanelTest = {
     id: 0,
-    data:"",
-    reportID:0,
-    panelID:0,
-    testID:0,
-  }; 
-  reportTestPanelList:ReportPanelTest[]=[];
-  reportList: ReportPanelTest[]=[];
+    data: '',
+    reportID: 0,
+    panelID: 0,
+    testID: 0,
+  };
+  reportTestPanelList: ReportPanelTest[] = [];
+  reportList: ReportPanelTest[] = [];
   stringJson?: string;
-  reportMapDetails =  new Map();
-  savedreportId:any;
+  reportMapDetails = new Map();
+  savedreportId: any;
   constructor(
     private panelService: PanelService,
     private router: Router,
@@ -63,30 +63,22 @@ export class ReportlistComponent implements OnInit {
       return false;
     }
   }
-   isPanelTestPresentInReport(currentPanel: Panel, currentTest: Test) {
-    if (
-      currentPanel &&
-      currentTest &&
-      this.reportList ) {
-        const matchedReportTest = this.reportList.find((reportList)  => reportList.panelID === currentPanel.id && reportList.testID === currentTest.id)
-        return matchedReportTest && matchedReportTest.data;
-      }else{
-        return "";
-      }
-   }
- 
+  isPanelTestPresentInReport(currentPanel: Panel, currentTest: Test) {
+    if (currentPanel && currentTest) {
+      const reportMapvalue = this.reportMapDetails.get(currentPanel.id + '_' + currentTest.id);
+      return reportMapvalue;
+    }
+  }
+
   async onBlurEvent(event: any, panel: Panel, test: Test) {
     const savedreportId = localStorage.getItem('reportId');
     if (savedreportId != null) {
-     const reportList: ReportPanelTest = {
+      const reportList: ReportPanelTest = {
         data: event.target.value,
         panelID: panel.id,
         testID: test.id,
         reportID: +this.savedreportId,
       };
-     
     }
   }
 }
- 
-

@@ -10,6 +10,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { ReportlistComponent } from './components/reportlist/reportlist.component';
 import { ReportDetialListComponent } from './components/report-detial-list/report-detial-list.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,

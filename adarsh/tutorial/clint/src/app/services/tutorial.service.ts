@@ -15,6 +15,7 @@ const authenticate = 'http://localhost:8080/authenticate';
 const commentUrl = 'http://localhost:8080/coments';
 const getcommentUrl = 'http://localhost:8080/addComment';
 const getLoginUser = 'http://localhost:8080/addloginuser';
+
 export class Role {
   name?: String;
 }
@@ -151,7 +152,7 @@ export class TutorialService {
       'Bearer ' + this.tokenIs
     );
     return await this.http
-      .post(getLoginUser, user, { headers: header })
+      .post(authenticate, user, { headers: header })
       .toPromise();
   }
 }
