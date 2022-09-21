@@ -9,19 +9,16 @@ import {
 import {
   createConnection,
   getConnection,
-  getManager,
-  getRepository,
 } from "typeorm";
 import { Reportpaneltest } from "../models/reportpaneltest";
-import { query } from "express";
-import { Req, Res } from "@nestjs/common";
 import { sequelizeConfig } from "../config/seq.config";
 import { QueryTypes } from "sequelize";
 
 @Route("reportpaneltest")
 @Tags("reportpaneltest")
 export default class ReportPaneltestController {
-  myMap = new Map();
+  
+  reportpaneltest: any;
 
   @Post("/")
   public async createReportpaneltest(@Body() body: IReportpaneltestPayload) {
@@ -47,15 +44,22 @@ export default class ReportPaneltestController {
 
   @Get("/")
   public async getReportpaneltest(): Promise<any> {
+    let myMap = new Map();
     var tableName = "report_panel_test";
     let query = `SELECT * FROM ${tableName}`;
     console.log(query);
     const data = await sequelizeConfig.query(query, {
       type: QueryTypes.SELECT,
     });
-    for (let map of data) {
-      console.log(map.panel_id);
-    }
-    return data;
+    for (var reportpanellistdata of data) {
+      const reportpaneltest = reportpanellistdata  as Reportpaneltest;
+         myMap.set( 
+          reportpaneltest.panel_id+'_'+reportpaneltest.test_id ,reportpaneltest.data
+        )
+     }
+     const mapObject = Object.fromEntries(myMap);
+     console.log(mapObject)
+     return mapObject;
+
   }
 }
