@@ -3,7 +3,7 @@ import ReportPanelTestController from '../controllers/report_panel_test.controll
 
 const router = express.Router();
 
-router.get('/', async (_req, res) => {
+router.get('/', async (req, res) => {
   const controller = new ReportPanelTestController();
   const response = await controller.getReportpaneltest();
   return res.send(response);
