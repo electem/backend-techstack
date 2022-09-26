@@ -1,6 +1,7 @@
 package com.example.onetoonemapping.models;
 
 import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,38 +13,32 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "panels")
-public class Panel {
-
+@Table(name = "panelDatas")
+public class PanelData {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 
 	private String name;
 
-	private String description;
-
 	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "panels_tests", joinColumns = { @JoinColumn(name = "panels_id") }, inverseJoinColumns = {
-			@JoinColumn(name = "tests_id") })
-	private List<Tests> tests;
+	@JoinTable(name = "panelData_testsData", joinColumns = {
+			@JoinColumn(name = "panelData_id") }, inverseJoinColumns = { @JoinColumn(name = "testsData_id") })
+	private List<TestData> testsDatas;
 
-	public Panel() {
-	}
-
-	public Panel(int id, String name, String description, List<Tests> tests) {
+	
+	public PanelData(int id, String name, List<TestData> testsDatas) {
 		super();
 		this.id = id;
 		this.name = name;
-		this.description = description;
-		this.tests = tests;
-
+		this.testsDatas = testsDatas;
 	}
 
 	public int getId() {
 		return id;
 	}
 
+	
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -52,24 +47,18 @@ public class Panel {
 		return name;
 	}
 
+	
 	public void setName(String name) {
 		this.name = name;
 	}
 
-	public String getDescription() {
-		return description;
+	
+	public List<TestData> getTestsDatas() {
+		return testsDatas;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public List<Tests> getTests() {
-		return tests;
-	}
-
-	public void setTests(List<Tests> tests) {
-		this.tests = tests;
+	public void setTestsDatas(List<TestData> testsDatas) {
+		this.testsDatas = testsDatas;
 	}
 
 }
