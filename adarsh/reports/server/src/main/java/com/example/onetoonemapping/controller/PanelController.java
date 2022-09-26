@@ -1,9 +1,13 @@
 package com.example.onetoonemapping.controller;
 
+import java.io.FileReader;
 import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
+
+import org.json.simple.JSONArray;
+import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -54,4 +58,16 @@ public class PanelController {
 		panelRepository.save(panel);
 		return "Panel data updated";
 	}
+
+	@CrossOrigin(origins = "http://localhost:4200")
+	@GetMapping("/studentlData")
+	public Object getStudentData() throws Exception {
+		JSONParser jsonParser = new JSONParser();
+		FileReader reader = new FileReader("check.json");
+		Object obj = jsonParser.parse(reader);
+		JSONArray studentDataList = (JSONArray) obj;
+
+		return studentDataList;
+	}
+
 }

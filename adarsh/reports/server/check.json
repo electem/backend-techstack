@@ -1,14 +1,76 @@
 [
-   {
-      "parameterId":1,
-      "parameterName":"SEAM COMPRESSION"
-   },
-   {
-      "parameterId":2,
-      "parameterName":"POLY FLOW"
-   },
-   {
-      "parameterId":4,
-      "parameterName":"SIDE SEAL OVERLAP"
-   }
+    {
+        
+        "name": "adarsh",
+       "adress": "ranebennur",
+        "Email":"Adarsh@gmail.com",
+        "discription":90
+    },
+    {
+        "name": "harsha",
+        "adress": "bengalore",
+         "Email":"Adarsh@gmail.com",
+        "discription":80
+    },
+    {
+        "name": "Shashi",
+        "adress": "haveri",
+         "Email":"Adarsh@gmail.com",
+        "discription":85
+    },
+     {
+        
+        "name": "adarsh",
+       "adress": "ranebennur",
+        "Email":"Adarsh@gmail.com",
+        "discription":95
+    },
+    {
+        "name": "harsha",
+        "adress": "bengalore",
+         "Email":"Adarsh@gmail.com",
+        "discription":80
+    },
+    {
+        "name": "Shashi",
+        "adress": "haveri",
+         "Email":"Adarsh@gmail.com",
+        "discription":60
+    }, {
+        
+        "name": "adarsh",
+       "adress": "ranebennur",
+        "Email":"Adarsh@gmail.com",
+        "discription":68
+    },
+    {
+        "name": "harsha",
+        "adress": "bengalore",
+         "Email":"Adarsh@gmail.com",
+        "discription":93
+    },
+    {
+        "name": "Shashi",
+        "adress": "haveri",
+         "Email":"Adarsh@gmail.com",
+        "discription":86
+    }, {
+        
+        "name": "adarsh",
+       "adress": "ranebennur",
+        "Email":"Adarsh@gmail.com",
+        "discription":72
+    },
+    {
+        "name": "harsha",
+        "adress": "bengalore",
+         "Email":"Adarsh@gmail.com",
+        "discription":65
+    },
+    {
+        "name": "Shashi",
+        "adress": "haveri",
+         "Email":"Adarsh@gmail.com",
+        "discription":81
+    }
 ]
