@@ -5,8 +5,6 @@ import { Tutorial } from 'src/app/models/tutorial.model';
 import { Category } from 'src/app/models/category';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-
-
 @Component({
   selector: 'app-tutorial-details',
   templateUrl: './tutorial-details.component.html',
@@ -14,10 +12,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class TutorialDetailsComponent implements OnInit {
   registerForm!: FormGroup;
-  submitted=false;
+  submitted = false;
   country: any;
   currentTutorial: Tutorial = {
-    
     title: '',
     description: '',
     published: false,
@@ -27,12 +24,10 @@ export class TutorialDetailsComponent implements OnInit {
   categories!: Category[];
   selectedCategory = new Category();
   selectedCategories: Category[] = [];
-  countries!: { name: string; }[];
+  countries!: { name: string }[];
   tutorials?: Tutorial[];
   // Categoey?: Category[] ;
- 
- 
- 
+
   constructor(
     private tutorialService: TutorialService,
     private route: ActivatedRoute,
@@ -44,27 +39,25 @@ export class TutorialDetailsComponent implements OnInit {
     this.registerForm = this.formBuilder.group({
       title: ['', Validators.required],
       description: ['', Validators.required],
-      author: ['',  Validators.required ],
-      category:['',  Validators.required ],
-      country:['', Validators.required]
-    })
+      author: ['', Validators.required],
+      category: ['', Validators.required],
+      country: ['', Validators.required],
+    });
     this.message = '';
-      this.retriveCategory();
-   // this.retriveCategorylocal(this.route.snapshot.params.id);
-     this.getTutorialbyId(this.route.snapshot.params.id);
+    this.retriveCategory();
+    // this.retriveCategorylocal(this.route.snapshot.params.id);
+    this.getTutorialbyId(this.route.snapshot.params.id);
     this.countries = this.getCountry();
     //this.getTutorialbyIdd(this.route.snapshot.params.id);
   }
 
   getCountry() {
-    return this.tutorialService. getCountryData();
+    return this.tutorialService.getCountryData();
   }
 
-   async retriveCategory(): Promise<void> {
+  async retriveCategory(): Promise<void> {
     this.categories = await this.tutorialService.getAllCategory();
-    
-
-}
+  }
 
   onSelected(value: Category) {
     if (this.categories) {
@@ -77,17 +70,10 @@ export class TutorialDetailsComponent implements OnInit {
   }
 
   async getTutorialbyIdd(id: number) {
-    this.tutorials = JSON.parse(localStorage.getItem('GetCurrent') ||  '{}');
-    this.currentTutorial= this.tutorials?.find((x) =>x.id ==id)!;
-    console.log(localStorage.getItem('GetCurrent'))
-}
-
-// async  retriveCategorylocal(id: number){
-//      this.Categoey =  JSON.parse(localStorage.getItem('GetCategory') || '{}');
-//      this.selectedCategory = this.Categoey?.find((y) => y.id == id)!;
-// }
-
-
+    this.tutorials = JSON.parse(localStorage.getItem('GetCurrent') || '{}');
+    this.currentTutorial = this.tutorials?.find((x) => x.id == id)!;
+    console.log(localStorage.getItem('GetCurrent'));
+  }
 
   async getTutorialbyId(id: number) {
     this.currentTutorial = await this.tutorialService.getbyId(id);
@@ -95,38 +81,38 @@ export class TutorialDetailsComponent implements OnInit {
       console.log();
       this.selectedCategory = this.currentTutorial.categories[0];
     }
-     localStorage.setItem('myData',JSON.stringify(this.currentTutorial));
-    console.log(localStorage.getItem('myData'))
+    localStorage.setItem('myData', JSON.stringify(this.currentTutorial));
+    console.log(localStorage.getItem('myData'));
   }
 
-  async  saveTutorial(){
-    this.submitted = true
-    if(this.registerForm.invalid){
-    return
-}else{
-     this.saveTutorialDetail();
-}
+  async saveTutorial() {
+    this.submitted = true;
+    if (this.registerForm.invalid) {
+      return;
+    } else {
+      this.saveTutorialDetail();
+    }
   }
-async saveTutorialDetail(){
-       const currentTutorial: Tutorial = {
-        title: this.currentTutorial.title,
-        description: this.currentTutorial.description,
-        published: (this.currentTutorial.published = true),
-      };
-      currentTutorial.categories = this.selectedCategories;
-      await this.tutorialService.createTutorial(currentTutorial);
-      this.router.navigate(['/tutorials']);
-      console.log(currentTutorial);
-    } 
+  async saveTutorialDetail() {
+    const currentTutorial: Tutorial = {
+      title: this.currentTutorial.title,
+      description: this.currentTutorial.description,
+      published: (this.currentTutorial.published = true),
+    };
+    currentTutorial.categories = this.selectedCategories;
+    await this.tutorialService.createTutorial(currentTutorial);
+    this.router.navigate(['/tutorials']);
+    console.log(currentTutorial);
+  }
 
-    async  updatetutorial(){
-      this.submitted = true
-      if(this.registerForm.invalid){
-      return
-  }else{
-       this.updateTutorialData();
+  async updatetutorial() {
+    this.submitted = true;
+    if (this.registerForm.invalid) {
+      return;
+    } else {
+      this.updateTutorialData();
+    }
   }
-    } 
   async updateTutorialData() {
     const currentTutorial: Tutorial = {
       id: this.currentTutorial.id,
@@ -141,24 +127,18 @@ async saveTutorialDetail(){
   }
 
   async deletebyid() {
-       await this.tutorialService.deleteid(this.currentTutorial.id);
-    
+    await this.tutorialService.deleteid(this.currentTutorial.id);
   }
 
   get fval() {
     return this.registerForm.controls;
-    }
-  
-   async signup(){
+  }
+
+  async signup() {
     this.submitted = true;
     if (this.registerForm.invalid) {
-    return;
+      return;
     }
     alert('form fields are validated successfully!');
-    }
-   }
-  
-
-
-
-
+  }
+}

@@ -5,7 +5,7 @@ import {
     JoinTable,
     ManyToMany,
   } from "typeorm";
-  import { Test } from "./test";
+ import { Test } from "./test";
   @Entity()
   export class Panel {
     @PrimaryGeneratedColumn()
@@ -22,5 +22,5 @@ import {
     })
     @JoinTable()
     tests!: Test[];
-  }
+   }
   

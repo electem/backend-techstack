@@ -1,4 +1,4 @@
-import { Test } from "./test";
+import { Test } from './test';
 
 export class Panel {
   id?: number;
