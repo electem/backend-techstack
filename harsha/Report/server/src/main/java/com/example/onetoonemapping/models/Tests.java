@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name = "tests")
-public class Test {
+public class Tests {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -23,10 +23,10 @@ public class Test {
 	@ManyToMany(mappedBy = "tests")
 	private List<Panel> panels;
 
-	public Test() {
+	public Tests() {
 	}
 
-	public Test(int id, String name, List<Panel> panels) {
+	public Tests(int id, String name, List<Panel> panels) {
 		this.id = id;
 		this.name = name;
 		this.panels = panels;
