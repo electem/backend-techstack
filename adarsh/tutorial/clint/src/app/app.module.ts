@@ -28,6 +28,10 @@ import { ComponentsComponent } from './components/components/components.componen
 import { CommentPostComponent } from './components/tutorial-view-detials/comment-post/commentPost.component';
 import { TutorialViewDetialsComponent } from './components/tutorial-view-detials/tutorial-view-detials.component';
 import { LoginComponent } from './components/login/login.component';
+import { DataTableComponent } from './components/data-table/data-table.component';
+import { PaginationTableComponent } from './components/pagination-table/pagination-table.component';
+import { DataTablesModule } from 'angular-datatables';
+import { StudentChartComponent } from './components/student-chart/student-chart.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +58,9 @@ import { LoginComponent } from './components/login/login.component';
     CommentPostComponent,
     TutorialViewDetialsComponent,
     LoginComponent,
+    DataTableComponent,
+    PaginationTableComponent,
+    StudentChartComponent,
   ],
   imports: [
     BrowserModule,
@@ -62,6 +69,8 @@ import { LoginComponent } from './components/login/login.component';
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
+    DataTablesModule
+   
   ],
   providers: [],
   bootstrap: [AppComponent],

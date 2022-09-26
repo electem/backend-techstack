@@ -5,6 +5,7 @@ import { Tutorial } from '../models/tutorial.model';
 import { Category } from '../models/category.model';
 import { Comments } from '../models/comment.model';
 import { LoginUser } from '../models/loginUser.model';
+import { Student } from '../models/studentform.model';
 
 const baseUrl = 'http://localhost:8080/api/tutorials';
 const tutorialUrl = 'http://localhost:8080/tutorials';
@@ -15,6 +16,7 @@ const authenticate = 'http://localhost:8080/authenticate';
 const commentUrl = 'http://localhost:8080/coments';
 const getcommentUrl = 'http://localhost:8080/addComment';
 const getLoginUser = 'http://localhost:8080/addloginuser';
+const getStudentData = 'http://localhost:8080/studentlData';
 
 export class Role {
   name?: String;
@@ -25,6 +27,7 @@ export class Role {
 export class TutorialService {
   tokenIs!: string;
   tutorial: Tutorial[] = [];
+  students:Student[] =[];
 
   constructor(private http: HttpClient) {}
 
@@ -155,4 +158,9 @@ export class TutorialService {
       .post(authenticate, user, { headers: header })
       .toPromise();
   }
+
+getStudentData(): Observable<Student[]> {
+  return this.http.get<Student[]>(`${getStudentData}`);
 }
+}
+
