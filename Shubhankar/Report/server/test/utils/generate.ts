@@ -42,3 +42,29 @@ export function generateTestPayload() {
     name: faker.name.firstName(),
     }
 }
+
+export function generateReportPanelTestData(overide = {}) {
+  return {
+    id: faker.random.number(),
+    data: faker.name.findName(),
+    panel_id: faker.random.number(),
+    test_id:  faker.random.number(),
+    report_id:faker.random.number(),
+    ...overide
+  }
+}
+export function generateReportPanelTestsData(n: number = 1) {
+  return Array.from({
+    length: n
+  }, (_, i) => {
+    return generateReportPanelTestData()
+  });
+}
+export function generateReportPanelTestPayload() {
+  return {
+    data: faker.name.findName(),
+    panel_id: faker.random.number(),
+    test_id:  faker.random.number(),
+    report_id:faker.random.number(),
+    }
+}

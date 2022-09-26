@@ -11,9 +11,17 @@ import { PannellistComponent } from './components/pannellist/pannellist.componen
 import { AddpannelComponent } from './components/addpannel/addpannel.component';
 import { EditpannelComponent } from './components/editpannel/editpannel.component';
 import { ReporttableComponent } from './components/reporttable/reporttable.component';
+import { ReportrecordComponent } from './components/reportrecord/reportrecord.component';
 
 @NgModule({
-  declarations: [AppComponent, PannellistComponent, AddpannelComponent, EditpannelComponent, ReporttableComponent],
+  declarations: [
+    AppComponent,
+    PannellistComponent,
+    AddpannelComponent,
+    EditpannelComponent,
+    ReporttableComponent,
+    ReportrecordComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

@@ -32,7 +32,14 @@
       >
         Add Panel
       </button>
-      <button  style="margin-left: 12px" class="btn btn-primary btn-lg" routerLink="/report">Report</button>
+      <button
+        style="margin-left: 12px"
+        class="btn btn-primary btn-lg"
+        (click)="saveReport()"
+        routerLink="/report"
+      >
+        Report
+      </button>
       <button
         *ngIf="this.editPanelForm"
         type="button"
@@ -130,8 +137,8 @@
           <th class="text-center" scope="row">
             <button
               type="button"
-              class="btn btn-link"
-              routerLink="/edit/{{panel.id}}"
+              class="btn btn-outline-success"
+              routerLink="/edit/{{ panel.id }}"
             >
               Edit
             </button>

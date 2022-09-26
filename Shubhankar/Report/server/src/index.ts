@@ -1,11 +1,14 @@
 import "reflect-metadata";
-import { createConnection } from "typeorm";
+import { createConnection, getConnection } from "typeorm";
 import express, { Application } from "express";
 import morgan from "morgan";
 import swaggerUi from "swagger-ui-express";
 
 import Router from "./routes";
 import dbConfig from "./config/database";
+import { Reportpaneltest } from "./models/reportpaneltest";
+
+
 
 const PORT = process.env.PORT || 8000;
 
@@ -50,3 +53,4 @@ createConnection(dbConfig)
     console.log("Unable to connect to db", err);
     process.exit(1);
   });
+
