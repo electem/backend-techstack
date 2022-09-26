@@ -12,6 +12,15 @@
         Add New Panel
       </button>
     </td>
+    <td>
+      <button
+        type="button"
+        class="btn btn-primary btn-sm mr-2 btn1"
+        (click)="saveReport()"
+      >
+        Report
+      </button>
+    </td>
     <br />
     <button
       *ngIf="this.showButton"
@@ -68,7 +77,6 @@
         </div>
         <br />
         <button
-          style="margin: 50"
           type="button"
           class="btn btn-warning btn-sm mr-2 btn1"
           (click)="canclePanel()"
