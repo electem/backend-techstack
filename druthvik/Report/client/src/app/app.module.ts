@@ -13,6 +13,8 @@ import { ReporttableComponent } from './components/reporttable/reporttable.compo
 import { AddpanelComponent } from './components/addpanel/addpanel.component';
 import { EditpanelComponent } from './components/editpanel/editpanel.component';
 import { AdddtestComponent } from './components/editpanel/adddtest/adddtest.component';
+import { ReportComponent } from './components/report/report.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,6 +24,7 @@ import { AdddtestComponent } from './components/editpanel/adddtest/adddtest.comp
     EditpanelComponent,
     PageNotFoundComponent,
     AdddtestComponent,
+    ReportComponent,
   ],
   imports: [
     BrowserModule,

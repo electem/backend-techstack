@@ -6,6 +6,7 @@ import morgan from 'morgan';
 import swaggerUi from 'swagger-ui-express';
 import Router from './routes';
 import dbConfig from './config/database';
+
 const PORT = process.env.PORT || 8000;
 const app: Application = express();
 app.use(express.json());

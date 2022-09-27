@@ -25,4 +25,17 @@ export class ReporttableComponent implements OnInit {
   async listTests(): Promise<void> {
     this.tests = await this.panelService.getAllTests();
   }
+
+  checkIfPanelContainsTest(currentPanel: Panel, currentTest: Test) {
+    if (
+      currentPanel &&
+      currentTest &&
+      currentPanel.test &&
+      currentPanel.test.find((test) => test.id === currentTest.id)
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
