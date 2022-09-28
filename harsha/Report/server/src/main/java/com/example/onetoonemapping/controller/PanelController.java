@@ -31,14 +31,13 @@ public class PanelController {
 	}
 
 	@GetMapping("/panels/{id}")
-	public ResponseEntity<Panel> getPanelById(@PathVariable(value = "id") Integer id)
-			throws ResourceNotFoundException {
+	public ResponseEntity<Panel> getPanelById(@PathVariable(value = "id") Integer id) throws ResourceNotFoundException {
 		Panel panel = panelRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("Panel not found :: " + id));
 
 		return ResponseEntity.ok().body(panel);
 	}
-	
+
 	@PostMapping("/createPanel")
 	public String createPanel(@Valid @RequestBody Panel panel, BindingResult result, Model model) {
 		if (result.hasErrors()) {
@@ -49,7 +48,7 @@ public class PanelController {
 	}
 
 	@PutMapping("/updatePanel/{id}")
-	public String updatePanel(@PathVariable("id") int id,@Valid @RequestBody Panel panel, BindingResult result,
+	public String updatePanel(@PathVariable("id") int id, @Valid @RequestBody Panel panel, BindingResult result,
 			Model model) {
 		if (result.hasErrors()) {
 			return "update-Panel";
