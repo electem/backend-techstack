@@ -4,6 +4,8 @@ import { Panel } from '../models/pannel';
 import { Test } from '../models/test';
 import { Report } from '../models/report';
 import { Reporttestpanel } from '../models/reporttestpanel';
+import employeeRecord from '../data.json';
+import companyRecord from '../company.json'
 
 const baseUrl4 = 'http://localhost:8000';
 
@@ -11,12 +13,23 @@ const baseUrl4 = 'http://localhost:8000';
   providedIn: 'root',
 })
 export class PannelserviceService {
-
-
-
-
   panels!: Panel[];
+  data = employeeRecord;
+  data1 =companyRecord;
+
   constructor(private http: HttpClient) {}
+
+  getEmployee() {
+    return employeeRecord;
+  }
+
+  getCompany() {
+    return companyRecord;
+  }
+
+  createEmployee(data: any): Promise<Object> {
+    return data;
+  }
 
   createReport(data: Report) {
     return this.http.post(baseUrl4 + '/reports', data).toPromise();
@@ -31,9 +44,10 @@ export class PannelserviceService {
   }
 
   async getAllReportTestPanel(): Promise<Reporttestpanel[]> {
-    return await this.http.get<Reporttestpanel[]>(baseUrl4 + '/reportpaneltest').toPromise();
+    return await this.http
+      .get<Reporttestpanel[]>(baseUrl4 + '/reportpaneltest')
+      .toPromise();
   }
-
 
   async getAll(): Promise<Panel[]> {
     return await this.http.get<Panel[]>(baseUrl4 + '/panels').toPromise();
@@ -41,7 +55,6 @@ export class PannelserviceService {
   createReporttestpanel(data: Reporttestpanel) {
     return this.http.post(baseUrl4 + '/reportpaneltest', data).toPromise();
   }
-
 
   createPanel(data: Panel) {
     return this.http.post(baseUrl4 + '/panels', data).toPromise();

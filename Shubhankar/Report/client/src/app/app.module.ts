@@ -12,6 +12,7 @@ import { AddpannelComponent } from './components/addpannel/addpannel.component';
 import { EditpannelComponent } from './components/editpannel/editpannel.component';
 import { ReporttableComponent } from './components/reporttable/reporttable.component';
 import { ReportrecordComponent } from './components/reportrecord/reportrecord.component';
+import { EmployeeComponent } from './components/employee/employee.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { ReportrecordComponent } from './components/reportrecord/reportrecord.co
     EditpannelComponent,
     ReporttableComponent,
     ReportrecordComponent,
+    EmployeeComponent,
   ],
   imports: [
     BrowserModule,
