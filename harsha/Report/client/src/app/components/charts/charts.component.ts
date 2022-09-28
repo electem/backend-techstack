@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart, registerables } from 'chart.js';
+import { Employee } from 'src/app/models/employee.model';
+import { PanelService } from 'src/app/services/panel.service';
 
 @Component({
   selector: 'app-charts',
@@ -7,9 +9,13 @@ import { Chart, registerables } from 'chart.js';
   styleUrls: ['./charts.component.css'],
 })
 export class ChartsComponent implements OnInit {
-  constructor() {}
+  employees: Employee[] = [];
+  chart = [];
+
+  constructor(private panelService: PanelService) {}
 
   ngOnInit(): void {
+
     Chart.register(...registerables);
     const myChart = new Chart('myChart', {
       type: 'bar',

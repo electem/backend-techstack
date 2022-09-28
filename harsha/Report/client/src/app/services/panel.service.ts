@@ -1,12 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Panel } from '../models/panel.model';
+import { ReportPanelTest } from '../models/report-panel-test.model';
 import { Test } from '../models/test.model';
+import { Pagination } from '../models/pagination.model';
+import { Employee } from '../models/employee.model';
 
-const panelUrl = 'http://localhost:8080/panels';
-const addPanelUrl = 'http://localhost:8080/createPanel';
-const updatePanelUrl = 'http://localhost:8080/updatePanel';
-const testUrl = 'http://localhost:8080/tests';
+const baseUrl = 'http://localhost:8080';
 
 @Injectable({
   providedIn: 'root',
@@ -15,22 +15,51 @@ const testUrl = 'http://localhost:8080/tests';
 export class PanelService {
   tokenIs!: string;
   panel: Panel[] = [];
+  pagination = new Pagination;
 
   constructor(private http: HttpClient) {}
 
   async getPanels(): Promise<Panel[]> {
-    return await this.http.get<Panel[]>(panelUrl).toPromise();
+    return await this.http.get<Panel[]>(baseUrl + '/panels').toPromise();
   }
 
-  async createPanel(panel: Panel): Promise<any> {
-    return await this.http.post(addPanelUrl, panel).toPromise();
+  async getPanelById(id: Number) {
+    return await this.http.get(`${baseUrl + '/panels'}/${id}`).toPromise();
   }
 
-  async updatePanel(panel: Panel): Promise<any> {
-    return await this.http.put(updatePanelUrl, panel).toPromise();
+  async createPanel(panel: Panel): Promise<Panel> {
+    return await this.http.post(baseUrl + '/createPanel', panel).toPromise();
   }
 
+  async updatePanel(id: any, panel: Panel): Promise<Panel> {
+    return await this.http
+      .put(`${baseUrl + '/updatePanel'}/${id}`, panel)
+      .toPromise();
+      
+  }
   async getTests(): Promise<Test[]> {
-    return await this.http.get<Test[]>(testUrl).toPromise();
+    return await this.http.get<Test[]>(baseUrl + '/tests').toPromise();
+  }
+
+  async createReportPanelTests(
+    reportPanelTest: ReportPanelTest
+  ): Promise<ReportPanelTest> {
+    return await this.http
+      .post(baseUrl + '/createReportPanelTests', reportPanelTest)
+      .toPromise();
+  }
+
+  async getReportPanelTests(): Promise<ReportPanelTest[]> {
+    return await this.http
+      .get<ReportPanelTest[]>(baseUrl + '/reportPanelTests')
+      .toPromise();
+  }
+  
+  async getEmployees(startPoint:number,pageLength:number): Promise<Employee[]>{
+    this.pagination={
+      startPoint:startPoint,
+      pageLength:pageLength
+    }
+    return await this.http.post<Employee[]>(baseUrl + '/employees',this.pagination).toPromise();
   }
 }
