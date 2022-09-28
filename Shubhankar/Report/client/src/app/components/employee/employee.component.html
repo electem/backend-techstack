@@ -1,0 +1,61 @@
+<form [formGroup]="Employeeform" (ngSubmit)="signup();">
+<div class="formbox">
+<div class="form-group">
+<h4>Employee</h4>
+<label for="name">Name</label>
+<input type="name" [(ngModel)]="employee.name" 
+formControlName="name"
+[ngClass]="{'is-invalid': submitted && fval.name.errors }"/>
+<div *ngIf="submitted && fval.name.errors" class="invalid-feedback">
+  <div *ngIf="fval.name.errors.required">Name Field is required</div>
+  </div>
+
+</div>
+<div class="form-group">
+<label for="address">Address</label>
+<input type="address" [(ngModel)]="employee.address"
+formControlName="address"
+[ngClass]="{'is-invalid': submitted && fval.address.errors }" />
+<div *ngIf="submitted && fval.address.errors" class="invalid-feedback">
+  <div *ngIf="fval.address.errors.required">Address Field is required</div>
+  </div>
+
+</div>
+<div class="form-group">
+<label for="gender">Gender</label>
+<div class="radio">
+  <label>
+    <input
+      type="radio"
+      name="gender"
+      value="Male"
+      [checked]="true"
+      [(ngModel)]="employee.gender"
+    />
+    Male
+  </label>
+</div>
+<div class="radio">
+  <label>
+    <input
+      type="radio"
+      name="gender"
+      value="Female"
+      [(ngModel)]="employee.gender"
+    />
+    Female
+  </label>
+</div>
+</div>
+<div class="form-group">
+<label for="salary">Salary</label>
+<input type="salary" [(ngModel)]="employee.salary" 
+formControlName="salary"
+[ngClass]="{'is-invalid': submitted && fval.salary.errors }"/>
+<div *ngIf="submitted && fval.salary.errors" class="invalid-feedback">
+  <div *ngIf="fval.salary.errors.required">Salary Field is required</div>
+  </div>
+</div>
+<button type="save" class="btn btn-primary" (click)=" SaveData()">SAVE</button>
+</div>
+</form>
