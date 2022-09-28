@@ -4,8 +4,9 @@ import { Panel } from '../models/pannel';
 import { Test } from '../models/test';
 import { Report } from '../models/report';
 import { Reporttestpanel } from '../models/reporttestpanel';
+import { Employee } from '../models/employee';
 import employeeRecord from '../data.json';
-import companyRecord from '../company.json'
+import companyRecord from '../company.json';
 
 const baseUrl4 = 'http://localhost:8000';
 
@@ -15,7 +16,7 @@ const baseUrl4 = 'http://localhost:8000';
 export class PannelserviceService {
   panels!: Panel[];
   data = employeeRecord;
-  data1 =companyRecord;
+  data1 = companyRecord;
 
   constructor(private http: HttpClient) {}
 
@@ -26,9 +27,8 @@ export class PannelserviceService {
   getCompany() {
     return companyRecord;
   }
-
-  createEmployee(data: any): Promise<Object> {
-    return data;
+  createEmployee(employee: Employee) {
+    return this.http.post(baseUrl4 + '/employees/employee', employee).toPromise();
   }
 
   createReport(data: Report) {

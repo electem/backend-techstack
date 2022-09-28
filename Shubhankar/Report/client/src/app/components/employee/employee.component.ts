@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Company } from 'src/app/models/company';
 import { Employee } from 'src/app/models/employee';
 import { PannelserviceService } from 'src/app/services/pannelservice.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-employee',
@@ -18,7 +19,7 @@ export class EmployeeComponent implements OnInit {
   companys?: Company[];
   submitted?: boolean;
 
-  constructor(private PannelserviceService: PannelserviceService) {}
+  constructor(private http: HttpClient, private PannelserviceService: PannelserviceService) {}
 
   ngOnInit(): void {
     this.getEmployee();
@@ -35,12 +36,13 @@ export class EmployeeComponent implements OnInit {
 
   async  SaveData(){
     this.submitted = true
-   const employee: Employee = {
+      const employee: Employee = {
       name:this.employee.name,
       address: this.employee.address,
       gender: this.employee.gender,
       salary: this.employee.salary,
     };
     await this.PannelserviceService.createEmployee(employee);
+    console.log(employee)
   }
 }
