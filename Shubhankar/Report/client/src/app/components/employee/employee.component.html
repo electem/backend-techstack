@@ -1,0 +1,73 @@
+<table class="table table-striped table-bordered justify-content-center">
+  <thead class="thead-light">
+    <tr class="active">
+      <th class="text-center" scope="col">Name</th>
+      <th class="text-center" scope="col"> Address</th>
+   </tr>
+  </thead>
+  <tbody *ngFor="let companys of companys; let i = index">
+      <tr class="success">
+        <th class="text-center" scope="row">{{ companys.name }}</th>
+        <th class="text-center" scope="row">{{ companys.address }}</th>
+        </tr>
+      </tbody>
+</table>
+<div class="form-group">
+<h4>Employee</h4>
+<label for="name">Name</label>
+<input type="name" [(ngModel)]="employee.name" />
+</div>
+<div class="form-group">
+<label for="address">Address</label>
+<input type="address" [(ngModel)]="employee.address" />
+</div>
+<div class="form-group">
+<label for="gender">Gender</label>
+<div class="radio">
+  <label>
+    <input
+      type="radio"
+      name="gender"
+      value="Male"
+      [checked]="true"
+      [(ngModel)]="employee.gender"
+    />
+    Male
+  </label>
+</div>
+<div class="radio">
+  <label>
+    <input
+      type="radio"
+      name="gender"
+      value="Female"
+      [(ngModel)]="employee.gender"
+    />
+    Female
+  </label>
+</div>
+</div>
+<div class="form-group">
+<label for="salary">Salary</label>
+<input type="salary" [(ngModel)]="employee.salary" />
+</div>
+<button type="save" class="btn btn-primary" (click)=" SaveData()">SAVE</button>
+<div></div>
+<table class="table table-striped table-bordered justify-content-center">
+  <thead class="thead-light">
+    <tr class="active">
+      <th class="text-center" scope="col">Name</th>
+      <th class="text-center" scope="col"> Address</th>
+      <th class="text-center" scope="col">Gender</th>
+      <th class="text-center" scope="col"> Salary</th>
+   </tr>
+  </thead>
+  <tbody *ngFor="let employee of employees; let i = index">
+      <tr class="success">
+        <th class="text-center" scope="row">{{ employee.name }}</th>
+        <th class="text-center" scope="row">{{ employee.address }}</th>
+        <th class="text-center" scope="row">{{ employee.gender }}</th>
+        <th class="text-center" scope="row">{{ employee.salary }}</th>
+        </tr>
+      </tbody>
+</table>
