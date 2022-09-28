@@ -1,6 +1,7 @@
 package com.example.onetoonemapping.controller;
 
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -8,6 +9,7 @@ import javax.validation.Valid;
 
 import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -28,7 +30,7 @@ public class PanelController {
 
 	@Autowired
 	private PanelRepository panelRepository;
-
+	
 	@GetMapping("/panels")
 	public List<Panel> getPanelList() {
 		List<Panel> panels = (List<Panel>) panelRepository.findAll();
@@ -42,12 +44,10 @@ public class PanelController {
 	}
 
 	@PostMapping("/createPanel")
-	public String createPanel(@Valid @RequestBody Panel panel, BindingResult result, Model model) {
-		if (result.hasErrors()) {
-			return "Panel";
-		}
-		panelRepository.save(panel);
-		return "Panel data added";
+	public Panel createPanel(@Valid @RequestBody Panel panel, BindingResult result, Model model) {
+
+		return panelRepository.save(panel);
+
 	}
 
 	@PutMapping("/updatePanel")
@@ -59,15 +59,32 @@ public class PanelController {
 		return "Panel data updated";
 	}
 
-	@CrossOrigin(origins = "http://localhost:4200")
+	
 	@GetMapping("/studentlData")
 	public Object getStudentData() throws Exception {
 		JSONParser jsonParser = new JSONParser();
 		FileReader reader = new FileReader("check.json");
 		Object obj = jsonParser.parse(reader);
 		JSONArray studentDataList = (JSONArray) obj;
-
 		return studentDataList;
 	}
 
+	
+	@GetMapping("/pagination/{offset}/{pageSize}")
+	public Object getPanelPagination(@PathVariable int offset, @PathVariable int pageSize) throws Exception {
+		JSONParser jsonParser = new JSONParser();
+		FileReader reader = new FileReader("check.json");
+		Object obj = jsonParser.parse(reader);
+		JSONArray studentDataList = (JSONArray) obj;
+		return studentDataList.subList(offset, pageSize);
+	}
+	
+	@PostMapping("/studentData")
+	public Object creatStudent(@Valid @RequestBody Pagination pagination ) throws Exception  {
+		JSONParser jsonParser = new JSONParser();
+		FileReader reader = new FileReader("check.json");
+		Object obj = jsonParser.parse(reader);
+		JSONArray studentDataList = (JSONArray) obj;
+		return studentDataList.subList(pagination.getStart(), pagination.getLength());
+	}
 }

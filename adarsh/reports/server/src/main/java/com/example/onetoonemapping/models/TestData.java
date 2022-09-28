@@ -18,7 +18,7 @@ public class TestData {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 
-	private String Data;
+	private String data;
 
 	@JsonBackReference
 	@ManyToMany(mappedBy = "testsDatas")
@@ -31,7 +31,7 @@ public class TestData {
 	public TestData(int id, String data, List<PanelData> panelDatas) {
 		super();
 		this.id = id;
-		Data = data;
+		this.data = data;
 		this.panelDatas = panelDatas;
 	}
 
@@ -44,11 +44,11 @@ public class TestData {
 	}
 
 	public String getData() {
-		return Data;
+		return data;
 	}
 
 	public void setData(String data) {
-		Data = data;
+		this.data = data;
 	}
 
 	public List<PanelData> getPanelDatas() {
