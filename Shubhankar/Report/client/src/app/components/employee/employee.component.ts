@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Company} from 'src/app/models/company';
 import { Employee } from 'src/app/models/employee';
 import { PannelserviceService } from 'src/app/services/pannelservice.service';
-
 @Component({
   selector: 'app-employee',
   templateUrl: './employee.component.html',
   styleUrls: ['./employee.component.css'],
 })
 export class EmployeeComponent implements OnInit {
+  Employeeform!: FormGroup;
   employee: Employee = {
     name: '',
     address: '',
@@ -21,29 +22,29 @@ export class EmployeeComponent implements OnInit {
   employees?: Employee[] =[];
   
 
-  constructor(private PannelserviceService: PannelserviceService) {}
+  constructor(private PannelserviceService: PannelserviceService, private formBuilder: FormBuilder) {}
 
   ngOnInit(): void {
+    this.Employeeform = this.formBuilder.group({
+      name: ['', Validators.required],
+      address: ['', Validators.required],
+      salary: ['', Validators.required],
+    })
     this.getEmployee();
-    this.getCompanies();
-    this.getEmployees();
   }
-
-  async getEmployees(){
-      this.employees  = await this.PannelserviceService.getEmployees()
-  }
-
-  getEmployee() {
+getEmployee() {
     this.employee = this.PannelserviceService.getEmployee();
   }
-
-  getCompanies() {
-    this.companys = this.PannelserviceService.getCompany();
-  }
-
   async  SaveData(){
     this.submitted = true
-   const employee: Employee = {
+    if(this.Employeeform.invalid){
+      return
+    }else{
+      this.SaveFormdata();
+    }
+  }
+  async SaveFormdata(){
+    const employee: Employee = {
       name:this.employee.name,
       address: this.employee.address,
       gender: this.employee.gender,
@@ -51,4 +52,16 @@ export class EmployeeComponent implements OnInit {
     };
     await this.PannelserviceService.createEmployee(employee);
   }
+  
+  get fval() {
+    return this.Employeeform.controls;
+  }
+
+  async signup(){
+    this.submitted = true;
+    if (this.Employeeform.invalid) {
+    return;
+    }
+    
+    }
 }

@@ -12,6 +12,9 @@ import { AddpannelComponent } from './components/addpannel/addpannel.component';
 import { EditpannelComponent } from './components/editpannel/editpannel.component';
 import { ReporttableComponent } from './components/reporttable/reporttable.component';
 import { ReportrecordComponent } from './components/reportrecord/reportrecord.component';
+import { EmployeeComponent } from './components/employee/employee.component';
+import { CompanyComponent } from './components/company/company.component';
+import { EmployeerecordComponent } from './components/employeerecord/employeerecord.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +24,9 @@ import { ReportrecordComponent } from './components/reportrecord/reportrecord.co
     EditpannelComponent,
     ReporttableComponent,
     ReportrecordComponent,
+    EmployeeComponent,
+    CompanyComponent,
+    EmployeerecordComponent,
   ],
   imports: [
     BrowserModule,

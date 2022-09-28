@@ -1,25 +1,25 @@
-<table class="table table-striped table-bordered justify-content-center">
-  <thead class="thead-light">
-    <tr class="active">
-      <th class="text-center" scope="col">Name</th>
-      <th class="text-center" scope="col"> Address</th>
-   </tr>
-  </thead>
-  <tbody *ngFor="let companys of companys; let i = index">
-      <tr class="success">
-        <th class="text-center" scope="row">{{ companys.name }}</th>
-        <th class="text-center" scope="row">{{ companys.address }}</th>
-        </tr>
-      </tbody>
-</table>
+<form [formGroup]="Employeeform" (ngSubmit)="signup();">
+<div class="formbox">
 <div class="form-group">
 <h4>Employee</h4>
 <label for="name">Name</label>
-<input type="name" [(ngModel)]="employee.name" />
+<input type="name" [(ngModel)]="employee.name" 
+formControlName="name"
+[ngClass]="{'is-invalid': submitted && fval.name.errors }"/>
+<div *ngIf="submitted && fval.name.errors" class="invalid-feedback">
+  <div *ngIf="fval.name.errors.required">Name Field is required</div>
+  </div>
+
 </div>
 <div class="form-group">
 <label for="address">Address</label>
-<input type="address" [(ngModel)]="employee.address" />
+<input type="address" [(ngModel)]="employee.address"
+formControlName="address"
+[ngClass]="{'is-invalid': submitted && fval.address.errors }" />
+<div *ngIf="submitted && fval.address.errors" class="invalid-feedback">
+  <div *ngIf="fval.address.errors.required">Address Field is required</div>
+  </div>
+
 </div>
 <div class="form-group">
 <label for="gender">Gender</label>
@@ -49,25 +49,13 @@
 </div>
 <div class="form-group">
 <label for="salary">Salary</label>
-<input type="salary" [(ngModel)]="employee.salary" />
+<input type="salary" [(ngModel)]="employee.salary" 
+formControlName="salary"
+[ngClass]="{'is-invalid': submitted && fval.salary.errors }"/>
+<div *ngIf="submitted && fval.salary.errors" class="invalid-feedback">
+  <div *ngIf="fval.salary.errors.required">Salary Field is required</div>
+  </div>
 </div>
 <button type="save" class="btn btn-primary" (click)=" SaveData()">SAVE</button>
-<div></div>
-<table class="table table-striped table-bordered justify-content-center">
-  <thead class="thead-light">
-    <tr class="active">
-      <th class="text-center" scope="col">Name</th>
-      <th class="text-center" scope="col"> Address</th>
-      <th class="text-center" scope="col">Gender</th>
-      <th class="text-center" scope="col"> Salary</th>
-   </tr>
-  </thead>
-  <tbody *ngFor="let employee of employees; let i = index">
-      <tr class="success">
-        <th class="text-center" scope="row">{{ employee.name }}</th>
-        <th class="text-center" scope="row">{{ employee.address }}</th>
-        <th class="text-center" scope="row">{{ employee.gender }}</th>
-        <th class="text-center" scope="row">{{ employee.salary }}</th>
-        </tr>
-      </tbody>
-</table>
+</div>
+</form>
