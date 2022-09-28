@@ -7,6 +7,7 @@ import {
 import{createEmployee} from "../repositories/EmployeeDetails.repository"
 import { EmployeeDetils } from "../models/EmployeeDetails";
 import { IEmployeeDetailPayload } from "../repositories/EmployeeDetails.repository";
+import { EmployeeData } from "../json/employee";
 
 @Route("employees")
 @Tags("employees")
@@ -65,5 +66,13 @@ export default class EmployeeController {
   @Post("/employee")
   public async createEmployee(@Body() body: IEmployeeDetailPayload): Promise<EmployeeDetils> {
     return createEmployee(body);
+  }
+
+  @Get("")
+  public async getEmployee(): Promise<EmployeeDetils> {
+    var employeedata =  EmployeeData
+    console.log(employeedata)
+    return employeedata as EmployeeDetils;
+  
   }
 }

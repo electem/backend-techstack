@@ -1,17 +1,21 @@
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 import { JsonObject, JsonProperty } from "typescript-json-serializer";
-     @Entity()
+  
+     @JsonObject()
     export class EmployeeDetils {
-    @PrimaryGeneratedColumn()
+     @JsonProperty()
     id?:number;
-     @Column()
+
+     @JsonProperty()
      name?: string;
-    @Column()
+    
+    @JsonProperty()
     address?: string;
    
-    @Column()
+
+    @JsonProperty()
     gender?:string;
    
-    @Column()
+    @JsonProperty()
     salary?: number;
     }

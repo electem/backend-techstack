@@ -30,4 +30,10 @@ router.get("/:id", async (req, res) => {
     const response = await controller.createEmployee(req.body);
     return res.send(response);
   });
+  router.get("", async (_req, res) => {
+    const controller = new EmployeeController();
+    const response = await controller.getEmployee();
+    return res.send(response);
+  });
+   
   export default router;
