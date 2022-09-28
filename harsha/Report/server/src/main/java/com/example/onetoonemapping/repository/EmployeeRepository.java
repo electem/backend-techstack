@@ -10,6 +10,6 @@ import com.example.onetoonemapping.models.Employee;
 @Repository
 public interface EmployeeRepository extends PagingAndSortingRepository<Employee, Integer> {
 
-	 @Query(value = "SELECT e.* FROM employee e ", nativeQuery = true)
-	 Page<Employee> findAll(Pageable paging);
+	@Query(value = "SELECT e.id,e.name,e.age FROM employee e", countQuery = "select count(e.id) as FROM from employee e", nativeQuery = true)
+	Page<Employee> findAll(Pageable paging);
 }

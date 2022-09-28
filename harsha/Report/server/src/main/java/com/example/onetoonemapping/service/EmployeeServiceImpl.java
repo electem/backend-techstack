@@ -16,9 +16,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 	private EmployeeRepository employeeRepository;
 
 	@Override
-	public List<Employee> findPaginated(int pageNo, int pageSize) {
-
-		Pageable paging = PageRequest.of(pageNo, pageSize);
+	public List<Employee> findPaginated(int startPoint, int pageLength) {
+		Pageable paging = PageRequest.of(startPoint, pageLength);
 		Page<Employee> pagedResult = employeeRepository.findAll(paging);
 
 		return pagedResult.toList();
