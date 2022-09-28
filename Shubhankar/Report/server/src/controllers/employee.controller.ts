@@ -3,6 +3,7 @@ import { Body, Delete, Get, Path, Post, Put, Route, Tags } from "tsoa";
 import {
   IEmployeePayload,
 } from "../repositories/employee.repository";
+import { EmployeeDetils } from "../models/EmployeeDetails";
 
 @Route("employees")
 @Tags("employees")
@@ -45,5 +46,19 @@ export default class EmployeeController {
   public async deleteEmployee(@Path() id: string): Promise<string> {
     console.log(" deleted Id is " + id);
     return "employee deleted";
+  }
+
+  @Post("/employee")
+  public async createEmployee(
+    @Body() body: IEmployeePayload
+  ): Promise<EmployeeDetils> {
+    var employee = {
+      name: body.name,
+      address: body.address,
+      gender:body.gender,
+    };
+    console.log(employee)
+    return employee as EmployeeDetils;    
+  
   }
 }
