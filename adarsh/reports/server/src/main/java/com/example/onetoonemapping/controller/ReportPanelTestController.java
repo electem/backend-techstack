@@ -31,7 +31,7 @@ public class ReportPanelTestController {
 	@GetMapping("/ReportPanelTest")
 	public Map<String, String> getReportPanelTest() {
 		List<Object[]> reportList = reportRepository.getReportPanelTests();
-		Map<String, String> reportTestPanelList = new HashMap();
+		Map<String, String> reportTestPanelList = new HashMap<String, String>();
 		for (Object[] reportData : reportList) {
 			reportTestPanelList.put(reportData[3] + "_" + reportData[4], (String) reportData[1]);
 		}
