@@ -4,6 +4,18 @@ import { Panel } from '../models/panel.model';
 import { Test } from '../models/test.model';
 import { Report } from '../models/report.model';
 import { ReportTestPanel } from '../models/reporttestpanel.model';
+import student from '../students.json';
+import { Student } from '../models/student.model';
+import employee from '../components/employee.json';
+import { Employee } from '../models/employee.model';
+import { data } from 'jquery';
+
+const panel = new Panel();
+let panelMap = new Map();
+panelMap.set(panel.name, panel.description);
+
+const map1 = new Map(Object.entries(Panel));
+console.log(map1);
 
 const baseUrl = 'http://localhost:8000/panel';
 const baseUrl1 = 'http://localhost:8000/test';
@@ -12,9 +24,31 @@ const baseUrl3 = 'http://localhost:8000/reportpaneltest';
 @Injectable({
   providedIn: 'root',
 })
+// const map1 = new Map(Object.entries(obj));
+// console.log(map1);
 export class PanelService {
+  // employees = employee;
+  employees: Employee[] = employee;
+  students: Student[] = student;
   constructor(private http: HttpClient) {}
 
+  getEmployee(start: number, length: number): Employee[] {
+    const pageArray = [];
+
+    for (let i = start; i < start + length; i++) {
+      pageArray.push(this.employees[i]);
+    }
+    console.log(pageArray);
+    return pageArray;
+  }
+
+  getEmployees() {
+    return this.employees;
+  }
+
+  getStudent() {
+    return this.students;
+  }
   async getAllPanel(): Promise<Panel[]> {
     return await this.http.get<Panel[]>(baseUrl).toPromise();
   }
@@ -30,8 +64,18 @@ export class PanelService {
     return await this.http.get(`${baseUrl}/${id}`).toPromise();
   }
 
+  // async createPanel(panel: Panel): Promise<Panel[]> {
+  //   return await this.http.post<Panel[]>(baseUrl, panel).toPromise();
+  // }
   async createPanel(panel: Panel): Promise<Panel[]> {
-    return await this.http.post<Panel[]>(baseUrl, panel).toPromise();
+    //let panelMap = new Map();
+    //panelMap.set(panel.name, panel.description);
+    // let myMap = new Map<string, string>([
+    //   ['key1', 'value1'],
+    //   ['key2', 'value2'],
+    // ]);
+    const myMap = { name: panel.name, description: panel.description };
+    return await this.http.post<Panel[]>(baseUrl, myMap).toPromise();
   }
 
   async update(data: Panel) {
