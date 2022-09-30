@@ -1,6 +1,7 @@
 package com.example.onetoonemapping.controller;
 
 import java.util.List;
+import java.util.Map;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -55,5 +56,15 @@ public class PanelController {
 		}
 		panelRepository.save(panel);
 		return "Panel data updated";
+	}
+
+	@CrossOrigin(origins = "http://localhost:4200")
+	@PostMapping("/createPanelByMap")
+	public Panel createPanelMap(@Valid @RequestBody Map<String, String> map) {
+		Panel panel = new Panel();
+		panel.setName(map.get("name"));
+		panel.setDescription(map.get("description"));
+
+		return panelRepository.save(panel);
 	}
 }
