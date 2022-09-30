@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Panel } from 'src/app/models/panel.model';
 import { PanelService } from 'src/app/services/panel.service';
 import { Test } from 'src/app/models/test.model';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-panel-list',
@@ -10,25 +11,37 @@ import { Test } from 'src/app/models/test.model';
 })
 export class PanelListComponent implements OnInit {
   panels: Panel[] = [];
-  currentIndex = -1;
   tests: Test[] = [];
   selectedTests: Test[] = [];
-  selectedTestNew = new Test();
   selectedTest = new Test();
-  editForm: boolean = false;
   panel: Panel = {
     name: '',
     description: '',
     tests: [],
   };
+
   panelForm?: boolean;
   testForm?: boolean;
-
-  constructor(private panelService: PanelService) {}
+  constructor(
+    private panelService: PanelService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     this.retrievePanels();
     this.getTests();
+  }
+
+  randomString(length: number) {
+    var randomChars =
+      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var result = '';
+    for (var i = 0; i < length; i++) {
+      result += randomChars.charAt(
+        Math.floor(Math.random() * randomChars.length)
+      );
+    }
+    return result;
   }
 
   async retrievePanels(): Promise<void> {
@@ -43,7 +56,7 @@ export class PanelListComponent implements OnInit {
     if (this.tests) {
       for (let test of this.tests) {
         if (test.id == value.id) {
-          this.selectedTests.push(this.selectedTestNew);
+          this.selectedTests.push(test);
         }
       }
     }
@@ -57,34 +70,16 @@ export class PanelListComponent implements OnInit {
     this.testForm = true;
   }
 
-  editPanel(panel: Panel) {
-    this.panel = panel;
-    this.editForm = true;
-  }
-
   async savePanel(): Promise<void> {
     const panelData: Panel = {
       name: this.panel.name,
       description: this.panel.description,
     };
-    await this.panelService.createPanel(panelData);
-  }
-
-  async updatePanel(): Promise<void> {
-    const panel = {
-      id: this.panel.id,
-      title: this.panel.name,
-      description: this.panel.description,
-      tests: this.selectedTests,
-    };
-    if (this.selectedTests.length) await this.panelService.updatePanel(panel);
+    await this.panelService.createPanelByMap(panelData);
+    this.panelForm = false;
   }
 
   cancelPanel() {
     this.panelForm = false;
-    this.panel = {
-      name: '',
-      description: '',
-    };
   }
 }
