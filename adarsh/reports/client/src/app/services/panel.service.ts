@@ -13,7 +13,7 @@ const updatePanelUrl = 'http://localhost:8080/updatePanel';
 const getReport = 'http://localhost:8080/report';
 const creatReportList = 'http://localhost:8080/createReportPanelTests';
 const gettReportList = 'http://localhost:8080/ReportPanelTest';
-
+const paneldata = 'http://localhost:8080/PanelData';
 
 @Injectable({
   providedIn: 'root',
@@ -30,9 +30,13 @@ export class PanelService {
   async getPanels(): Promise<Panel[]> {
     return await this.http.get<Panel[]>(panelUrl).toPromise();
   }
-
-  async createPanel(panel: Panel) {
+  
+  async createNewPanel(panel: Panel) {
     return await this.http.post(addPanelUrl, panel).toPromise();
+  }
+  async createPanel(panel: Panel) :Promise<Panel> {
+    const convertMap = {'name': panel.name, 'description': panel.description}
+    return await this.http.post<Panel>(paneldata, convertMap).toPromise();
   }
   async updatePanel(panel: Panel): Promise<any> {
     return await this.http.put(updatePanelUrl, panel).toPromise();
