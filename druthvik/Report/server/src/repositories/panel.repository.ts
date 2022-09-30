@@ -1,24 +1,11 @@
 import { getManager, getRepository } from 'typeorm';
 import { Panel } from '../models/panel';
-import { IPanelDataPayload } from './paneldata.repository';
-
-const panel = new Panel();
-const map = new Map();
-map.set(panel.name, panel.description);
 
 export class IPanelPayload {
   name: string;
   description: string;
 }
 
-// export const createPanel = async (payload: IPanelPayload): Promise<Panel> => {
-//   const panelRepository = getRepository(Panel);
-//   // const panel = new Panel();
-//   return panelRepository.save({
-//     ...map,
-//     ...payload,
-//   });
-// };
 export const createPanel = async (map: Map<string, string>): Promise<Panel> => {
   const panelRepository = getRepository(Panel);
   const map1 = new Map(Object.entries(map));

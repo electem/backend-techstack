@@ -16,10 +16,6 @@ export default class PanelController {
     return getPanels();
   }
 
-  // @Post('/')
-  // public async createPanel(@Body() Body: IPanelPayload): Promise<Panel> {
-  //   return createPanel(Body);
-  // }
   @Post('/')
   public async createPanel(@Param() map: Map<string, string>): Promise<Panel> {
     return createPanel(map);
