@@ -24,10 +24,7 @@ const baseUrl3 = 'http://localhost:8000/reportpaneltest';
 @Injectable({
   providedIn: 'root',
 })
-// const map1 = new Map(Object.entries(obj));
-// console.log(map1);
 export class PanelService {
-  // employees = employee;
   employees: Employee[] = employee;
   students: Student[] = student;
   constructor(private http: HttpClient) {}
@@ -64,16 +61,7 @@ export class PanelService {
     return await this.http.get(`${baseUrl}/${id}`).toPromise();
   }
 
-  // async createPanel(panel: Panel): Promise<Panel[]> {
-  //   return await this.http.post<Panel[]>(baseUrl, panel).toPromise();
-  // }
   async createPanel(panel: Panel): Promise<Panel[]> {
-    //let panelMap = new Map();
-    //panelMap.set(panel.name, panel.description);
-    // let myMap = new Map<string, string>([
-    //   ['key1', 'value1'],
-    //   ['key2', 'value2'],
-    // ]);
     const myMap = { name: panel.name, description: panel.description };
     return await this.http.post<Panel[]>(baseUrl, myMap).toPromise();
   }

@@ -86,16 +86,6 @@ export class PanelListComponent implements OnInit {
     this.showDropdown = true;
   }
 
-  // async savePanel() {
-  //   this.submitted = true;
-  //   const panelData: Panel = {
-  //     name: this.panel.name,
-  //     description: this.panel.description,
-  //   };
-  //   await this.panelService.createPanel(panelData);
-  //   this.showForm = false;
-  //   this.listPanels();
-  // }
   async savePanel() {
     this.submitted = true;
     const panelData: Panel = {
