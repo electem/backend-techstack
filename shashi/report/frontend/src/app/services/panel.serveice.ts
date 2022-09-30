@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
 
 const baseUrl = 'http://localhost:8000';
 
+const map = new Map();
 @Injectable({
   providedIn: 'root',
 })
@@ -22,8 +23,15 @@ export class PanelService {
     return await this.http.get<Panel[]>(baseUrl + '/panel').toPromise();
   }
 
-  createPanel(data: Panel): Promise<Panel> {
-    return this.http.post<Panel>(baseUrl + '/panel', data).toPromise();
+  // createPanel(data: Panel): Promise<Panel> {
+  //   return this.http.post<Panel>(baseUrl + '/panel', data).toPromise();
+  // }
+
+  //create panel map object
+  createPanel(data: Panel): Promise<Panel[]> {
+    const myMap = { name: data.name, description: data.description };
+    console.log(myMap);
+    return this.http.post<Panel[]>(baseUrl + '/panel', myMap).toPromise();
   }
 
   async getPanel(id: Number): Promise<Panel> {

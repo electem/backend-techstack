@@ -9,11 +9,11 @@ router.get("/", async (_req, res) => {
   return res.send(response);
 });
 
-router.post("/", async (req, res) => {
-  const controller = new PanelController();
-  const response = await controller.createPanel(req.body);
-  return res.send(response);
-});
+// router.post("/", async (req, res) => {
+//   const controller = new PanelController();
+//   const response = await controller.createPanel(req.body);
+//   return res.send(response);
+// });
 
 router.get("/:id", async (req, res) => {
   const controller = new PanelController();
@@ -25,6 +25,12 @@ router.get("/:id", async (req, res) => {
 router.put("/", async (req, res) => {
   const controller = new PanelController();
   const response = await controller.updatePanel(req.body);
+  return res.send(response);
+});
+
+router.post("/", async (req, res) => {
+  const controller = new PanelController();
+  const response = await controller.createPanelMap(req.body);
   return res.send(response);
 });
 
