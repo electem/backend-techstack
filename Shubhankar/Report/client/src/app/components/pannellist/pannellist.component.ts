@@ -15,6 +15,7 @@ export class PannellistComponent implements OnInit {
   currentPanel?: Panel[];
   currentIndex = -1;
   submitted = false;
+  Panels: Panel[] = [];
   panel: Panel = {
     name: '',
     description: '',
@@ -33,6 +34,9 @@ export class PannellistComponent implements OnInit {
     name: '',
   };
   selectedTest: Test[] = [];
+
+  filterpanel?: Panel[] ;
+
   constructor(private PannelserviceService: PannelserviceService) {}
 
   ngOnInit(): void {
@@ -54,6 +58,7 @@ export class PannellistComponent implements OnInit {
   }
   async retrievePanels(): Promise<void> {
     this.panels = await this.PannelserviceService.getAll();
+    this.filterpanel=this.panels
   }
 
   async retrieveTest(): Promise<void> {
@@ -126,5 +131,13 @@ export class PannellistComponent implements OnInit {
       );
     }
     return result;
+  }
+  onKey(event: any) {
+    console.log(event.target.value);
+
+    this.filterpanel = this.panels?.filter((panels) => {
+      return panels.name?.startsWith(event.target.value);
+    });
+    console.log(this.filterpanel);
   }
 }
