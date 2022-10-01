@@ -20,6 +20,25 @@
       >
         ADD NEW PANEL
       </button>
+
+      <button
+        type="button"
+        style="margin: px"
+        class="btn-outline-secondary btn btn-sm mr-2"
+        (click)="saveReport()"
+        routerLink="/reporttable"
+      >
+        REPORT
+      </button>
+      <br />
+      <div class="form-group mb-4">
+        <input
+          class="form-control"
+          type="text"
+          placeholder="Search"
+          (keyup)="searchPanels($event)"
+        />
+      </div>
       <br />
       <button
         style="margin: 10px"
@@ -102,7 +121,7 @@
           <th class="text-center" scope="col">OPTIONS</th>
         </tr>
       </thead>
-      <tbody *ngFor="let panel of panels; let i = index">
+      <tbody *ngFor="let panel of searchallPanles; let i = index">
         <tr class="success head heading2">
           <th class="text-center" scope="row">{{ panel.name }}</th>
           <th class="text-center" scope="row">{{ panel.description }}</th>
@@ -114,13 +133,6 @@
               (click)="editPanel(panel)"
             >
               Edit
-            </button>
-            <button
-              type="button"
-              class="btn-outline-secondary btn btn-sm mr-2"
-              routerLink="/testDetails"
-            >
-              View
             </button>
           </th>
         </tr>
