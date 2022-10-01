@@ -10,7 +10,9 @@ public class Employee {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
+	
 	private String name;
+	
 	private int age;
 
 	public Employee() {
