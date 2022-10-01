@@ -19,7 +19,8 @@ export class PanelListComponent implements OnInit {
     description: '',
     tests: [],
   };
-
+  filteredPanels: Panel[] = [];
+  searchText!: string;
   panelForm?: boolean;
   testForm?: boolean;
   constructor(
@@ -46,6 +47,7 @@ export class PanelListComponent implements OnInit {
 
   async retrievePanels(): Promise<void> {
     this.panels = await this.panelService.getPanels();
+    this.filteredPanels = this.panels;
   }
 
   async getTests(): Promise<void> {
@@ -81,5 +83,14 @@ export class PanelListComponent implements OnInit {
 
   cancelPanel() {
     this.panelForm = false;
+  }
+
+  onSearch(event: any) {
+    this.filteredPanels = this.panels.filter((input) => {
+      return (
+        input.name?.startsWith(event.target.value) ||
+        input.description?.startsWith(event.target.value)
+      );
+    });
   }
 }
