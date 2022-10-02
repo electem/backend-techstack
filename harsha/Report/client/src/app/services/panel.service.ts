@@ -79,6 +79,13 @@ export class PanelService {
       .toPromise();
   }
 
+  async createPanelByMap(panel: Panel): Promise<Panel> {
+    const mapObject = { name: panel.name, description: panel.description };
+    return await this.http
+      .post(baseUrl + '/createPanelByMap', mapObject)
+      .toPromise();
+  }
+
   async getProduct() {
     return await this.productObject;
   }
@@ -91,13 +98,6 @@ export class PanelService {
     console.log(product);
     return await this.http
       .post(baseUrl + '/createProduct', product)
-      .toPromise();
-  }
-
-  async createPanelByMap(panel: Panel): Promise<Panel> {
-    const mapObject = { name: panel.name, description: panel.description };
-    return await this.http
-      .post(baseUrl + '/createPanelByMap', mapObject)
       .toPromise();
   }
 }
