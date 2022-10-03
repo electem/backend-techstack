@@ -46,3 +46,7 @@ export const getPanel = async (id: number) => {
     .getOne();
   return panelquery;
 };
+export const createMap = async ( panel:Panel): Promise<Panel> => {
+  const panelRepository = getRepository(Panel);
+  return panelRepository.save(panel);
+}
