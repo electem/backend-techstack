@@ -8,6 +8,7 @@ import employeeRecord from '../data.json';
 import companyRecord from '../company.json';
 import datatableRecord from '../datatable.json';
 import { Employee } from '../models/employee';
+import { Person } from '../models/person';
 
 const baseUrl4 = 'http://localhost:8000';
 
@@ -15,11 +16,15 @@ const baseUrl4 = 'http://localhost:8000';
   providedIn: 'root',
 })
 export class PannelserviceService {
-
-  getdatatable(){
-    return datatableRecord;
+ 
+  getdatatable(start:number ,length:number){
+    const databada : Person[]=[];
+    for (let i = start; i < start+length; i++) {
+      databada.push(datatableRecord[i]);
+   }
+    return databada;
   }
-
+  
   getEmployee() {
     return employeeRecord;
   }
@@ -27,6 +32,7 @@ export class PannelserviceService {
   getCompany() {
     return companyRecord;
   }
+  
   async getEmployees(): Promise<Employee[]> {
     return await this.http.get<Employee[]>(baseUrl4 + '/employees').toPromise();
   }
@@ -49,15 +55,15 @@ export class PannelserviceService {
   async getReportbyid(id: Number) {
     return await this.http.get(`${baseUrl4 + '/reports'}/${id}`).toPromise();
   }
-
+  
   async getAllReportTestPanel(): Promise<Reporttestpanel[]> {
     return await this.http.get<Reporttestpanel[]>(baseUrl4 + '/reportpaneltest').toPromise();
   }
 
-
   async getAll(): Promise<Panel[]> {
     return await this.http.get<Panel[]>(baseUrl4 + '/panels').toPromise();
   }
+  
   createReporttestpanel(data: Reporttestpanel) {
     return this.http.post(baseUrl4 + '/reportpaneltest', data).toPromise();
   }
@@ -67,12 +73,11 @@ export class PannelserviceService {
    console.log(map);
    return this.http.post(baseUrl4 + '/panels', map).toPromise();
   };
-
-
+  
   createTest(data: Test) {
     return this.http.post(baseUrl4 + '/tests', data).toPromise();
   }
-
+  
   async getPanel(id: Number) {
     return await this.http.get(`${baseUrl4 + '/panels'}/${id}`).toPromise();
   }
@@ -80,6 +85,7 @@ export class PannelserviceService {
   updatePanel(data: Panel) {
     return this.http.put(baseUrl4 + '/panels', data).toPromise();
   }
+  
   async getAllTest(): Promise<Test[]> {
     return await this.http.get<Test[]>(baseUrl4 + '/tests').toPromise();
   }
