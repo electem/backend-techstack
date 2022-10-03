@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable prettier/prettier */
-import { Injectable } from '@nestjs/common';
+import { Body, Injectable } from '@nestjs/common';
 import { ArticleDto } from './articles/dto/article.dto';
 
 @Injectable()
@@ -34,12 +34,13 @@ export class AppService {
       description: 'nnnn',
     },
   ];
+
   getHello(): ArticleDto[] {
     return this.artcle;
   }
 
-  async createArticle(): Promise<ArticleDto> {
-    const article = new ArticleDto();
+  async createArticle(@Body() article: ArticleDto): Promise<ArticleDto> {
+    //console.log(article[1]);
     return article;
   }
 }
