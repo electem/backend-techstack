@@ -9,4 +9,5 @@ public class SpringBootJpaOneToOneHibernateMappingExampleApplication  {
 	public static void main(String[] args) {
 		SpringApplication.run(SpringBootJpaOneToOneHibernateMappingExampleApplication.class, args);
 	}
+	
 }

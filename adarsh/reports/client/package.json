@@ -24,6 +24,7 @@
     "modules": "^0.4.0",
     "moment-timezone": "^0.5.37",
     "node": "^17.1.0",
+    "package": "^1.0.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.1.0",
     "zone.js": "~0.11.4"
