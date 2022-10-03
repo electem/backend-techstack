@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart, registerables } from 'chart.js';
 import { PanelService } from 'src/app/services/panel.serveice';
+import { Employee } from 'src/app/models/employee.model';
 import employeeJson from 'src/app/employeedetails.json';
-export interface Employee {
-  name?: String;
-  salary?: number;
-}
 
 @Component({
   selector: 'app-chart',
@@ -33,10 +30,11 @@ export class ChartComponent implements OnInit {
       type: 'bar',
       data: {
         labels: this.employeeName,
+
         datasets: [
           {
             label: '# of Votes',
-            data: this.employeeSalary,
+            data: this.employeeSalary,  
             backgroundColor: [
               'rgba(255, 99, 132, 0.2)',
               'rgba(54, 162, 235, 0.2)',
