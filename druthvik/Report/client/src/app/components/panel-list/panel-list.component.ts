@@ -4,6 +4,12 @@ import { Panel } from 'src/app/models/panel.model';
 import { PanelService } from 'src/app/services/panel.service';
 import { Test } from '../../models/test.model';
 import { Report } from '../../models/report.model';
+const map1 = new Map(Object.entries(Panel));
+console.log(map1);
+
+const panel = new Panel();
+let sampleMap = new Map<string, string>();
+sampleMap.set(panel.name, panel.description);
 
 @Component({
   selector: 'app-panel-list',
@@ -23,7 +29,7 @@ export class PanelListComponent implements OnInit {
   savedReport = new Report();
   testTable: boolean;
   panel: Panel = {
-    name: '',
+    name: '', //object
     description: '',
     test: [],
   };
