@@ -5,7 +5,8 @@ import { Test } from '../models/test';
 import { Report } from '../models/report';
 import { Reporttestpanel } from '../models/reporttestpanel';
 import employeeRecord from '../data.json';
-import companyRecord from '../company.json'
+import companyRecord from '../company.json';
+import datatableRecord from '../datatable.json';
 import { Employee } from '../models/employee';
 
 const baseUrl4 = 'http://localhost:8000';
@@ -14,6 +15,10 @@ const baseUrl4 = 'http://localhost:8000';
   providedIn: 'root',
 })
 export class PannelserviceService {
+
+  getdatatable(){
+    return datatableRecord;
+  }
 
   getEmployee() {
     return employeeRecord;
@@ -57,10 +62,12 @@ export class PannelserviceService {
     return this.http.post(baseUrl4 + '/reportpaneltest', data).toPromise();
   }
 
-
   createPanel(data: Panel) {
-    return this.http.post(baseUrl4 + '/panels', data).toPromise();
-  }
+   const map = {name:data.name,description:data.description}
+   console.log(map);
+   return this.http.post(baseUrl4 + '/panels', map).toPromise();
+  };
+
 
   createTest(data: Test) {
     return this.http.post(baseUrl4 + '/tests', data).toPromise();
