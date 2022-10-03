@@ -6,11 +6,9 @@ import { Report } from '../models/report.model';
 import { Reportpaneltest } from '../models/reportpaneltest.model';
 import studentJson from '../datatables.json';
 import { Student } from '../models/student';
-import { Observable } from 'rxjs';
 
 const baseUrl = 'http://localhost:8000';
 
-const map = new Map();
 @Injectable({
   providedIn: 'root',
 })
@@ -27,25 +25,25 @@ export class PanelService {
   //   return this.http.post<Panel>(baseUrl + '/panel', data).toPromise();
   // }
 
-  //create panel map object
-  createPanel(data: Panel): Promise<Panel[]> {
-    const myMap = { name: data.name, description: data.description };
+  // create panel map object
+  createPanel(panelData: Panel): Promise<Panel[]> {
+    const myMap = { name: panelData.name, description: panelData.description };
     console.log(myMap);
     return this.http.post<Panel[]>(baseUrl + '/panel', myMap).toPromise();
   }
 
-  async getPanel(id: Number): Promise<Panel> {
+  async getPanel(id: number): Promise<Panel> {
     return await this.http.get(`${baseUrl + '/panel'}/${id}`).toPromise();
   }
 
-  updatePanel(data: Panel): Promise<Panel> {
-    return this.http.put<Panel>(baseUrl + '/panel', data).toPromise();
+  updatePanel(panelData: Panel): Promise<Panel> {
+    return this.http.put<Panel>(baseUrl + '/panel', panelData).toPromise();
   }
   async getAllTest(): Promise<Test[]> {
     return await this.http.get<Test[]>(baseUrl + '/test').toPromise();
   }
-  createReport(data: Report): Promise<Report> {
-    return this.http.post<Report>(baseUrl + '/report', data).toPromise();
+  createReport(reportData: Report): Promise<Report> {
+    return this.http.post<Report>(baseUrl + '/report', reportData).toPromise();
   }
   async getAllReport(): Promise<Report[]> {
     return await this.http.get<Report[]>(baseUrl + '/report').toPromise();
@@ -55,8 +53,8 @@ export class PanelService {
       .get<Reportpaneltest[]>(baseUrl + '/reportpaneltest')
       .toPromise();
   }
-  getAllStudent(length: number, start: number): any {
-    var records = this.studentdetails.splice(start, length);
+  getAllStudent(length: number, start: number): Array<Student> {
+    const records = this.studentdetails.splice(start, length);
     console.log(records);
     return records;
   }

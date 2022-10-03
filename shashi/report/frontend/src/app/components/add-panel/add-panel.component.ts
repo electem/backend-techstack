@@ -20,9 +20,9 @@ export class AddPanelComponent implements OnInit {
 
   ngOnInit(): void {}
   async retrievePanels(): Promise<void> {
-    this.panels = await this.panelService.getAll();
+    this.panels = await this.panelService.getAllPanels();
   }
-  async savePanel() {
+  async savePanel(): Promise<void> {
     this.submitted = true;
     const panelData: Panel = {
       name: this.panel.name,
@@ -31,7 +31,8 @@ export class AddPanelComponent implements OnInit {
     await this.panelService.createPanel(panelData);
     this.retrievePanels();
   }
-  canclePanel() {
+
+  canclePanel(): void {
     this.panel = {
       name: '',
       description: '',

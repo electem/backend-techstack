@@ -1,10 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient, HttpResponse } from '@angular/common/http';
-import { Subject } from 'rxjs/internal/Subject';
 import { PanelService } from 'src/app/services/panel.serveice';
 import { Student } from '../../models/student';
-
-import studentJson from '../../datatables.json';
 
 class DataTablesResponse {
   data?: any[];
@@ -23,17 +19,13 @@ export class DatatablesComponent implements OnInit {
 
   students: Student[] = [];
   dtTrigger: any;
-  constructor(
-    private http: HttpClient,
-    private panelService: PanelService,
-    private httpClient: HttpClient
-  ) {}
+  constructor(private panelService: PanelService) {}
   ngOnInit(): void {
-    //this.getAllStudent();
+    // this.getAllStudent();
     const that = this;
     this.dtOptions = {
       pagingType: 'full_numbers',
-      pageLength: 4,
+      pageLength: 3,
       paging: true,
       lengthChange: true,
       serverSide: true,

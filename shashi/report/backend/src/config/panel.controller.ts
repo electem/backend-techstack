@@ -1,4 +1,6 @@
-import { Get, Route, Tags, Post, Body, Path, Put, Request } from "tsoa";
+import { Param } from "@nestjs/common/decorators/http/route-params.decorator";
+import { Request } from "node-fetch";
+import { Get, Route, Tags, Post, Body, Path, Put } from "tsoa";
 import { Panel } from "../models/panels";
 import {
   IPanelPayload,
@@ -34,7 +36,7 @@ export default class PanelController {
 
   @Post("/")
   public async createPanelMap(
-    @Request() map: Map<string, string>
+    @Param() map: Map<string, string>
   ): Promise<Panel> {
     return createPanelMap(map);
   }

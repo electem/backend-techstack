@@ -14,7 +14,6 @@ export class ReportListComponent implements OnInit {
   ngOnInit(): void {
     this.retrieveReports();
   }
-
   async retrieveReports(): Promise<void> {
     this.reports = await this.panelService.getAllReport();
   }

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart, registerables } from 'chart.js';
-import { PanelService } from 'src/app/services/panel.serveice';
 import { Employee } from 'src/app/models/employee.model';
 import employeeJson from 'src/app/employeedetails.json';
 
@@ -12,21 +11,21 @@ import employeeJson from 'src/app/employeedetails.json';
 export class ChartComponent implements OnInit {
   employeedetails: Employee[] = employeeJson;
   employeeSalary: number[] = [];
-  employeeName: String[] = [];
+  employeeName: string[] = [];
 
-  constructor(private panelService: PanelService) {}
+  constructor() {}
 
   ngOnInit(): void {
     this.retrieveEmployeeDetails();
   }
 
-  retrieveEmployeeDetails() {
-    this.employeeName = this.employeedetails.map((employee) => employee.name!);
+  retrieveEmployeeDetails(): void {
+    this.employeeName = this.employeedetails.map((employee) => employee.name);
     this.employeeSalary = this.employeedetails.map(
-      (employee) => employee.salary!
+      (employee) => employee.salary
     );
     Chart.register(...registerables);
-    var myChart = new Chart('myChart', {
+    const myChart = new Chart('myChart', {
       type: 'bar',
       data: {
         labels: this.employeeName,
@@ -34,7 +33,7 @@ export class ChartComponent implements OnInit {
         datasets: [
           {
             label: '# of Votes',
-            data: this.employeeSalary,  
+            data: this.employeeSalary,
             backgroundColor: [
               'rgba(255, 99, 132, 0.2)',
               'rgba(54, 162, 235, 0.2)',
