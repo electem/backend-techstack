@@ -29,7 +29,15 @@ public class PanelController {
 
 	@GetMapping("/panels")
 	public List<Panel> getPanelList() {
+		// set all panels name as "electem"
 		List<Panel> panels = (List<Panel>) panelRepository.findAll();
+		panels.forEach(Panel -> Panel.setName("Electam"));
+
+		// average of panel ID using map()
+		double averageOfPanelId = panels.stream().mapToInt(p -> p.getId()).average().getAsDouble();
+
+		// get sum of employee age using map and reduce.
+		Integer sumOfAge = employeeList.stream().map(empAge -> empAge.getAge()).reduce(Integer::sum).get();
 		return panels;
 	}
 
@@ -62,6 +70,15 @@ public class PanelController {
 		Object obj = jsonParser.parse(reader);
 		JSONArray studentDataList = (JSONArray) obj;
 		return studentDataList;
+	}
+
+	@GetMapping("/pagination/{offset}/{pageSize}")
+	public Object getPanelPagination(@PathVariable int offset, @PathVariable int pageSize) throws Exception {
+		JSONParser jsonParser = new JSONParser();
+		FileReader reader = new FileReader("check.json");
+		Object obj = jsonParser.parse(reader);
+		JSONArray studentDataList = (JSONArray) obj;
+		return studentDataList.subList(offset, pageSize);
 	}
 
 	@PostMapping("/studentData")
