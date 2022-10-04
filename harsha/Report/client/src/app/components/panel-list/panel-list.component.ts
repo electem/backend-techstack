@@ -20,12 +20,18 @@ export class PanelListComponent implements OnInit {
     description: '',
     tests: [],
   };
+
+  filteredPanels: Panel[] = [];
+  searchText!: string;
+  panelForm?: boolean;
+  testForm?: boolean;
   report: Report = {
     name: '',
   };
   panelForm?: boolean;
   testForm?: boolean;
   savedReport = new Report();
+  
   constructor(
     private panelService: PanelService,
     private route: ActivatedRoute
@@ -49,8 +55,21 @@ export class PanelListComponent implements OnInit {
     return result;
   }
 
+  randomString(length: number) {
+    var randomChars =
+      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var result = '';
+    for (var i = 0; i < length; i++) {
+      result += randomChars.charAt(
+        Math.floor(Math.random() * randomChars.length)
+      );
+    }
+    return result;
+  }
+
   async retrievePanels(): Promise<void> {
     this.panels = await this.panelService.getPanels();
+    this.filteredPanels = this.panels;
   }
 
   async getTests(): Promise<void> {
@@ -80,7 +99,7 @@ export class PanelListComponent implements OnInit {
       name: this.panel.name,
       description: this.panel.description,
     };
-    await this.panelService.createPanel(panelData);
+    await this.panelService.createPanelByMap(panelData);
     this.panelForm = false;
   }
 
@@ -96,5 +115,14 @@ export class PanelListComponent implements OnInit {
 
   cancelPanel() {
     this.panelForm = false;
+  }
+
+  onSearch(event: any) {
+    this.filteredPanels = this.panels.filter((input) => {
+      return (
+        input.name?.startsWith(event.target.value) ||
+        input.description?.startsWith(event.target.value)
+      );
+    });
   }
 }
