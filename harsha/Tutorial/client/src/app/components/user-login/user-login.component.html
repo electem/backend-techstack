@@ -17,7 +17,6 @@
         <label for="password">Password</label>
         <input type="password" formControlName="password" class="form-control" id="password"
           [(ngModel)]="login.password" [ngClass]="{ 'is-invalid': submitted && validation.password.errors }" />
-
         <div *ngIf="submitted && validation.password.errors" class="invalid-feedback">
           <div *ngIf="validation.password.errors.required">
             password Field is required

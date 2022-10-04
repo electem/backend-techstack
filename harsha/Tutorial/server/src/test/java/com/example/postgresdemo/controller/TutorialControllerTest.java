@@ -40,6 +40,6 @@ class TutorialControllerTest {
 		categoryList.add(category1);
 		categoryList.add(category2);
 		when(tutorialRepository.findAll()).thenReturn(tutorialList);
-		assertEquals(1, ((List<Tutorial>) tutorialRepository.findAll()).size());
+		assertEquals(tutorialList.size(), ((List<Tutorial>) tutorialRepository.findAll()).size());
 	}
 }

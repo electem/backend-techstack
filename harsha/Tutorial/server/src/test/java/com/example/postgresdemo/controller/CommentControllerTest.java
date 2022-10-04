@@ -2,17 +2,17 @@ package com.example.postgresdemo.controller;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
-import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+
+import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+
 import com.example.postgresdemo.model.Comment;
 import com.example.postgresdemo.repository.CommentRepository;
 

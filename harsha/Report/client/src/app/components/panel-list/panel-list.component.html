@@ -18,7 +18,7 @@
         <button class="m-3 btn btn-sm btn-danger" (click)="savePanel()">
           Save Panel
         </button>
-        <button class="btn btn-warning">Cancel</button>
+        <button class="btn btn-warning" (click)="cancelPanel()">Cancel</button>
       </div>
     </form>
   </div>
@@ -29,6 +29,10 @@
       Add Panel
     </button><br>
     <input type="text" placeholder="Search" (keyup)="onSearch($event)" />
+    <button type="button" class="btn btn-primary mr-2" routerLink="/reports-details/{{report.id}}"
+      (click)="saveReport()">
+      Add Report
+    </button>
     <table class="table table-bordered table-striped table-hover">
       <thead>
         <tr>
@@ -42,7 +46,7 @@
           <td class="text-center">{{ panel.name }}</td>
           <td class="text-center">{{ panel.description }}</td>
           <td>
-            <button type="button" class="btn btn-info btn-sm mr-2">
+            <button type="button" class="btn btn-info btn-sm mr-2" routerLink="/panels/{{ panel.id }}">
               Edit
             </button>
           </td>
