@@ -1,6 +1,7 @@
 package com.example.onetoonemapping.controller;
 
 import java.util.List;
+import java.util.Map;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -31,14 +32,13 @@ public class PanelController {
 	}
 
 	@GetMapping("/panels/{id}")
-	public ResponseEntity<Panel> getPanelById(@PathVariable(value = "id") Integer id)
-			throws ResourceNotFoundException {
+	public ResponseEntity<Panel> getPanelById(@PathVariable(value = "id") Integer id) throws ResourceNotFoundException {
 		Panel panel = panelRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("Panel not found :: " + id));
 
 		return ResponseEntity.ok().body(panel);
 	}
-	
+
 	@PostMapping("/createPanel")
 	public String createPanel(@Valid @RequestBody Panel panel, BindingResult result, Model model) {
 		if (result.hasErrors()) {
@@ -49,12 +49,22 @@ public class PanelController {
 	}
 
 	@PutMapping("/updatePanel/{id}")
-	public String updatePanel(@PathVariable("id") int id,@Valid @RequestBody Panel panel, BindingResult result,
+	public String updatePanel(@PathVariable("id") int id, @Valid @RequestBody Panel panel, BindingResult result,
 			Model model) {
 		if (result.hasErrors()) {
 			return "update-Panel";
 		}
 		panelRepository.save(panel);
 		return "Panel data updated";
+	}
+
+	@CrossOrigin(origins = "http://localhost:4200")
+	@PostMapping("/createPanelByMap")
+	public Panel createPanelMap(@Valid @RequestBody Map<String, String> map) {
+		Panel panel = new Panel();
+		panel.setName(map.get("name"));
+		panel.setDescription(map.get("description"));
+
+		return panelRepository.save(panel);
 	}
 }

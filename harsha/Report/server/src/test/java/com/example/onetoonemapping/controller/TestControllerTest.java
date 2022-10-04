@@ -14,21 +14,21 @@ import com.example.onetoonemapping.repository.TestsRepository;
 @SpringBootTest
 class TestControllerTest {
 
-	List<Tests> tests = new ArrayList<Tests>();
-	List<Panel> panels = new ArrayList<Panel>();
-	Panel panel = new Panel(1, "ABC", "xyz", tests);
-	Tests test = new Tests(1, "blood test", panels);
-	Tests test2 = new Tests(1, "blood test", panels);
-
-	@MockBean
-	TestsRepository testsRepository;
-
-	@Test
-	public void getTestList() {
-		Tests test = new Tests(1, "blood test", panels);
-		tests.add(test);
-		tests.add(test2);
-		when(testsRepository.findAll()).thenReturn(tests);
-		assertEquals(tests.size(), ((List<Tests>) testsRepository.findAll()).size());
-	}
+//	List<Tests> tests = new ArrayList<Tests>();
+//	List<Panel> panels = new ArrayList<Panel>();
+//	Panel panel = new Panel(1, "ABC", "xyz", tests);
+//	Tests test = new Tests(1, "blood test", panels);
+//	Tests test2 = new Tests(1, "blood test", panels);
+//
+//	@MockBean
+//	TestsRepository testsRepository;
+//
+//	@Test
+//	public void getTestList() {
+//		Tests test = new Tests(1, "blood test", panels);
+//		tests.add(test);
+//		tests.add(test2);
+//		when(testsRepository.findAll()).thenReturn(tests);
+//		assertEquals(tests.size(), ((List<Tests>) testsRepository.findAll()).size());
+//	}
 }
