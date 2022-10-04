@@ -27,18 +27,13 @@ public class Report {
 	@CreationTimestamp
 	private Date createdAt;
 
-//	@OneToMany(cascade = CascadeType.ALL)
-//	@JoinColumn(name = "report_id")
-//	private List<ReportPanelTests> reportPanelTests;
-
 	public Report() {
 	}
 
-	public Report(int id, String name, Date createdAt, List<ReportPanelTests> reportPanelTests) {
+	public Report(int id, String name, Date createdAt) {
 		this.id = id;
 		this.name = name;
 		this.createdAt = createdAt;
-//		this.reportPanelTests = reportPanelTests;
 	}
 
 	public int getId() {
