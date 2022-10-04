@@ -27,7 +27,7 @@ public class Panel {
 	@JoinTable(name = "panels_tests", joinColumns = {
 			@JoinColumn(name = "panels_id") }, inverseJoinColumns = { @JoinColumn(name = "tests_id") })
 	private List<Tests> tests;
-	
+
 	public Panel() {
 	}
 
@@ -70,3 +70,4 @@ public class Panel {
 		this.tests = tests;
 	}
 }
+
