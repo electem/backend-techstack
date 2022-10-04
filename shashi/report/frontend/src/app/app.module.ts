@@ -7,21 +7,29 @@ import { AppComponent } from './app.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppHttpInterceptor } from '.././app/app.interceptor';
 import { PanelListComponent } from './components/panel-list/panel-list.component';
-import { PanelTestDetailsComponent } from './components/panel-test-details/panel-test-details.component';
+import { ReportComponent } from './components/report/report.component';
 import { AddPanelComponent } from './components/add-panel/add-panel.component';
+import { ReportListComponent } from './components/report-list/report-list.component';
+import { ChartComponent } from './components/chart/chart.component';
+import { DatatablesComponent } from './components/datatables/datatables.component';
+import { DataTablesModule } from 'angular-datatables';
 
 @NgModule({
   declarations: [
     AppComponent,
     PanelListComponent,
-    PanelTestDetailsComponent,
+    ReportComponent,
     AddPanelComponent,
+    ReportListComponent,
+    ChartComponent,
+    DatatablesComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    DataTablesModule,
     ReactiveFormsModule,
   ],
   providers: [

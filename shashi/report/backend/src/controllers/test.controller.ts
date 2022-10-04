@@ -2,9 +2,8 @@ import { Body, Get, Post, Route, Tags } from "tsoa";
 import fetch from "node-fetch";
 import { JsonSerializer } from "typescript-json-serializer";
 import { Panel } from "../models";
-import { readFileSync, writeFileSync, promises as fsPromises } from "fs";
+import { writeFileSync } from "fs";
 import { join } from "path";
-import * as fs from "fs";
 
 @Route("tests")
 @Tags("test")
@@ -35,7 +34,7 @@ export default class TestController {
     });
   }
 
-  //json read file
+  // json read file
 
   // @Get("/")
   // public async getTests(): Promise<JSON> {

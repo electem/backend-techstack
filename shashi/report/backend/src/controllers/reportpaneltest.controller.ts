@@ -1,7 +1,7 @@
 import { QueryTypes } from "sequelize";
 import { sequelizeConfig } from "../config/seq.config";
 import { Get, Route, Tags } from "tsoa";
-import { Reportpaneltest } from "src/models";
+import { Reportpaneltest } from "../models/reportpaneltest";
 
 @Route("reportpaneltests")
 @Tags("reportpaneltest")

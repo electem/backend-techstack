@@ -12,7 +12,7 @@ export class PanelTestDetailsComponent implements OnInit {
   panels?: Panel[];
   tests?: Test[];
   currentPanel?: Panel;
-  disableTextbox?:boolean;
+  disableTextbox?: boolean;
   selectedTests: Test[] = [];
   panel: Panel = {
     name: '',
@@ -27,16 +27,16 @@ export class PanelTestDetailsComponent implements OnInit {
     this.retrieveTests();
   }
   async retrievePanels(): Promise<void> {
-    this.panels = await this.panelService.getAll();
+    this.panels = await this.panelService.getAllPanels();
   }
   async retrieveTests(): Promise<void> {
     this.tests = await this.panelService.getAllTest();
   }
-  toggleDisable() {
+  toggleDisable(): void {
     const panelData: Panel = {
       tests: this.panel.tests,
     };
-    this.disableTextbox=false;
-    panelData.tests == this.selectedTests;
+    this.disableTextbox = false;
+    panelData.tests = this.selectedTests;
   }
 }

@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Panel } from 'src/app/models/panel.model';
 import { Reportpaneltest } from 'src/app/models/reportpaneltest.model';
-import { Report } from 'src/app/models/report.model';
 import { Test } from 'src/app/models/test.model';
 import { PanelService } from 'src/app/services/panel.serveice';
-import { Target } from '@angular/compiler';
 
 @Component({
   selector: 'app-panel-test-details',
@@ -38,6 +36,8 @@ export class ReportComponent implements OnInit {
 
   async retrieveReportpaneltest(): Promise<void> {
     const reportMapData = await this.panelService.getAllReportpaneltest();
+    console.log(reportMapData);
+    // converting map to object
     this.objectToMap = new Map(Object.entries(reportMapData));
   }
   async retrievePanels(): Promise<void> {
@@ -46,7 +46,7 @@ export class ReportComponent implements OnInit {
   async retrieveTests(): Promise<void> {
     this.tests = await this.panelService.getAllTest();
   }
-  TestPresentInPanelTextBox(currentPanel: Panel, currentTest: Test) {
+  TestPresentInPanelTextBox(currentPanel: Panel, currentTest: Test): boolean {
     if (
       currentPanel &&
       currentTest &&
@@ -59,23 +59,37 @@ export class ReportComponent implements OnInit {
     }
   }
 
-  dataInsertInTextBox(currentPanel: Panel, currentTest: Test) {
+  dataInsertInTextBox(currentPanel: Panel, currentTest: Test): void {
     if (currentPanel && currentTest) {
       const mapedData = this.objectToMap.get(
         currentPanel.id + '_' + currentTest.id
       );
       return mapedData;
-    } 
+    }
   }
 
-  reportDetailsSave(event: any, panel: Panel, test: Test) {
+  // without mapping
+  // dataInsertInTextBox(currentPanel: Panel, currentTest: Test) {
+  //   if (currentPanel && currentTest && this.reportpaneltest) {
+  //     const tableData = this.reportpaneltest.find(
+  //       (reportpanel) =>
+  //         reportpanel.panel_fk == currentPanel.id &&
+  //         reportpanel.test_fk == currentTest.id
+  //     );
+  //     return tableData?.data;
+  //   } else {
+  //     return 'shashi ';
+  //   }
+  // }
+
+  reportDetailsSave(event: any, panel: Panel, test: Test): void {
     const savedReportId = localStorage.getItem('reportId');
     if (savedReportId != null) {
       const reportPanelTest: Reportpaneltest = {
         data: event.target.value,
-        panel_fk: panel.id,
-        test_fk: test.id,
-        report_fk: +savedReportId,
+        panelFk: panel.id,
+        testFk: test.id,
+        reportFk: +savedReportId,
       };
       console.log(reportPanelTest);
     }
