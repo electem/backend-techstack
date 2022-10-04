@@ -25,6 +25,8 @@ export class PanelListComponent implements OnInit {
 
   editPanelForm?: boolean;
   test!: Test[];
+  filteredPanels: Panel[] = [];
+  searchText!: string;
   constructor(
     private panelService: PanelService,
     private router: Router,
@@ -89,5 +91,14 @@ export class PanelListComponent implements OnInit {
       );
     }
     return result;
+  }
+
+  onSearch(event: any) {
+    this.filteredPanels = this.panels.filter((input) => {
+      return (
+        input.name?.startsWith(event.target.value) ||
+        input.description?.startsWith(event.target.value)
+      );
+    });
   }
 }
