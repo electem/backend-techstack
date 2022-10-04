@@ -1,0 +1,76 @@
+<div>
+  <div class="col-md-6">
+    <h4>EDIT PANEL</h4>
+    <td>
+      <button
+        type="button"
+        class="btn btn-info btn-sm mr-2"
+        (click)="addPanel()"
+      >
+        ADD TEST TO PANEL
+      </button>
+    </td>
+    <br />
+    <div *ngIf="this.showForm">
+      <form>
+        <div class="form-group">
+          <p>
+            TEST :
+            <select
+              class="form-control"
+              placeholder="Choose test"
+              style="width: 50%"
+              [(ngModel)]="selectedTest"
+              (ngModelChange)="onSelected(selectedTest)"
+              name="tests"
+            >
+              <option value="Choose test">Choose Test</option>
+              <option *ngFor="let test of tests" [ngValue]="test">
+                {{ test.name }}
+              </option>
+            </select>
+          </p>
+        </div>
+      </form>
+    </div>
+    <br />
+    <form>
+      <div class="form-group">
+        <div class="formbox">
+          <div class="form-group">
+            <label for="name">PANEL NAME</label>
+            <input type="text" name="name" class="form-control" />
+          </div>
+          <br />
+          <div class="form-group">
+            <label for="name">PANEL DESCRIPTION</label>
+            <input
+              name="description"
+              type="text"
+              class="form-control"
+              [(ngModel)]="panel.description"
+            />
+          </div>
+        </div>
+
+        <button
+          type="button"
+          class="btn btn-info btn-sm mr-2"
+          (click)="canclePanel()"
+          routerLink="/panel"
+        >
+          CANCEL
+        </button>
+        <button
+          type="button"
+          class="btn btn-info btn-sm mr-2"
+          (click)="updatePanel()"
+          routerLink="/panel"
+        >
+          SAVE
+        </button>
+        <br />
+      </div>
+    </form>
+  </div>
+</div>

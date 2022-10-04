@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Courses</title>
+  </head>
+  <body>
+    <div>
+      <form>
+        <label>course1</label>
+        <input type="string" [(ngModel)]="courses.course1" [ngModelOptions]="{ standalone: true }"/><br />
+        <label>course2</label>
+        <input type="string" [(ngModel)]="courses.course2" [ngModelOptions]="{ standalone: true }"/><br />
+        <!-- <p>
+          <button type="button" id="SubmitNewform" class="btn btn-primary mr-2" (click)="saveUsercourse(courses)">Submit</button>
+        </p> -->
+        <!-- <button (click)="saveUsercourse(user)">save Course</button>   -->
+      </form>
+    </div>
+  </body>
+</html>

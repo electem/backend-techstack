@@ -1,0 +1,27 @@
+
+    <form>
+      <h2> Edit student</h2>
+    <div class=" form-group"> 
+    <form class="form" #editForm="ngForm"></form> 
+    </div> 
+   <p>First Name: <input type="text" name="firstName"  [(ngModel)]="newstudent.firstName" #name="ngModel" required /> 
+  <span class="text-danger" 
+  *ngIf="(name.touched || editForm.submitted) && name.errors?.required">  FirstName is required </span> 
+      </p>
+         <p>Address: <input type="text" name="Address" [(ngModel)]="newstudent.Address" #name="ngModel" required/>
+      <span class="text-danger" 
+      *ngIf="(name.touched || editForm.submitted) && name.errors?.required">  address is required </span> </p>
+            <p>Phoneno: <input type="number" name="Phoneno"  [(ngModel)]="newstudent.Phoneno" #name="ngModel" required />
+        <span class="text-danger" 
+      *ngIf="(name.touched || editForm.submitted) && name.errors?.required">  Phoneno is required </span> </p>
+    <p>course :<select name="course" [(ngModel)]="newstudent.course">
+      <option>Select course</option>
+      <option *ngFor="let course of courses"  >{{course.name}}</option>
+      </select></p>
+    <p>
+      <button type="button" class="btn btn-primary mr-2" (click)="savestudent(newstudent)" routerLink="/Studentform">Submit</button>
+
+      <button type="button" class="btn btn-warning" (click)="cancelNewstudent()" routerLink="/Studentform">Cancel</button>
+    </p> 
+ </form>
+

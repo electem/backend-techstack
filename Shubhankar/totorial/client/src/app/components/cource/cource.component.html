@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div>
+      <form>
+        <label>xyz</label>
+        <input
+          type="string"
+          [(ngModel)]="cource.xyz"
+          [ngModelOptions]="{ standalone: true }"
+        />
+        <br />
+        <label>abc</label>
+        <input
+          type="string"
+          [(ngModel)]="cource.abc"
+          [ngModelOptions]="{ standalone: true }"
+        />
+        <br />
+        <button (click)="save()">
+          save
+        </button>
+      </form>
+    </div>
+  </body>
+</html>

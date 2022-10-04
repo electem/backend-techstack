@@ -1,0 +1,14 @@
+<div class="col-md-6">
+  <div class="form-group dropdown dropdownwidth">
+    <select
+      class="custom-select"
+      [(ngModel)]="selectedTest"
+      (ngModelChange)="onSelected(selectedTest)"
+    >
+      <option *ngFor="let test of tests" [ngValue]="test">
+        {{ test.name }}
+      </option>
+    </select>
+    <br />
+  </div>
+</div>
