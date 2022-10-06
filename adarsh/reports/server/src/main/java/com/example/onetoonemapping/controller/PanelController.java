@@ -36,8 +36,8 @@ public class PanelController {
 		// average of panel ID using map()
 		double averageOfPanelId = panels.stream().mapToInt(p -> p.getId()).average().getAsDouble();
 
-		// get sum of employee age using map and reduce.
-		Integer sumOfAge = employeeList.stream().map(empAge -> empAge.getAge()).reduce(Integer::sum).get();
+		// get sum of panels Id using map and reduce.
+		Integer sumOfId = panels.stream().map(panelId -> panelId.getId()).reduce(Integer::sum).get();
 		return panels;
 	}
 
@@ -89,14 +89,14 @@ public class PanelController {
 		JSONArray studentDataList = (JSONArray) obj;
 		return studentDataList.subList(pagination.getStart(), pagination.getLength());
 	}
-
-	@PostMapping("/PanelData")
-	public Panel postPanel(@Valid @RequestBody Map<String, String> input) {
-		Panel panel = new Panel();
-		panel.setName(input.get("name"));
-		panel.setDescription(input.get("description"));
-		return panelRepository.save(panel);
-
-	}
+//
+//	@PostMapping("/PanelData")
+//	public Panel postPanel(@Valid @RequestBody Map<String, String> input) {
+//		Panel panel = new Panel();
+//		panel.setName(input.get("name"));
+//		panel.setDescription(input.get("description"));
+//		return panelRepository.save(panel);
+//
+//	}
 
 }
