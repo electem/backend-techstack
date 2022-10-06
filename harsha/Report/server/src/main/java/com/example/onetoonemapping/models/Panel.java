@@ -11,8 +11,17 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 @Entity
 @Table(name = "panels")
+@Builder
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Panel {
 
 	@Id
@@ -24,49 +33,7 @@ public class Panel {
 	private String description;
 
 	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "panels_tests", joinColumns = {
-			@JoinColumn(name = "panels_id") }, inverseJoinColumns = { @JoinColumn(name = "tests_id") })
+	@JoinTable(name = "panels_tests", joinColumns = { @JoinColumn(name = "panels_id") }, inverseJoinColumns = {
+			@JoinColumn(name = "tests_id") })
 	private List<Tests> tests;
-	
-	public Panel() {
-	}
-
-	public Panel(int id, String name, String description, List<Tests> tests) {
-		this.id = id;
-		this.name = name;
-		this.description = description;
-		this.tests = tests;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public List<Tests> getTests() {
-		return tests;
-	}
-
-	public void setTests(List<Tests> tests) {
-		this.tests = tests;
-	}
 }
