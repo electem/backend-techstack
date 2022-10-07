@@ -33,7 +33,7 @@ export class DatatablesComponent implements OnInit {
     const that = this;
     this.dtOptions = {
       pagingType: 'full_numbers',
-      pageLength: 4,
+      pageLength: 3,
       paging: true,
       lengthChange: true,
       serverSide: true,

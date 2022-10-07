@@ -38,6 +38,8 @@ export class ReportComponent implements OnInit {
 
   async retrieveReportpaneltest(): Promise<void> {
     const reportMapData = await this.panelService.getAllReportpaneltest();
+  console.log(reportMapData)
+    //converting map to object
     this.objectToMap = new Map(Object.entries(reportMapData));
   }
   async retrievePanels(): Promise<void> {
@@ -65,8 +67,22 @@ export class ReportComponent implements OnInit {
         currentPanel.id + '_' + currentTest.id
       );
       return mapedData;
-    } 
+    }
   }
+
+  //without mapping
+  // dataInsertInTextBox(currentPanel: Panel, currentTest: Test) {
+  //   if (currentPanel && currentTest && this.reportpaneltest) {
+  //     const tableData = this.reportpaneltest.find(
+  //       (reportpanel) =>
+  //         reportpanel.panel_fk == currentPanel.id &&
+  //         reportpanel.test_fk == currentTest.id
+  //     );
+  //     return tableData?.data;
+  //   } else {
+  //     return 'shashi ';
+  //   }
+  // }
 
   reportDetailsSave(event: any, panel: Panel, test: Test) {
     const savedReportId = localStorage.getItem('reportId');

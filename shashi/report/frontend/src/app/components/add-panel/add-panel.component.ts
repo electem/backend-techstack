@@ -20,7 +20,7 @@ export class AddPanelComponent implements OnInit {
 
   ngOnInit(): void {}
   async retrievePanels(): Promise<void> {
-    this.panels = await this.panelService.getAll();
+    this.panels = await this.panelService.getAllPanels();
   }
   async savePanel() {
     this.submitted = true;

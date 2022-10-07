@@ -55,7 +55,7 @@ export class PanelService {
       .get<Reportpaneltest[]>(baseUrl + '/reportpaneltest')
       .toPromise();
   }
-  getAllStudent(length: number, start: number): any {
+  getAllStudent(length: number, start: number): Array<Student> {
     var records = this.studentdetails.splice(start, length);
     console.log(records);
     return records;
