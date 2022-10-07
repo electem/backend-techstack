@@ -29,3 +29,36 @@ router.post("", async (req: Request, res: Response) => {
   });
 });
 export default router;
+
+// export class FileDownLoadController {
+//   @Post("/postFile")
+//   public async fileCreate(
+//     @Req() req: Request,
+//     @Res() res: Response,
+//     @Body() body
+//   ): Promise<void> {
+//     const filePath = baseUrl + body.fileName
+//     body.filePath = filePath
+//     const file = {
+//       filename: body.fileName,
+//       filepath: body.filePath,
+//       user_fk: body.user_fk
+//     }
+//     // Save File in the database
+//     fileOp.copyFile(
+//       directoryPath + file.filename,
+//       directoryPath + file.filename,
+//       err => {
+//         if (err) {
+//           logger.error("file not copied" + err)
+//         }
+//       }
+//     )
+//     const data = await files.create(file)
+//     try {
+//       res.send(data)
+//     } catch (err) {
+//       err
+//     }
+//   }
+// }

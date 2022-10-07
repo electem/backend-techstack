@@ -6,14 +6,14 @@ export interface IPanelPayload {
   description: string;
 }
 
-// export const createPanel = async (payload: IPanelPayload): Promise<Panel> => {
-//   const panelRepository = getRepository(Panel);
-//   const panel = new Panel();
-//   return panelRepository.save({
-//     ...panel,
-//     ...payload,
-//   });
-// };
+export const createPanel = async (payload: IPanelPayload): Promise<Panel> => {
+  const panelRepository = getRepository(Panel);
+  const panel = new Panel();
+  return panelRepository.save({
+    ...panel,
+    ...payload,
+  });
+};
 
 export const updatePanel = async (payload: IPanelPayload): Promise<Panel> => {
   const panelRepository = getRepository(Panel);
@@ -60,3 +60,5 @@ export const createPanelMap = async (
   panel.description = map1.get("description");
   return panelRepository.save(panel);
 };
+
+

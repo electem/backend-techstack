@@ -15,10 +15,10 @@ export default class TestController {
     const response = await fetch("http://localhost:8000/panel", {}); //http client
     const paneldata = await response.json();
     const jsondata = defaultSerializer.deserialize(paneldata, Panel);
-    console.log(jsondata);
+    //console.log(jsondata);
     return jsondata as Panel;
   }
-
+         
   //write a file
 
   @Post("/")

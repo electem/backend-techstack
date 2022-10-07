@@ -20,7 +20,7 @@ export class Post {
     userId!: number;
     @ManyToOne(_type => User, (user: User) => user.posts)
     @JoinColumn()
-    user!: User;
+    user!: User;    
 
     // @OneToMany(_type=> Comment, (comment: Comment) => comment.post)
     // comments!: Array<Comment>;

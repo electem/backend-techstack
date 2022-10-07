@@ -1,7 +1,7 @@
 import { QueryTypes } from "sequelize";
 import { sequelizeConfig } from "../config/seq.config";
 import { Get, Route, Tags } from "tsoa";
-import { Reportpaneltest } from "src/models";
+import { Reportpaneltest } from "../models";
 
 @Route("reportpaneltests")
 @Tags("reportpaneltest")
@@ -10,7 +10,7 @@ export default class ReportpaneltestController {
   public async getReportpaneltest(): Promise<Map<String, String>> {
     var tableName = "report_panel_test";
     let query = `SELECT * FROM ${tableName}`;
-    console.log(query);
+    //console.log(query);
     const tableData = await sequelizeConfig.query(query, {
       type: QueryTypes.SELECT,
     });

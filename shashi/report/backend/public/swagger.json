@@ -139,8 +139,8 @@
 				"security": [],
 				"parameters": []
 			},
-			"post": {
-				"operationId": "CreatePanel",
+			"put": {
+				"operationId": "UpdatePanel",
 				"responses": {
 					"200": {
 						"description": "Ok",
@@ -169,8 +169,8 @@
 					}
 				}
 			},
-			"put": {
-				"operationId": "UpdatePanel",
+			"post": {
+				"operationId": "CreatePanelMap",
 				"responses": {
 					"200": {
 						"description": "Ok",
@@ -240,10 +240,7 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"items": {
-										"$ref": "#/components/schemas/Test"
-									},
-									"type": "array"
+									"$ref": "#/components/schemas/Panel"
 								}
 							}
 						}
@@ -254,6 +251,36 @@
 				],
 				"security": [],
 				"parameters": []
+			},
+			"post": {
+				"operationId": "CreateJsonData",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "string"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"test"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/Panel"
+							}
+						}
+					}
+				}
 			}
 		}
 	},

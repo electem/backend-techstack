@@ -1,4 +1,4 @@
-const {File}= require ('../models/fileupload')
+// const { File } = require("../models/fileupload");
 
 import multer from "multer";
 const storage = multer.diskStorage({
@@ -26,37 +26,37 @@ export const upload = multer({
   storage,
 }).single("file");
 
-//file to byte
-// var fileByteArray: any = [];
+// //file to byte
+// // var fileByteArray: any = [];
 
-// function uploadFile1(){
-//   var files = myInput.files[0];
-//   var reader = new FileReader();
-//   reader.onload = processFile(files);
-//   reader.readAsText(files);
-// }
+// // function uploadFile1(){
+// //   var files = myInput.files[0];
+// //   var reader = new FileReader();
+// //   reader.onload = processFile(files);
+// //   reader.readAsText(files);
+// // }
 
-// function uploadFile2(){
-//   var files = document.querySelector('input').files[0];
-//   var reader = new FileReader();
-//   reader.onload = processFile(files);
-//   reader.readAsDataURL(files);
-// }
+// // function uploadFile2(){
+// //   var files = document.querySelector('input').files[0];
+// //   var reader = new FileReader();
+// //   reader.onload = processFile(files);
+// //   reader.readAsDataURL(files);
+// // }
 
-// function uploadFile3(){
-//   var files = myInput.files[0];
-//   var reader = new FileReader();
-//   reader.onload = processFile(files);
-//   reader.readAsArrayBuffer(files);
-// }
+// // function uploadFile3(){
+// //   var files = myInput.files[0];
+// //   var reader = new FileReader();
+// //   reader.onload = processFile(files);
+// //   reader.readAsArrayBuffer(files);
+// // }
 
-// function processFile(theFile){
-//   return function(e) {
-//     var theBytes = e.target.result; //.split('base64,')[1]; // use with uploadFile2
-//     fileByteArray.push(theBytes);
-//     document.getElementById('file').innerText = '';
-//     for (var i=0; i<fileByteArray.length; i++) {
-//         document.getElementById('file').innerText += fileByteArray[i];
-//     }
-//   }
-// }
+// // function processFile(theFile){
+// //   return function(e) {
+// //     var theBytes = e.target.result; //.split('base64,')[1]; // use with uploadFile2
+// //     fileByteArray.push(theBytes);
+// //     document.getElementById('file').innerText = '';
+// //     for (var i=0; i<fileByteArray.length; i++) {
+// //         document.getElementById('file').innerText += fileByteArray[i];
+// //     }
+// //   }
+// // }

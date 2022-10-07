@@ -15,7 +15,7 @@ import {
 import { InjectRepository } from '@nestjs/typeorm';
 import { getRepository, Repository } from 'typeorm';
 import { ArticleDto } from './articles/dto/article.dto';
-import { ImageFileDto } from './fileupload/fileupload.entity';
+import { Image } from './fileupload/fileupload.entity';
 import fs from 'fs';
 import { buffer } from 'stream/consumers';
 import { toUnicode } from 'punycode';

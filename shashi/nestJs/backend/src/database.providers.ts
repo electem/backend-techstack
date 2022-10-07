@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { Sequelize } from 'sequelize-typescript';
-import { ImageFileDto } from './fileupload/fileupload.entity';
+import { Image } from './fileupload/fileupload.entity';
 
 export const databaseProviders = [
   {
@@ -14,7 +14,7 @@ export const databaseProviders = [
         password: 'postgres',
         database: 'postgres',
       });
-      sequelize.addModels([ImageFileDto]);
+      sequelize.addModels([Image]);
       await sequelize.sync();
       return sequelize;
     },

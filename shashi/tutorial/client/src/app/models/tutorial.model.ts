@@ -1,7 +1,7 @@
 import { Category } from './categoryTask.model';
 
 export class Tutorial {
-  id?: any;
+  id?: number;
   title?: string;
   description?: string;
   categories?: Category[];

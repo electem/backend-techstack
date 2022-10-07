@@ -48,6 +48,7 @@ export class TutorialService {
 
   async getAllCategory() {
     return await this.http.get<Category[]>(baseUrl2).toPromise();
+    
   }
 
   createTutorial(data: Tutorial) {

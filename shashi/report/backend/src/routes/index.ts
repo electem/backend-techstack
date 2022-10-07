@@ -3,6 +3,8 @@ import PingController from "../controllers/ping.controller";
 import PanelRouter from "./panel.router";
 import TestRouter from "./test.router";
 
+//import FileRouter from "./fileupload.router";
+
 const router = express.Router();
 
 router.get("/ping", async (_req, res) => {
@@ -13,4 +15,6 @@ router.get("/ping", async (_req, res) => {
 
 router.use("/panel", PanelRouter);
 router.use("/test", TestRouter);
+
+//router.use("/filerouter", FileRouter);
 export default router;

@@ -4,7 +4,7 @@ import Sequelize from 'sequelize';
 import { Blob } from 'buffer';
 
 @Table
-export class ImageFileDto extends Model {
+export class Image extends Model {
   @Column
   primarykey: true;
   id: number;

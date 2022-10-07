@@ -7,6 +7,7 @@ import TutorialRouter from "./tutorials.router";
 import CategoryRouter from "./category.router";
 import SampleRouter from "./sample.router";
 import UserloginRouter from "./login.router";
+import UserloginController from "src/controllers/login.controller";
 
 const router = express.Router();
 
@@ -22,5 +23,7 @@ router.use("/comments", CommentRouter);
 router.use("/tutorials", TutorialRouter);
 router.use("/category", CategoryRouter);
 router.use("/sample", SampleRouter);
-router.use("/login", UserloginRouter);
+router.use(("/login"), UserloginRouter);
 export default router;
+
+// router.get(`/login`).get(UserloginController.getAuth())

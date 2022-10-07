@@ -62,64 +62,61 @@
   </main>
 </body>
 </html> -->
-            
-              
-
-
 
 <!-- my code -->
 <div class="list row">
-    <div class="col-md-8">
-      <div class="input-group mb-3">
-      </div>
-    </div>
-    <div class="col-md-6">
-      <h4>Tutorials List</h4>
-      <td>
-        <button type="button" class="btn btn-info btn-sm mr-2" routerLink="/add">ADD NEW TUTORIAL</button>
-      </td>
-      <ul class="list-group">
-        <li
-          class="list-group-item"
-          *ngFor="let tutorial of tutorials; let i = index"
-          [class.active]="i == currentIndex"
-          (click)="setActiveTutorial(tutorial, i)"
-        >
-          {{ tutorial.title }} 
-          <a
+  <div class="col-md-8">
+    <div class="input-group mb-3"></div>
+  </div>
+  <div class="col-md-6">
+    <h4>Tutorials List</h4>
+    <td>
+      <button type="button" class="btn btn-info btn-sm mr-2" routerLink="/add">
+        ADD NEW TUTORIAL
+      </button>
+    </td>
+    <ul class="list-group">
+      <li
+        class="list-group-item"
+        *ngFor="let tutorial of tutorials; let i = index"
+        [class.active]="i == currentIndex"
+        (click)="setActiveTutorial(tutorial, i)"
+      >
+        {{ tutorial.title }}
+        <a
           class="btn btn-outline-info btn-sm text-left"
           routerLink="/tutorialdetailview/{{ tutorial.id }}"
         >
-          View Details       
+          View Details
         </a>
-        </li>     
-      </ul>
+      </li>
+    </ul>
+  </div>
+  <div class="col-md-6">
+    <div *ngIf="currentTutorial">
+      <h4>Tutorial-Detail</h4>
+      <div>
+        <label><strong>Title:</strong></label> {{ currentTutorial.title }}
+      </div>
+      <div>
+        <label><strong>Description:</strong></label>
+        {{ currentTutorial.description }}
+      </div>
+      <div>
+        <label><strong>Categories:</strong></label>
+        {{ currentTutorial.categories | json }}
+      </div>
+
+      <a
+        class="btn btn-info btn-sm mr-2"
+        routerLink="/tutorials/{{ currentTutorial.id }}"
+      >
+        Edit
+      </a>
     </div>
-    <div class="col-md-6">
-      <div *ngIf="currentTutorial">
-        <h4>Tutorial-Detail</h4>
-        <div>
-          <label><strong>Title:</strong></label> {{ currentTutorial.title }}
-        </div>
-        <div>
-          <label><strong>Description:</strong></label>
-          {{ currentTutorial.description }}
-        </div>
-        <div>
-          <label><strong>Categories:</strong></label>
-          {{ currentTutorial.categories | json }}
-        </div>
-  
-        <a class="btn btn-info btn-sm mr-2" routerLink="/tutorials/{{ currentTutorial.id }}">
-          Edit
-        </a>
-      </div>
-      <div *ngIf="!currentTutorial">
-        <br>
-        <p>please click on the tutorial for more information</p>
-      </div>
-      
+    <div *ngIf="!currentTutorial">
+      <br />
+      <p>please click on the tutorial for more information</p>
     </div>
   </div>
-  
-
+</div>

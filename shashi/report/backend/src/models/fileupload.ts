@@ -1,6 +1,6 @@
 import { Sequelize, DataTypes, Model } from "sequelize";
 const sequelize = new Sequelize("sqlite::memory:");
-const File = sequelize.define("file", {
+export const File = sequelize.define("file", {
   type: {
     type: DataTypes.STRING,
   },
