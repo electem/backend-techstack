@@ -1,4 +1,4 @@
-import { Get, Route, Tags, Put } from 'tsoa';
+import { Route, Tags } from 'tsoa';
 import { QueryTypes } from 'sequelize';
 import { sequelizeConfig } from '../config/seq.config';
 import { ReportPanelTest } from '../models/report_panel_test.model';
@@ -6,7 +6,7 @@ const map = new Map();
 @Route('reportpaneltests')
 @Tags('ReportPanelTest')
 export default class ReportPanelTestController {
-  public async getReportpaneltest(): Promise<any> {
+  public async getReportpaneltest(): Promise<Map<string, string>> {
     const tableName = 'report_panel_test';
     const query = `SELECT * FROM ${tableName}`;
     console.log(query);

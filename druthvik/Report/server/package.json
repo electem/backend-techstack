@@ -71,7 +71,8 @@
     "swagger-ui-express": "^4.3.0",
     "tsoa": "^3.2.1",
     "typeorm": "^0.2.45",
-    "typescript-ioc": "^3.2.2"
+    "typescript-ioc": "^3.2.2",
+    "typescript-json-serializer": "^4.3.0"
   },
   "nodemonConfig": {
     "watch": [

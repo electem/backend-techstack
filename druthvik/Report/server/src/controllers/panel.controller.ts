@@ -1,14 +1,13 @@
 import { Param } from '@nestjs/common/decorators/http/route-params.decorator';
-import { Get, Route, Tags, Post, Body, Path, Put } from 'tsoa';
-import { updateExportSpecifier } from 'typescript';
+import { Get, Route, Tags, Post, Path } from 'tsoa';
 import { Panel } from '../models/panel';
 import {
-  getPanel,
   createPanel,
+  getPanel,
   getPanels,
 } from '../repositories/panel.repository';
 
-@Route('panels')
+@Route('Panels')
 @Tags('Panel')
 export default class PanelController {
   @Get('/')

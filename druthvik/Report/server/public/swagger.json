@@ -55,22 +55,6 @@
 				"type": "object",
 				"additionalProperties": false
 			},
-			"IPanelPayload": {
-				"properties": {
-					"name": {
-						"type": "string"
-					},
-					"description": {
-						"type": "string"
-					}
-				},
-				"required": [
-					"name",
-					"description"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
 			"Report": {
 				"properties": {
 					"id": {
@@ -114,7 +98,7 @@
 	},
 	"openapi": "3.0.0",
 	"paths": {
-		"/panels": {
+		"/Panels": {
 			"get": {
 				"operationId": "GetPanel",
 				"responses": {
@@ -137,69 +121,9 @@
 				],
 				"security": [],
 				"parameters": []
-			},
-			"post": {
-				"operationId": "CreatePanel",
-				"responses": {
-					"200": {
-						"description": "Ok",
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/Panel"
-								}
-							}
-						}
-					}
-				},
-				"tags": [
-					"Panel"
-				],
-				"security": [],
-				"parameters": [],
-				"requestBody": {
-					"required": true,
-					"content": {
-						"application/json": {
-							"schema": {
-								"$ref": "#/components/schemas/IPanelPayload"
-							}
-						}
-					}
-				}
-			},
-			"put": {
-				"operationId": "UpdatePanel",
-				"responses": {
-					"200": {
-						"description": "Ok",
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/Panel"
-								}
-							}
-						}
-					}
-				},
-				"tags": [
-					"Panel"
-				],
-				"security": [],
-				"parameters": [],
-				"requestBody": {
-					"required": true,
-					"content": {
-						"application/json": {
-							"schema": {
-								"$ref": "#/components/schemas/IPanelPayload"
-							}
-						}
-					}
-				}
 			}
 		},
-		"/panels/{id}": {
+		"/Panels/{id}": {
 			"get": {
 				"operationId": "GetPanelByID",
 				"responses": {
@@ -290,21 +214,6 @@
 						}
 					}
 				}
-			}
-		},
-		"/reportpaneltests": {
-			"get": {
-				"operationId": "GetReportpaneltest",
-				"responses": {
-					"204": {
-						"description": "No content"
-					}
-				},
-				"tags": [
-					"ReportPanelTest"
-				],
-				"security": [],
-				"parameters": []
 			}
 		}
 	},
