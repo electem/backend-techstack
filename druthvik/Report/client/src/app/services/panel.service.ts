@@ -8,7 +8,6 @@ import student from '../students.json';
 import { Student } from '../models/student.model';
 import employee from '../components/employee.json';
 import { Employee } from '../models/employee.model';
-import { data } from 'jquery';
 
 const panel = new Panel();
 let panelMap = new Map();
