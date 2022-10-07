@@ -7,6 +7,7 @@ import { AddpanelComponent } from './components/addpanel/addpanel.component';
 import { EditpanelComponent } from './components/editpanel/editpanel.component';
 import { AdddtestComponent } from './components/editpanel/adddtest/adddtest.component';
 import { ReportComponent } from './components/report/report.component';
+import { ChartsComponent } from './components/charts/charts.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'panels', pathMatch: 'full' },
@@ -16,7 +17,7 @@ const routes: Routes = [
   { path: 'report', component: ReporttableComponent },
   { path: 'test', component: AdddtestComponent },
   { path: 'report1', component: ReportComponent },
-
+  { path: 'charts', component: ChartsComponent },
   { path: '**', component: PageNotFoundComponent },
 ];
 

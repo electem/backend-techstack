@@ -26,7 +26,11 @@
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "unique-names-generator": "^4.7.1",
-    "zone.js": "~0.10.2"
+    "zone.js": "~0.10.2",
+    "chart.js": "^3.9.1",
+    "datatables.net": "^1.12.1",
+    "datatables.net-bs5": "^1.11.3",
+    "datatables.net-dt": "^1.12.1"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.1100.2",
