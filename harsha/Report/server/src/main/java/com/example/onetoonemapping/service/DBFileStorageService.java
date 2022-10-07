@@ -1,8 +1,6 @@
 package com.example.onetoonemapping.service;
 
-import java.io.IOException;
-import java.sql.SQLException;
-import javax.sql.rowset.serial.SerialException;
+import java.util.stream.Stream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -18,10 +16,8 @@ public class DBFileStorageService {
 	@Autowired
 	private DBFileRepository dbFileRepository;
 
-	public DBFile storeFile(final MultipartFile file) throws FileStorageException, SerialException, SQLException {
-		// Normalize file name
+	public DBFile storeFile(MultipartFile file) {
 		final String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-
 		try {
 			// Check if the file's name contains invalid characters
 			if (fileName.contains("..")) {
@@ -30,7 +26,7 @@ public class DBFileStorageService {
 			DBFile dbFile = new DBFile(fileName, file.getContentType(), file.getBytes());
 
 			return dbFileRepository.save(dbFile);
-		} catch (IOException ex) {
+		} catch (Exception ex) {
 			throw new FileStorageException("Could not store file " + fileName + ". Please try again!", ex);
 		}
 	}
@@ -41,7 +37,10 @@ public class DBFileStorageService {
 	}
 
 	public DBFile getFileByname(String fileId) {
-
 		return dbFileRepository.getByFileName(fileId);
+	}
+
+	public Stream<DBFile> getAllFiles() {
+		return dbFileRepository.findAll().stream();
 	}
 }
