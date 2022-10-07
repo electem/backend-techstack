@@ -5,19 +5,26 @@ import {
   ManyToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { JsonObject, JsonProperty } from 'typescript-json-serializer';
+
 import { Test } from './test';
 
 @Entity()
+@JsonObject()
 export class Panel {
   @PrimaryGeneratedColumn()
+  @JsonProperty()
   id!: number;
 
   @Column()
-  name?: string;
+  @JsonProperty()
+  name!: string;
 
   @Column()
-  description?: string;
+  @JsonProperty()
+  description!: string;
 
+  @JsonProperty()
   @ManyToMany(() => Test, (test) => test.panel, {
     cascade: true,
   })
