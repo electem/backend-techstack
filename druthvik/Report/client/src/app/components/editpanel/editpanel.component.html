@@ -2,7 +2,7 @@
   <button
     type="button"
     class="btn btn btn-secondary dropdown btn2"
-    (click)="editTest(test)"
+    (click)="editTest()"
   >
     Add Test To Panel
   </button>
@@ -10,7 +10,7 @@
     <select
       class="custom-select"
       [(ngModel)]="selectedTest"
-      (ngModelChange)="onSelected(selectedTest)"
+      (ngModelChange)="onSelectedTest(selectedTest)"
     >
       <option *ngFor="let test of tests" [ngValue]="test">
         {{ test.name }}

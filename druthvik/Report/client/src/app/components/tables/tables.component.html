@@ -6,14 +6,14 @@
       <th>Last name</th>
     </tr>
   </thead>
-  <tbody *ngIf="person?.length != 0">
-    <tr *ngFor="let perso of person">
+  <tbody *ngIf="employee?.length != 0">
+    <tr *ngFor="let perso of employee">
       <td>{{ perso.id }}</td>
       <td>{{ perso.firstName }}</td>
       <td>{{ perso.lastName }}</td>
     </tr>
   </tbody>
-  <tbody *ngIf="person?.length == 0">
+  <tbody *ngIf="employee?.length == 0">
     <tr>
       <td colspan="3" class="no-data-available">No data!</td>
     </tr>

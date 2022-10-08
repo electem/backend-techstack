@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Panel } from 'src/app/models/panel.model';
-import { Test } from 'src/app/models/test.model';
-import { PanelService } from 'src/app/services/panel.service';
+import { Panel } from '../../models/panel.model';
+import { Test } from '../../models/test.model';
+import { PanelService } from '../../services/panel.service';
 
 @Component({
   selector: 'app-editpanel',
@@ -22,6 +22,7 @@ export class EditpanelComponent implements OnInit {
   showDropdown: boolean;
   selectedTests: Test[] = [];
   selectedTest = new Test();
+
   constructor(
     private panelService: PanelService,
     private route: ActivatedRoute,
@@ -39,9 +40,11 @@ export class EditpanelComponent implements OnInit {
   async getPanelbyId(id: number) {
     this.panel = await this.panelService.getPanelById(id);
   }
-  editTest(test: Test) {
+
+  async editTest() {
     this.showDropdown = true;
   }
+
   async updatePanel(): Promise<void> {
     const panelData: Panel = {
       id: this.panel.id,
@@ -52,6 +55,7 @@ export class EditpanelComponent implements OnInit {
     panelData.test = this.selectedTests;
     await this.panelService.update(panelData);
   }
+
   async savePanel() {
     const panelData: Panel = {
       name: this.panel.name,
@@ -59,10 +63,11 @@ export class EditpanelComponent implements OnInit {
     };
     await this.panelService.createPanel(panelData);
   }
-  onSelected(value: Test) {
+
+  async onSelectedTest(test: Test) {
     if (this.tests) {
       for (const tests of this.tests) {
-        if (tests.id === value.id) {
+        if (tests.id === test.id) {
           this.selectedTests.push(tests);
         }
       }

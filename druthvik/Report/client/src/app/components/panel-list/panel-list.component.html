@@ -34,7 +34,7 @@
       <select
         class="custom-select"
         [(ngModel)]="selectedTest"
-        (ngModelChange)="onSelected(selectedTest)"
+        (ngModelChange)="onSelectedPanel(selectedTest)"
       >
         <option *ngFor="let test of tests" [ngValue]="test">
           {{ test.name }}

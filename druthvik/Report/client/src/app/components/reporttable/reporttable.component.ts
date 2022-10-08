@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Panel } from 'src/app/models/panel.model';
-import { PanelService } from 'src/app/services/panel.service';
+import { Panel } from '../../models/panel.model';
+import { PanelService } from '../../services/panel.service';
 import { Test } from '../../models/test.model';
 
 @Component({
@@ -22,11 +22,12 @@ export class ReporttableComponent implements OnInit {
   async listPanels(): Promise<void> {
     this.panels = await this.panelService.getAllPanel();
   }
+
   async listTests(): Promise<void> {
     this.tests = await this.panelService.getAllTests();
   }
 
-  checkIfPanelContainsTest(currentPanel: Panel, currentTest: Test) {
+  async checkIfPanelContainsTest(currentPanel: Panel, currentTest: Test) {
     if (
       currentPanel &&
       currentTest &&
