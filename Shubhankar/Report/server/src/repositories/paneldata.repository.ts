@@ -1,5 +1,6 @@
-import {getManager, getRepository} from "typeorm";
+import {getRepository} from "typeorm";
 import { PanelData } from '../models/paneldata'
+
 export interface IPanelDataPayload {
   name: string;
 }
