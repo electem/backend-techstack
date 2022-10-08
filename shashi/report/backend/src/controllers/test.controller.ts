@@ -11,14 +11,12 @@ export default class TestController {
   @Get("/")
   public async getTests(): Promise<Panel> {
     const defaultSerializer = new JsonSerializer();
-    const response = await fetch("http://localhost:8000/panel", {}); //http client
+    const response = await fetch("http://localhost:8000/panel", {});
     const paneldata = await response.json();
     const jsondata = defaultSerializer.deserialize(paneldata, Panel);
     console.log(jsondata);
     return jsondata as Panel;
   }
-
-  //write a file
 
   @Post("/")
   public async createJsonData(@Body() panel: Panel): Promise<String> {
@@ -28,19 +26,9 @@ export default class TestController {
     this.syncWriteFile(strPanel);
     return "panel data is created";
   }
-  private syncWriteFile(data: string) {
-    writeFileSync(join(__dirname, "paneljson.txt"), data, {
+  private syncWriteFile(fileData: string) {
+    writeFileSync(join(__dirname, "paneljson.txt"), fileData, {
       flag: "w",
     });
   }
-
-  // json read file
-
-  // @Get("/")
-  // public async getTests(): Promise<JSON> {
-  //   const inputFile = "../controllers/employeedetails.json";
-  //   const data = fs.readFileSync(join(__dirname, inputFile), "utf-8");
-  //   console.log(data);
-  //   return data as unknown as JSON;
-  // }
 }

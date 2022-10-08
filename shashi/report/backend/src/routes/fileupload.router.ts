@@ -1,6 +1,7 @@
 import express from "express";
 import { upload } from "../controllers/fileupload.controller";
 import { Request, Response } from "express";
+
 const router = express.Router();
 router.post("", async (req: Request, res: Response) => {
   upload(req, res, async (err) => {
@@ -12,7 +13,7 @@ router.post("", async (req: Request, res: Response) => {
       }
       const file = req.file;
       if (!file) {
-        return res.status(400).json({
+        return res.status(400).json({  
           status: "failed",
           code: "400",
           message: "Please upload file",

@@ -1,18 +1,10 @@
 import { getManager, getRepository } from "typeorm";
 import { Panel } from "../models/panels";
+
 export interface IPanelPayload {
   name: string;
   description: string;
 }
-
-// export const createPanel = async (payload: IPanelPayload): Promise<Panel> => {
-//   const panelRepository = getRepository(Panel);
-//   const panel = new Panel();
-//   return panelRepository.save({
-//     ...panel,
-//     ...payload,
-//   });
-// };
 
 export const updatePanel = async (payload: IPanelPayload): Promise<Panel> => {
   const panelRepository = getRepository(Panel);
@@ -23,7 +15,6 @@ export const updatePanel = async (payload: IPanelPayload): Promise<Panel> => {
   });
 };
 
-// query builder query to get all the panels with their tests
 export const getPanels = async (): Promise<Array<Panel>> => {
   const entityManager = getManager();
   let panels = [];
@@ -35,7 +26,6 @@ export const getPanels = async (): Promise<Array<Panel>> => {
   return panels;
 };
 
-// query builder query to get panel by id with their associations
 export const getPanel = async (id: number) => {
   const entityManager = getManager();
   const query = entityManager.createQueryBuilder(Panel, "panels");

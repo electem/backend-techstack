@@ -6,29 +6,26 @@ import { Report } from '../models/report.model';
 import { Reportpaneltest } from '../models/reportpaneltest.model';
 import studentJson from '../datatables.json';
 import { Student } from '../models/student';
-
-const baseUrl = 'http://localhost:8000';
+import { environment } from '../../environments/environment';
+class
+const baseUrl = environment.url;
 
 @Injectable({
   providedIn: 'root',
 })
+
 export class PanelService {
   panels!: Panel[];
   studentdetails = studentJson;
-  constructor(private http: HttpClient) {}
+
+  constructor(private http:HttpClient) {}
 
   async getAllPanels(): Promise<Panel[]> {
     return await this.http.get<Panel[]>(baseUrl + '/panel').toPromise();
   }
 
-  // createPanel(data: Panel): Promise<Panel> {
-  //   return this.http.post<Panel>(baseUrl + '/panel', data).toPromise();
-  // }
-
-  // create panel map object
-  createPanel(panelData: Panel): Promise<Panel[]> {
+  async createPanel(panelData: Panel): Promise<Panel[]> {
     const myMap = { name: panelData.name, description: panelData.description };
-    console.log(myMap);
     return this.http.post<Panel[]>(baseUrl + '/panel', myMap).toPromise();
   }
 
@@ -36,26 +33,30 @@ export class PanelService {
     return await this.http.get(`${baseUrl + '/panel'}/${id}`).toPromise();
   }
 
-  updatePanel(panelData: Panel): Promise<Panel> {
+  async updatePanel(panelData: Panel): Promise<Panel> {
     return this.http.put<Panel>(baseUrl + '/panel', panelData).toPromise();
   }
+
   async getAllTest(): Promise<Test[]> {
     return await this.http.get<Test[]>(baseUrl + '/test').toPromise();
   }
-  createReport(reportData: Report): Promise<Report> {
+
+  async createReport(reportData: Report): Promise<Report> {
     return this.http.post<Report>(baseUrl + '/report', reportData).toPromise();
   }
+
   async getAllReport(): Promise<Report[]> {
     return await this.http.get<Report[]>(baseUrl + '/report').toPromise();
   }
+
   async getAllReportpaneltest(): Promise<Reportpaneltest[]> {
     return await this.http
       .get<Reportpaneltest[]>(baseUrl + '/reportpaneltest')
       .toPromise();
   }
-  getAllStudent(length: number, start: number): Array<Student> {
+
+  async getAllStudent(length: number, start: number): Promise<Array<Student>> {
     const records = this.studentdetails.splice(start, length);
-    console.log(records);
     return records;
   }
 }

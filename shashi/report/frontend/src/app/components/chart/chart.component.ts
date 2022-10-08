@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart, registerables } from 'chart.js';
-import { Employee } from 'src/app/models/employee.model';
-import employeeJson from 'src/app/employeedetails.json';
+import { Employee } from '../../models/employee.model';
+import employeeJson from '../../employeedetails.json';
 
 @Component({
   selector: 'app-chart',
   templateUrl: './chart.component.html',
   styleUrls: ['./chart.component.css'],
 })
+
 export class ChartComponent implements OnInit {
   employeedetails: Employee[] = employeeJson;
   employeeSalary: number[] = [];
@@ -19,7 +20,7 @@ export class ChartComponent implements OnInit {
     this.retrieveEmployeeDetails();
   }
 
-  retrieveEmployeeDetails(): void {
+  async retrieveEmployeeDetails(): Promise<void> {
     this.employeeName = this.employeedetails.map((employee) => employee.name);
     this.employeeSalary = this.employeedetails.map(
       (employee) => employee.salary
