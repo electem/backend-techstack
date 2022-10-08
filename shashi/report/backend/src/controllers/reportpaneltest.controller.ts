@@ -6,6 +6,7 @@ import { Reportpaneltest } from "../models/reportpaneltest";
 @Route("reportpaneltests")
 @Tags("reportpaneltest")
 export default class ReportpaneltestController {
+
   @Get("/")
   public async getReportpaneltest(): Promise<Map<String, String>> {
     var tableName = "report_panel_test";

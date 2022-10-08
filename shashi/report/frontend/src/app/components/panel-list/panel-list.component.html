@@ -54,7 +54,7 @@
           *ngIf="this.Testdropdown"
           style="width: 100%"
           [(ngModel)]="selectedtests"
-          (ngModelChange)="onSelected(selectedtests)"
+          (ngModelChange)="onSelectedTest(selectedtests)"
         >
           <option>Choose Test</option>
           <option *ngFor="let test of tests" [ngValue]="test">

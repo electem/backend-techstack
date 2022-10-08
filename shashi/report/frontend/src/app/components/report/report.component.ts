@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Panel } from 'src/app/models/panel.model';
-import { Reportpaneltest } from 'src/app/models/reportpaneltest.model';
-import { Test } from 'src/app/models/test.model';
-import { PanelService } from 'src/app/services/panel.serveice';
+import { Panel } from '../../models/panel.model';
+import { Reportpaneltest } from '../../models/reportpaneltest.model';
+import { Test } from '../../models/test.model';
+import { PanelService } from '../../services/panel.serveice';
 
 @Component({
   selector: 'app-panel-test-details',
@@ -36,17 +36,21 @@ export class ReportComponent implements OnInit {
 
   async retrieveReportpaneltest(): Promise<void> {
     const reportMapData = await this.panelService.getAllReportpaneltest();
-    console.log(reportMapData);
-    // converting map to object
     this.objectToMap = new Map(Object.entries(reportMapData));
   }
+
   async retrievePanels(): Promise<void> {
     this.panels = await this.panelService.getAllPanels();
   }
+
   async retrieveTests(): Promise<void> {
     this.tests = await this.panelService.getAllTest();
   }
-  TestPresentInPanelTextBox(currentPanel: Panel, currentTest: Test): boolean {
+
+  async TestPresentInPanelTextBox(
+    currentPanel: Panel,
+    currentTest: Test
+  ): Promise<boolean> {
     if (
       currentPanel &&
       currentTest &&
@@ -59,7 +63,10 @@ export class ReportComponent implements OnInit {
     }
   }
 
-  dataInsertInTextBox(currentPanel: Panel, currentTest: Test): void {
+  async dataInsertInTextBox(
+    currentPanel: Panel,
+    currentTest: Test
+  ): Promise<void> {
     if (currentPanel && currentTest) {
       const mapedData = this.objectToMap.get(
         currentPanel.id + '_' + currentTest.id
@@ -67,22 +74,11 @@ export class ReportComponent implements OnInit {
       return mapedData;
     }
   }
-
-  // without mapping
-  // dataInsertInTextBox(currentPanel: Panel, currentTest: Test) {
-  //   if (currentPanel && currentTest && this.reportpaneltest) {
-  //     const tableData = this.reportpaneltest.find(
-  //       (reportpanel) =>
-  //         reportpanel.panel_fk == currentPanel.id &&
-  //         reportpanel.test_fk == currentTest.id
-  //     );
-  //     return tableData?.data;
-  //   } else {
-  //     return 'shashi ';
-  //   }
-  // }
-
-  reportDetailsSave(event: any, panel: Panel, test: Test): void {
+  
+  async reportDetailsSave(event: any, 
+    panel: Panel, 
+    test: Test
+    ): Promise<void> {
     const savedReportId = localStorage.getItem('reportId');
     if (savedReportId != null) {
       const reportPanelTest: Reportpaneltest = {

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PanelService } from 'src/app/services/panel.serveice';
+import { PanelService } from '../../services/panel.serveice';
 import { Student } from '../../models/student';
 
 class DataTablesResponse {
@@ -14,14 +14,14 @@ class DataTablesResponse {
   templateUrl: './datatables.component.html',
   styleUrls: ['./datatables.component.css'],
 })
+
 export class DatatablesComponent implements OnInit {
   dtOptions: DataTables.Settings = {};
-
   students: Student[] = [];
-  dtTrigger: any;
+
   constructor(private panelService: PanelService) {}
+
   ngOnInit(): void {
-    // this.getAllStudent();
     const that = this;
     this.dtOptions = {
       pagingType: 'full_numbers',
@@ -39,7 +39,6 @@ export class DatatablesComponent implements OnInit {
           dataTablesParameters.length,
           dataTablesParameters.start
         );
-        // console.log(jsonData);
         that.students = jsonData;
         callback({});
       },
@@ -51,8 +50,4 @@ export class DatatablesComponent implements OnInit {
       ],
     };
   }
-
-  // getAllStudent() {
-  //   //this.students = this.panelService.getAllStudent();
-  //   console.log(this.students);
 }

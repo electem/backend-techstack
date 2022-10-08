@@ -17,11 +17,7 @@ export class AppHttpInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
     console.log(request);
-
-    // const body = { title: request.body.title };
-
     const reqCopy = request.clone({
-      // body,
     });
 
     if (baseUrl && request.url.startsWith(baseUrl)) {

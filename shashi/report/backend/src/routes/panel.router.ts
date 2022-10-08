@@ -9,12 +9,6 @@ router.get("/", async (_req, res) => {
   return res.send(response);
 });
 
-// router.post("/", async (req, res) => {
-//   const controller = new PanelController();
-//   const response = await controller.createPanel(req.body);
-//   return res.send(response);
-// });
-
 router.get("/:id", async (req, res) => {
   const controller = new PanelController();
   const response = await controller.getPanel(req.params.id);
