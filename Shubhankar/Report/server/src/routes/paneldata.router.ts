@@ -9,4 +9,10 @@ router.post("/", async (req, res) => {
   return res.send(response);
 });
 
+router.get("/", async (_req, res) => {
+  const controller = new PanelDataController();
+  const response = await controller.getPanelData();
+  return res.send(response);
+});
+
 export default router

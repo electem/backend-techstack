@@ -8,6 +8,7 @@ import { ReportrecordComponent } from './components/reportrecord/reportrecord.co
 import { EmployeeComponent } from './components/employee/employee.component';
 import { CompanyComponent } from './components/company/company.component';
 import { EmployeerecordComponent } from './components/employeerecord/employeerecord.component';
+import { DataTablesComponent } from './components/data-tables/data-tables.component';
 const routes: Routes = [
   { path: '', redirectTo: 'loginusers', pathMatch: 'full' },
   { path: 'pannels', component: PannellistComponent },
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'employee', component: EmployeeComponent },
   { path: 'company', component: CompanyComponent },
   { path: 'list', component: EmployeerecordComponent },
+  { path: 'datatable', component: DataTablesComponent },
 ];
 
 @NgModule({

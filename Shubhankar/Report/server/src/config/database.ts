@@ -1,5 +1,5 @@
 import {ConnectionOptions} from 'typeorm'
-import {  Panel,Test,Report,Reportpaneltest ,PanelData,Testdata  } from '../models'
+import {  Panel,Test,Report,Reportpaneltest ,PanelData,Testdata ,Employee,EmployeeDetils } from '../models'
 
 
 const config : ConnectionOptions = {
@@ -9,7 +9,7 @@ const config : ConnectionOptions = {
   username: process.env.POSTGRES_USER || "postgres",
   password: process.env.POSTGRES_PASSWORD || "cybis@ban",
   database: process.env.POSTGRES_DB || "postgres",
-  entities: [Panel,Test,Report,Reportpaneltest,PanelData,Testdata],
+  entities: [Panel,Test,Report,Reportpaneltest,PanelData,Testdata, Employee, EmployeeDetils],
   synchronize: true,
 }
 

@@ -1,15 +1,10 @@
-/** @format */
-
 import { Route, Tags, Post, Body, Get } from "tsoa";
 import {
   createReportpaneltest,
   getReportpaneltest,
   IReportpaneltestPayload,
 } from "../repositories/reportpaneltest.repository";
-import {
-  createConnection,
-  getConnection,
-} from "typeorm";
+import { createConnection, getConnection } from "typeorm";
 import { Reportpaneltest } from "../models/reportpaneltest";
 import { sequelizeConfig } from "../config/seq.config";
 import { QueryTypes } from "sequelize";
@@ -17,7 +12,6 @@ import { QueryTypes } from "sequelize";
 @Route("reportpaneltest")
 @Tags("reportpaneltest")
 export default class ReportPaneltestController {
-  
   reportpaneltest: any;
 
   @Post("/")
@@ -52,14 +46,14 @@ export default class ReportPaneltestController {
       type: QueryTypes.SELECT,
     });
     for (var reportpanellistdata of data) {
-      const reportpaneltest = reportpanellistdata  as Reportpaneltest;
-         myMap.set( 
-          reportpaneltest.panel_id+'_'+reportpaneltest.test_id ,reportpaneltest.data
-        )
-     }
-     const mapObject = Object.fromEntries(myMap);
-     console.log(mapObject)
-     return mapObject;
-
+      const reportpaneltest = reportpanellistdata as Reportpaneltest;
+      myMap.set(
+        reportpaneltest.panel_id + "_" + reportpaneltest.test_id,
+        reportpaneltest.data
+      );
+    }
+    const mapObject = Object.fromEntries(myMap);
+    console.log(mapObject);
+    return mapObject;
   }
 }

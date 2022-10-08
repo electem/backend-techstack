@@ -13,3 +13,7 @@ export const createTestData  = async (payload: ITestdataPayload) :Promise<Testda
     ...payload
   })
 }
+export const getTestData = async (): Promise<Array<Testdata>> => {
+  const testdata = getRepository(Testdata);
+  return testdata.find();
+};

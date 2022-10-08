@@ -1,5 +1,5 @@
-import {createPanelData} from '../repositories/paneldata.repository'
-import {Route, Tags,  Post, Body} from "tsoa";
+import {createPanelData, getPanelData} from '../repositories/paneldata.repository'
+import {Route, Tags,  Post, Body, Get} from "tsoa";
 import {PanelData} from '../models/paneldata'
 
 @Route("paneldata")
@@ -10,4 +10,9 @@ export default class PanelDataController {
   public async createPanelData(@Body() body: any):  Promise<PanelData> {
     return createPanelData(body)
   } 
+
+  @Get("/")
+  public async getPanelData(): Promise<Array<PanelData>> {
+    return getPanelData();
+  }
 }

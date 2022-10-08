@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Report } from 'src/app/models/report';
-import { PannelserviceService } from 'src/app/services/pannelservice.service';
+import { Report } from '../../models/report';
+import { PannelService } from '../../services/pannelservice.service';
 
 @Component({
   selector: 'app-reportrecord',
@@ -11,13 +11,13 @@ export class ReportrecordComponent implements OnInit {
   currentReport: Report = {};
   records?: Report[];
 
-  constructor(private PannelserviceService: PannelserviceService) {}
+  constructor(private pannelService: PannelService) {}
 
   ngOnInit(): void {
     this.retrieveRecords();
   }
 
   async retrieveRecords(): Promise<void> {
-    this.records = await this.PannelserviceService.getRecords();
+    this.records = await this.pannelService.getRecords();
   }
 }

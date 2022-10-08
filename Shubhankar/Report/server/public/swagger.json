@@ -230,6 +230,98 @@
 				],
 				"type": "object",
 				"additionalProperties": false
+			},
+			"Employee": {
+				"properties": {
+					"id": {
+						"type": "number",
+						"format": "double"
+					},
+					"name": {
+						"type": "string"
+					},
+					"address": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"id"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IEmployeePayload": {
+				"properties": {
+					"id": {
+						"type": "number",
+						"format": "double"
+					},
+					"name": {
+						"type": "string"
+					},
+					"address": {
+						"type": "string"
+					},
+					"gender": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"id",
+					"name",
+					"address",
+					"gender"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"EmployeeDetils": {
+				"properties": {
+					"id": {
+						"type": "number",
+						"format": "double"
+					},
+					"name": {
+						"type": "string"
+					},
+					"address": {
+						"type": "string"
+					},
+					"gender": {
+						"type": "string"
+					},
+					"salary": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IEmployeeDetailPayload": {
+				"properties": {
+					"id": {
+						"type": "number",
+						"format": "double"
+					},
+					"name": {
+						"type": "string"
+					},
+					"address": {
+						"type": "string"
+					},
+					"gender": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"id",
+					"name",
+					"address",
+					"gender"
+				],
+				"type": "object",
+				"additionalProperties": false
 			}
 		},
 		"securitySchemes": {}
@@ -286,17 +378,7 @@
 					"panel"
 				],
 				"security": [],
-				"parameters": [],
-				"requestBody": {
-					"required": true,
-					"content": {
-						"application/json": {
-							"schema": {
-								"$ref": "#/components/schemas/IPanelPayload"
-							}
-						}
-					}
-				}
+				"parameters": []
 			},
 			"put": {
 				"operationId": "UpdatePanel",
@@ -361,28 +443,28 @@
 			}
 		},
 		"/tests": {
-			"get": {
-				"operationId": "GetTests",
+			"post": {
+				"operationId": "CreatePanel",
 				"responses": {
-					"200": {
-						"description": "Ok",
-						"content": {
-							"application/json": {
-								"schema": {
-									"items": {
-										"$ref": "#/components/schemas/Test"
-									},
-									"type": "array"
-								}
-							}
-						}
+					"204": {
+						"description": "No content"
 					}
 				},
 				"tags": [
-					"test"
+					"tests"
 				],
 				"security": [],
-				"parameters": []
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/Panel"
+							}
+						}
+					}
+				}
 			}
 		},
 		"/reports": {
@@ -518,6 +600,29 @@
 						}
 					}
 				}
+			},
+			"get": {
+				"operationId": "GetPanelData",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/PanelData"
+									},
+									"type": "array"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"paneldata"
+				],
+				"security": [],
+				"parameters": []
 			}
 		},
 		"/testdata": {
@@ -546,6 +651,212 @@
 						"application/json": {
 							"schema": {
 								"$ref": "#/components/schemas/ITestdataPayload"
+							}
+						}
+					}
+				}
+			},
+			"get": {
+				"operationId": "GetTestData",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/Testdata"
+									},
+									"type": "array"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"testdata"
+				],
+				"security": [],
+				"parameters": []
+			}
+		},
+		"/employees": {
+			"post": {
+				"operationId": "CreateEmployees",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Employee"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"employees"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/IEmployeePayload"
+							}
+						}
+					}
+				}
+			},
+			"get": {
+				"operationId": "GetEmployee",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/EmployeeDetils"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"employees"
+				],
+				"security": [],
+				"parameters": []
+			}
+		},
+		"/employees/{id}": {
+			"get": {
+				"operationId": "GetEmployees",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Employee"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"employees"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			},
+			"put": {
+				"operationId": "UpdateEmployee",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Employee"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"employees"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/IEmployeePayload"
+							}
+						}
+					}
+				}
+			},
+			"delete": {
+				"operationId": "DeleteEmployee",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "string"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"employees"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/employees/employee": {
+			"post": {
+				"operationId": "CreateEmployee",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/EmployeeDetils"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"employees"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/IEmployeeDetailPayload"
 							}
 						}
 					}

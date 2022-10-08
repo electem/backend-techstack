@@ -5,22 +5,28 @@ import {
     JoinTable,
     ManyToMany,
   } from "typeorm";
- import { Test } from "./test";
-  @Entity()
-  export class Panel {
+import { JsonObject, JsonProperty } from "typescript-json-serializer";
+import { Test } from "./test";
+ @Entity()
+ @JsonObject()
+export class Panel {
     @PrimaryGeneratedColumn()
+    @JsonProperty()
     id!: number;
   
     @Column()
+    @JsonProperty()
     name?: string;
   
     @Column()
+    @JsonProperty()
     description?: string;
   
     @ManyToMany((_type) => Test, (test) => test.panels, {
       cascade: true,
     })
     @JoinTable()
-    tests!: Test[];
+    @JsonProperty()
+   tests!: Test[];
    }
   

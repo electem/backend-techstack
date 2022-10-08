@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Company} from 'src/app/models/company';
-import { Employee } from 'src/app/models/employee';
-import { PannelserviceService } from 'src/app/services/pannelservice.service';
+import { Company} from '../../models/company';
+import { Employee } from '../../models/employee';
+import { PannelService } from '../../services/pannelservice.service';
 @Component({
   selector: 'app-employee',
   templateUrl: './employee.component.html',
@@ -17,12 +17,10 @@ export class EmployeeComponent implements OnInit {
     salary: 1,
   };
   companys?: Company[];
-  
   submitted?: boolean;
   employees?: Employee[] =[];
   
-
-  constructor(private PannelserviceService: PannelserviceService, private formBuilder: FormBuilder) {}
+  constructor(private pannelService: PannelService, private formBuilder: FormBuilder) {}
 
   ngOnInit(): void {
     this.Employeeform = this.formBuilder.group({
@@ -32,8 +30,9 @@ export class EmployeeComponent implements OnInit {
     })
     this.getEmployee();
   }
-getEmployee() {
-    this.employee = this.PannelserviceService.getEmployee();
+
+ getEmployee() {
+    this.employee = this.pannelService.getEmployee();
   }
   async  SaveData(){
     this.submitted = true
@@ -50,7 +49,7 @@ getEmployee() {
       gender: this.employee.gender,
       salary: this.employee.salary,
     };
-    await this.PannelserviceService.createEmployee(employee);
+    await this.pannelService.createEmployee(employee);
   }
   
   get fval() {

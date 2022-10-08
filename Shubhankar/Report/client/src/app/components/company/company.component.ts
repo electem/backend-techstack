@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Company } from 'src/app/models/company';
-import { PannelserviceService } from 'src/app/services/pannelservice.service';
+import { Company } from '../../models/company';
+import { PannelService } from '../../services/pannelservice.service';
 
 @Component({
   selector: 'app-company',
@@ -8,17 +8,17 @@ import { PannelserviceService } from 'src/app/services/pannelservice.service';
   styleUrls: ['./company.component.css']
 })
 export class CompanyComponent implements OnInit {
-  companys?: Company[];
+  company?: Company[];
   
 
-  constructor(private PannelserviceService: PannelserviceService) { }
+  constructor(private pannelService: PannelService) { }
 
   ngOnInit(): void {
     this.getCompanies();
   }
 
   getCompanies() {
-    this.companys = this.PannelserviceService.getCompany();
+    this.company = this.pannelService.getCompany();
   }
 
 }

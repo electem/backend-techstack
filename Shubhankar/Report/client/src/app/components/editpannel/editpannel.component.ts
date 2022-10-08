@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { PannelserviceService } from 'src/app/services/pannelservice.service';
-import { Panel } from 'src/app/models/pannel';
-import { Test } from 'src/app/models/test';
+import { PannelService } from '../../services/pannelservice.service';
+import { Panel } from '../../models/pannel';
+import { Test } from '../../models/test';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -24,7 +24,7 @@ export class EditpannelComponent implements OnInit {
     tests: [],
   };
   constructor(
-    private PannelserviceService: PannelserviceService,
+    private pannelService: PannelService,
     private route: ActivatedRoute
   ) {}
 
@@ -36,11 +36,11 @@ export class EditpannelComponent implements OnInit {
   }
 
   async retrievePanels(): Promise<void> {
-    this.panels = await this.PannelserviceService.getAll();
+    this.panels = await this.pannelService.getAll();
   }
 
   async retrievePanelbyid(id: number) {
-    this.panel = await this.PannelserviceService.getPanel(id);
+    this.panel = await this.pannelService.getPanel(id);
   }
 
   addPanel() {
@@ -67,11 +67,11 @@ export class EditpannelComponent implements OnInit {
       name: this.panel.name,
       description: this.panel.description,
     };
-    await this.PannelserviceService.createPanel(panelData);
+    await this.pannelService.createPanel(panelData);
     this.retrievePanels();
   }
   async retrieveTest(): Promise<void> {
-    this.test = await this.PannelserviceService.getAllTest();
+    this.test = await this.pannelService.getAllTest();
   }
 
   onSelected(value: Test) {
@@ -93,6 +93,6 @@ export class EditpannelComponent implements OnInit {
       tests: this.panel.tests,
     };
     updateData.tests = this.selectedTest;
-    await this.PannelserviceService.updatePanel(updateData);
+    await this.pannelService.updatePanel(updateData);
   }
 }

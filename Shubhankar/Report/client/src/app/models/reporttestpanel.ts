@@ -3,4 +3,4 @@ export class Reporttestpanel {
   panel_id?: number;
   data?: string;
   test_id?: number;
- }
+}

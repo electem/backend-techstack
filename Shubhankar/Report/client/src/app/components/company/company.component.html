@@ -1,4 +1,3 @@
-<p>company works!</p>
 <table class="table table-striped table-bordered justify-content-center">
   <thead class="thead-light">
     <tr class="active">
@@ -6,10 +5,10 @@
       <th class="text-center" scope="col"> Address</th>
    </tr>
   </thead>
-  <tbody *ngFor="let companys of companys; let i = index">
+  <tbody *ngFor="let company of company; let i = index">
       <tr class="success">
-        <th class="text-center" scope="row">{{ companys.name }}</th>
-        <th class="text-center" scope="row">{{ companys.address }}</th>
+        <th class="text-center" scope="row">{{ company.name }}</th>
+        <th class="text-center" scope="row">{{ company.address }}</th>
         </tr>
       </tbody>
 </table>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Employee } from 'src/app/models/employee';
-import { PannelserviceService } from 'src/app/services/pannelservice.service';
+import { Employee } from '../../models/employee';
+import { PannelService } from '../../services/pannelservice.service';
 
 @Component({
   selector: 'app-employeerecord',
@@ -10,12 +10,13 @@ import { PannelserviceService } from 'src/app/services/pannelservice.service';
 export class EmployeerecordComponent implements OnInit {
   employees?: Employee[] =[];
 
-  constructor(private PannelserviceService: PannelserviceService) { }
+  constructor(private pannelService: PannelService) { }
 
   ngOnInit(): void {
     this. getEmployees();
   }
+  
   async getEmployees(){
-    this.employees  = await this.PannelserviceService.getEmployees()
+    this.employees  = await this.pannelService.getEmployees()
 }
 }
