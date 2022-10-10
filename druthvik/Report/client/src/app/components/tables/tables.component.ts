@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PanelService } from '../../services/panel.service';
 import { Employee } from '../../models/employee.model';
-import { Student } from '../../models/student.model';
 
 @Component({
   selector: 'app-tables',
@@ -11,7 +10,6 @@ import { Student } from '../../models/student.model';
 export class DatatablesComponent implements OnInit {
   dtOptions: DataTables.Settings = {};
   employee?: Employee[] = [];
-  student?: Student[] = [];
 
   constructor(private panelService: PanelService) {}
   ngOnInit(): void {
@@ -19,23 +17,17 @@ export class DatatablesComponent implements OnInit {
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 3,
-      paging: true,
       serverSide: true,
       processing: true,
       ajax: (dataTablesParameters: any, callback) => {
-        const jsonData = that.panelService.getEmployee(
-          dataTablesParameters.start,
+        const employeeData = that.panelService.getEmployee(
           dataTablesParameters.length,
+          dataTablesParameters.start,
         );
-        that.employee = jsonData;
-        console.log(jsonData);
+        that.employee = employeeData;
         callback({});
       },
       columns: [{ data: 'id' }, { data: 'firstName' }, { data: 'lastName' }],
     };
-  }
-  getAllEmployess() {
-    this.employee = this.panelService.getEmployees();
-    console.log(this.employee);
   }
 }

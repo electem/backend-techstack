@@ -16,7 +16,7 @@ const baseUrl = environment.url;
   providedIn: 'root',
 })
 export class PanelService {
-  employees: Employee[] = employee;
+  employees = employee;
   students: Student[] = student;
 
   constructor(private http: HttpClient) {}
@@ -27,14 +27,6 @@ export class PanelService {
       pageArray.push(this.employees[i]);
     }
     return pageArray;
-  }
-
-  getEmployees() {
-    return this.employees;
-  }
-
-  getStudent() {
-    return this.students;
   }
 
   async getAllPanel(): Promise<Panel[]> {
