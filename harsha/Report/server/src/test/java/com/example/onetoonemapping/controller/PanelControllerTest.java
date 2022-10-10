@@ -5,7 +5,6 @@ import static org.mockito.Mockito.when;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import com.example.onetoonemapping.models.Panel;
@@ -36,21 +35,7 @@ class PanelControllerTest {
 
 	@Test
 	public void createPanel() {
-		panels.add(panel);
-		tests.add(test);
-		tests.add(test2);
 		when(panelRepository.save(panel)).thenReturn(panel);
 		assertEquals(panel, panelRepository.save(panel));
-	}
-	
-	@Test
-	public void getPanelById()  {
-		int id = 1;
-	panels.add(panel);
-	panels.add(panel2);
-	tests.add(test);
-	tests.add(test2);
-		Mockito.when(panelRepository.findByPanelId(id)).thenReturn(panels);
-		assertEquals(panels.size(), (panelRepository.findByPanelId(id)).size());
 	}
 }

@@ -89,7 +89,7 @@ export class ReportDetailsComponent implements OnInit {
     }
   }
 
-  async getReportById(id: Number) {
+  async getReportById(id: number) {
     this.report = await this.panelService.getReportById(id);
   }
 }

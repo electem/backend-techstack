@@ -11,5 +11,5 @@ import com.example.onetoonemapping.models.Employee;
 public interface EmployeeRepository extends PagingAndSortingRepository<Employee, Integer> {
 
 	@Query(value = "SELECT e.id,e.name,e.age FROM employee e", countQuery = "select count(e.id) as FROM from employee e", nativeQuery = true)
-	Page<Employee> findAll(Pageable paging);
+	Page<Employee> findAll(Pageable pageable);
 }

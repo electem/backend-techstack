@@ -7,12 +7,10 @@ import javax.persistence.Lob;
 import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "files")
 @Data
-@NoArgsConstructor
 public class DBFile {
 
 	@Id

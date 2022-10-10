@@ -1,13 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { PanelService } from 'src/app/services/panel.service';
-import { Employee } from 'src/app/models/employee.model';
-
-class DataTablesResponse {
-  data!: any[];
-  draw!: number;
-  recordsFiltered!: number;
-  recordsTotal!: number;
-}
+import { PanelService } from '../../services/panel.service';
+import { Employee } from '../../models/employee.model';
 
 @Component({
   selector: 'app-data-table',
