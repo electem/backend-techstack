@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Panel } from 'src/app/models/panel.model';
-import { Test } from 'src/app/models/test.model';
-import { PanelService } from 'src/app/services/panel.service';
+import { Panel } from '../../models/panel.model';
+import { Test } from '../../models/test.model';
+import { PanelService } from '../../services/panel.service';
 import { ReportTestPanel } from '../../models/reporttestpanel.model';
 
 @Component({
@@ -13,12 +13,6 @@ export class ReportComponent implements OnInit {
   panels?: Panel[];
   tests: Test[];
   report: ReportTestPanel[];
-  report1: ReportTestPanel = {
-    data: '',
-    panel_fk: 0,
-    test_fk: 0,
-    report_fk: 0,
-  };
   objectToMap = new Map();
 
   constructor(private panelService: PanelService) {}
@@ -28,9 +22,11 @@ export class ReportComponent implements OnInit {
     this.listTests();
     this.listReportTestPanel();
   }
+
   async listPanels(): Promise<void> {
     this.panels = await this.panelService.getAllPanel();
   }
+
   async listTests(): Promise<void> {
     this.tests = await this.panelService.getAllTests();
   }
@@ -39,7 +35,8 @@ export class ReportComponent implements OnInit {
     const reportMap = await this.panelService.getReportPaneltest();
     this.objectToMap = new Map(Object.entries(reportMap));
   }
-  checkIfPanelContainsTest(currentPanel: Panel, currentTest: Test) {
+
+  async checkIfPanelContainsTest(currentPanel: Panel, currentTest: Test) {
     if (
       currentPanel &&
       currentTest &&
@@ -51,20 +48,8 @@ export class ReportComponent implements OnInit {
       return false;
     }
   }
-  onBlurMethod(event: any, panel: Panel, test: Test) {
-    const savedReportId = localStorage.getItem('reportId');
-    if (savedReportId != null) {
-      const ReportTestPanel: ReportTestPanel = {
-        data: event.target.value,
-        panel_fk: panel.id,
-        test_fk: test.id,
-        report_fk: +savedReportId,
-      };
-      console.log(ReportTestPanel);
-    }
-  }
 
-  onDisplay(currentPanel: Panel, currentTest: Test) {
+  async onDisplay(currentPanel: Panel, currentTest: Test) {
     if (currentPanel && currentTest) {
       const keyObject = this.objectToMap.get(
         currentPanel.id + '' + currentTest.id,

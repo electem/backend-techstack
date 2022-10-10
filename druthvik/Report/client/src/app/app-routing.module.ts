@@ -8,16 +8,18 @@ import { EditpanelComponent } from './components/editpanel/editpanel.component';
 import { AdddtestComponent } from './components/editpanel/adddtest/adddtest.component';
 import { ReportComponent } from './components/report/report.component';
 import { ChartsComponent } from './components/charts/charts.component';
+import { DatatablesComponent } from './components/tables/tables.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'panels', pathMatch: 'full' },
   { path: 'addPanel', component: AddpanelComponent },
   { path: 'panels', component: PanelListComponent },
   { path: 'editpanels/:id', component: EditpanelComponent },
-  { path: 'report', component: ReporttableComponent },
+  { path: 'reporttable', component: ReporttableComponent },
   { path: 'test', component: AdddtestComponent },
-  { path: 'report1', component: ReportComponent },
+  { path: 'report', component: ReportComponent },
   { path: 'charts', component: ChartsComponent },
+  { path: 'tables', component: DatatablesComponent },
   { path: '**', component: PageNotFoundComponent },
 ];
 

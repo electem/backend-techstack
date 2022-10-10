@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart, registerables } from 'chart.js';
-
-import student from 'src/app/students.json';
+import student from '../../services/students.json';
 
 interface Student {
-  id: Number;
-  name: String;
+  id: number;
+  name: string;
   salary: number;
 }
 
@@ -16,8 +15,9 @@ interface Student {
 })
 export class ChartsComponent implements OnInit {
   students: Student[] = student;
-  studentName: String[] = [];
+  studentName: string[] = [];
   studentSalary: number[] = [];
+
   constructor() {}
 
   ngOnInit(): void {
@@ -28,7 +28,7 @@ export class ChartsComponent implements OnInit {
     this.studentName = this.students.map((students) => students.name);
     this.studentSalary = this.students.map((students) => students.salary);
     Chart.register(...registerables);
-    var myChart = new Chart('myChart', {
+    const myChart = new Chart('myChart', {
       type: 'bar',
       data: {
         labels: this.studentName,

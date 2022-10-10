@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Panel } from 'src/app/models/panel.model';
-import { PanelService } from 'src/app/services/panel.service';
+import { Panel } from '../../models/panel.model';
+import { PanelService } from '../../services/panel.service';
 
 @Component({
   selector: 'app-addpanel',
@@ -16,25 +16,28 @@ export class AddpanelComponent implements OnInit {
     description: '',
     test: [],
   };
+
   constructor(private panelService: PanelService, private router: Router) {}
 
   ngOnInit(): void {
     this.showForm = false;
   }
 
-  addPanel() {
+  async addPanel() {
     this.showForm = true;
   }
-  canclePanel() {
+
+  async canclePanel() {
     this.showForm = false;
   }
+
   async savePanel() {
     this.submitted = true;
-    const panelData: Panel = {
+    const panel: Panel = {
       name: this.panel.name,
       description: this.panel.description,
     };
-    await this.panelService.createPanel(panelData);
+    await this.panelService.createPanel(panel);
     this.showForm = false;
     this.router.navigate(['/panels']);
   }

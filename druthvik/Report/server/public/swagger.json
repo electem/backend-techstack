@@ -27,6 +27,8 @@
 				},
 				"required": [
 					"id",
+					"name",
+					"description",
 					"test"
 				],
 				"type": "object",
@@ -111,6 +113,26 @@
 										"$ref": "#/components/schemas/Panel"
 									},
 									"type": "array"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Panel"
+				],
+				"security": [],
+				"parameters": []
+			},
+			"post": {
+				"operationId": "CreatePanel",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Panel"
 								}
 							}
 						}

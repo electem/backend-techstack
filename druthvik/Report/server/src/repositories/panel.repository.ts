@@ -1,5 +1,6 @@
 import { getManager, getRepository } from 'typeorm';
 import { Panel } from '../models/panel';
+import logger from 'winston';
 
 export class IPanelPayload {
   name: string;
@@ -7,28 +8,30 @@ export class IPanelPayload {
 }
 
 export const createPanel = async (map: Map<string, string>): Promise<Panel> => {
+  logger.info('Start of :: createPanel :: panelCreation ');
   const panelRepository = getRepository(Panel);
-  const map1 = new Map(Object.entries(map));
-  console.log(map1);
+  const objectToMap = new Map(Object.entries(map));
   const panel = new Panel();
-  console.log(' ' + map1);
-  panel.name = map1.get('name');
-  panel.description = map1.get('description');
+  panel.name = objectToMap.get('name');
+  panel.description = objectToMap.get('description');
+  logger.info('End of :: createPanel :: panelCreation ');
   return panelRepository.save(panel);
 };
 
 export const updatePanel = async (payload: IPanelPayload): Promise<Panel> => {
+  logger.info('Start of :: updatePanel :: panelUpdation ');
   const panelRepository = getRepository(Panel);
   const panel = new Panel();
+  logger.info('End of :: updatePanel :: panelUpdation ');
   return panelRepository.save({
     ...panel,
     ...payload,
   });
 };
 
-//query builder query to get all the panels with their tests
-
+// This is block of code is use to get all the panels and its associated tests using Querybuilder.
 export const getPanels = async (): Promise<Array<Panel>> => {
+  logger.error('Start of :: getPanels :: getPanels ');
   const entityManager = getManager();
   let tests = [];
   const query = entityManager.createQueryBuilder(Panel, 'panel');
@@ -36,12 +39,13 @@ export const getPanels = async (): Promise<Array<Panel>> => {
     .select(['panel', 'test'])
     .leftJoinAndSelect('panel.test', 'test')
     .getMany();
+  logger.info('End of :: getPanels :: getPanels ');
   return tests;
 };
 
-//query builder query to get panel by id with their associations
-
+// This is block of code is use to get single panel by id and its associated tests using Querybuilder.
 export const getPanel = async (id: number) => {
+  logger.info('Start of :: getPanels :: getPanels ::' + id);
   const entityManager = getManager();
   const query = entityManager.createQueryBuilder(Panel, 'panel');
   const panelquery = await query
@@ -49,6 +53,6 @@ export const getPanel = async (id: number) => {
     .leftJoinAndSelect('panel.test', 'test')
     .where('panel.id = :id', { id: id })
     .getOne();
-
+  logger.info('End of :: getPanels :: getPanels ::' + id);
   return panelquery;
 };

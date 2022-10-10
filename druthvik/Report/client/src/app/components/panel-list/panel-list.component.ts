@@ -1,15 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Panel } from 'src/app/models/panel.model';
-import { PanelService } from 'src/app/services/panel.service';
+import { Panel } from '../../models/panel.model';
+import { PanelService } from '../../services/panel.service';
 import { Test } from '../../models/test.model';
 import { Report } from '../../models/report.model';
-const map1 = new Map(Object.entries(Panel));
-console.log(map1);
-
-const panel = new Panel();
-let sampleMap = new Map<string, string>();
-sampleMap.set(panel.name, panel.description);
 
 @Component({
   selector: 'app-panel-list',
@@ -29,7 +22,7 @@ export class PanelListComponent implements OnInit {
   savedReport = new Report();
   testTable: boolean;
   panel: Panel = {
-    name: '', //object
+    name: '',
     description: '',
     test: [],
   };
@@ -40,10 +33,7 @@ export class PanelListComponent implements OnInit {
     name: this.randomString(5),
   };
 
-  constructor(
-    private panelService: PanelService,
-    private route: ActivatedRoute,
-  ) {}
+  constructor(private panelService: PanelService) {}
 
   ngOnInit(): void {
     this.listPanels();
@@ -51,11 +41,12 @@ export class PanelListComponent implements OnInit {
     this.showForm = false;
   }
 
-  randomString(length) {
-    var randomChars =
+  //This block of code is used to generate random string
+  randomString(length: number) {
+    const randomChars =
       'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    var result = '';
-    for (var i = 0; i < length; i++) {
+    let result = '';
+    for (let i = 0; i < length; i++) {
       result += randomChars.charAt(
         Math.floor(Math.random() * randomChars.length),
       );
@@ -71,36 +62,36 @@ export class PanelListComponent implements OnInit {
     this.tests = await this.panelService.getAllTests();
   }
 
-  addPanel() {
+  async addPanel() {
     this.showForm = true;
   }
 
-  canclePanel() {
+  async canclePanel() {
     this.showForm = false;
     this.addPanelForm = false;
     this.showButton = false;
   }
 
-  editTest(test: Test) {
+  async editTest(test: Test) {
     this.test = test;
     this.showDropdown = true;
   }
 
   async savePanel() {
     this.submitted = true;
-    const panelData: Panel = {
+    const panel: Panel = {
       name: this.panel.name,
       description: this.panel.description,
     };
-    await this.panelService.createPanel(panelData);
+    await this.panelService.createPanel(panel);
     this.showForm = false;
     this.listPanels();
   }
 
-  onSelected(value: Test) {
+  async onSelectedPanel(test: Test) {
     if (this.tests) {
       for (const tests of this.tests) {
-        if (tests.id === value.id) {
+        if (tests.id === test.id) {
           this.selectedTests.push(tests);
         }
       }
@@ -108,24 +99,24 @@ export class PanelListComponent implements OnInit {
   }
 
   async updatePanel(): Promise<void> {
-    const panelData: Panel = {
+    const panel: Panel = {
       id: this.panel.id,
       name: this.panel.name,
       description: this.panel.description,
       test: this.panel.test,
     };
-    panelData.test = this.selectedTests;
-    await this.panelService.update(panelData);
+    panel.test = this.selectedTests;
+    await this.panelService.update(panel);
     this.addPanelForm = false;
     this.showDropdown = false;
     this.testTable = true;
   }
 
   async saveReport() {
-    const reportData: Report = {
+    const report: Report = {
       name: this.report.name,
     };
-    this.savedReport = await this.panelService.createReport(reportData);
+    this.savedReport = await this.panelService.createReport(report);
     if (this.savedReport && this.savedReport.id) {
       localStorage.setItem('reportId', this.savedReport.id + '');
     }

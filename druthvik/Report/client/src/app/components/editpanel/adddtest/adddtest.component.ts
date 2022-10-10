@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Test } from 'src/app/models/test.model';
-import { PanelService } from 'src/app/services/panel.service';
+import { Test } from '../../../models/test.model';
+import { PanelService } from '../../../services/panel.service';
 import { Panel } from '../../../models/panel.model';
 
 @Component({
@@ -26,17 +26,13 @@ export class AdddtestComponent implements OnInit {
 
   ngOnInit(): void {
     this.listTests();
-    this.listTests1(this.test1);
   }
+
   async listTests(): Promise<void> {
     this.tests = await this.panelService.getAllTests();
   }
 
-  async listTests1(test): Promise<void> {
-    this.tests = await this.panelService.getAllTests1(test);
-  }
-
-  onSelected(value: Test) {
+  async onSelected(value: Test) {
     if (this.tests) {
       for (const tests of this.tests) {
         if (tests.id === value.id) {

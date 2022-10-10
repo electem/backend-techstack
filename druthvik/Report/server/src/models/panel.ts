@@ -6,7 +6,6 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { JsonObject, JsonProperty } from 'typescript-json-serializer';
-
 import { Test } from './test';
 
 @Entity()

@@ -4,11 +4,8 @@ import {
   HttpHandler,
   HttpEvent,
   HttpInterceptor,
-  HttpResponse,
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
-const baseUrl = 'http://localhost:8000/tutorial';
 
 @Injectable()
 export class HeadersInterceptor implements HttpInterceptor {
@@ -19,7 +16,7 @@ export class HeadersInterceptor implements HttpInterceptor {
     next: HttpHandler,
   ): Observable<HttpEvent<unknown>> {
     console.log(request);
-    const apiKey = 'Druthvik';
+    const apiKey = 'Headers';
 
     request = request.clone({
       setHeaders: {
