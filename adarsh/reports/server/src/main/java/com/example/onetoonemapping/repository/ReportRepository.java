@@ -1,13 +1,11 @@
 package com.example.onetoonemapping.repository;
 
 import java.util.List;
-
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import com.example.onetoonemapping.models.Report;
-
 
 @Repository
 public interface ReportRepository extends CrudRepository<Report, Integer> {
