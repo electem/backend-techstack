@@ -19,6 +19,8 @@ import com.example.onetoonemapping.exceptions.MyFileNotFoundException;
 import com.example.onetoonemapping.models.DBFile;
 import com.example.onetoonemapping.models.UploadFileResponse;
 import com.example.onetoonemapping.service.DBFileStorageService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author Cybertech1
@@ -28,31 +30,21 @@ import com.example.onetoonemapping.service.DBFileStorageService;
 @RequestMapping("/api")
 public class FileControllerr {
 
+	private Logger log = LoggerFactory.getLogger(FileControllerr.class);
+
 	@Autowired
 	private DBFileStorageService dbFileStorageService;
 
-	/**
-	 * @param file
-	 * @return
-	 * @throws FileStorageException
-	 */
-	@GetMapping("/")
-	public String getHello() {
-		return "hellow world";
-
-	}
-
 	@PostMapping("/uploadFile")
 	public UploadFileResponse uploadFile(@RequestParam(value = "file") MultipartFile file) throws FileStorageException {
-
+		log.info("Start of FileController :: uploadFile ");
 		DBFile dbFile = dbFileStorageService.storeFile(file);
-
 		String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/downloadFile/")
 				.path(dbFile.getId()).toUriString();
+		log.info("End of FileController :: uploadFile ");
 		return new UploadFileResponse(dbFile.getFileName(), fileDownloadUri, file.getContentType(), file.getSize());
-
 	}
-	  
+
 	/**
 	 * @param fileId
 	 * @return
@@ -60,12 +52,12 @@ public class FileControllerr {
 	 */
 	@GetMapping("/downloadFile/{fileId}")
 	public ResponseEntity<Resource> downloadFile(@PathVariable String fileId) throws MyFileNotFoundException {
-		// Load file from database
+		log.info("Start of FileController :: downloadFile :: "+fileId);
+		// this piece of code is to Load file from database
 		DBFile dbFile = dbFileStorageService.getFile(fileId);
-		// DBFile dbFile=dbFileStorageService.getFileByname(fileId);
+		log.info("End of FileController :: downloadFile ");
 		return ResponseEntity.ok().contentType(MediaType.parseMediaType(dbFile.getFileType()))
 				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + dbFile.getFileName() + "\"")
 				.body(new ByteArrayResource(dbFile.getData()));
 	}
-
 }

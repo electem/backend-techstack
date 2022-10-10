@@ -1,7 +1,6 @@
 package com.example.onetoonemapping.models;
 
 import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,7 +10,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-
 import lombok.Builder;
 import lombok.Data;
 
@@ -23,11 +21,11 @@ public class Panel {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private int panelId;
 
-	private String name;
+	private String panelName;
 
-	private String description;
+	private String panelDescription;
 
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "panels_tests", joinColumns = { @JoinColumn(name = "panels_id") }, inverseJoinColumns = {

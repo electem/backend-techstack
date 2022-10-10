@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Panel } from 'src/app/models/panel.model';
-import { ReportPanelTest } from 'src/app/models/reportlist.model';
-import { Test } from 'src/app/models/test.model';
-import { PanelService } from 'src/app/services/panel.service';
+import { Panel } from '../../models/panel.model';
+import { ReportPanelTest } from '../../models/reportlist.model';
+import { Test } from '../../models/test.model';
+import { PanelService } from '../../services/panel.service';
 
 @Component({
   selector: 'app-reportlist',
@@ -30,6 +30,7 @@ export class ReportlistComponent implements OnInit {
   stringJson?: string;
   reportMapDetails = new Map();
   savedreportId: any;
+  
   constructor(
     private panelService: PanelService,
     private router: Router,
@@ -41,16 +42,20 @@ export class ReportlistComponent implements OnInit {
     this.retrieveTest();
     this.retrieveReportList();
   }
+
   async retrievePanels(): Promise<void> {
     this.panels = await this.panelService.getPanels();
   }
+
   async retrieveTest(): Promise<void> {
     this.tests = await this.panelService.getAllTest();
   }
+
   async retrieveReportList(): Promise<void> {
     const reportMap = await this.panelService.getAllReportList();
     this.reportMapDetails = new Map(Object.entries(reportMap));
   }
+  
   isTestPresentInPanel(currentPanel: Panel, currentTest: Test) {
     if (
       currentPanel &&
@@ -63,18 +68,21 @@ export class ReportlistComponent implements OnInit {
       return false;
     }
   }
+
   isPanelTestPresentInReport(currentPanel: Panel, currentTest: Test) {
     if (currentPanel && currentTest) {
-      const reportMapvalue = this.reportMapDetails.get(currentPanel.id + '_' + currentTest.id);
+      const reportMapvalue = this.reportMapDetails.get(
+        currentPanel.id + '_' + currentTest.id
+      );
       return reportMapvalue;
     }
   }
 
-  async onBlurEvent(event: any, panel: Panel, test: Test) {
+  async onBlurEventToAutoGenarateId(event: Event, panel: Panel, test: Test) {
     const savedreportId = localStorage.getItem('reportId');
     if (savedreportId != null) {
       const reportList: ReportPanelTest = {
-        data: event.target.value,
+        data: (event.target as HTMLInputElement).value,
         panelID: panel.id,
         testID: test.id,
         reportID: +this.savedreportId,

@@ -1,9 +1,10 @@
 package com.example.onetoonemapping.controller;
 
 import java.util.List;
-
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,20 +17,32 @@ import com.example.onetoonemapping.repository.ReportRepository;
 @RestController
 @CrossOrigin
 public class ReportController {
-	
+	private Logger log = LoggerFactory.getLogger(ReportController.class);
+
 	@Autowired
 	ReportRepository reportRepository;
-	
+
+	/**
+	 * @GetMapping
+	 * @return list of report
+	 */
 	@GetMapping("/report")
 	public List<Report> getReportList() {
-		List<Report> report = (List<Report>) reportRepository.findAll();
-		return report;
+		log.info("Start of ReportController :: getReportList ");
+		List<Report> listOfeport = (List<Report>) reportRepository.findAll();
+		log.info("End of ReportController :: getReportList ");
+		return listOfeport;
 	}
-	
+
+	/**
+	 * @GetMapping
+	 * @param report
+	 * @return list of report
+	 */
 	@PostMapping("/createReport")
-	public Report createReport(@Valid @RequestBody Report report) {	
-			return reportRepository.save(report);
-	
+	public Report createReport(@Valid @RequestBody Report report) {
+		log.info("Start of ReportController :: createReport ");
+		return reportRepository.save(report);
+
 	}
-	
 }
