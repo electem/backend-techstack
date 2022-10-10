@@ -1,18 +1,17 @@
 import { Employee } from "../models/employee";
 import { Body, Delete, Get, Path, Post, Put, Route, Tags } from "tsoa";
-import {
-  IEmployeePayload,
-} from "../repositories/employee.repository";
+import { IEmployeePayload } from "../repositories/employee.repository";
 import { EmployeeDetils } from "../models/EmployeeDetails";
 
 @Route("employees")
 @Tags("employees")
 export default class EmployeeController {
+  
   @Post("/")
   public async createEmployees(
     @Body() body: IEmployeePayload
   ): Promise<Employee> {
-    var employee = {
+    const employee = {
       name: body.name,
       address: body.address,
     };
@@ -21,7 +20,7 @@ export default class EmployeeController {
 
   @Get("/:id")
   public async getEmployees(@Path() id: string): Promise<Employee> {
-    var employeedata = {
+    const employeedata = {
       id: +id,
       name: "ram",
       address: "btm",
@@ -34,31 +33,23 @@ export default class EmployeeController {
     @Path() id: string,
     @Body() body: IEmployeePayload
   ): Promise<Employee> {
-    console.log("Id is " + id);
-    var updateemployee = {
+    const updateemployee = {
       name: body.name,
       address: body.address,
     };
     return updateemployee as Employee;
   }
 
-  @Delete("/:id")
-  public async deleteEmployee(@Path() id: string): Promise<string> {
-    console.log(" deleted Id is " + id);
-    return "employee deleted";
-  }
-
   @Post("/employee")
   public async createEmployee(
     @Body() body: IEmployeePayload
   ): Promise<EmployeeDetils> {
-    var employee = {
+    const employee = {
       name: body.name,
       address: body.address,
-      gender:body.gender,
+      gender: body.gender,
     };
-    console.log(employee)
-    return employee as EmployeeDetils;    
-  
+    console.log(employee);
+    return employee as EmployeeDetils;
   }
 }

@@ -15,5 +15,10 @@
     }
   },
   "include": [ "src/**/*"],
-  "exclude" : ["src/**/*.test.ts"]
+  "exclude" : ["src/**/*.test.ts"],
+   "rules": {
+        "semi": ["error", "always"],
+        "quotes": ["error", "double"]
+    }
+
 }

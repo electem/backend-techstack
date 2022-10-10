@@ -1,16 +1,11 @@
 import { Get, Route, Tags, Post, Body, Path, Put } from "tsoa";
 import { Panel } from "../models/panel";
-import {
-  IPanelPayload,
-  getPanels,
-  createPanel,
-  getPanel,
-  updatePanel,
-} from "../repositories/panel.repository";
+import { IPanelPayload, getPanels,createPanel, getPanel, updatePanel} from "../repositories/panel.repository";
 
 @Route("panels")
 @Tags("panel")
 export default class PanelController {
+  
   @Get("/")
   public async getPanels(): Promise<Array<Panel>> {
     return getPanels();

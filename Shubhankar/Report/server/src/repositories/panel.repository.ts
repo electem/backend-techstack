@@ -23,7 +23,6 @@ export const updatePanel = async (payload: IPanelPayload): Promise<Panel> => {
   });
 };
 
-
 export const getPanels = async (): Promise<Array<Panel>> => {
   const entityManager = getManager();
   let tests = [];
@@ -35,11 +34,10 @@ export const getPanels = async (): Promise<Array<Panel>> => {
   return tests;
 };
 
-
 export const getPanel = async (id: number) => {
   const entityManager = getManager();
   const query = entityManager.createQueryBuilder(Panel, "panels");
-  let panelquery = await query
+  const panelquery = await query
     .select(["panels", "tests"])
     .leftJoinAndSelect("panels.tests", "tests")
     .where("panels.id = :id", { id: id })

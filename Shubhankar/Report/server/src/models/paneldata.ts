@@ -1,10 +1,4 @@
-import {
-    Column,
-    Entity,
-    JoinTable,
-    ManyToMany,
-    PrimaryGeneratedColumn,
-      } from "typeorm";
+import {Column,Entity,JoinTable,ManyToMany,PrimaryGeneratedColumn} from "typeorm";
 import { Testdata } from "./testdata";
   
     @Entity()
@@ -20,5 +14,4 @@ import { Testdata } from "./testdata";
     })
     @JoinTable()
     test_data!: Testdata[]
-
 }

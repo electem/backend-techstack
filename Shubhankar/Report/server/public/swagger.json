@@ -146,33 +146,6 @@
 				"type": "object",
 				"additionalProperties": false
 			},
-			"IReportpaneltestPayload": {
-				"properties": {
-					"data": {
-						"type": "string"
-					},
-					"panel_id": {
-						"type": "number",
-						"format": "double"
-					},
-					"test_id": {
-						"type": "number",
-						"format": "double"
-					},
-					"report_id": {
-						"type": "number",
-						"format": "double"
-					}
-				},
-				"required": [
-					"data",
-					"panel_id",
-					"test_id",
-					"report_id"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
 			"PanelData": {
 				"properties": {
 					"id": {
@@ -361,28 +334,28 @@
 			}
 		},
 		"/tests": {
-			"get": {
-				"operationId": "GetTests",
+			"post": {
+				"operationId": "CreatePanel",
 				"responses": {
-					"200": {
-						"description": "Ok",
-						"content": {
-							"application/json": {
-								"schema": {
-									"items": {
-										"$ref": "#/components/schemas/Test"
-									},
-									"type": "array"
-								}
-							}
-						}
+					"204": {
+						"description": "No content"
 					}
 				},
 				"tags": [
-					"test"
+					"tests"
 				],
 				"security": [],
-				"parameters": []
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/Panel"
+							}
+						}
+					}
+				}
 			}
 		},
 		"/reports": {
@@ -441,36 +414,6 @@
 			}
 		},
 		"/reportpaneltest": {
-			"post": {
-				"operationId": "CreateReportpaneltest",
-				"responses": {
-					"200": {
-						"description": "Ok",
-						"content": {
-							"application/json": {
-								"schema": {
-									"type": "string"
-								}
-							}
-						}
-					}
-				},
-				"tags": [
-					"reportpaneltest"
-				],
-				"security": [],
-				"parameters": [],
-				"requestBody": {
-					"required": true,
-					"content": {
-						"application/json": {
-							"schema": {
-								"$ref": "#/components/schemas/IReportpaneltestPayload"
-							}
-						}
-					}
-				}
-			},
 			"get": {
 				"operationId": "GetReportpaneltest",
 				"responses": {
@@ -478,7 +421,9 @@
 						"description": "Ok",
 						"content": {
 							"application/json": {
-								"schema": {}
+								"schema": {
+									"$ref": "#/components/schemas/Reportpaneltest"
+								}
 							}
 						}
 					}

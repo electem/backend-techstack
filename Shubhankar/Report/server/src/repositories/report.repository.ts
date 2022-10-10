@@ -1,8 +1,8 @@
 import { getRepository } from "typeorm";
 import { Report } from "../models/report";
+
 export interface IReportPayload {
   name: string;
-  
 }
 
 export const createReport = async (payload: IReportPayload): Promise<Report> => {
@@ -13,8 +13,8 @@ export const createReport = async (payload: IReportPayload): Promise<Report> => 
     ...payload,
   });
 };
+
 export const getReports = async (): Promise<Array<Report>> => {
   const ReportRepository = getRepository(Report);
   return ReportRepository.find();
 };
-
