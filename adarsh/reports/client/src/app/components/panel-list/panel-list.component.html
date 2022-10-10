@@ -20,17 +20,20 @@
         *ngIf="!this.editPanelForm"
         type="button"
         class="btn btn-info btn-sm mr-2"
-       (click)="saveReport()"        
+        (click)="saveReport()"
       >
         CREATE REPORT
       </button>
     </td>
     <br />
-    <br>
-    <input type="text" placeholder="Search" (keyup)="onSearch($event)" />
+    <br />
+    <input
+      type="text"
+      placeholder="Search"
+      (keyup)="onSearchOfPanels($event)"
+    />
 
     <div *ngIf="this.showForm">
-     
       <thead>
         <tr>
           <th class="text-center">&nbsp;</th>
@@ -63,7 +66,6 @@
           type="button"
           class="btn btn-info btn-sm mr-2"
           (click)="canclePanel()"
-          
         >
           CANCEL
         </button>
@@ -71,7 +73,6 @@
           type="button"
           class="btn btn-info btn-sm mr-2"
           (click)="savePanel()"
-         
         >
           SAVE
         </button>
@@ -109,4 +110,3 @@
     </table>
   </div>
 </div>
-

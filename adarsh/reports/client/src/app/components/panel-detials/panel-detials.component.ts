@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Panel } from 'src/app/models/panel.model';
-import { Test } from 'src/app/models/test.model';
-import { PanelService } from 'src/app/services/panel.service';
+import { Panel } from '../../models/panel.model';
+import { Test } from '../../models/test.model';
+import { PanelService } from '../../services/panel.service';
 
 @Component({
   selector: 'app-panel-detials',
@@ -17,7 +17,6 @@ export class PanelDetialsComponent implements OnInit {
     description: '',
     tests: [],
   };
-
   editPanelForm?: boolean;
   showForm?: boolean;
   submitted?: boolean;
@@ -37,21 +36,24 @@ export class PanelDetialsComponent implements OnInit {
     this.getPanelId(this.route.snapshot.params.id);
     this.editPanelForm = false;
   }
+
   async retrievePanels(): Promise<void> {
     this.panels = await this.panelService.getPanels();
   }
+
   async retrieveTest(): Promise<void> {
     this.tests = await this.panelService.getAllTest();
   }
+
   editPanel(panel: Panel) {
     this.panel = panel;
   }
 
-  onSelected(value: Test) {
+  onSelectedTest(testSelected: Test) {
     this.showForm = true;
     if (this.tests) {
-      for (let test of this.tests) {
-        if (test.id == value.id) {
+      for (const test of this.tests) {
+        if (test.id == testSelected.id) {
           this.selectedTests.push(test);
         }
       }
@@ -67,6 +69,7 @@ export class PanelDetialsComponent implements OnInit {
     await this.panelService.createPanel(panelData);
     this.retrievePanels();
   }
+
   async updatePanel(): Promise<void> {
     const panelData: Panel = {
       id: this.panel.id,
@@ -77,12 +80,15 @@ export class PanelDetialsComponent implements OnInit {
     if (this.selectedTests.length)
       await this.panelService.updatePanel(panelData);
   }
-  private async getPanelId(id: Number) {
+
+  private async getPanelId(id: number) {
     this.panel = await this.panelService.getPanelByID(id);
   }
+
   addPanel() {
     this.showForm = true;
   }
+
   canclePanel() {
     this.showForm = false;
     this.panel = {
