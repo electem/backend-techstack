@@ -8,8 +8,9 @@ import { Pagination } from '../models/pagination.model';
 import { Employee } from '../models/employee.model';
 import productJson from '../product.json';
 import productJsonData from '../productList.json';
+import { environment } from '../../environments/environment';
 
-const baseUrl = 'http://localhost:8080';
+const baseUrl = environment.url;
 
 interface Product {
   id?: number;
@@ -31,52 +32,52 @@ export class PanelService {
   constructor(private http: HttpClient) {}
 
   async getPanels(): Promise<Panel[]> {
-    return await this.http.get<Panel[]>(baseUrl + '/panels').toPromise();
+    return await this.http.get<Panel[]>(baseUrl + 'panels').toPromise();
   }
-  
+
   async createPanel(panel: Panel): Promise<Panel> {
     return await this.http
-      .post<Panel>(baseUrl + '/createPanel', panel)
+      .post<Panel>(baseUrl + 'createPanel', panel)
       .toPromise();
   }
 
-  async getPanelById(id: Number) {
-    return await this.http.get(`${baseUrl + '/panels'}/${id}`).toPromise();
+  async getPanelById(id: number) {
+    return await this.http.get(`${baseUrl + 'panels'}/${id}`).toPromise();
   }
 
-  async updatePanel(id: any, panel: Panel): Promise<Panel> {
+  async updatePanel(id: number, panel: Panel): Promise<Panel> {
     return await this.http
-      .put(`${baseUrl + '/updatePanel'}/${id}`, panel)
+      .put(`${baseUrl + 'updatePanel'}/${id}`, panel)
       .toPromise();
   }
 
   async getReports(): Promise<Report[]> {
-    return await this.http.get<Report[]>(baseUrl + '/reports').toPromise();
+    return await this.http.get<Report[]>(baseUrl + 'reports').toPromise();
   }
 
-  async getReportById(id: Number) {
-    return await this.http.get(`${baseUrl + '/reports'}/${id}`).toPromise();
+  async getReportById(id: number) {
+    return await this.http.get(`${baseUrl + 'reports'}/${id}`).toPromise();
   }
-  
+
   async getTests(): Promise<Test[]> {
-    return await this.http.get<Test[]>(baseUrl + '/tests').toPromise();
+    return await this.http.get<Test[]>(baseUrl + 'tests').toPromise();
   }
 
   async createReport(report: Report): Promise<Report> {
-    return await this.http.post(baseUrl + '/createReport', report).toPromise();
+    return await this.http.post(baseUrl + 'createReport', report).toPromise();
   }
 
   async createReportPanelTests(
     reportPanelTest: ReportPanelTest
   ): Promise<ReportPanelTest> {
     return await this.http
-      .post(baseUrl + '/createReportPanelTests', reportPanelTest)
+      .post(baseUrl + 'createReportPanelTests', reportPanelTest)
       .toPromise();
   }
 
   async getReportPanelTests(): Promise<ReportPanelTest[]> {
     return await this.http
-      .get<ReportPanelTest[]>(baseUrl + '/reportPanelTests')
+      .get<ReportPanelTest[]>(baseUrl + 'eportPanelTests')
       .toPromise();
   }
 
@@ -89,7 +90,10 @@ export class PanelService {
       pageLength: pageLength,
     };
     return await this.http
-      .post<Employee[]>(baseUrl + '/employees', this.pagination)
+      .post<Employee[]>(
+        `${baseUrl + 'employees'}/${startPoint}/${pageLength}`,
+        this.pagination
+      )
       .toPromise();
   }
 
@@ -101,8 +105,7 @@ export class PanelService {
     return await this.products;
   }
 
-  async createProduct(product: Product): Promise<any> {
-    console.log(product);
+  async createProduct(product: Product): Promise<Product> {
     return await this.http
       .post(baseUrl + '/createProduct', product)
       .toPromise();

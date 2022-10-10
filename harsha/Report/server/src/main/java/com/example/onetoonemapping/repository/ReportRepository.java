@@ -20,4 +20,7 @@ public interface ReportRepository extends CrudRepository<Report, Integer> {
 
 	@Query(value="SELECT * FROM reports r join report_panel_tests rpt on r.id=rpt.reportid",nativeQuery=true)
 	List<Report> getReports();
+	
+	@Query(value = "SELECT * FROM reports r where r.id=?1", nativeQuery = true)
+	List<Report> findByReportId(Integer id);
 }

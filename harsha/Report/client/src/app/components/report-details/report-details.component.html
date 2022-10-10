@@ -11,12 +11,8 @@
       <th>{{ panel.name }}</th>
       <td *ngFor="let test of tests">
         <div *ngIf="isTestPresentInPanel(panel, test)">
-          <input
-            type="text"
-            [ngModel]="getData(panel, test)"
-            (blur)="onBlurMethod($event, panel, test)"
-            style="width: 150px"
-          />
+          <input type="text" [ngModel]="getData(panel, test)" (blur)="onBlurMethod($event, panel, test)"
+            style="width: 150px" />
         </div>
       </td>
     </tr>

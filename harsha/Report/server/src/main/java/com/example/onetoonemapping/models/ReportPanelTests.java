@@ -3,10 +3,8 @@ package com.example.onetoonemapping.models;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import lombok.Builder;
 import lombok.Data;
 
-@Builder
 @Data
 public class ReportPanelTests {
 

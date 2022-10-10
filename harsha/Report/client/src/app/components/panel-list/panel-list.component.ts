@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Panel } from 'src/app/models/panel.model';
-import { PanelService } from 'src/app/services/panel.service';
-import { Test } from 'src/app/models/test.model';
-import { Report } from 'src/app/models/report.model';
-import { ActivatedRoute } from '@angular/router';
+import { Panel } from '../../models/panel.model';
+import { PanelService } from '../../services/panel.service';
+import { Test } from '../../models/test.model';
+import { Report } from '../../models/report.model';
 
 @Component({
   selector: 'app-panel-list',
@@ -20,7 +19,6 @@ export class PanelListComponent implements OnInit {
     description: '',
     tests: [],
   };
-
   filteredPanels: Panel[] = [];
   searchText!: string;
   panelForm?: boolean;
@@ -28,14 +26,9 @@ export class PanelListComponent implements OnInit {
   report: Report = {
     name: '',
   };
-  panelForm?: boolean;
-  testForm?: boolean;
   savedReport = new Report();
-  
-  constructor(
-    private panelService: PanelService,
-    private route: ActivatedRoute
-  ) {}
+
+  constructor(private panelService: PanelService) {}
 
   ngOnInit(): void {
     this.retrievePanels();
@@ -44,22 +37,10 @@ export class PanelListComponent implements OnInit {
   }
 
   randomString(length: number) {
-    var randomChars =
+    const randomChars =
       'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    var result = '';
-    for (var i = 0; i < length; i++) {
-      result += randomChars.charAt(
-        Math.floor(Math.random() * randomChars.length)
-      );
-    }
-    return result;
-  }
-
-  randomString(length: number) {
-    var randomChars =
-      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    var result = '';
-    for (var i = 0; i < length; i++) {
+    let result = '';
+    for (let i = 0; i < length; i++) {
       result += randomChars.charAt(
         Math.floor(Math.random() * randomChars.length)
       );
@@ -78,7 +59,7 @@ export class PanelListComponent implements OnInit {
 
   onSelected(value: Panel) {
     if (this.tests) {
-      for (let test of this.tests) {
+      for (const test of this.tests) {
         if (test.id == value.id) {
           this.selectedTests.push(test);
         }
@@ -117,11 +98,11 @@ export class PanelListComponent implements OnInit {
     this.panelForm = false;
   }
 
-  onSearch(event: any) {
+  onSearch(event: Event) {
     this.filteredPanels = this.panels.filter((input) => {
       return (
-        input.name?.startsWith(event.target.value) ||
-        input.description?.startsWith(event.target.value)
+        input.name?.startsWith((event.target as HTMLInputElement).value) ||
+        input.description?.startsWith((event.target as HTMLInputElement).value)
       );
     });
   }

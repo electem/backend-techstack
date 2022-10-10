@@ -15,7 +15,6 @@ export class ChartsComponent implements OnInit {
   constructor(private panelService: PanelService) {}
 
   ngOnInit(): void {
-
     Chart.register(...registerables);
     const myChart = new Chart('myChart', {
       type: 'bar',
