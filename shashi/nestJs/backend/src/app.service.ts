@@ -3,6 +3,7 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable prettier/prettier */
+<<<<<<< HEAD
 import {
   Body,
   FileTypeValidator,
@@ -14,6 +15,9 @@ import {
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { getRepository, Repository } from 'typeorm';
+=======
+import { Body, Injectable } from '@nestjs/common';
+>>>>>>> 29dceecd661f20fa9132e5e255dfa422005be965
 import { ArticleDto } from './articles/dto/article.dto';
 import { Image } from './fileupload/fileupload.entity';
 import fs from 'fs';
@@ -50,7 +54,10 @@ export class AppService {
       description: 'nnnn',
     },
   ];
+<<<<<<< HEAD
   constructor() {}
+=======
+>>>>>>> 29dceecd661f20fa9132e5e255dfa422005be965
 
   getHello(): ArticleDto[] {
     return this.artcle;
