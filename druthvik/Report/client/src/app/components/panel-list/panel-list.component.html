@@ -22,6 +22,14 @@
       </button>
     </td>
     <br />
+    <div class="form-group mb-4">
+      <input
+        class="form-control"
+        type="text"
+        placeholder="Search"
+        (keyup)="searchPanels($event)"
+      />
+    </div>
     <button
       *ngIf="this.showButton"
       type="button"
