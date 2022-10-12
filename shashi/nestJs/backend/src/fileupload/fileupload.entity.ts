@@ -12,4 +12,5 @@ export class Image extends Model {
   originalname: string;
   @Column(Sequelize.BLOB('long'))
   filename: Blob;
+
 }

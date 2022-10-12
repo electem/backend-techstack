@@ -4,8 +4,6 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { UrlGeneratorModule } from 'nestjs-url-generator';
-//import { PhotosController } from './PhotosController';
 import { DatabaseModule } from './database.module';
 import { filesProviders } from './file.providers';
 import { FileController } from './image.controller';
