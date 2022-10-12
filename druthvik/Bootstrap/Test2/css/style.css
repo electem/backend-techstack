@@ -1,0 +1,25 @@
+body{background: #f5f5f5}.rounded{border-radius: 1rem}.nav-pills{border-radius: 50px;} .nav-link{color: #555; border-radius: 50px;}.nav-pills{border-radius: 50px;} .nav-link.active{color: white}input[type="radio"]{margin-right: 5px}.bold{font-weight:bold}
+.spacing{padding-top: 1rem;
+padding-bottom: 1rem;
+padding-left: .25rem;
+ padding-right: .25rem;
+}
+.top{padding-top: 1rem
+}
+
+.color{background-color: white}
+.margin{margin-right: 2rem}
+.bottom{margin-bottom: 2rem}
+.button {border-radius: 100em}
+.btn {
+  border-radius: 35px;
+  border: 2px solid rgba(0, 70, 147, 0.75);
+}
+
+.btn-primary {
+  font-size: 13px;
+  border-radius: 25px;
+  text-align: center;
+}
+.nav-select{border-radius: 50px;
+}
