@@ -1,47 +1,101 @@
 <div style="width: 400px; margin: auto">
-  <div class="form-group">
-    <label for="title">Title</label>
-    <input
-      class="form-control"
-      id="title"
-      required
-      [(ngModel)]="this.tutorial.title"
-      name="title"
-    />
+  <div class="row">
+    <div class="col-md-4 offset-md-4">
+      <form
+        action="/action_page.php"
+        [formGroup]="registerForm"
+        (ngSubmit)="saveTutorial()"
+      >
+        <div class="formbox">
+          <div class="form-group">
+            <label for="title">Title</label>
+            <input
+              type="text"
+              formControlName="title"
+              class="form-control"
+              placeholder="Title"
+              [ngClass]="{ 'is-invalid': submitted && fval.title.errors }"
+              [(ngModel)]="tutorial.title"
+            />
+            <div
+              *ngIf="submitted && fval.title.errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="fval.title.errors.required">
+                Title is required and must be a valid name
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="description">Description</label>
+            <input
+              type="text"
+              formControlName="description"
+              class="form-control"
+              placeholder="Description"
+              [ngClass]="{ 'is-invalid': submitted && fval.description.errors }"
+              [(ngModel)]="tutorial.description"
+            />
+            <div
+              *ngIf="submitted && fval.description.errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="fval.description.errors.required">
+                Description is required and must be a valid name
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <p>
+              Category :
+              <select
+                formControlName="categories"
+                class="form-control"
+                placeholder="Choose Category"
+                style="width: 50%"
+                name="categories"
+                [(ngModel)]="selectedCategory.id"
+                (ngModelChange)="onSelected(selectedCategory)"
+                name="categories"
+                [ngClass]="{
+                  'is-invalid': submitted && fval.categories.errors
+                }"
+              >
+                <option value="Choose Category">Choose Category</option>
+                <option
+                  *ngFor="let category of categories"
+                  [ngValue]="category.id"
+                >
+                  {{ category.title }}
+                </option>
+              </select>
+            </p>
+
+            <div
+              *ngIf="this.submitted && fval.categories.errors"
+              s
+              tyle="color: red"
+            >
+              <div *ngIf="fval.categories.errors.required">
+                Selecting atleast one Category is required
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Select time zone: </label>
+            <select
+              name="timeZone"
+              [ngModel]="selectedTimeZone"
+              (ngModelChange)="timeZoneChanged($event)"
+            >
+              <option *ngFor="let tz of timeZoneNames" [value]="tz">
+                {{ tz }}
+              </option>
+            </select>
+          </div>
+          <button class="btn btn-success">Submit</button>
+        </div>
+      </form>
+    </div>
   </div>
-  <div class="form-group">
-    <label for="description">Description</label>
-    <input
-      class="form-control"
-      id="description"
-      required
-      [(ngModel)]="this.tutorial.description"
-      name="description"
-    />
-  </div>
-  <div class="col-md-6">
-    <select
-      class="custom-select"
-      [(ngModel)]="selectedCategory"
-      (ngModelChange)="onSelected(selectedCategory)"
-    >
-      <option *ngFor="let category of categories" [ngValue]="category">
-        {{ category.title }}
-      </option>
-    </select>
-    <br />
-  </div>
-  <div class="form-group">
-    <label>Select time zone: </label>
-    <select
-      name="timeZone"
-      [ngModel]="selectedTimeZone"
-      (ngModelChange)="timeZoneChanged($event)"
-    >
-      <option *ngFor="let tz of timeZoneNames" [value]="tz">
-        {{ tz }}
-      </option>
-    </select>
-  </div>
-  <button (click)="saveTutorial1()" class="btn btn-success">Submit</button>
 </div>
