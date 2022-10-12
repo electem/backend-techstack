@@ -14,6 +14,7 @@ export class ReportComponent implements OnInit {
   tests: Test[];
   report: ReportTestPanel[];
   objectToMap = new Map();
+  reportPanelTests: ReportTestPanel[] = [];
 
   constructor(private panelService: PanelService) {}
 
@@ -55,6 +56,19 @@ export class ReportComponent implements OnInit {
         currentPanel.id + '' + currentTest.id,
       );
       return keyObject;
+    }
+  }
+
+  async reportDetailsSave(event: any, panel: Panel, test: Test): Promise<void> {
+    const savedReportId = localStorage.getItem('reportId');
+    if (savedReportId != null) {
+      const reportPanelTest: ReportTestPanel = {
+        data: event.target.value,
+        panel_fk: panel.id,
+        test_fk: test.id,
+        report_fk: +savedReportId,
+      };
+      console.log(reportPanelTest);
     }
   }
 }
