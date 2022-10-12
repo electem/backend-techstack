@@ -10,6 +10,6 @@ export class Test {
   name?: string;
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  @ManyToMany((_type) => Panel, (panel) => panel.test)
+  @ManyToMany((_type) => Panel, (panel: Panel) => panel.test)
   panel!: Panel[];
 }
