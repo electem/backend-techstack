@@ -14,9 +14,9 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { Blob } from 'buffer';
 import type { Express, Response } from 'express';
 import { Image } from './fileupload/fileupload.entity';
-const fs = require('fs');
 @Controller('photos')
 export class FileController {
+  // file upload
   @Post()
   @UseInterceptors(FileInterceptor('file'))
   public async imageToBlob(@UploadedFile() file: Express.Multer.File) {

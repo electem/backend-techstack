@@ -3,6 +3,8 @@ import { Sequelize } from 'sequelize-typescript';
 import { Image } from './fileupload/fileupload.entity';
 
 export const databaseProviders = [
+
+
   {
     provide: 'SEQUELIZE',
     useFactory: async () => {
@@ -18,5 +20,6 @@ export const databaseProviders = [
       await sequelize.sync();
       return sequelize;
     },
+    
   },
 ];

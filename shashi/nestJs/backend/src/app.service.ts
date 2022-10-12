@@ -62,32 +62,4 @@ export class AppService {
     //console.log(article[1]);
     return article;
   }
-
-  // async uploadedFile(
-  //   @UploadedFile() file: QueryFileDto,
-  // ): Promise<QueryFileDto> {
-  //   const response = {
-  //     originalname: file.originalname,
-  //     filename: file.filename,
-  //   };
-  // const encoding = toUnicode(response.filename);
-  // const uint8array = new TextEncoder().decode(response.filename);
-  // const string = new TextDecoder('utf-8').encode(uint8array);
-  // const readStream = fs.createReadStream('./files', { highWaterMark: 16 });
-  // const data = [];
-  // readStream.on('response', (chunk) => {
-  //   data.push(chunk);
-  //   console.log('response :', chunk, chunk.length);
-  // });
-  // readStream.on('end', () => {
-  //   console.log('end :', Buffer.concat(data).toString());
-  //   // end : I am transferring in bytes by bytes called chunk
-  // });
-  // readStream.on('error', (err) => {
-  //   console.log('error :', err);
-  // });
-  //console.log(string);
-
-  //   return this.imageRepository.save(response);
-  // }
 }
