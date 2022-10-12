@@ -1,0 +1,117 @@
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
+
+  <title>Bootstrap Form Tutorial</title>
+</head>
+	<link href="css/test2.css" rel="stylesheet">
+<body class="container bg-light">
+  <!-- Start Header form -->
+  <div class="text-center pt-5">
+    <img src="https://i.ibb.co/8cDgdFX/Logo.png" alt="network-logo" width="72" height="72" />
+    <h2>Meeting Room Booking Form</h2>
+  </div>
+  <!-- End Header form -->
+
+  <!-- Start Card -->
+  <div class="card">
+    <!-- Start Card Body -->
+    <div class="card-body">
+      <!-- Start Form -->
+      <form id="bookingForm" action="#" method="" class="needs-validation" novalidate autocomplete="off">
+        <!-- Start Input Name -->
+        <div class="form-group">
+          <label for="inputName">Name</label>
+          <input type="text" class="form-control" id="inputName" name="name" placeholder="Your name" required />
+          <small class="form-text text-muted">Please fill your name</small>
+        </div>
+        <!-- End Input Name -->
+
+        <!-- Start Input Email -->
+        <div class="form-group">
+          <label for="inputEmail">Email</label>
+          <input type="email" class="form-control" id="inputEmail" name="email" placeholder="Enter email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required />
+          <small class="form-text text-muted">We'll never share your email with anyone else.</small>
+        </div>
+        <!-- End Input Email -->
+
+        <!-- Start Input Telephone -->
+        <div class="form-group">
+          <label for="inputPhone">Phone</label>
+          <input type="tel" class="form-control" id="inputPhone" name="phone" placeholder="099xxxxxxx" pattern="\d{3}\d{3}\d{4}" required />
+          <small class="form-text text-muted">We'll never share your phone number with anyone else.</small>
+        </div>
+        <!-- End Input Telephone -->
+
+        <!-- Start Input Date , Start Time and End Time -->
+        <div class="form-row">
+          <!-- Start Input Date -->
+          <div class="form-group col-md-4">
+            <label for="inputDate">Date</label>
+            <input type="date" class="form-control" id="inputDate" name="date" required />
+            <small class="form-text text-muted">Please choose date and time for meeting.</small>
+          </div>
+          <!-- End Input Date -->
+
+          <!-- Start Input Start Time -->
+          <div class="form-group col-md-4">
+            <label>Start Time</label>
+            <div class="d-flex flex-row justify-content-between align-items-center">
+              <select class="form-control mr-1" id="inputStartTimeHour" name="startHour" required>
+                <option value="" disabled selected>Hour</option>
+                <option value="08">08</option>
+                <option value="09">09</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15">15</option>
+              </select>
+              <div class="pl-1 pr-2">:</div>
+              <select class="form-control" id="inputStartTimeMinute" name="startMinute" required>
+                <option value="" disabled selected>Min</option>
+                <option value="00">00</option>
+                <option value="00">30</option>
+              </select>
+            </div>
+          </div>
+          <!-- End Input Start Time -->
+
+          <!-- Start Input End Time -->
+          <div class="form-group col-md-4">
+            <label>End Time</label>
+            <div class="d-flex flex-row justify-content-between align-items-center">
+              <select class="form-control mr-1" id="inputEndTimeHour" name="endHour" required>
+                <option value="" disabled selected>Hour</option>
+                <option value="09">09</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15">15</option>
+                <option value="16">16</option>
+              </select>
+              <div class="pl-1 pr-2">:</div>
+              <select class="form-control" id="inputEndTimeMinute" name="endMinute" required>
+                <option value="" disabled selected>Min</option>
+                <option value="00">00</option>
+                <option value="00">30</option>
+              </select>
+            </div>
+          </div>
+          <!-- End Input End Time -->
+        </div>
+     
+      </form>
+      <!-- End Form -->
+    </div>
+    <!-- End Card Body -->
+  </div>
+
+</body>
