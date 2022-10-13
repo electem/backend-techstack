@@ -8,14 +8,11 @@ const baseUrl = environment.url;
   providedIn: 'root',
 })
 export class CustomerService {
-  onSubmit() {
-    throw new Error('Method not implemented.');
-  }
   constructor(private http: HttpClient) {}
 
-  async createUser(reportData: UserRegistration): Promise<UserRegistration> {
+  async createUser(userData: UserRegistration): Promise<UserRegistration> {
     return this.http
-      .post<UserRegistration>(baseUrl + '/userregistration', reportData)
+      .post<UserRegistration>(baseUrl + '/userregistration', userData)
       .toPromise();
   }
 }

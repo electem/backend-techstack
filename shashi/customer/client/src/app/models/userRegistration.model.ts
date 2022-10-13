@@ -3,5 +3,5 @@ export class UserRegistration {
   name?: string;
   email?: string;
   password?: string;
-  phoneNumber?: number;
+  phonenumber?: number;
 }
