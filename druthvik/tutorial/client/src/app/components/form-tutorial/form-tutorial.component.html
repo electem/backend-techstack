@@ -1,0 +1,47 @@
+<div style="width: 400px; margin: auto">
+  <div class="form-group">
+    <label for="title">Title</label>
+    <input
+      class="form-control"
+      id="title"
+      required
+      [(ngModel)]="this.tutorial.title"
+      name="title"
+    />
+  </div>
+  <div class="form-group">
+    <label for="description">Description</label>
+    <input
+      class="form-control"
+      id="description"
+      required
+      [(ngModel)]="this.tutorial.description"
+      name="description"
+    />
+  </div>
+  <div class="col-md-6">
+    <select
+      class="custom-select"
+      [(ngModel)]="selectedCategory"
+      (ngModelChange)="onSelected(selectedCategory)"
+    >
+      <option *ngFor="let category of categories" [ngValue]="category">
+        {{ category.title }}
+      </option>
+    </select>
+    <br />
+  </div>
+  <div class="form-group">
+    <label>Select time zone: </label>
+    <select
+      name="timeZone"
+      [ngModel]="selectedTimeZone"
+      (ngModelChange)="timeZoneChanged($event)"
+    >
+      <option *ngFor="let tz of timeZoneNames" [value]="tz">
+        {{ tz }}
+      </option>
+    </select>
+  </div>
+  <button (click)="saveTutorial1()" class="btn btn-success">Submit</button>
+</div>

@@ -10,9 +10,16 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
 import org.hibernate.annotations.CreationTimestamp;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 @Entity
 @Table(name = "reports")
 public class Report {
@@ -26,44 +33,4 @@ public class Report {
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "createdAt", nullable = false, updatable = false)
 	private Date createdAt;
-	
-
-	
-   
-	public Report() {
-
-	}
-
-	public Report(int id, String name, Date createdAt) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.createdAt = createdAt;
-
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public Date getCreatedAt() {
-		return createdAt;
-	}
-
-	public void setCreatedAt(Date createdAt) {
-		this.createdAt = createdAt;
-	}
-
 }

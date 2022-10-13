@@ -21,7 +21,7 @@
               placeholder="Choose test"
               style="width: 50%"
               [(ngModel)]="selectedTest"
-              (ngModelChange)="onSelected(selectedTest)"
+              (ngModelChange)="onSelectedTest(selectedTest)"
               name="tests"
             >
               <option value="Choose test">Choose Test</option>
@@ -52,7 +52,6 @@
             />
           </div>
         </div>
-
         <button
           type="button"
           class="btn btn-info btn-sm mr-2"

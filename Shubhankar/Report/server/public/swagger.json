@@ -1,0 +1,561 @@
+{
+	"components": {
+		"examples": {},
+		"headers": {},
+		"parameters": {},
+		"requestBodies": {},
+		"responses": {},
+		"schemas": {
+			"Panel": {
+				"properties": {
+					"id": {
+						"type": "number",
+						"format": "double"
+					},
+					"name": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					},
+					"tests": {
+						"items": {
+							"$ref": "#/components/schemas/Test"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"id",
+					"tests"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"Test": {
+				"properties": {
+					"id": {
+						"type": "number",
+						"format": "double"
+					},
+					"name": {
+						"type": "string"
+					},
+					"panels": {
+						"items": {
+							"$ref": "#/components/schemas/Panel"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"id",
+					"panels"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IPanelPayload": {
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"name",
+					"description"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"Report": {
+				"properties": {
+					"id": {
+						"type": "number",
+						"format": "double"
+					},
+					"name": {
+						"type": "string"
+					},
+					"createdAt": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"reportpaneltest": {
+						"items": {
+							"$ref": "#/components/schemas/Reportpaneltest"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"id",
+					"createdAt",
+					"reportpaneltest"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"Reportpaneltest": {
+				"properties": {
+					"id": {
+						"type": "number",
+						"format": "double"
+					},
+					"data": {
+						"type": "string"
+					},
+					"panel_id": {
+						"type": "number",
+						"format": "double"
+					},
+					"test_id": {
+						"type": "number",
+						"format": "double"
+					},
+					"report_id": {
+						"type": "number",
+						"format": "double"
+					},
+					"report_data": {
+						"items": {
+							"$ref": "#/components/schemas/Report"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"id",
+					"report_data"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IReportPayload": {
+				"properties": {
+					"name": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"name"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IReportpaneltestPayload": {
+				"properties": {
+					"data": {
+						"type": "string"
+					},
+					"panel_id": {
+						"type": "number",
+						"format": "double"
+					},
+					"test_id": {
+						"type": "number",
+						"format": "double"
+					},
+					"report_id": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"data",
+					"panel_id",
+					"test_id",
+					"report_id"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"PanelData": {
+				"properties": {
+					"id": {
+						"type": "number",
+						"format": "double"
+					},
+					"name": {
+						"type": "string"
+					},
+					"test_data": {
+						"items": {
+							"$ref": "#/components/schemas/Testdata"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"id",
+					"test_data"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"Testdata": {
+				"properties": {
+					"id": {
+						"type": "number",
+						"format": "double"
+					},
+					"value": {
+						"type": "string"
+					},
+					"panel_data": {
+						"items": {
+							"$ref": "#/components/schemas/PanelData"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"id",
+					"panel_data"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"ITestdataPayload": {
+				"properties": {
+					"value": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"value"
+				],
+				"type": "object",
+				"additionalProperties": false
+			}
+		},
+		"securitySchemes": {}
+	},
+	"info": {
+		"title": "express-typescript",
+		"version": "1.1.1",
+		"license": {
+			"name": "ISC"
+		},
+		"contact": {}
+	},
+	"openapi": "3.0.0",
+	"paths": {
+		"/panels": {
+			"get": {
+				"operationId": "GetPanels",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/Panel"
+									},
+									"type": "array"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"panel"
+				],
+				"security": [],
+				"parameters": []
+			},
+			"post": {
+				"operationId": "CreatePanel",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Panel"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"panel"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/IPanelPayload"
+							}
+						}
+					}
+				}
+			},
+			"put": {
+				"operationId": "UpdatePanel",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Panel"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"panel"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/IPanelPayload"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/panels/{id}": {
+			"get": {
+				"operationId": "GetPanel",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Panel"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"panel"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/tests": {
+			"get": {
+				"operationId": "GetTests",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/Test"
+									},
+									"type": "array"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"test"
+				],
+				"security": [],
+				"parameters": []
+			}
+		},
+		"/reports": {
+			"post": {
+				"operationId": "CreateReport",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Report"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"reports"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/IReportPayload"
+							}
+						}
+					}
+				}
+			},
+			"get": {
+				"operationId": "GetReports",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/Report"
+									},
+									"type": "array"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"reports"
+				],
+				"security": [],
+				"parameters": []
+			}
+		},
+		"/reportpaneltest": {
+			"post": {
+				"operationId": "CreateReportpaneltest",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "string"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"reportpaneltest"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/IReportpaneltestPayload"
+							}
+						}
+					}
+				}
+			},
+			"get": {
+				"operationId": "GetReportpaneltest",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {}
+							}
+						}
+					}
+				},
+				"tags": [
+					"reportpaneltest"
+				],
+				"security": [],
+				"parameters": []
+			}
+		},
+		"/paneldata": {
+			"post": {
+				"operationId": "CreatePanelData",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/PanelData"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"paneldata"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {}
+						}
+					}
+				}
+			}
+		},
+		"/testdata": {
+			"post": {
+				"operationId": "CreateTestData",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Testdata"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"testdata"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/ITestdataPayload"
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+	"servers": [
+		{
+			"url": "/"
+		}
+	]
+}

@@ -1,0 +1,71 @@
+<!-- <div class="container">
+  <table class="table table-bordered justify-content-center">
+    <thead class="thead head">
+      <tr>
+        <th>panels</th>
+        <th *ngFor="let test of tests; let i = index">{{ test.name }}</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let panel of panels; let i = index">
+      <tr>
+        <th class="text-center" scope="row">{{ panel.name }}</th>
+      </tr>
+    </tbody>
+  </table>
+</div> -->
+<!-- <table class="table table-bordered justify-content-center">
+  <div class="container">
+    <table *ngFor="let panel of panels">
+      <tr>
+        <td>{{ panel.name }}</td>
+        <td>-</td>
+      </tr>
+      <tr *ngFor="let test of panel.test">
+        <td></td>
+        <input type="text" style="width: 100px" />
+      </tr>
+    </table>
+  </div>
+</table> -->
+
+<!-- <div class="container">
+  <table class="table table-bordered justify-content-center">
+    <thead class="thead head">
+      <tr>
+        <th>panels</th>
+        <th *ngFor="let test of tests; let i = index">{{ test.name }}</th>
+      </tr>
+    </thead>
+    <tr *ngFor="let panel of panels; let i = index">
+      <th>{{ panel.name }}</th>
+      <td></td>
+      <td *ngFor="let test of tests; let j = index">
+        <div *ngIf="checkIfPanelContainsTest(panel, test)">
+          <input type="text" style="width: 100px" />
+        </div>
+      </td>
+    </tr>
+  </table>
+</div> -->
+
+<div>
+  <table class="table table-bordered table-striped table-hover">
+    <tr>
+      <th></th>
+
+      <th *ngFor="let test of tests; let j = index">
+        {{ test.name }}
+      </th>
+    </tr>
+
+    <tr *ngFor="let panel of panels; let i = index">
+      <th>{{ panel.name }}</th>
+
+      <td *ngFor="let test of tests; let j = index">
+        <div *ngIf="checkIfPanelContainsTest(panel, test)">
+          <input type="text" />
+        </div>
+      </td>
+    </tr>
+  </table>
+</div>

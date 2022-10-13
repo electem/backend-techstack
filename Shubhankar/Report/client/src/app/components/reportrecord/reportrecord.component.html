@@ -1,0 +1,27 @@
+<div class="container">
+  <table class="table table-striped table-bordered justify-content-center">
+    <thead class="thead-light">
+      <tr class="active">
+        <th class="text-center" scope="col">Id</th>
+        <th class="text-center" scope="col">Created Date</th>
+        <th class="text-center" scope="col">Name</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let record of records; let i = index">
+      <tr class="success">
+        <th class="text-center" scope="row">{{ record.id }}</th>
+        <th class="text-center" scope="row">{{ record.createdAt }}</th>
+        <th class="text-center" scope="row">
+          {{ record.name }}
+          <button
+            type="button"
+            class="btn btn-outline-success float-right"
+            routerLink="/report/{{ currentReport.id }}"
+          >
+            Edit
+          </button>
+        </th>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,18 @@
+      <h4>Tutorial Details</h4>
+     
+        <label><strong>Title:</strong></label>{{ currentTutorial.title }}
+      
+        <label><strong>Description:</strong></label>{{ currentTutorial.description }}
+     
+        <label><strong>Categories:</strong></label> {{ currentTutorial.categories | json }}
+     
+        <label><strong>Timezone:</strong></label> {{ currentTutorial.timezone }}
+      
+        <label><strong>CreatedDate:</strong></label> {{ currentTutorial.createdAt }}
+
+        <label><strong>Conversion:</strong></label> {{ currentTutorial.createdAt | date:'full':currentTutorial.timezone}}
+       
+          <div><strong>Tutorial Id:</strong>{{currentTutorial.id}}</div>
+
+<app-comment-post [tutorialId]="tutorialId" [timeZone]="timeZone"></app-comment-post>
+<button class="btn btn-outline-success  btn-sm"  routerLink="/tutorials" >Back</button>

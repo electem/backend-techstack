@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Panel } from 'src/app/models/panel.model';
-import { PanelService } from 'src/app/services/panel.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Panel } from '../../models/panel.model';
+import { PanelService } from '../../services/panel.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Test } from 'src/app/models/test.model';
-import { Report } from 'src/app/models/report.model';
+import { Test } from '../../models/test.model';
+import { Report } from '../../models/report.model';
 
 @Component({
   selector: 'app-panel-list',
@@ -22,9 +21,11 @@ export class PanelListComponent implements OnInit {
     description: '',
   };
   savereports = new Report();
-
   editPanelForm?: boolean;
   test!: Test[];
+  filteredPanels: Panel[] = [];
+  searchText!: string;
+
   constructor(
     private panelService: PanelService,
     private router: Router,
@@ -37,17 +38,21 @@ export class PanelListComponent implements OnInit {
     this.retrievePanels();
     console.log(this.randomString(10));
   }
+
   onSubmit() {
     alert(
       'Form Submitted succesfully!!!\n Check the values in browser console.'
     );
   }
+
   async retrievePanels(): Promise<void> {
     this.panels = await this.panelService.getPanels();
   }
+
   addPanel() {
     this.showForm = true;
   }
+
   canclePanel() {
     this.showForm = false;
     this.panel = {
@@ -67,6 +72,7 @@ export class PanelListComponent implements OnInit {
     await this.panelService.createPanel(panelData);
     this.router.navigate(['panel']);
   }
+
   async saveReport() {
     this.submitted = true;
     const reportData: Report = {
@@ -80,14 +86,23 @@ export class PanelListComponent implements OnInit {
   }
 
   randomString(length: number) {
-    var randomChars =
+    let randomChars =
       'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    var result = '';
-    for (var i = 0; i < length; i++) {
+    let result = '';
+    for (let i = 0; i < length; i++) {
       result += randomChars.charAt(
         Math.floor(Math.random() * randomChars.length)
       );
     }
     return result;
+  }
+
+  onSearchOfPanels(event: Event) {
+    this.filteredPanels = this.panels.filter((input) => {
+      return (
+        input.name?.startsWith((event.target as HTMLInputElement).value) ||
+        input.description?.startsWith((event.target as HTMLInputElement).value)
+      );
+    });
   }
 }
