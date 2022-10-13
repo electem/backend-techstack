@@ -32,6 +32,7 @@ export class PanelListComponent implements OnInit {
   report: Report = {
     name: this.randomString(5),
   };
+  searchallPanles?: Panel[];
 
   constructor(private panelService: PanelService) {}
 
@@ -56,6 +57,7 @@ export class PanelListComponent implements OnInit {
 
   async listPanels(): Promise<void> {
     this.panels = await this.panelService.getAllPanel();
+    this.searchallPanles = this.panels;
   }
 
   async listTests(): Promise<void> {
@@ -120,5 +122,14 @@ export class PanelListComponent implements OnInit {
     if (this.savedReport && this.savedReport.id) {
       localStorage.setItem('reportId', this.savedReport.id + '');
     }
+  }
+
+  async searchPanels(event: Event) {
+    this.searchallPanles = this.panels.filter((obj) => {
+      return (
+        obj.name!.startsWith((event.target as HTMLInputElement).value) ||
+        obj.description!.startsWith((event.target as HTMLInputElement).value)
+      );
+    });
   }
 }

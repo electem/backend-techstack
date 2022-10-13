@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Category } from 'src/app/models/category.model';
 import { Tutorial } from 'src/app/models/tutorial.model';
 import { TutorialService } from 'src/app/services/tutorial.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as moment from 'moment-timezone';
 
 @Component({
@@ -36,22 +37,33 @@ export class FormTutorialComponent implements OnInit {
   updateCategory!: Category[];
   timeZoneNames!: string[];
   selectedTimeZone!: string;
-
+  registerForm!: FormGroup;
   constructor(
     private tutorialService: TutorialService,
     private route: ActivatedRoute,
     private router: Router,
+    private formBuilder: FormBuilder
   ) {
     this.timeZoneNames = moment.tz.names();
     this.timeZoneChanged('America/New_York');
   }
 
   ngOnInit(): void {
+    this.registerForm = this.formBuilder.group({
+      title: ['', Validators.required],
+      description: ['', Validators.required],
+      categories: ['', Validators.required],
+      author: ['', Validators.required],
+      country: ['', Validators.required],
+    });
     this.retriveCategory();
     if (this.route.snapshot.params.id != 'add') {
       this.getTutorial(this.route.snapshot.params.id);
       this.update = false;
     }
+  }
+  get fval() {
+    return this.registerForm.controls;
   }
 
   async retriveCategory(): Promise<void> {
@@ -109,11 +121,6 @@ export class FormTutorialComponent implements OnInit {
     console.log(tutorialData);
   }
   async updateTutorial() {
-    // if (this.update && this.selectedCategories.length == 0) {
-    //   if (this.tutorial.categories) {
-    //     this.selectedCategories = this.tutorial.categories;
-    //   }
-    // }
     const tutorialData: Tutorial = {
       id: this.tutorial.id,
       title: this.tutorial.title,
