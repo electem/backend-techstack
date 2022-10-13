@@ -7,9 +7,10 @@ import { AppComponent } from './app.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { UserLoginComponent } from './components/user-login/user-login.component';
+import { UserRegisterComponent } from './components/user-register/user-register.component';
 
 @NgModule({
-  declarations: [AppComponent, UserLoginComponent],
+  declarations: [AppComponent, UserLoginComponent, UserRegisterComponent],
   imports: [
     NgxDatatableModule,
     BrowserModule,
