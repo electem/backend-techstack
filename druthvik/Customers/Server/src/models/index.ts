@@ -1,3 +1,2 @@
-import { UserRegister } from '../models/userregister.model';
-
+import { UserRegister } from './userlogin.model';
 export { UserRegister };

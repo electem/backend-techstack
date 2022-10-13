@@ -8,9 +8,15 @@ import { AppComponent } from './app.component';
 import { HeadersInterceptor } from './headers.interceptor';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { UserloginComponent } from '../app/components/userlogin/userlogin.component';
+import { RegisteruserComponent } from '../app/components/registeruser/registeruser.component';
 
 @NgModule({
-  declarations: [AppComponent, PageNotFoundComponent, UserloginComponent],
+  declarations: [
+    AppComponent,
+    PageNotFoundComponent,
+    UserloginComponent,
+    RegisteruserComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

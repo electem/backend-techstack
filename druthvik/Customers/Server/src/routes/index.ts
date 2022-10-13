@@ -1,6 +1,6 @@
 import express from 'express';
 const router = express.Router();
-import registerRouter from './userregister.router';
+import registerRouter from './userreister.router';
 
 router.use('/registeruser', registerRouter);
 
