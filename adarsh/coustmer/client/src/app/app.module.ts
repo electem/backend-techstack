@@ -5,9 +5,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { UserRegistrationComponent } from './components/user-registration/user-registration.component';
+import { UserLoginComponent } from './components/user-login/user-login.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, UserRegistrationComponent, UserLoginComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
