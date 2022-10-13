@@ -6,7 +6,7 @@ import {
   ITutorialPayload,
   getTutorial,
   updateTutorial,
-  //deleteTutorial,
+  deleteTutorial,
 } from "../repositories/tutorials.repository";
 
 @Route("tutorials")
@@ -35,5 +35,8 @@ export default class TutorialController {
   ): Promise<Tutorial> {
     return updateTutorial(body);
   }
-
+  @Delete("/:id")
+  public async deleteTutorial(@Path() id: string) {
+    return deleteTutorial(Number(id));
+  }
 }

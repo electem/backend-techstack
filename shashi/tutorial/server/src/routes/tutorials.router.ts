@@ -28,5 +28,11 @@ router.put("/", async (req, res) => {
   return res.send(response);
 });
 
+router.delete("/:id", async (req, res) => {
+  const controller = new TutorialController();
+  const response = await controller.deleteTutorial(req.params.id);
+  if (!response) res.status(404).send({ message: "No user found" });
+  return res.send(response);
+});
 
 export default router;

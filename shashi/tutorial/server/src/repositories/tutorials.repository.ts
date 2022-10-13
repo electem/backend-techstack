@@ -1,4 +1,6 @@
-import { getManager, getRepository } from "typeorm";
+ import { request, response } from "express";
+import { id } from "inversify";
+import { getConnection, getManager, getRepository } from "typeorm";
 import { Tutorial } from "../models/tutorials";
 
 export interface ITutorialPayload {
@@ -51,6 +53,7 @@ export const getTutorial = async (id: number) => {
     .where("tutorial.id = :id", { id: id })
     .getOne();
   return prod;
+  
 };
 
 export const updateTutorial = async (
@@ -63,3 +66,24 @@ export const updateTutorial = async (
     ...payload,
   });
 };
+export const deleteTutorial = async (id: number) => {
+  //id = parseInt(request.params.id);
+  const entityManager = getManager();
+  const query = entityManager.createQueryBuilder(Tutorial, "tutorial");
+  let prod = await query
+    .delete()
+    .from(Tutorial)
+    .where("tutorial.id = :id", { id: id })
+    .execute();
+  return response.status(200).send(`User deleted with ID: ${id}`);
+};
+// const deleteUser = (request, response) => {
+//   const id = parseInt(request.params.id)
+
+//   pool.query('DELETE FROM users WHERE id = $1', [id], (error, results) => {
+//     if (error) {
+//       throw error
+//     }
+//     response.status(200).send(`User deleted with ID: ${id}`)
+//   })
+// }
