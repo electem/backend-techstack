@@ -3,6 +3,7 @@ import { UserRegistration } from "../models/userLogin";
 import {
   IUserRegistrationPayload,
   createUser,
+  mwBasicAuth,
 } from "../repositories/userlogin.repository";
 
 @Route("userRegistration")
@@ -13,5 +14,12 @@ export default class UserRegistrationController {
     @Body() body: IUserRegistrationPayload
   ): Promise<UserRegistration> {
     return createUser(body);
+  }
+  @Get("/")
+  public async getUserAuthentication(
+    payload: IUserRegistrationPayload,
+    name: string
+  ): Promise<boolean> {
+    return mwBasicAuth(payload, name);
   }
 }
