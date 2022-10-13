@@ -1,5 +1,5 @@
 import { getRepository } from 'typeorm';
-import { UserRegister } from '../models/userregister.model';
+import { UserRegister } from '../models/userlogin.model';
 import crypto from 'crypto';
 
 export interface IRegisterLoginPayload {
