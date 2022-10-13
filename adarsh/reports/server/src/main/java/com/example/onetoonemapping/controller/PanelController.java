@@ -1,8 +1,11 @@
 package com.example.onetoonemapping.controller;
 
+import java.io.File;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
+import javax.annotation.PostConstruct;
 import javax.validation.Valid;
 import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser;
@@ -22,6 +25,17 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.onetoonemapping.models.Pagination;
 import com.example.onetoonemapping.models.Panel;
 import com.example.onetoonemapping.repository.PanelRepository;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import graphql.ExecutionResult;
+import graphql.GraphQL;
+import graphql.schema.DataFetcher;
+import graphql.schema.GraphQLSchema;
+import graphql.schema.idl.RuntimeWiring;
+import graphql.schema.idl.SchemaGenerator;
+import graphql.schema.idl.SchemaParser;
+import graphql.schema.idl.TypeDefinitionRegistry;
 
 @RestController
 @CrossOrigin
@@ -32,8 +46,38 @@ public class PanelController {
 	@Value("${inputFile}")
 	private String studentFile;
 
+//	@Value("classpath:schema.graphqls")
+//	private Resource schemaResource;
+
 	@Autowired
 	private PanelRepository panelRepository;
+
+//	private GraphQL graphQL;
+//
+//	@PostConstruct
+//	public void loadSchema() throws IOException {
+//		File schemaFile = schemaResource.getFile();
+//		TypeDefinitionRegistry registry = new SchemaParser().parse(schemaFile);
+//		RuntimeWiring wiring = buildWiring();
+//		GraphQLSchema schema = new SchemaGenerator().makeExecutableSchema(registry, wiring);
+//		graphQL = GraphQL.newGraphQL(schema).build();
+//	}
+//
+//	private RuntimeWiring buildWiring() {
+//		DataFetcher<List<Panel>> fetcher1 = data -> {
+//			return (List<Panel>) panelRepository.findAll();
+//		};
+//
+//		return RuntimeWiring.newRuntimeWiring()
+//				.type("Query", typeWriting -> typeWriting.dataFetcher("getAllPanel", fetcher1)).build();
+//
+//	}
+//
+//	@PostMapping("/getAllPanel")
+//	public ResponseEntity<Object> getAllPanel(@RequestBody String query) {
+//		ExecutionResult result = graphQL.execute(query);
+//		return new ResponseEntity<Object>(result, HttpStatus.OK);
+//	}
 
 	/**
 	 * @GetMapping
