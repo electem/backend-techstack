@@ -6,84 +6,58 @@
 		"requestBodies": {},
 		"responses": {},
 		"schemas": {
-			"Panel": {
+			"UserRegister": {
 				"properties": {
 					"id": {
 						"type": "number",
 						"format": "double"
 					},
-					"name": {
+					"username": {
 						"type": "string"
 					},
-					"description": {
+					"email": {
 						"type": "string"
 					},
-					"test": {
-						"items": {
-							"$ref": "#/components/schemas/Test"
-						},
-						"type": "array"
+					"password": {
+						"type": "string"
+					},
+					"phonenumber": {
+						"type": "number",
+						"format": "double"
 					}
 				},
 				"required": [
 					"id",
+					"username",
+					"email",
+					"password",
+					"phonenumber"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IRegisterLoginPayload": {
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"email": {
+						"type": "string"
+					},
+					"password": {
+						"type": "string"
+					},
+					"phonenumber": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
 					"name",
-					"description",
-					"test"
+					"email",
+					"password",
+					"phonenumber"
 				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"Test": {
-				"properties": {
-					"id": {
-						"type": "number",
-						"format": "double"
-					},
-					"name": {
-						"type": "string"
-					},
-					"panel": {
-						"items": {
-							"$ref": "#/components/schemas/Panel"
-						},
-						"type": "array"
-					}
-				},
-				"required": [
-					"id",
-					"panel"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"Report": {
-				"properties": {
-					"id": {
-						"type": "number",
-						"format": "double"
-					},
-					"name": {
-						"type": "string"
-					},
-					"createdAt": {
-						"type": "string",
-						"format": "date-time"
-					}
-				},
-				"required": [
-					"id",
-					"createdAt"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"IReportPayload": {
-				"properties": {
-					"name": {
-						"type": "string"
-					}
-				},
 				"type": "object",
 				"additionalProperties": false
 			}
@@ -100,129 +74,23 @@
 	},
 	"openapi": "3.0.0",
 	"paths": {
-		"/Panels": {
-			"get": {
-				"operationId": "GetPanel",
-				"responses": {
-					"200": {
-						"description": "Ok",
-						"content": {
-							"application/json": {
-								"schema": {
-									"items": {
-										"$ref": "#/components/schemas/Panel"
-									},
-									"type": "array"
-								}
-							}
-						}
-					}
-				},
-				"tags": [
-					"Panel"
-				],
-				"security": [],
-				"parameters": []
-			},
+		"/registerLogin": {
 			"post": {
-				"operationId": "CreatePanel",
+				"operationId": "RegisterUser",
 				"responses": {
 					"200": {
 						"description": "Ok",
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/Panel"
+									"$ref": "#/components/schemas/UserRegister"
 								}
 							}
 						}
 					}
 				},
 				"tags": [
-					"Panel"
-				],
-				"security": [],
-				"parameters": []
-			}
-		},
-		"/Panels/{id}": {
-			"get": {
-				"operationId": "GetPanelByID",
-				"responses": {
-					"200": {
-						"description": "Ok",
-						"content": {
-							"application/json": {
-								"schema": {
-									"allOf": [
-										{
-											"$ref": "#/components/schemas/Panel"
-										}
-									],
-									"nullable": true
-								}
-							}
-						}
-					}
-				},
-				"tags": [
-					"Panel"
-				],
-				"security": [],
-				"parameters": [
-					{
-						"in": "path",
-						"name": "id",
-						"required": true,
-						"schema": {
-							"type": "string"
-						}
-					}
-				]
-			}
-		},
-		"/tests": {
-			"get": {
-				"operationId": "GetTests",
-				"responses": {
-					"200": {
-						"description": "Ok",
-						"content": {
-							"application/json": {
-								"schema": {
-									"items": {
-										"$ref": "#/components/schemas/Test"
-									},
-									"type": "array"
-								}
-							}
-						}
-					}
-				},
-				"tags": [
-					"test"
-				],
-				"security": [],
-				"parameters": []
-			}
-		},
-		"/reports": {
-			"post": {
-				"operationId": "CreateReport",
-				"responses": {
-					"200": {
-						"description": "Ok",
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/Report"
-								}
-							}
-						}
-					}
-				},
-				"tags": [
-					"Report"
+					"RegisterLogin"
 				],
 				"security": [],
 				"parameters": [],
@@ -231,7 +99,7 @@
 					"content": {
 						"application/json": {
 							"schema": {
-								"$ref": "#/components/schemas/IReportPayload"
+								"$ref": "#/components/schemas/IRegisterLoginPayload"
 							}
 						}
 					}
