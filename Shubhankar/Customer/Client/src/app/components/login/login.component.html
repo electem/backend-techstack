@@ -9,9 +9,10 @@
           formControlName="username"
           class="form-control"
           id="username"
-          [ngClass]="{ 'is-invalid': fval.username.errors }"
+          [(ngModel)]="login.username"
+          [ngClass]="{ 'is-invalid': submitted && fval.username.errors }"
         />
-        <div *ngIf="fval.username.errors" class="invalid-feedback">
+        <div *ngIf="submitted && fval.username.errors" class="invalid-feedback">
           <div *ngIf="fval.username.errors.required">
             User Field is required
           </div>
@@ -25,20 +26,20 @@
           formControlName="password"
           class="form-control"
           id="password"
-          [ngClass]="{ 'is-invalid': fval.password.errors }"
+          [(ngModel)]="login.password"
+          [ngClass]="{ 'is-invalid': submitted && fval.password.errors }"
         />
-        <div *ngIf="fval.password.errors" class="invalid-feedback">
+        <div *ngIf="submitted && fval.password.errors" class="invalid-feedback">
           <div *ngIf="fval.password.errors.required">
             password Field is required
           </div>
         </div>
       </div>
-
       <br />
       <button type="button" class="btn btn-primary" (click)="loginData()">
         login
       </button>
-      <button type="button" class="btn btn-primary "  (click)="Register()">
+      <button type="button" class="btn btn-primary" (click)="Register()">
         Register
       </button>
     </div>

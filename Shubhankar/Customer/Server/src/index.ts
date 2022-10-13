@@ -14,22 +14,22 @@ const app: Application = express();
 app.use(express.json());
 app.use(morgan("tiny"));
 app.use(express.static("public"));
-const router = express.Router()
-const cors = require('cors');
+const router = express.Router();
+const cors = require("cors");
 router.use(function (req, res, next) {
-res.header(
-'Access-Control-Allow-Origin *',
-'x-access-token, Origin, Content-Type, Accept',
-);
-next();
+  res.header(
+    "Access-Control-Allow-Origin *",
+    "x-access-token, Origin, Content-Type, Accept"
+  );
+  next();
 });
 const corsOptions = {
-origin: 'http://localhost:8000',
+  origin: "http://localhost:8000",
 };
 app.use(cors());
-cors: true
+cors: true;
 app.use(
-  "/docs",  
+  "/docs",
   swaggerUi.serve,
   swaggerUi.setup(undefined, {
     swaggerOptions: {
