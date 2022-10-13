@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { UserRegistration } from '../../models/userRegistration.model';
+import { CustomerService } from '../../services/customerservice';
 import { UserLogin } from '../../models/userLogin.model';
 
 @Component({
@@ -17,6 +19,11 @@ export class UserloginComponent implements OnInit {
   };
 
   constructor(private formBuilder: FormBuilder) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private CustomerService: CustomerService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
@@ -25,6 +32,9 @@ export class UserloginComponent implements OnInit {
     });
   }
   get formValidation() {
+    return this.loginForm.controls;
+  }
+  get fval() {
     return this.loginForm.controls;
   }
   async loginUserValidate(): Promise<void> {

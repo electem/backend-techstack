@@ -2,13 +2,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AppRoutingModule } from './app-routing.module';
+import { AppRoutingMod} from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UserloginComponent } from './components/userLogin/userlogin.component';
 import { AppHttpInterceptor } from './app.interceptor';
 import { UserRegistrationComponent } from './components/user-registration/user-registration.component';
+
 @NgModule({
-  declarations: [AppComponent, UserloginComponent, UserRegistrationComponent],
+  declarations: [AppComponent, UserloginComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

@@ -10,7 +10,7 @@ import { Report } from '../../models/report.model';
   styleUrls: ['./panel-list.component.css'],
 })
 export class PanelListComponent implements OnInit {
-  panels: Panel[] = [];
+  panels?: Panel[];
   tests: Test[] = [];
   selectedTests: Test[] = [];
   selectedTest = new Test();
@@ -19,7 +19,7 @@ export class PanelListComponent implements OnInit {
     description: '',
     tests: [],
   };
-  filteredPanels: Panel[] = [];
+  filteredPanels?: Panel[];
   searchText!: string;
   panelForm?: boolean;
   testForm?: boolean;
@@ -99,7 +99,7 @@ export class PanelListComponent implements OnInit {
   }
 
   onSearch(event: Event) {
-    this.filteredPanels = this.panels.filter((input) => {
+    this.filteredPanels = this.panels!.filter((input) => {
       return (
         input.name?.startsWith((event.target as HTMLInputElement).value) ||
         input.description?.startsWith((event.target as HTMLInputElement).value)
