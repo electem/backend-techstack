@@ -18,6 +18,7 @@ export class UserloginComponent implements OnInit {
     password: '',
   };
 
+  constructor(private formBuilder: FormBuilder) {}
   constructor(
     private formBuilder: FormBuilder,
     private CustomerService: CustomerService,
@@ -30,10 +31,12 @@ export class UserloginComponent implements OnInit {
       password: ['', [Validators.required]],
     });
   }
+  get formValidation() {
+    return this.loginForm.controls;
+  }
   get fval() {
     return this.loginForm.controls;
   }
-
   async loginUserValidate(): Promise<void> {
     this.submitted = true;
     if (this.loginForm.invalid) {

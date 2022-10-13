@@ -8,6 +8,8 @@
               login to your Account
             </h5>
           </div>
+          <form [formGroup]="loginForm" (ngSubmit)="loginUserValidate()">
+
           <form
             action="/action_page.php"
             [formGroup]="loginForm"
@@ -20,6 +22,16 @@
                 formControlName="username"
                 class="form-control"
                 placeholder="username"
+                [ngClass]="{
+                  'is-invalid': submitted && formValidation.username.errors
+                }"
+                [(ngModel)]="userlogin.username"
+              />
+              <div
+                *ngIf="submitted && formValidation.username.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="formValidation.username.errors.required">
                 [ngClass]="{ 'is-invalid': submitted && fval.username.errors }"
                 [(ngModel)]="userlogin.username"
               />
@@ -28,6 +40,7 @@
                 class="invalid-feedback"
               >
                 <div *ngIf="fval.username.errors.required">
+
                   username is required and must be a valid name
                 </div>
               </div>
@@ -40,6 +53,16 @@
                 formControlName="password"
                 class="form-control"
                 placeholder="password"
+                [ngClass]="{
+                  'is-invalid': submitted && formValidation.password.errors
+                }"
+                [(ngModel)]="userlogin.password"
+              />
+              <div
+                *ngIf="submitted && formValidation.password.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="formValidation.password.errors.required">
                 [ngClass]="{ 'is-invalid': submitted && fval.password.errors }"
                 [(ngModel)]="userlogin.password"
               />
@@ -56,6 +79,7 @@
             <button class="btn btn-primary w-100" type="submit">Login</button>
             <br />
             <br />
+            <button class="btn btn-secondary w-100" routerLink="/userRegister">
             <button class="btn btn-primary w-100" type="submit">
               Register
             </button>

@@ -14,5 +14,5 @@ export class UserRegistration {
   password?: string;
 
   @Column({ type: "varchar", length: 10 })
-  phoneNumber?: number;
+  phonenumber?: number;
 }
