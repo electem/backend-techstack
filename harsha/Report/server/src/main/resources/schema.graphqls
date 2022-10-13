@@ -1,0 +1,31 @@
+type Query{
+
+getAllPerson : [Person]
+findPerson(email: String) : Person
+getAllPanels : [Panel]
+findPanel(name: String): Panel
+findAllPanels : [Panel]
+}
+
+type Person{
+
+id: String
+name: String
+mobile: String
+email: String
+address: [String]
+}
+
+type Panel{
+
+id: String
+name: String
+description: String
+tests: [Tests]
+}
+
+type Tests{
+
+id: String
+name: String
+}
