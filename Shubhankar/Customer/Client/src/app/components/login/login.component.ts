@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { Router } from '@angular/router';
-import { LoginUser } from '../../models/login';
+import { ActivatedRoute, Router } from '@angular/router';
+import { LoginUser } from 'src/app/models/login';
 import { UserService } from '../../services/user.service';
 
 @Component({
@@ -15,8 +15,11 @@ export class LoginComponent implements OnInit {
     username: '',
     password: '',
   };
+  submitted = false;
+  role?: { role: string }[];
   constructor(
-    private userservice: UserService,
+    private userService: UserService,
+    private route: ActivatedRoute,
     private router: Router,
     private formBuilder: FormBuilder
   ) {}
@@ -29,6 +32,7 @@ export class LoginComponent implements OnInit {
   }
 
   async loginData() {
+    this.submitted = true;
     if (this.loginform.invalid) {
       return;
     } else {
@@ -41,16 +45,15 @@ export class LoginComponent implements OnInit {
       password: this.login.password,
     };
   }
-
   get fval() {
     return this.loginform.controls;
   }
   async signup() {
+    this.submitted = true;
     if (this.loginform.invalid) {
       return;
     }
   }
-
   async Register() {
     this.router.navigate(['/Registerusers']);
   }

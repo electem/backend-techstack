@@ -1,5 +1,4 @@
-export interface LoginUser{
-   username:String;
-    password:String;
- 
+export interface LoginUser {
+  username: String;
+  password: String;
 }
