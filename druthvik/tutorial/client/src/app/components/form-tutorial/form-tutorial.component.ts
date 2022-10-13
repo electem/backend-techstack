@@ -108,18 +108,18 @@ export class FormTutorialComponent implements OnInit {
       this.submitted = true;
     }
   }
-  async saveTutorial1() {
-    const tutorialData: Tutorial = {
-      title: this.tutorial.title,
-      description: this.tutorial.description,
-      published: (this.tutorial.published = false),
-      timeZone: this.tutorial.timeZone,
-    };
-    tutorialData.categories = this.selectedCategories;
-    await this.tutorialService.createTutorial(tutorialData);
-    this.router.navigate(['/tutorials']);
-    console.log(tutorialData);
-  }
+  // async saveTutorial1() {
+  //   const tutorialData: Tutorial = {
+  //     title: this.tutorial.title,
+  //     description: this.tutorial.description,
+  //     published: (this.tutorial.published = false),
+  //     timeZone: this.tutorial.timeZone,
+  //   };
+  //   tutorialData.categories = this.selectedCategories;
+  //   await this.tutorialService.createTutorial(tutorialData);
+  //   this.router.navigate(['/tutorials']);
+  //   console.log(tutorialData);
+  // }
   async updateTutorial() {
     const tutorialData: Tutorial = {
       id: this.tutorial.id,
