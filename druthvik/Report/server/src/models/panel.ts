@@ -24,7 +24,7 @@ export class Panel {
   description!: string;
 
   @JsonProperty()
-  @ManyToMany(() => Test, (test) => test.panel, {
+  @ManyToMany(() => Test, (test: Test) => test.panel, {
     cascade: true,
   })
   @JoinTable()
