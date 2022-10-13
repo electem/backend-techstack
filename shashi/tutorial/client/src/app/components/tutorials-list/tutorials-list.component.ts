@@ -21,8 +21,9 @@ export class TutorialTaskComponent implements OnInit {
 
   async retrieveTutorials(): Promise<void> {
     this.tutorials = await this.tutorialService.getAll();
+    console.log(this.tutorials);
     localStorage.setItem('allTutorial', JSON.stringify(this.tutorials));
-    console.log(localStorage.getItem("allTutorial"))
+    console.log(localStorage.getItem('allTutorial'));
   }
   refreshList(): void {
     this.retrieveTutorials();

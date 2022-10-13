@@ -140,7 +140,7 @@ export class AddTutorialComponent implements OnInit {
     tutorialData.categories = this.selectedCategories;
     await this.tutorialService.createTutorial(tutorialData);
     this.router.navigate(['/tutorials']);
-    // console.log(tutorialData);
+     console.log(tutorialData);
   }
 
   newTutorial(): void {
