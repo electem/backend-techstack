@@ -10,10 +10,6 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { UserloginComponent } from '../app/components/userlogin/userlogin.component';
 
 @NgModule({
-  declarations: [AppComponent, UserloginComponent, PageNotFoundComponent],
-import { UserloginComponent } from './components/userlogin/userlogin.component';
-
-@NgModule({
   declarations: [AppComponent, PageNotFoundComponent, UserloginComponent],
   imports: [
     BrowserModule,
