@@ -19,6 +19,10 @@ import lombok.Data;
 @Table(name = "panels")
 public class Panel {
 
+	public Panel() {
+		// TODO Auto-generated constructor stub
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int panelId;
@@ -31,5 +35,9 @@ public class Panel {
 	@JoinTable(name = "panels_tests", joinColumns = { @JoinColumn(name = "panels_id") }, inverseJoinColumns = {
 			@JoinColumn(name = "tests_id") })
 	private List<Tests> tests;
+
+	
+	
+	
 
 }

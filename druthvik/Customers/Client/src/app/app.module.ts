@@ -11,6 +11,10 @@ import { UserloginComponent } from '../app/components/userlogin/userlogin.compon
 
 @NgModule({
   declarations: [AppComponent, UserloginComponent, PageNotFoundComponent],
+import { UserloginComponent } from './components/userlogin/userlogin.component';
+
+@NgModule({
+  declarations: [AppComponent, PageNotFoundComponent, UserloginComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

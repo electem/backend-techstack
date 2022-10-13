@@ -5,6 +5,11 @@ import { UserloginComponent } from '../app/components/userlogin/userlogin.compon
 const routes: Routes = [
   { path: '', redirectTo: 'logincomponent', pathMatch: 'full' },
   { path: 'logincomponent', component: UserloginComponent },
+import { UserloginComponent } from './components/userlogin/userlogin.component';
+
+const routes: Routes = [
+  { path: '', redirectTo: 'registeruser', pathMatch: 'full' },
+  { path: 'registeruser', component: UserloginComponent },
   { path: '**', component: PageNotFoundComponent },
 ];
 
