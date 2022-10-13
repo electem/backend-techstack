@@ -15,6 +15,7 @@ export class UserloginComponent implements OnInit {
     username: '',
     password: '',
   };
+  constructor(private formBuilder: FormBuilder) {}
   constructor(private formBuilder: FormBuilder, private router: Router) {}
 
   ngOnInit(): void {
