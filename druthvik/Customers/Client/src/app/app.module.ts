@@ -7,9 +7,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeadersInterceptor } from './headers.interceptor';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { UserloginComponent } from '../app/components/userlogin/userlogin.component';
 
 @NgModule({
-  declarations: [AppComponent, PageNotFoundComponent],
+  declarations: [AppComponent, UserloginComponent, PageNotFoundComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
