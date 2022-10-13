@@ -13,6 +13,10 @@ import { EditpannelComponent } from './components/editpannel/editpannel.componen
 import { ReporttableComponent } from './components/reporttable/reporttable.component';
 import { ReportrecordComponent } from './components/reportrecord/reportrecord.component';
 import { EmployeeComponent } from './components/employee/employee.component';
+import { CompanyComponent } from './components/company/company.component';
+import { EmployeerecordComponent } from './components/employeerecord/employeerecord.component';
+// import { ChartComponent } from './components/chart/chart.component';
+// import { DatatableComponent } from './components/datatable/datatable.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +27,10 @@ import { EmployeeComponent } from './components/employee/employee.component';
     ReporttableComponent,
     ReportrecordComponent,
     EmployeeComponent,
+    CompanyComponent,
+    EmployeerecordComponent,
+    // ChartComponent,
+    // DatatableComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,6 +1,7 @@
 import { getRepository } from "typeorm";
 import { Report } from "../models/report";
 
+
 export interface IReportPayload {
   name: string;
 }

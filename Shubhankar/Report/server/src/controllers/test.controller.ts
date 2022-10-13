@@ -27,3 +27,4 @@ export default class TestController {
     writeFileSync(join(__dirname, "file.txt"), json, {});
   }
 }
+

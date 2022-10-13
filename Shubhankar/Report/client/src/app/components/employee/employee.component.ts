@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Company } from 'src/app/models/company';
-import { Employee } from 'src/app/models/employee';
-import { PannelserviceService } from 'src/app/services/pannelservice.service';
+import { Employee } from '../../models/employee';
+import { PannelService } from '../../services/pannelservice.service';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -9,29 +8,26 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './employee.component.html',
   styleUrls: ['./employee.component.css'],
 })
+
 export class EmployeeComponent implements OnInit {
+
   employee: Employee = {
     name: '',
     address: '',
     gender: '',
     salary: 1,
   };
-  companys?: Company[];
+  
   submitted?: boolean;
 
-  constructor(private http: HttpClient, private PannelserviceService: PannelserviceService) {}
+  constructor(private http: HttpClient, private pannelservice: PannelService) {}
 
   ngOnInit(): void {
     this.getEmployee();
-    this.getCompanies();
   }
 
   getEmployee() {
-    this.employee = this.PannelserviceService.getEmployee();
-  }
-
-  getCompanies() {
-    this.companys = this.PannelserviceService.getCompany();
+    this.employee = this.pannelservice.getEmployee();
   }
 
   async  SaveData(){
@@ -42,7 +38,6 @@ export class EmployeeComponent implements OnInit {
       gender: this.employee.gender,
       salary: this.employee.salary,
     };
-    await this.PannelserviceService.createEmployee(employee);
-    console.log(employee)
+    await this.pannelservice.createEmployee(employee);
   }
 }

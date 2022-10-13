@@ -18,5 +18,5 @@ const config: ConnectionOptions = {
   entities: [Panel, Test, Report, Reportpaneltest, PanelData, Testdata],
   synchronize: true,
 };
-
 export default config;
+

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { PannelserviceService } from 'src/app/services/pannelservice.service';
-import { Panel } from 'src/app/models/pannel';
-import { Test } from 'src/app/models/test';
-import { Report } from 'src/app/models/report';
+import { PannelService } from '../../services/pannelservice.service';
+import { Panel } from '../../models/pannel';
+import { Test } from '../../models/test';
+import { Report } from '../../models/report';
 
 @Component({
   selector: 'app-pannellist',
@@ -33,7 +33,7 @@ export class PannellistComponent implements OnInit {
     name: '',
   };
   selectedTest: Test[] = [];
-  constructor(private PannelserviceService: PannelserviceService) {}
+  constructor(private pannelservice: PannelService) {}
 
   ngOnInit(): void {
     this.showForm = false;
@@ -41,23 +41,24 @@ export class PannellistComponent implements OnInit {
     this.retrievePanels();
     this.retrieveTest();
   }
+
   async saveReport() {
     this.reportName = this.randomString(10);
     const reportData: Report = {
       name: this.reportName,
     };
-    await this.PannelserviceService.createReport(reportData);
+    await this.pannelservice.createReport(reportData);
   }
 
   onSubmit() {
     alert('Submitted Successfully');
   }
   async retrievePanels(): Promise<void> {
-    this.panels = await this.PannelserviceService.getAll();
+    this.panels = await this.pannelservice.getAll();
   }
 
   async retrieveTest(): Promise<void> {
-    this.test = await this.PannelserviceService.getAllTest();
+    this.test = await this.pannelservice.getAllTest();
   }
 
   onSelected(value: Test) {
@@ -66,6 +67,7 @@ export class PannellistComponent implements OnInit {
   addPanel() {
     this.showForm = true;
   }
+
   cancelPanel() {
     this.showForm = false;
     this.panel = {
@@ -81,23 +83,26 @@ export class PannellistComponent implements OnInit {
     this.editPanelForm = true;
     this.dropdown = true;
   }
+
   async savePanel() {
     this.submitted = true;
     const panelData: Panel = {
       name: this.panel.name,
       description: this.panel.description,
     };
-    await this.PannelserviceService.createPanel(panelData);
+    await this.pannelservice.createPanel(panelData);
     this.retrievePanels();
   }
+
   async saveTest() {
     this.submitted = true;
     const testData: Test = {
       name: this.tests?.name,
     };
-    await this.PannelserviceService.createTest(testData);
+    await this.pannelservice.createTest(testData);
     this.retrievePanels();
   }
+
   async updatePanel() {
     const updateData: Panel = {
       id: this.panel.id,
@@ -106,7 +111,7 @@ export class PannellistComponent implements OnInit {
       tests: this.panel.tests,
     };
     updateData.tests = this.selectedTest;
-    await this.PannelserviceService.updatePanel(updateData);
+    await this.pannelservice.updatePanel(updateData);
   }
 
   cancleTest() {
@@ -116,6 +121,7 @@ export class PannellistComponent implements OnInit {
     };
     this.editTestForm = false;
   }
+
   randomString(length: number) {
     var randomChars =
       'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';

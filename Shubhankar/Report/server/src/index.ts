@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 import "reflect-metadata";
 import { createConnection, getConnection } from "typeorm";
 import express, { Application } from "express";
@@ -7,8 +8,10 @@ import swaggerUi from "swagger-ui-express";
 import Router from "./routes";
 import dbConfig from "./config/database";
 import { Reportpaneltest } from "./models/reportpaneltest";
-
-
+import cloudClient from "./config/elastric";
+import { IPhotos } from "./models/photo";
+import * as fs from 'fs';
+import * as path from 'path';
 
 const PORT = process.env.PORT || 8000;
 
@@ -53,4 +56,30 @@ createConnection(dbConfig)
     console.log("Unable to connect to db", err);
     process.exit(1);
   });
+
+app.get("/photos", async (req, res) => {
+    fs.readFile(path.join(__dirname, "photos.json"), (err, data) => {
+      if (err) throw err;
+      console.log(data);
+      return data;
+  })
+     const { search } = req.query;
+    try {
+      const body = {
+        index: "albums",
+        type: "photos",
+        body: {
+          size: 200,
+          query: { match: { title: search } },
+        },
+      };
+      await cloudClient.search(body).then((response) => {
+        res.send(response);
+      });
+    } catch (err) {
+      console.error(err);
+    }
+  })
+
+  
 

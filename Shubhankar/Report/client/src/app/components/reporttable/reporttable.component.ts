@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Panel } from 'src/app/models/pannel';
-import { Test } from 'src/app/models/test';
-import { PannelserviceService } from 'src/app/services/pannelservice.service';
-import { Report } from 'src/app/models/report';
-import { Reporttestpanel } from 'src/app/models/reporttestpanel';
+import { Panel } from '../../models/pannel';
+import { Test } from '../../models/test';
+import { PannelService } from '../../services/pannelservice.service';
+import { Report } from '../../models/report';
+import { Reporttestpanel } from '../../models/reporttestpanel';
 
 @Component({
   selector: 'app-reporttable',
@@ -28,7 +28,7 @@ export class ReporttableComponent implements OnInit {
   reportMap = new Map();
 
   constructor(
-    private PannelserviceService: PannelserviceService,
+    private pannelservice: PannelService,
     private route: ActivatedRoute
   ) {}
 
@@ -37,11 +37,13 @@ export class ReporttableComponent implements OnInit {
     this.retrievePanels();
     this.retrieveReportPanelTestRecord();
   }
+
   async retrievePanels(): Promise<void> {
-    this.panels = await this.PannelserviceService.getAll();
+    this.panels = await this.pannelservice.getAll();
   }
+
   async retrieveTest(): Promise<void> {
-    this.tests = await this.PannelserviceService.getAllTest();
+    this.tests = await this.pannelservice.getAllTest();
   }
 
   isTestPresentInAPanel(currentPanel: Panel, currentTest: Test) {
@@ -56,15 +58,16 @@ export class ReporttableComponent implements OnInit {
       return false;
     }
   }
-  onBlurMethod(event: any, panel: Panel, test: Test) {
+
+  onBlurMethod(event: Event, panel: Panel, test: Test) {
     const reportpanel: Reporttestpanel = {
       panel_id: panel.id,
       test_id: test.id,
-      data: event.target.value,
+      data: (event.target as HTMLInputElement).value,
     };
-
-    console.log(reportpanel);
   }
+  
+
   async savetabledata() {
     this.submitted = true;
     const reporttestpanel: Reporttestpanel = {
@@ -73,8 +76,9 @@ export class ReporttableComponent implements OnInit {
       test_id: this.reporttestpanels.test_id,
     };
   }
+
   async retrieveReportPanelTestRecord(): Promise<void> {
-    const mapdata = await this.PannelserviceService.getAllReportTestPanel();
+    const mapdata = await this.pannelservice.getAllReportTestPanel();
     this.reportMap = new Map(Object.entries(mapdata));
   }
 
