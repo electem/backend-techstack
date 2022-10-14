@@ -8,9 +8,11 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
+import { AddcustomerComponent } from './components/addcustomer/addcustomer.component';
+import { CustomerlistComponent } from './components/customerlist/customerlist.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, RegisterComponent],
+  declarations: [AppComponent, LoginComponent, RegisterComponent, AddcustomerComponent, CustomerlistComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
