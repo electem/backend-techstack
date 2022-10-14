@@ -7,9 +7,12 @@ import { AppComponent } from './app.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { UserRegistrationComponent } from './components/user-registration/user-registration.component';
 import { UserLoginComponent } from './components/user-login/user-login.component';
+import { CustomerListComponent } from './components/customer-list/customer-list.component';
+import { AddCustomerComponent } from './components/add-customer/add-customer.component';
+
 
 @NgModule({
-  declarations: [AppComponent, UserRegistrationComponent, UserLoginComponent],
+  declarations: [AppComponent, UserRegistrationComponent, UserLoginComponent, CustomerListComponent, AddCustomerComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
