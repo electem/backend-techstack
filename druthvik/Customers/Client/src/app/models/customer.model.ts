@@ -1,4 +1,4 @@
-export class createCustomer {
+export class Customer {
   name: string;
   phonenumber: number;
   address: string;
