@@ -10,6 +10,7 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { UserloginComponent } from '../app/components/userlogin/userlogin.component';
 import { RegisteruserComponent } from '../app/components/registeruser/registeruser.component';
 import { CreatecustomerComponent } from '../app/components/createcustomer/createcustomer.component';
+import { CustomerlistComponent } from '../app/components/customerlist/customerlist.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { CreatecustomerComponent } from '../app/components/createcustomer/create
     UserloginComponent,
     RegisteruserComponent,
     CreatecustomerComponent,
+    CustomerlistComponent,
   ],
   imports: [
     BrowserModule,

@@ -17,3 +17,8 @@ export const createCustomer = async (
     ...payload,
   });
 };
+
+export const getCustomers = async (): Promise<Array<customerModel>> => {
+  const customerRepository = getRepository(customerModel);
+  return customerRepository.find();
+};
