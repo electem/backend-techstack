@@ -34,7 +34,7 @@ export class UserService {
   }
 
   async getAll(): Promise<Customer[]>{
-    return await this.http.get<Customer[]>(baseUrl + './customer').toPromise();
+    return await this.http.get<Customer[]>(baseUrl + '/customer').toPromise();
   }
   createcustomer(data: Customer): Promise<Customer> {
     return this.http.post<Customer>(baseUrl + '/customer', data).toPromise();
