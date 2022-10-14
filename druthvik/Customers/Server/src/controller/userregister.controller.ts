@@ -3,7 +3,7 @@ import {
   IRegisterLoginPayload,
   registerUser,
 } from '../repositories/userregister.repository';
-import { UserRegister } from '../models/userlogin.model';
+import { UserRegister } from '../models/userregister.model';
 
 @Route('registerLogin')
 @Tags('RegisterLogin')
