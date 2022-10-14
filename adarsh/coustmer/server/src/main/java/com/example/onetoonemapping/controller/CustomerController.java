@@ -14,31 +14,29 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.example.onetoonemapping.models.User;
-import com.example.onetoonemapping.repository.UserRepository;
+import com.example.onetoonemapping.models.Customar;
+import com.example.onetoonemapping.repository.CustomerRepository;
 
 @RestController
 @CrossOrigin
-public class UserController {
-
+public class CustomerController {
 	private Logger log = LoggerFactory.getLogger(UserController.class);
 
 	@Autowired
-	private UserRepository userRepo;
+	private CustomerRepository customerRepo;
 
-	@GetMapping("/Users")
-	public List<User> getUSerList() {
-		log.info("Start of UserController :: getUSerList ");
-		List<User> listOfUsers = (List<User>) userRepo.findAll();
+	@GetMapping("/customers")
+	public List<Customar> getCustomarList() {
+		log.info("Start of CustomerController :: getCustomarList ");
+		List<Customar> listOfCustomars = (List<Customar>) customerRepo.findAll();
 		log.info("End of PanelController :: getPanelList ");
-		return listOfUsers;
+		return listOfCustomars;
 	}
-
-	@PostMapping("/addUser")
-	public User addNewUser(@Valid @RequestBody User user, BindingResult result, Model model) {
-		log.info("Start of UserController :: addNewUser ");
-		return userRepo.save(user);
+	
+	@PostMapping("/addCustomersr")
+	public Customar addNewustomer(@Valid @RequestBody Customar customar, BindingResult result, Model model) {
+		log.info("Start of CustomerController :: addNewustomer ");
+		return customerRepo.save(customar);
 
 	}
 

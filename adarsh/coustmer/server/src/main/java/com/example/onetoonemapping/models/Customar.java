@@ -11,20 +11,19 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "users")
-public class User {
-
+@Entity
+@Table(name = "csustomar")
+public class Customar {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int userId;
+	private int id;
 	@NotNull
-	private String userName;
-	@NotNull
-	private String password;
-	private String email;
-	private long phoNum;
+	private String name;
+	private String status;
+	private String postal;
+	private String city;
+	private long phone;
 
 }
