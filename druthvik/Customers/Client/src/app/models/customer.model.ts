@@ -1,6 +1,7 @@
-export class Customer {
-  name: string;
-  phonenumber: number;
-  address: string;
+export class createCustomer {
+  id?: number;
+  name?: string;
+  phonenumber?: number;
+  address?: string;
   status?: string;
 }
