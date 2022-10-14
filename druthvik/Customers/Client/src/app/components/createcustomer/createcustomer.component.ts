@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Status } from '../../services/createcustomer.service';
 import { customerService } from '../../services/createcustomer.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Customer } from '../../models/customer.model';
+import { createCustomer } from '../../models/customer.model';
 
 @Component({
   selector: 'app-createcustomer',
@@ -13,7 +13,7 @@ export class CreatecustomerComponent implements OnInit {
   registerCustomerForm: FormGroup;
   submitted = false;
   status: Status[] = [];
-  createcustomer: Customer = {
+  createcustomer: createCustomer = {
     name: '',
     phonenumber: null,
     address: '',
@@ -50,7 +50,7 @@ export class CreatecustomerComponent implements OnInit {
     }
   }
   async registerCustomer(): Promise<void> {
-    const customerRegister: Customer = {
+    const customerRegister: createCustomer = {
       name: this.createcustomer.name,
       phonenumber: this.createcustomer.phonenumber,
       address: this.createcustomer.address,

@@ -25,6 +25,13 @@
           <th class="text-center" scope="row">{{ customer.name }}</th>
           <th class="text-center" scope="row">{{ customer.phonenumber }}</th>
           <th class="text-center" scope="row">{{ customer.address }}</th>
+          <button
+            type="button"
+            class="btn btn-warning btn-sm mr-2"
+            routerLink="/customeredit/{{ customer.id }}"
+          >
+            Edit
+          </button>
         </tr>
       </tbody>
     </table>

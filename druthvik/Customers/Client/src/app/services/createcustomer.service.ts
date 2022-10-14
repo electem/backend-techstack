@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { Customer } from '../models/customer.model';
+import { createCustomer } from '../models/customer.model';
 
 const baseUrl = environment.url;
 
@@ -19,9 +19,11 @@ export class customerService {
   getStatus() {
     return this.status;
   }
-  async createCustomer(createcustomer: Customer): Promise<Customer> {
+  async createCustomer(
+    createcustomer: createCustomer,
+  ): Promise<createCustomer> {
     return await this.http
-      .post<Customer>(baseUrl + '/customers', createcustomer)
+      .post<createCustomer>(baseUrl + '/customers', createcustomer)
       .toPromise();
   }
 
@@ -29,5 +31,12 @@ export class customerService {
     return await this.http
       .get<createCustomer[]>(baseUrl + '/customers')
       .toPromise();
+  }
+
+  async getCustomerById(id: number) {
+    return await this.http.get(`${baseUrl + '/customers'}/${id}`).toPromise();
+  }
+  async updateCustomer(customer: createCustomer) {
+    return await this.http.put(baseUrl + '/customers', customer).toPromise();
   }
 }
