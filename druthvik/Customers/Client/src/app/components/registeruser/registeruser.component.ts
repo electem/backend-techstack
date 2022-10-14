@@ -45,16 +45,15 @@ export class RegisteruserComponent implements OnInit {
     this.submitted = false;
     this.registerForm.reset();
   }
-  async registerUserValidate(): Promise<void> {
+  async registerCustomerValidate(): Promise<void> {
     this.submitted = true;
     if (this.registerForm.invalid) {
       return;
     } else {
-      this.registerUser();
-      this.router.navigate(['/loginuser']);
+      this.registerCustomer();
     }
   }
-  async registerUser(): Promise<void> {
+  async registerCustomer(): Promise<void> {
     const userRegister: RegisterUser = {
       username: this.userRegister.username,
       email: this.userRegister.email,
