@@ -60,6 +60,55 @@
 				],
 				"type": "object",
 				"additionalProperties": false
+			},
+			"customerModel": {
+				"properties": {
+					"id": {
+						"type": "number",
+						"format": "double"
+					},
+					"name": {
+						"type": "string"
+					},
+					"phonenumber": {
+						"type": "number",
+						"format": "double"
+					},
+					"address": {
+						"type": "string"
+					},
+					"status": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"id",
+					"name",
+					"phonenumber",
+					"address"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"ICustomerPaylod": {
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"phonenumber": {
+						"type": "number",
+						"format": "double"
+					},
+					"address": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"name",
+					"phonenumber"
+				],
+				"type": "object",
+				"additionalProperties": false
 			}
 		},
 		"securitySchemes": {}
@@ -100,6 +149,38 @@
 						"application/json": {
 							"schema": {
 								"$ref": "#/components/schemas/IRegisterLoginPayload"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/createCustomer": {
+			"post": {
+				"operationId": "CreateCustomer",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/customerModel"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"CreateCustomer"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/ICustomerPaylod"
 							}
 						}
 					}

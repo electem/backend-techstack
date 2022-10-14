@@ -9,6 +9,7 @@ import { HeadersInterceptor } from './headers.interceptor';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { UserloginComponent } from '../app/components/userlogin/userlogin.component';
 import { RegisteruserComponent } from '../app/components/registeruser/registeruser.component';
+import { CreatecustomerComponent } from '../app/components/createcustomer/createcustomer.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { RegisteruserComponent } from '../app/components/registeruser/registerus
     PageNotFoundComponent,
     UserloginComponent,
     RegisteruserComponent,
+    CreatecustomerComponent,
   ],
   imports: [
     BrowserModule,
