@@ -15,25 +15,27 @@
     </div>
   </div>
 
-<div class="form-group">
-    <label for="status">Status</label>
-    <input
-      type="status"
-      formControlName="status"
-      class="form-control"
-      id="status"
-      [(ngModel)]="customer.status"
-      [ngClass]="{ 'is-invalid': submitted && fval.status.errors }"
-    />
-    <div *ngIf="submitted && fval.status.errors" class="invalid-feedback">
-      <div *ngIf="fval.status.errors.required">Status Field is required</div>
-    </div>
+  <div class="form-group">
+    <label for="name">Status</label>
+    <select class="custom-select"
+    formControlName="status" 
+    id="status"
+    [(ngModel)]="customer.status"
+    [ngClass]="{'is-invalid': submitted && fval.status.errors }"
+    >
+   <option *ngFor="let status of status" [ngValue]="status">
+        {{ status.name }}
+      </option>
+      <div *ngIf="submitted && fval.status.errors" class="invalid-feedback">
+      <div *ngIf="fval.status.errors.required"> Status Field is required</div>
+      </div>
+  </select>
 </div>
 <div class="form-group">
     <label for="name">Address</label>
     <input
     type="address"
-    formControlName="status"
+    formControlName="address"
     class="form-control"
     id="address"
     [(ngModel)]="customer.address"
@@ -49,6 +51,8 @@
     type="phonenumber"
     formControlName="phonenumber"
     class="form-control"
+    maxlength="10"
+    minlength="10"
     id="phonenumber"
     [(ngModel)]="customer.phonenumber"
     [ngClass]="{ 'is-invalid': submitted && fval.phonenumber.errors }"
@@ -59,3 +63,4 @@
 </div>
 
 <button type="button" class="btn btn-primary" (click)="Submit()" >Save</button>
+</form>

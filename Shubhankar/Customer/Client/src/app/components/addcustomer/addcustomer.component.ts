@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Customer } from 'src/app/models/customer';
-import { UserService } from 'src/app/services/user.service';
+import { Status, UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-addcustomer',
@@ -15,8 +15,9 @@ export class AddcustomerComponent implements OnInit {
     name: '',
     status: '',
     address: '',
-    phonenumber: 0,
-   };
+    phonenumber:0,
+  };
+  status?:Status[]=[]
 
   constructor( private formBuilder: FormBuilder,
     private userService: UserService,
@@ -29,7 +30,13 @@ export class AddcustomerComponent implements OnInit {
       address: ['', Validators.required],
       phonenumber: [' ', Validators.required],
     });
+    this.status = this.getStatusdata();
   }
+
+  getStatusdata() {
+    return this.userService.getstatus();
+  }
+
   get fval() {
     return this.addcustomer.controls;
   }
@@ -44,10 +51,10 @@ async Submit() {
   const customer: Customer = {
     name: this.customer.name,
     status: this.customer.status,
-    address: this.customer.status,
+    address: this.customer.address,
     phonenumber: this.customer.phonenumber,
   };
   await this.userService.createcustomer(customer);
-  
+
 }
 }

@@ -5,13 +5,29 @@ import { Register } from '../models/register';
 import { Customer } from '../models/customer';
 
 const baseUrl = environment.url;
+export class Status{
+  name?:string;
 
+}
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
 
   constructor(private http: HttpClient) {}
+
+  private status:Status[] = [
+    {
+      "name":"Active"
+    },
+    {
+      "name":"Inactive"
+    }]
+
+
+  getstatus(){
+    return this.status;
+  }
 
   createlogin(data: Register): Promise<Register> {
     return this.http.post<Register>(baseUrl + '/loginusers', data).toPromise();
