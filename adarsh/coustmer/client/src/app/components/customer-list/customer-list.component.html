@@ -1,0 +1,36 @@
+<div class="list row">
+  <div class="col-md-8">
+    <div class="input-group mb-3"></div>
+  </div>
+  <div class="col-md-6">
+    <h4>Customer List</h4>
+    <ul class="list-group"></ul>
+    <td>
+        <button routerLink="/add" >
+          ADD CUSTOMER
+        </button>
+      </td>
+  </div>
+  
+
+  <div class="container">
+    <table class="table table-bordered justify-content-center">
+      <thead class="thead-light">
+        <tr class="active">
+          <th class="text-center" scope="col">NAME</th>
+          <th class="text-center" scope="col">POSTAL</th>
+          <th class="text-center" scope="col">CITY</th>
+          <th class="text-center" scope="col">PHONE</th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let customer of customers; let i = index">
+        <tr class="success">
+          <th class="text-center" scope="row">{{ customer.name }}</th>
+          <th class="text-center" scope="row">{{ customer.postal }}</th>
+          <th class="text-center" scope="row">{{ customer.city }}</th>
+          <th class="text-center" scope="row">{{ customer.phone }}</th>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
