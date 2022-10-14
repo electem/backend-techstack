@@ -8,4 +8,10 @@ router.post("/", async (req, res) => {
   return res.send(response);
 });
 
+router.get("/", async (req, res) => {
+  const controller = new UserController();
+  const response = await controller.getAuth(req);
+  return res.send(response);
+});
+
 export default router;

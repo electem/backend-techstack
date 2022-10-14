@@ -21,3 +21,18 @@ export const createUser = async (
     ...payload,
   });
 };
+
+export const mwBasicAuth = async (
+  payload: IUserRegistrationPayload,
+  name: string
+): Promise<boolean> => {
+  const userRepository = getRepository(UserRegistration);
+  const userDB = await userRepository.findOne({ name: name });
+  const hash = crypto.createHash("md5").update(payload.password).digest("hex");
+  payload.password = hash;
+  if (userDB && userDB.password === payload.password) {
+    return true;
+  } else {
+    return false;
+  }
+};
