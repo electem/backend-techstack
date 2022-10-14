@@ -1,8 +1,9 @@
 import {
   createCustomer,
+  getCustomers,
   ICustomerPaylod,
 } from '../repositories/customer.repository';
-import { Route, Tags, Post, Body } from 'tsoa';
+import { Route, Tags, Post, Body, Get } from 'tsoa';
 import { customerModel } from '../models/customer.model';
 
 @Route('createCustomer')
@@ -13,5 +14,10 @@ export default class customerController {
     @Body() body: ICustomerPaylod,
   ): Promise<customerModel> {
     return createCustomer(body);
+  }
+
+  @Get('/')
+  public async getCustomers(): Promise<Array<customerModel>> {
+    return getCustomers();
   }
 }

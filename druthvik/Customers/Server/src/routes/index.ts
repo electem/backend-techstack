@@ -4,6 +4,6 @@ import registerRouter from './userreister.router';
 import customerRouter from './customer.router';
 
 router.use('/registeruser', registerRouter);
-router.use('/createcustomer', customerRouter);
+router.use('/customers', customerRouter);
 
 export default router;
