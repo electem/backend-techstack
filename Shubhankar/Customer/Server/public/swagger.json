@@ -211,6 +211,33 @@
 						}
 					}
 				}
+			},
+			"get": {
+				"operationId": "GetAuthentication",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"anyOf": [
+										{
+											"$ref": "#/components/schemas/User"
+										},
+										{
+											"type": "string"
+										}
+									]
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"loginusers"
+				],
+				"security": [],
+				"parameters": []
 			}
 		},
 		"/customergroup": {
