@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Register } from '../models/register';
 import { Customer } from '../models/customer';
+import { Customergroup } from '../models/customergroup';
 
 const baseUrl = environment.url;
 export class Status{
@@ -38,5 +39,9 @@ export class UserService {
   }
   createcustomer(data: Customer): Promise<Customer> {
     return this.http.post<Customer>(baseUrl + '/customer', data).toPromise();
+  }
+
+  async getcustomergroup(): Promise<Customergroup[]>{
+    return await this.http.get<Customergroup[]>(baseUrl + '/customergroup').toPromise();
   }
 }
