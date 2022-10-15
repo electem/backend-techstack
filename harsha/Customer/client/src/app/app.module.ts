@@ -11,7 +11,12 @@ import { UserRegisterComponent } from './components/user-register/user-register.
 import { CustomerComponent } from './components/customer/customer.component';
 
 @NgModule({
-  declarations: [AppComponent, UserLoginComponent, UserRegisterComponent, CustomerComponent],
+  declarations: [
+    AppComponent,
+    UserLoginComponent,
+    UserRegisterComponent,
+    CustomerComponent,
+  ],
   imports: [
     NgxDatatableModule,
     BrowserModule,
