@@ -1,0 +1,66 @@
+<h1>Add Customer</h1>
+<form [formGroup]="registerForm" (click)="signup()">
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input type="text" name="name" formControlName="name" placeholder="Customer Name" class="form-control"
+      [(ngModel)]="customer.name" [ngClass]="{ 'is-invalid': submitted && validation.name.errors }" />
+    <div *ngIf="submitted && validation.name.errors" class="invalid-feedback">
+      <div *ngIf="validation.name.errors.required">
+        Name Field is required
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="status">Status</label>
+    <select type="text" name="status" formControlName="status" aria-placeholder="Choose Status" class="form-control"
+      [(ngModel)]="customer.status" [ngClass]="{ 'is-invalid': submitted && validation.status.errors }">
+      <option *ngFor="let status of status" [ngValue]="status">
+        {{ status.name }}
+      </option>
+      <div *ngIf="submitted && validation.status.errors" class="invalid-feedback">
+        <div *ngIf="validation.status.errors.required">
+          Status Field is required
+        </div>
+      </div>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="address">Address</label>
+    <textarea type="text" name="address" formControlName="address" placeholder="Address" class="form-control"
+      [(ngModel)]="customer.address" [ngClass]="{ 'is-invalid': submitted && validation.address.errors }"></textarea>
+    <div *ngIf="submitted && validation.address.errors" class="invalid-feedback">
+      <div *ngIf="validation.address.errors.required">
+        Address Field is required
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="phoneNo">Phone No</label>
+    <input type="text" name="phoneNo" formControlName="phoneNo" placeholder="Phone Number" class="form-control"
+      [(ngModel)]="customer.phoneNo" [ngClass]="{ 'is-invalid': submitted && validation.phoneNo.errors }" />
+    <div *ngIf="submitted && validation.phoneNo.errors" class="invalid-feedback">
+      <div *ngIf="validation.phoneNo.errors.required">
+        Phone No Field is required
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="status">Customer Group</label>
+    <select type="text" name="status" formControlName="status" aria-placeholder="Choose Group" class="form-control"
+      [(ngModel)]="customer.status" [ngClass]="{ 'is-invalid': submitted && validation.status.errors }">
+      <div *ngIf="submitted && validation.status.errors" class="invalid-feedback">
+        <div *ngIf="validation.status.errors.required">
+          Status Field is required
+        </div>
+      </div>
+    </select>
+  </div>
+  <button class="btn btn-info btn-sm mr-2">
+    Save Customer
+  </button>
+  <button class="btn btn-warning">Cancel</button>
+</form>
