@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { User } from '../models/user.model';
 import { environment } from '../../environments/environment';
 import { Customer } from '../models/customer.model';
+import { CustomerGroup } from '../models/customer-group.model';
 
 const baseUrl = environment.url;
 export class Status {
@@ -24,9 +25,27 @@ export class CustomerService {
     return await this.http.post<User>(baseUrl + 'createUser', user).toPromise();
   }
 
-  async createCustomer(customer: Customer): Promise<User> {
+  async createCustomer(customer: Customer): Promise<Customer> {
     return await this.http
       .post<Customer>(baseUrl + 'createCustomer', customer)
+      .toPromise();
+  }
+
+  async getCustomers(): Promise<Customer[]> {
+    return await this.http.get<Customer[]>(baseUrl + 'customers').toPromise();
+  }
+
+  async createCustomerGroup(
+    customerGroup: CustomerGroup
+  ): Promise<CustomerGroup> {
+    return await this.http
+      .post<CustomerGroup>(baseUrl + 'createCustomerGroup', customerGroup)
+      .toPromise();
+  }
+
+  async getCustomerGroupList(): Promise<CustomerGroup[]> {
+    return await this.http
+      .get<CustomerGroup[]>(baseUrl + 'customerGroups')
       .toPromise();
   }
 }

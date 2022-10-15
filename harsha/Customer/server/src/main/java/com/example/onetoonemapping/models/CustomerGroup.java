@@ -42,7 +42,7 @@ public class CustomerGroup {
 	@UpdateTimestamp
 	private Date updatedDate;
 
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.MERGE )
 	@JoinColumn(name = "customer_group_id")
 	private List<Customer> customers;
 }
