@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserLogin } from '../../models/userlogin.model';
 import { Router } from '@angular/router';
+import { UserRegisterService } from '../../services/userregister.service';
 
 @Component({
   selector: 'app-userlogin',
@@ -15,7 +16,11 @@ export class UserloginComponent implements OnInit {
     username: '',
     password: '',
   };
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private userRegisterService: UserRegisterService,
+    private router: Router,
+  ) {}
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
@@ -35,6 +40,12 @@ export class UserloginComponent implements OnInit {
       this.loginUser();
     }
   }
+  // async loginUser(): Promise<void> {
+  //   const userLoginDetails: UserLogin = {
+  //     username: this.userLogin.username,
+  //     password: this.userLogin.password,
+  //   };
+  // }
   async loginUser(): Promise<void> {
     const userLoginDetails: UserLogin = {
       username: this.userLogin.username,

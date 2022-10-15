@@ -11,7 +11,7 @@
                 formControlName="username"
                 class="form-control"
                 [ngClass]="{ 'is-invalid': submitted && f.username.errors }"
-                [(ngModel)]="userRegister.username"
+                [(ngModel)]="userRegister.name"
               />
               <div
                 *ngIf="submitted && f.username.errors"
