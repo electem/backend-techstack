@@ -1,4 +1,11 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  JoinColumn,
+} from 'typeorm';
+import { customerGroup } from './customergroup.model';
 
 @Entity()
 export class customerModel {
@@ -16,4 +23,10 @@ export class customerModel {
 
   @Column({ nullable: true })
   status?: string;
+
+  @ManyToOne(
+    (_type) => customerGroup,
+    (customerGroup: customerGroup) => customerGroup.customer,
+  )
+  customerGroup!: customerGroup;
 }

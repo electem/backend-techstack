@@ -8,5 +8,4 @@ router.post('/', async (req, res) => {
   const response = await controller.registerUser(req.body);
   return res.send(response);
 });
-
 export default router;
