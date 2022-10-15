@@ -12,7 +12,7 @@ export class RegisteruserComponent implements OnInit {
   registerForm: FormGroup;
   submitted = false;
   userRegister: RegisterUser = {
-    username: '',
+    name: '',
     email: '',
     password: '',
   };
@@ -55,7 +55,7 @@ export class RegisteruserComponent implements OnInit {
   }
   async registerCustomer(): Promise<void> {
     const userRegister: RegisterUser = {
-      username: this.userRegister.username,
+      name: this.userRegister.name,
       email: this.userRegister.email,
       password: this.userRegister.password,
       phonenumber: this.userRegister.phonenumber,

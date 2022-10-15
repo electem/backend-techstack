@@ -1,6 +1,6 @@
 export class RegisterUser {
   id?: any;
-  username?: string;
+  name?: string;
   email?: string;
   password?: string;
   phonenumber?: number;

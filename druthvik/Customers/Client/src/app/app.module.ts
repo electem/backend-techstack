@@ -12,6 +12,7 @@ import { RegisteruserComponent } from '../app/components/registeruser/registerus
 import { CreatecustomerComponent } from '../app/components/createcustomer/createcustomer.component';
 import { CustomerlistComponent } from '../app/components/customerlist/customerlist.component';
 import { CustomereditComponent } from './components/customeredit/customeredit.component';
+import { CustomergrouplistComponent } from './components/customergrouplist/customergrouplist.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { CustomereditComponent } from './components/customeredit/customeredit.co
     CreatecustomerComponent,
     CustomerlistComponent,
     CustomereditComponent,
+    CustomergrouplistComponent,
   ],
   imports: [
     BrowserModule,

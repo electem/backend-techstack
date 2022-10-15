@@ -12,7 +12,7 @@
 						"type": "number",
 						"format": "double"
 					},
-					"username": {
+					"name": {
 						"type": "string"
 					},
 					"email": {
@@ -28,7 +28,7 @@
 				},
 				"required": [
 					"id",
-					"username",
+					"name",
 					"email",
 					"password",
 					"phonenumber"
@@ -79,13 +79,45 @@
 					},
 					"status": {
 						"type": "string"
+					},
+					"customerGroup": {
+						"$ref": "#/components/schemas/customerGroup"
 					}
 				},
 				"required": [
 					"id",
 					"name",
 					"phonenumber",
-					"address"
+					"address",
+					"customerGroup"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"customerGroup": {
+				"properties": {
+					"id": {
+						"type": "number",
+						"format": "double"
+					},
+					"name": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					},
+					"customer": {
+						"items": {
+							"$ref": "#/components/schemas/customerModel"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"id",
+					"name",
+					"description",
+					"customer"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -106,6 +138,22 @@
 				"required": [
 					"name",
 					"phonenumber"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"ICustomerGroupPayload": {
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"name",
+					"description"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -153,6 +201,33 @@
 						}
 					}
 				}
+			},
+			"get": {
+				"operationId": "GetAuthentication",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"anyOf": [
+										{
+											"$ref": "#/components/schemas/IRegisterLoginPayload"
+										},
+										{
+											"type": "string"
+										}
+									]
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"RegisterLogin"
+				],
+				"security": [],
+				"parameters": []
 			}
 		},
 		"/createCustomer": {
@@ -274,6 +349,61 @@
 						}
 					}
 				]
+			}
+		},
+		"/customergroup": {
+			"get": {
+				"operationId": "GetCustomerGroup",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/customerGroup"
+									},
+									"type": "array"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"CustomerGroup"
+				],
+				"security": [],
+				"parameters": []
+			},
+			"post": {
+				"operationId": "CreateCustomerGroup",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/customerGroup"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"CustomerGroup"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/ICustomerGroupPayload"
+							}
+						}
+					}
+				}
 			}
 		}
 	},
