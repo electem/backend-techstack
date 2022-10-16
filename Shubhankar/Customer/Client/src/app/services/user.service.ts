@@ -44,4 +44,8 @@ export class UserService {
   async getcustomergroup(): Promise<Customergroup[]>{
     return await this.http.get<Customergroup[]>(baseUrl + '/customergroup').toPromise();
   }
+
+  createcustomergroup(data: Customergroup): Promise<Customergroup> {
+    return this.http.post<Customergroup>(baseUrl + '/customergroup', data).toPromise();
+  }
 }
