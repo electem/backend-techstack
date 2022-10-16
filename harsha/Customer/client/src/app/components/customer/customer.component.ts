@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CustomerGroup } from 'src/app/models/customer-group.model';
 import { Customer } from 'src/app/models/customer.model';
 import { CustomerService, Status } from 'src/app/services/customer.service';
 
@@ -17,6 +18,7 @@ export class CustomerComponent implements OnInit {
     status: '',
     address: '',
   };
+  customerGroups?: CustomerGroup[];
   constructor(
     private customerService: CustomerService,
     private formBuilder: FormBuilder
@@ -31,6 +33,7 @@ export class CustomerComponent implements OnInit {
     });
 
     this.status = this.getStatus();
+    this.getCustomerGroupList();
   }
 
   getStatus() {
@@ -58,5 +61,9 @@ export class CustomerComponent implements OnInit {
       phoneNo: this.customer.phoneNo,
     };
     await this.customerService.createCustomer(customer);
+  }
+
+  async getCustomerGroupList(): Promise<void> {
+    this.customerGroups = await this.customerService.getCustomerGroupList();
   }
 }

@@ -47,20 +47,17 @@
       </div>
     </div>
   </div>
-
   <div class="form-group">
     <label for="status">Customer Group</label>
-    <select type="text" name="status" formControlName="status" aria-placeholder="Choose Group" class="form-control"
-      [(ngModel)]="customer.status" [ngClass]="{ 'is-invalid': submitted && validation.status.errors }">
-      <div *ngIf="submitted && validation.status.errors" class="invalid-feedback">
-        <div *ngIf="validation.status.errors.required">
-          Status Field is required
-        </div>
-      </div>
+    <select type="text" aria-placeholder="Choose Customer Group" class="form-control">
+      <option value="Choose Customer Group">Choose Customer Group</option>
+      <option *ngFor="let customerGroup of customerGroups">
+        {{ customerGroup.name }}
+      </option>
     </select>
   </div>
   <button class="btn btn-info btn-sm mr-2">
     Save Customer
   </button>
-  <button class="btn btn-warning">Cancel</button>
+  <button class="btn btn-warning" routerLink="/customer-list">Cancel</button>
 </form>
