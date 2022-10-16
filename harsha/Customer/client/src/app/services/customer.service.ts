@@ -54,4 +54,8 @@ export class CustomerService {
       .get(`${baseUrl + 'customerGroup'}/${id}`)
       .toPromise();
   }
+
+  async getCustomerById(id: number) {
+    return await this.http.get(`${baseUrl + 'customer'}/${id}`).toPromise();
+  }
 }

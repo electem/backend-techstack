@@ -13,6 +13,7 @@ import { CustomerGroupComponent } from './components/customer-group/customer-gro
 import { CustomerGroupListingComponent } from './components/customer-group-listing/customer-group-listing.component';
 import { EditCustomerGroupComponent } from './components/edit-customer-group/edit-customer-group.component';
 import { CustomerListComponent } from './components/customer-list/customer-list.component';
+import { EditCustomerComponent } from './components/edit-customer/edit-customer.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { CustomerListComponent } from './components/customer-list/customer-list.
     CustomerGroupListingComponent,
     EditCustomerGroupComponent,
     CustomerListComponent,
+    EditCustomerComponent,
   ],
   imports: [
     NgxDatatableModule,

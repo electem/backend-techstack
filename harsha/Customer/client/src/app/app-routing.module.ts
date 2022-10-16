@@ -7,6 +7,7 @@ import { CustomerGroupComponent } from './components/customer-group/customer-gro
 import { CustomerGroupListingComponent } from './components/customer-group-listing/customer-group-listing.component';
 import { EditCustomerGroupComponent } from './components/edit-customer-group/edit-customer-group.component';
 import { CustomerListComponent } from './components/customer-list/customer-list.component';
+import { EditCustomerComponent } from './components/edit-customer/edit-customer.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'userLogin', pathMatch: 'full' },
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'customer-group', component: CustomerGroupComponent },
   { path: 'customer-group-list', component: CustomerGroupListingComponent },
   { path: 'edit-customer-group/:id', component: EditCustomerGroupComponent },
+  { path: 'edit-customer/:id', component: EditCustomerComponent },
 ];
 
 @NgModule({
