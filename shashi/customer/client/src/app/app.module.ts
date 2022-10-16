@@ -7,9 +7,17 @@ import { AppComponent } from './app.component';
 import { UserloginComponent } from './components/userLogin/userlogin.component';
 import { AppHttpInterceptor } from './app.interceptor';
 import { UserRegistrationComponent } from './components/user-registration/user-registration.component';
+import { CustomerComponent } from './components/customerList/customer.component';
+import { CreateCustomerComponent } from './components/create-customer/create-customer.component';
 
 @NgModule({
-  declarations: [AppComponent, UserloginComponent, UserRegistrationComponent],
+  declarations: [
+    AppComponent,
+    UserloginComponent,
+    UserRegistrationComponent,
+    CustomerComponent,
+    CreateCustomerComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
