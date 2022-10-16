@@ -48,4 +48,10 @@ export class CustomerService {
       .get<CustomerGroup[]>(baseUrl + 'customerGroups')
       .toPromise();
   }
+
+  async getCustomerGroupById(id: number) {
+    return await this.http
+      .get(`${baseUrl + 'customerGroup'}/${id}`)
+      .toPromise();
+  }
 }

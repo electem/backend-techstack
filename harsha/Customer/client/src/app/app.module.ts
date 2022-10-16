@@ -11,6 +11,7 @@ import { UserRegisterComponent } from './components/user-register/user-register.
 import { CustomerComponent } from './components/customer/customer.component';
 import { CustomerGroupComponent } from './components/customer-group/customer-group.component';
 import { CustomerGroupListingComponent } from './components/customer-group-listing/customer-group-listing.component';
+import { EditCustomerGroupComponent } from './components/edit-customer-group/edit-customer-group.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { CustomerGroupListingComponent } from './components/customer-group-listi
     CustomerComponent,
     CustomerGroupComponent,
     CustomerGroupListingComponent,
+    EditCustomerGroupComponent,
   ],
   imports: [
     NgxDatatableModule,

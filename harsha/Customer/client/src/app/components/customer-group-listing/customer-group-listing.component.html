@@ -21,7 +21,8 @@
         <td class="text-center">{{ customerGroup.createdDate }}</td>
         <td class="text-center">{{ customerGroup.updatedDate }}</td>
         <td>
-          <button type="button" class="btn btn-info btn-sm mr-2">Edit</button>
+          <button type="button" class="btn btn-info btn-sm mr-2"
+            routerLink="/edit-customer-group/{{ customerGroup.id }}">Edit</button>
         </td>
       </tr>
     </tbody>
