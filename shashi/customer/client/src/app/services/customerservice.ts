@@ -19,4 +19,9 @@ export class CustomerService {
   async getCustomer(): Promise<Customer[]> {
     return await this.http.get<Customer[]>(baseUrl + '/customer').toPromise();
   }
+  async createCustomer(customerData: Customer): Promise<Customer> {
+    return this.http
+      .post<Customer>(baseUrl + '/customer', customerData)
+      .toPromise();
+  }
 }
