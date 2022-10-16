@@ -1,9 +1,11 @@
-import { Route, Tags, Post, Body, Get } from "tsoa";
+import { Route, Tags, Post, Body, Get, Put, Path } from "tsoa";
 import { Customer } from "../models/customer";
 import {
   ICustomerPayload,
   getCustomers,
   createCustomer,
+  getCustomerById,
+  updateCustomer,
 } from "../repositories/customer.repository";
 
 @Route("customers")
@@ -18,5 +20,16 @@ export default class CustomerController {
     @Body() body: ICustomerPayload
   ): Promise<Customer> {
     return createCustomer(body);
+  }
+  @Get("/:id")
+  public async getCustomerById(@Path() id: string): Promise<Customer | null> {
+    return getCustomerById(Number(id));
+  }
+
+  @Put("/")
+  public async updateCustomer(
+    @Body() body: ICustomerPayload
+  ): Promise<ICustomerPayload> {
+    return updateCustomer(body);
   }
 }
