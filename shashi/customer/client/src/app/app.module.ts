@@ -9,6 +9,7 @@ import { AppHttpInterceptor } from './app.interceptor';
 import { UserRegistrationComponent } from './components/user-registration/user-registration.component';
 import { CustomerComponent } from './components/customerList/customerList.component';
 import { CreateCustomerComponent } from './components/create-customer/create-customer.component';
+import { EditCustomerComponent } from './components/edit-customer/edit-customer.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { CreateCustomerComponent } from './components/create-customer/create-cus
     UserRegistrationComponent,
     CustomerComponent,
     CreateCustomerComponent,
+    EditCustomerComponent,
   ],
   imports: [
     BrowserModule,
