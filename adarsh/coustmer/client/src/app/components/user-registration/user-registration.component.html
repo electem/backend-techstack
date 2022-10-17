@@ -1,6 +1,6 @@
 <div>
     <div class="edit-form">
-      <h4>Tutorial</h4>
+      <h4>REGISTER</h4>
       <form [formGroup]="registerForm" (ngSubmit)="signupUser();">
   
         <div class="form-group">
@@ -40,11 +40,11 @@
               [ngClass]="{ 'is-invalid': submitted && fval.phoNum.errors }" />
             <div *ngIf="this.submitted && fval.phoNum.errors " class="invalid-feedback">
               <div *ngIf="fval.phoNum.errors.required" style="color: red">
-                email is required
+                phoNum is required
               </div>
             </div>
           </div>
         <br>
             <button type="submit" class="btn btn-info btn-sm mr-2" >  Submit </button>
             <button type="submit" class="btn btn-info btn-sm mr-2" > Update </button>
-         
+      </form>

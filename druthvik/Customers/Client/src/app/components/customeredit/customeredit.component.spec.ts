@@ -10,6 +10,9 @@ describe('CustomereditComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [CustomereditComponent],
     }).compileComponents();
+      declarations: [ CustomereditComponent ]
+    })
+    .compileComponents();
   });
 
   beforeEach(() => {

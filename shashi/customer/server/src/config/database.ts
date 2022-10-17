@@ -1,5 +1,6 @@
 import { ConnectionOptions } from "typeorm";
 import { UserRegistration } from "../models";
+import { Customer, CustomerGroup } from "../models";
 
 const config: ConnectionOptions = {
   type: "postgres",
@@ -8,7 +9,7 @@ const config: ConnectionOptions = {
   username: process.env.POSTGRES_USER || "postgres",
   password: process.env.POSTGRES_PASSWORD || "postgres",
   database: process.env.POSTGRES_DB || "customer",
-  entities: [UserRegistration],
+  entities: [UserRegistration, Customer, CustomerGroup],
   synchronize: true,
 };
 export default config;

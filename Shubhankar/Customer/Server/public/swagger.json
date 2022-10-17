@@ -59,6 +59,114 @@
 				],
 				"type": "object",
 				"additionalProperties": false
+			},
+			"CustomerGroup": {
+				"properties": {
+					"id": {
+						"type": "number",
+						"format": "double"
+					},
+					"name": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					},
+					"createdAt": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"customer": {
+						"items": {
+							"$ref": "#/components/schemas/Customer"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"id",
+					"name",
+					"description",
+					"createdAt",
+					"customer"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"Customer": {
+				"properties": {
+					"id": {
+						"type": "number",
+						"format": "double"
+					},
+					"name": {
+						"type": "string"
+					},
+					"status": {
+						"type": "string"
+					},
+					"address": {
+						"type": "string"
+					},
+					"phonenumber": {
+						"type": "number",
+						"format": "double"
+					},
+					"customergroup": {
+						"$ref": "#/components/schemas/CustomerGroup"
+					}
+				},
+				"required": [
+					"id",
+					"name",
+					"status",
+					"address",
+					"phonenumber",
+					"customergroup"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"ICustomerGroupData": {
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"name",
+					"description"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"ICustomerData": {
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"status": {
+						"type": "string"
+					},
+					"address": {
+						"type": "string"
+					},
+					"phonenumber": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"name",
+					"status",
+					"address",
+					"phonenumber"
+				],
+				"type": "object",
+				"additionalProperties": false
 			}
 		},
 		"securitySchemes": {}
@@ -99,6 +207,143 @@
 						"application/json": {
 							"schema": {
 								"$ref": "#/components/schemas/IUserPayload"
+							}
+						}
+					}
+				}
+			},
+			"get": {
+				"operationId": "GetAuthentication",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"anyOf": [
+										{
+											"$ref": "#/components/schemas/User"
+										},
+										{
+											"type": "string"
+										}
+									]
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"loginusers"
+				],
+				"security": [],
+				"parameters": []
+			}
+		},
+		"/customergroup": {
+			"get": {
+				"operationId": "GetCustomerGroup",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/CustomerGroup"
+									},
+									"type": "array"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"customergroup"
+				],
+				"security": [],
+				"parameters": []
+			},
+			"post": {
+				"operationId": "CreateCustomerGroup",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/CustomerGroup"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"customergroup"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/ICustomerGroupData"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/customer": {
+			"get": {
+				"operationId": "GetCustomer",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/Customer"
+									},
+									"type": "array"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"customer"
+				],
+				"security": [],
+				"parameters": []
+			},
+			"post": {
+				"operationId": "CreateCustomer",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Customer"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"customer"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/ICustomerData"
 							}
 						}
 					}

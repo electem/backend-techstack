@@ -1,7 +1,6 @@
 import { User } from "../models";
-import { createUser, IUserPayload, mwBasicAuth } from "../repositories/user.repository";
-import { Body, Get, Post, Route, Tags } from "tsoa";
-import { request } from "inversify-express-utils/lib/decorators";
+import { createUser, IUserPayload , myBasicAuth} from "../repositories/user.repository";
+import { Body, Get, Post, Route, Tags , Request} from "tsoa";
 
 @Route("loginusers")
 @Tags("loginusers")
@@ -12,11 +11,10 @@ export default class UserController {
  }
 
  @Get("/")
-  public async getAuth(
-   @request()  res: IUserPayload,
-   @request()  username:any
-  ): Promise<boolean | null> {
-    return mwBasicAuth(res, username);
-  }
-
+ public async getAuthentication(
+    @Request() payload: IUserPayload,
+    @Request()  name: string
+ ): Promise<User | String> {
+   return myBasicAuth(payload, name);
+ }
 }
