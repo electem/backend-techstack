@@ -10,6 +10,7 @@ import { UserRegistrationComponent } from './components/user-registration/user-r
 import { CustomerComponent } from './components/customerList/customerList.component';
 import { CreateCustomerComponent } from './components/create-customer/create-customer.component';
 import { EditCustomerComponent } from './components/edit-customer/edit-customer.component';
+import { CustomerGroupListComponent } from './components/customer-group-list/customer-group-list.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { EditCustomerComponent } from './components/edit-customer/edit-customer.
     CustomerComponent,
     CreateCustomerComponent,
     EditCustomerComponent,
+    CustomerGroupListComponent,
   ],
   imports: [
     BrowserModule,

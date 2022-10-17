@@ -5,6 +5,7 @@ import { UserRegistrationComponent } from './components/user-registration/user-r
 import { CustomerComponent } from './components/customerList/customerList.component';
 import { CreateCustomerComponent } from './components/create-customer/create-customer.component';
 import { EditCustomerComponent } from './components/edit-customer/edit-customer.component';
+import { CustomerGroupListComponent } from './components/customer-group-list/customer-group-list.component';
 const routes: Routes = [
   { path: '', redirectTo: 'userlogin', pathMatch: 'full' },
   { path: 'userlogin', component: UserloginComponent },
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'customerList', component: CustomerComponent },
   { path: 'Create-customer', component: CreateCustomerComponent },
   { path: 'edit-customer/:id', component: EditCustomerComponent },
+  { path: 'customergroupList', component: CustomerGroupListComponent },
 ];
 
 @NgModule({

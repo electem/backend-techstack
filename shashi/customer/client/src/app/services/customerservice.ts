@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { UserRegistration } from '../models/userRegistration.model';
 import { environment } from '../../environments/environment';
 import { Customer } from '../models/customer.model';
+import { CustomerGroup } from '../models/customerGroup.model';
 const baseUrl = environment.url;
 
 export class Status {
@@ -40,5 +41,10 @@ export class CustomerService {
   }
   async updateCustomer(customer: Customer): Promise<Customer> {
     return await this.http.put(baseUrl + '/customer', customer).toPromise();
+  }
+  async getCustomerGroups(): Promise<CustomerGroup[]> {
+    return await this.http
+      .get<CustomerGroup[]>(baseUrl + '/customergroup')
+      .toPromise();
   }
 }
