@@ -15,7 +15,6 @@ export class AddcustomerComponent implements OnInit {
     name: '',
     status: '',
     address: '',
-    phonenumber:0,
   };
   status?:Status[]=[]
 
@@ -55,6 +54,11 @@ async Submit() {
     phonenumber: this.customer.phonenumber,
   };
   await this.userService.createcustomer(customer);
-
+  if(this.submitted==true){
+  this.router.navigate(['/list']);
+  }
+  return 
 }
+
+
 }

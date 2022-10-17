@@ -1,21 +1,21 @@
-<button type="button" class="btn btn-primary" (click)="click()" >Edit customer</button>
+<button type="button" class="btn btn-primary" (click)="click()">
+  Add customer
+</button>
 <table class="table table-striped table-bordered justify-content-center">
-    <thead class="thead-light">
-      <tr class="active">
-        <th class="text-center" scope="col">Name</th>
-        <th class="text-center" scope="col">Status</th>
-        <th class="text-center" scope="col">Location</th>
-        <th class="text-center" scope="col">Phonenumber</th>
-      </tr>
-    </thead>
-    <tbody *ngFor="let customer of customers; let i = index">
-      <tr class="success">
-        <th class="text-center" scope="row">{{ customer.name }}</th>
-        <th class="text-center" scope="row">{{ customer.status }}</th>
-        <th class="text-center" scope="row">{{ customer.address }}</th>
-        <th class="text-center" scope="row">{{ customer.phonenumber }}</th>
-      </tr>
-    </tbody>
-  </table>
-
- 
+  <thead class="thead-light">
+    <tr class="active">
+      <th class="text-center" scope="col">Name</th>
+      <th class="text-center" scope="col">Status</th>
+      <th class="text-center" scope="col">Location</th>
+      <th class="text-center" scope="col">Phonenumber</th>
+    </tr>
+  </thead>
+  <tbody *ngFor="let customer of customers; let i = index">
+    <tr class="success">
+      <th class="text-center" scope="row">{{ customer.name }}</th>
+      <th class="text-center" scope="row">{{ customer.status }}</th>
+      <th class="text-center" scope="row">{{ customer.address }}</th>
+      <th class="text-center" scope="row">{{ customer.phonenumber }}</th>
+    </tr>
+  </tbody>
+</table>
