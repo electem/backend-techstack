@@ -12,7 +12,9 @@ import { RegisteruserComponent } from '../app/components/registeruser/registerus
 import { CreatecustomerComponent } from '../app/components/createcustomer/createcustomer.component';
 import { CustomerlistComponent } from '../app/components/customerlist/customerlist.component';
 import { CustomereditComponent } from './components/customeredit/customeredit.component';
+import { AddcustomergroupComponent } from './components/addcustomergroup/addcustomergroup.component';
 import { CustomergrouplistComponent } from './components/customergrouplist/customergrouplist.component';
+import { EditcustomergroupComponent } from './components/editcustomergroup/editcustomergroup.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,8 @@ import { CustomergrouplistComponent } from './components/customergrouplist/custo
     CustomerlistComponent,
     CustomereditComponent,
     CustomergrouplistComponent,
+    AddcustomergroupComponent,
+    EditcustomergroupComponent,
   ],
   imports: [
     BrowserModule,

@@ -7,6 +7,8 @@ import { CreatecustomerComponent } from '../app/components/createcustomer/create
 import { CustomerlistComponent } from './components/customerlist/customerlist.component';
 import { CustomereditComponent } from './components/customeredit/customeredit.component';
 import { CustomergrouplistComponent } from './components/customergrouplist/customergrouplist.component';
+import { EditcustomergroupComponent } from './components/editcustomergroup/editcustomergroup.component';
+import { AddcustomergroupComponent } from './components/addcustomergroup/addcustomergroup.component';
 const routes: Routes = [
   { path: '', redirectTo: 'registeruser', pathMatch: 'full' },
   { path: 'loginuser', component: UserloginComponent },
@@ -15,6 +17,8 @@ const routes: Routes = [
   { path: 'customerlist', component: CustomerlistComponent },
   { path: 'customeredit/:id', component: CustomereditComponent },
   { path: 'customergroup', component: CustomergrouplistComponent },
+  { path: 'add', component: AddcustomergroupComponent },
+  { path: 'customergroupedit/:id', component: EditcustomergroupComponent },
   { path: '**', component: PageNotFoundComponent },
 ];
 

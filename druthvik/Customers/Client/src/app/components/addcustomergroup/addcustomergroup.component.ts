@@ -20,8 +20,12 @@ export class AddcustomergroupComponent implements OnInit {
   };
   customers: createCustomer[] = [];
   selectedCustomers: createCustomer[] = [];
-  currentCustomer: createCustomer = {};
-  removeCustomer: createCustomer = {};
+  currentCustomer: createCustomer = {
+    customergroup: [],
+  };
+  removeCustomer: createCustomer = {
+    customergroup: [],
+  };
   constructor(
     private customerGroupService: customergroupService,
     private formBuilder: FormBuilder,
