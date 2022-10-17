@@ -16,8 +16,6 @@ export class CreateCustomerGroupComponent implements OnInit {
   customerGroups: CustomerGroup[] = [];
   customers!: Customer[];
   selectedCustomers: Customer[] = [];
-  removeCurrentCustomer!: Customer;
-  removeselectedCustomers: Customer[] = [];
   submitted = false;
   customerGroup: CustomerGroup = {
     groupname: '',
@@ -61,6 +59,7 @@ export class CreateCustomerGroupComponent implements OnInit {
     const customerData: CustomerGroup = {
       groupname: this.customerGroup.groupname,
       description: this.customerGroup.description,
+      customers: this.selectedCustomers,
     };
     await this.customerService.createCustomerGroup(customerData);
     this.router.navigate(['/customergroupList']);
