@@ -21,6 +21,6 @@ export class CustomergroupComponent implements OnInit {
 }
 
 click(){
-  this.router.navigate(['/edit']);
+  this.router.navigate(['/addgroup']);
 }
 }

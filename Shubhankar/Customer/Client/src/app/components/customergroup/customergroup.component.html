@@ -5,14 +5,16 @@
       <tr class="active">
         <th class="text-center" scope="col">Customer Group Name</th>
         <th class="text-center" scope="col">Description</th>
-        <th class="text-center" scope="col">Created Date</th>
+        <!-- <th class="text-center" scope="col">Created Date</th> -->
+        <th class="text-center" scope="col">Option</th>
       </tr>
     </thead>
     <tbody *ngFor="let customer of customergroup; let i = index">
       <tr class="success">
         <th class="text-center" scope="row">{{ customer.name }}</th>
         <th class="text-center" scope="row">{{ customer.description }}</th>
-        <th class="text-center" scope="row">{{ customer.createdAt }}</th>
+        <!-- <th class="text-center" scope="row">{{ customer.createdAt }}</th> -->
+       <button class="button button1"  scope="row">Edit</button>
     </tr>
     </tbody>
   </table>
