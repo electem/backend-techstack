@@ -80,8 +80,11 @@
 					"status": {
 						"type": "string"
 					},
-					"customerGroup": {
-						"$ref": "#/components/schemas/customerGroup"
+					"customergroup": {
+						"items": {
+							"$ref": "#/components/schemas/customerGroup"
+						},
+						"type": "array"
 					}
 				},
 				"required": [
@@ -89,7 +92,7 @@
 					"name",
 					"phonenumber",
 					"address",
-					"customerGroup"
+					"customergroup"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -106,7 +109,15 @@
 					"description": {
 						"type": "string"
 					},
-					"customer": {
+					"createdAt": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"updatedAt": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"customers": {
 						"items": {
 							"$ref": "#/components/schemas/customerModel"
 						},
@@ -117,7 +128,9 @@
 					"id",
 					"name",
 					"description",
-					"customer"
+					"createdAt",
+					"updatedAt",
+					"customers"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -201,33 +214,6 @@
 						}
 					}
 				}
-			},
-			"get": {
-				"operationId": "GetAuthentication",
-				"responses": {
-					"200": {
-						"description": "Ok",
-						"content": {
-							"application/json": {
-								"schema": {
-									"anyOf": [
-										{
-											"$ref": "#/components/schemas/IRegisterLoginPayload"
-										},
-										{
-											"type": "string"
-										}
-									]
-								}
-							}
-						}
-					}
-				},
-				"tags": [
-					"RegisterLogin"
-				],
-				"security": [],
-				"parameters": []
 			}
 		},
 		"/createCustomer": {
@@ -404,6 +390,42 @@
 						}
 					}
 				}
+			}
+		},
+		"/customergroup/{id}": {
+			"get": {
+				"operationId": "GetCustomerGroupById",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"allOf": [
+										{
+											"$ref": "#/components/schemas/customerGroup"
+										}
+									],
+									"nullable": true
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"CustomerGroup"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
 			}
 		}
 	},
