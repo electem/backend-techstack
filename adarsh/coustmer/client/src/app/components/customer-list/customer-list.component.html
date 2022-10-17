@@ -21,6 +21,8 @@
           <th class="text-center" scope="col">POSTAL</th>
           <th class="text-center" scope="col">CITY</th>
           <th class="text-center" scope="col">PHONE</th>
+
+          <th class="text-center" scope="col">EDIT</th>
         </tr>
       </thead>
       <tbody *ngFor="let customer of customers; let i = index">
@@ -29,6 +31,16 @@
           <th class="text-center" scope="row">{{ customer.postal }}</th>
           <th class="text-center" scope="row">{{ customer.city }}</th>
           <th class="text-center" scope="row">{{ customer.phone }}</th>
+          <th class="text-center" scope="row">
+            <button
+              type="button"
+              class="btn btn-info btn-sm mr-2"
+              routerLink="/customer/{{ customer.id }}"
+            >
+              Edit
+            </button>
+          </th>
+        
         </tr>
       </tbody>
     </table>

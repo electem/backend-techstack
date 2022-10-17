@@ -5,4 +5,5 @@ export class Customar {
   postal?: string;
   city?: string;
   phone?: number;
+ 
 }

@@ -9,10 +9,13 @@ import { UserRegistrationComponent } from './components/user-registration/user-r
 import { UserLoginComponent } from './components/user-login/user-login.component';
 import { CustomerListComponent } from './components/customer-list/customer-list.component';
 import { AddCustomerComponent } from './components/add-customer/add-customer.component';
+import { EditCustomerComponent } from './components/edit-customer/edit-customer.component';
+import { CustomerGroupComponent } from './components/customer-group/customer-group.component';
+import { AddCustomerGroupComponent } from './components/add-customer-group/add-customer-group.component';
 
 
 @NgModule({
-  declarations: [AppComponent, UserRegistrationComponent, UserLoginComponent, CustomerListComponent, AddCustomerComponent],
+  declarations: [AppComponent, UserRegistrationComponent, UserLoginComponent, CustomerListComponent, AddCustomerComponent, EditCustomerComponent, CustomerGroupComponent, AddCustomerGroupComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

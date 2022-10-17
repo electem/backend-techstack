@@ -17,7 +17,6 @@ export class CustomerListComponent implements OnInit {
     private router: Router,) { }
 
   ngOnInit(): void {
-    this.status = this.getStatus();
     this.retrieveCustomers();
   }
    
