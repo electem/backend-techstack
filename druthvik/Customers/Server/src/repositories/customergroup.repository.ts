@@ -1,4 +1,4 @@
-import { getRepository } from 'typeorm';
+import { getManager, getRepository } from 'typeorm';
 import { customerGroup } from '../models/customergroup.model';
 
 export interface ICustomerGroupPayload {
