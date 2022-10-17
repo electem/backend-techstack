@@ -32,7 +32,7 @@ export class AddcustomergroupComponent implements OnInit {
     this.addGroup = this.formBuilder.group({
       name: ['', Validators.required],
       description: ['', Validators.required],
-      customer: ['', Validators.required],
+      customers: ['', Validators.required],
     });
     this.retrieveCustomers();
   }

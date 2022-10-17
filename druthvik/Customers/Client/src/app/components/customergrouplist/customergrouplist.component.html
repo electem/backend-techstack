@@ -31,7 +31,11 @@
           </th>
           <th class="text-center" scope="row">{{ customergroup.createdAt }}</th>
           <th class="text-center" scope="row">{{ customergroup.updatedAt }}</th>
-          <button type="button" class="btn btn-warning btn-sm mr-2">
+          <button
+            type="button"
+            class="btn btn-warning btn-sm mr-2"
+            routerLink="/customergroupedit/{{ customergroup.id }}"
+          >
             Edit
           </button>
         </tr>
