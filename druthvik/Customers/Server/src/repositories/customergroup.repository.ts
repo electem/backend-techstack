@@ -21,3 +21,37 @@ export const createCustomerGroup = async (
     ...payload,
   });
 };
+// export const getCustomerGroupById = async (
+//   id: number,
+// ): Promise<customerGroup | null> => {
+//   const customerGroupRepository = getRepository(customerGroup);
+//   const customergroup = await customerGroupRepository.findOne({ id: id });
+//   if (!customergroup) return null;
+//   return customergroup;
+// };
+export const getCustomerGroupById = async (id: number) => {
+  const entityManager = getManager();
+
+  const query = entityManager.createQueryBuilder(
+    customerGroup,
+    'customergroup',
+  );
+  const customergroup = await query
+    .select(['customergroup', 'customers'])
+    .leftJoinAndSelect('customergroup.customers', 'customers')
+    .where('customergroup.id = :id', { id: id })
+    .getOne();
+
+  return customergroup;
+};
+
+export const updateCustomerGroup = async (
+  payload: ICustomerGroupPayload,
+): Promise<ICustomerGroupPayload> => {
+  const customerGroupRepository = getRepository(customerGroup);
+  const customer = new customerGroup();
+  return customerGroupRepository.save({
+    ...customer,
+    ...payload,
+  });
+};
