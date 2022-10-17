@@ -4,7 +4,10 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
+  ManyToMany,
+  JoinTable,
 } from "typeorm";
+import { CustomerGroup } from "./customerGroup";
 @Entity()
 export class Customer {
   @PrimaryGeneratedColumn()
@@ -30,4 +33,11 @@ export class Customer {
 
   @UpdateDateColumn()
   updatedAt!: Date;
+
+  @ManyToMany(
+    (_type) => CustomerGroup,
+    (customerGroup) => customerGroup.customers
+  )
+  @JoinTable()
+  customerGroups!: CustomerGroup[];
 }
