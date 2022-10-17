@@ -51,7 +51,7 @@ public class CustomerGroup {
 	@UpdateTimestamp
 	private Date updatedDate;
 
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany(cascade = CascadeType.MERGE)
 	@JoinTable(name = "customergroup_customer", joinColumns = {
 			@JoinColumn(name = "customergroup_id") }, inverseJoinColumns = { @JoinColumn(name = "customer_id") })
 	private List<Customar> customars;
