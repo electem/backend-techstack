@@ -1,4 +1,4 @@
-import { Route, Tags, Post, Body, Get, Request, Path } from 'tsoa';
+import { Route, Tags, Post, Body } from 'tsoa';
 import {
   IRegisterLoginPayload,
   registerUser,
