@@ -17,6 +17,7 @@ export class CustomerComponent implements OnInit {
     private router: Router
   ) {}
 
+  
   ngOnInit(): void {
     this.retrieveCustomers();
   }

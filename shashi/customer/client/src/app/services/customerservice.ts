@@ -47,4 +47,11 @@ export class CustomerService {
       .get<CustomerGroup[]>(baseUrl + '/customergroup')
       .toPromise();
   }
+  async createCustomerGroup(
+    customerGroupData: CustomerGroup
+  ): Promise<CustomerGroup> {
+    return this.http
+      .post<CustomerGroup>(baseUrl + '/customergroup', customerGroupData)
+      .toPromise();
+  }
 }
