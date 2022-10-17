@@ -3,6 +3,8 @@ import { Status } from '../../services/createcustomer.service';
 import { customerService } from '../../services/createcustomer.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { createCustomer } from '../../models/customer.model';
+import { customergroupService } from 'src/app/services/customergroup.service';
+import { customerGroup } from '../../models/customergroup.model';
 
 @Component({
   selector: 'app-createcustomer',
@@ -18,11 +20,14 @@ export class CreatecustomerComponent implements OnInit {
     phonenumber: null,
     address: '',
     status: '',
+    customergroup: [],
   };
+  customersGroup: customerGroup[] = [];
 
   constructor(
     private customerService: customerService,
     private formBuilder: FormBuilder,
+    private customerGroupService: customergroupService,
   ) {}
 
   ngOnInit(): void {
@@ -31,8 +36,10 @@ export class CreatecustomerComponent implements OnInit {
       phonenumber: ['', Validators.required],
       address: ['', Validators.required],
       status: ['', Validators.required],
+      customergroup: ['', Validators.required],
     });
     this.status = this.getStatus();
+    this.retriveCustomerGroup();
   }
   get f() {
     return this.registerCustomerForm.controls;
@@ -41,6 +48,11 @@ export class CreatecustomerComponent implements OnInit {
   getStatus() {
     return this.customerService.getStatus();
   }
+
+  async retriveCustomerGroup(): Promise<void> {
+    this.customersGroup = await this.customerGroupService.getCustomerGroup();
+  }
+
   async registerCustomerValidate(): Promise<void> {
     this.submitted = true;
     if (this.registerCustomerForm.invalid) {
@@ -55,6 +67,7 @@ export class CreatecustomerComponent implements OnInit {
       phonenumber: this.createcustomer.phonenumber,
       address: this.createcustomer.address,
       status: this.createcustomer.status,
+      customergroup: this.createcustomer.customergroup,
     };
     await this.customerService.createCustomer(customerRegister);
   }

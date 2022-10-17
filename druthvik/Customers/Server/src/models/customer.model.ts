@@ -1,10 +1,4 @@
-import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-  ManyToOne,
-  JoinColumn,
-} from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToMany } from 'typeorm';
 import { customerGroup } from './customergroup.model';
 
 @Entity()
@@ -24,9 +18,9 @@ export class customerModel {
   @Column({ nullable: true })
   status?: string;
 
-  @ManyToOne(
+  @ManyToMany(
     (_type) => customerGroup,
-    (customerGroup: customerGroup) => customerGroup.customer,
+    (customergroup) => customergroup.customers,
   )
-  customerGroup!: customerGroup;
+  customergroup!: customerGroup[];
 }

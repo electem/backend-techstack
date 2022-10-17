@@ -5,7 +5,6 @@ export interface ICustomerPaylod {
   name: string;
   phonenumber: number;
   address?: string;
-  customergroup: [];
 }
 
 export const createCustomer = async (

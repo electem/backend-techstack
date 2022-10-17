@@ -2,10 +2,10 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
-  OneToMany,
-  JoinColumn,
   CreateDateColumn,
   UpdateDateColumn,
+  ManyToMany,
+  JoinTable,
 } from 'typeorm';
 import { customerModel } from './customer.model';
 
@@ -26,9 +26,13 @@ export class customerGroup {
   @UpdateDateColumn()
   updatedAt!: Date;
 
-  @OneToMany(
-    (_type) => customerModel,
-    (customer: customerModel) => customer.customerGroup,
+  @ManyToMany(
+    () => customerModel,
+    (customergroup) => customergroup.customergroup,
+    {
+      cascade: true,
+    },
   )
-  customer!: Array<customerModel>;
+  @JoinTable()
+  customers!: customerModel[];
 }
