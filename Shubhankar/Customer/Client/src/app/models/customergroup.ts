@@ -1,8 +1,10 @@
 import { Customer } from "./customer";
 
 export interface Customergroup {
-    name: String;
-    description: String;
-    customer:Customer[];
+    id?:number;
+    name?: string;
+    description?: string;
+    createdAt?:string;
+   customers?:Customer[];
 }
   

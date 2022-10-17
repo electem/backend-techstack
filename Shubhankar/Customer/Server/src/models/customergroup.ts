@@ -1,4 +1,4 @@
-import {Entity, PrimaryGeneratedColumn, Column, OneToMany, CreateDateColumn} from "typeorm";
+import {Entity, PrimaryGeneratedColumn, Column, OneToMany, CreateDateColumn, ManyToMany, JoinTable} from "typeorm";
 import { Customer } from "./customer"
 @Entity()
 export class CustomerGroup {
@@ -14,8 +14,14 @@ export class CustomerGroup {
     @CreateDateColumn()
     createdAt!: Date;
 
-    @OneToMany(_type => Customer, (customer: Customer) => customer.customergroup, {
+    // @OneToMany(_type => Customer, (customer: Customer) => customer.customergroup, {
+    //     cascade: true,
+    // })
+    // customer!: Array<Customer>
+
+    @ManyToMany((_type) => Customer, (customer) => customer.customergroups, {
         cascade: true,
-    })
-    customer!: Array<Customer>
+      })
+      @JoinTable()
+      customers!: Customer[];
 }

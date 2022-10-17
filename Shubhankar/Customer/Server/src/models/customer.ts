@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToMany } from "typeorm";
 import { CustomerGroup } from "./customergroup";
 @Entity()
 export class Customer {
@@ -17,7 +17,10 @@ export class Customer {
   @Column({ type: "varchar", length: 10 })
   phonenumber!: number;
 
-  @ManyToOne(_type => CustomerGroup, (customergroup: CustomerGroup) => customergroup.customer)
-  @JoinColumn()
-  customergroup!: CustomerGroup;
+  // @ManyToOne(_type => CustomerGroup, (customergroup: CustomerGroup) => customergroup.customer)
+  // @JoinColumn()
+  // customergroup!: CustomerGroup;
+
+  @ManyToMany(() => CustomerGroup, (customergroup) => customergroup.customers)
+  customergroups!: Customer[];
 }

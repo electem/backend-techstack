@@ -60,39 +60,6 @@
 				"type": "object",
 				"additionalProperties": false
 			},
-			"CustomerGroup": {
-				"properties": {
-					"id": {
-						"type": "number",
-						"format": "double"
-					},
-					"name": {
-						"type": "string"
-					},
-					"description": {
-						"type": "string"
-					},
-					"createdAt": {
-						"type": "string",
-						"format": "date-time"
-					},
-					"customer": {
-						"items": {
-							"$ref": "#/components/schemas/Customer"
-						},
-						"type": "array"
-					}
-				},
-				"required": [
-					"id",
-					"name",
-					"description",
-					"createdAt",
-					"customer"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
 			"Customer": {
 				"properties": {
 					"id": {
@@ -112,8 +79,11 @@
 						"type": "number",
 						"format": "double"
 					},
-					"customergroup": {
-						"$ref": "#/components/schemas/CustomerGroup"
+					"customergroups": {
+						"items": {
+							"$ref": "#/components/schemas/Customer"
+						},
+						"type": "array"
 					}
 				},
 				"required": [
@@ -122,7 +92,40 @@
 					"status",
 					"address",
 					"phonenumber",
-					"customergroup"
+					"customergroups"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CustomerGroup": {
+				"properties": {
+					"id": {
+						"type": "number",
+						"format": "double"
+					},
+					"name": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					},
+					"createdAt": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"customers": {
+						"items": {
+							"$ref": "#/components/schemas/Customer"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"id",
+					"name",
+					"description",
+					"createdAt",
+					"customers"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -242,7 +245,7 @@
 		},
 		"/customergroup": {
 			"get": {
-				"operationId": "GetCustomerGroup",
+				"operationId": "GetCustomerGroups",
 				"responses": {
 					"200": {
 						"description": "Ok",
@@ -293,11 +296,72 @@
 						}
 					}
 				}
+			},
+			"put": {
+				"operationId": "UpdateCustomerGroup",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/CustomerGroup"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"customergroup"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/ICustomerGroupData"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/customergroup/{id}": {
+			"get": {
+				"operationId": "GetCustomerGroup",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/CustomerGroup"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"customergroup"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
 			}
 		},
 		"/customer": {
 			"get": {
-				"operationId": "GetCustomer",
+				"operationId": "GetCustomers",
 				"responses": {
 					"200": {
 						"description": "Ok",
@@ -348,6 +412,70 @@
 						}
 					}
 				}
+			},
+			"put": {
+				"operationId": "UpdateCustomer",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Customer"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"customer"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {}
+						}
+					}
+				}
+			}
+		},
+		"/customer/{id}": {
+			"get": {
+				"operationId": "GetCustomer",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"allOf": [
+										{
+											"$ref": "#/components/schemas/Customer"
+										}
+									],
+									"nullable": true
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"customer"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
 			}
 		}
 	},

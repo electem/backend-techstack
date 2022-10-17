@@ -39,11 +39,12 @@ export class AddcustomerComponent implements OnInit {
   get fval() {
     return this.addcustomer.controls;
   }
-  async signup() {
+ Addcustomer() {
     this.submitted = true;
     if (this.addcustomer.invalid) {
       return;
     }
+    this.Submit();
 }
 async Submit() {
   this.submitted = true;
@@ -59,6 +60,4 @@ async Submit() {
   }
   return 
 }
-
-
 }

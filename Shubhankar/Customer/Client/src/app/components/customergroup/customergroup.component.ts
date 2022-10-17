@@ -6,21 +6,23 @@ import { UserService } from '../../services/user.service';
 @Component({
   selector: 'app-customergroup',
   templateUrl: './customergroup.component.html',
-  styleUrls: ['./customergroup.component.css']
+  styleUrls: ['./customergroup.component.css'],
 })
 export class CustomergroupComponent implements OnInit {
-  customergroup: Customergroup[] =[];
-  constructor(private userService: UserService, private router: Router) { }
+  currentIndex = -1;
+  customergroup: Customergroup[] = [];
+
+  constructor(private userService: UserService, private router: Router) {}
 
   ngOnInit(): void {
     this.retrievecustomergroup();
   }
-  async retrievecustomergroup(): Promise<void>  {
+  async retrievecustomergroup(): Promise<void> {
     this.customergroup = await this.userService.getcustomergroup();
-   console.log(this.customergroup);
-}
+    console.log(this.customergroup);
+  }
 
-click(){
-  this.router.navigate(['/addgroup']);
-}
+  click() {
+    this.router.navigate(['/addgroup']);
+  }
 }

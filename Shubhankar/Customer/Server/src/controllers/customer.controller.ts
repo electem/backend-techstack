@@ -1,16 +1,24 @@
-import { createCustomer, getCustomer, ICustomerData } from "../repositories/customer.repository";
-import { Get, Route, Tags,Post,Body} from "tsoa";
+import { createCustomer, getCustomer, getCustomers, ICustomerData, updateCustomer } from "../repositories/customer.repository";
+import { Get, Route, Tags,Post,Body, Path, Put} from "tsoa";
 import {Customer} from '../models/customer'
 
 @Route("customer")
 @Tags("customer")
 export default class CustomerController {
   @Get("/")
-  public async getCustomer(): Promise<Array<Customer>> {
-    return getCustomer()
+  public async getCustomers(): Promise<Array<Customer>> {
+    return getCustomers()
   }
   @Post("/")
   public async createCustomer(@Body() body: ICustomerData): Promise<Customer> {
     return createCustomer(body)
   }
+  @Get("/:id")
+  public async getCustomer(@Path() id: string): Promise<Customer | null> {
+    return getCustomer(Number(id))
+  }
+  @Put("/")
+  public async updateCustomer(@Body() body: any): Promise<Customer> {
+    return updateCustomer(body)
+  } 
 }
