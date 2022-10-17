@@ -21,7 +21,7 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int userId;
 	@NotNull
-	private String userName;
+	private String username;
 	@NotNull
 	private String password;
 	private String email;
