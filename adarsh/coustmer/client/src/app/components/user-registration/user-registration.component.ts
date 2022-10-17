@@ -15,7 +15,7 @@ export class UserRegistrationComponent implements OnInit {
   userName: "",
   password: "",
   email: "",
-  phoNum: 0,
+ 
   }
   registerForm!: FormGroup;
   submitted: boolean = false;

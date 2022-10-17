@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.onetoonemapping.models.User;
@@ -20,13 +21,14 @@ import com.example.onetoonemapping.repository.UserRepository;
 
 @RestController
 @CrossOrigin
+@RequestMapping("account")
 public class UserController {
-	
+
 	private Logger log = LoggerFactory.getLogger(UserController.class);
 
 	@Autowired
 	private UserRepository userRepo;
-	
+
 	@GetMapping("/Users")
 	public List<User> getUSerList() {
 		log.info("Start of UserController :: getUSerList ");
