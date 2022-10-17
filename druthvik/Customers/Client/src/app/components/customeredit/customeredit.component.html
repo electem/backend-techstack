@@ -28,13 +28,23 @@
         [(ngModel)]="customer.address"
       />
     </div>
-    <div class="form-group dropdown dropdownwidth">
-      <select class="custom-select" [(ngModel)]="customer.status">
-        <option *ngFor="let status of status" [ngValue]="status">
-          {{ status.name }}
-        </option>
-      </select>
-      <br />
+    <div class="form-group">
+      <p>
+        status :
+        <select
+          class="form-control"
+          style="width: 50%"
+          aria-placeholder="choose status"
+          name="status"
+          formControlName="status"
+          [(ngModel)]="customer.status"
+        >
+          <option value="Choose status">Choose status</option>
+          <option *ngFor="let status of status" [ngValue]="status">
+            {{ status.name }}
+          </option>
+        </select>
+      </p>
     </div>
     <button (click)="updateCustomer()">Update</button>
   </div>

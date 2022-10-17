@@ -80,6 +80,35 @@
                 <div *ngIf="f.status.errors.required">Status is required</div>
               </div>
             </div>
+            <div class="form-group col">
+              <label>Customer Group</label>
+              <select
+                formControlName="status"
+                aria-placeholder="choose role"
+                name="customergroup"
+                class="form-control"
+                [ngClass]="{
+                  'is-invalid': submitted && f.customergroup.errors
+                }"
+                [(ngModel)]="createcustomer.customergroup"
+              >
+                <option value="null" hidden disabled>Choose everything</option>
+                <option
+                  *ngFor="let customergroup of customersGroup"
+                  [ngValue]="status"
+                >
+                  {{ customergroup.name }}
+                </option>
+              </select>
+              <div
+                *ngIf="submitted && f.customergroup.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="f.customergroup.errors.required">
+                  Status is required
+                </div>
+              </div>
+            </div>
             <br />
             <div class="text-center">
               <button class="btn btn-primary">Register</button>

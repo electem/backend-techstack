@@ -14,7 +14,7 @@ export class CustomereditComponent implements OnInit {
     address: '',
     status: '',
   };
-  status: Status;
+  status: Status[];
   constructor(
     private customerService: customerService,
     private route: ActivatedRoute,
