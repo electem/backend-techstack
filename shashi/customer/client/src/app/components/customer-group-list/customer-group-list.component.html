@@ -1,0 +1,32 @@
+<div class="list row">
+  <h2 class="py-4">Customer Lists</h2>
+  <div class="col-md-8">
+    <div class="input-group mb-3"></div>
+  </div>
+
+  <div class="col-md-6">
+    <ul class="list-group"></ul>
+    <td>
+      <button>ADD CUSTOMER-GROUP</button>
+    </td>
+  </div>
+  <div class="container">
+    <br />
+    <table class="table table-bordered justify-content-center">
+      <thead class="thead-light">
+        <tr class="active">
+          <th class="text-center" scope="col">Group Name</th>
+          <th class="text-center" scope="col">Description</th>
+          <th class="text-center" scope="col">Created Date</th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let customer of customerGroups; let i = index">
+        <tr class="success">
+          <th class="text-center" scope="row">{{ customer.groupname }}</th>
+          <th class="text-center" scope="row">{{ customer.description }}</th>
+          <th class="text-center" scope="row">{{ customer.createdat }}</th>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
