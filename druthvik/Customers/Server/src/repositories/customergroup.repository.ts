@@ -55,3 +55,11 @@ export const updateCustomerGroup = async (
     ...payload,
   });
 };
+
+export const deleteCustomerGroup = async (
+  id: number,
+): Promise<customerGroup | string> => {
+  const customerGroupRepository = getRepository(customerGroup);
+  const customerGgoup = await customerGroupRepository.delete({ id: id });
+  if (customerGgoup) return 'deleted';
+};
