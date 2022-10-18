@@ -1,5 +1,5 @@
-import { createCustomer, getCustomer, getCustomers, ICustomerData, updateCustomer } from "../repositories/customer.repository";
-import { Get, Route, Tags,Post,Body, Path, Put} from "tsoa";
+import { createCustomer, deleteCustomer, getCustomer, getCustomers, ICustomerData, updateCustomer } from "../repositories/customer.repository";
+import { Get, Route, Tags,Post,Body, Path, Put, Delete} from "tsoa";
 import {Customer} from '../models/customer'
 
 @Route("customer")
@@ -21,4 +21,10 @@ export default class CustomerController {
   public async updateCustomer(@Body() body: any): Promise<Customer> {
     return updateCustomer(body)
   } 
+  @Delete('/:id')
+  public async deleteCustomerById(
+    @Path() id: string,
+  ): Promise<Customer | string> {
+    return deleteCustomer(Number(id));
+  }
 }

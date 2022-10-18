@@ -64,4 +64,11 @@ export class UserService {
   getCustomergroupid(id: Number) {
     return this.http.get(`${baseUrl + '/customergroup'}/${id}`).toPromise();
   }
+
+  deleteCustomer(id: Number | any) {
+    return this.http.delete(`${baseUrl + '/customer'}/${id}`).toPromise();
+  }
+  deleteCustomergroup(id: Number | any) {
+    return this.http.delete(`${baseUrl + '/customergroup'}/${id}`).toPromise();
+  }
 }

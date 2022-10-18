@@ -34,3 +34,14 @@ export const updateCustomer  = async (payload: ICustomerData) :Promise<Customer>
     ...payload
   })
 }
+
+export const deleteCustomer = async (id: number): Promise<Customer | string> => {
+  const customerRepository = getRepository(Customer);
+  const customer = await customerRepository.delete({ id: id });
+  if (customer) return 'deleted';
+  return customer
+};
+
+
+
+
