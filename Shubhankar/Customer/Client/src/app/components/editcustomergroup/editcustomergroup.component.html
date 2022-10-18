@@ -1,5 +1,5 @@
-<h4>Add Customer Group</h4>
-<form [formGroup]="addcustomer" (ngSubmit)="signup()">
+<h4>Edit Customer Group</h4>
+<form [formGroup]="editcustomer" (ngSubmit)="signup()">
   <div class="form-group">
     <label for="name">Name</label>
     <input
@@ -57,7 +57,7 @@
         Remove
       </button>
       <div style="float: right">
-        <tbody *ngFor="let customer of customerlist; let i = index">
+        <tbody *ngFor="let customer of selectCustomer; let i = index">
           <tr class="success">
             <td
               class="text-center"
@@ -71,5 +71,10 @@
       </div>
     </div>
   </table>
-  <button type="button" class="btn btn-primary" (click)="getSubmit()">Save</button>
+  <button type="button" class="btn btn-primary" (click)="Submit()">
+    Update
+  </button>
+  <button type="button" class="btn btn-primary" (click)="Delete()">
+    Delete
+  </button>
 </form>

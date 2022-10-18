@@ -6,7 +6,8 @@ import { CustomerlistComponent } from './components/customerlist/customerlist.co
 import { AddcustomerComponent } from './components/addcustomer/addcustomer.component'
 import { CustomergroupComponent } from './components/customergroup/customergroup.component'
 import { AddcustomergroupComponent } from './components/addcustomergroup/addcustomergroup.component'
-
+import { EditcustomergroupComponent } from './components/editcustomergroup/editcustomergroup.component'
+import { EditcustomerComponent } from './components/editcustomer/editcustomer.component'
 const routes: Routes = [
   { path: '', redirectTo: 'loginusers', pathMatch: 'full' },
 { path: 'loginusers', component: LoginComponent },
@@ -15,6 +16,8 @@ const routes: Routes = [
 { path: 'add', component: AddcustomerComponent },
 { path: 'group', component: CustomergroupComponent },
 { path: 'addgroup', component: AddcustomergroupComponent },
+{ path: 'editgroup/:id', component: EditcustomergroupComponent },
+{ path: 'edit/:id', component: EditcustomerComponent },
 ]
 
 

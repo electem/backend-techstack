@@ -1,11 +1,11 @@
-<h1>Customergroup List</h1>
+<h4>Customergroup List</h4>
 <button type="button" class="btn btn-primary" (click)="click()" >add customergroup</button>
 <table class="table table-striped table-bordered justify-content-center">
     <thead class="thead-light">
       <tr class="active">
         <th class="text-center" scope="col">Customer Group Name</th>
         <th class="text-center" scope="col">Description</th>
-        <!-- <th class="text-center" scope="col">Created Date</th> -->
+        <th class="text-center" scope="col">Created Date</th>
         <th class="text-center" scope="col">Option</th>
       </tr>
     </thead>
@@ -13,8 +13,9 @@
       <tr class="success">
         <th class="text-center" scope="row">{{ customer.name }}</th>
         <th class="text-center" scope="row">{{ customer.description }}</th>
-        <!-- <th class="text-center" scope="row">{{ customer.createdAt }}</th> -->
-       <button class="button button1"  scope="row">Edit</button>
+        <th class="text-center" scope="row">{{ customer.createdAt }}</th>
+  <button class="button button1"  scope="row" routerLink="/editgroup/{{customer.id}}">Edit</button>
+
     </tr>
     </tbody>
   </table>

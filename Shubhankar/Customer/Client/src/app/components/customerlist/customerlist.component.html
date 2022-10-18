@@ -1,3 +1,4 @@
+<h4>Customer Listing</h4>
 <button type="button" class="btn btn-primary" (click)="click()">
   Add customer
 </button>
@@ -8,6 +9,7 @@
       <th class="text-center" scope="col">Status</th>
       <th class="text-center" scope="col">Location</th>
       <th class="text-center" scope="col">Phonenumber</th>
+      <th class="text-center" scope="col">Option</th>
     </tr>
   </thead>
   <tbody *ngFor="let customer of customers; let i = index">
@@ -16,6 +18,8 @@
       <th class="text-center" scope="row">{{ customer.status }}</th>
       <th class="text-center" scope="row">{{ customer.address }}</th>
       <th class="text-center" scope="row">{{ customer.phonenumber }}</th>
+      <button class="button button1"  scope="row" routerLink="/edit/{{customer.id}}">Edit</button>
+    
     </tr>
   </tbody>
 </table>
