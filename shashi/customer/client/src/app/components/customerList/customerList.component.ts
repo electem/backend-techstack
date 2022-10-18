@@ -17,11 +17,10 @@ export class CustomerComponent implements OnInit {
     private router: Router
   ) {}
 
-  
   ngOnInit(): void {
     this.retrieveCustomers();
   }
   async retrieveCustomers(): Promise<void> {
-    this.customers = await this.customerService.getCustomer();
+    this.customers = await this.customerService.getCustomers();
   }
 }

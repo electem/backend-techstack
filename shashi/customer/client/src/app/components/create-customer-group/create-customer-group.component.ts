@@ -38,7 +38,7 @@ export class CreateCustomerGroupComponent implements OnInit {
     this.retrieveCustomers();
   }
   async retrieveCustomers(): Promise<void> {
-    this.customers = await this.customerService.getCustomer();
+    this.customers = await this.customerService.getCustomers();
   }
   get formValidation() {
     return this.createCustomerGroupForm.controls;
@@ -64,17 +64,21 @@ export class CreateCustomerGroupComponent implements OnInit {
     await this.customerService.createCustomerGroup(customerData);
     this.router.navigate(['/customergroupList']);
   }
-  setActiveCustomer(customer: Customer): void {
+
+  async setActiveCustomer(customer: Customer): Promise<void> {
     this.currentCustomer = customer;
   }
-  onSelectedCustomers() {
+
+  async onSelectedCustomers(): Promise<void> {
     this.selectedCustomers.push(this.currentCustomer);
     this.customers.splice(this.customers.indexOf(this.currentCustomer), 1);
   }
-  removeActiveCustomer(customer: Customer): void {
+
+  async removeActiveCustomer(customer: Customer): Promise<void> {
     this.currentCustomer = customer;
   }
-  onSelected() {
+
+  async onSelectedRemove(): Promise<void> {
     this.customers.push(this.currentCustomer);
     this.selectedCustomers.splice(
       this.selectedCustomers.indexOf(this.currentCustomer),

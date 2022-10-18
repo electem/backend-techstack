@@ -1,0 +1,70 @@
+<div class="container">
+  <h5 class="card-title text-center pb-0 fs-4">Edit Customer Group</h5>
+  <br />
+  <div class="row">
+    <div class="col-md-4 offset-md-4">
+      <div class="card mb-4">
+        <div class="card-body">
+          <form>
+            <div class="formbox center">
+              <div class="form-group input center">
+                <label for="customername">groupname</label>
+                <input
+                  type="text"
+                  name="groupname"
+                  class="form-control"
+                  [(ngModel)]="customerGroup.groupname"
+                />
+              </div>
+              <br />
+              <div class="form-group input center">
+                <label for="name">Description</label>
+                <input
+                  name="description"
+                  type="text"
+                  class="form-control"
+                  [(ngModel)]="customerGroup.description"
+                />
+              </div>
+              <br />
+              <div class="form-group">
+                <p>
+                  customers :
+                  <select
+                    class="form-control"
+                    placeholder="Choose Customers"
+                    style="width: 50%"
+                    name="Customers"
+                    [(ngModel)]="selectedCustomer.id"
+                    (ngModelChange)="onSelected(selectedCustomer)"
+                  >
+                    <option value="Choose Customer">Choose Customers</option>
+                    <option
+                      *ngFor="let customer of customers"
+                      [ngValue]="customer.id"
+                    >
+                      {{ customer.customername }}
+                    </option>
+                  </select>
+                </p>
+              </div>
+              <button
+                class="btn btn-outline-success btn-sm"
+                (click)="updateCustomerGroup()"
+                routerLink="/customergroupList"
+              >
+                Update
+              </button>
+              <button
+                class="btn btn-outline-danger btn-sm btn-space"
+                routerLink="/customergroupList"
+              >
+                Cancel
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

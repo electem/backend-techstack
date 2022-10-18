@@ -12,6 +12,7 @@ import { CreateCustomerComponent } from './components/create-customer/create-cus
 import { EditCustomerComponent } from './components/edit-customer/edit-customer.component';
 import { CustomerGroupListComponent } from './components/customer-group-list/customer-group-list.component';
 import { CreateCustomerGroupComponent } from './components/create-customer-group/create-customer-group.component';
+import { EditCustomerGroupComponent } from './components/edit-customer-group/edit-customer-group.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { CreateCustomerGroupComponent } from './components/create-customer-group
     EditCustomerComponent,
     CustomerGroupListComponent,
     CreateCustomerGroupComponent,
+    EditCustomerGroupComponent,
   ],
   imports: [
     BrowserModule,
