@@ -24,4 +24,10 @@ router.put("/", async (req, res) => {
   const response = await controller.updateCustomerGroup(req.body);
   return res.send(response);
 });
+router.delete("/:id", async (req, res) => {
+  const controller = new CustomerGroupController();
+  const response = await controller.deleteCustomerGroupById(req.params.id);
+  if (!response) res.status(404).send({ message: "No customers found" });
+  return res.send(response);
+});
 export default router;

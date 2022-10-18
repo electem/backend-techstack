@@ -46,3 +46,11 @@ export const updateCustomerGroup = async (
     ...payload,
   });
 };
+
+export const deleteCustomerGroupById = async (
+  id: number
+): Promise<CustomerGroup | string | undefined> => {
+  const customerGroupRepository = getRepository(CustomerGroup);
+  const customerGgoup = await customerGroupRepository.delete({ id: id });
+  if (customerGgoup) return "customerGroup deleted successfully";
+};
