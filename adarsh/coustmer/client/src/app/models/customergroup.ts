@@ -6,6 +6,6 @@ export class CustomarGroup {
   discription?: string;
   createdDate?: string;
   updatedDate?: string;
-  customers?: Customar[];
+  customars?: Customar[];
  
 }
