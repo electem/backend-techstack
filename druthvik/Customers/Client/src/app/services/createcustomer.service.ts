@@ -39,4 +39,10 @@ export class customerService {
   async updateCustomer(customer: createCustomer) {
     return await this.http.put(baseUrl + '/customers', customer).toPromise();
   }
+
+  async deletCustomerById(id: number) {
+    return await this.http
+      .delete(`${baseUrl + '/customers'}/${id}`)
+      .toPromise();
+  }
 }

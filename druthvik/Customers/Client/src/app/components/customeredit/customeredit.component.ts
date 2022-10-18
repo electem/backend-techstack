@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { createCustomer } from '../../models/customer.model';
 import { customerService, Status } from '../../services/createcustomer.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-customeredit',
   templateUrl: './customeredit.component.html',
@@ -18,6 +18,7 @@ export class CustomereditComponent implements OnInit {
   constructor(
     private customerService: customerService,
     private route: ActivatedRoute,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -36,5 +37,10 @@ export class CustomereditComponent implements OnInit {
       status: this.customer.status,
     };
     await this.customerService.updateCustomer(customer);
+  }
+
+  async deletebyid() {
+    await this.customerService.deletCustomerById(this.customer.id);
+    this.router.navigate(['/customerlist']);
   }
 }

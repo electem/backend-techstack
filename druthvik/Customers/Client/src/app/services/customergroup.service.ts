@@ -35,4 +35,9 @@ export class customergroupService {
       .put(baseUrl + '/customergroup', customergroup)
       .toPromise();
   }
+  async deletCustomerGroupById(id: number) {
+    return await this.http
+      .delete(`${baseUrl + '/customergroup'}/${id}`)
+      .toPromise();
+  }
 }

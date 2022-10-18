@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { createCustomer } from 'src/app/models/customer.model';
 import { customergroupService } from 'src/app/services/customergroup.service';
 import { customerGroup } from '../../models/customergroup.model';
@@ -27,6 +27,7 @@ export class EditcustomergroupComponent implements OnInit {
     private customerServicegroup: customergroupService,
     private route: ActivatedRoute,
     private customerService: customerService,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -77,5 +78,12 @@ export class EditcustomergroupComponent implements OnInit {
       customers: this.selectedCustomers,
     };
     await this.customerServicegroup.updateGroup(customergroup);
+  }
+
+  async deleteGroupById() {
+    await this.customerServicegroup.deletCustomerGroupById(
+      this.customergroup.id,
+    );
+    this.router.navigate(['/customergroup']);
   }
 }
