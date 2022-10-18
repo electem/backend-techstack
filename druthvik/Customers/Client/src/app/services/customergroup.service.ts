@@ -16,4 +16,28 @@ export class customergroupService {
       .get<customerGroup[]>(baseUrl + '/customergroup')
       .toPromise();
   }
+
+  async createCustomerGroup(
+    createcustomergroup: customerGroup,
+  ): Promise<customerGroup> {
+    return await this.http
+      .post<customerGroup>(baseUrl + '/customergroup', createcustomergroup)
+      .toPromise();
+  }
+  async getCustomerGroupById(id: number) {
+    return await this.http
+      .get(`${baseUrl + '/customergroup'}/${id}`)
+      .toPromise();
+  }
+
+  async updateGroup(customergroup: customerGroup) {
+    return await this.http
+      .put(baseUrl + '/customergroup', customergroup)
+      .toPromise();
+  }
+  async deletCustomerGroupById(id: number) {
+    return await this.http
+      .delete(`${baseUrl + '/customergroup'}/${id}`)
+      .toPromise();
+  }
 }

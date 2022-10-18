@@ -1,9 +1,12 @@
 import {
   createCustomerGroup,
+  deleteCustomerGroup,
   getCustomerGroup,
+  getCustomerGroupById,
   ICustomerGroupPayload,
+  updateCustomerGroup,
 } from '../repositories/customergroup.repository';
-import { Body, Get, Post, Route, Tags } from 'tsoa';
+import { Body, Delete, Get, Path, Post, Put, Route, Tags } from 'tsoa';
 import { customerGroup } from '../models';
 
 @Route('customergroup')
@@ -18,5 +21,25 @@ export default class CustomerGroupController {
     @Body() body: ICustomerGroupPayload,
   ): Promise<customerGroup> {
     return createCustomerGroup(body);
+  }
+  @Get('/:id')
+  public async getCustomerGroupById(
+    @Path() id: string,
+  ): Promise<customerGroup | null> {
+    return getCustomerGroupById(Number(id));
+  }
+
+  @Put('/')
+  public async updateCustomerGroup(
+    @Body() body: ICustomerGroupPayload,
+  ): Promise<ICustomerGroupPayload> {
+    return updateCustomerGroup(body);
+  }
+
+  @Delete('/:id')
+  public async deleteCustomerGroupById(
+    @Path() id: string,
+  ): Promise<customerGroup | string> {
+    return deleteCustomerGroup(Number(id));
   }
 }

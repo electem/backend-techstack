@@ -335,6 +335,42 @@
 						}
 					}
 				]
+			},
+			"delete": {
+				"operationId": "DeleteCustomerGroupById",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"anyOf": [
+										{
+											"$ref": "#/components/schemas/customerModel"
+										},
+										{
+											"type": "string"
+										}
+									]
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"CreateCustomer"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
 			}
 		},
 		"/customergroup": {
@@ -390,6 +426,36 @@
 						}
 					}
 				}
+			},
+			"put": {
+				"operationId": "UpdateCustomerGroup",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ICustomerGroupPayload"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"CustomerGroup"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/ICustomerGroupPayload"
+							}
+						}
+					}
+				}
 			}
 		},
 		"/customergroup/{id}": {
@@ -407,6 +473,42 @@
 										}
 									],
 									"nullable": true
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"CustomerGroup"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			},
+			"delete": {
+				"operationId": "DeleteCustomerGroupById",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"anyOf": [
+										{
+											"$ref": "#/components/schemas/customerGroup"
+										},
+										{
+											"type": "string"
+										}
+									]
 								}
 							}
 						}

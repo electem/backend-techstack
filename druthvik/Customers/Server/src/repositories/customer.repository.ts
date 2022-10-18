@@ -42,3 +42,11 @@ export const updateCustomer = async (
     ...payload,
   });
 };
+
+export const deleteCustomer = async (
+  id: number,
+): Promise<customerModel | string> => {
+  const customerRepository = getRepository(customerModel);
+  const customer = await customerRepository.delete({ id: id });
+  if (customer) return 'deleted';
+};
