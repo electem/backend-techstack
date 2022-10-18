@@ -11,6 +11,13 @@ import { UserService } from '../../services/user.service';
 export class CustomergroupComponent implements OnInit {
   currentIndex = -1;
   customergroup: Customergroup[] = [];
+  removedCustomer: Customergroup = {};
+
+  groupcustomer: Customergroup = {
+    name: '',
+    description: '',
+    customers: [],
+  };
 
   constructor(private userService: UserService, private router: Router) {}
 
@@ -20,6 +27,11 @@ export class CustomergroupComponent implements OnInit {
   async retrievecustomergroup(): Promise<void> {
     this.customergroup = await this.userService.getcustomergroup();
     console.log(this.customergroup);
+  }
+
+  async Deletecustomergroup(customer: Customergroup) {
+    this.removedCustomer = customer;
+    await this.userService.deleteCustomergroup(this.removedCustomer.id!);
   }
 
   click() {
