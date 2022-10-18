@@ -24,6 +24,12 @@ router.put("/", async (req, res) => {
   const response = await controller.updateCustomer(req.body);
   return res.send(response);
 });
+router.delete('/:id', async (req, res) => {
+  const controller = new CustomerController();
+  const response = await controller.deleteCustomerById(req.params.id);
+  if (!response) res.status(404).send({ message: 'No user found' });
+  return res.send(response);
+});
 
 
 export default router;

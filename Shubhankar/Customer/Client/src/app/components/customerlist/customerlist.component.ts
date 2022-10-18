@@ -7,7 +7,14 @@ import { UserService } from '../../services/user.service';
   templateUrl: './customerlist.component.html',
   styleUrls: ['./customerlist.component.css'],
 })
+
 export class CustomerlistComponent implements OnInit {
+  customer: Customer = {
+    name: '',
+    status: '',
+    address: '',
+    
+  };
   customers: Customer[] = [];
   constructor(private userService: UserService, private router: Router) {}
 
@@ -19,7 +26,7 @@ export class CustomerlistComponent implements OnInit {
     this.customers = await this.userService.getAll();
     console.log(this.customers);
   }
-  click() {
+  click(){
     this.router.navigate(['/add']);
   }
 }
