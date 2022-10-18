@@ -38,6 +38,5 @@ export class Customer {
     (_type) => CustomerGroup,
     (customerGroup) => customerGroup.customers
   )
-  @JoinTable()
-  customerGroups!: CustomerGroup[];
+  customerGroup!: CustomerGroup[];
 }

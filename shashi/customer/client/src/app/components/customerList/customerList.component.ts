@@ -21,6 +21,6 @@ export class CustomerComponent implements OnInit {
     this.retrieveCustomers();
   }
   async retrieveCustomers(): Promise<void> {
-    this.customers = await this.customerService.getCustomer();
+    this.customers = await this.customerService.getCustomers();
   }
 }

@@ -28,7 +28,7 @@ export class CustomerService {
       .post<UserRegistration>(baseUrl + '/userregistration', userData)
       .toPromise();
   }
-  async getCustomer(): Promise<Customer[]> {
+  async getCustomers(): Promise<Customer[]> {
     return await this.http.get<Customer[]>(baseUrl + '/customer').toPromise();
   }
   async createCustomer(customerData: Customer): Promise<Customer> {
@@ -45,6 +45,30 @@ export class CustomerService {
   async getCustomerGroups(): Promise<CustomerGroup[]> {
     return await this.http
       .get<CustomerGroup[]>(baseUrl + '/customergroup')
+      .toPromise();
+  }
+  async createCustomerGroup(
+    customerGroupData: CustomerGroup
+  ): Promise<CustomerGroup> {
+    return this.http
+      .post<CustomerGroup>(baseUrl + '/customergroup', customerGroupData)
+      .toPromise();
+  }
+  async getCustomerGroupById(id: number): Promise<CustomerGroup> {
+    return await this.http
+      .get(`${baseUrl + '/customergroup'}/${id}`)
+      .toPromise();
+  }
+  async updateCustomerGroup(
+    customerGroup: CustomerGroup
+  ): Promise<CustomerGroup> {
+    return await this.http
+      .put(baseUrl + '/customergroup', customerGroup)
+      .toPromise();
+  }
+  async deleteCustomerGroupById(id: number): Promise<CustomerGroup> {
+    return await this.http
+      .delete(`${baseUrl + '/customergroup'}/${id}`)
       .toPromise();
   }
 }
