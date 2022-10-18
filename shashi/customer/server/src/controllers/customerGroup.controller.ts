@@ -36,7 +36,8 @@ export default class CustomerGroupController {
   @Delete("/:id")
   public async deleteCustomerGroupById(
     @Path() id: string
-  ): Promise<CustomerGroup | string | undefined> {
+  ): Promise<CustomerGroup | string> {
+    console.log(id);
     return deleteCustomerGroupById(Number(id));
   }
 }

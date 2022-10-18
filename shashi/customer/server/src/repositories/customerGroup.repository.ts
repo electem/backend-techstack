@@ -1,5 +1,5 @@
 import { getManager, getRepository } from "typeorm";
-import { CustomerGroup } from "../models";
+import { Customer, CustomerGroup } from "../models";
 
 export interface ICustomerGroupPayload {
   groupname: string;
@@ -49,8 +49,8 @@ export const updateCustomerGroup = async (
 
 export const deleteCustomerGroupById = async (
   id: number
-): Promise<CustomerGroup | string | undefined> => {
+): Promise<CustomerGroup | string> => {
   const customerGroupRepository = getRepository(CustomerGroup);
-  const customerGgoup = await customerGroupRepository.delete({ id: id });
-  if (customerGgoup) return "customerGroup deleted successfully";
+  await customerGroupRepository.delete({ id: id });
+  return "deleted";
 };

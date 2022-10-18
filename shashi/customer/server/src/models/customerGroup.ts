@@ -5,6 +5,7 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   ManyToMany,
+  JoinTable,
 } from "typeorm";
 import { Customer } from "./customer";
 @Entity()
@@ -24,8 +25,9 @@ export class CustomerGroup {
   @UpdateDateColumn()
   updatedAt!: Date;
 
-  @ManyToMany(() => Customer, (customer) => customer.customerGroups, {
+  @ManyToMany(() => Customer, (customer) => customer.customerGroup, {
     cascade: true,
   })
+  @JoinTable()
   customers!: Customer[];
 }
