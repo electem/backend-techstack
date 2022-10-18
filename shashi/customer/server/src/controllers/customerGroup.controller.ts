@@ -4,6 +4,8 @@ import {
   ICustomerGroupPayload,
   createCustomerGroup,
   getCustomerGroups,
+  getCustomerGroup,
+  updateCustomerGroup,
 } from "../repositories/customerGroup.repository";
 
 @Route("customergroups")
@@ -18,5 +20,16 @@ export default class CustomerGroupController {
     @Body() body: ICustomerGroupPayload
   ): Promise<CustomerGroup> {
     return createCustomerGroup(body);
+  }
+  @Get("/:id")
+  public async getCustomerGroup(@Path() id: string) {
+    return getCustomerGroup(Number(id));
+  }
+
+  @Put("/")
+  public async updateCustomerGroup(
+    @Body() body: ICustomerGroupPayload
+  ): Promise<ICustomerGroupPayload> {
+    return updateCustomerGroup(body);
   }
 }
