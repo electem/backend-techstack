@@ -27,27 +27,7 @@
                 />
               </div>
               <br />
-              <div class="form-group">
-                <p>
-                  customers :
-                  <select
-                    class="form-control"
-                    placeholder="Choose Customers"
-                    style="width: 50%"
-                    name="Customers"
-                    [(ngModel)]="selectedCustomer.id"
-                    (ngModelChange)="onSelected(selectedCustomer)"
-                  >
-                    <option value="Choose Customer">Choose Customers</option>
-                    <option
-                      *ngFor="let customer of customers"
-                      [ngValue]="customer.id"
-                    >
-                      {{ customer.customername }}
-                    </option>
-                  </select>
-                </p>
-              </div>
+
               <button
                 class="btn btn-outline-success btn-sm"
                 (click)="updateCustomerGroup()"
@@ -66,5 +46,57 @@
         </div>
       </div>
     </div>
+  </div>
+</div>
+<button
+  class="btn btn-outline-success btn-sm btn-space"
+  (click)="onSelectedCustomers()"
+  (ngSubmit)="onSelectedCustomers()"
+>
+  Add
+</button>
+<button
+  class="btn btn-outline-danger btn-sm btn-space"
+  (click)="onSelectedRemove()"
+  (ngSubmit)="onSelectedRemove()"
+>
+  remove
+</button>
+<div class="row">
+  <div class="column">
+    <table class="table table-bordered justify-content-center">
+      <tr>
+        <th class="text-center" scope="col">Availabel</th>
+      </tr>
+      <tbody *ngFor="let customer of customers; let i = index">
+        <tr class="success">
+          <th
+            class="text-center"
+            scope="row"
+            (click)="setActiveCustomer(customer)"
+          >
+            {{ customer.customername }}
+          </th>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="column">
+    <table class="table table-bordered justify-content-center">
+      <tr>
+        <th class="text-center" scope="col">Current</th>
+      </tr>
+      <tbody *ngFor="let selectedcustomer of selectedCustomers; let i = index">
+        <tr class="success">
+          <th
+            class="text-center"
+            scope="row"
+            (click)="removeActiveCustomer(selectedcustomer)"
+          >
+            {{ selectedcustomer.customername }}
+          </th>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>

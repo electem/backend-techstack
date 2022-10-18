@@ -12,9 +12,9 @@ export class EditCustomerComponent implements OnInit {
   customer: Customer = {
     customername: '',
     street: '',
-    status: '',
   };
-  status: Status[] = [];
+  status!: Status[];
+  selectedstatus: Status[] = [];
   constructor(
     private customerService: CustomerService,
     private route: ActivatedRoute
@@ -29,15 +29,24 @@ export class EditCustomerComponent implements OnInit {
   async getCustomerById(id: number): Promise<void> {
     this.customer = await this.customerService.getCustomerById(id);
   }
+  onSelected(value: Status) {
+    if (this.status) {
+      for (let category of this.status) {
+        if (category.id == value.id) {
+          this.selectedstatus.push(category);
+        }
+      }
+    }
+  }
   async updateCustomer(): Promise<void> {
-    const customer: Customer = {
+    const customerData: Customer = {
       id: this.customer.id,
       customername: this.customer.customername,
       phonenumber: this.customer.phonenumber,
       street: this.customer.street,
-      status: this.customer.status,
       postalcode: this.customer.postalcode,
     };
-    await this.customerService.updateCustomer(customer);
+    // customerData.status = this.selectedstatus;
+    await this.customerService.updateCustomer(customerData);
   }
 }

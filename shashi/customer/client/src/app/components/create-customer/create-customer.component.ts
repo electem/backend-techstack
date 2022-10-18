@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Customer } from 'src/app/models/customer.model';
-import { CustomerService } from 'src/app/services/customerservice';
+import { CustomerService, Status } from 'src/app/services/customerservice';
 
 @Component({
   selector: 'app-create-customer',
@@ -11,6 +11,9 @@ import { CustomerService } from 'src/app/services/customerservice';
 })
 export class CreateCustomerComponent implements OnInit {
   createCustomerForm!: FormGroup;
+  status!: Status[];
+  statusList: Status[] = [];
+  selectedstatus = new Status();
   submitted = false;
   customer: Customer = {
     customername: '',
@@ -33,9 +36,13 @@ export class CreateCustomerComponent implements OnInit {
       postalcode: ['', Validators.required],
       phonenumber: ['', Validators.required],
     });
+    this.getStatus();
   }
   get formValidation() {
     return this.createCustomerForm.controls;
+  }
+  getStatus() {
+    this.statusList = this.customerService.getStatus();
   }
   async saveCustomer(): Promise<void> {
     this.submitted = true;
@@ -45,16 +52,19 @@ export class CreateCustomerComponent implements OnInit {
       this.saveCustomerDetails();
     }
   }
-
   async saveCustomerDetails(): Promise<void> {
     const customerData: Customer = {
       customername: this.customer.customername,
-      status: this.customer.status,
       street: this.customer.street,
+      status:this.customer.status,
       postalcode: this.customer.postalcode,
       phonenumber: this.customer.phonenumber,
     };
+    // customerData.status = this.selectedstatus.name;
     await this.customerService.createCustomer(customerData);
     this.router.navigate(['/customerList']);
+  }
+  onSelected() {
+    this.status;
   }
 }
