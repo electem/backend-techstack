@@ -6,7 +6,11 @@
   <div class="col-md-6">
     <ul class="list-group"></ul>
     <td>
-      <button class="btn btn-success" type="button" routerLink="/add">
+      <button
+        class="btn btn-success"
+        type="button"
+        routerLink="/addcustomergroup"
+      >
         Add new customer group
       </button>
     </td>
@@ -37,6 +41,13 @@
             routerLink="/customergroupedit/{{ customergroup.id }}"
           >
             Edit
+          </button>
+          <button
+            type="button"
+            class="btn btn-warning btn-sm mr-2"
+            (click)="deleteGroupById(customergroup.id)"
+          >
+            Delete
           </button>
         </tr>
       </tbody>

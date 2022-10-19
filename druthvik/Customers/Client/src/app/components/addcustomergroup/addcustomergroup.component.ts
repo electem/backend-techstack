@@ -20,12 +20,14 @@ export class AddcustomergroupComponent implements OnInit {
   };
   customers: createCustomer[] = [];
   selectedCustomers: createCustomer[] = [];
-  currentCustomer: createCustomer = {
-    customergroup: [],
-  };
-  removeCustomer: createCustomer = {
-    customergroup: [],
-  };
+  // currentCustomer: createCustomer = {
+  //   customergroup: [],
+  // };
+  currentCustomer = new createCustomer();
+  removeCustomer = new createCustomer();
+  // removeCustomer: createCustomer = {
+  //   customergroup: [],
+  // };
   constructor(
     private customerGroupService: customergroupService,
     private formBuilder: FormBuilder,
@@ -36,7 +38,7 @@ export class AddcustomergroupComponent implements OnInit {
     this.addGroup = this.formBuilder.group({
       name: ['', Validators.required],
       description: ['', Validators.required],
-      customers: ['', Validators.required],
+      //customers: ['', Validators.required],
     });
     this.retrieveCustomers();
   }

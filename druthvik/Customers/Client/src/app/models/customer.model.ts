@@ -5,5 +5,4 @@ export class createCustomer {
   phonenumber?: number;
   address?: string;
   status?: string;
-  customergroup?: customerGroup[];
 }

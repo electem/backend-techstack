@@ -4,6 +4,7 @@ import { environment } from '../../environments/environment';
 import { customerGroup } from '../models/customergroup.model';
 
 const baseUrl = environment.url;
+const baseUrl1 = environment.url1;
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +14,7 @@ export class customergroupService {
 
   async getCustomerGroup(): Promise<customerGroup[]> {
     return await this.http
-      .get<customerGroup[]>(baseUrl + '/customergroup')
+      .get<customerGroup[]>(baseUrl1 + '/customergroups')
       .toPromise();
   }
 
@@ -21,23 +22,23 @@ export class customergroupService {
     createcustomergroup: customerGroup,
   ): Promise<customerGroup> {
     return await this.http
-      .post<customerGroup>(baseUrl + '/customergroup', createcustomergroup)
+      .post<customerGroup>(baseUrl1 + '/customergroups', createcustomergroup)
       .toPromise();
   }
   async getCustomerGroupById(id: number) {
     return await this.http
-      .get(`${baseUrl + '/customergroup'}/${id}`)
+      .get(`${baseUrl1 + '/customergroups'}/${id}`)
       .toPromise();
   }
 
   async updateGroup(customergroup: customerGroup) {
     return await this.http
-      .put(baseUrl + '/customergroup', customergroup)
+      .put(baseUrl1 + '/customergroups', customergroup)
       .toPromise();
   }
   async deletCustomerGroupById(id: number) {
     return await this.http
-      .delete(`${baseUrl + '/customergroup'}/${id}`)
+      .delete(`${baseUrl1 + '/customergroups'}/${id}`)
       .toPromise();
   }
 }

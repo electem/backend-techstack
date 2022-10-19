@@ -17,4 +17,7 @@ export class CustomerlistComponent implements OnInit {
   async retrieveCustomers(): Promise<void> {
     this.customers = await this.customerService.getCustomer();
   }
+  async deletebyid(id: number) {
+    await this.customerService.deletCustomerById(id);
+  }
 }

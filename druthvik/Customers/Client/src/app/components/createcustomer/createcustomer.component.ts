@@ -20,7 +20,6 @@ export class CreatecustomerComponent implements OnInit {
     phonenumber: null,
     address: '',
     status: '',
-    customergroup: [],
   };
   customersGroup: customerGroup[] = [];
 
@@ -36,7 +35,6 @@ export class CreatecustomerComponent implements OnInit {
       phonenumber: ['', Validators.required],
       address: ['', Validators.required],
       status: ['', Validators.required],
-      customergroup: ['', Validators.required],
     });
     this.status = this.getStatus();
     this.retriveCustomerGroup();
@@ -67,7 +65,6 @@ export class CreatecustomerComponent implements OnInit {
       phonenumber: this.createcustomer.phonenumber,
       address: this.createcustomer.address,
       status: this.createcustomer.status,
-      customergroup: this.createcustomer.customergroup,
     };
     await this.customerService.createCustomer(customerRegister);
   }
