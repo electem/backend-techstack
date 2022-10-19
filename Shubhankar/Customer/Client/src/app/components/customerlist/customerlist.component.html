@@ -18,8 +18,16 @@
       <th class="text-center" scope="row">{{ customer.status }}</th>
       <th class="text-center" scope="row">{{ customer.address }}</th>
       <th class="text-center" scope="row">{{ customer.phonenumber }}</th>
-      <button class="button button1"  scope="row" routerLink="/edit/{{customer.id}}">Edit</button>
-    
+      <button
+        class="button button1"
+        scope="row"
+        routerLink="/edit/{{ customer.id }}"
+      >
+        Edit
+      </button>
+      <button class="button button1" (click)="Deletecustomer(customer)">
+        Delete
+      </button>
     </tr>
   </tbody>
 </table>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Customer } from '../../models/customer';
 import { UserService } from '../../services/user.service';
+
 @Component({
   selector: 'app-customerlist',
   templateUrl: './customerlist.component.html',
@@ -9,11 +10,12 @@ import { UserService } from '../../services/user.service';
 })
 
 export class CustomerlistComponent implements OnInit {
+
+  removedCustomer: Customer = {};
   customer: Customer = {
     name: '',
     status: '',
     address: '',
-    
   };
   customers: Customer[] = [];
   constructor(private userService: UserService, private router: Router) {}
@@ -22,11 +24,16 @@ export class CustomerlistComponent implements OnInit {
     this.retrievecustomers();
   }
 
+  async Deletecustomer(customer: Customer) {
+    this.removedCustomer = customer;
+    await this.userService.deleteCustomer(this.removedCustomer.id!);
+  }
+
   async retrievecustomers(): Promise<void> {
     this.customers = await this.userService.getAll();
     console.log(this.customers);
   }
-  click(){
+  click() {
     this.router.navigate(['/add']);
   }
 }
