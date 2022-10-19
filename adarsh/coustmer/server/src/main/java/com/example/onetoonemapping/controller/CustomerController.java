@@ -48,7 +48,7 @@ public class CustomerController {
 		return customerRepo.save(customar);
 
 	}
-	@PutMapping("/updatePanel")
+	@PutMapping("/updatecustomer")
 	public Customar updateCustomer(@Valid @RequestBody Customar customar, BindingResult result, Model model) {
 		log.info("Start of CustomerController :: updateCustomer ");
 		return customerRepo.save(customar);
