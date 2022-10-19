@@ -1,0 +1,16 @@
+<div>
+  <form >
+    <h2>Edit Student Details</h2>
+    <p>First Name: <input type="text" name="firstName" [(ngModel)]="editedStudent.firstName" /></p>
+    <p>Address  : <textarea type="text" name="address" [(ngModel)]="editedStudent.address" ></textarea></p>
+    <p> Phone No:<input type="text" name="phoneNo" #phoneNo="ngModel" required  [(ngModel)]="editedStudent.phoneNo" /></p>
+    <p>Courses : <select style="width: 20%;" name="course" [(ngModel)]="editedStudent.course">
+      <option >Choose Courses</option>
+      <option *ngFor="let course of courses" >{{course.name}}</option> 
+    </select> </p>
+    <p>
+      <button><a class="btn" (click)="updateStudent()" routerLink="/studentForm">Submit</a></button>
+      <button><a class="btn" (click)="cancelEdits()" routerLink="/studentForm">Cancel</a></button>
+    </p>
+  </form>
+</div> 

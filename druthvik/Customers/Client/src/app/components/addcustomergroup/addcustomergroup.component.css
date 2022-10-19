@@ -1,0 +1,23 @@
+h1 {
+  text-align: center;
+}
+
+h3 {
+  text-align: center;
+}
+
+input {
+  width: 500px;
+}
+button {
+  width: 100px;
+  align-items: center;
+}
+td {
+  text-align: center;
+
+  width: 300px;
+}
+.float {
+  float: right;
+}

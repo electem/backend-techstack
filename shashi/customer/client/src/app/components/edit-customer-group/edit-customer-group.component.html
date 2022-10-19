@@ -1,0 +1,102 @@
+<div class="container">
+  <h5 class="card-title text-center pb-0 fs-4">Edit Customer Group</h5>
+  <br />
+  <div class="row">
+    <div class="col-md-4 offset-md-4">
+      <div class="card mb-4">
+        <div class="card-body">
+          <form>
+            <div class="formbox center">
+              <div class="form-group input center">
+                <label for="customername">groupname</label>
+                <input
+                  type="text"
+                  name="groupname"
+                  class="form-control"
+                  [(ngModel)]="customerGroup.groupname"
+                />
+              </div>
+              <br />
+              <div class="form-group input center">
+                <label for="name">Description</label>
+                <input
+                  name="description"
+                  type="text"
+                  class="form-control"
+                  [(ngModel)]="customerGroup.description"
+                />
+              </div>
+              <br />
+
+              <button
+                class="btn btn-outline-success btn-sm"
+                (click)="updateCustomerGroup()"
+                routerLink="/customergroupList"
+              >
+                Update
+              </button>
+              <button
+                class="btn btn-outline-danger btn-sm btn-space"
+                routerLink="/customergroupList"
+              >
+                Cancel
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<button
+  class="btn btn-outline-success btn-sm btn-space"
+  (click)="onSelectedCustomers()"
+  (ngSubmit)="onSelectedCustomers()"
+>
+  Add
+</button>
+<button
+  class="btn btn-outline-danger btn-sm btn-space"
+  (click)="onSelectedRemove()"
+  (ngSubmit)="onSelectedRemove()"
+>
+  remove
+</button>
+<div class="row">
+  <div class="column">
+    <table class="table table-bordered justify-content-center">
+      <tr>
+        <th class="text-center" scope="col">Availabel</th>
+      </tr>
+      <tbody *ngFor="let customer of customers; let i = index">
+        <tr class="success">
+          <th
+            class="text-center"
+            scope="row"
+            (click)="setActiveCustomer(customer)"
+          >
+            {{ customer.customername }}
+          </th>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="column">
+    <table class="table table-bordered justify-content-center">
+      <tr>
+        <th class="text-center" scope="col">Current</th>
+      </tr>
+      <tbody *ngFor="let selectedcustomer of selectedCustomers; let i = index">
+        <tr class="success">
+          <th
+            class="text-center"
+            scope="row"
+            (click)="removeActiveCustomer(selectedcustomer)"
+          >
+            {{ selectedcustomer.customername }}
+          </th>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

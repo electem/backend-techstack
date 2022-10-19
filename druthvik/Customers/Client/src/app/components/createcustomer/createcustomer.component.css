@@ -1,0 +1,10 @@
+.text-input {
+  padding: 6px 10px;
+  width: 100%;
+  resize: none; /* hide browser provided resize handles */
+  font-size: 14px;
+  line-height: 20px; /* equal to avgLineHeight in controller */
+}
+.btn-space {
+  margin-left: 10px;
+}

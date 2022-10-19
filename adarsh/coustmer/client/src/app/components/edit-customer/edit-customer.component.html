@@ -1,0 +1,59 @@
+<div class="col-md-6">
+  <h4>EDIT CUSTOMER</h4>
+  <form>
+    <div class="form-group">
+      <div class="formbox">
+        <br />
+        <div class="form-group">
+          <label for="name"> NAME</label>
+          <input
+            type="text"
+            name="name"
+            class="form-control"
+            [(ngModel)]="customer.name"
+          />
+        </div>
+        <br />
+        <div class="form-group">
+          <label for="name">STATUS</label>
+          <input
+            name="status"
+            type="text"
+            class="form-control"
+            [(ngModel)]="customer.status"
+          />
+        </div>
+        <div class="form-group">
+          <label for="name">POSTAL</label>
+          <input
+            name="postal"
+            type="text"
+            class="form-control"
+            [(ngModel)]="customer.postal"
+          />
+        </div>
+        <div class="form-group">
+          <label for="name">CITY</label>
+          <input
+            name="city"
+            type="text"
+            class="form-control"
+            [(ngModel)]="customer.city"
+          />
+        </div>
+        <div class="form-group">
+          <label for="name">PHONE</label>
+          <input
+            name="phone"
+            type="text"
+            class="form-control"
+            [(ngModel)]="customer.phone"
+          />
+        </div>
+      </div>
+      <button>CANCEL</button>
+      <button>SAVE</button>
+      <br />
+    </div>
+  </form>
+</div>

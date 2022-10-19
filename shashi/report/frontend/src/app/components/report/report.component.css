@@ -1,0 +1,13 @@
+.table {
+    width: 100%;    
+    table-layout: auto;
+    border-collapse: collapse;
+  }
+  .table td {
+    border: 1px solid lightgrey;
+    min-width: 1em;
+    position: relative;
+  }
+  .table tr:nth-child(2) td {
+    border: 1px solid red;
+  } 

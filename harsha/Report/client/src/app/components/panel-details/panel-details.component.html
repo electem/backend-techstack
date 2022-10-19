@@ -1,0 +1,39 @@
+<!-- <div class="head">
+  <h4 class="text-center">Edit Panel</h4>
+  <button class="m-3 btn btn-sm btn-danger" (click)="addTest()">
+    Add Test to Panel
+  </button>
+  <div *ngIf="this.testForm">
+    <form>
+      <div class="form-group">
+        <p class="text-center">
+          Tests
+          <select class="form-control" placeholder="Choose Test" name="tests" [(ngModel)]="selectedTest"
+            (ngModelChange)="onSelected(selectedTest)">
+            <option value="Choose Test">Choose Test</option>
+            <option *ngFor="let test of tests" [ngValue]="test">
+              {{ test.name }}
+            </option>
+          </select>
+        </p>
+      </div>
+    </form>
+  </div>
+  <form>
+    <div class="form-group">
+      <label for="name">PANEL NAME</label>
+      <input type="text" id="name" name="name" class="form-control" [(ngModel)]="currentPanel.name" />
+    </div>
+
+    <div class="form-group">
+      <label for="description">Panel Description</label>
+      <input type="text" name="description" class="form-control" [(ngModel)]="currentPanel.description" /><br>
+      <button class="btn btn-primary mr-2" (click)="updatePanel()">
+        Update Panel
+      </button>
+      <button class="btn btn-warning" routerLink="/panels" (click)="cancelPanel()">
+        Cancel
+      </button>
+    </div>
+  </form>
+</div> -->

@@ -1,0 +1,71 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-4 offset-md-4">
+      <div class="card mb-3">
+        <div class="card-body">
+          <div class="pt-4 pb-2">
+            <h5 class="card-title text-center pb-0 fs-4">
+              Login to your Account
+            </h5>
+          </div>
+          <form
+            action="/action_page.php"
+            [formGroup]="loginForm"
+            (ngSubmit)="loginUserValidate()"
+          >
+            <div class="form-group">
+              <label for="name">Username</label>
+              <input
+                type="text"
+                formControlName="username"
+                class="form-control"
+                placeholder="username"
+                [ngClass]="{ 'is-invalid': submitted && fval.username.errors }"
+                [(ngModel)]="userLogin.username"
+              />
+              <div
+                *ngIf="submitted && fval.username.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="fval.username.errors.required">
+                  username is required and must be a valid name
+                </div>
+              </div>
+            </div>
+            <br />
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input
+                type="text"
+                formControlName="password"
+                class="form-control"
+                placeholder="password"
+                [ngClass]="{ 'is-invalid': submitted && fval.password.errors }"
+                [(ngModel)]="userLogin.password"
+              />
+              <div
+                *ngIf="submitted && fval.password.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="fval.password.errors.required">
+                  x password is required
+                </div>
+              </div>
+            </div>
+            <br />
+            <div class="text-center">
+              <button class="btn btn-primary" type="submit">Login</button>
+              <button
+                type="button"
+                class="btn btn-secondary btn-space"
+                routerLink="/registeruser"
+              >
+                Register
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
