@@ -31,7 +31,6 @@ export const createCustomerGroup = async (
 // };
 export const getCustomerGroupById = async (id: number) => {
   const entityManager = getManager();
-
   const query = entityManager.createQueryBuilder(
     customerGroup,
     'customergroup',
@@ -60,6 +59,6 @@ export const deleteCustomerGroup = async (
   id: number,
 ): Promise<customerGroup | string> => {
   const customerGroupRepository = getRepository(customerGroup);
-  const customerGgoup = await customerGroupRepository.delete({ id: id });
-  if (customerGgoup) return 'deleted';
+  const customergroup = await customerGroupRepository.delete({ id: id });
+  if (customergroup) return 'deleted';
 };
