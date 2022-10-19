@@ -2,9 +2,7 @@ package com.example.onetoonemapping.controller;
 
 import java.util.List;
 import java.util.Optional;
-
 import javax.validation.Valid;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +33,7 @@ public class CustomerController {
 		log.info("End of CustomerController :: getCustomarList ");
 		return listOfCustomars;
 	}
+
 	@GetMapping("/customer/{id}")
 	public Optional<Customar> getCustomerById(@PathVariable(value = "id") Integer customerId) {
 		log.info("Start of CustomerController :: getCustomerById ");
@@ -42,12 +41,14 @@ public class CustomerController {
 		log.info("End of CustomerController :: getCustomerById ");
 		return customer;
 	}
+
 	@PostMapping("/addCustomers")
 	public Customar addNewustomer(@Valid @RequestBody Customar customar, BindingResult result, Model model) {
 		log.info("Start of CustomerController :: addNewustomer ");
 		return customerRepo.save(customar);
 
 	}
+
 	@PutMapping("/updatecustomer")
 	public Customar updateCustomer(@Valid @RequestBody Customar customar, BindingResult result, Model model) {
 		log.info("Start of CustomerController :: updateCustomer ");
