@@ -17,7 +17,7 @@ const routes: Routes = [
   { path: 'customerlist', component: CustomerlistComponent },
   { path: 'customeredit/:id', component: CustomereditComponent },
   { path: 'customergroup', component: CustomergrouplistComponent },
-  { path: 'add', component: AddcustomergroupComponent },
+  { path: 'addcustomergroup', component: AddcustomergroupComponent },
   { path: 'customergroupedit/:id', component: EditcustomergroupComponent },
   { path: '**', component: PageNotFoundComponent },
 ];

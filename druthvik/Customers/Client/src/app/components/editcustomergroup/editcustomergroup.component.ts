@@ -16,13 +16,9 @@ export class EditcustomergroupComponent implements OnInit {
     customers: [],
   };
   customers: customerGroup[];
-  currentCustomer: createCustomer = {
-    customergroup: [],
-  };
+  currentCustomer = new createCustomer();
   selectedCustomers: createCustomer[] = [];
-  removeCustomer: createCustomer = {
-    customergroup: [],
-  };
+  removeCustomer = new createCustomer();
   constructor(
     private customerServicegroup: customergroupService,
     private route: ActivatedRoute,
