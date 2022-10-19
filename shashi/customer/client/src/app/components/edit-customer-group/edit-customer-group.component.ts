@@ -10,13 +10,16 @@ import { Customer } from 'src/app/models/customer.model';
   styleUrls: ['./edit-customer-group.component.css'],
 })
 export class EditCustomerGroupComponent implements OnInit {
+  currentCustomer!: Customer;
+  customerGroups: CustomerGroup[] = [];
+  customers!: Customer[];
+  selectedCustomers: Customer[] = [];
+  submitted = false;
   customerGroup: CustomerGroup = {
     groupname: '',
     description: '',
+    customers: [],
   };
-  customers!: Customer[];
-  public selectedCustomer = new Customer();
-  selectedCustomers: Customer[] = [];
 
   constructor(
     private customerService: CustomerService,
@@ -24,24 +27,49 @@ export class EditCustomerGroupComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getCustomerGroupById(this.route.snapshot.params.id);
+    this.retrieveCustomerGroups();
     this.retrieveCustomers();
+    this.getCustomerGroupById(this.route.snapshot.params.id);
   }
   async getCustomerGroupById(id: number): Promise<void> {
     this.customerGroup = await this.customerService.getCustomerGroupById(id);
+    this.selectedCustomers = this.customerGroup.customers;
   }
   async retrieveCustomers(): Promise<void> {
     this.customers = await this.customerService.getCustomers();
   }
+  async retrieveCustomerGroups(): Promise<void> {
+    this.customerGroups = await this.customerService.getCustomerGroups();
+  }
 
-  onSelected(value: Customer) {
-    if (this.customers) {
-      for (let customer of this.customers) {
-        if (customer.id == value.id) {
-          this.selectedCustomers.push(customer);
-        }
-      }
-    }
+  async saveCustomerGroupDetails(): Promise<void> {
+    const customerData: CustomerGroup = {
+      groupname: this.customerGroup.groupname,
+      description: this.customerGroup.description,
+      customers: this.selectedCustomers,
+    };
+    await this.customerService.createCustomerGroup(customerData);
+  }
+
+  async setActiveCustomer(customer: Customer): Promise<void> {
+    this.currentCustomer = customer;
+  }
+
+  async onSelectedCustomers(): Promise<void> {
+    this.selectedCustomers.push(this.currentCustomer);
+    this.customers.splice(this.customers.indexOf(this.currentCustomer), 1);
+  }
+
+  async removeActiveCustomer(customer: Customer): Promise<void> {
+    this.currentCustomer = customer;
+  }
+
+  async onSelectedRemove(): Promise<void> {
+    this.customers.push(this.currentCustomer);
+    this.selectedCustomers.splice(
+      this.selectedCustomers.indexOf(this.currentCustomer),
+      1
+    );
   }
   async updateCustomerGroup(): Promise<void> {
     const customerGroup: CustomerGroup = {
