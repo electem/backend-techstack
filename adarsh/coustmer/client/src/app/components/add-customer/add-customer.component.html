@@ -1,0 +1,81 @@
+<div class="customer-form">
+    <h4>Customer Data</h4>
+    <form>
+      <div>
+        <div class="form-group">
+          <label for="title">NAME</label>
+          <input
+            type="text"
+            class="form-control"
+            id="title"
+            required
+            [(ngModel)]="newCustomer.name"
+            name="title"
+          />
+        </div>
+        <div>
+          <div class="form-group">
+            <label for="title">postal</label>
+            <input
+              type="text"
+              class="form-control"
+              id="title"
+              required
+              [(ngModel)]="newCustomer.postal"
+              name="title"
+            />
+          </div>
+          <div>
+            <div class="form-group">
+              <label for="title">city</label>
+              <input
+                type="text"
+                class="form-control"
+                id="title"
+                required
+                [(ngModel)]="newCustomer.city"
+                name="title"
+              />
+            </div>
+            <div>
+              <div class="form-group">
+                <label for="title">phone</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="title"
+                  required
+                  [(ngModel)]="newCustomer.phone"
+                  name="title"
+                />
+              </div>
+              <div>
+                <div class="form-group">
+                  <p>
+                    Status :
+                    <select
+                      formControlName="countries"
+                      class="form-control"
+                      placeholder="Choose Country"
+                      style="width: 50%"
+                      name="country"
+                      [(ngModel)]="newCustomer.status"
+                    >
+                      <option value="Choose Status">Choose Status</option>
+                      <option *ngFor="let sattus of status">
+                        {{ sattus.name }}
+                      </option>
+                    </select>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br>
+      <button type="submit" class="btn btn-info btn-sm mr-2" (click)=" saveNewCustomer()">
+        Submit </button>
+    </form>
+  </div>
+  

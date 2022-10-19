@@ -1,0 +1,80 @@
+<h4>Edit Customer Group</h4>
+<form [formGroup]="editcustomer" (ngSubmit)="signup()">
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input
+      type="name"
+      class="form-control"
+      id="name"
+      formControlName="name"
+      [(ngModel)]="customergroup.name"
+      [ngClass]="{ 'is-invalid': submitted && fval.name.errors }"
+    />
+    <div *ngIf="submitted && fval.name.errors" class="invalid-feedback">
+      <div *ngIf="fval.name.errors.required">Name Field is required</div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="description">Description</label>
+    <input
+      type="description"
+      class="form-control"
+      id="description"
+      formControlName="description"
+      [(ngModel)]="customergroup.description"
+      [ngClass]="{ 'is-invalid': submitted && fval.description.errors }"
+    />
+    <div *ngIf="submitted && fval.description.errors" class="invalid-feedback">
+      <div *ngIf="fval.description.errors.required">Name Field is required</div>
+    </div>
+  </div>
+
+  <table class="table table-bordered justify-content-center">
+    <thead class="thead-light">
+      <tr class="active">
+        <th class="text-center" scope="col">Assign Customer</th>
+      </tr>
+    </thead>
+    <div style="width: 100%">
+      <div style="float: left">
+        <tbody *ngFor="let customer of customers; let i = index">
+          <tr class="success">
+            <td
+              class="text-center"
+              scope="row"
+              (click)="toggleSelection(customer)"
+            >
+              {{ customer.name }}
+            </td>
+          </tr>
+        </tbody>
+      </div>
+      <button type="button" class="btn btn-primary" (click)="moveSelected()">
+        Add
+      </button>
+      <br />
+      <button type=" button" class="btn btn-primary" (click)="moveRight()">
+        Remove
+      </button>
+      <div style="float: right">
+        <tbody *ngFor="let customer of selectCustomer; let i = index">
+          <tr class="success">
+            <td
+              class="text-center"
+              scope="row"
+              (click)="toggleSelections(customer)"
+            >
+              {{ customer.name }}
+            </td>
+          </tr>
+        </tbody>
+      </div>
+    </div>
+  </table>
+  <button type="button" class="btn btn-primary" (click)="Submit()">
+    Update
+  </button>
+  <button type="button" class="btn btn-primary" (click)="Delete()">
+    Delete
+  </button>
+</form>

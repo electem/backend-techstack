@@ -1,0 +1,41 @@
+<div class="list row">
+  <h2 class="py-4">Customer Lists</h2>
+  <div class="col-md-8">
+    <div class="input-group mb-3"></div>
+  </div>
+
+  <div class="col-md-6">
+    <ul class="list-group"></ul>
+    <td>
+      <button routerLink="/Create-customer">ADD CUSTOMER</button>
+    </td>
+  </div>
+  <div class="container">
+    <br />
+    <table class="table table-bordered justify-content-center">
+      <thead class="thead-light">
+        <tr class="active">
+          <th class="text-center" scope="col">Name</th>
+          <th class="text-center" scope="col">Ph No.</th>
+          <th class="text-center" scope="col">Address</th>
+          <th class="text-center" scope="col">options</th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let customer of customers; let i = index">
+        <tr class="success">
+          <th class="text-center" scope="row">{{ customer.customername }}</th>
+          <th class="text-center" scope="row">{{ customer.phonenumber }}</th>
+          <th class="text-center" scope="row">{{ customer.street }}</th>
+          <button
+            type="button"
+            style="margin: px"
+            class="btn-outline-secondary btn btn-sm mr-2"
+            routerLink="/edit-customer/{{ customer.id }}"
+          >
+            Edit
+          </button>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

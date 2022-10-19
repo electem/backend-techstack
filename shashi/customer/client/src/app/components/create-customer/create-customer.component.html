@@ -1,0 +1,143 @@
+<div class="container">
+  <h5 class="card-title text-center pb-0 fs-4">Add Customer</h5>
+  <br />
+  <div class="row">
+    <div class="col-md-4 offset-md-4">
+      <div class="card mb-4">
+        <div class="card-body">
+          <form [formGroup]="createCustomerForm" (ngSubmit)="saveCustomer()">
+            <div class="form-group">
+              <label>customer name</label>
+              <input
+                type="text"
+                formControlName="customername"
+                class="form-control"
+                [ngClass]="{
+                  'is-invalid': submitted && formValidation.customername.errors
+                }"
+                [(ngModel)]="customer.customername"
+              />
+              <div
+                *ngIf="submitted && formValidation.customername.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="formValidation.customername.errors.required">
+                  customer name is required
+                </div>
+              </div>
+            </div>
+            <!-- <div class="form-group">
+              <p>
+                status :
+                <select
+                  class="form-control"
+                  style="width: 50%"
+                  aria-placeholder="choose status"
+                  name="status"
+                  formControlName="status"
+                  [(ngModel)]="status"
+                  (ngModelChange)="onSelected()"
+                >
+                  <option value="Choose status">Choose status</option>
+                  <option *ngFor="let status of statusList" [ngValue]="status">
+                    {{ status.name }}
+                  </option>
+                </select>
+              </p>
+            </div> -->
+            <div class="form-group">
+              <label>status</label>
+              <input
+                type="text"
+                formControlName="status"
+                class="form-control"
+                [ngClass]="{
+                  'is-invalid': submitted && formValidation.status.errors
+                }"
+                [(ngModel)]="customer.status"
+              />
+              <div
+                *ngIf="submitted && formValidation.status.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="formValidation.status.errors.required">
+                  status is required
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>street</label>
+              <input
+                type="text"
+                formControlName="street"
+                class="form-control"
+                [ngClass]="{
+                  'is-invalid': submitted && formValidation.street.errors
+                }"
+                [(ngModel)]="customer.street"
+              />
+              <div
+                *ngIf="submitted && formValidation.street.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="formValidation.street.errors.required">
+                  street is required
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>postalcode</label>
+              <input
+                type="text"
+                formControlName="postalcode"
+                class="form-control"
+                [ngClass]="{
+                  'is-invalid': submitted && formValidation.postalcode.errors
+                }"
+                [(ngModel)]="customer.postalcode"
+              />
+              <div
+                *ngIf="submitted && formValidation.postalcode.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="formValidation.postalcode.errors.required">
+                  postalcode is required
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Phone Number</label>
+              <input
+                type="text"
+                formControlName="phonenumber"
+                class="form-control"
+                [ngClass]="{
+                  'is-invalid': submitted && formValidation.phonenumber.errors
+                }"
+                [(ngModel)]="customer.phonenumber"
+              />
+              <div
+                *ngIf="submitted && formValidation.phonenumber.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="formValidation.phonenumber.errors.required">
+                  Phone Number is required
+                </div>
+              </div>
+            </div>
+            <br />
+            <div class="text-center">
+              <button class="btn btn-outline-primary btn-sm">Submit</button>
+              <button
+                class="btn btn-outline-danger btn-sm btn-space"
+                routerLink="/customerList"
+              >
+                Cancel
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

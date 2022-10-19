@@ -1,0 +1,56 @@
+<div class="list row">
+  <div class="col-md-8">
+    <div class="input-group mb-3"></div>
+  </div>
+
+  <div class="col-md-6">
+    <ul class="list-group"></ul>
+    <td>
+      <button
+        class="btn btn-success"
+        type="button"
+        routerLink="/addcustomergroup"
+      >
+        Add new customer group
+      </button>
+    </td>
+  </div>
+  <div class="container">
+    <br />
+    <table class="table table-bordered justify-content-center">
+      <thead class="thead-light">
+        <tr class="active">
+          <th class="text-center" scope="col">Name</th>
+          <th class="text-center" scope="col">description</th>
+          <th class="text-center" scope="col">createdAt</th>
+          <th class="text-center" scope="col">updatedAT</th>
+          <th class="text-center" scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let customergroup of customerGroup; let i = index">
+        <tr class="success">
+          <th class="text-center" scope="row">{{ customergroup.name }}</th>
+          <th class="text-center" scope="row">
+            {{ customergroup.description }}
+          </th>
+          <th class="text-center" scope="row">{{ customergroup.createdAt }}</th>
+          <th class="text-center" scope="row">{{ customergroup.updatedAt }}</th>
+          <button
+            type="button"
+            class="btn btn-warning btn-sm mr-2"
+            routerLink="/customergroupedit/{{ customergroup.id }}"
+          >
+            Edit
+          </button>
+          <button
+            type="button"
+            class="btn btn-warning btn-sm mr-2"
+            (click)="deleteGroupById(customergroup.id)"
+          >
+            Delete
+          </button>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

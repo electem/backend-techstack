@@ -1,0 +1,47 @@
+<form [formGroup]="loginform" (ngSubmit)="signup()">
+  <div class="form-group">
+    <h4>Login</h4>
+    <div class="formbox">
+      <div class="form-group">
+        <label for="username">UserName</label>
+        <input
+          type="username"
+          formControlName="username"
+          class="form-control"
+          id="username"
+          [(ngModel)]="login.username"
+          [ngClass]="{ 'is-invalid': submitted && fval.username.errors }"
+        />
+        <div *ngIf="submitted && fval.username.errors" class="invalid-feedback">
+          <div *ngIf="fval.username.errors.required">
+            User Field is required
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          type="password"
+          formControlName="password"
+          class="form-control"
+          id="password"
+          [(ngModel)]="login.password"
+          [ngClass]="{ 'is-invalid': submitted && fval.password.errors }"
+        />
+        <div *ngIf="submitted && fval.password.errors" class="invalid-feedback">
+          <div *ngIf="fval.password.errors.required">
+            password Field is required
+          </div>
+        </div>
+      </div>
+      <br />
+      <button type="button" class="btn btn-primary" (click)="loginData()">
+        login
+      </button>
+      <button type="button" class="btn btn-primary" (click)="Register()">
+        Register
+      </button>
+    </div>
+  </div>
+</form>
