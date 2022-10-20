@@ -1,5 +1,9 @@
 /* eslint-disable prettier/prettier */
-import { Column, Model, Table } from 'sequelize-typescript';
+import { BelongsToMany, Column, Model, Table } from 'sequelize-typescript';
+import { CustomerGroup } from 'src/customergroup/entity/customergroup.entity';
+import { CustomerCustomerGroup } from './customergroup-customer.entity';
+import { Unit } from 'src/unit/entity/unit.entity';
+import { UnitCustomer } from 'src/unit/entity/customer-unit.entity';
 @Table
 export class Customer extends Model {
   @Column({
@@ -19,4 +23,10 @@ export class Customer extends Model {
 
   @Column
   status?: string;
+
+  @BelongsToMany(() => CustomerGroup, () => CustomerCustomerGroup)
+  customergroup: CustomerGroup[];
+
+  @BelongsToMany(() => Unit, () => UnitCustomer)
+  unit: Unit[];
 }

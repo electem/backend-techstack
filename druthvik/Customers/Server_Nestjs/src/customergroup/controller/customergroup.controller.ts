@@ -19,7 +19,7 @@ export class CustomerGroupController {
 
   @Get()
   async getCustomerGroup(): Promise<CustomerGroup[]> {
-    return this.customerGroupService.getCustomerGroup();
+    return this.customerGroupService.getCustomerWithCustomerGroup();
   }
   @Post()
   async createCustomerGroup(@Body() customer: CustomerGroup) {
@@ -28,10 +28,7 @@ export class CustomerGroupController {
 
   @Get('/:id')
   async findCustomerById(@Res() response, @Param('id') id) {
-    const customerGroup = await this.customerGroupService.findCustomerById(id);
-    return response.status(HttpStatus.OK).json({
-      customerGroup,
-    });
+    return await this.customerGroupService.getCustomerWithCustomerGroupById(id);
   }
 
   @Put('/:id')

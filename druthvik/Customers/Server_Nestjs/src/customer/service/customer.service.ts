@@ -1,6 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { Injectable, Inject, HttpException, HttpStatus } from '@nestjs/common';
 import { Customer } from '../entity/customer.entity';
+import { Unit } from '../../unit/entity/unit.entity';
 
 @Injectable()
 export class CustomerService {
@@ -57,6 +58,15 @@ export class CustomerService {
       );
     }
   }
+  async update2(id, data, unit: Unit) {
+    const [numberOfAffectedRows, [updatedPost]] =
+      await this.customersRepository.update(
+        { ...data, unit },
+        { where: { id }, returning: true },
+      );
+
+    return { numberOfAffectedRows, updatedPost };
+  }
 
   async deleteCustomer(id: string) {
     try {
@@ -70,6 +80,23 @@ export class CustomerService {
         'Error deleting customer',
         HttpStatus.BAD_REQUEST,
       );
+    }
+  }
+
+  async update(user, id): Promise<any> {
+    console.log('id, user', id, user);
+    try {
+      const updatedUser = await this.customersRepository.update(
+        { ...user },
+        { where: { id: id } },
+      );
+
+      console.log('updatedUser ', updatedUser);
+
+      return updatedUser;
+    } catch (error) {
+      console.error(error);
+      throw new Error('User Update Failed');
     }
   }
 }

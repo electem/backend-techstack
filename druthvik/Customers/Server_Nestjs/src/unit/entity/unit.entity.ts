@@ -1,9 +1,8 @@
-/* eslint-disable prettier/prettier */
 import { BelongsToMany, Column, Model, Table } from 'sequelize-typescript';
 import { Customer } from 'src/customer/entity/customer.entity';
-import { CustomerCustomerGroup } from 'src/customer/entity/customergroup-customer.entity';
+import { UnitCustomer } from './customer-unit.entity';
 @Table
-export class CustomerGroup extends Model {
+export class Unit extends Model {
   @Column({
     primaryKey: true,
     autoIncrement: true,
@@ -16,6 +15,6 @@ export class CustomerGroup extends Model {
   @Column
   descritption?: string;
 
-  @BelongsToMany(() => Customer, () => CustomerCustomerGroup)
+  @BelongsToMany(() => Customer, () => UnitCustomer)
   customer: Customer[];
 }

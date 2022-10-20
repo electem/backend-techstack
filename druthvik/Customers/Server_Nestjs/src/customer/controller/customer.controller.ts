@@ -12,6 +12,7 @@ import {
 } from '@nestjs/common';
 import { CustomerService } from '../service/customer.service';
 import { Customer } from '../entity/customer.entity';
+import { Unit } from '../../unit/entity/unit.entity';
 
 @Controller('customer')
 export class CustomerController {
@@ -27,17 +28,14 @@ export class CustomerController {
   }
 
   @Get('/:id')
-  async findById(@Res() response, @Param('id') id) {
-    const customer = await this.customerService.findOne(id);
-    return response.status(HttpStatus.OK).json({
-      customer,
-    });
+  async findCustomerById(@Param('id') id): Promise<Customer> {
+    return this.customerService.findOne(id);
   }
 
   @Put('/:id')
-  async update(@Body() customer: Customer, @Param('id') id) {
+  async update(@Body() customer: Customer, unit: Unit, @Param('id') id) {
     await this.customerService.findOne(id);
-    return await this.customerService.updateCustomer(customer, id);
+    return await this.customerService.update2(customer, id, unit);
   }
 
   @Delete('/:id')

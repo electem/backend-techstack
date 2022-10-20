@@ -1,6 +1,6 @@
 import { Injectable, Inject, HttpException, HttpStatus } from '@nestjs/common';
 import { CustomerGroup } from '../entity/customergroup.entity';
-
+import { Customer } from 'src/customer/entity/customer.entity';
 @Injectable()
 export class CustomerGroupService {
   constructor(
@@ -65,5 +65,30 @@ export class CustomerGroupService {
         HttpStatus.BAD_REQUEST,
       );
     }
+  }
+
+  async getCustomerWithCustomerGroup(): Promise<CustomerGroup[]> {
+    const tasks = await this.customersGroupRepository.findAll({
+      include: {
+        model: Customer,
+        through: {
+          attributes: [],
+        },
+      },
+    });
+    return tasks;
+  }
+  async getCustomerWithCustomerGroupById(id: string): Promise<CustomerGroup> {
+    return this.customersGroupRepository.findOne({
+      include: {
+        model: Customer,
+        through: {
+          attributes: [],
+        },
+      },
+      where: {
+        id,
+      },
+    });
   }
 }
