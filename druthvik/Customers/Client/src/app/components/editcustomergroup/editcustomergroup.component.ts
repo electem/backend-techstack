@@ -4,6 +4,7 @@ import { createCustomer } from 'src/app/models/customer.model';
 import { customergroupService } from 'src/app/services/customergroup.service';
 import { customerGroup } from '../../models/customergroup.model';
 import { customerService } from '../../services/createcustomer.service';
+
 @Component({
   selector: 'app-editcustomergroup',
   templateUrl: './editcustomergroup.component.html',
@@ -12,17 +13,13 @@ import { customerService } from '../../services/createcustomer.service';
 export class EditcustomergroupComponent implements OnInit {
   customergroup: customerGroup = {
     name: '',
-    description: null,
+    descritption: '',
     customers: [],
   };
   customers: customerGroup[];
-  currentCustomer: createCustomer = {
-    customergroup: [],
-  };
+  currentCustomer: createCustomer;
   selectedCustomers: createCustomer[] = [];
-  removeCustomer: createCustomer = {
-    customergroup: [],
-  };
+  removeCustomer: createCustomer;
   constructor(
     private customerServicegroup: customergroupService,
     private route: ActivatedRoute,
@@ -74,7 +71,7 @@ export class EditcustomergroupComponent implements OnInit {
     const customergroup: customerGroup = {
       id: this.customergroup.id,
       name: this.customergroup.name,
-      description: this.customergroup.description,
+      descritption: this.customergroup.descritption,
       customers: this.selectedCustomers,
     };
     await this.customerServicegroup.updateGroup(customergroup);

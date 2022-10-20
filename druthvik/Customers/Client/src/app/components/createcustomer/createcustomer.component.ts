@@ -19,15 +19,12 @@ export class CreatecustomerComponent implements OnInit {
     name: '',
     phonenumber: null,
     address: '',
-    status: '',
-    customergroup: [],
+    unit: [],
   };
-  customersGroup: customerGroup[] = [];
 
   constructor(
     private customerService: customerService,
     private formBuilder: FormBuilder,
-    private customerGroupService: customergroupService,
   ) {}
 
   ngOnInit(): void {
@@ -36,10 +33,8 @@ export class CreatecustomerComponent implements OnInit {
       phonenumber: ['', Validators.required],
       address: ['', Validators.required],
       status: ['', Validators.required],
-      customergroup: ['', Validators.required],
     });
     this.status = this.getStatus();
-    this.retriveCustomerGroup();
   }
   get f() {
     return this.registerCustomerForm.controls;
@@ -47,10 +42,6 @@ export class CreatecustomerComponent implements OnInit {
 
   getStatus() {
     return this.customerService.getStatus();
-  }
-
-  async retriveCustomerGroup(): Promise<void> {
-    this.customersGroup = await this.customerGroupService.getCustomerGroup();
   }
 
   async registerCustomerValidate(): Promise<void> {
@@ -66,8 +57,7 @@ export class CreatecustomerComponent implements OnInit {
       name: this.createcustomer.name,
       phonenumber: this.createcustomer.phonenumber,
       address: this.createcustomer.address,
-      status: this.createcustomer.status,
-      customergroup: this.createcustomer.customergroup,
+      unit: this.createcustomer.unit,
     };
     await this.customerService.createCustomer(customerRegister);
   }

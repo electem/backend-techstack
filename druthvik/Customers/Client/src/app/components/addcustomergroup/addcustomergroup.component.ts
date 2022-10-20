@@ -15,17 +15,13 @@ export class AddcustomergroupComponent implements OnInit {
   submitted = false;
   customerGroup: customerGroup = {
     name: '',
-    description: '',
+    descritption: '',
     customers: [],
   };
   customers: createCustomer[] = [];
   selectedCustomers: createCustomer[] = [];
-  currentCustomer: createCustomer = {
-    customergroup: [],
-  };
-  removeCustomer: createCustomer = {
-    customergroup: [],
-  };
+  currentCustomer = new createCustomer();
+  removeCustomer = new createCustomer();
   constructor(
     private customerGroupService: customergroupService,
     private formBuilder: FormBuilder,
@@ -54,7 +50,7 @@ export class AddcustomergroupComponent implements OnInit {
   async addCustomerGroup(): Promise<void> {
     const userRegister: customerGroup = {
       name: this.customerGroup.name,
-      description: this.customerGroup.description,
+      descritption: this.customerGroup.descritption,
       customers: this.selectedCustomers,
     };
 

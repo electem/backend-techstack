@@ -3,6 +3,20 @@
   <div class="col-md-8">
     <div class="input-group mb-3"></div>
   </div>
+  <div class="form-group">
+    <p>
+      Category :
+      <select
+        style="width: 20%"
+        [(ngModel)]="statusObject"
+        (ngModelChange)="onSelected(statusObject)"
+      >
+        <option *ngFor="let status of status" [ngValue]="status">
+          {{ status.name }}
+        </option>
+      </select>
+    </p>
+  </div>
 
   <div class="col-md-6">
     <ul class="list-group"></ul>
@@ -18,6 +32,7 @@
           <th class="text-center" scope="col">Name</th>
           <th class="text-center" scope="col">Ph No.</th>
           <th class="text-center" scope="col">Address</th>
+          <th class="text-center" scope="col">status</th>
           <th class="text-center" scope="col">Action</th>
         </tr>
       </thead>
@@ -26,6 +41,7 @@
           <th class="text-center" scope="row">{{ customer.name }}</th>
           <th class="text-center" scope="row">{{ customer.phonenumber }}</th>
           <th class="text-center" scope="row">{{ customer.address }}</th>
+          <th class="text-center" scope="row">{{ customer.status }}</th>
           <button
             type="button"
             class="btn btn-warning btn-sm mr-2"
