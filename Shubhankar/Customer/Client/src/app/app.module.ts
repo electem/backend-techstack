@@ -15,10 +15,18 @@ import { AddcustomergroupComponent } from './components/addcustomergroup/addcust
 import { EditcustomergroupComponent } from './components/editcustomergroup/editcustomergroup.component';
 import { EditcustomerComponent } from './components/editcustomer/editcustomer.component';
 
-
-
 @NgModule({
-  declarations: [AppComponent, LoginComponent, RegisterComponent, AddcustomerComponent, CustomerlistComponent, CustomergroupComponent, AddcustomergroupComponent, EditcustomergroupComponent, EditcustomerComponent],
+  declarations: [
+    AppComponent,
+    LoginComponent,
+    RegisterComponent,
+    AddcustomerComponent,
+    CustomerlistComponent,
+    CustomergroupComponent,
+    AddcustomergroupComponent,
+    EditcustomergroupComponent,
+    EditcustomerComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

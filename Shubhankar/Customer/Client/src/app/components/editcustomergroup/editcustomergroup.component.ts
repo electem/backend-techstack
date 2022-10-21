@@ -86,11 +86,6 @@ export class EditcustomergroupComponent implements OnInit {
     this.router.navigate(['/group']);
   }
 
-  async Delete() {
-    await this.userService.deleteCustomergroup(this.customergroup.id);
-    this.router.navigate(['/group']);
-  }
-
   get fval() {
     return this.editcustomer.controls;
   }
