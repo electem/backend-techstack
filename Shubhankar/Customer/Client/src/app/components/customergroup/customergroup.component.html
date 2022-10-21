@@ -1,4 +1,4 @@
-<h4>Customergroup List</h4>
+<h4>Customergroup</h4>
 <button type="button" class="btn btn-primary" (click)="click()">
   add customergroup
 </button>
@@ -17,14 +17,14 @@
       <th class="text-center" scope="row">{{ customer.description }}</th>
       <th class="text-center" scope="row">{{ customer.createdAt }}</th>
       <button
-        class="button button1"
+        class="btn btn-outline-success"
         scope="row"
         routerLink="/editgroup/{{ customer.id }}"
       >
         Edit
       </button>
       <button
-        class="button button1"
+        class="btn btn-outline-danger"
         scope="row"
         (click)="Deletecustomergroup(customer)"
       >

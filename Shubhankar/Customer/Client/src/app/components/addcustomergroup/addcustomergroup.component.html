@@ -49,11 +49,19 @@
           </tr>
         </tbody>
       </div>
-      <button type="button" class="btn btn-primary" (click)="moveSelected()">
+      <button
+        type="button"
+        class="btn btn-outline-success"
+        (click)="moveSelected()"
+      >
         Add
       </button>
       <br />
-      <button type=" button" class="btn btn-primary" (click)="moveRight()">
+      <button
+        type=" button"
+        class="btn btn-outline-danger"
+        (click)="moveRight()"
+      >
         Remove
       </button>
       <div style="float: right">
@@ -71,5 +79,10 @@
       </div>
     </div>
   </table>
-  <button type="button" class="btn btn-primary" (click)="getSubmit()">Save</button>
+  <button type="button" class="btn btn-outline-success" (click)="getSubmit()">
+    Save
+  </button>
+  <button type="button" class="btn btn-outline-danger" (click)="Cancel()">
+    Cancel
+  </button>
 </form>

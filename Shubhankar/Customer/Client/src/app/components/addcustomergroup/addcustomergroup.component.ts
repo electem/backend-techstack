@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Customer } from 'src/app/models/customer';
 import { Customergroup } from 'src/app/models/customergroup';
 import { UserService } from 'src/app/services/user.service';
@@ -24,7 +25,8 @@ export class AddcustomergroupComponent implements OnInit {
   };
   constructor(
     private userService: UserService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -73,6 +75,11 @@ export class AddcustomergroupComponent implements OnInit {
       customers: this.customerlist,
     };
     await this.userService.createcustomergroup(customergroup);
+    this.router.navigate(['/group']);
+  }
+
+  Cancel() {
+    this.router.navigate(['/group']);
   }
 
   get fval() {
