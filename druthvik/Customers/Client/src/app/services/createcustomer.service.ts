@@ -14,7 +14,11 @@ export class Status {
   providedIn: 'root',
 })
 export class customerService {
-  private status: Status[] = [{ name: 'active' }, { name: 'inactive' }];
+  private status: Status[] = [
+    { name: 'active' },
+    { name: 'inactive' },
+    { name: 'all' },
+  ];
   constructor(private http: HttpClient) {}
 
   getStatus() {
@@ -44,6 +48,12 @@ export class customerService {
   async deletCustomerById(id: number) {
     return await this.http
       .delete(`${baseUrl2 + '/customer'}/${id}`)
+      .toPromise();
+  }
+
+  async getUnits(): Promise<createCustomer[]> {
+    return await this.http
+      .get<createCustomer[]>(baseUrl2 + '/units')
       .toPromise();
   }
 }

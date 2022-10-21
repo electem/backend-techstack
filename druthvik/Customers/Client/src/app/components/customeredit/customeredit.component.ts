@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { createCustomer } from '../../models/customer.model';
 import { customerService, Status } from '../../services/createcustomer.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Unit } from '../../models/unit.model';
 @Component({
   selector: 'app-customeredit',
   templateUrl: './customeredit.component.html',
@@ -10,11 +11,16 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class CustomereditComponent implements OnInit {
   customer: createCustomer = {
     name: '',
-    phonenumber: null,
     address: '',
+    phonenumber: null,
     status: '',
+    unit: [],
   };
+  unit: Unit[] = [];
   status: Status[];
+  units?: Unit[];
+  selectedUnits: Unit[] = [];
+  selectedUnit = new Unit();
   constructor(
     private customerService: customerService,
     private route: ActivatedRoute,
@@ -23,6 +29,7 @@ export class CustomereditComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCustomerById(this.route.snapshot.params.id);
+    this.retrieveUnits();
   }
 
   async getCustomerById(id: number) {
@@ -35,6 +42,7 @@ export class CustomereditComponent implements OnInit {
       phonenumber: this.customer.phonenumber,
       address: this.customer.address,
       status: this.customer.status,
+      unit: this.customer.unit,
     };
     await this.customerService.updateCustomer(customer);
   }
@@ -42,5 +50,19 @@ export class CustomereditComponent implements OnInit {
   async deletebyid() {
     await this.customerService.deletCustomerById(this.customer.id);
     this.router.navigate(['/customerlist']);
+  }
+
+  async retrieveUnits(): Promise<void> {
+    this.unit = await this.customerService.getUnits();
+  }
+
+  onSelected(value: Unit) {
+    if (this.unit) {
+      for (let unit of this.unit) {
+        if (unit.id == value.id) {
+          this.selectedUnits.push(unit);
+        }
+      }
+    }
   }
 }
