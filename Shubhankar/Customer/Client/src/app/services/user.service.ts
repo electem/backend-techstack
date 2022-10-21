@@ -4,9 +4,13 @@ import { environment } from 'src/environments/environment';
 import { Register } from '../models/register';
 import { Customer } from '../models/customer';
 import { Customergroup } from '../models/customergroup';
+import { Unit } from '../models/unit';
 
 const baseUrl = environment.url;
 export class Status {
+  name?: string;
+}
+export class StatusFilter {
   name?: string;
 }
 @Injectable({
@@ -23,6 +27,22 @@ export class UserService {
       name: 'Inactive',
     },
   ];
+
+  private getfiltercustomerstatus: StatusFilter[] = [
+    {
+      name: 'active',
+    },
+    {
+      name: 'inactive',
+    },
+    {
+      name: 'All',
+    },
+  ];
+
+  getfilterstatus() {
+    return this.getfiltercustomerstatus;
+  }
 
   getstatus() {
     return this.status;
@@ -58,17 +78,23 @@ export class UserService {
   getCustomerid(id: Number) {
     return this.http.get(`${baseUrl + '/customer'}/${id}`).toPromise();
   }
-  updateCustomer(data: Customer) {
-    return this.http.put<Customer>(baseUrl + '/customer', data).toPromise();
+  updateCustomer(data: Customer, id: Number) {
+    return this.http
+      .put<Customer>(`${baseUrl + '/customer'}/${id}`, data)
+      .toPromise();
   }
-  getCustomergroupid(id: Number) {
+  getCustomergroupid(id: number) {
     return this.http.get(`${baseUrl + '/customergroup'}/${id}`).toPromise();
   }
 
-  deleteCustomer(id: Number | any) {
+  deleteCustomer(id: number) {
     return this.http.delete(`${baseUrl + '/customer'}/${id}`).toPromise();
   }
-  deleteCustomergroup(id: Number | any) {
+  deleteCustomergroup(id: number) {
     return this.http.delete(`${baseUrl + '/customergroup'}/${id}`).toPromise();
+  }
+
+  async getUnit(): Promise<Unit[]> {
+    return await this.http.get<Unit[]>(baseUrl + '/unit').toPromise();
   }
 }

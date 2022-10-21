@@ -20,6 +20,7 @@ export class CreatecustomerComponent implements OnInit {
     phonenumber: null,
     address: '',
     unit: [],
+    status: '',
   };
 
   constructor(
@@ -58,6 +59,7 @@ export class CreatecustomerComponent implements OnInit {
       phonenumber: this.createcustomer.phonenumber,
       address: this.createcustomer.address,
       unit: this.createcustomer.unit,
+      status: this.createcustomer.status,
     };
     await this.customerService.createCustomer(customerRegister);
   }

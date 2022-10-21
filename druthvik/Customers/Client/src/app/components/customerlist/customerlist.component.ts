@@ -40,4 +40,7 @@ export class CustomerlistComponent implements OnInit {
       });
     }
   }
+  async deletebyid(id: number) {
+    await this.customerService.deletCustomerById(id);
+  }
 }
