@@ -7,7 +7,7 @@ import { Status, UserService } from 'src/app/services/user.service';
 @Component({
   selector: 'app-addcustomer',
   templateUrl: './addcustomer.component.html',
-  styleUrls: ['./addcustomer.component.css']
+  styleUrls: ['./addcustomer.component.css'],
 })
 export class AddcustomerComponent implements OnInit {
   addcustomer!: FormGroup;
@@ -16,11 +16,13 @@ export class AddcustomerComponent implements OnInit {
     status: '',
     address: '',
   };
-  status?:Status[]=[]
+  status?: Status[] = [];
 
-  constructor( private formBuilder: FormBuilder,
+  constructor(
+    private formBuilder: FormBuilder,
     private userService: UserService,
-    private router: Router) { }
+    private router: Router
+  ) {}
   submitted = false;
   ngOnInit(): void {
     this.addcustomer = this.formBuilder.group({
@@ -39,25 +41,28 @@ export class AddcustomerComponent implements OnInit {
   get fval() {
     return this.addcustomer.controls;
   }
- Addcustomer() {
+  Addcustomer() {
     this.submitted = true;
     if (this.addcustomer.invalid) {
       return;
     }
     this.Submit();
-}
-async Submit() {
-  this.submitted = true;
-  const customer: Customer = {
-    name: this.customer.name,
-    status: this.customer.status,
-    address: this.customer.address,
-    phonenumber: this.customer.phonenumber,
-  };
-  await this.userService.createcustomer(customer);
-  if(this.submitted==true){
-  this.router.navigate(['/list']);
   }
-  return 
-}
+  async Submit() {
+    this.submitted = true;
+    const customer: Customer = {
+      name: this.customer.name,
+      status: this.customer.status,
+      address: this.customer.address,
+      phonenumber: this.customer.phonenumber,
+    };
+    await this.userService.createcustomer(customer);
+    if (this.submitted == true) {
+      this.router.navigate(['/list']);
+    }
+    return;
+  }
+  Cancel() {
+    this.router.navigate(['/list']);
+  }
 }

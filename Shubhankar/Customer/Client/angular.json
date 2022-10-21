@@ -71,7 +71,8 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "Angular12Crud:build:production"
+              "browserTarget": "Angular12Crud:build:production",
+              "proxyConfig": "./http://localhost:3000"
             },
             "development": {
               "browserTarget": "Angular12Crud:build:development"
@@ -83,6 +84,7 @@
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
             "browserTarget": "Angular12Crud:build"
+            
           }
         },
         "test": {
