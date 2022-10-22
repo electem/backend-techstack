@@ -93,7 +93,7 @@ export class CustomerService {
     return await this.game[0];
   }
 
-  updateGame(game: Game) {
+  async updateGame(game: Game) {
     console.log(game);
   }
 }

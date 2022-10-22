@@ -1,0 +1,36 @@
+[
+  {
+    "id": 1,
+    "name": "cricket",
+    "players": [
+      { "id": 1, "name": "KL" },
+      { "id": 2, "name": "VK" },
+      { "id": 3, "name": "Rohit" },
+      { "id": 4, "name": "SKY" },
+      { "id": 5, "name": "MSD" },
+      { "id": 6, "name": "Hardik" },
+      { "id": 7, "name": "Bumrah" },
+      { "id": 8, "name": "Bhuvi" }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "kabaddi",
+    "players": [
+      { "id": 1, "name": "pavan kumar" },
+      { "id": 2, "name": "vikas" },
+      { "id": 3, "name": "saurabh" },
+      { "id": 4, "name": "manindar" },
+      { "id": 5, "name": "naveen" }
+    ]
+  },
+  {
+    "id": 3,
+    "name": "football",
+    "players": [
+      { "id": 1, "name": "Mesii" },
+      { "id": 2, "name": "Ronaldo" },
+      { "id": 3, "name": "Neymar" }
+    ]
+  }
+]
