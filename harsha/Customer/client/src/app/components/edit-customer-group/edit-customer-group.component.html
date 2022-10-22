@@ -17,16 +17,36 @@
       <label for="updatedDate">Updated Date</label>
       <input type="text" name="updatedDate" class="form-control" [(ngModel)]="customerGroup.updatedDate" /><br />
     </div>
-    <div class="form-group">
-      <p>
-        Customers :
-        <select name="customers" class="form-control" [(ngModel)]="customerGroup.customers" name="customers">
-          <option *ngFor="let customer of customers" [ngValue]="customer.id">
-            {{ customer.name }}
-          </option>
-        </select>
-      </p>
-    </div>
+    <h3>Assign Customers</h3>
+    <table class="table table-bordered table-striped table-hover">
+      <thead>
+        <tr>
+          <th class="text-center">Available</th>
+        </tr>
+      </thead>
+      <div class="float">
+        <tbody *ngFor="let customer of customers; let i = index">
+          <tr class="success">
+            <td (click)="onSelectingFromCustomersList(customer)">
+              {{ customer.name }}
+            </td>
+          </tr>
+        </tbody>
+      </div>
+      <div class="button">
+        <button type="button" class="btn btn-success" (click)="addCustomerToUpdateList()">
+          Add --></button><br />
+        <button type=" button" class="btn btn-info btn-sm mr-2" (click)="removeCustomerFromUpdateList()">
+          <-- Remove </button> </div> <div class="floating">
+            <tbody *ngFor="let customer of updatedCustomers; let i = index">
+              <tr class="success">
+                <td (click)="onSelectingFromUpdateCustomerList(customer)">
+                  {{ customer.name }}
+                </td>
+              </tr>
+            </tbody>
+      </div>
+    </table>
     <button class="btn btn-warning" routerLink="/customer-group-list">
       Cancel
     </button>

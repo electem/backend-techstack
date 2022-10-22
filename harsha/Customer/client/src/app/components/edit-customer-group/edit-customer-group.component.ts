@@ -16,6 +16,9 @@ export class EditCustomerGroupComponent implements OnInit {
     description: '',
     customers: [],
   };
+  updatedCustomers: Customer[] = [];
+  addCustomerToList?: Customer = {};
+  removeCustomerFromList?: Customer = {};
 
   constructor(
     private customerService: CustomerService,
@@ -29,9 +32,48 @@ export class EditCustomerGroupComponent implements OnInit {
 
   async getCustomerGroupById(id: number) {
     this.customerGroup = await this.customerService.getCustomerGroupById(id);
+    this.updatedCustomers = this.customerGroup.customers!;
   }
 
   async getCustomers(): Promise<void> {
     this.customers = await this.customerService.getCustomers();
+  }
+
+  public onSelectingFromCustomersList(customer: Customer) {
+    if (customer != null) {
+      this.addCustomerToList = customer;
+    }
+  }
+
+  public addCustomerToUpdateList() {
+    this.updatedCustomers.push(this.addCustomerToList!);
+    this.customers.splice(this.customers.indexOf(this.addCustomerToList!), 1);
+  }
+
+  public onSelectingFromUpdateCustomerList(customer: Customer) {
+    if (customer != null) {
+      this.removeCustomerFromList = customer;
+    }
+  }
+
+  public removeCustomerFromUpdateList() {
+    this.customers.push(this.removeCustomerFromList!);
+    this.updatedCustomers.splice(
+      this.updatedCustomers.indexOf(this.removeCustomerFromList!),
+      1
+    );
+  }
+
+  async updateCustomerGroup(): Promise<void> {
+    const customerGroup = {
+      id: this.customerGroup.id,
+      name: this.customerGroup.name,
+      description: this.customerGroup.description,
+      customers: this.updatedCustomers,
+    };
+    await this.customerService.updateCustomerGroup(
+      this.customerGroup.id!,
+      customerGroup
+    );
   }
 }
