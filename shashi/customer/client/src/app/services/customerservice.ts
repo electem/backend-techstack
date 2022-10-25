@@ -61,48 +61,48 @@ export class CustomerService {
       .toPromise();
   }
   async getCustomers(): Promise<Customer[]> {
-    return await this.http.get<Customer[]>(baseUrl2 + '/customer').toPromise();
+    return await this.http.get<Customer[]>(baseUrl + '/customer').toPromise();
   }
   async createCustomer(customerData: Customer): Promise<Customer> {
     return this.http
-      .post<Customer>(baseUrl2 + '/customer', customerData)
+      .post<Customer>(baseUrl + '/customer', customerData)
       .toPromise();
   }
   async getCustomerById(id: number): Promise<Customer> {
-    return await this.http.get(`${baseUrl2 + '/customer'}/${id}`).toPromise();
+    return await this.http.get(`${baseUrl + '/customer'}/${id}`).toPromise();
   }
   async updateCustomer(customer: Customer): Promise<Customer> {
     return await this.http
-      .put(`${baseUrl2 + '/customer'}/${customer.id}`, customer)
+      .put(`${baseUrl + '/customer'}/${customer.id}`, customer)
       .toPromise();
   }
   async getCustomerGroups(): Promise<CustomerGroup[]> {
     return await this.http
-      .get<CustomerGroup[]>(baseUrl2 + '/customergroup')
+      .get<CustomerGroup[]>(baseUrl + '/customergroup')
       .toPromise();
   }
   async createCustomerGroup(
     customerGroupData: CustomerGroup
   ): Promise<CustomerGroup> {
     return this.http
-      .post<CustomerGroup>(baseUrl2 + '/customergroup', customerGroupData)
+      .post<CustomerGroup>(baseUrl + '/customergroup', customerGroupData)
       .toPromise();
   }
   async getCustomerGroupById(id: number): Promise<CustomerGroup> {
     return await this.http
-      .get(`${baseUrl2 + '/customergroup'}/${id}`)
+      .get(`${baseUrl + '/customergroup'}/${id}`)
       .toPromise();
   }
   async updateCustomerGroup(
     customerGroup: CustomerGroup
   ): Promise<CustomerGroup> {
     return await this.http
-      .put(`${baseUrl2 + '/customergroup'}/${customerGroup.id}`, customerGroup)
+      .put(`${baseUrl + '/customergroup'}/${customerGroup.id}`, customerGroup)
       .toPromise();
   }
   async deleteCustomerGroupById(id: number): Promise<CustomerGroup> {
     return await this.http
-      .delete(`${baseUrl2 + '/customergroup'}/${id}`)
+      .delete(`${baseUrl + '/customergroup'}/${id}`)
       .toPromise();
   }
   async getUnits(): Promise<Unit[]> {

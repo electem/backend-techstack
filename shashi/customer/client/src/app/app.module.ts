@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, Output, EventEmitter  } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
@@ -15,6 +15,7 @@ import { CreateCustomerGroupComponent } from './components/create-customer-group
 import { EditCustomerGroupComponent } from './components/edit-customer-group/edit-customer-group.component';
 import { GameListComponent } from './components/game-list/game-list.component';
 import { EditGameListComponent } from './components/edit-game-list/edit-game-list.component';
+import { OutputCustomerGroupComponent } from './components/edit-customer-group/output-customer-group/output-customer-group.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { EditGameListComponent } from './components/edit-game-list/edit-game-lis
     EditCustomerGroupComponent,
     GameListComponent,
     EditGameListComponent,
+    OutputCustomerGroupComponent,
   ],
   imports: [
     BrowserModule,

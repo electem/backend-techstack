@@ -10,6 +10,7 @@ import { CreateCustomerGroupComponent } from './components/create-customer-group
 import { EditCustomerGroupComponent } from './components/edit-customer-group/edit-customer-group.component';
 import { GameListComponent } from './components/game-list/game-list.component';
 import { EditGameListComponent } from './components/edit-game-list/edit-game-list.component';
+import { OutputCustomerGroupComponent } from './components/edit-customer-group/output-customer-group/output-customer-group.component';
 const routes: Routes = [
   { path: '', redirectTo: 'userlogin', pathMatch: 'full' },
   { path: 'userlogin', component: UserloginComponent },
@@ -22,6 +23,7 @@ const routes: Routes = [
   { path: 'editcustomergroup/:id', component: EditCustomerGroupComponent },
   { path: 'gamelist', component: GameListComponent },
   { path: 'editgamelist/:id', component: EditGameListComponent },
+  { path: 'output', component: OutputCustomerGroupComponent },
 ];
 
 @NgModule({

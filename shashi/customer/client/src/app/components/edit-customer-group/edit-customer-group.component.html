@@ -99,4 +99,21 @@
       </tbody>
     </table>
   </div>
+  <label for="item-input">output event Current customers</label>
+  <div class="column">
+    <table class="table table-bordered justify-content-center">
+      <tr>
+        <th class="text-center" scope="col">Current</th>
+      </tr>
+      <tbody
+        *ngFor="let selectedcustomer of currentcustomerEvent; let i = index"
+      >
+        <tr class="success">
+          <th class="text-center" scope="row">
+            {{ selectedcustomer.customername }}
+          </th>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

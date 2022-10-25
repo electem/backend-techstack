@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { CustomerGroup } from 'src/app/models/customerGroup.model';
 import { CustomerService } from 'src/app/services/customerservice';
 import { Customer } from 'src/app/models/customer.model';
+import { Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-edit-customer-group',
@@ -10,22 +11,23 @@ import { Customer } from 'src/app/models/customer.model';
   styleUrls: ['./edit-customer-group.component.css'],
 })
 export class EditCustomerGroupComponent implements OnInit {
+  @Output() public customerEvent = new EventEmitter<Customer>();
   currentCustomer!: Customer;
   customerGroups: CustomerGroup[] = [];
   customers!: Customer[];
-  selectedCustomers: Customer[] = [];
+  selectedCustomers?: Customer[] = [];
   submitted = false;
   customerGroup: CustomerGroup = {
     groupname: '',
     description: '',
     customers: [],
   };
+  currentcustomerEvent: Customer[] = [];
 
   constructor(
     private customerService: CustomerService,
     private route: ActivatedRoute
   ) {}
-
   ngOnInit(): void {
     this.retrieveCustomerGroups();
     this.retrieveCustomers();
@@ -33,8 +35,9 @@ export class EditCustomerGroupComponent implements OnInit {
   }
   async getCustomerGroupById(id: number): Promise<void> {
     this.customerGroup = await this.customerService.getCustomerGroupById(id);
-    // this.selectedCustomers = this.customerGroup.customers;
+    this.selectedCustomers = this.customerGroup.customers;
   }
+
   async retrieveCustomers(): Promise<void> {
     this.customers = await this.customerService.getCustomers();
   }
@@ -44,11 +47,13 @@ export class EditCustomerGroupComponent implements OnInit {
 
   async setActiveCustomer(customer: Customer): Promise<void> {
     this.currentCustomer = customer;
+    this.customerEvent.emit(customer);
   }
 
   async onSelectedCustomers(): Promise<void> {
-    this.selectedCustomers.push(this.currentCustomer);
+    this.selectedCustomers?.push(this.currentCustomer);
     this.customers.splice(this.customers.indexOf(this.currentCustomer), 1);
+    this.currentcustomerEvent.push(this.currentCustomer);
   }
 
   async removeActiveCustomer(customer: Customer): Promise<void> {
@@ -57,7 +62,7 @@ export class EditCustomerGroupComponent implements OnInit {
 
   async onSelectedRemove(): Promise<void> {
     this.customers.push(this.currentCustomer);
-    this.selectedCustomers.splice(
+    this.selectedCustomers?.splice(
       this.selectedCustomers.indexOf(this.currentCustomer),
       1
     );
