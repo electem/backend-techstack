@@ -37,6 +37,7 @@ export class AddcustomergroupComponent implements OnInit {
     });
     this.retrievecustomers();
   }
+  
   async retrievecustomers(): Promise<void> {
     this.customers = await this.userService.getAll();
     console.log(this.customers);
@@ -57,6 +58,15 @@ export class AddcustomergroupComponent implements OnInit {
 
   public toggleSelections(customer: Customer) {
     this.removedCustomer = customer;
+  }
+
+  Movetoparent(newItem: string) {
+    this.customers.push(this.removedCustomer);
+    const index = this.customerlist.indexOf(this.removedCustomer);
+      if (index > -1) {
+        this.customerlist.splice(index, 1);
+        console.log(newItem);
+      }
   }
   public moveRight() {
     if (this.removedCustomer != null) {
