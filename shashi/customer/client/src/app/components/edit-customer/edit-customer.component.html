@@ -37,18 +37,22 @@
               </div>
               <div class="form-group">
                 <p>
-                  status :
+                  Unit :
                   <select
                     class="form-control"
+                    placeholder="Choose units"
                     style="width: 50%"
-                    aria-placeholder="choose status"
-                    name="status"
-                    formControlName="status"
-                    [(ngModel)]="customer.status"
+                    name="units"
+                    [(ngModel)]="selectedunit.id"
+                    (ngModelChange)="onSelected(selectedunit)"
+                    name="units"
                   >
-                    <option value="Choose status">Choose status</option>
-                    <option *ngFor="let status of status" [ngValue]="status">
-                      {{ status.name }}
+                    <option value="Choose units">Choose Unit</option>
+                    <option
+                      *ngFor="let category of unitsList"
+                      [ngValue]="category.id"
+                    >
+                      {{ category.name }}
                     </option>
                   </select>
                 </p>

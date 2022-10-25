@@ -13,6 +13,8 @@ import { EditCustomerComponent } from './components/edit-customer/edit-customer.
 import { CustomerGroupListComponent } from './components/customer-group-list/customer-group-list.component';
 import { CreateCustomerGroupComponent } from './components/create-customer-group/create-customer-group.component';
 import { EditCustomerGroupComponent } from './components/edit-customer-group/edit-customer-group.component';
+import { GameListComponent } from './components/game-list/game-list.component';
+import { EditGameListComponent } from './components/edit-game-list/edit-game-list.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +27,8 @@ import { EditCustomerGroupComponent } from './components/edit-customer-group/edi
     CustomerGroupListComponent,
     CreateCustomerGroupComponent,
     EditCustomerGroupComponent,
+    GameListComponent,
+    EditGameListComponent,
   ],
   imports: [
     BrowserModule,

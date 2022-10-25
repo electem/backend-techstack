@@ -4,7 +4,7 @@ export class CustomerGroup {
   id?: number;
   groupname?: string;
   description?: string;
-  createdat?: Date;
+  createdAt?: Date;
   updatedAt?: Date;
   customers?: Customer[];
 }

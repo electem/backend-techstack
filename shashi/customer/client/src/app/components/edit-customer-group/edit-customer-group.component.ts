@@ -33,22 +33,13 @@ export class EditCustomerGroupComponent implements OnInit {
   }
   async getCustomerGroupById(id: number): Promise<void> {
     this.customerGroup = await this.customerService.getCustomerGroupById(id);
-    this.selectedCustomers = this.customerGroup.customers;
+    // this.selectedCustomers = this.customerGroup.customers;
   }
   async retrieveCustomers(): Promise<void> {
     this.customers = await this.customerService.getCustomers();
   }
   async retrieveCustomerGroups(): Promise<void> {
     this.customerGroups = await this.customerService.getCustomerGroups();
-  }
-
-  async saveCustomerGroupDetails(): Promise<void> {
-    const customerData: CustomerGroup = {
-      groupname: this.customerGroup.groupname,
-      description: this.customerGroup.description,
-      customers: this.selectedCustomers,
-    };
-    await this.customerService.createCustomerGroup(customerData);
   }
 
   async setActiveCustomer(customer: Customer): Promise<void> {
