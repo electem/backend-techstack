@@ -6,9 +6,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AppHttpInterceptor } from './app.interceptor';
 import { CreateCompanyComponent } from './components/create-company/create-company.component';
+import { CreateDepartmentComponent } from './components/create-department/create-department.component';
 
 @NgModule({
-  declarations: [AppComponent, CreateCompanyComponent],
+  declarations: [AppComponent, CreateCompanyComponent, CreateDepartmentComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
