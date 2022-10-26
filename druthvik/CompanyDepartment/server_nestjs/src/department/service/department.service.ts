@@ -23,4 +23,16 @@ export class DepartmentService {
       );
     }
   }
+
+  async findAllDepartment(): Promise<Department[]> {
+    return this.departmentRepository.findAll<Department>();
+  }
+
+  async findOneDepartment(id: string): Promise<Department> {
+    return this.departmentRepository.findOne({
+      where: {
+        id,
+      },
+    });
+  }
 }
