@@ -7,9 +7,16 @@ import { DatabaseModule } from './database.module';
 import { CustomerModule } from './customer/customer.Module';
 import { CustomerGroupModule } from './customerGroup/customerGroup.module';
 import { UnitModule } from './unit/unit.module';
+import { ImageModule } from './fileupload-Download/file.module';
 
 @Module({
-  imports: [DatabaseModule, CustomerModule, CustomerGroupModule, UnitModule],
+  imports: [
+    ImageModule,
+    DatabaseModule,
+    CustomerModule,
+    CustomerGroupModule,
+    UnitModule,
+  ],
   controllers: [AppController],
   providers: [...databaseProviders, AppService],
 })

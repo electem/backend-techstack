@@ -5,6 +5,7 @@ import { CustomerGroup } from './customerGroup/customergroup.entity';
 import { customerCustomerGroup } from './customer/customer-customergroup.model';
 import { Unit } from './unit/unit.entity';
 import { customerUnit } from './unit/unit-customer.entity';
+import { Image } from './fileupload-Download/file.entity';
 export const databaseProviders = [
   {
     provide: 'SEQUELIZE',
@@ -23,6 +24,7 @@ export const databaseProviders = [
         customerCustomerGroup,
         Unit,
         customerUnit,
+        Image,
       ]);
       await sequelize.sync();
       return sequelize;
