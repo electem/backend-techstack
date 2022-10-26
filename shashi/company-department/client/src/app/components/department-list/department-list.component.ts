@@ -11,12 +11,12 @@ import { Department } from 'src/app/models/department.model';
 export class DepartmentListComponent implements OnInit {
   departmentsList: Department[] = [];
 
-  constructor(private customerService: CompanyService) {}
+  constructor(private companyService: CompanyService) {}
 
   ngOnInit(): void {
     this.retrieveDepartments();
   }
   async retrieveDepartments(): Promise<void> {
-    this.departmentsList = await this.customerService.getDepartments();
+    this.departmentsList = await this.companyService.getDepartments();
   }
 }
