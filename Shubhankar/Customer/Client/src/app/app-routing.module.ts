@@ -14,6 +14,7 @@ import { AssigncustomerchildeditComponent } from './components/editcustomergroup
 import { CompanylistComponent } from './components/companylist/companylist.component';
 import { DepartmentlistComponent } from './components/departmentlist/departmentlist.component';
 import { CreatecompanyComponent } from './components/createcompany/createcompany.component';
+import { CreatedepartmentComponent } from './components/createdepartment/createdepartment.component';
 const routes: Routes = [
   { path: '', redirectTo: 'loginusers', pathMatch: 'full' },
   { path: 'loginusers', component: LoginComponent },
@@ -30,6 +31,7 @@ const routes: Routes = [
   { path: 'company', component: CompanylistComponent },
   { path: 'department', component: DepartmentlistComponent },
   { path: 'create', component: CreatecompanyComponent },
+  { path: 'dept', component: CreatedepartmentComponent },
 ];
 
 @NgModule({

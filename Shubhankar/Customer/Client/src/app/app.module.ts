@@ -21,6 +21,7 @@ import { EditgameComponent } from './components/editgame/editgame.component';
 import { CompanylistComponent } from './components/companylist/companylist.component';
 import { DepartmentlistComponent } from './components/departmentlist/departmentlist.component';
 import { CreatecompanyComponent } from './components/createcompany/createcompany.component';
+import { CreatedepartmentComponent } from './components/createdepartment/createdepartment.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { CreatecompanyComponent } from './components/createcompany/createcompany
    CompanylistComponent,
    DepartmentlistComponent,
    CreatecompanyComponent,
+   CreatedepartmentComponent,
   ],
   imports: [
     BrowserModule,
