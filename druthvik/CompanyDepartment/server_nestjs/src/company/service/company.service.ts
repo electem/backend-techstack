@@ -1,6 +1,7 @@
 import { Injectable, Inject, HttpException, HttpStatus } from '@nestjs/common';
 import { Company } from '../entity/company.entity';
-
+import { Department } from 'src/department/entity/department.entity';
+import { CompanyDto } from '../entity/company.dto';
 @Injectable()
 export class CompanyService {
   constructor(
@@ -28,8 +29,16 @@ export class CompanyService {
     return this.companyRepository.findAll<Company>();
   }
 
-  async findOneCompany(id: string): Promise<Company> {
+  findCustomerGroupById(id: string): Promise<Company> {
     return this.companyRepository.findOne({
+      include: {
+        model: Department,
+
+        through: {
+          attributes: [],
+        },
+      },
+
       where: {
         id,
       },

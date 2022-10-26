@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Res } from '@nestjs/common';
 
 import { CompanyService } from '../service/company.service';
 import { Company } from '../entity/company.entity';
@@ -15,8 +15,8 @@ export class CompanyController {
   async findAllCompany(): Promise<Company[]> {
     return this.companyService.findAllCompany();
   }
-  @Get('/:id')
-  async findCustomerById(@Param('id') id): Promise<Company> {
-    return this.companyService.findOneCompany(id);
-  }
+  // @Get('/:id')
+  // async findCustomerById(@Param('id') id): Promise<Company> {
+  //   return this.companyService.findOneCompany(id);
+  // }
 }

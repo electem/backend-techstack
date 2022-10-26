@@ -38,6 +38,21 @@
               </div>
             </div>
             <br />
+            <div class="form-group">
+              <label for="options">Departments:</label>
+              <div *ngFor="let department of departmentlist">
+                <label>
+                  <input
+                    type="checkbox"
+                    name="options"
+                    value="{{ department.value }}"
+                    (click)="selectedDepartment(department)"
+                  />
+                  {{ department.name }}
+                </label>
+              </div>
+            </div>
+            <br />
             <div class="text-center">
               <button class="btn btn-primary">Register</button>
               <button class="btn btn-secondary btn-space" type="reset">
