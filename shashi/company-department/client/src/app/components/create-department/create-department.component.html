@@ -1,11 +1,11 @@
-<div class="container">
-  <h5 class="card-title text-center pb-0 fs-4">create department</h5>
-  <br />
-  <div class="row">
-    <div class="col-md-4 offset-md-4">
-      <div class="card mb-4">
-        <div class="card-body">
+<div class="form-bg">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 offset-md-3 col-md-6 col-sm-offset-2 col-sm-8">
+        <div class="form-container">
+          <h3 class="title">create department</h3>
           <form
+            class="form-horizontal"
             [formGroup]="createDepartmentForm"
             (ngSubmit)="saveDepartment()"
           >
@@ -50,17 +50,17 @@
                 </div>
               </div>
             </div>
-            <br />
-            <div class="text-center">
-              <button class="btn btn-outline-primary btn-sm">Submit</button>
-              <button
-                class="btn btn-outline-danger btn-sm btn-space"
-                routerLink="/customerList"
-              >
-                Cancel
-              </button>
-            </div>
+            <button class="btn signin">Submit</button>
+            >
           </form>
+          <div class="social-links">
+            <button
+              class="btn btn-outline-danger btn-sm btn-space"
+              routerLink="/departmentlist"
+            >
+              Cancel
+            </button>
+          </div>
         </div>
       </div>
     </div>

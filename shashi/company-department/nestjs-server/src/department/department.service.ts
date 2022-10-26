@@ -22,4 +22,7 @@ export class DepartmentService {
       throw new HttpException('Error creating company', HttpStatus.BAD_REQUEST);
     }
   }
+  async getDepartments(): Promise<Array<Department>> {
+    return this.departmentModel.findAll();
+  }
 }

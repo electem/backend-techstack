@@ -1,0 +1,43 @@
+<div class="list row">
+  <h2 class="py-4">Companies List</h2>
+  <div class="col-md-8">
+    <div class="input-group mb-3"></div>
+  </div>
+  <div class="col-md-6">
+    <ul class="list-group"></ul>
+    <td>
+      <button routerLink="/createcompany">ADD NEW COMPANY</button>
+    </td>
+  </div>
+  <div class="container">
+    <br />
+    <table class="table table-bordered justify-content-center">
+      <thead class="thead-light">
+        <tr class="active">
+          <th class="text-center" scope="col">Company Name</th>
+          <th class="text-center" scope="col">Address</th>
+          <th class="text-center" scope="col">Created Date</th>
+          <th class="text-center" scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let company of companiesList; let i = index">
+        <tr class="success">
+          <th class="text-center" scope="row">{{ company.companyname }}</th>
+          <th class="text-center" scope="row">{{ company.address }}</th>
+          <th class="text-center" scope="row">
+            {{ company.createdAt | date: "short" }}
+          </th>
+          <th class="text-center" scope="row">
+            <button
+              type="button"
+              style="margin: px"
+              class="btn-outline-secondary btn btn-sm mr-2"
+            >
+              Edit
+            </button>
+          </th>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
