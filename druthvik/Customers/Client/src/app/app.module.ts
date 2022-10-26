@@ -16,6 +16,7 @@ import { AddcustomergroupComponent } from './components/addcustomergroup/addcust
 import { CustomergrouplistComponent } from './components/customergrouplist/customergrouplist.component';
 import { EditcustomergroupComponent } from './components/editcustomergroup/editcustomergroup.component';
 import { GameplayerComponent } from './components/gameplayer/gameplayer.component';
+import { EditgameplayerComponent } from './components/editgameplayer/editgameplayer.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { GameplayerComponent } from './components/gameplayer/gameplayer.componen
     AddcustomergroupComponent,
     GameplayerComponent,
     EditcustomergroupComponent,
+    EditgameplayerComponent,
   ],
   imports: [
     BrowserModule,

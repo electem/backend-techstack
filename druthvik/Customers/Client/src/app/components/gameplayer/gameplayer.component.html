@@ -15,7 +15,12 @@
         <th class="text-center" scope="row">{{ games.Name }}</th>
         <th class="text-center" scope="row">{{ games.players.length }}</th>
         <th class="text-center" scope="row">
-          <button>Edit</button>
+          <button
+            class="btn btn-warning btn-sm mr-2"
+            routerLink="/game/{{ games.id }}"
+          >
+            Edit
+          </button>
         </th>
       </tr>
     </tbody>
