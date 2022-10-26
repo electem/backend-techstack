@@ -22,4 +22,7 @@ export class CompanyService {
       throw new HttpException('Error creating company', HttpStatus.BAD_REQUEST);
     }
   }
+  async getCompanies(): Promise<Array<Company>> {
+    return this.companyModel.findAll();
+  }
 }

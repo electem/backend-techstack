@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { Company } from './company.model';
 import { CompanyService } from './company.service';
 
@@ -10,5 +10,9 @@ export class CompanyController {
   @Post()
   async createCompany(@Body() company: Company) {
     return await this.companyService.createCompany(company);
+  }
+  @Get()
+  async getCompanies(): Promise<Array<Company>> {
+    return this.companyService.getCompanies();
   }
 }
