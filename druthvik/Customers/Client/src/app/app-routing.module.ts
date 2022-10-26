@@ -10,6 +10,7 @@ import { CustomergrouplistComponent } from './components/customergrouplist/custo
 import { EditcustomergroupComponent } from './components/editcustomergroup/editcustomergroup.component';
 import { AddcustomergroupComponent } from './components/addcustomergroup/addcustomergroup.component';
 import { GameplayerComponent } from './components/gameplayer/gameplayer.component';
+import { EditgameplayerComponent } from './components/editgameplayer/editgameplayer.component';
 const routes: Routes = [
   { path: '', redirectTo: 'registeruser', pathMatch: 'full' },
   { path: 'loginuser', component: UserloginComponent },
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path: 'addcustomergroup', component: AddcustomergroupComponent },
   { path: 'customergroupedit/:id', component: EditcustomergroupComponent },
   { path: 'game', component: GameplayerComponent },
+  { path: 'game/:id', component: EditgameplayerComponent },
   { path: '**', component: PageNotFoundComponent },
 ];
 

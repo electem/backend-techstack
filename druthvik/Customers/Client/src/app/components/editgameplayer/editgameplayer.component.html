@@ -1,0 +1,54 @@
+<form>
+  <div class="formbox center">
+    <div class="form-group input center">
+      <label for="name">Name</label>
+      <input
+        type="text"
+        name="name"
+        class="form-control"
+        [(ngModel)]="games.Name"
+      />
+    </div>
+    <br />
+    <div class="form-group input center">
+      <label for="name">players</label>
+      <input
+        name="players"
+        type="text"
+        class="form-control"
+        [(ngModel)]="games.players"
+      />
+    </div>
+    <div class="form-group">
+      <label for="options">Players:</label>
+      <div *ngFor="let game of games.players">
+        <label>
+          <input
+            type="checkbox"
+            name="options"
+            [(ngModel)]="game.name"
+            (click)="removeSelectedPlayerFromGame(player)"
+          />
+          {{ game.name }}
+        </label>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="options">Players:</label>
+      <div *ngFor="let player of players">
+        <label>
+          <input
+            type="checkbox"
+            name="options"
+            value="{{ player.value }}"
+            (change)="onSelected(playerss, $event.target.checked)"
+          />
+          {{ player.name }}
+        </label>
+      </div>
+    </div>
+    <button class="btn btn-outline-success btn-sm" (click)="updateGame()">
+      Update
+    </button>
+  </div>
+</form>
