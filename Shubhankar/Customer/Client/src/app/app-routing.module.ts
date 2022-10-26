@@ -11,6 +11,9 @@ import { EditcustomerComponent } from './components/editcustomer/editcustomer.co
 import { GamelistComponent } from './components/gamelist/gamelist.component';
 import { EditgameComponent } from './components/editgame/editgame.component';
 import { AssigncustomerchildeditComponent } from './components/editcustomergroup/assigncustomerchildedit/assigncustomerchildedit.component';
+import { CompanylistComponent } from './components/companylist/companylist.component';
+import { DepartmentlistComponent } from './components/departmentlist/departmentlist.component';
+import { CreatecompanyComponent } from './components/createcompany/createcompany.component';
 const routes: Routes = [
   { path: '', redirectTo: 'loginusers', pathMatch: 'full' },
   { path: 'loginusers', component: LoginComponent },
@@ -24,6 +27,9 @@ const routes: Routes = [
   { path: 'game', component: GamelistComponent },
   { path: 'gameedit/:id', component: EditgameComponent },
   { path: 'Customeredit', component: AssigncustomerchildeditComponent },
+  { path: 'company', component: CompanylistComponent },
+  { path: 'department', component: DepartmentlistComponent },
+  { path: 'create', component: CreatecompanyComponent },
 ];
 
 @NgModule({

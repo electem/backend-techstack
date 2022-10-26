@@ -8,9 +8,11 @@ import { Unit } from '../models/unit';
 import gameJson from '../game.json';
 import { Game } from '../models/game';
 import { Player } from '../models/player';
+import { Company } from '../models/company';
+import { Department } from '../models/department';
 
 
-const baseUrl = environment.url1;
+const baseUrl = environment.url;
 export class Status {
   name?: string;
 }
@@ -125,6 +127,20 @@ export class UserService {
 
   async updateGame(game: Game) {
     console.log(game);
+  }
+
+  async getallCompany(): Promise<Company[]> {
+    return await this.http.get<Company[]>(baseUrl + '/company').toPromise();
+  }
+
+  async getallDepartment(): Promise<Department[]> {
+    return await this.http.get<Department[]>(baseUrl + '/department').toPromise();
+  }
+
+  createcompany(data: Company): Promise<Company> {
+    return this.http
+      .post<Company>(baseUrl + '/company', data)
+      .toPromise();
   }
 
 }

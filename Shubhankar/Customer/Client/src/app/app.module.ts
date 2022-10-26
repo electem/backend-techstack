@@ -18,6 +18,9 @@ import { GamelistComponent } from './components/gamelist/gamelist.component';
 import { AssigncustomerchildComponent } from './components/addcustomergroup/assigncustomerchild/assigncustomerchild.component';
 import { AssigncustomerchildeditComponent } from './components/editcustomergroup/assigncustomerchildedit/assigncustomerchildedit.component';
 import { EditgameComponent } from './components/editgame/editgame.component';
+import { CompanylistComponent } from './components/companylist/companylist.component';
+import { DepartmentlistComponent } from './components/departmentlist/departmentlist.component';
+import { CreatecompanyComponent } from './components/createcompany/createcompany.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +37,9 @@ import { EditgameComponent } from './components/editgame/editgame.component';
     AssigncustomerchildComponent,
     AssigncustomerchildeditComponent,
    EditgameComponent,
+   CompanylistComponent,
+   DepartmentlistComponent,
+   CreatecompanyComponent,
   ],
   imports: [
     BrowserModule,
