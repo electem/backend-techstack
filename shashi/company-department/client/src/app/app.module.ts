@@ -7,9 +7,10 @@ import { AppComponent } from './app.component';
 import { AppHttpInterceptor } from './app.interceptor';
 import { CreateCompanyComponent } from './components/create-company/create-company.component';
 import { CreateDepartmentComponent } from './components/create-department/create-department.component';
+import { CompanyListComponent } from './components/company-list/company-list.component';
 
 @NgModule({
-  declarations: [AppComponent, CreateCompanyComponent, CreateDepartmentComponent],
+  declarations: [AppComponent, CreateCompanyComponent, CreateDepartmentComponent, CompanyListComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
