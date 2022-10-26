@@ -15,4 +15,13 @@ export class DepartmentService {
       .post<Department>(baseUrl + '/department', createdepartment)
       .toPromise();
   }
+  async getDepartments(): Promise<Department[]> {
+    return await this.http
+      .get<Department[]>(baseUrl + '/department')
+      .toPromise();
+  }
+
+  async getDepartmentById(id: number) {
+    return await this.http.get(`${baseUrl + '/department'}/${id}`).toPromise();
+  }
 }

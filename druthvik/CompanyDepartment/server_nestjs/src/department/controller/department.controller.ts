@@ -10,4 +10,12 @@ export class DepartmentController {
   async createCustomer(@Body() department: Department) {
     return await this.departmentService.createDepartment(department);
   }
+  @Get()
+  async findAllCompany(): Promise<Department[]> {
+    return this.departmentService.findAllDepartment();
+  }
+  @Get('/:id')
+  async findCustomerById(@Param('id') id): Promise<Department> {
+    return this.departmentService.findOneDepartment(id);
+  }
 }
