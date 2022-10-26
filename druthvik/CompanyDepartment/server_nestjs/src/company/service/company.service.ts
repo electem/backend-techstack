@@ -23,4 +23,16 @@ export class CompanyService {
       );
     }
   }
+
+  async findAllCompany(): Promise<Company[]> {
+    return this.companyRepository.findAll<Company>();
+  }
+
+  async findOneCompany(id: string): Promise<Company> {
+    return this.companyRepository.findOne({
+      where: {
+        id,
+      },
+    });
+  }
 }

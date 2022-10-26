@@ -16,4 +16,11 @@ export class CompanyService {
       .post<Company>(baseUrl + '/company', createcompany)
       .toPromise();
   }
+  async getCompanies(): Promise<Company[]> {
+    return await this.http.get<Company[]>(baseUrl + '/company').toPromise();
+  }
+
+  async getCompanyById(id: number) {
+    return await this.http.get(`${baseUrl + '/company'}/${id}`).toPromise();
+  }
 }
