@@ -22,4 +22,9 @@ export class CompanyService {
   async getCompanies(): Promise<Company[]> {
     return await this.http.get<Company[]>(baseUrl + '/company').toPromise();
   }
+  async getDepartments(): Promise<Department[]> {
+    return await this.http
+      .get<Department[]>(baseUrl + '/department')
+      .toPromise();
+  }
 }
