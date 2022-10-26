@@ -137,9 +137,9 @@ export class UserService {
     return await this.http.get<Department[]>(baseUrl + '/department').toPromise();
   }
 
-  createcompany(data: Company): Promise<Company> {
-    return this.http
-      .post<Company>(baseUrl + '/company', data)
+ async createcompany(companyinfo: Company): Promise<Company> {
+    return await this.http
+      .post<Company>(baseUrl + '/company', companyinfo)
       .toPromise();
   }
 
