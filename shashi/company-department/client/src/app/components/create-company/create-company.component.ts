@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Company } from 'src/app/models/company.model';
+import { Department } from 'src/app/models/department.model';
 import { CompanyService } from 'src/app/services/companyDepartment.service';
 
 @Component({
@@ -11,6 +12,9 @@ import { CompanyService } from 'src/app/services/companyDepartment.service';
 })
 export class CreateCompanyComponent implements OnInit {
   createCompanyForm!: FormGroup;
+  departmentsList: Department[] = [];
+  AdddepartmentsList: Department[] = [];
+  currentDepartment!: Department;
   submitted = false;
   company: Company = {
     companyname: '',
@@ -28,10 +32,15 @@ export class CreateCompanyComponent implements OnInit {
       companyname: ['', Validators.required],
       address: ['', Validators.required],
     });
+    this.retrieveDepartments();
   }
   get formValidation() {
     return this.createCompanyForm.controls;
   }
+  async retrieveDepartments(): Promise<void> {
+    this.departmentsList = await this.companyService.getDepartments();
+  }
+
   async saveCompany(): Promise<void> {
     this.submitted = true;
     if (this.createCompanyForm.invalid) {
@@ -48,5 +57,9 @@ export class CreateCompanyComponent implements OnInit {
     };
     await this.companyService.createCompany(companyData);
     // this.router.navigate(['/customerList']);
+  }
+  async removeSelectedDepartment(department: Department): Promise<void> {
+    this.currentDepartment = department;
+    this.AdddepartmentsList?.push(this.currentDepartment);
   }
 }

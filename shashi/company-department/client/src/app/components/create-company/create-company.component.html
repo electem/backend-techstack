@@ -2,7 +2,7 @@
   <h5 class="card-title text-center pb-0 fs-4">create company</h5>
   <br />
   <div class="row">
-    <div class="col-md-4 offset-md-4">
+    <div class="col-md-6 offset-md-4">
       <div class="card mb-4">
         <div class="card-body">
           <form [formGroup]="createCompanyForm" (ngSubmit)="saveCompany()">
@@ -55,6 +55,18 @@
               >
                 Cancel
               </button>
+            </div>
+            <br />
+            <div class="column">
+              <h2>Departments List</h2>
+              <ul>
+                <li *ngFor="let player of departmentsList">
+                  <input
+                    type="checkbox"
+                    (click)="removeSelectedDepartment(player)"
+                  />{{ player.departmentname }}
+                </li>
+              </ul>
             </div>
           </form>
         </div>
