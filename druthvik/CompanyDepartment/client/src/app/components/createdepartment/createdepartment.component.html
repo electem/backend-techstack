@@ -1,0 +1,49 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-4 offset-md-4">
+      <div class="card mb-4">
+        <div class="card-body">
+          <form
+            [formGroup]="createdepartmentForm"
+            (ngSubmit)="createDepatmentValidate()"
+          >
+            <div class="form-group">
+              <label>Department Name</label>
+              <input
+                type="text"
+                formControlName="name"
+                class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.name.errors }"
+                [(ngModel)]="createdepartment.name"
+              />
+              <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                <div *ngIf="f.name.errors.required">Name is required</div>
+              </div>
+            </div>
+            <br />
+            <div class="form-group">
+              <label>Type</label>
+              <input
+                type="text"
+                formControlName="type"
+                class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.type.errors }"
+                [(ngModel)]="createdepartment.type"
+              />
+              <div *ngIf="submitted && f.type.errors" class="invalid-feedback">
+                <div *ngIf="f.type.errors.required">Type is required</div>
+              </div>
+            </div>
+            <br />
+            <div class="text-center">
+              <button class="btn btn-primary">Register</button>
+              <button class="btn btn-secondary btn-space" type="reset">
+                Cancel
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
