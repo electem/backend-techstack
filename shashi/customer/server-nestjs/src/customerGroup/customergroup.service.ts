@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { Injectable, Inject, HttpException, HttpStatus } from '@nestjs/common';
 import { CustomerGroup } from './customergroup.entity';
-
+import { Customer } from 'src/customer/customer.entity';
 @Injectable()
 export class CustomerGroupService {
   constructor(
@@ -10,7 +10,16 @@ export class CustomerGroupService {
   ) {}
 
   async getCustomerGroups(): Promise<Array<CustomerGroup>> {
-    return this.customerGroupModel.findAll();
+    const tasks = await this.customerGroupModel.findAll({
+      include: {
+        model: Customer,
+
+        through: {
+          attributes: [],
+        },
+      },
+    });
+    return tasks;
   }
 
   async createCustomergroup(
@@ -20,6 +29,7 @@ export class CustomerGroupService {
       const createdCustomergroup = new this.customerGroupModel({
         groupname: customerGroup.groupname,
         description: customerGroup.description,
+        customer: customerGroup.customer,
         createdAt: new Date().getTime(),
         updatedAt: new Date().getTime(),
       });
@@ -34,6 +44,12 @@ export class CustomerGroupService {
 
   findCustomerGroupById(id: string): Promise<CustomerGroup> {
     return this.customerGroupModel.findOne({
+      include: {
+        model: Customer,
+        through: {
+          attributes: [],
+        },
+      },
       where: {
         id,
       },

@@ -1,10 +1,10 @@
+import { Unit } from './unit.model';
 export class Customer {
   id?: number;
   customername?: string;
   status?: string;
   street?: string;
-  postalcode?: string;
+  postalcode?: number;
   phonenumber?: number;
-  createdat?: Date;
-  updatedAt?: Date;
+  units?: Unit[];
 }

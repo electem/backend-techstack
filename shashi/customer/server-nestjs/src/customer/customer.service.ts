@@ -1,6 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { Injectable, Inject, HttpException, HttpStatus } from '@nestjs/common';
 import { Customer } from './customer.entity';
+import { Unit } from 'src/unit/unit.entity';
 
 @Injectable()
 export class CustomerService {
@@ -21,6 +22,7 @@ export class CustomerService {
         street: customer.street,
         postalcode: customer.postalcode,
         phonenumber: customer.phonenumber,
+        units: customer.units,
         createdAt: new Date().getTime(),
         updatedAt: new Date().getTime(),
       });
@@ -52,6 +54,7 @@ export class CustomerService {
         (customer.street = updateCustomer.street),
         (customer.postalcode = updateCustomer.postalcode),
         (customer.phonenumber = updateCustomer.phonenumber),
+        (customer.units = updateCustomer.units),
         (customer.updatedAt = new Date().getTime());
       return await customer.save();
     } catch (error) {
