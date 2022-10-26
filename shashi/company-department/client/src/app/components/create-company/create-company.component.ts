@@ -34,9 +34,11 @@ export class CreateCompanyComponent implements OnInit {
     });
     this.retrieveDepartments();
   }
+
   get formValidation() {
     return this.createCompanyForm.controls;
   }
+  
   async retrieveDepartments(): Promise<void> {
     this.departmentsList = await this.companyService.getDepartments();
   }
@@ -58,7 +60,7 @@ export class CreateCompanyComponent implements OnInit {
     await this.companyService.createCompany(companyData);
     // this.router.navigate(['/customerList']);
   }
-  async removeSelectedDepartment(department: Department): Promise<void> {
+  async selectedDepartment(department: Department): Promise<void> {
     this.currentDepartment = department;
     this.AdddepartmentsList?.push(this.currentDepartment);
   }

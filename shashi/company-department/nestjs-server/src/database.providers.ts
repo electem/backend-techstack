@@ -2,6 +2,7 @@
 import { Sequelize } from 'sequelize-typescript';
 import { Company } from './company/company.model';
 import { Department } from './department/department.entity';
+import { CompanyDepartment } from './department/company-department.entity';
 export const databaseProviders = [
   {
     provide: 'SEQUELIZE',
@@ -14,7 +15,7 @@ export const databaseProviders = [
         password: 'postgres',
         database: 'company',
       });
-      sequelize.addModels([Company, Department]);
+      sequelize.addModels([Company, Department, CompanyDepartment]);
       await sequelize.sync();
       return sequelize;
     },

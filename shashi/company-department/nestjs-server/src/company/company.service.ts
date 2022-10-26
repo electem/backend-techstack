@@ -1,6 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { Injectable, Inject, HttpException, HttpStatus } from '@nestjs/common';
 import { Company } from './company.model';
+import { Department } from 'src/department/department.entity';
 
 @Injectable()
 export class CompanyService {
@@ -14,6 +15,7 @@ export class CompanyService {
       const createdCompany = new this.companyModel({
         companyname: company.companyname,
         address: company.address,
+        department: Department,
         createdAt: new Date().getTime(),
         updatedAt: new Date().getTime(),
       });
@@ -24,5 +26,18 @@ export class CompanyService {
   }
   async getCompanies(): Promise<Array<Company>> {
     return this.companyModel.findAll();
+  }
+  findCustomerGroupById(id: string): Promise<Company> {
+    return this.companyModel.findOne({
+      include: {
+        model: Department,
+        through: {
+          attributes: [],
+        },
+      },
+      where: {
+        id,
+      },
+    });
   }
 }

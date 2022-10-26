@@ -1,5 +1,7 @@
 /* eslint-disable prettier/prettier */
-import { Column, Model, Table } from 'sequelize-typescript';
+import { BelongsToMany, Column, Model, Table } from 'sequelize-typescript';
+import { Department } from 'src/department/department.entity';
+import { CompanyDepartment } from 'src/department/company-department.entity';
 
 @Table
 export class Company extends Model {
@@ -14,4 +16,8 @@ export class Company extends Model {
 
   @Column
   address?: string;
+
+  @BelongsToMany(() => Department, () => CompanyDepartment ,)
+  department: Department[];
+
 }
