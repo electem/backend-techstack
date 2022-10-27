@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Company } from 'src/app/models/company.model';
 import { CompanyService } from 'src/app/services/company.service';
 import { DepartmentService } from 'src/app/services/department.service';
@@ -24,6 +25,7 @@ export class CreatecompanyComponent implements OnInit {
     private companyService: CompanyService,
     private formBuilder: FormBuilder,
     private departmentservice: DepartmentService,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -51,6 +53,7 @@ export class CreatecompanyComponent implements OnInit {
       department: this.AdddepartmentsList,
     };
     await this.companyService.createCompany(createCompany);
+    this.router.navigate(['/comapanylisting']);
   }
   async retrieveDepartments(): Promise<void> {
     this.departmentlist = await this.departmentservice.getDepartments();
