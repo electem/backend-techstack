@@ -1,7 +1,7 @@
+import { Department } from './department.model';
 export class Company {
   id?: number;
   name: string;
   address?: string;
-  createdAt?: string;
-  updatedAt?: string;
+  department: Department[];
 }

@@ -15,6 +15,7 @@ export class CreatecompanyComponent implements OnInit {
   createcompany: Company = {
     name: '',
     address: '',
+    department: [],
   };
   departmentlist: Department[] = [];
   currentDepartment = new Department();
@@ -47,6 +48,7 @@ export class CreatecompanyComponent implements OnInit {
     const createCompany: Company = {
       name: this.createcompany.name,
       address: this.createcompany.address,
+      department: this.AdddepartmentsList,
     };
     await this.companyService.createCompany(createCompany);
   }
