@@ -1,15 +1,29 @@
 /* eslint-disable prettier/prettier */
 import { Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { databaseProviders } from './database.provider';
-import { DatabaseModule } from './database.module';
-import { CompanyModule } from './company/company.module';
+import { Company } from './company/company.entity';
+import { Department } from './department/department.entity';
+import { CompanyModule } from './company/comapny.module';
 import { DepartmentModule } from './department/department.module';
 
 @Module({
-  imports: [DatabaseModule, CompanyModule, DepartmentModule],
+  imports: [
+    TypeOrmModule.forRoot({
+      type: 'postgres',
+      host: 'localhost',
+      port: 5432,
+      username: 'postgres',
+      password: 'root',
+      database: 'companydept',
+      entities: [Company, Department],
+      synchronize: true,
+    }),
+    CompanyModule,
+    DepartmentModule,
+  ],
   controllers: [AppController],
-  providers: [...databaseProviders, AppService],
+  providers: [AppService],
 })
 export class AppModule {}

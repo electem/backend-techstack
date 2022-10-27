@@ -1,4 +1,4 @@
-import { Company } from './entity/company.entity';
+import { Company } from '../company/company.entity';
 
 export const companyProviders = [
   {
