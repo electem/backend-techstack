@@ -1,7 +1,6 @@
 import { Injectable, Inject, HttpException, HttpStatus } from '@nestjs/common';
 import { Company } from '../entity/company.entity';
 import { Department } from 'src/department/entity/department.entity';
-import { CompanyDto } from '../entity/company.dto';
 @Injectable()
 export class CompanyService {
   constructor(
@@ -43,5 +42,9 @@ export class CompanyService {
         id,
       },
     });
+  }
+  async getRoleByValue(id: string) {
+    const role = await this.companyRepository.findOne({ where: { id } });
+    return role;
   }
 }
