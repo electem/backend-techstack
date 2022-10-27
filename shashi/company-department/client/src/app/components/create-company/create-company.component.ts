@@ -19,6 +19,7 @@ export class CreateCompanyComponent implements OnInit {
   company: Company = {
     companyname: '',
     address: '',
+    department: [],
   };
 
   constructor(
@@ -38,11 +39,15 @@ export class CreateCompanyComponent implements OnInit {
   get formValidation() {
     return this.createCompanyForm.controls;
   }
-  
+
   async retrieveDepartments(): Promise<void> {
     this.departmentsList = await this.companyService.getDepartments();
   }
 
+  async selectedDepartment(department: Department): Promise<void> {
+    this.currentDepartment = department;
+    this.AdddepartmentsList?.push(this.currentDepartment);
+  }
   async saveCompany(): Promise<void> {
     this.submitted = true;
     if (this.createCompanyForm.invalid) {
@@ -51,17 +56,13 @@ export class CreateCompanyComponent implements OnInit {
       this.saveCompanyDetails();
     }
   }
-
   async saveCompanyDetails(): Promise<void> {
     const companyData: Company = {
       companyname: this.company.companyname,
       address: this.company.address,
+      department: this.AdddepartmentsList,
     };
     await this.companyService.createCompany(companyData);
-    // this.router.navigate(['/customerList']);
-  }
-  async selectedDepartment(department: Department): Promise<void> {
-    this.currentDepartment = department;
-    this.AdddepartmentsList?.push(this.currentDepartment);
+    this.router.navigate(['/companylist']);
   }
 }

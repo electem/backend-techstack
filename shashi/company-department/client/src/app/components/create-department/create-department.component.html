@@ -51,15 +51,23 @@
               </div>
             </div>
             <button class="btn signin">Submit</button>
-            >
+            <div class="social-links">
+              <button
+                class="btn btn-outline-danger btn-sm btn-space"
+                routerLink="/departmentlist"
+              >
+                Cancel
+              </button>
+            </div>
           </form>
-          <div class="social-links">
-            <button
-              class="btn btn-outline-danger btn-sm btn-space"
-              routerLink="/departmentlist"
+          <div style="width: 50%">
+            <ng-multiselect-dropdown
+              [settings]="dropdownSettings"
+              [data]="companiesList"
+              (onSelect)="selectedCompany($event)"
+              (onSelectAll)="onSelectAllCompany($event)"
             >
-              Cancel
-            </button>
+            </ng-multiselect-dropdown>
           </div>
         </div>
       </div>
