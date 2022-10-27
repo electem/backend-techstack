@@ -1,0 +1,62 @@
+<div class="container">
+  <h5 class="card-title text-center pb-0 fs-4">Edit Company</h5>
+  <br />
+  <div class="row">
+    <div class="col-md-4 offset-md-4">
+      <div class="card mb-4">
+        <div class="card-body">
+          <form>
+            <div class="formbox center">
+              <div class="form-group input center">
+                <label for="companyname">company name</label>
+                <input
+                  type="text"
+                  name="companyname"
+                  class="form-control"
+                  [(ngModel)]="company.companyname"
+                />
+              </div>
+              <br />
+              <div class="form-group input center">
+                <label for="name">address</label>
+                <input
+                  name="address"
+                  type="text"
+                  class="form-control"
+                  [(ngModel)]="company.address"
+                />
+              </div>
+              <div class="form-group input center">
+                <div class="form-group">
+                  <label for="options">Departments:</label>
+                  <div *ngFor="let department of company.department">
+                    <label>
+                      <input
+                        type="checkbox"
+                        name="options"
+                        [(ngModel)]="company.department"
+                      />
+                      {{ department.departmentname }}
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <button
+                class="btn btn-outline-danger btn-sm btn-space"
+                routerLink="/companylist"
+              >
+                Cancel
+              </button>
+              <button
+                class="btn btn-outline-success btn-sm"
+                routerLink="/customerList"
+              >
+                Update
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

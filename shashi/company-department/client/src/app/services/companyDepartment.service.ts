@@ -27,4 +27,7 @@ export class CompanyService {
       .get<Department[]>(baseUrl + '/department')
       .toPromise();
   }
+  async getCompanyById(id: number): Promise<Company> {
+    return await this.http.get(`${baseUrl + '/company'}/${id}`).toPromise();
+  }
 }

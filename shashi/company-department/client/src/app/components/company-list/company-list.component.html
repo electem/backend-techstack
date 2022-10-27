@@ -27,15 +27,14 @@
           <th class="text-center" scope="row">
             {{ company.createdAt | date: "short" }}
           </th>
-          <th class="text-center" scope="row">
-            <button
-              type="button"
-              style="margin: px"
-              class="btn-outline-secondary btn btn-sm mr-2"
-            >
-              Edit
-            </button>
-          </th>
+          <button
+            type="button"
+            style="margin: px"
+            class="btn-outline-secondary btn btn-sm mr-2"
+            routerLink="/editcompany/{{ company.id }}"
+          >
+            Edit
+          </button>
         </tr>
       </tbody>
     </table>
