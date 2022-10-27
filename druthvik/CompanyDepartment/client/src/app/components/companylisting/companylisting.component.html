@@ -24,7 +24,11 @@
         <tr class="success">
           <th class="text-center" scope="row">{{ company.name }}</th>
           <th class="text-center" scope="row">{{ company.address }}</th>
-          <button type="button" class="btn btn-warning btn-sm mr-2">
+          <button
+            type="button"
+            class="btn btn-warning btn-sm mr-2"
+            routerLink="/editcompany/{{ company.id }}"
+          >
             Edit
           </button>
           <button type="button" class="btn btn-warning btn-sm mr-2">

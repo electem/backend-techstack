@@ -7,7 +7,7 @@ import { CompanyService } from 'src/app/services/company.service';
   styleUrls: ['./companylisting.component.css'],
 })
 export class CompanylistingComponent implements OnInit {
-  companies: Company[] = [];
+  companies: Company[];
   constructor(private companyservice: CompanyService) {}
 
   ngOnInit(): void {
