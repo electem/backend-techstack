@@ -1,8 +1,8 @@
-import { Department } from './entity/department.entity';
+import { Department } from './department.entity';
 
-export const DepartmentProviders = [
+export const departmentProviders = [
   {
-    provide: 'DEPARTMENT_REPOSITORY',
+    provide: 'DRPARTMENT_REPOSITORY',
     useValue: Department,
   },
 ];
