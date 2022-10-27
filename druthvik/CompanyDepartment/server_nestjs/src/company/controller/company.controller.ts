@@ -19,4 +19,8 @@ export class CompanyController {
   // async findCustomerById(@Param('id') id): Promise<Company> {
   //   return this.companyService.findOneCompany(id);
   // }
+  @Get('/:id')
+  getByValue(@Param('id') id: string) {
+    return this.companyService.getRoleByValue(id);
+  }
 }
