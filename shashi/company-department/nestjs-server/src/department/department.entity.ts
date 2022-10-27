@@ -1,21 +1,29 @@
 /* eslint-disable prettier/prettier */
-import { BelongsToMany, Column, Model, Table } from 'sequelize-typescript';
+//import { BelongsToMany, Column, Model, Table } from 'sequelize-typescript';
 import { Company } from 'src/company/company.model';
-import { CompanyDepartment } from './company-department.entity';
 
-@Table
-export class Department extends Model {
-  @Column({
-    primaryKey: true,
-    autoIncrement: true,
-  })
+import {
+  Column,
+  Entity,
+  ManyToMany,
+  PrimaryGeneratedColumn,
+  CreateDateColumn,
+} from 'typeorm';
+
+@Entity()
+export class Department {
+  @PrimaryGeneratedColumn()
   id: number;
 
-  @Column
-  departmentname?: string;
+  @Column()
+  departmentname!: string;
 
-  @Column
+  @Column()
   type?: string;
-  @BelongsToMany(() => Company, () => CompanyDepartment)
-  company: Company[];
+
+  @CreateDateColumn()
+  createdAt!: Date;
+
+  @ManyToMany((_type) => Company, (company) => company.department)
+  company!: Company[];
 }
