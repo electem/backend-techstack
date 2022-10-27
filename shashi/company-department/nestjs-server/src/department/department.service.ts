@@ -1,28 +1,47 @@
 /* eslint-disable prettier/prettier */
-import { Injectable, Inject, HttpException, HttpStatus } from '@nestjs/common';
+import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { Department } from './department.entity';
+import { DepartmentDto } from './department.dto';
 
 @Injectable()
 export class DepartmentService {
   constructor(
-    @Inject('department')
-    private departmentModel: typeof Department,
+    @InjectRepository(Department)
+    private departmentRepository: Repository<Department>,
   ) {}
 
-  async createDepartment(department: Department): Promise<Department> {
+  public async findAllDepartment(): Promise<Department[]> {
+    return await this.departmentRepository.find();
+  }
+
+  public async createDepartment(
+    departmentDto: DepartmentDto,
+  ): Promise<Department> {
     try {
-      const createdDepartment = new this.departmentModel({
-        departmentname: department.departmentname,
-        type: department.type,
-        createdAt: new Date().getTime(),
-        updatedAt: new Date().getTime(),
-      });
-      return await createdDepartment.save();
-    } catch (error) {
-      throw new HttpException('Error creating company', HttpStatus.BAD_REQUEST);
+      return await this.departmentRepository.save(departmentDto);
+    } catch (err) {
+      throw new HttpException(err, HttpStatus.BAD_REQUEST);
     }
   }
-  async getDepartments(): Promise<Array<Department>> {
-    return this.departmentModel.findAll();
+
+  //code with out query builder
+
+  // async findOneDepartment(id: number) {
+  //   const postWithRepository = await this.departmentRepository.findOneBy({
+  //     id,
+  //   });
+  //   return postWithRepository;
+  // }
+
+  async findOneDepartment(id: number) {
+    const postWithQueryBuilder = await this.departmentRepository
+      .createQueryBuilder('department')
+      .select(['department', 'company'])
+      .leftJoinAndSelect('department.company', 'company')
+      .where('department.id= :id', { id: id })
+      .getOne();
+    return postWithQueryBuilder;
   }
 }

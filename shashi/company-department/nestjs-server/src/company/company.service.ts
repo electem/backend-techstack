@@ -1,43 +1,40 @@
 /* eslint-disable prettier/prettier */
-import { Injectable, Inject, HttpException, HttpStatus } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { InjectEntityManager, InjectRepository } from '@nestjs/typeorm';
+import { EntityManager, Repository } from 'typeorm';
 import { Company } from './company.model';
-import { Department } from 'src/department/department.entity';
-
+import { CompanyDto } from './company.dto';
 @Injectable()
 export class CompanyService {
   constructor(
-    @Inject('company')
-    private companyModel: typeof Company,
+    @InjectRepository(Company)
+    private companyRepository: Repository<Company>,
   ) {}
 
-  async createCompany(company: Company): Promise<Company> {
+  public async findAllCompany(): Promise<Company[]> {
+    return await this.companyRepository.find();
+  }
+
+  public async createCompany(companyDto: CompanyDto): Promise<Company> {
     try {
-      const createdCompany = new this.companyModel({
-        companyname: company.companyname,
-        address: company.address,
-        department: Department,
-        createdAt: new Date().getTime(),
-        updatedAt: new Date().getTime(),
-      });
-      return await createdCompany.save();
-    } catch (error) {
-      throw new HttpException('Error creating company', HttpStatus.BAD_REQUEST);
+      return await this.companyRepository.save(companyDto);
+    } catch (err) {
+      throw new HttpException(err, HttpStatus.BAD_REQUEST);
     }
   }
-  async getCompanies(): Promise<Array<Company>> {
-    return this.companyModel.findAll();
+
+  async findOne(id: number) {
+    const postWithRepository = await this.companyRepository.findOneBy({ id });
+    return postWithRepository;
   }
-  findCustomerGroupById(id: string): Promise<Company> {
-    return this.companyModel.findOne({
-      include: {
-        model: Department,
-        through: {
-          attributes: [],
-        },
-      },
-      where: {
-        id,
-      },
-    });
+
+  async findOneCompany(id: number) {
+    const postWithQueryBuilder = await this.companyRepository
+      .createQueryBuilder('company')
+      .select(['company', 'department'])
+      .leftJoinAndSelect('company.department', 'department')
+      .where('company.id= :id', { id: id })
+      .getOne();
+    return postWithQueryBuilder;
   }
 }
