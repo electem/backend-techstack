@@ -10,9 +10,18 @@ import { CreateDepartmentComponent } from './components/create-department/create
 import { CompanyListComponent } from './components/company-list/company-list.component';
 import { DepartmentListComponent } from './components/department-list/department-list.component';
 
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+
 @NgModule({
-  declarations: [AppComponent, CreateCompanyComponent, CreateDepartmentComponent, CompanyListComponent, DepartmentListComponent],
+  declarations: [
+    AppComponent,
+    CreateCompanyComponent,
+    CreateDepartmentComponent,
+    CompanyListComponent,
+    DepartmentListComponent,
+  ],
   imports: [
+    NgMultiSelectDropDownModule.forRoot(),
     BrowserModule,
     AppRoutingModule,
     FormsModule,

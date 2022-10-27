@@ -10,12 +10,12 @@ import { CompanyService } from 'src/app/services/companyDepartment.service';
 export class CompanyListComponent implements OnInit {
   companiesList: Company[] = [];
 
-  constructor(private customerService: CompanyService) {}
+  constructor(private companyService: CompanyService) {}
 
   ngOnInit(): void {
     this.retrievecompanies();
   }
   async retrievecompanies(): Promise<void> {
-    this.companiesList = await this.customerService.getCompanies();
+    this.companiesList = await this.companyService.getCompanies();
   }
 }
