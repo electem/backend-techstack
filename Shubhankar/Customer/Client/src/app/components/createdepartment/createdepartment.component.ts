@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Company } from 'src/app/models/company';
 import { Department } from '../../models/department';
 import { UserService } from '../../services/user.service';
 
@@ -16,6 +17,7 @@ export class CreatedepartmentComponent implements OnInit {
     name: '',
     type: '',
   };
+  
   constructor(
     private userService: UserService,
     private router: Router,

@@ -9,8 +9,7 @@ router.post("/", async (req, res) => {
 });
 router.get("/", async (req, res) => {
   const controller = new UserController();
-  const response = await controller.getAuthentication(req.body,req.body.name);
+  const response = await controller.getAuthentication(req.body, req.body.name);
   return res.send(response);
 });
 export default router;
-

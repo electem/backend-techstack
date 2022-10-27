@@ -1,3 +1,5 @@
+/** @format */
+
 import "reflect-metadata";
 import { createConnection } from "typeorm";
 import express, { Application } from "express";

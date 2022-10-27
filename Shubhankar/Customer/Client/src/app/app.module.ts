@@ -23,6 +23,7 @@ import { DepartmentlistComponent } from './components/departmentlist/departmentl
 import { CreatecompanyComponent } from './components/createcompany/createcompany.component';
 import { CreatedepartmentComponent } from './components/createdepartment/createdepartment.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,6 +43,7 @@ import { CreatedepartmentComponent } from './components/createdepartment/created
    DepartmentlistComponent,
    CreatecompanyComponent,
    CreatedepartmentComponent,
+   
   ],
   imports: [
     BrowserModule,
@@ -50,6 +52,7 @@ import { CreatedepartmentComponent } from './components/createdepartment/created
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent],

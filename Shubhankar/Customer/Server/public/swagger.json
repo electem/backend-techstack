@@ -357,6 +357,42 @@
 						}
 					}
 				]
+			},
+			"delete": {
+				"operationId": "DeleteCustomergroupById",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"anyOf": [
+										{
+											"$ref": "#/components/schemas/CustomerGroup"
+										},
+										{
+											"type": "string"
+										}
+									]
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"customergroup"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
 			}
 		},
 		"/customer": {

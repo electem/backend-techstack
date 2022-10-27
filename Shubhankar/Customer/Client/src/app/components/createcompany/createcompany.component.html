@@ -42,6 +42,12 @@
           <div *ngIf="fval.address.errors.required">Address Field is required</div>
         </div>
       </div>
+      <label>Choose Department</label>
+      <li *ngFor="let depertment of department">
+        <input type="checkbox"
+       />
+        {{depertment.name}}
+      </li>
       <button type="button" class="btn btn-outline-success" (click)="getSubmit()">
         Save
       </button>
