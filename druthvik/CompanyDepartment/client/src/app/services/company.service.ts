@@ -23,4 +23,13 @@ export class CompanyService {
   async getCompanyById(id: number) {
     return await this.http.get(`${baseUrl + '/company'}/${id}`).toPromise();
   }
+  async updateCompany(updatecompany: Company) {
+    return await this.http
+      .put<Company>(baseUrl + '/company', updatecompany)
+      .toPromise();
+  }
+
+  async deletCompanyById(id: number) {
+    return await this.http.delete(`${baseUrl + '/company'}/${id}`).toPromise();
+  }
 }

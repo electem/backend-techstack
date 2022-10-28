@@ -13,21 +13,39 @@
   <div class="container">
     <br />
     <table
-      class="table table-bordered justify-content-center table table-striped table-hover"
+      class="table table-striped table-hover table-bordered border-secondary"
     >
-      <thead class="thead-light">
+      <thead>
         <tr class="active">
           <th class="text-center" scope="col">Name</th>
           <th class="text-center" scope="col">Type</th>
+          <th class="text-center" scope="col">Company Length</th>
           <th class="text-center" scope="col">Action</th>
         </tr>
       </thead>
       <tbody *ngFor="let department of departments; let i = index">
-        <tr class="success">
+        <tr>
           <th class="text-center" scope="row">{{ department.name }}</th>
           <th class="text-center" scope="row">{{ department.type }}</th>
-          <button type="button" class="btn btn-sm mr-2">Edit</button>
-          <button type="button" class="btn btn-sm mr-2">Delete</button>
+          <th class="text-center" scope="row">
+            {{ department.company.length }}
+          </th>
+          <th class="text-center">
+            <button
+              type="button"
+              class="btn btn-outline-secondary btn-sm"
+              routerLink="/editdepartment/{{ department.id }}"
+            >
+              Edit
+            </button>
+            <button
+              type="button"
+              class="btn btn-outline-secondary btn-sm marignleft"
+              (click)="deletebyid(department.id)"
+            >
+              Delete
+            </button>
+          </th>
         </tr>
       </tbody>
     </table>

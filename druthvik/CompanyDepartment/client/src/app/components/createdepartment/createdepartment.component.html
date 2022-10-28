@@ -5,10 +5,10 @@
         <div class="card-body">
           <form
             [formGroup]="createdepartmentForm"
-            (ngSubmit)="createDepatmentValidate()"
+            (ngSubmit)="createDepartmentValidate()"
           >
             <div class="form-group">
-              <label>Department Name</label>
+              <label>Name</label>
               <input
                 type="text"
                 formControlName="name"
@@ -30,23 +30,26 @@
                 [ngClass]="{ 'is-invalid': submitted && f.type.errors }"
                 [(ngModel)]="createdepartment.type"
               />
-              <div *ngIf="submitted && f.type.errors" class="invalid-feedback">
+              <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
                 <div *ngIf="f.type.errors.required">Type is required</div>
               </div>
             </div>
             <br />
-            <div style="width: 70%">
+            <div class="form-group">
               <ng-multiselect-dropdown
                 [settings]="dropdownSettings"
                 [data]="companies"
-                (onSelect)="onItemSelect($event)"
-                (onSelectAll)="onSelectAll($event)"
+                (onSelect)="onSelectCompany($event)"
+                (onSelectAll)="onSelectAllCompanies($event)"
+                [class.is-invalid]="
+                  f?.company?.errors?.required && f?.company?.touched
+                "
               >
               </ng-multiselect-dropdown>
             </div>
             <br />
             <div class="text-center">
-              <button class="btn btn-primary">Register</button>
+              <button class="btn btn-primary">Create</button>
               <button class="btn btn-secondary btn-space" type="reset">
                 Cancel
               </button>

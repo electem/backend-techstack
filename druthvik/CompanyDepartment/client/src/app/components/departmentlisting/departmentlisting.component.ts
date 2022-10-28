@@ -18,4 +18,9 @@ export class DepartmentlistingComponent implements OnInit {
   async retrieveDepartments(): Promise<void> {
     this.departments = await this.departmentservice.getDepartments();
   }
+
+  async deletebyid(id: number) {
+    await this.departmentservice.deleteDepartmentById(id);
+    this.retrieveDepartments();
+  }
 }

@@ -29,6 +29,7 @@
     "moment": "^2.29.4",
     "moment-timezone": "^0.5.37",
     "ng-multiselect-dropdown": "^0.2.11",
+    "ngx-pagination": "^4.0.0",
     "randomstring": "^1.2.2",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
