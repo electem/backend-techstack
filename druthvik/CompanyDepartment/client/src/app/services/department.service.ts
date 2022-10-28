@@ -24,4 +24,15 @@ export class DepartmentService {
   async getDepartmentById(id: number) {
     return await this.http.get(`${baseUrl + '/department'}/${id}`).toPromise();
   }
+
+  async updateDepartment(updateDepartment: Department) {
+    return await this.http
+      .put(baseUrl + '/department', updateDepartment)
+      .toPromise();
+  }
+  async deleteDepartmentById(id: number) {
+    return await this.http
+      .delete(`${baseUrl + '/department'}/${id}`)
+      .toPromise();
+  }
 }

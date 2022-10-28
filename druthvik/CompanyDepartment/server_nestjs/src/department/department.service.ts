@@ -13,6 +13,15 @@ export class DepartmentService {
   public async findAllDepartments(): Promise<Department[]> {
     return await this.departmentRepository.find();
   }
+  async getAllDepartmentWithCompany() {
+    const getAll = await this.departmentRepository
+      .createQueryBuilder('department')
+      .select(['department', 'company'])
+      .leftJoinAndSelect('department.company', 'company')
+      .getMany();
+    return getAll;
+  }
+
   public async createDepartment(
     departmentDto: DepartmentDto,
   ): Promise<Department> {
@@ -30,5 +39,19 @@ export class DepartmentService {
       .where('department.id= :id', { id: id })
       .getOne();
     return idWithQueryBuilder;
+  }
+
+  public async updateDepartment(
+    departmentDto: DepartmentDto,
+  ): Promise<Department> {
+    try {
+      return await this.departmentRepository.save(departmentDto);
+    } catch (err) {
+      throw new HttpException(err, HttpStatus.BAD_REQUEST);
+    }
+  }
+  public async deleteDepartment(id: number): Promise<void> {
+    const comapany = await this.findDepartmentWithCompanyById(id);
+    await this.departmentRepository.remove(comapany);
   }
 }

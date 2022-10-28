@@ -7,7 +7,9 @@ import { CompanyService } from 'src/app/services/company.service';
   styleUrls: ['./companylisting.component.css'],
 })
 export class CompanylistingComponent implements OnInit {
-  companies: Company[] = [];
+  companies: Company[];
+  p: Number = 1;
+  count: Number = 3;
   constructor(private companyservice: CompanyService) {}
 
   ngOnInit(): void {
@@ -16,5 +18,10 @@ export class CompanylistingComponent implements OnInit {
 
   async retrieveCompanies(): Promise<void> {
     this.companies = await this.companyservice.getCompanies();
+  }
+
+  async deletebyid(id: number) {
+    await this.companyservice.deletCompanyById(id);
+    this.retrieveCompanies();
   }
 }

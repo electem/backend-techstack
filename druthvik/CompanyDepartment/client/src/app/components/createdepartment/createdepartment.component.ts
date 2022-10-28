@@ -34,6 +34,7 @@ export class CreatedepartmentComponent implements OnInit {
     this.createdepartmentForm = this.formBuilder.group({
       name: ['', Validators.required],
       type: ['', Validators.required],
+      //company: ['', Validators.required],
     });
     this.retrieveCompanies();
     this.dropdownSettings = {
@@ -47,7 +48,7 @@ export class CreatedepartmentComponent implements OnInit {
   get f() {
     return this.createdepartmentForm.controls;
   }
-  async createDepatmentValidate(): Promise<void> {
+  async createDepartmentValidate(): Promise<void> {
     this.submitted = true;
     if (this.createdepartmentForm.invalid) {
       return;
@@ -64,13 +65,13 @@ export class CreatedepartmentComponent implements OnInit {
     await this.departmentservice.createDepartment(createDepartment);
   }
 
-  onItemSelect(item: Company) {
-    this.currentCompany = item;
+  onSelectCompany(company: Company) {
+    this.currentCompany = company;
     this.AddedCompanies?.push(this.currentCompany);
   }
 
-  public onSelectAll(items: Company) {
-    this.currentCompany = items;
+  public onSelectAllCompanies(companies: Company) {
+    this.currentCompany = companies;
     this.AddedCompanies?.push(this.currentCompany);
   }
 }

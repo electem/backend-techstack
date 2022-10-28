@@ -1,7 +1,7 @@
 import { Department } from './department.model';
 export class Company {
   id?: number;
-  name: string;
+  name?: string;
   address?: string;
-  department: Department[];
+  department?: Department[];
 }

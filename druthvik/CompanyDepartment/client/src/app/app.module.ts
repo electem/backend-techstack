@@ -11,6 +11,10 @@ import { CompanylistingComponent } from './components/companylisting/companylist
 import { CreatedepartmentComponent } from './components/createdepartment/createdepartment.component';
 import { DepartmentlistingComponent } from './components/departmentlisting/departmentlisting.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { EditcompanyComponent } from './components/editcompany/editcompany.component';
+import { EditdepartmentComponent } from './components/editdepartment/editdepartment.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { DataTablesModule } from 'angular-datatables';
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,6 +22,8 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     CompanylistingComponent,
     CreatedepartmentComponent,
     DepartmentlistingComponent,
+    EditcompanyComponent,
+    EditdepartmentComponent,
   ],
   imports: [
     BrowserModule,
@@ -25,6 +31,8 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
+    DataTablesModule,
+    NgxPaginationModule,
     NgMultiSelectDropDownModule.forRoot(),
   ],
   providers: [

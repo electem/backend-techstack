@@ -1,4 +1,13 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  NotFoundException,
+  Param,
+  Post,
+  Put,
+} from '@nestjs/common';
 import { CompanyService } from './company.service';
 import { CompanyDto } from './company.dto';
 
@@ -8,7 +17,7 @@ export class CompanyController {
 
   @Get()
   findAll() {
-    return this.companyService.findAllCompany();
+    return this.companyService.getAllCompanyWithDepartment();
   }
   @Post()
   async create(@Body() companyDto: CompanyDto) {
@@ -18,5 +27,18 @@ export class CompanyController {
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.companyService.findCompanyWithDepartmentById(+id);
+  }
+
+  @Put('/')
+  async update(@Body() companyDto: CompanyDto) {
+    return await this.companyService.updateCompany(companyDto);
+  }
+  @Delete('/:id')
+  public async deleteCompany(@Param('id') id: string): Promise<void> {
+    const company = this.companyService.deleteCompany(+id);
+    if (!company) {
+      throw new NotFoundException('User does not exist!');
+    }
+    return company;
   }
 }

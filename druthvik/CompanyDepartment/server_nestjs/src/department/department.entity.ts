@@ -11,6 +11,7 @@ export class Department {
   @Column()
   type: string;
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   @ManyToMany((_type) => Company, (company) => company.department)
   company!: Company[];
 }
