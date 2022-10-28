@@ -1,0 +1,55 @@
+<h4>Create Company</h4>
+<form [formGroup]="createCompany" (ngSubmit)="create()">
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input
+      type="name"
+      class="form-control"
+      id="name"
+      formControlName="name"
+      [(ngModel)]="company.name"
+      [ngClass]="{ 'is-invalid': submitted && fval.name.errors }"
+    />
+    <div *ngIf="submitted && fval.name.errors" class="invalid-feedback">
+      <div *ngIf="fval.name.errors.required">Name Field is required</div>
+    </div>
+  </div>
+  <!-- <div class="form-group">
+    <label for="department">Department</label>
+    <input
+      type="department"
+      class="form-control"
+      id="department"
+      formControlName="department"
+      [(ngModel)]="company.department"
+      [ngClass]="{ 'is-invalid': submitted && fval.department.errors }"
+    />
+    <div *ngIf="submitted && fval.department.errors" class="invalid-feedback">
+      <div *ngIf="fval.department.errors.required">
+        department Field is required
+      </div>
+    </div>
+  </div> -->
+  <div class="form-group">
+    <label for="address">Address</label>
+    <input
+      type="address"
+      class="form-control"
+      id="address"
+      formControlName="address"
+      [(ngModel)]="company.address"
+      [ngClass]="{ 'is-invalid': submitted && fval.address.errors }"
+    />
+    <div *ngIf="submitted && fval.address.errors" class="invalid-feedback">
+      <div *ngIf="fval.address.errors.required">Address Field is required</div>
+    </div>
+  </div>
+  <label>Choose Department</label>
+  <li *ngFor="let depertment of department">
+    <input type="checkbox"  (click)="onSelectPushExtraPlayerToPlayersList(depertment)"/>
+    {{ depertment.name }}
+  </li>
+  <button type="button" class="btn btn-outline-success" (click)="getSubmit()">
+    Save
+  </button>
+</form>
