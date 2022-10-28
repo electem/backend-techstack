@@ -20,4 +20,5 @@ export class CompanyController {
   companybyId(@Param('id') id: string) {
     return this.companyService.getCompanyById(+id);
   }
+  
 }
