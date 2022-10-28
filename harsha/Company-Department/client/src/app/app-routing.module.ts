@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { CreateCompanyComponent } from './components/create-company/create-company.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'userLogin', pathMatch: 'full' },
-  // { path: 'userLogin', component: UserLoginComponent },
+  { path: '', redirectTo: 'company', pathMatch: 'full' },
+  { path: 'company', component: CreateCompanyComponent },
 ];
 
 @NgModule({

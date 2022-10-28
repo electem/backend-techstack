@@ -6,9 +6,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { CreateCompanyComponent } from './components/create-company/create-company.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, CreateCompanyComponent],
   imports: [
     NgxDatatableModule,
     BrowserModule,
