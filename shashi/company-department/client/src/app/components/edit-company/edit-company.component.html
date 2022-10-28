@@ -8,7 +8,7 @@
           <form>
             <div class="formbox center">
               <div class="form-group input center">
-                <label for="companyname">company name</label>
+                <label for="companyname">Company name</label>
                 <input
                   type="text"
                   name="companyname"
@@ -18,7 +18,7 @@
               </div>
               <br />
               <div class="form-group input center">
-                <label for="name">address</label>
+                <label for="name">Address</label>
                 <input
                   name="address"
                   type="text"
@@ -28,33 +28,55 @@
               </div>
               <div class="form-group input center">
                 <div class="form-group">
-                  <label for="options">Departments:</label>
+                  <label for="options">Present Departments:</label>
                   <div *ngFor="let department of company.department">
                     <label>
                       <input
                         type="checkbox"
                         name="options"
                         [(ngModel)]="company.department"
+                        (click)="
+                          removeSelectedDepartmentFromCompany(department)
+                        "
                       />
                       {{ department.departmentname }}
                     </label>
                   </div>
                 </div>
               </div>
-              <button
-                class="btn btn-outline-danger btn-sm btn-space"
-                routerLink="/companylist"
-              >
-                Cancel
-              </button>
-              <button
-                class="btn btn-outline-success btn-sm"
-                routerLink="/customerList"
-              >
-                Update
-              </button>
+              <br />
+              <div class="form-group input center">
+                <div class="form-group">
+                  <label for="options">Click to add departments:</label>
+                  <div *ngFor="let department of departmentsList">
+                    <label>
+                      <input
+                        type="checkbox"
+                        name="options"
+                        (click)="removeActiveDepartment(department)"
+                      />
+                      {{ department.departmentname }}
+                    </label>
+                  </div>
+                </div>
+              </div>
             </div>
           </form>
+          <div class="text-center">
+            <button
+              class="btn btn-outline-success btn-sm btn-space"
+              routerLink="/companylist"
+              (click)="updateCompany()"
+            >
+              Update
+            </button>
+            <button
+              class="btn btn-outline-danger btn-sm btn-space"
+              routerLink="/companylist"
+            >
+              Cancel
+            </button>
+          </div>
         </div>
       </div>
     </div>

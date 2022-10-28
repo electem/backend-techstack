@@ -12,6 +12,7 @@ import { DepartmentListComponent } from './components/department-list/department
 
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { EditCompanyComponent } from './components/edit-company/edit-company.component';
+import { EditDepartmentComponent } from './components/edit-department/edit-department.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { EditCompanyComponent } from './components/edit-company/edit-company.com
     CompanyListComponent,
     DepartmentListComponent,
     EditCompanyComponent,
+    EditDepartmentComponent,
   ],
   imports: [
     NgMultiSelectDropDownModule.forRoot(),

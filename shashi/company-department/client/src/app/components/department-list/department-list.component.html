@@ -14,20 +14,26 @@
     <table
       class="table table-striped table-hover table-bordered border-secondary"
     >
-      <thead >
+      <thead>
         <tr class="active">
           <th class="text-center" scope="col">Department Name</th>
           <th class="text-center" scope="col">Type</th>
+          <th class="text-center" scope="col">Companies</th>
           <th class="text-center" scope="col">Created Date</th>
           <th class="text-center" scope="col">Actions</th>
         </tr>
       </thead>
-      <tbody *ngFor="let company of departmentsList; let i = index">
-        <tr >
-          <th class="text-center" scope="row">{{ company.departmentname }}</th>
-          <th class="text-center" scope="row">{{ company.type }}</th>
+      <tbody *ngFor="let department of departmentsList; let i = index">
+        <tr>
           <th class="text-center" scope="row">
-            {{ company.createdAt | date: "short" }}
+            {{ department.departmentname }}
+          </th>
+          <th class="text-center" scope="row">{{ department.type }}</th>
+          <th class="text-center" scope="row">
+            {{ department.company?.length }}
+          </th>
+          <th class="text-center" scope="row">
+            {{ department.createdAt | date: "short" }}
           </th>
           <th class="text-center" scope="row">
             <button
@@ -35,8 +41,17 @@
               class="btn btn-outline-secondary btn-rounded btn-sm fw-bold"
               mdbRipple
               rippleColor="dark"
+              routerLink="/editdepartment/{{ department.id }}"
             >
               Edit
+            </button>
+            <button
+              type="button"
+              style="margin: px"
+              class="btn-outline-danger btn btn-sm mr-2 btn-space"
+              (click)="deleteDepartmentById(department.id!)"
+            >
+              delete
             </button>
           </th>
         </tr>

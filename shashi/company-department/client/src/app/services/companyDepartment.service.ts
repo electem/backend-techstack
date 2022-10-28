@@ -30,4 +30,25 @@ export class CompanyService {
   async getCompanyById(id: number): Promise<Company> {
     return await this.http.get(`${baseUrl + '/company'}/${id}`).toPromise();
   }
+  async getDepartmentById(id: number): Promise<Department> {
+    return await this.http.get(`${baseUrl + '/department'}/${id}`).toPromise();
+  }
+  async updateCompany(company: Company): Promise<Company> {
+    return await this.http
+      .put<Company>(baseUrl + '/company', company)
+      .toPromise();
+  }
+  async updateDepartment(departmentData: Department): Promise<Department> {
+    return await this.http
+      .put<Department>(baseUrl + '/department', departmentData)
+      .toPromise();
+  }
+  async deleteCompanyById(id: number): Promise<Company> {
+    return await this.http.delete(`${baseUrl + '/company'}/${id}`).toPromise();
+  }
+  async deleteDepartmentById(id: number): Promise<Department> {
+    return await this.http
+      .delete(`${baseUrl + '/department'}/${id}`)
+      .toPromise();
+  }
 }

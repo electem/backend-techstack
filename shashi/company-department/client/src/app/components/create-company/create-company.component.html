@@ -1,5 +1,5 @@
 <div class="container">
-  <h5 class="card-title text-center pb-0 fs-4">create company</h5>
+  <h5 class="card-title text-center pb-0 fs-4">Create company</h5>
   <br />
   <div class="row">
     <div class="col-md-6 offset-md-4">
@@ -7,7 +7,7 @@
         <div class="card-body">
           <form [formGroup]="createCompanyForm" (ngSubmit)="saveCompany()">
             <div class="form-group">
-              <label>company name</label>
+              <label>Company name</label>
               <input
                 type="text"
                 formControlName="companyname"
@@ -26,8 +26,9 @@
                 </div>
               </div>
             </div>
+            <br />
             <div class="form-group">
-              <label>address</label>
+              <label>Address</label>
               <input
                 type="text"
                 formControlName="address"
@@ -47,29 +48,27 @@
               </div>
             </div>
             <br />
-            <div class="text-center">
-              <button class="btn btn-outline-primary btn-sm">Submit</button>
-              <button
-                class="btn btn-outline-danger btn-sm btn-space"
-                routerLink="/companylist"
-              >
-                Cancel
-              </button>
-            </div>
-            <br />
             <div class="column">
               <h2>Departments List</h2>
-              <ul>
-                <li *ngFor="let department of departmentsList">
-                  <input
-                    type="checkbox"
-                    (click)="selectedDepartment(department)"
-                  />{{ department.departmentname }}
-                </li>
-              </ul>
+              <div *ngFor="let department of departmentsList">
+                <input
+                  type="checkbox"
+                  (click)="selectedDepartment(department)"
+                />{{ department.departmentname }}
+              </div>
             </div>
           </form>
         </div>
+        <div class="text-center">
+          <button class="btn btn-outline-primary btn-sm">Submit</button>
+          <button
+            class="btn btn-outline-danger btn-sm btn-space"
+            routerLink="/companylist"
+          >
+            Cancel
+          </button>
+        </div>
+        <br />
       </div>
     </div>
   </div>

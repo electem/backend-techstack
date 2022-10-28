@@ -11,30 +11,49 @@
   </div>
   <div class="container">
     <br />
-    <table class="table table-bordered justify-content-center">
-      <thead class="thead-light">
+    <table
+      class="table table-striped table-hover table-bordered border-secondary"
+    >
+      <thead>
         <tr class="active">
           <th class="text-center" scope="col">Company Name</th>
           <th class="text-center" scope="col">Address</th>
           <th class="text-center" scope="col">Created Date</th>
+          <th class="text-center" scope="col">Departments</th>
           <th class="text-center" scope="col">Actions</th>
         </tr>
       </thead>
       <tbody *ngFor="let company of companiesList; let i = index">
-        <tr class="success">
-          <th class="text-center" scope="row">{{ company.companyname }}</th>
+        <tr>
+          <th class="text-center" scope="row">
+            {{ company.companyname }}
+          </th>
           <th class="text-center" scope="row">{{ company.address }}</th>
           <th class="text-center" scope="row">
             {{ company.createdAt | date: "short" }}
           </th>
-          <button
-            type="button"
-            style="margin: px"
-            class="btn-outline-secondary btn btn-sm mr-2"
-            routerLink="/editcompany/{{ company.id }}"
-          >
-            Edit
-          </button>
+          <th class="text-center" scope="row">
+            {{ company.department?.length }}
+          </th>
+          <th class="text-center" scope="row">
+            <button
+              type="button"
+              class="btn btn-outline-secondary btn-rounded btn-sm fw-bold"
+              mdbRipple
+              rippleColor="dark"
+              routerLink="/editcompany/{{ company.id }}"
+            >
+              Edit
+            </button>
+            <button
+              type="button"
+              style="margin: px"
+              class="btn-outline-danger btn btn-sm mr-2 btn-space"
+              (click)="deleteCompanyById(company.id!)"
+            >
+              delete
+            </button>
+          </th>
         </tr>
       </tbody>
     </table>
