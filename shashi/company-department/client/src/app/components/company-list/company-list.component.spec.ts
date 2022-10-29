@@ -25,9 +25,58 @@ describe('CompanyService', () => {
   });
 
   it('should show the list of companies', () => {
-    const companiesList: Company[] = [];
+    const companiesTestingList: Company[] = [
+      {
+        id: 1,
+        companyname: 'eigth company',
+        address: 'cdcd',
+        department: [
+          {
+            id: 4,
+            departmentname: 'fourth department',
+            type: 'type 4',
+          },
+        ],
+      },
+      {
+        id: 2,
+        companyname: 'eigth company',
+        address: 'cdcd',
+        department: [
+          {
+            id: 4,
+            departmentname: 'fourth department',
+            type: 'type 4',
+          },
+        ],
+      },
+      {
+        id: 3,
+        companyname: 'eigth company',
+        address: 'cdcd',
+        department: [
+          {
+            id: 4,
+            departmentname: 'fourth department',
+            type: 'type 4',
+          },
+        ],
+      },
+      {
+        id: 4,
+        companyname: 'eigth company',
+        address: 'cdcd',
+        department: [
+          {
+            id: 4,
+            departmentname: 'fourth department',
+            type: 'type 4',
+          },
+        ],
+      },
+    ];
     console.log(`Conponent instance ${component}`);
-    component.companiesList = companiesList;
+    component.companiesList = companiesTestingList;
     // const element = fixture.nativeElement;
     expect(component).toBeTruthy();
   });
