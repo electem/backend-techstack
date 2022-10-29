@@ -4,10 +4,15 @@ import { environment } from '../../environments/environment';
 import { Company } from '../models/company.model';
 import { Department } from '../models/department.model';
 const baseUrl = environment.url;
+export class Pagination {
+  startPoint?: number;
+  pageLength?: number;
+}
 @Injectable({
   providedIn: 'root',
 })
 export class CompanyService {
+  pagination = new Pagination();
   constructor(private http: HttpClient) {}
   async createCompany(companyData: Company): Promise<Company> {
     return this.http
@@ -19,9 +24,11 @@ export class CompanyService {
       .post<Department>(baseUrl + '/department', departmentData)
       .toPromise();
   }
+
   async getCompanies(): Promise<Company[]> {
     return await this.http.get<Company[]>(baseUrl + '/company').toPromise();
   }
+
   async getDepartments(): Promise<Department[]> {
     return await this.http
       .get<Department[]>(baseUrl + '/department')

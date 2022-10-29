@@ -23,7 +23,18 @@
           <th class="text-center" scope="col">Actions</th>
         </tr>
       </thead>
-      <tbody *ngFor="let department of departmentsList; let i = index">
+      <tbody
+        *ngFor="
+          let department of departmentsList
+            | paginate
+              : {
+                  itemsPerPage: itemsPerPage,
+                  currentPage: page,
+                  totalItems: totalItems
+                };
+          let i = index
+        "
+      >
         <tr>
           <th class="text-center" scope="row">
             {{ department.departmentname }}
@@ -57,5 +68,18 @@
         </tr>
       </tbody>
     </table>
+    <br />
+    <pagination-controls
+      class="pagi"
+      (pageChange)="pagination((page = $event))"
+    ></pagination-controls>
   </div>
+</div>
+<div class="marginleftpage">
+  Items per Page:
+  <select (change)="handlePageSizeChange($event)">
+    <option *ngFor="let size of pagesizes" [ngValue]="size">
+      {{ size }}
+    </option>
+  </select>
 </div>

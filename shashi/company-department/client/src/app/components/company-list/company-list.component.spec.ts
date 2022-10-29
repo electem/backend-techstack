@@ -2,8 +2,10 @@ import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { Company } from 'src/app/models/company.model';
 import { CompanyListComponent } from './company-list.component';
+import { CompanyService } from 'src/app/services/companyDepartment.service';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
-describe('CompanyListComponent', () => {
+describe('CompanyService', () => {
   let component: CompanyListComponent;
   let fixture: ComponentFixture<CompanyListComponent>;
   let button: HTMLElement;
@@ -11,7 +13,8 @@ describe('CompanyListComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [CompanyListComponent],
-      imports: [FormsModule],
+      imports: [FormsModule, HttpClientTestingModule],
+      providers: [CompanyService],
     }).compileComponents();
   });
 
@@ -22,9 +25,10 @@ describe('CompanyListComponent', () => {
   });
 
   it('should show the list of companies', () => {
-    const companiesList: [] = [];
+    const companiesList: Company[] = [];
     console.log(`Conponent instance ${component}`);
     component.companiesList = companiesList;
+    // const element = fixture.nativeElement;
     expect(component).toBeTruthy();
   });
 });

@@ -11,31 +11,33 @@
   </div>
   <div class="container">
     <br />
-    <table
-      class="table table-striped table-hover table-bordered border-secondary"
-    >
+    <table datatable class="row-border hover">
       <thead>
-        <tr class="active">
-          <th class="text-center" scope="col">Company Name</th>
-          <th class="text-center" scope="col">Address</th>
-          <th class="text-center" scope="col">Created Date</th>
-          <th class="text-center" scope="col">Departments</th>
-          <th class="text-center" scope="col">Actions</th>
+        <tr>
+          <th>Company Name</th>
+          <th>Address</th>
+          <th>Created Date</th>
+          <th>Departments</th>
+          <th>Actions</th>
         </tr>
       </thead>
-      <tbody *ngFor="let company of companiesList; let i = index">
-        <tr>
-          <th class="text-center" scope="row">
-            {{ company.companyname }}
-          </th>
-          <th class="text-center" scope="row">{{ company.address }}</th>
-          <th class="text-center" scope="row">
-            {{ company.createdAt | date: "short" }}
-          </th>
-          <th class="text-center" scope="row">
-            {{ company.department?.length }}
-          </th>
-          <th class="text-center" scope="row">
+      <tbody *ngIf="companiesList?.length != 0">
+        <tr
+          *ngFor="
+            let company of companiesList
+              | paginate
+                : {
+                    itemsPerPage: itemsPerPage,
+                    currentPage: page,
+                    totalItems: totalItems
+                  }
+          "
+        >
+          <td>{{ company.companyname }}</td>
+          <td>{{ company.address }}</td>
+          <td>{{ company.createdAt | date: "short" }}</td>
+          <td>{{ company.department?.length }}</td>
+          <td>
             <button
               type="button"
               class="btn btn-outline-secondary btn-rounded btn-sm fw-bold"
@@ -53,9 +55,28 @@
             >
               delete
             </button>
-          </th>
+          </td>
+          <br />
+        </tr>
+      </tbody>
+      <tbody *ngIf="companiesList?.length == 0">
+        <tr>
+          <td colspan="3" class="no-data-available">No data!</td>
         </tr>
       </tbody>
     </table>
+    <br />
+    <pagination-controls
+      class="pagi"
+      (pageChange)="pagination((page = $event))"
+    ></pagination-controls>
   </div>
+</div>
+<div class="marginleftpage">
+  Items per Page:
+  <select (change)="handlePageSizeChange($event)">
+    <option *ngFor="let size of pagesizes" [ngValue]="size">
+      {{ size }}
+    </option>
+  </select>
 </div>
