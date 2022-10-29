@@ -1,0 +1,37 @@
+<h1 class="card-title text-center">Add Department</h1>
+<div class="global-container">
+  <div class="card login-form">
+    <form [formGroup]="registerForm">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="name" formControlName="name" class="form-control" [(ngModel)]="currentDepartment.name"
+          [ngClass]="{ 'is-invalid': submitted && validation.name.errors }" />
+        <div *ngIf="this.submitted && validation.name.errors" class="invalid-feedback">
+          <div *ngIf="validation.name.errors.required">
+            Name Field is required
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Type</label>
+        <input type="text" formControlName="type" class="form-control" [(ngModel)]="currentDepartment.type"
+          [ngClass]="{ 'is-invalid': submitted && validation.type.errors }" />
+        <div *ngIf="this.submitted && validation.type.errors" class="invalid-feedback">
+          <div *ngIf="validation.type.errors.required">
+            Type Field is required
+          </div>
+        </div>
+      </div>
+      <div class="form-group col-md-6">
+        <ng-multiselect-dropdown [placeholder]="'Select Companies'" [settings]="dropdownSettings" [data]="companies"
+          (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+        </ng-multiselect-dropdown>
+      </div>
+      <button type="button" class="btn btn-success" (click)="signup()">
+        Save
+      </button>
+      <button type=" button" class="btn btn-warning" routerLink="/dept-list">Cancel</button>
+    </form>
+  </div>
+</div>

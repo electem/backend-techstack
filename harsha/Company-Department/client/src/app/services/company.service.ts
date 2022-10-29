@@ -27,4 +27,10 @@ export class CompanyService {
       .get<Department[]>(baseUrl + 'departments')
       .toPromise();
   }
+
+  async createDepartment(department: Department): Promise<Department> {
+    return await this.http
+      .post<Department>(baseUrl + 'createDepartment', department)
+      .toPromise();
+  }
 }

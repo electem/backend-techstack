@@ -10,6 +10,7 @@
         <th class="text-center"> Name</th>
         <th class="text-center">Type</th>
         <th class="text-center">Created Date</th>
+        <th class="text-center">Companies</th>
         <th class="text-center">Action</th>
       </tr>
     </thead>
@@ -18,6 +19,7 @@
         <td class="text-center">{{ department.name }}</td>
         <td class="text-center">{{ department.type }}</td>
         <td class="text-center">{{ department.createdDate }}</td>
+        <td class="text-center">{{ department.companies?.length }}</td>
         <td>
           <button type="button" class="btn btn-info btn-sm mr-2"
             routerLink="/edit-department/{{ department.id }}">Edit</button>
