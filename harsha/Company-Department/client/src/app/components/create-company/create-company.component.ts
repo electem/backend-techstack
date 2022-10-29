@@ -36,6 +36,7 @@ export class CreateCompanyComponent implements OnInit {
       email: ['', Validators.required],
       phoneNo: ['', Validators.required],
     });
+    this.getDepartments();
   }
 
   get validation() {
@@ -49,6 +50,10 @@ export class CreateCompanyComponent implements OnInit {
     }
     alert('form fields are validated successfully!');
     this.saveCompany();
+  }
+
+  async getDepartments(): Promise<void> {
+    this.departments = await this.companyService.getDepartments();
   }
 
   async onSelectingDepartment(department: Department): Promise<void> {
