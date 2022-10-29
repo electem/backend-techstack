@@ -1,8 +1,7 @@
 /* eslint-disable prettier/prettier */
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
 import { DepartmentService } from './department.service';
 import { DepartmentDto } from './dto/depertment.dto';
-
 
 @Controller('department')
 export class DepartmentController {
@@ -20,5 +19,10 @@ export class DepartmentController {
   @Get(':id')
   departmentbyId(@Param('id') id: string) {
     return this.departmentService.findDepartmentById(+id);
+  }
+
+  @Put('/')
+  async updateDepartment(@Body() companyDto: DepartmentDto) {
+    return await this.departmentService.updateDepartment(companyDto);
   }
 }
