@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Company } from 'src/app/models/company.model';
 import { CompanyService } from 'src/app/services/company.service';
+import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-companylisting',
   templateUrl: './companylisting.component.html',
@@ -8,9 +9,16 @@ import { CompanyService } from 'src/app/services/company.service';
 })
 export class CompanylistingComponent implements OnInit {
   companies: Company[];
-  p: Number = 1;
-  count: Number = 3;
-  constructor(private companyservice: CompanyService) {}
+  p: number;
+  count: number = 2;
+  totalItems: any;
+  pageSizes = [3, 6, 9];
+  filteredItems: Company[];
+  searchText: string;
+  constructor(
+    private companyservice: CompanyService,
+    private http: HttpClient,
+  ) {}
 
   ngOnInit(): void {
     this.retrieveCompanies();
@@ -22,6 +30,17 @@ export class CompanylistingComponent implements OnInit {
 
   async deletebyid(id: number) {
     await this.companyservice.deletCompanyById(id);
+    this.retrieveCompanies();
+  }
+  pagination(page: any) {
+    this.http
+      .get(`http://localhost:3000/company?page=${page}&size=${this.count}`)
+      .toPromise();
+  }
+
+  handlePageSizeChange(event) {
+    this.count = event.target.value;
+    this.p = 1;
     this.retrieveCompanies();
   }
 }

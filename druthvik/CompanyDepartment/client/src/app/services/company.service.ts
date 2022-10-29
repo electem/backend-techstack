@@ -9,6 +9,7 @@ const baseUrl = environment.url;
   providedIn: 'root',
 })
 export class CompanyService {
+  itemsPerPage: number;
   constructor(private http: HttpClient) {}
 
   async createCompany(createcompany: Company): Promise<Company> {
@@ -18,6 +19,15 @@ export class CompanyService {
   }
   async getCompanies(): Promise<Company[]> {
     return await this.http.get<Company[]>(baseUrl + '/company').toPromise();
+  }
+  async getAll(start: number, length: number): Promise<Company[]> {
+    return await this.http.get<Company[]>(baseUrl + '/company').toPromise();
+  }
+
+  async getUsers(page: number): Promise<Company[]> {
+    return await this.http
+      .get<Company[]>(baseUrl + '/company' + '?page=' + page)
+      .toPromise();
   }
 
   async getCompanyById(id: number) {

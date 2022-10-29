@@ -2,6 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CompanylistingComponent } from './companylisting.component';
 import { CompanyService } from 'src/app/services/company.service';
+import { Company } from 'src/app/models/company.model';
 
 describe('CompanylistingComponent', () => {
   let component: CompanylistingComponent;
@@ -24,7 +25,9 @@ describe('CompanylistingComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should create', () => {
-    expect(component.companies.length).toEqual(1);
+  it(`should have as title 'Angular11Crud'`, () => {
+    const fixture = TestBed.createComponent(CompanylistingComponent);
+    const app = fixture.componentInstance;
+    expect(app.companies.length).toBeGreaterThanOrEqual(1);
   });
 });
