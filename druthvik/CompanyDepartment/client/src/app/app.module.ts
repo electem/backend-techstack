@@ -15,6 +15,7 @@ import { EditcompanyComponent } from './components/editcompany/editcompany.compo
 import { EditdepartmentComponent } from './components/editdepartment/editdepartment.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { DataTablesModule } from 'angular-datatables';
+
 @NgModule({
   declarations: [
     AppComponent,

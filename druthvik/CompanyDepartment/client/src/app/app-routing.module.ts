@@ -6,7 +6,6 @@ import { CreatedepartmentComponent } from './components/createdepartment/created
 import { DepartmentlistingComponent } from './components/departmentlisting/departmentlisting.component';
 import { EditcompanyComponent } from './components/editcompany/editcompany.component';
 import { EditdepartmentComponent } from './components/editdepartment/editdepartment.component';
-
 const routes: Routes = [
   { path: '', redirectTo: 'createcompany', pathMatch: 'full' },
   { path: 'createcompany', component: CreatecompanyComponent },
