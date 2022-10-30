@@ -1,4 +1,8 @@
-<h4>Create Department</h4>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-4 offset-md-3 col-md-6 col-sm-offset-2 col-sm-8">
+      <h4>Create Department</h4>
 <form [formGroup]="createDepartment" (ngSubmit)="signup()">
     <div class="form-group">
       <label for="name">Name</label>
@@ -28,8 +32,17 @@
           <div *ngIf="fval.type.errors.required">Type Field is required</div>
         </div>
       </div>
-      <button type="button" class="btn btn-outline-success" (click)="getSubmit()">
-        Save
-      </button>
+      <ng-multiselect-dropdown
+              [settings]="dropdownSettings"
+              [data]="companies"
+              (onSelect)="selectedCompany($event)" 
+              (onSelectAll)="onSelectAllCompany($event)"
+     >
+            </ng-multiselect-dropdown>
+            <button type="button" class="btn btn-outline-success" (click)="getSubmit()">
+              Save
+            </button>
      
 </form>
+    </div>
+  </div>

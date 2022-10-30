@@ -7,9 +7,10 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Department } from 'src/department/department.entity';
+import { PaginateableBaseEntity } from 'src/pagination';
 
 @Entity()
-export class Company {
+export class Company extends PaginateableBaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 

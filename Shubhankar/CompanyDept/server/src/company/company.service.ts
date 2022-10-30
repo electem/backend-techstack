@@ -12,10 +12,17 @@ export class CompanyService {
     @InjectRepository(Company)
     private companyRepository: Repository<Company>,
   ) {}
-  public async getAllCompany(): Promise<Company[]> {
-    return await this.companyRepository.find();
+ 
+ async getAllCompanyDepartment() : Promise<Company[]> {
+    const companywithdept = await this.companyRepository
+      .createQueryBuilder('company')
+      .select(['company', 'department'])
+      .leftJoinAndSelect('company.department', 'department')
+      .getMany();
+    return companywithdept;
   }
-  public async createCompany(companyDto: CompanyDto): Promise<Company> {
+
+public async createCompany(companyDto: CompanyDto): Promise<Company> {
     try {
       return await this.companyRepository.save(companyDto);
     } catch (err) {
@@ -30,5 +37,13 @@ export class CompanyService {
       .where('company.id= :id', { id: id })
       .getOne();
     return companyQueryBuilder;
+  }
+  
+  public async updateCompany(companyDto: CompanyDto): Promise<Company> {
+    try {
+      return await this.companyRepository.save(companyDto);
+    } catch (err) {
+      throw new HttpException(err, HttpStatus.BAD_REQUEST);
+    }
   }
 }
