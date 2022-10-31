@@ -22,9 +22,16 @@ describe('CreateCompanyComponent', () => {
   });
 
   it('it should create company object when submit button is clicked', () => {
-    const company = new Company();
+    const companyTesting: Company = {
+      id: 1,
+      companyname: '',
+      address: '',
+      department: [],
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    };
     console.log(`Component instance ${component}`);
-    component.company = company;
+    component.company = companyTesting;
     const element = fixture.nativeElement;
     button = element.querySelector('.btn-success');
     const eventType = button.dispatchEvent(new Event('click'));

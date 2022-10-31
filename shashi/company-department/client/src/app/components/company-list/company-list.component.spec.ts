@@ -8,6 +8,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 describe('CompanyService', () => {
   let component: CompanyListComponent;
   let fixture: ComponentFixture<CompanyListComponent>;
+  let companyService: CompanyService;
   let button: HTMLElement;
 
   beforeEach(async () => {
@@ -22,6 +23,11 @@ describe('CompanyService', () => {
     fixture = TestBed.createComponent(CompanyListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+  });
+
+  it('should set the list of companies', () => {
+    component.ngOnInit();
+    expect(companyService.getCompanies()).toHaveBeenCalled();
   });
 
   it('should show the list of companies', () => {
@@ -77,7 +83,8 @@ describe('CompanyService', () => {
     ];
     console.log(`Conponent instance ${component}`);
     component.companiesList = companiesTestingList;
-    // const element = fixture.nativeElement;
+    expect(component.companiesList.length).toBe(4);
+    expect(component.companiesList).toEqual(companiesTestingList);
     expect(component).toBeTruthy();
   });
 });
