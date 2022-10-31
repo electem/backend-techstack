@@ -8,10 +8,12 @@ import {
   Param,
   Post,
   Put,
+  UseGuards,
 } from '@nestjs/common';
 import { Company } from './company.model';
 import { CompanyService } from './company.service';
 import { CompanyDto } from './company.dto';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('company')
 export class CompanyController {
@@ -21,6 +23,7 @@ export class CompanyController {
     return await this.companyService.createCompany(company);
   }
   @Get()
+  @UseGuards(AuthGuard())
   async getCompanies(): Promise<Array<Company>> {
     return this.companyService.getAllCompanyWithDepartment();
   }
