@@ -5,11 +5,16 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.example.manytomanymapping.exceptions.ResourceNotFoundException;
 import com.example.manytomanymapping.models.Company;
 import com.example.manytomanymapping.repository.CompanyRepository;
 
@@ -39,5 +44,23 @@ public class CompanyController {
 		List<Company> companies = (List<Company>) companyRepository.findAll();
 		LOG.info("End of CompanyController :: getCompaniesList ");
 		return companies;
+	}
+
+	// This block of code is used to get a company by Id from DB.
+	@GetMapping("/company/{id}")
+	public ResponseEntity<Company> getCompanyById(@PathVariable(value = "id") Integer id)
+			throws ResourceNotFoundException {
+		LOG.info("Start of CompanyController :: getCompanyById ");
+		Company company = companyRepository.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("Company not found :: " + id));
+		LOG.info("End of CompanyController :: getCompanyById ");
+		return ResponseEntity.ok().body(company);
+	}
+
+	// This block of code is used to update a company to the DB.
+	@PutMapping("/updateCompany/{id}")
+	public Company updateCompany(@PathVariable("id") int id, @Valid @RequestBody Company company) {
+		LOG.info("Start of CompanyController :: updateCompany ");
+		return companyRepository.save(company);
 	}
 }
