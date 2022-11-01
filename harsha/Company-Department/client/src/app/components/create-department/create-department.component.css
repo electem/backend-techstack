@@ -1,52 +1,36 @@
-input[type="name"],
-input[type="text"] {
-  background-color: rgb(239, 225, 230);
-  border: 2px solid green;
-  border-radius: 10px;
+body{
+  background-color: #dee9ff;
+}
+.form{
+  padding: 50px 0;
+}
+
+.form form{
+  background-color: #fff;
+   max-width: 400px;
+  margin: auto;
+  padding: 50px 70px;
+  border: 50px;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.075);
+}
+
+.form .item{
+border-radius: 10px;
   margin-bottom: 25px;
-  width: 300px;
+  padding: 20px 20px;
+}
+ng-multiselect-dropdown{
+  margin-bottom: 25px;
+  padding: 10px 20px;
 }
 
-input[type="name"]:focus,
-input[type="text"]:focus {
-  outline: none;
+.form .create-account{
+  border-radius: 30px;
+  padding: 10px 20px;
+  font-size: 18px;
+  font-weight: bold;
+  background-color: #5791ff;
   border: none;
-  text-align: center;
-  background-color: rgb(34, 98, 163);
-  color: antiquewhite;
-  margin: 0;
-}
-
-ng-multiselect-dropdown {
-  width: 50%;
-  outline: none;
-  border: none;
-  text-align: center;
-  background-color: rgb(27, 118, 210);
-  color: rgb(225, 139, 26);
-  margin: 0;
-}
-
-.global-container {
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: end;
-  color: rgb(86, 7, 213);
-}
-
-.login-form {
-  width: 400px;
-  height: 400px;
-  margin: 10px;
-  border-radius: 10px !important;
-  background-color: rgb(242, 246, 254);
-  text-align: center;
-}
-
-form {
-  padding-top: 10px;
-  font-size: 14px;
-  margin-top: 30px;
+  color: white;
+  margin-top: 20px;
 }

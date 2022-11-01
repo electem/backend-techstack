@@ -41,7 +41,7 @@ public class Company {
 	private Date createdDate;
 
 	@JsonIgnoreProperties("companies")
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+	@ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE})
 	@JoinTable(name = "company_department", joinColumns = {
 			@JoinColumn(name = "company_id", referencedColumnName = "id") }, inverseJoinColumns = {
 					@JoinColumn(name = "department_id", referencedColumnName = "id") })
