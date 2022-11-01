@@ -17,10 +17,6 @@ export class Customer {
   @Column({ type: "varchar", length: 10 })
   phonenumber!: number;
 
-  // @ManyToOne(_type => CustomerGroup, (customergroup: CustomerGroup) => customergroup.customer)
-  // @JoinColumn()
-  // customergroup!: CustomerGroup;
-
   @ManyToMany(() => CustomerGroup, (customergroup) => customergroup.customers)
   customergroups!: Customer[];
 }

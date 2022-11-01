@@ -4,7 +4,7 @@
     import { Customergroup } from 'src/customergroup/customergroup.entity';
     import { Customer } from './customer.entity';
     
-    @Table
+    @Table({ tableName: "customer_group", timestamps: false })
     export class customerCustomerGroup extends Model<customerCustomerGroup> {
       @ForeignKey(() => Customer)
       @Column

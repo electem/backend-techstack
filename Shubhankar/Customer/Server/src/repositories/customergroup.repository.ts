@@ -56,10 +56,11 @@ export const getCustomerGroup = async (id: number) => {
   return customergroupquery;
 };
 
-export const deleteCustomerGroup = async (id: number): Promise<CustomerGroup | string> => {
+export const deleteCustomerGroup = async (
+  id: number
+): Promise<CustomerGroup | string> => {
   const customerRepository = getRepository(CustomerGroup);
   const customergroup = await customerRepository.delete({ id: id });
-  if (customergroup) return 'deleted';
-  return customergroup
+  if (customergroup) return "deleted";
+  return customergroup;
 };
-

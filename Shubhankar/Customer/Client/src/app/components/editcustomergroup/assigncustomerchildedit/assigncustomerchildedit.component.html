@@ -1,0 +1,6 @@
+<app-editcustomergroup
+  (newCustomerEvent)="addCustomer($event)"
+></app-editcustomergroup>
+<ul>
+  <li *ngFor="let customer of customers">{{ customers }}</li>
+</ul>

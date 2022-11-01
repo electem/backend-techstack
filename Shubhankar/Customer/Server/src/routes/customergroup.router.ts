@@ -21,14 +21,14 @@ router.put("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
   const controller = new CustomerGroupController();
   const response = await controller.getCustomerGroup(req.params.id);
-  if (!response) res.status(404).send({message: "No post found"})
+  if (!response) res.status(404).send({ message: "No post found" });
   return res.send(response);
 });
 
-router.delete('/:id', async (req, res) => {
+router.delete("/:id", async (req, res) => {
   const controller = new CustomerGroupController();
   const response = await controller.deleteCustomergroupById(req.params.id);
-  if (!response) res.status(404).send({ message: 'No user found' });
+  if (!response) res.status(404).send({ message: "No user found" });
   return res.send(response);
 });
-export default router
+export default router;

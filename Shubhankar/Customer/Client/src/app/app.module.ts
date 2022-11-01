@@ -14,6 +14,15 @@ import { CustomergroupComponent } from './components/customergroup/customergroup
 import { AddcustomergroupComponent } from './components/addcustomergroup/addcustomergroup.component';
 import { EditcustomergroupComponent } from './components/editcustomergroup/editcustomergroup.component';
 import { EditcustomerComponent } from './components/editcustomer/editcustomer.component';
+import { GamelistComponent } from './components/gamelist/gamelist.component';
+import { AssigncustomerchildComponent } from './components/addcustomergroup/assigncustomerchild/assigncustomerchild.component';
+import { AssigncustomerchildeditComponent } from './components/editcustomergroup/assigncustomerchildedit/assigncustomerchildedit.component';
+import { EditgameComponent } from './components/editgame/editgame.component';
+import { CompanylistComponent } from './components/companylist/companylist.component';
+import { DepartmentlistComponent } from './components/departmentlist/departmentlist.component';
+import { CreatecompanyComponent } from './components/createcompany/createcompany.component';
+import { CreatedepartmentComponent } from './components/createdepartment/createdepartment.component';
+
 
 @NgModule({
   declarations: [
@@ -26,6 +35,15 @@ import { EditcustomerComponent } from './components/editcustomer/editcustomer.co
     AddcustomergroupComponent,
     EditcustomergroupComponent,
     EditcustomerComponent,
+    GamelistComponent,
+    AssigncustomerchildComponent,
+    AssigncustomerchildeditComponent,
+   EditgameComponent,
+   CompanylistComponent,
+   DepartmentlistComponent,
+   CreatecompanyComponent,
+   CreatedepartmentComponent,
+   
   ],
   imports: [
     BrowserModule,
@@ -34,6 +52,7 @@ import { EditcustomerComponent } from './components/editcustomer/editcustomer.co
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -1,8 +1,10 @@
 /* eslint-disable prettier/prettier */
 import { Sequelize } from 'sequelize-typescript';
+import { Company } from './company/company.entity';
 import { Customer } from './customer/customer.entity';
 import { customerCustomerGroup } from './customer/customerCustomergroup.model';
 import { Customergroup } from './customergroup/customergroup.entity';
+import { Department } from './department/department.entity';
 import { customerUnit } from './unit/customerunit.model';
 import { Unit } from './unit/unit.entity';
 
@@ -19,7 +21,7 @@ export const databaseProviders = [
         password: 'cybis@ban',
         database: 'customern',
       });
-      sequelize.addModels([Customer, Customergroup,customerCustomerGroup,Unit,customerUnit]);
+      sequelize.addModels([Customer, Customergroup,customerCustomerGroup,Unit,customerUnit,Company,Department]);
       await sequelize.sync();
       return sequelize;
     },

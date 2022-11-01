@@ -5,6 +5,11 @@ import { Register } from '../models/register';
 import { Customer } from '../models/customer';
 import { Customergroup } from '../models/customergroup';
 import { Unit } from '../models/unit';
+import gameJson from '../game.json';
+import { Game } from '../models/game';
+import { Player } from '../models/player';
+import { Company } from '../models/company';
+import { Department } from '../models/department';
 
 const baseUrl = environment.url;
 export class Status {
@@ -17,6 +22,10 @@ export class StatusFilter {
   providedIn: 'root',
 })
 export class UserService {
+  // gamedetails = gameJson;
+
+  games: Game[] = gameJson;
+  game: Game[] = [];
   constructor(private http: HttpClient) {}
 
   private status: Status[] = [
@@ -70,7 +79,7 @@ export class UserService {
       .post<Customergroup>(baseUrl + '/customergroup', data)
       .toPromise();
   }
-  updatecustomergroup(data: Customergroup) {
+  updatecustomergroup(data: Customergroup, id: Number) {
     return this.http
       .put<Customergroup>(baseUrl + '/customergroup', data)
       .toPromise();
@@ -96,5 +105,46 @@ export class UserService {
 
   async getUnit(): Promise<Unit[]> {
     return await this.http.get<Unit[]>(baseUrl + '/unit').toPromise();
+  }
+  async getAllgames(): Promise<Array<Game>> {
+    const records = this.games;
+    return records;
+  }
+
+  async getGamesList() {
+    return await this.games;
+  }
+
+  async getGameById(id: number) {
+    this.game = this.games.filter((input) => {
+      return input.id == id;
+    });
+    return await this.game[0];
+  }
+
+  async updateGame(game: Game) {
+    console.log(game);
+  }
+
+  async getallCompany(): Promise<Company[]> {
+    return await this.http.get<Company[]>(baseUrl + '/company').toPromise();
+  }
+
+  async getallDepartment(): Promise<Department[]> {
+    return await this.http
+      .get<Department[]>(baseUrl + '/department')
+      .toPromise();
+  }
+
+  async createcompany(companyinfo: Company): Promise<Company> {
+    return await this.http
+      .post<Company>(baseUrl + '/company', companyinfo)
+      .toPromise();
+  }
+
+  async createdepartment(departmentinfo: Department): Promise<Department> {
+    return await this.http
+      .post<Department>(baseUrl + '/department', departmentinfo)
+      .toPromise();
   }
 }
