@@ -11,7 +11,6 @@ import { Player } from '../models/player';
 import { Company } from '../models/company';
 import { Department } from '../models/department';
 
-
 const baseUrl = environment.url;
 export class Status {
   name?: string;
@@ -80,7 +79,7 @@ export class UserService {
       .post<Customergroup>(baseUrl + '/customergroup', data)
       .toPromise();
   }
-  updatecustomergroup(data: Customergroup , id:Number) {
+  updatecustomergroup(data: Customergroup, id: Number) {
     return this.http
       .put<Customergroup>(baseUrl + '/customergroup', data)
       .toPromise();
@@ -111,11 +110,10 @@ export class UserService {
     const records = this.games;
     return records;
   }
-  
+
   async getGamesList() {
     return await this.games;
   }
-
 
   async getGameById(id: number) {
     this.game = this.games.filter((input) => {
@@ -123,7 +121,6 @@ export class UserService {
     });
     return await this.game[0];
   }
- 
 
   async updateGame(game: Game) {
     console.log(game);
@@ -134,13 +131,20 @@ export class UserService {
   }
 
   async getallDepartment(): Promise<Department[]> {
-    return await this.http.get<Department[]>(baseUrl + '/department').toPromise();
+    return await this.http
+      .get<Department[]>(baseUrl + '/department')
+      .toPromise();
   }
 
- async createcompany(companyinfo: Company): Promise<Company> {
+  async createcompany(companyinfo: Company): Promise<Company> {
     return await this.http
       .post<Company>(baseUrl + '/company', companyinfo)
       .toPromise();
   }
 
+  async createdepartment(departmentinfo: Department): Promise<Department> {
+    return await this.http
+      .post<Department>(baseUrl + '/department', departmentinfo)
+      .toPromise();
+  }
 }
