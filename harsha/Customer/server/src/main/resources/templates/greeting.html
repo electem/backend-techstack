@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bootstrap demo</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+	crossorigin="anonymous">
+</head>
+<body>
+	<h1>Customer Email Data</h1>
+	<br>
+	<table class="table table border table script">
+		<thead class=thead-dark>
+			<tr>
+				<th>Id</th>
+				<th>Email</th>
+				<th>Name</th>
+				<th>Age</th>
+				<th>Occupation</th>
+				<th>Place</th>
+				<th>Graduation</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td th:text="${Id}">Id</td>
+				<td th:text="${Email}">Email</td>
+				<td th:text="${Name}">Name</td>
+				<td th:text="${Age}">Age</td>
+				<td th:text="${Occupation}">Occupation</td>
+				<td th:text="${Place}">Place</td>
+				<td th:text="${Graduation}">Graduation</td>
+			</tr>
+		</tbody>
+	</table>
+</body>

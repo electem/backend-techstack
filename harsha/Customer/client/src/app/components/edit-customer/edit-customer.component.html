@@ -6,8 +6,16 @@
       <input type="text" id="name" name="name" class="form-control" [(ngModel)]="customer.name" />
     </div>
     <div class="form-group">
-      <label for="description">Status</label>
-      <input type="text" name="description" class="form-control" [(ngModel)]="customer.status" /><br />
+      <p>
+        Status :
+        <select class="form-control" aria-placeholder="choose Status" name="status" formControlName="status"
+          [(ngModel)]="customer.status">
+          <option value="Choose status">Choose Status</option>
+          <option *ngFor="let status of status" [ngValue]="status">
+            {{ status.name }}
+          </option>
+        </select>
+      </p>
     </div>
     <div class="form-group">
       <label for="createdDate">Address</label>
@@ -17,6 +25,9 @@
       <label for="updatedDate">Phone Number</label>
       <input type="text" name="updatedDate" class="form-control" [(ngModel)]="customer.phoneNo" /><br />
     </div>
+    <button class="btn btn-info btn-sm mr-2" (click)="updateCustomer()">
+      Edit
+    </button>
     <button class="btn btn-warning" routerLink="/customer-list">
       Cancel
     </button>

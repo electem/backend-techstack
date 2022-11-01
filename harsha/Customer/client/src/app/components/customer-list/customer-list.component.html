@@ -4,6 +4,15 @@
     Add Customer
   </button>
   <br><br>
+  <div class="form-group">
+    <label for="status">Status</label>
+    <select [(ngModel)]="statu" (ngModelChange)="onSelected(statu)">
+      <option *ngFor="let statu of status" [ngValue]="statu">
+        {{ statu.name }}
+      </option>
+    </select>
+  </div>
+
   <table class="table table-bordered table-striped table-hover">
     <thead>
       <tr>
@@ -14,7 +23,7 @@
         <th class="text-center">&nbsp;</th>
       </tr>
     </thead>
-    <tbody *ngFor="let customer of customers; let i = index">
+    <tbody *ngFor="let customer of selectedCustomers; let i = index">
       <tr class="success">
         <td class="text-center">{{ customer.name }}</td>
         <td class="text-center">{{ customer.status }}</td>

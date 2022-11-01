@@ -10,12 +10,11 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.example.onetoonemapping.exceptions.ResourceNotFoundException;
 import com.example.onetoonemapping.models.Customer;
-import com.example.onetoonemapping.models.CustomerGroup;
 import com.example.onetoonemapping.repository.CustomerRepository;
 
 @RestController
@@ -55,5 +54,12 @@ public class CustomerController {
 				.orElseThrow(() -> new ResourceNotFoundException("Customer not found :: " + id));
 		LOG.info("Start of CustomerController :: getCustomerById ");
 		return ResponseEntity.ok().body(customer);
+	}
+
+	// This block of code is used to update a customer to the DB.
+	@PutMapping("/updateCustomer/{id}")
+	public Customer updateCustomer(@PathVariable("id") int id, @Valid @RequestBody Customer customer) {
+		LOG.info("Start of CustomerController :: updateCustomer ");
+		return customerRepository.save(customer);
 	}
 }
