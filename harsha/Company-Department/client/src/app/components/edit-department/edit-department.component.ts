@@ -1,86 +1,74 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { Company } from 'src/app/models/company.model';
 import { Department } from 'src/app/models/department.model';
 import { CompanyService } from 'src/app/services/company.service';
-import { IDropdownSettings } from 'ng-multiselect-dropdown';
 
 @Component({
-  selector: 'app-create-department',
-  templateUrl: './create-department.component.html',
-  styleUrls: ['./create-department.component.css'],
+  selector: 'app-edit-department',
+  templateUrl: './edit-department.component.html',
+  styleUrls: ['./edit-department.component.css'],
 })
-export class CreateDepartmentComponent implements OnInit {
-  submitted: boolean = false;
-  registerForm!: FormGroup;
+export class EditDepartmentComponent implements OnInit {
   companies: Company[] = [];
+  selectedItems = [];
   addedCompanies: Company[] = [];
   selectedCompany: Company = {};
+  dropdownSettings: IDropdownSettings = {};
   currentDepartment: Department = {
     name: '',
     type: '',
     companies: [],
   };
-  selectedItems = [];
-  dropdownSettings: IDropdownSettings = {};
   constructor(
     private companyService: CompanyService,
-    private formBuilder: FormBuilder,
+    private route: ActivatedRoute,
     private router: Router
   ) {}
 
   ngOnInit(): void {
-    this.registerForm = this.formBuilder.group({
-      name: ['', Validators.required],
-      type: ['', Validators.required],
-    });
     this.getCompanies();
+    this.getDepartmentById(this.route.snapshot.params.id);
     this.dropdownSettings = {
       singleSelection: false,
       idField: 'id',
       textField: 'name',
       selectAllText: 'Select All',
       unSelectAllText: 'UnSelect All',
-      itemsShowLimit: 3,
       allowSearchFilter: true,
     };
-  }
-
-  get validation() {
-    return this.registerForm.controls;
-  }
-
-  signup() {
-    this.submitted = true;
-    if (this.registerForm.invalid) {
-      return;
-    }
-    alert('form fields are validated successfully!');
-    this.saveDepartment();
   }
 
   async getCompanies(): Promise<void> {
     this.companies = await this.companyService.getCompanies();
   }
 
-  onCompanySelect(company: any) {
-    this.selectedCompany = company;
+  async getDepartmentById(id: number) {
+    this.currentDepartment = await this.companyService.getDepartmentById(id);
+  }
+
+  onItemSelect(item: any) {
+    this.selectedCompany = item;
     this.addedCompanies.push(this.selectedCompany);
   }
-  onSelectAll(companies: any) {
-    this.selectedCompany = companies;
+  onSelectAll(items: any) {
+    this.selectedCompany = items;
     this.addedCompanies.push(this.selectedCompany);
     console.log(this.addedCompanies);
   }
 
-  async saveDepartment(): Promise<void> {
+  async updateDepartment(): Promise<void> {
     const department: Department = {
+      id: this.currentDepartment.id,
       name: this.currentDepartment.name,
       type: this.currentDepartment.type,
-      companies: this.addedCompanies,
+      companies: this.currentDepartment.companies,
     };
-    await this.companyService.createDepartment(department);
+    await this.companyService.updateDepartment(
+      this.currentDepartment.id!,
+      department
+    );
     this.router.navigate(['/dept-list']);
   }
 }
