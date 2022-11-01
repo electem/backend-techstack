@@ -4,6 +4,7 @@ import { CreateCompanyComponent } from './components/create-company/create-compa
 import { CompanyListComponent } from './components/company-list/company-list.component';
 import { DepartmentListComponent } from './components/department-list/department-list.component';
 import { CreateDepartmentComponent } from './components/create-department/create-department.component';
+import { EditCompanyComponent } from './components/edit-company/edit-company.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'company-list', pathMatch: 'full' },
@@ -11,6 +12,7 @@ const routes: Routes = [
   { path: 'company-list', component: CompanyListComponent },
   { path: 'dept-list', component: DepartmentListComponent },
   { path: 'department', component: CreateDepartmentComponent },
+  { path: 'edit-company/:id', component: EditCompanyComponent },
 ];
 
 @NgModule({

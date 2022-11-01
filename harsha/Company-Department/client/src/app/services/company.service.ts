@@ -33,4 +33,14 @@ export class CompanyService {
       .post<Department>(baseUrl + 'createDepartment', department)
       .toPromise();
   }
+
+  async getCompanyById(id: number) {
+    return await this.http.get(`${baseUrl + 'company'}/${id}`).toPromise();
+  }
+
+  async updateCompany(id: number, company: Company): Promise<Company> {
+    return await this.http
+      .put(`${baseUrl + 'updateCompany'}/${id}`, company)
+      .toPromise();
+  }
 }

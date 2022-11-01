@@ -11,6 +11,7 @@ import { CompanyListComponent } from './components/company-list/company-list.com
 import { DepartmentListComponent } from './components/department-list/department-list.component';
 import { CreateDepartmentComponent } from './components/create-department/create-department.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { EditCompanyComponent } from './components/edit-company/edit-company.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     CompanyListComponent,
     DepartmentListComponent,
     CreateDepartmentComponent,
+    EditCompanyComponent,
   ],
   imports: [
     NgxDatatableModule,
