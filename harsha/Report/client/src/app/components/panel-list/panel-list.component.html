@@ -1,6 +1,21 @@
 <div class="container">
   <div *ngIf="this.panelForm">
     <h4 class="text-center">Add Panel</h4>
+    <form>
+      <div class="form-group">
+        <label for="name">Panel Name</label>
+        <input type="text" formControlName="name" class="form-control" [(ngModel)]="currentPanel.name" />
+      </div>
+
+      <div class="form-group">
+        <label for="description">Panel Description</label>
+        <input type="text" formControlName="description" class="form-control" [(ngModel)]="currentPanel.description" />
+        <button class="m-3 btn btn-sm btn-danger" (click)="savePanel()">
+          Save Panel
+        </button>
+        <button class="btn btn-warning" (click)="cancelPanel()">Cancel</button>
+      </div>
+    </form>
     <div>
       <form>
         <div class="form-group">
@@ -23,6 +38,11 @@
   <div class="col-md-6">
     <h4 class="text-center">Panels List</h4>
     <button class="m-3 btn btn-sm btn-danger" (click)="addPanel()">
+      Add Panel
+    </button>
+    <button class="btn btn-primary mr-2" routerLink="/reports" (click)="saveReport()">
+      Add Report
+    </button>
       Add Panel</button><br />
     <button type="button" class="btn btn-primary mr-2" routerLink="/reports-details/{{ report.id }}"
       (click)="saveReport()">
@@ -36,11 +56,14 @@
           <th class="text-center">&nbsp;</th>
         </tr>
       </thead>
+      <tbody *ngFor="let panel of panels">
       <tbody *ngFor="let panel of filteredPanels; let i = index">
         <tr class="success">
           <td class="text-center">{{ panel.name }}</td>
           <td class="text-center">{{ panel.description }}</td>
           <td>
+            <button type="button" class="btn btn-info btn-sm mr-2" routerLink="/panels/{{ panel.id }}"
+              (click)="editPanel(panel)">
             <button type="button" class="btn btn-info btn-sm mr-2" routerLink="/panels/{{ panel.id }}">
               Edit
             </button>

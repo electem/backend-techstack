@@ -1,3 +1,21 @@
+
+<h3><strong class="text-center">Report List</strong></h3>
+<div>
+  <table class="table table-bordered table-striped table-hover">
+    <tr>
+      <th></th>
+      <th *ngFor="let test of tests; let j = index">
+        {{ test.name }}
+      </th>
+    </tr>
+    <tr *ngFor="let panel of panels; let i = index">
+      <th>{{ panel.name }}</th>
+      <td *ngFor="let test of tests; let j = index">
+        <div *ngIf="isTestPresentInPanel(panel,test)">
+          <input type="text" (blur)="onBlurMethod($event,panel,test)" />
+        </div>
+      </td>
+    </tr>
 <div class="col-md-6">
   <h4 class="text-center">Reports List</h4>
   <table class="table table-bordered table-striped table-hover">

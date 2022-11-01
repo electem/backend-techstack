@@ -1,5 +1,10 @@
 package com.example.onetoonemapping.repository;
 
+import org.springframework.data.repository.CrudRepository;
+import com.example.onetoonemapping.models.Report;
+
+public interface ReportRepository extends CrudRepository<Report, Integer>  {
+
 import java.util.List;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;

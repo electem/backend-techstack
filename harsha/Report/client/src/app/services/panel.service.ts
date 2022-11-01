@@ -9,7 +9,12 @@ import { Employee } from '../models/employee.model';
 import productJson from '../product.json';
 import productJsonData from '../productList.json';
 import { environment } from '../../environments/environment';
-
+const panelUrl = 'http://localhost:8080/panels';
+const addPanelUrl = 'http://localhost:8080/createPanel';
+const updatePanelUrl = 'http://localhost:8080/updatePanel';
+const testUrl = 'http://localhost:8080/tests';
+const panelByIdUrl = 'http://localhost:8080/panels';
+const addReportUrl = 'http://localhost:8080/createReport';
 const baseUrl = environment.url;
 
 interface Product {
@@ -45,6 +50,20 @@ export class PanelService {
     return await this.http.get(`${baseUrl + 'panels'}/${id}`).toPromise();
   }
 
+  async getPanelById(id: Number) {
+    return await this.http.get(`${panelByIdUrl}/${id}`).toPromise();
+  }
+
+  async createPanel(panel: Panel): Promise<Panel> {
+    return await this.http.post(addPanelUrl, panel).toPromise();
+  }
+
+  async createReport(report: Report): Promise<Report> {
+    return await this.http.post(addReportUrl, report).toPromise();
+  }
+
+  async updatePanel(id: any, panel: Panel): Promise<Panel> {
+    return await this.http.put(`${updatePanelUrl}/${id}`, panel).toPromise();
   async updatePanel(id: number, panel: Panel): Promise<Panel> {
     return await this.http
       .put(`${baseUrl + 'updatePanel'}/${id}`, panel)
