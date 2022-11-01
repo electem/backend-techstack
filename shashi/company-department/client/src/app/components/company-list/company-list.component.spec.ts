@@ -8,6 +8,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 describe('CompanyService', () => {
   let component: CompanyListComponent;
   let fixture: ComponentFixture<CompanyListComponent>;
+  let companyService: CompanyService;
   let button: HTMLElement;
 
   beforeEach(async () => {
@@ -24,11 +25,66 @@ describe('CompanyService', () => {
     fixture.detectChanges();
   });
 
+  it('should set the list of companies', () => {
+    component.ngOnInit();
+    expect(companyService.getCompanies()).toHaveBeenCalled();
+  });
+
   it('should show the list of companies', () => {
-    const companiesList: Company[] = [];
+    const companiesTestingList: Company[] = [
+      {
+        id: 1,
+        companyname: 'eigth company',
+        address: 'cdcd',
+        department: [
+          {
+            id: 4,
+            departmentname: 'fourth department',
+            type: 'type 4',
+          },
+        ],
+      },
+      {
+        id: 2,
+        companyname: 'eigth company',
+        address: 'cdcd',
+        department: [
+          {
+            id: 4,
+            departmentname: 'fourth department',
+            type: 'type 4',
+          },
+        ],
+      },
+      {
+        id: 3,
+        companyname: 'eigth company',
+        address: 'cdcd',
+        department: [
+          {
+            id: 4,
+            departmentname: 'fourth department',
+            type: 'type 4',
+          },
+        ],
+      },
+      {
+        id: 4,
+        companyname: 'eigth company',
+        address: 'cdcd',
+        department: [
+          {
+            id: 4,
+            departmentname: 'fourth department',
+            type: 'type 4',
+          },
+        ],
+      },
+    ];
     console.log(`Conponent instance ${component}`);
-    component.companiesList = companiesList;
-    // const element = fixture.nativeElement;
+    component.companiesList = companiesTestingList;
+    expect(component.companiesList.length).toBe(4);
+    expect(component.companiesList).toEqual(companiesTestingList);
     expect(component).toBeTruthy();
   });
 });
