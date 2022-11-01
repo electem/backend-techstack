@@ -14,7 +14,8 @@ export class CommentPostComponent implements OnInit {
     commentDescription: '',
   };
   commentdetails?: any;
-  @Input() tutorialId: any;
+  @Input() tutorialId?: any;
+  @Input() timeZone?: string;
 
   constructor(
     private tutorialService: TutorialService,

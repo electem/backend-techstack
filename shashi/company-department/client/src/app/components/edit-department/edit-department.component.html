@@ -1,0 +1,58 @@
+<div class="container">
+  <h5 class="card-title text-center pb-0 fs-4">Edit Department</h5>
+  <br />
+  <div class="row">
+    <div class="col-md-4 offset-md-4">
+      <div class="card mb-4">
+        <div class="card-body">
+          <form>
+            <div class="formbox center">
+              <div class="form-group input center">
+                <label for="departmentname">Department name</label>
+                <input
+                  type="text"
+                  name="departmentname"
+                  class="form-control"
+                  [(ngModel)]="department.departmentname"
+                />
+              </div>
+              <br />
+              <div class="form-group input center">
+                <label for="name">Type</label>
+                <input
+                  name="type"
+                  type="text"
+                  class="form-control"
+                  [(ngModel)]="department.type"
+                />
+              </div>
+            </div>
+          </form>
+          <br />
+          <div style="width: 70%">
+            <ng-multiselect-dropdown
+              [settings]="dropdownSettings"
+              [data]="companiesList"
+              [(ngModel)]="department.company"
+            >
+            </ng-multiselect-dropdown>
+          </div>
+          <br />
+          <button
+            class="btn btn-outline-danger btn-sm btn-space"
+            routerLink="/departmentlist"
+          >
+            Cancel
+          </button>
+          <button
+            class="btn btn-outline-success btn-sm btn-space"
+            routerLink="/departmentlist"
+            (click)="updateDepartment()"
+          >
+            Update
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -19,8 +19,12 @@ import { NewTutorialComponent } from './components/new-tutorial/new-tutorial.com
 import { StudentformComponent } from './components/studentform/studentform.component';
 import { EditStudentFormComponent } from './components/edit-student-form/edit-student-form.component';
 import { ComponentsComponent } from './components/components/components.component';
-
 import { TutorialViewDetialsComponent } from './components/tutorial-view-detials/tutorial-view-detials.component';
+import { LoginComponent } from './components/login/login.component';
+import { DataTableComponent } from './components/data-table/data-table.component';
+import { PaginationTableComponent } from './components/pagination-table/pagination-table.component';
+import { StudentChartComponent } from './components/student-chart/student-chart.component';
+
 const routes: Routes = [
   { path: '', redirectTo: 'tutorials', pathMatch: 'full' },
   { path: 'components', component: ComponentsComponent },
@@ -43,6 +47,10 @@ const routes: Routes = [
   { path: 'userListing', component: UserListComponent },
   { path: 'newTutorial/:id', component: NewTutorialComponent },
   { path: 'tutorials-view/:id', component: TutorialViewDetialsComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'table', component: DataTableComponent },
+  { path: 'pagination', component: PaginationTableComponent },
+  { path: 'chart', component: StudentChartComponent },
 ];
 
 @NgModule({

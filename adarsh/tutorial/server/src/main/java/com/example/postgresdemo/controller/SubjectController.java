@@ -13,13 +13,8 @@ import com.example.postgresdemo.model.Subject;
 import com.example.postgresdemo.repository.SubjectRepository;
 
 public class SubjectController {
-
-	private final SubjectRepository subjectRepository;
-
 	@Autowired
-	public SubjectController(SubjectRepository subjectRepository) {
-		this.subjectRepository = subjectRepository;
-	}
+	private SubjectRepository subjectRepository;
 
 	// This method is used to get students data from the Database.
 	@GetMapping("/subjectData")

@@ -27,6 +27,11 @@ import { EditStudentFormComponent } from './components/edit-student-form/edit-st
 import { ComponentsComponent } from './components/components/components.component';
 import { CommentPostComponent } from './components/tutorial-view-detials/comment-post/commentPost.component';
 import { TutorialViewDetialsComponent } from './components/tutorial-view-detials/tutorial-view-detials.component';
+import { LoginComponent } from './components/login/login.component';
+import { DataTableComponent } from './components/data-table/data-table.component';
+import { PaginationTableComponent } from './components/pagination-table/pagination-table.component';
+import { DataTablesModule } from 'angular-datatables';
+import { StudentChartComponent } from './components/student-chart/student-chart.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +57,10 @@ import { TutorialViewDetialsComponent } from './components/tutorial-view-detials
     ComponentsComponent,
     CommentPostComponent,
     TutorialViewDetialsComponent,
+    LoginComponent,
+    DataTableComponent,
+    PaginationTableComponent,
+    StudentChartComponent,
   ],
   imports: [
     BrowserModule,
@@ -60,6 +69,8 @@ import { TutorialViewDetialsComponent } from './components/tutorial-view-detials
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
+    DataTablesModule
+   
   ],
   providers: [],
   bootstrap: [AppComponent],

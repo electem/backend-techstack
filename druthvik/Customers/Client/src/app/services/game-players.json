@@ -1,0 +1,64 @@
+[
+  {
+    "id": 1,
+    "Name": "cricket",
+    "players": [
+      {
+        "id": 1,
+        "name": "sachin"
+      },
+      {
+        "id": 2,
+        "name": "ganguly"
+      },
+      {
+        "id": 3,
+        "name": "dravid"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "Name": "football",
+    "players": [
+      {
+        "id": 1,
+        "name": "messi"
+      },
+      {
+        "id": 2,
+        "name": "ronaldo"
+      },
+      {
+        "id": 3,
+        "name": "neymar"
+      },
+      {
+        "id": 10,
+        "name": "pogba"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "Name": "basketball",
+    "players": [
+      {
+        "id": 1,
+        "name": "mj"
+      },
+      {
+        "id": 2,
+        "name": "kb"
+      },
+      {
+        "id": 3,
+        "name": "lj"
+      },
+      {
+        "id": 4,
+        "name": "sc"
+      }
+    ]
+  }
+]

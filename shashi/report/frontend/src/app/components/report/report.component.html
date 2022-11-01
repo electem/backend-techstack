@@ -22,8 +22,10 @@
           type="text"
           style="width: 100px"
           (blur)="reportDetailsSave($event, panel, test)"
+          [ngModel]="dataInsertInTextBox(panel, test)"
         />
       </div>
     </td>
   </tr>
+</table>
 </table>

@@ -1,0 +1,54 @@
+<div class="head">
+  <h4 class="text-center">Edit Customer Group</h4>
+  <form>
+    <div class="form-group">
+      <label for="name">NAME</label>
+      <input type="text" id="name" name="name" class="form-control" [(ngModel)]="customerGroup.name" />
+    </div>
+    <div class="form-group">
+      <label for="description">Description</label>
+      <input type="text" name="description" class="form-control" [(ngModel)]="customerGroup.description" /><br />
+    </div>
+    <div class="form-group">
+      <label for="createdDate">Created Date</label>
+      <input type="text" name="createdDate" class="form-control" [(ngModel)]="customerGroup.createdDate" /><br />
+    </div>
+    <div class="form-group">
+      <label for="updatedDate">Updated Date</label>
+      <input type="text" name="updatedDate" class="form-control" [(ngModel)]="customerGroup.updatedDate" /><br />
+    </div>
+    <h3>Assign Customers</h3>
+    <table class="table table-bordered table-striped table-hover">
+      <thead>
+        <tr>
+          <th class="text-center">Available</th>
+        </tr>
+      </thead>
+      <div class="float">
+        <tbody *ngFor="let customer of customers; let i = index">
+          <tr class="success">
+            <td (click)="onSelectingFromCustomersList(customer)">
+              {{ customer.name }}
+            </td>
+          </tr>
+        </tbody>
+      </div>
+      <div class="button">
+        <button type="button" class="btn btn-success" (click)="addCustomerToUpdateList()">
+          Add --></button><br />
+        <button type=" button" class="btn btn-info btn-sm mr-2" (click)="removeCustomerFromUpdateList()">
+          <-- Remove </button> </div> <div class="floating">
+            <tbody *ngFor="let customer of updatedCustomers; let i = index">
+              <tr class="success">
+                <td (click)="onSelectingFromUpdateCustomerList(customer)">
+                  {{ customer.name }}
+                </td>
+              </tr>
+            </tbody>
+      </div>
+    </table>
+    <button class="btn btn-warning" routerLink="/customer-group-list">
+      Cancel
+    </button>
+  </form>
+</div>

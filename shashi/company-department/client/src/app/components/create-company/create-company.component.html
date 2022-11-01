@@ -1,0 +1,75 @@
+<div class="container">
+  <h5 class="card-title text-center pb-0 fs-4">Create company</h5>
+  <br />
+  <div class="row">
+    <div class="col-md-6 offset-md-4">
+      <div class="card mb-4">
+        <div class="card-body">
+          <form [formGroup]="createCompanyForm" (ngSubmit)="saveCompany()">
+            <div class="form-group">
+              <label>Company name</label>
+              <input
+                type="text"
+                formControlName="companyname"
+                class="form-control"
+                [ngClass]="{
+                  'is-invalid': submitted && formValidation.companyname.errors
+                }"
+                [(ngModel)]="company.companyname"
+              />
+              <div
+                *ngIf="submitted && formValidation.companyname.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="formValidation.companyname.errors.required">
+                  company name is required
+                </div>
+              </div>
+            </div>
+            <br />
+            <div class="form-group">
+              <label>Address</label>
+              <input
+                type="text"
+                formControlName="address"
+                class="form-control"
+                [ngClass]="{
+                  'is-invalid': submitted && formValidation.address.errors
+                }"
+                [(ngModel)]="company.address"
+              />
+              <div
+                *ngIf="submitted && formValidation.address.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="formValidation.address.errors.required">
+                  address is required
+                </div>
+              </div>
+            </div>
+            <br />
+            <div class="column">
+              <h2>Departments List</h2>
+              <div *ngFor="let department of departmentsList">
+                <input
+                  type="checkbox"
+                  (click)="selectedDepartment(department)"
+                />{{ department.departmentname }}
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="text-center">
+          <button class="btn btn-outline-primary btn-sm">Submit</button>
+          <button
+            class="btn btn-outline-danger btn-sm btn-space"
+            routerLink="/companylist"
+          >
+            Cancel
+          </button>
+        </div>
+        <br />
+      </div>
+    </div>
+  </div>
+</div>

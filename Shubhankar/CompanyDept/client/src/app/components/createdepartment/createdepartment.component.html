@@ -1,0 +1,48 @@
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-4 offset-md-3 col-md-6 col-sm-offset-2 col-sm-8">
+      <h4>Create Department</h4>
+<form [formGroup]="createDepartment" (ngSubmit)="signup()">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input
+      type="name"
+      class="form-control"
+      id="name"
+      formControlName="name"
+      [(ngModel)]="depertment.name"
+      [ngClass]="{ 'is-invalid': submitted && fval.name.errors }"
+    />
+    <div *ngIf="submitted && fval.name.errors" class="invalid-feedback">
+        <div *ngIf="fval.name.errors.required">Name Field is required</div>
+      </div>
+    </div>
+    <div class="form-group">
+        <label for="name">Type</label>
+        <input
+        type="type"
+        class="form-control"
+        id="type"
+        formControlName="type"
+        [(ngModel)]="depertment.type"
+        [ngClass]="{ 'is-invalid': submitted && fval.type.errors }"
+      />
+      <div *ngIf="submitted && fval.type.errors" class="invalid-feedback">
+          <div *ngIf="fval.type.errors.required">Type Field is required</div>
+        </div>
+      </div>
+      <ng-multiselect-dropdown
+              [settings]="dropdownSettings"
+              [data]="companies"
+              (onSelect)="selectedCompany($event)" 
+              (onSelectAll)="onSelectAllCompany($event)"
+     >
+            </ng-multiselect-dropdown>
+            <button type="button" class="btn btn-outline-success" (click)="getSubmit()">
+              Save
+            </button>
+     
+</form>
+    </div>
+  </div>

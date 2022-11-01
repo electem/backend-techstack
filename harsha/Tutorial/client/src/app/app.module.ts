@@ -24,9 +24,9 @@ import { UserListComponent } from './components/user-list/user-list.component';
 import { NewTutorialComponent } from './components/new-tutorial/new-tutorial.component';
 import { StudentformComponent } from './components/studentform/studentform.component';
 import { EditStudentFormComponent } from './components/edit-student-form/edit-student-form.component';
-import { ComponentsComponent } from './components/components/components.component';
 import { CommentPostComponent } from './components/tutorial-details-new/comment-post/comment-post.component';
 import { TutorialDetailsNewComponent } from './components/tutorial-details-new/tutorial-details-new.component';
+import { UserLoginComponent } from './components/user-login/user-login.component';
 
 @NgModule({
   declarations: [
@@ -49,9 +49,9 @@ import { TutorialDetailsNewComponent } from './components/tutorial-details-new/t
     NewTutorialComponent,
     StudentformComponent,
     EditStudentFormComponent,
-    ComponentsComponent,
     CommentPostComponent,
     TutorialDetailsNewComponent,
+    UserLoginComponent,
   ],
   imports: [
     BrowserModule,

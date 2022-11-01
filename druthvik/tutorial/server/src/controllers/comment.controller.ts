@@ -5,6 +5,7 @@ import {
   getComments,
   ICommentPayload,
   createComment,
+  getTutorialComment1,
 } from '../repositories/comment.repository';
 
 @Route('comments')
@@ -16,14 +17,15 @@ export default class CommentController {
   }
 
   @Post('/')
-  public async createComment(@Body() body: ICommentPayload): Promise<Comment> {
-    return createComment(body);
+  public async createComment(
+    @Body() body: ICommentPayload,
+  ): Promise<Array<Comment>> {
+    return await commentService.getTutorialComment1(
+      body.tutorialId,
+      body.timeZone,
+    );
   }
 
-  @Get('/:id')
-  public async getCommentTutorial(@Path() id: string) {
-    return commentService.getTutorialComment(Number(id));
-  }
   // @Get('/:id')
   // public async getComment(@Path() id: string): Promise<Comment | null> {
   //   return getComment(Number(id));

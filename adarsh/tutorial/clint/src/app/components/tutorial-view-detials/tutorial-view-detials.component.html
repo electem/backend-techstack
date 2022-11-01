@@ -10,4 +10,6 @@
 <div>
     <label><strong>Conversion:</strong></label>{{ currentTutorial.creatDate | date: "full":"ist" }}
 </div>
-<app-comment-post [tutorialId]="tutorialId"></app-comment-post>
+
+<app-comment-post [tutorialId]="tutorialId" [timeZone]="timeZone"></app-comment-post>
+<button class="btn btn-outline-success  btn-sm" routerLink="/tutorials">Back</button>

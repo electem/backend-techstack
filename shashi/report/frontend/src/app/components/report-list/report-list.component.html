@@ -1,0 +1,27 @@
+<div class="container">
+  <table class="table table-bordered justify-content-center">
+    <thead class="thead-light">
+      <tr class="active">
+        <th class="text-center" scope="col">id</th>
+        <th class="text-center" scope="col">name</th>
+        <th class="text-center" scope="col">create-date</th>
+        <th class="text-center" scope="col">options</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let report of reports; let i = index">
+      <tr class="success head heading2">
+        <td class="text-center" scope="row">{{ report.id }}</td>
+        <td class="text-center" scope="row">{{ report.name }}</td>
+        <td class="text-center" scope="row">{{ report.createdDate }}</td>
+        <button
+          type="button"
+          style="margin: px"
+          class="btn-outline-secondary btn btn-sm mr-2"
+          routerLink="/reporttable"
+        >
+          Edit
+        </button>
+      </tr>
+    </tbody>
+  </table>
+</div>

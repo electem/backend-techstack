@@ -14,8 +14,10 @@ import { FormTutorialComponent } from './components/form-tutorial/form-tutorial.
 import { ValidationComponent } from './components/validation/validation.component';
 import { CommentPostComponent } from './components/tutorial-detial-view/comment-post/comment-post.component';
 import { TutorialDetialViewComponent } from './components/tutorial-detial-view/tutorial-detial-view.component';
+import { LoginComponentComponent } from './components/login-component/login-component.component';
 @NgModule({
   declarations: [
+    LoginComponentComponent,
     AppComponent,
     AddTutorialComponent,
     TutorialDetailsComponent,

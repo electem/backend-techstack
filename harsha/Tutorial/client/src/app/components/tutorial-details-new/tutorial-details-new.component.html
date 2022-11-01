@@ -12,6 +12,7 @@
 
         <label><strong>Conversion:</strong></label> {{ currentTutorial.createdAt | date:'full':currentTutorial.timezone}}
        
-        <div>{{currentTutorial.id}}</div>
+          <div><strong>Tutorial Id:</strong>{{currentTutorial.id}}</div>
 
-<app-comment-post [tutorialId]="tutorialId"></app-comment-post>
+<app-comment-post [tutorialId]="tutorialId" [timeZone]="timeZone"></app-comment-post>
+<button class="btn btn-outline-success  btn-sm"  routerLink="/tutorials" >Back</button>

@@ -18,7 +18,7 @@ export class TutorialDetailsNewComponent implements OnInit {
   countries:any;
   timezoneNames: string[] = [];
   selectedTimezone!: string;
-  timeZone!: string;
+  timeZone?: String;
   currentTutorial: Tutorial = {
     title: '',
     description: '',
@@ -28,7 +28,7 @@ export class TutorialDetailsNewComponent implements OnInit {
     timezone:'',
     createdAt:'',
   }
-  tutorialId:any
+  tutorialId:any;
 
   constructor(
     private tutorialService: TutorialService,
@@ -39,12 +39,13 @@ export class TutorialDetailsNewComponent implements OnInit {
   ngOnInit(): void {
    
       this.getTutorial(this.route.snapshot.params.id);
-    this.tutorialId=this.route.snapshot.params.id
+    this.tutorialId=this.route.snapshot.params.id;
   }
 
   private async getTutorial(id: Number) {
     const data = await this.tutorialService.getTutor(id)
     this.currentTutorial = data;
+    this.timeZone =this.currentTutorial.timezone;
     if(this.currentTutorial.categories){
     this.selectedCategory = this.currentTutorial.categories[0];
     }

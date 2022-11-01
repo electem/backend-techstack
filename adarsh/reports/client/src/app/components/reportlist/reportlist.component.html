@@ -1,0 +1,24 @@
+<h3><strong class="text-center">Report List</strong></h3>
+<div>
+  <table class="table table-bordered table-striped table-hover">
+    <tr>
+      <th></th>
+      <th *ngFor="let test of tests; let j = index">
+        {{ test.name }}
+      </th>
+    </tr>
+    <tr *ngFor="let panel of panels; let i = index">
+      <th>{{ panel.name }}</th>
+      <td *ngFor="let test of tests; let j = index">
+        <div *ngIf="isTestPresentInPanel(panel, test)">
+          <input
+            type="text"
+            [ngModel]="isPanelTestPresentInReport(panel, test)"
+            (blur)="onBlurEventToAutoGenarateId($event, panel, test)"
+          />
+        </div>
+      </td>
+    </tr>
+  </table>
+</div>
+<button type="button" class="btn btn-info btn-sm mr-2">SAVE</button>

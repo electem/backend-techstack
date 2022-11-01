@@ -1,0 +1,79 @@
+<h1>Add Customer Group</h1>
+<br />
+<div>
+  <div class="form-group">
+    <label for="title">NAME</label>
+    <input
+      type="text"
+      class="form-control"
+      id="title"
+      required
+      [(ngModel)]="newCustomerGroup.name"
+      name="name"
+    />
+  </div>
+  <div class="form-group">
+    <label for="title">DISCRIPTION</label>
+    <input
+      type="text"
+      class="form-control"
+      id="title"
+      required
+      [(ngModel)]="newCustomerGroup.discription"
+      name="discription"
+    />
+  </div>
+  <h3>Assign Customers</h3>
+  <table class="table table-bordered table-striped table-hover">
+    <thead>
+      <tr>
+        <th class="text-center">Available</th>
+        <th class="text-center">Current</th>
+      </tr>
+    </thead>
+    <div class="float">
+      <tbody *ngFor="let customer of customers; let i = index">
+        <tr class="success">
+          <th
+            class="text-center"
+            scope="row"
+            (click)="selectedCustomerFromList(customer)"
+          >
+            {{ customer.name }}
+          </th>
+        </tr>
+      </tbody>
+    </div>
+    <div class="button">
+      <button
+        type="button"
+        class="btn btn-success"
+        (click)="selectedCustomer()"
+      >
+        ADD</button
+      ><br />
+
+      <button
+        type="button"
+        class="btn btn-success"
+        (click)="removeCustomerFromNewList()"
+      >
+        REMOVE</button
+      ><br />
+    </div>
+    <tbody *ngFor="let customer of selectedCustomerName; let i = index">
+      <tr class="success">
+        <th
+          class="text-center"
+          scope="row"
+          (click)="selectedCustomerFromListToRemove(customer)"
+        >
+          {{ customer.name }}
+        </th>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<button  routerLink="/customergroup">CANCEL</button>
+<button   (click)="saveCustomerGroup()">SAVE</button>
+<br />

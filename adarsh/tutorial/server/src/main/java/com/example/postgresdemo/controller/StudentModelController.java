@@ -15,13 +15,8 @@ import com.example.postgresdemo.repository.StudentModelRepository;
 
 @RestController
 public class StudentModelController {
-
-	private final StudentModelRepository studentModelRepository;
-
 	@Autowired
-	public StudentModelController(StudentModelRepository studentModelRepository) {
-		this.studentModelRepository = studentModelRepository;
-	}
+	private StudentModelRepository studentModelRepository;
 
 	// This method is used to get students data from the Database.
 	@GetMapping("/studentModelData")
@@ -39,7 +34,8 @@ public class StudentModelController {
 		return "StudentModel data added";
 	}
 
-	// This method is used to update students data into Database using student_id
+	// This method is used to update students data into Database using
+	// student_id
 	@PostMapping("/updateModel/{id}")
 	public String updateStudentModel(@PathVariable("id") int id, @Valid @RequestBody StudentModel studentModel,
 			BindingResult result2, Model model) {

@@ -24,7 +24,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HeadersInterceptor } from './headers.interceptor';
 import { TutorialDetailnewComponent } from './components/tutorial-detailnew/tutorial-detailnew.component';
 import { CommentPostComponent } from './components/tutorial-detailnew/comment-post/comment-post.component'
-
+import { StudentListComponent } from './components/student-list/student-list.component';
+import { LoginComponent } from './components/login/login.component'
 
 
 @NgModule({
@@ -44,10 +45,11 @@ import { CommentPostComponent } from './components/tutorial-detailnew/comment-po
     ProductComponent,
    UserComponent,
     UserListComponent,
-
+    StudentListComponent,
     EditStudentComponent,
       TutorialDetailnewComponent,
       CommentPostComponent,
+      LoginComponent,
   
    
     

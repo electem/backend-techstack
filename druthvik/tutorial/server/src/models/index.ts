@@ -8,6 +8,7 @@ import { Product } from '../controllers/canbrowser/model/product';
 import { Resources } from '../controllers/canbrowser/model/resource';
 import { Tutorial } from './tutorial';
 import { Category } from './category';
+import { userLogin } from './userlogin';
 
 export {
   User,
@@ -20,4 +21,5 @@ export {
   Resources,
   Tutorial,
   Category,
+  userLogin,
 };

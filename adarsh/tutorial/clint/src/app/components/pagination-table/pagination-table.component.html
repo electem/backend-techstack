@@ -1,0 +1,45 @@
+<table datatable [dtOptions]="dtOptions" class="row-border hover">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>First name</th>
+        <th>Last name</th>
+      </tr>
+    </thead>
+    <tbody *ngIf="persons?.length != 0">
+      <tr *ngFor="let person of persons">
+        <td>{{ person.id }}</td>
+        <td>{{ person.firstName }}</td>
+        <td>{{ person.lastName }}</td>
+      </tr>
+    </tbody>
+    <tbody *ngIf="persons?.length == 0">
+      <tr>
+        <td colspan="3" class="no-data-available">No data!</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- <table datatable [dtOptions]="dtOptions" class="row-border hover">
+    <thead>
+      <tr>
+        <th>NAME</th>
+        <th>ADRESS</th>
+        <th>EMAIL</th>
+        <th>DISCRIPTION</th>
+      </tr>
+    </thead>
+    <tbody *ngIf="students?.length != 0">
+      <tr *ngFor="let student of students">
+        <td>{{ student.name }}</td>
+        <td>{{ student.adress }}</td>
+        <td>{{ student.email }}</td>
+        <td>{{ student.discription }}</td>
+      </tr>
+    </tbody>
+    <tbody *ngIf="students?.length == 0">
+      <tr>
+        <td colspan="3" class="no-data-available">No data!</td>
+      </tr>
+    </tbody>
+  </table> -->

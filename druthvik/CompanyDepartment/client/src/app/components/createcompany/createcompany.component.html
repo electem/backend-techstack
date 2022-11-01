@@ -1,0 +1,67 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-4 offset-md-4">
+      <div class="card mb-4">
+        <div class="card-body">
+          <form
+            [formGroup]="createcompanyForm"
+            (ngSubmit)="createCompanyValidate()"
+          >
+            <div class="form-group">
+              <label>Name</label>
+              <input
+                type="text"
+                formControlName="name"
+                class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.name.errors }"
+                [(ngModel)]="createcompany.name"
+              />
+              <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                <div *ngIf="f.name.errors.required">Name is required</div>
+              </div>
+            </div>
+            <br />
+            <div class="form-group">
+              <label>Address</label>
+              <input
+                type="text"
+                formControlName="address"
+                class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.address.errors }"
+                [(ngModel)]="createcompany.address"
+              />
+              <div
+                *ngIf="submitted && f.address.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="f.address.errors.required">Address is required</div>
+              </div>
+            </div>
+            <br />
+            <div class="form-group">
+              <label for="options">Departments:</label>
+              <div *ngFor="let department of departmentlist">
+                <label>
+                  <input
+                    type="checkbox"
+                    name="options"
+                    value="{{ department.value }}"
+                    (click)="selectedDepartment(department)"
+                  />
+                  {{ department.name }}
+                </label>
+              </div>
+            </div>
+            <br />
+            <div class="text-center">
+              <button class="btn btn-primary">Create</button>
+              <button class="btn btn-secondary btn-space" type="reset">
+                Cancel
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

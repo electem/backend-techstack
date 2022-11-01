@@ -1,0 +1,25 @@
+<p>gamelist works!</p>
+<table class="table table-striped table-bordered justify-content-center">
+    <thead class="thead-light">
+      <tr class="active">
+        <th class="text-center" scope="col">Id</th>
+        <th class="text-center" scope="col">Name</th>
+        <th class="text-center" scope="col">Players</th>
+        <th class="text-center" scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody *ngFor="let game of games; let i = index">
+        <tr class="success">
+          <th class="text-center" scope="row">{{ game.id }}</th>
+          <th class="text-center" scope="row">{{ game.name }}</th>
+          <th class="text-center" scope="row"> {{ game.players?.length }}</th>
+          <button
+        class="btn btn-outline-success"
+        scope="row"
+        routerLink=  "/gameedit/{{game.id}}"
+      >
+        Edit
+      </button>
+        </tr>
+    </tbody>
+    </table>

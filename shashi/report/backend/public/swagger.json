@@ -139,36 +139,6 @@
 				"security": [],
 				"parameters": []
 			},
-			"post": {
-				"operationId": "CreatePanel",
-				"responses": {
-					"200": {
-						"description": "Ok",
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/Panel"
-								}
-							}
-						}
-					}
-				},
-				"tags": [
-					"panel"
-				],
-				"security": [],
-				"parameters": [],
-				"requestBody": {
-					"required": true,
-					"content": {
-						"application/json": {
-							"schema": {
-								"$ref": "#/components/schemas/IPanelPayload"
-							}
-						}
-					}
-				}
-			},
 			"put": {
 				"operationId": "UpdatePanel",
 				"responses": {
@@ -198,6 +168,26 @@
 						}
 					}
 				}
+			},
+			"post": {
+				"operationId": "CreatePanelMap",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Panel"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"panel"
+				],
+				"security": [],
+				"parameters": []
 			}
 		},
 		"/panels/{id}": {
@@ -240,10 +230,7 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"items": {
-										"$ref": "#/components/schemas/Test"
-									},
-									"type": "array"
+									"$ref": "#/components/schemas/Panel"
 								}
 							}
 						}
@@ -254,6 +241,36 @@
 				],
 				"security": [],
 				"parameters": []
+			},
+			"post": {
+				"operationId": "CreateJsonData",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "string"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"test"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/Panel"
+							}
+						}
+					}
+				}
 			}
 		}
 	},

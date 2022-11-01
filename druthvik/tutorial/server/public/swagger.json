@@ -205,20 +205,26 @@
 						"type": "string",
 						"format": "date-time"
 					},
+					"createdAtStr": {
+						"type": "string"
+					},
 					"tutorialId": {
 						"type": "number",
 						"format": "double"
 					},
 					"tutorial": {
 						"$ref": "#/components/schemas/Tutorial"
-					}
+					},
+					"comment": {}
 				},
 				"required": [
 					"id",
 					"content",
 					"createdAt",
+					"createdAtStr",
 					"tutorialId",
-					"tutorial"
+					"tutorial",
+					"comment"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -231,11 +237,15 @@
 					"tutorialId": {
 						"type": "number",
 						"format": "double"
+					},
+					"timeZone": {
+						"type": "string"
 					}
 				},
 				"required": [
 					"content",
-					"tutorialId"
+					"tutorialId",
+					"timeZone"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -382,6 +392,51 @@
 				},
 				"required": [
 					"title"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"userLogin": {
+				"properties": {
+					"id": {
+						"type": "number",
+						"format": "double"
+					},
+					"userName": {
+						"type": "string"
+					},
+					"password": {
+						"type": "string"
+					},
+					"role": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"id",
+					"userName",
+					"password",
+					"role"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IUserLoginPayload": {
+				"properties": {
+					"userName": {
+						"type": "string"
+					},
+					"password": {
+						"type": "string"
+					},
+					"role": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"userName",
+					"password",
+					"role"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -602,7 +657,10 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/Comment"
+									"items": {
+										"$ref": "#/components/schemas/Comment"
+									},
+									"type": "array"
 								}
 							}
 						}
@@ -623,40 +681,6 @@
 						}
 					}
 				}
-			}
-		},
-		"/comments/{id}": {
-			"get": {
-				"operationId": "GetCommentTutorial",
-				"responses": {
-					"200": {
-						"description": "Ok",
-						"content": {
-							"application/json": {
-								"schema": {
-									"items": {
-										"$ref": "#/components/schemas/Comment"
-									},
-									"type": "array"
-								}
-							}
-						}
-					}
-				},
-				"tags": [
-					"Comment"
-				],
-				"security": [],
-				"parameters": [
-					{
-						"in": "path",
-						"name": "id",
-						"required": true,
-						"schema": {
-							"type": "string"
-						}
-					}
-				]
 			}
 		},
 		"/chocolates": {
@@ -1123,6 +1147,95 @@
 				},
 				"tags": [
 					"Category"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/userlogin": {
+			"post": {
+				"operationId": "CreateUser",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/userLogin"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"UserLogin"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/IUserLoginPayload"
+							}
+						}
+					}
+				}
+			},
+			"get": {
+				"operationId": "GetAuth",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "boolean",
+									"nullable": true
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"UserLogin"
+				],
+				"security": [],
+				"parameters": []
+			}
+		},
+		"/userlogin/{id}": {
+			"get": {
+				"operationId": "GetUser",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"allOf": [
+										{
+											"$ref": "#/components/schemas/userLogin"
+										}
+									],
+									"nullable": true
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"UserLogin"
 				],
 				"security": [],
 				"parameters": [

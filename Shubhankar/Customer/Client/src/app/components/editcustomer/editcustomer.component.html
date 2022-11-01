@@ -1,0 +1,85 @@
+<form [formGroup]="editcustomer" (ngSubmit)="signup()">
+  <div class="formbox center">
+    <div class="form-group input center">
+      <label for="name">Name</label>
+      <input
+        type="text"
+        name="name"
+        class="form-control"
+        [(ngModel)]="customer.name"
+        formControlName="name"
+        [ngClass]="{ 'is-invalid': submitted && fval.name.errors }"
+      />
+      <div *ngIf="submitted && fval.name.errors" class="invalid-feedback">
+        <div *ngIf="fval.name.errors.required">Name Field is required</div>
+      </div>
+    </div>
+    <div class="form-group input center">
+      <label for="status">Status</label>
+      <input
+        type="text"
+        name="status"
+        class="form-control"
+        [(ngModel)]="customer.status"
+        formControlName="status"
+        [ngClass]="{ 'is-invalid': submitted && fval.status.errors }"
+      />
+      <div *ngIf="submitted && fval.status.errors" class="invalid-feedback">
+        <div *ngIf="fval.status.errors.required">Status Field is required</div>
+      </div>
+    </div>
+    <br />
+    <div class="form-group input center">
+      <label for="name">Address</label>
+      <input
+        name="address"
+        type="text"
+        class="form-control"
+        [(ngModel)]="customer.address"
+        formControlName="address"
+        [ngClass]="{ 'is-invalid': submitted && fval.address.errors }"
+      />
+      <div *ngIf="submitted && fval.address.errors" class="invalid-feedback">
+        <div *ngIf="fval.address.errors.required">
+          address Field is required
+        </div>
+      </div>
+      <div class="form-group input center">
+        <label for="name">PhoneNumber</label>
+        <input
+          name="phonenumber"
+          type="text"
+          class="form-control"
+          [(ngModel)]="customer.phonenumber"
+          formControlName="phonenumber"
+          [ngClass]="{ 'is-invalid': submitted && fval.phonenumber.errors }"
+        />
+        <div
+          *ngIf="submitted && fval.phonenumber.errors"
+          class="invalid-feedback"
+        >
+          <div *ngIf="fval.phonenumber.errors.required">
+            phonenumber Field is required
+          </div>
+        </div>
+      </div>
+      <div class="form-group input center">
+        <label for="unit">Unit</label>
+        <select
+      class="custom-select"
+      formControlName="unit"
+      id="unit"
+      formControlName="unit"
+      [ngClass]="{ 'is-invalid': submitted && fval.unit.errors }">
+      <option *ngFor="let unit of units" [ngValue]="unit">
+        {{ unit.name }}
+      </option>
+      <div *ngIf="submitted && fval.unit.errors" class="invalid-feedback">
+        <div *ngIf="fval.unit.errors.required">unit Field is required</div>
+      </div>
+    </select>
+      </div>
+      </div>
+    <button (click)="updateCustomer()">Update</button>
+  </div>
+</form>

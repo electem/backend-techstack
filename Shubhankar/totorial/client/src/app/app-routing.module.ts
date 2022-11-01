@@ -19,10 +19,12 @@ import { NewtutorialComponent } from './components/newtutorial/newtutorial.compo
 import { EmployeelistComponent } from './components/employeelist/employeelist.component'
 import { EditStudentComponent } from './components/edit-student/edit-student.component'
 import {TutorialDetailnewComponent} from './components/tutorial-detailnew/tutorial-detailnew.component'
+import { LoginComponent } from './components/login/login.component'
 
 
 const routes: Routes = [
-  { path: '', redirectTo: 'tutorials', pathMatch: 'full' },
+  { path: '', redirectTo: 'loginusers', pathMatch: 'full' },
+  // { path: '', redirectTo: 'tutorials', pathMatch: 'full' },
   { path: 'tutorials', component: TutorialsListComponent },
   { path: 'tutorials/:id', component: TutorialDetailsComponent },
   { path: 'add', component: AddTutorialComponent },
@@ -44,6 +46,7 @@ const routes: Routes = [
   { path: 'Employeelist', component: EmployeelistComponent },
  { path: 'Studentform/:id', component: EditStudentComponent },
  { path: 'tutorial-detailnew/:id', component: TutorialDetailnewComponent },
+ { path: 'loginusers', component: LoginComponent },
 ]
 
 

@@ -1,0 +1,36 @@
+<div class="list row">
+  <h2 class="py-4">Games Lists</h2>
+  <div class="col-md-8">
+    <div class="input-group mb-3"></div>
+  </div>
+  <div class="container">
+    <br />
+    <table class="table table-bordered justify-content-center">
+      <thead class="thead-light">
+        <tr class="active">
+          <th class="text-center" scope="col">id</th>
+          <th class="text-center" scope="col">name</th>
+          <th class="text-center" scope="col">players</th>
+          <th class="text-center" scope="col">options</th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let customer of gameList; let i = index">
+        <tr class="success">
+          <th class="text-center" scope="row">{{ customer.id }}</th>
+          <th class="text-center" scope="row">{{ customer.name }}</th>
+          <th class="text-center" scope="row">
+            {{ customer.players?.length }}
+          </th>
+          <button
+            type="button"
+            style="margin: px"
+            class="btn-outline-secondary btn btn-sm mr-2"
+            routerLink="/editgamelist/{{ customer.id }}"
+          >
+            Edit
+          </button>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

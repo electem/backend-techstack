@@ -1,0 +1,76 @@
+<div class="form-bg">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 offset-md-3 col-md-6 col-sm-offset-2 col-sm-8">
+        <div class="form-container">
+          <h3 class="title">CREATE DEPARTMENT</h3>
+          <form
+            class="form-horizontal"
+            [formGroup]="createDepartmentForm"
+            (ngSubmit)="saveDepartment()"
+          >
+            <div class="form-group">
+              <label>DEPARTMENT NAME</label>
+              <input
+                type="text"
+                formControlName="departmentname"
+                class="form-control"
+                [ngClass]="{
+                  'is-invalid':
+                    submitted && formValidation.departmentname.errors
+                }"
+                [(ngModel)]="department.departmentname"
+              />
+              <div
+                *ngIf="submitted && formValidation.departmentname.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="formValidation.departmentname.errors.required">
+                  department name is required
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>TYPE</label>
+              <input
+                type="text"
+                formControlName="type"
+                class="form-control"
+                [ngClass]="{
+                  'is-invalid': submitted && formValidation.type.errors
+                }"
+                [(ngModel)]="department.type"
+              />
+              <div
+                *ngIf="submitted && formValidation.type.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="formValidation.type.errors.required">
+                  type is required
+                </div>
+              </div>
+            </div>
+            <button class="btn signin">Submit</button>
+            <div class="social-links">
+              <button
+                class="btn btn-outline-danger btn-sm btn-space"
+                routerLink="/departmentlist"
+              >
+                Cancel
+              </button>
+            </div>
+          </form>
+          <div style="width: 50%">
+            <ng-multiselect-dropdown
+              [settings]="dropdownSettings"
+              [data]="companiesList"
+              (onSelect)="selectedCompany($event)"
+              (onSelectAll)="onSelectAllCompany($event)"
+            >
+            </ng-multiselect-dropdown>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

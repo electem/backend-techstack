@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "name": "shiva",
+    "fees": 25000,
+    "class": "7th"
+  },
+  {
+    "id": 2,
+    "name": "dhru",
+    "fees": 20000,
+    "class": "8th"
+  },
+  {
+    "id": 3,
+    "name": "harsha",
+    "fees": 150000,
+    "class": "9th"
+  },
+  {
+    "id": 4,
+    "name": "adhar",
+    "fees": 15000,
+    "class": "8th"
+  },
+  {
+    "id": 5,
+    "name": "shub",
+    "fees": 16000,
+    "class": "7th"
+  },
+  {
+    "id": 6,
+    "name": "shash",
+    "fees": 10000,
+    "class": "7th"
+  },
+  {
+    "id": 7,
+    "name": "shiva1",
+    "fees": 25000,
+    "class": "7th"
+  },
+  {
+    "id": 8,
+    "name": "dhru1",
+    "fees": 20000,
+    "class": "7th"
+  },
+  {
+    "id": 9,
+    "name": "harsha1",
+    "fees": 150000,
+    "class": "7th"
+  },
+  {
+    "id": 10,
+    "name": "adhar1",
+    "fees": 15000,
+    "class": "7th"
+  },
+  {
+    "id": 11,
+    "name": "shub1",
+    "fees": 16000,
+    "class": "7th"
+  },
+  {
+    "id": 12,
+    "name": "shash1",
+    "fees": 10000,
+    "class": "7th"
+  }
+]

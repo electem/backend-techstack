@@ -21,12 +21,8 @@ import com.example.postgresdemo.repository.TutorialRepository;
 @CrossOrigin
 public class TutorialController {
 
-	private final TutorialRepository tutorialRepository;
-
 	@Autowired
-	public TutorialController(TutorialRepository tutorialRepository) {
-		this.tutorialRepository = tutorialRepository;
-	}
+	TutorialRepository tutorialRepository;
 
 	// This method is used to get tutorial by id data from the Database.
 	@GetMapping("/tutorials/{id}")
