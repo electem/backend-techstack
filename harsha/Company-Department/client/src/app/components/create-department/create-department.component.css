@@ -6,7 +6,8 @@ body{
 }
 
 .form form{
-  background-color: #fff;
+  background-color: rgb(42, 47, 32);
+  color: whitesmoke;
    max-width: 400px;
   margin: auto;
   padding: 50px 70px;

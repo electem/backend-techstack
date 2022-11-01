@@ -26,7 +26,7 @@
         <label for="options">Current Departments</label>
         <div *ngFor="let department of currentCompany.departments">
           <label>
-            <input type="checkbox" name="name" [(ngModel)]="department.name"
+            <input type="checkbox" name="name1" [(ngModel)]="department.name"
               (click)="onSelectPushToDepartmentList(department)" />
             {{ department.name }}
           </label>
