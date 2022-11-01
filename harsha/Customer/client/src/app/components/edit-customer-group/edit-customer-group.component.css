@@ -1,0 +1,13 @@
+input {
+  width: 500px;
+}
+.float {
+  float: left;
+}
+.floating {
+  float: right;
+}
+.button {
+  padding-right: 200px;
+  margin: 50px;
+}

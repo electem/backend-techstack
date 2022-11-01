@@ -1,0 +1,51 @@
+<h1 class="card-title text-center">Edit Company</h1>
+<div class="global-container">
+  <div class="card login-form">
+    <form>
+      <div class="form-group col-md-4">
+        <label for="name">Name</label>
+        <input type="name" name="name" class="form-control" [(ngModel)]="currentCompany.name" />
+      </div>
+
+      <div class="form-group col-md-4">
+        <label for="address">Address</label>
+        <input type="address" name="address" class="form-control" [(ngModel)]="currentCompany.address" />
+      </div>
+
+      <div class="form-group col-md-4">
+        <label for="email">Email</label>
+        <input type="email" name="email" class="form-control" [(ngModel)]="currentCompany.email" />
+      </div>
+
+      <div class="form-group col-md-4">
+        <label for="phoneNo">Phone No</label>
+        <input type="number" name="phoneNo" class="form-control" [(ngModel)]="currentCompany.phoneNo" />
+      </div>
+
+      <div class="form-group input centre">
+        <label for="options">Current Departments</label>
+        <div *ngFor="let department of currentCompany.departments">
+          <label>
+            <input type="checkbox" name="name1" [(ngModel)]="department.name"
+              (click)="onSelectPushToDepartmentList(department)" />
+            {{ department.name }}
+          </label>
+        </div><br>
+        <div>
+          <label for="options">Department List</label>
+          <div *ngFor="let department of departmentList">
+            <label>
+              <input type="checkbox" (click)="onSelectPushToCurrentDepartment(department)" />
+              {{ department.name }}
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <button type="button" class="btn btn-success" (click)="updateCompany()">
+        Update
+      </button>
+      <button type=" button" class="btn btn-warning" routerLink="/company-list">Cancel</button>
+    </form>
+  </div>
+</div>

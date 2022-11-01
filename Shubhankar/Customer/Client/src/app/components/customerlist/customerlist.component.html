@@ -1,0 +1,64 @@
+<head>
+  <meta charset="utf-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+    crossorigin="anonymous"
+  />
+  <img
+    src="pic_trulli.jpg"
+    alt="Italian Trulli"
+    class="img-fluid"
+    alt="Responsive image"
+  />
+</head>
+<div class="form-group">
+  <select
+    style="width: 100%"
+    [(ngModel)]="selectedStatus"
+    (ngModelChange)="onSelection(selectedStatus)"
+  >
+    <option>Choose Status</option>
+    <option *ngFor="let status of status" [ngValue]="status">
+      {{ status.name }}
+    </option>
+  </select>
+</div>
+<h4>Customer</h4>
+<button type="button" class="btn btn-primary" (click)="click()">
+  Add customer
+</button>
+<table class="table table-striped table-bordered justify-content-center">
+  <thead class="thead-light">
+    <tr class="active">
+      <th class="text-center" scope="col">Name</th>
+      <th class="text-center" scope="col">Status</th>
+      <th class="text-center" scope="col">Location</th>
+      <th class="text-center" scope="col">Phonenumber</th>
+      <th class="text-center" scope="col">Option</th>
+    </tr>
+  </thead>
+  <tbody *ngFor="let customer of activeCustomer; let i = index">
+    <tr class="success">
+      <th class="text-center" scope="row">{{ customer.name }}</th>
+      <th class="text-center" scope="row">{{ customer.status }}</th>
+      <th class="text-center" scope="row">{{ customer.address }}</th>
+      <th class="text-center" scope="row">{{ customer.phonenumber }}</th>
+      <button
+        class="btn btn-outline-success"
+        scope="row"
+        routerLink="/edit/{{ customer.id }}"
+      >
+        Edit
+      </button>
+      <button class="btn btn-outline-danger" (click)="Deletecustomer(customer)">
+        Delete
+      </button>
+    </tr>
+  </tbody>
+</table>

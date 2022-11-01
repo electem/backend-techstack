@@ -1,0 +1,85 @@
+<div class="list row">
+  <h2 class="py-4">Departments List</h2>
+  <div class="col-md-8">
+    <div class="input-group mb-3"></div>
+  </div>
+  <div class="col-md-6">
+    <ul class="list-group"></ul>
+    <td>
+      <button routerLink="/createdepartment">ADD NEW DEPARTMENT</button>
+    </td>
+  </div>
+  <div class="container">
+    <br />
+    <table
+      class="table table-striped table-hover table-bordered border-secondary"
+    >
+      <thead>
+        <tr class="active">
+          <th class="text-center" scope="col">Department Name</th>
+          <th class="text-center" scope="col">Type</th>
+          <th class="text-center" scope="col">Companies</th>
+          <th class="text-center" scope="col">Created Date</th>
+          <th class="text-center" scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody
+        *ngFor="
+          let department of departmentsList
+            | paginate
+              : {
+                  itemsPerPage: itemsPerPage,
+                  currentPage: page,
+                  totalItems: totalItems
+                };
+          let i = index
+        "
+      >
+        <tr>
+          <th class="text-center" scope="row">
+            {{ department.departmentname }}
+          </th>
+          <th class="text-center" scope="row">{{ department.type }}</th>
+          <th class="text-center" scope="row">
+            {{ department.company?.length }}
+          </th>
+          <th class="text-center" scope="row">
+            {{ department.createdAt | date: "short" }}
+          </th>
+          <th class="text-center" scope="row">
+            <button
+              type="button"
+              class="btn btn-outline-secondary btn-rounded btn-sm fw-bold"
+              mdbRipple
+              rippleColor="dark"
+              routerLink="/editdepartment/{{ department.id }}"
+            >
+              Edit
+            </button>
+            <button
+              type="button"
+              style="margin: px"
+              class="btn-outline-danger btn btn-sm mr-2 btn-space"
+              (click)="deleteDepartmentById(department.id!)"
+            >
+              delete
+            </button>
+          </th>
+        </tr>
+      </tbody>
+    </table>
+    <br />
+    <pagination-controls
+      class="pagi"
+      (pageChange)="pagination((page = $event))"
+    ></pagination-controls>
+  </div>
+</div>
+<div class="marginleftpage">
+  Items per Page:
+  <select (change)="handlePageSizeChange($event)">
+    <option *ngFor="let size of pagesizes" [ngValue]="size">
+      {{ size }}
+    </option>
+  </select>
+</div>

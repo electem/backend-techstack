@@ -1,0 +1,51 @@
+.global-container {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: end;
+  color: rgb(86, 7, 213);
+}
+form {
+  padding-top: 10px;
+  font-size: 14px;
+  margin-top: 30px;
+}
+.login-form {
+  width: 400px;
+  height: 600px;
+  margin: 10px;
+  border-radius: 10px !important;
+  background-color: rgb(242, 246, 254);
+  text-align: center;
+}
+
+input[type="name"],
+input[type="address"],
+input[type="email"],
+input[type="number"] {
+  background-color: rgb(239, 225, 230);
+  border: 2px solid green;
+  border-radius: 10px;
+  margin-bottom: 25px;
+  width: 300px;
+}
+
+input[type="name"]:focus,
+input[type="address"]:focus,
+input[type="email"]:focus,
+input[type="number"]:focus {
+  outline: none;
+  border: none;
+  text-align: center;
+  background-color: slategray;
+  color: antiquewhite;
+  margin: 0;
+}
+
+.button {
+  background-color: rgb(143, 143, 123) !important;
+  font-size: 14px;
+  transform: translateY(10px);
+  border-radius: 10px !important;
+}

@@ -1,0 +1,168 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-4 offset-md-4">
+      <div class="card mb-4">
+        <div class="card-body">
+          <form
+            [formGroup]="registerCustomerForm"
+            (ngSubmit)="registerCustomerValidate()"
+          >
+            <div class="form-group">
+              <label>Name</label>
+              <input
+                type="text"
+                formControlName="name"
+                class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.name.errors }"
+                [(ngModel)]="createcustomer.name"
+              />
+              <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                <div *ngIf="f.name.errors.required">Name is required</div>
+              </div>
+            </div>
+            <br />
+            <div class="form-group">
+              <label>Phone Number</label>
+              <input
+                type="text"
+                formControlName="phonenumber"
+                class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.phonenumber.errors }"
+                [(ngModel)]="createcustomer.phonenumber"
+              />
+              <div
+                *ngIf="submitted && f.phonenumber.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="f.phonenumber.errors.required">
+                  Phone Number is required
+                </div>
+                <div *ngIf="f.phonenumber.errors.email">
+                  Phone Number must be a valid phonenumber
+                </div>
+              </div>
+            </div>
+            <br />
+            <div class="sub-heading">Enter Your Address</div>
+            <textarea
+              appTextareaAutosize
+              placeholder="Enter Your Address Here here..."
+              class="text-input"
+              formControlName="address"
+              [ngClass]="{ 'is-invalid': submitted && f.address.errors }"
+              [(ngModel)]="createcustomer.address"
+            >
+            </textarea>
+            <div *ngIf="submitted && f.address.errors" class="invalid-feedback">
+              <div *ngIf="f.address.errors.required">Address is required</div>
+            </div>
+
+            <br />
+            <div class="form-group">
+              <label>Status</label>
+              <input
+                type="text"
+                formControlName="status"
+                class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.status.errors }"
+                [(ngModel)]="createcustomer.status"
+              />
+              <div
+                *ngIf="submitted && f.status.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="f.status.errors.required">Name is required</div>
+              </div>
+            </div>
+            <!-- <div class="form-group col">
+              <label>Status</label>
+              <select
+                formControlName="status"
+                aria-placeholder="choose role"
+                name="status"
+                class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.status.errors }"
+                [(ngModel)]="createcustomer.status"
+              >
+                <option value="null" hidden disabled>Choose everything</option>
+                <option *ngFor="let status of status" [ngValue]="status">
+                  {{ status.name }}
+                </option>
+              </select>
+              <div
+                *ngIf="submitted && f.status.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="f.status.errors.required">Status is required</div>
+              </div>
+            </div> -->
+            <!-- <div class="form-group col">
+              <label>Customer Group</label>
+              <select
+                formControlName="status"
+                aria-placeholder="choose role"
+                name="customergroup"
+                class="form-control"
+                [ngClass]="{
+                  'is-invalid': submitted && f.customergroup.errors
+                }"
+                [(ngModel)]="createcustomer.customergroup"
+              >
+                <option value="null" hidden disabled>Choose everything</option>
+                <option
+                  *ngFor="let customergroup of customersGroup"
+                  [ngValue]="status"
+                >
+                  {{ customergroup.name }}
+                </option>
+              </select>
+              <div
+                *ngIf="submitted && f.customergroup.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="f.customergroup.errors.required">
+                  Status is required
+                </div>
+              </div>
+            </div> -->
+            <!-- <div class="form-group">
+              <label for="DDCategory">Category Dropdown</label>
+              <select
+                class="custom-select"
+                name="customergroup"
+                [(ngModel)]="createcustomer.customergroup"
+                #DDCategory="ngModel"
+                [ngClass]="{ 'is-invalid': f.submitted && DDCategory.invalid }"
+                required
+              >
+                <option value="" class="text-primary font-weight-bolder">
+                  --- Select Category ---
+                </option>
+                <option
+                  *ngFor="let Category of customersGroup"
+                  [value]="Category.name"
+                >
+                  {{ Category.name }}
+                </option>
+              </select>
+
+              <div
+                *ngIf="f.submitted && DDCategory.invalid"
+                class="text-danger"
+              >
+                <h6 *ngIf="DDCategory.errors.required">Category is Required</h6>
+              </div>
+            </div> -->
+            <br />
+            <div class="text-center">
+              <button class="btn btn-primary">Register</button>
+              <button class="btn btn-secondary btn-space" type="reset">
+                Cancel
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

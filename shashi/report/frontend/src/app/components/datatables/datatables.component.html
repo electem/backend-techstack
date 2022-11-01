@@ -1,0 +1,24 @@
+<p>datatables works!</p>
+<table id="example" datatable [dtOptions]="dtOptions" class="row-border hover">
+  <thead>
+    <tr>
+      <th>id</th>
+      <th>name</th>
+      <th>fees</th>
+      <th>class</th>
+    </tr>
+  </thead>
+  <tbody *ngIf="this.students?.length != 0">
+    <tr *ngFor="let person of this.students">
+      <td>{{ person.id }}</td>
+      <td>{{ person.name }}</td>
+      <td>{{ person.fees }}</td>
+      <td>{{ person.class }}</td>
+    </tr>
+  </tbody>
+  <tbody *ngIf="this.students?.length == 0">
+    <tr>
+      <td colspan="3" class="no-data-available">No data!</td>
+    </tr>
+  </tbody>
+</table>

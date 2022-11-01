@@ -1,0 +1,89 @@
+<h1>Add Customer Group</h1>
+<form [formGroup]="addGroup">
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input
+      type="text"
+      formControlName="name"
+      class="form-control"
+      [(ngModel)]="customerGroup.name"
+      [ngClass]="{ 'is-invalid': submitted && validation.name.errors }"
+    />
+    <div
+      *ngIf="this.submitted && validation.name.errors"
+      class="invalid-feedback"
+    >
+      <div *ngIf="validation.name.errors.required">
+        User Name Field is required
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="description">Description</label>
+    <input
+      type="text"
+      formControlName="description"
+      class="form-control"
+      [(ngModel)]="customerGroup.descritption"
+      [ngClass]="{ 'is-invalid': submitted && validation.description.errors }"
+    />
+    <div
+      *ngIf="submitted && validation.description.errors"
+      class="invalid-feedback"
+    >
+      <div *ngIf="validation.description.errors.required">
+        Description Field is required
+      </div>
+    </div>
+  </div>
+  <h3>Assign Customers</h3>
+  <table class="table table-bordered table-striped table-hover">
+    <thead>
+      <tr>
+        <th class="text-center">Available</th>
+      </tr>
+    </thead>
+    <div style="float: left">
+      <tbody *ngFor="let customer of customers; let i = index">
+        <tr class="success">
+          <td (click)="setActiveCustomer(customer)">
+            {{ customer.name }}
+          </td>
+        </tr>
+      </tbody>
+    </div>
+    <button type="button" class="btn btn-success" (click)="onSelectCustomer()">
+      Add</button
+    ><br />
+    <button
+      type=" button"
+      class="m-3 btn btn-sm btn-danger"
+      (click)="removeCustomerFromList()"
+    >
+      Remove
+    </button>
+    <div style="float: right">
+      <tbody *ngFor="let customer of selectedCustomers; let i = index">
+        <tr class="success">
+          <td (click)="onSelectingFromNewCustomerList(customer)">
+            {{ customer.name }}
+          </td>
+        </tr>
+      </tbody>
+    </div>
+  </table>
+  <button
+    type="button"
+    class="btn btn-success"
+    (click)="registerCustomerValidate()"
+  >
+    Save
+  </button>
+  <button
+    type=" button"
+    class="btn btn-warning"
+    routerLink="/customer-group-list"
+  >
+    Cancel
+  </button>
+</form>

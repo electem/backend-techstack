@@ -1,0 +1,51 @@
+<form>
+  <div class="formbox center">
+    <div class="form-group input center">
+      <label for="name">Name</label>
+      <input
+        type="text"
+        name="name"
+        class="form-control"
+        [(ngModel)]="company.name"
+      />
+    </div>
+    <br />
+    <div class="form-group input center">
+      <label for="name">Address</label>
+      <input
+        name="phonenumber"
+        type="text"
+        class="form-control"
+        [(ngModel)]="company.address"
+      />
+    </div>
+    <div class="form-group">
+      <label for="options">Active Departments:</label>
+      <div *ngFor="let department of company.department">
+        <label>
+          <input
+            type="checkbox"
+            name="options"
+            [(ngModel)]="company.department"
+            (click)="removeSelectedDepartmentFromCompany(department)"
+          />
+          {{ department.name }}
+        </label>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="options">New Departments:</label>
+      <div *ngFor="let department of departments">
+        <label>
+          <input
+            type="checkbox"
+            name="options"
+            (click)="removeActiveDepartment(department)"
+          />
+          {{ department.name }}
+        </label>
+      </div>
+    </div>
+    <button (click)="updateCompany()">Update</button>
+  </div>
+</form>

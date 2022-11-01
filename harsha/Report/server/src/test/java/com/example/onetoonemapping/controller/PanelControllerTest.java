@@ -16,9 +16,10 @@ class PanelControllerTest {
 
 	List<Tests> tests = new ArrayList<Tests>();
 	List<Panel> panels = new ArrayList<Panel>();
-	Panel panel = new Panel(1, "ABC", "xyz", tests);
-	Tests test = new Tests(1, "blood test", panels);
-	Tests test2 = new Tests(2, "sugar test", panels);
+	Panel panel = Panel.builder().id(1).name("ABC").description("xyz").tests(tests).build();
+	Panel panel2 = Panel.builder().id(2).name("panel2").description("abc").tests(tests).build();
+	Tests test = Tests.builder().id(1).name("blood test").panels(panels).build();
+	Tests test2 = Tests.builder().id(2).name("sugar test").panels(panels).build();
 
 	@MockBean
 	PanelRepository panelRepository;
@@ -34,9 +35,6 @@ class PanelControllerTest {
 
 	@Test
 	public void createPanel() {
-		panels.add(panel);
-		tests.add(test);
-		tests.add(test2);
 		when(panelRepository.save(panel)).thenReturn(panel);
 		assertEquals(panel, panelRepository.save(panel));
 	}

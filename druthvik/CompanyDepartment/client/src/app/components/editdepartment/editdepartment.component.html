@@ -1,0 +1,38 @@
+<div class="container">
+  <form>
+    <div class="formbox center">
+      <div class="form-group input">
+        <label for="name">Name</label>
+        <input
+          type="text"
+          name="name"
+          class="form-control"
+          [(ngModel)]="department.name"
+        />
+      </div>
+      <br />
+      <div class="form-group input center">
+        <label for="name">Address</label>
+        <input
+          name="phonenumber"
+          type="text"
+          class="form-control"
+          [(ngModel)]="department.type"
+        />
+      </div>
+    </div>
+  </form>
+  <br />
+
+  <div class="form-group input center">
+    <ng-multiselect-dropdown
+      #multiSelect
+      [settings]="dropdownSettings"
+      [data]="companies"
+      [(ngModel)]="department.company"
+    >
+    </ng-multiselect-dropdown>
+  </div>
+  <br />
+  <button (click)="updateDepartment()">Update</button>
+</div>

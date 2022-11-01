@@ -1,5 +1,4 @@
 package com.example.onetoonemapping.models;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -8,6 +7,12 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "report_panel_tests")
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import lombok.Data;
+
+@Data
 public class ReportPanelTests {
 
 	@Id
@@ -39,4 +44,9 @@ public class ReportPanelTests {
 	public void setData(String data) {
 		this.data = data;
 	}
+	private int reportId;
+
+	private int panelId;
+
+	private int testId;
 }

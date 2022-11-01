@@ -1,3 +1,4 @@
+
 <h3><strong class="text-center">Report List</strong></h3>
 <div>
   <table class="table table-bordered table-striped table-hover">
@@ -15,5 +16,27 @@
         </div>
       </td>
     </tr>
+<div class="col-md-6">
+  <h4 class="text-center">Reports List</h4>
+  <table class="table table-bordered table-striped table-hover">
+    <thead>
+      <tr>
+        <th class="text-center">Report Id</th>
+        <th class="text-center">Report Name</th>
+        <th class="text-center">Created Date</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let report of reports">
+      <tr class="success">
+        <td class="text-center">{{ report.id }}</td>
+        <td class="text-center">{{ report.name }}</td>
+        <td class="text-center">{{ report.createdAt }}</td>
+        <td>
+          <button type="button" class="btn btn-info btn-sm mr-2" routerLink="/reports-details">
+            Edit
+          </button>
+        </td>
+      </tr>
+    </tbody>
   </table>
 </div>

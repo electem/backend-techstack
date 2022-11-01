@@ -1,0 +1,28 @@
+input[type=text] {
+    color: black;
+    width: auto;
+    border:transparent red;
+}
+h4{
+    color: rgb(107, 197, 236);
+}
+p{
+    text-size-adjust: 20px
+    ;
+    size: 20px;
+    padding-right: 650px;
+}
+select{
+    width: min-content;
+    align-items: flex-end;
+}
+head{
+    background-color: aqua;
+    padding: auto;
+    margin-left: 50px;
+}
+form {
+    margin-left: 15%;
+    margin-right:15%;
+    width: auto;
+}

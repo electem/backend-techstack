@@ -1,0 +1,21 @@
+<div>
+  <nav class="navbar navbar-expand-sm bg-primary navbar-dark">
+    <div class="navbar-nav mr-auto"></div>
+    <a href="#" class="navbar-brand">Welcome to EBS</a>
+    <div class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a routerLink="customerlist" class="nav-link">Customer</a>
+      </li>
+      <li class="nav-item">
+        <a routerLink="customergroup" class="nav-link">Customer Group</a>
+      </li>
+      <li class="nav-item">
+        <a routerLink="game" class="nav-link">Game</a>
+      </li>
+    </div>
+  </nav>
+
+  <div class="container mt-3">
+    <router-outlet></router-outlet>
+  </div>
+</div>

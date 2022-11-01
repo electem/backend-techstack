@@ -4,6 +4,10 @@ import { PanelService } from 'src/app/services/panel.service';
 import { Test } from 'src/app/models/test.model';
 import { ActivatedRoute } from '@angular/router';
 import { Report } from 'src/app/models/report.model';
+import { Panel } from '../../models/panel.model';
+import { PanelService } from '../../services/panel.service';
+import { Test } from '../../models/test.model';
+import { Report } from '../../models/report.model';
 
 @Component({
   selector: 'app-panel-list',
@@ -12,12 +16,13 @@ import { Report } from 'src/app/models/report.model';
 })
 export class PanelListComponent implements OnInit {
   panels: Panel[] = [];
+  panels?: Panel[];
   tests: Test[] = [];
   selectedTests: Test[] = [];
-  selectedTestNew = new Test();
   selectedTest = new Test();
   editForm: boolean = false;
   currentPanel: Panel = {
+  panel: Panel = {
     name: '',
     description: '',
     tests: [],
@@ -28,11 +33,33 @@ export class PanelListComponent implements OnInit {
   panelForm?: boolean;
   testForm?: boolean;
   currentIndex = -1;
+  filteredPanels?: Panel[];
+  searchText!: string;
+  panelForm?: boolean;
+  testForm?: boolean;
+  report: Report = {
+    name: '',
+  };
+  savedReport = new Report();
+
   constructor(private panelService: PanelService) {}
 
   ngOnInit(): void {
     this.retrievePanels();
     this.getTests();
+    this.report.name = this.randomString(9);
+  }
+
+  randomString(length: number) {
+    const randomChars =
+      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let result = '';
+    for (let i = 0; i < length; i++) {
+      result += randomChars.charAt(
+        Math.floor(Math.random() * randomChars.length)
+      );
+    }
+    return result;
   }
 
   randomString(length: number) {
@@ -53,6 +80,7 @@ export class PanelListComponent implements OnInit {
   }
   async retrievePanels(): Promise<void> {
     this.panels = await this.panelService.getPanels();
+    this.filteredPanels = this.panels;
   }
 
   async getTests(): Promise<void> {
@@ -61,7 +89,7 @@ export class PanelListComponent implements OnInit {
 
   onSelected(value: Panel) {
     if (this.tests) {
-      for (let test of this.tests) {
+      for (const test of this.tests) {
         if (test.id == value.id) {
           this.selectedTests.push(test);
         }
@@ -87,7 +115,8 @@ export class PanelListComponent implements OnInit {
       name: this.currentPanel.name,
       description: this.currentPanel.description,
     };
-    await this.panelService.createPanel(panelData);
+    await this.panelService.createPanelByMap(panelData);
+    this.panelForm = false;
   }
 
   async saveReport(): Promise<void> {
@@ -106,9 +135,26 @@ export class PanelListComponent implements OnInit {
     };
     panel.tests = this.selectedTests;
     await this.panelService.updatePanel(this.currentPanel.id, panel);
+  async saveReport() {
+    const report: Report = {
+      name: this.report.name,
+    };
+    this.savedReport = await this.panelService.createReport(report);
+    if (this.savedReport && this.savedReport.id) {
+      localStorage.setItem('reportId', this.savedReport.id + '');
+    }
   }
 
   cancelPanel() {
     this.panelForm = false;
+  }
+
+  onSearch(event: Event) {
+    this.filteredPanels = this.panels!.filter((input) => {
+      return (
+        input.name?.startsWith((event.target as HTMLInputElement).value) ||
+        input.description?.startsWith((event.target as HTMLInputElement).value)
+      );
+    });
   }
 }

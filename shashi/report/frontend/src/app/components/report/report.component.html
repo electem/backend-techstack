@@ -1,0 +1,31 @@
+<button
+  type="button"
+  style="margin: 10px"
+  type="button"
+  class="btn btn-secondary btn-sm mr-2"
+  routerLink="/panel"
+>
+  back
+</button>
+<table class="table table-bordered justify-content-center">
+  <tr>
+    <th></th>
+    <th *ngFor="let test of tests; let j = index">
+      {{ test.name }}
+    </th>
+  </tr>
+  <tr *ngFor="let panel of panels; let i = index">
+    <th>{{ panel.name }}</th>
+    <td *ngFor="let test of tests; let j = index">
+      <div *ngIf="TestPresentInPanelTextBox(panel, test)">
+        <input
+          type="text"
+          style="width: 100px"
+          (blur)="reportDetailsSave($event, panel, test)"
+          [ngModel]="dataInsertInTextBox(panel, test)"
+        />
+      </div>
+    </td>
+  </tr>
+</table>
+</table>

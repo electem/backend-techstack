@@ -1,0 +1,25 @@
+<div>
+  <div class="form-group">
+    <label for="title">Title</label>
+    <input
+      type="text"
+      class="form-control"
+      id="title"
+      required
+      [(ngModel)]="product.title"
+      name="title"
+    />
+  </div>
+
+  <div>
+    <ng-select
+      [items]="category"
+      bindLabel="name"
+      bindValue="id"
+      [(ngModel)]="product.selectedcategory"
+    ></ng-select>
+  </div>
+  <div>
+    <button (click)="saveproduct()" class="btn btn-success">Save</button>
+  </div>
+</div>

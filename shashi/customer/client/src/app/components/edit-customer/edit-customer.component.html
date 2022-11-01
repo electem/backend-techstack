@@ -1,0 +1,79 @@
+<div class="container">
+  <h5 class="card-title text-center pb-0 fs-4">Edit Customer</h5>
+  <br />
+  <div class="row">
+    <div class="col-md-4 offset-md-4">
+      <div class="card mb-4">
+        <div class="card-body">
+          <form>
+            <div class="formbox center">
+              <div class="form-group input center">
+                <label for="customername">customername</label>
+                <input
+                  type="text"
+                  name="customername"
+                  class="form-control"
+                  [(ngModel)]="customer.customername"
+                />
+              </div>
+              <br />
+              <div class="form-group input center">
+                <label for="name">PhoneNumber</label>
+                <input
+                  name="phonenumber"
+                  type="text"
+                  class="form-control"
+                  [(ngModel)]="customer.phonenumber"
+                />
+              </div>
+              <div class="form-group input center">
+                <label for="name">street</label>
+                <input
+                  name="street"
+                  type="text"
+                  class="form-control"
+                  [(ngModel)]="customer.street"
+                />
+              </div>
+              <div class="form-group">
+                <p>
+                  Unit :
+                  <select
+                    class="form-control"
+                    placeholder="Choose units"
+                    style="width: 50%"
+                    name="units"
+                    [(ngModel)]="selectedunit.id"
+                    (ngModelChange)="onSelected(selectedunit)"
+                    name="units"
+                  >
+                    <option value="Choose units">Choose Unit</option>
+                    <option
+                      *ngFor="let category of unitsList"
+                      [ngValue]="category.id"
+                    >
+                      {{ category.name }}
+                    </option>
+                  </select>
+                </p>
+              </div>
+              <button
+                class="btn btn-outline-success btn-sm"
+                (click)="updateCustomer()"
+                routerLink="/customerList"
+              >
+                Update
+              </button>
+              <button
+                class="btn btn-outline-danger btn-sm btn-space"
+                routerLink="/customerList"
+              >
+                Cancel
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

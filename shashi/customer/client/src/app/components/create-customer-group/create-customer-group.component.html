@@ -1,0 +1,119 @@
+<div class="container">
+  <h5 class="card-title text-center pb-0 fs-4">Add Customer Group</h5>
+  <br />
+  <div class="row">
+    <div class="col-md-4 offset-md-4">
+      <div class="card mb-4">
+        <div class="card-body">
+          <form
+            [formGroup]="createCustomerGroupForm"
+            (ngSubmit)="saveCustomerGroup()"
+          >
+            <div class="form-group">
+              <label>Group name</label>
+              <input
+                type="text"
+                formControlName="groupname"
+                class="form-control"
+                [ngClass]="{
+                  'is-invalid': submitted && formValidation.groupname.errors
+                }"
+                [(ngModel)]="customerGroup.groupname"
+              />
+              <div
+                *ngIf="submitted && formValidation.groupname.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="formValidation.groupname.errors.required">
+                  group name is required
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Description</label>
+              <input
+                type="text"
+                formControlName="description"
+                class="form-control"
+                [ngClass]="{
+                  'is-invalid': submitted && formValidation.description.errors
+                }"
+                [(ngModel)]="customerGroup.description"
+              />
+              <div
+                *ngIf="submitted && formValidation.description.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="formValidation.description.errors.required">
+                  description is required
+                </div>
+              </div>
+            </div>
+            <br />
+            <div class="text-center">
+              <button class="btn btn-outline-primary btn-sm">Submit</button>
+              <button
+                class="btn btn-outline-danger btn-sm btn-space"
+                routerLink="/customergroupList"
+              >
+                Cancel
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<button
+  class="btn btn-outline-success btn-sm btn-space"
+  (click)="onSelectedCustomers()"
+  (ngSubmit)="onSelectedCustomers()"
+>
+  Add
+</button>
+<button
+  class="btn btn-outline-danger btn-sm btn-space"
+  (click)="onSelectedRemove()"
+  (ngSubmit)="onSelectedRemove()"
+>
+  remove
+</button>
+<div class="row">
+  <div class="column">
+    <table class="table table-bordered justify-content-center">
+      <tr>
+        <th class="text-center" scope="col">Availabel</th>
+      </tr>
+      <tbody *ngFor="let customer of customers; let i = index">
+        <tr class="success">
+          <th
+            class="text-center"
+            scope="row"
+            (click)="setActiveCustomer(customer)"
+          >
+            {{ customer.customername }}
+          </th>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="column">
+    <table class="table table-bordered justify-content-center">
+      <tr>
+        <th class="text-center" scope="col">Current</th>
+      </tr>
+      <tbody *ngFor="let selectedcustomer of selectedCustomers; let i = index">
+        <tr class="success">
+          <th
+            class="text-center"
+            scope="row"
+            (click)="removeActiveCustomer(selectedcustomer)"
+          >
+            {{ selectedcustomer.customername }}
+          </th>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

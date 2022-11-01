@@ -1,0 +1,62 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-4 offset-md-4">
+      <div class="card mb-4">
+        <div class="card-body">
+          <form
+            [formGroup]="createdepartmentForm"
+            (ngSubmit)="createDepartmentValidate()"
+          >
+            <div class="form-group">
+              <label>Name</label>
+              <input
+                type="text"
+                formControlName="name"
+                class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.name.errors }"
+                [(ngModel)]="createdepartment.name"
+              />
+              <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                <div *ngIf="f.name.errors.required">Name is required</div>
+              </div>
+            </div>
+            <br />
+            <div class="form-group">
+              <label>Type</label>
+              <input
+                type="text"
+                formControlName="type"
+                class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.type.errors }"
+                [(ngModel)]="createdepartment.type"
+              />
+              <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                <div *ngIf="f.type.errors.required">Type is required</div>
+              </div>
+            </div>
+            <br />
+            <div class="form-group">
+              <ng-multiselect-dropdown
+                [settings]="dropdownSettings"
+                [data]="companies"
+                (onSelect)="onSelectCompany($event)"
+                (onSelectAll)="onSelectAllCompanies($event)"
+                [class.is-invalid]="
+                  f?.company?.errors?.required && f?.company?.touched
+                "
+              >
+              </ng-multiselect-dropdown>
+            </div>
+            <br />
+            <div class="text-center">
+              <button class="btn btn-primary">Create</button>
+              <button class="btn btn-secondary btn-space" type="reset">
+                Cancel
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

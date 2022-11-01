@@ -1,0 +1,63 @@
+<div class="list row">
+  <h2 class="py-4">Customer Lists</h2>
+  <div class="col-md-8">
+    <div class="input-group mb-3"></div>
+  </div>
+  <div class="form-group">
+    <p>
+      Category :
+      <select
+        style="width: 20%"
+        [(ngModel)]="statusObject"
+        (ngModelChange)="onSelected(statusObject)"
+      >
+        <option *ngFor="let status of status" [ngValue]="status">
+          {{ status.name }}
+        </option>
+      </select>
+    </p>
+  </div>
+
+  <div class="col-md-6">
+    <ul class="list-group"></ul>
+    <td>
+      <button routerLink="/createcustomer">ADD CUSTOMER</button>
+    </td>
+  </div>
+  <div class="container">
+    <br />
+    <table class="table table-bordered justify-content-center">
+      <thead class="thead-light">
+        <tr class="active">
+          <th class="text-center" scope="col">Name</th>
+          <th class="text-center" scope="col">Ph No.</th>
+          <th class="text-center" scope="col">Address</th>
+          <th class="text-center" scope="col">status</th>
+          <th class="text-center" scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let customer of customers; let i = index">
+        <tr class="success">
+          <th class="text-center" scope="row">{{ customer.name }}</th>
+          <th class="text-center" scope="row">{{ customer.phonenumber }}</th>
+          <th class="text-center" scope="row">{{ customer.address }}</th>
+          <th class="text-center" scope="row">{{ customer.status }}</th>
+          <button
+            type="button"
+            class="btn btn-warning btn-sm mr-2"
+            routerLink="/customeredit/{{ customer.id }}"
+          >
+            Edit
+          </button>
+          <button
+            type="button"
+            class="btn btn-warning btn-sm mr-2"
+            (click)="deletebyid(customer.id)"
+          >
+            Delete
+          </button>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

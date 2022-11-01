@@ -1,0 +1,28 @@
+<h4>Games</h4>
+<div class="container">
+  <table class="table table-bordered justify-content-center">
+    <thead class="thead head">
+      <tr>
+        <th class="text-center" scope="col">Id</th>
+        <th class="text-center" scope="col">Name</th>
+        <th class="text-center" scope="col">No. Of Players</th>
+        <th class="text-center" scope="col">Edit</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let games of game; let i = index">
+      <tr class="success">
+        <th class="text-center" scope="row">{{ games.id }}</th>
+        <th class="text-center" scope="row">{{ games.Name }}</th>
+        <th class="text-center" scope="row">{{ games.players.length }}</th>
+        <th class="text-center" scope="row">
+          <button
+            class="btn btn-warning btn-sm mr-2"
+            routerLink="/game/{{ games.id }}"
+          >
+            Edit
+          </button>
+        </th>
+      </tr>
+    </tbody>
+  </table>
+</div>

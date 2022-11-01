@@ -1,0 +1,52 @@
+<div>
+  <button
+    type="button"
+    class="btn btn btn-secondary dropdown btn2"
+    (click)="editTest()"
+  >
+    Add Test To Panel
+  </button>
+  <div class="form-group dropdown dropdownwidth" *ngIf="this.showDropdown">
+    <select
+      class="custom-select"
+      [(ngModel)]="selectedTest"
+      (ngModelChange)="onSelectedTest(selectedTest)"
+    >
+      <option *ngFor="let test of tests" [ngValue]="test">
+        {{ test.name }}
+      </option>
+    </select>
+    <br />
+  </div>
+  <button
+    *ngIf="this.showDropdown"
+    type="button"
+    class="btn btn-info btn-sm mr-2"
+    (click)="updatePanel()"
+  >
+    Add Test
+  </button>
+  <form>
+    <div class="formbox center">
+      <div class="form-group input center">
+        <label for="name">Name</label>
+        <input
+          type="text"
+          name="name"
+          class="form-control"
+          [(ngModel)]="panel.name"
+        />
+      </div>
+      <br />
+      <div class="form-group input center">
+        <label for="name">Description</label>
+        <input
+          name="description"
+          type="text"
+          class="form-control"
+          [(ngModel)]="panel.description"
+        />
+      </div>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,39 @@
+<div class="col-md-6">
+  <h4 class="text-center">Customer List</h4>
+  <button class="btn-info" routerLink="/customer">
+    Add Customer
+  </button>
+  <br><br>
+  <div class="form-group">
+    <label for="status">Status</label>
+    <select [(ngModel)]="statu" (ngModelChange)="onSelected(statu)">
+      <option *ngFor="let statu of status" [ngValue]="statu">
+        {{ statu.name }}
+      </option>
+    </select>
+  </div>
+
+  <table class="table table-bordered table-striped table-hover">
+    <thead>
+      <tr>
+        <th class="text-center"> Name</th>
+        <th class="text-center">Status</th>
+        <th class="text-center">Address</th>
+        <th class="text-center">Phone Number</th>
+        <th class="text-center">&nbsp;</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let customer of selectedCustomers; let i = index">
+      <tr class="success">
+        <td class="text-center">{{ customer.name }}</td>
+        <td class="text-center">{{ customer.status }}</td>
+        <td class="text-center">{{ customer.address }}</td>
+        <td class="text-center">{{ customer.phoneNo }}</td>
+        <td>
+          <button type="button" class="btn btn-info btn-sm mr-2"
+            routerLink="/edit-customer/{{ customer.id }}">Edit</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

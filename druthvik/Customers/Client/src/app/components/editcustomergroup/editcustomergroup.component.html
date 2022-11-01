@@ -1,0 +1,65 @@
+<form>
+  <div class="formbox center">
+    <div class="form-group input center">
+      <label for="name">Name</label>
+      <input
+        type="text"
+        name="name"
+        class="form-control"
+        [(ngModel)]="customergroup.name"
+      />
+    </div>
+    <br />
+    <div class="form-group input center">
+      <label for="name">Description</label>
+      <input
+        name="description"
+        type="text"
+        class="form-control"
+        [(ngModel)]="customergroup.descritption"
+      />
+    </div>
+    <h3>Assign Customers</h3>
+    <table class="table table-bordered table-striped table-hover">
+      <thead>
+        <tr>
+          <th class="text-center">Available</th>
+        </tr>
+      </thead>
+      <div style="float: left">
+        <tbody *ngFor="let customer of customers; let i = index">
+          <tr class="success">
+            <td (click)="setActiveCustomer(customer)">
+              {{ customer.name }}
+            </td>
+          </tr>
+        </tbody>
+      </div>
+      <button
+        type="button"
+        class="btn btn-success"
+        (click)="onSelectCustomer()"
+      >
+        Add</button
+      ><br />
+      <button
+        type=" button"
+        class="m-3 btn btn-sm btn-danger"
+        (click)="removeCustomerFromList()"
+      >
+        Remove
+      </button>
+      <div style="float: right">
+        <tbody *ngFor="let customer of selectedCustomers; let i = index">
+          <tr class="success">
+            <td (click)="onSelectingFromNewCustomerList(customer)">
+              {{ customer.name }}
+            </td>
+          </tr>
+        </tbody>
+      </div>
+    </table>
+    <button (click)="updateCustomerGroup()">Update</button>
+    <button (click)="deleteGroupById()">Delete</button>
+  </div>
+</form>

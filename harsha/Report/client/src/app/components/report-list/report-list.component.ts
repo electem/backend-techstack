@@ -3,6 +3,7 @@ import { Panel } from 'src/app/models/panel.model';
 import { ReportPanelTest } from 'src/app/models/report-panel-test.model';
 import { Report } from 'src/app/models/report.model';
 import { Test } from 'src/app/models/test.model';
+import { Report } from 'src/app/models/report.model';
 import { PanelService } from 'src/app/services/panel.service';
 
 @Component({
@@ -52,5 +53,15 @@ export class ReportListComponent implements OnInit {
 
   async getTests(): Promise<void> {
     this.tests = await this.panelService.getTests();
+  reports: Report[] = [];
+
+  constructor(private panelService: PanelService) {}
+
+  ngOnInit(): void {
+    this.retrieveReports();
+  }
+
+  async retrieveReports(): Promise<void> {
+    this.reports = await this.panelService.getReports();
   }
 }
