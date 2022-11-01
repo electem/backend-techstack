@@ -16,4 +16,8 @@ export class CompanyService {
       .post<Company>(baseUrl + 'createCompany', company)
       .toPromise();
   }
+
+  async getCompanies(): Promise<Company[]> {
+    return await this.http.get<Company[]>(baseUrl + 'companies').toPromise();
+  }
 }

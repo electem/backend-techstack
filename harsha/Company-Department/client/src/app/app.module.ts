@@ -7,9 +7,10 @@ import { AppComponent } from './app.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { CreateCompanyComponent } from './components/create-company/create-company.component';
+import { CompanyListComponent } from './components/company-list/company-list.component';
 
 @NgModule({
-  declarations: [AppComponent, CreateCompanyComponent],
+  declarations: [AppComponent, CreateCompanyComponent, CompanyListComponent],
   imports: [
     NgxDatatableModule,
     BrowserModule,
