@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Customer } from 'src/app/models/customer';
-import { Customergroup } from 'src/app/models/customergroup';
-import { UserService } from 'src/app/services/user.service';
+import { Customer } from '../../models/customer';
+import { Customergroup } from '../..//models/customergroup';
+import { UserService } from '../../services/user.service';
+import { Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-editcustomergroup',
@@ -24,8 +25,11 @@ export class EditcustomergroupComponent implements OnInit {
     description: '',
     customers: [],
   };
+  currentcustomerEvent: Customer[] = [];
 
-  constructor(
+  @Output() newCustomerEvent = new EventEmitter<Customer>();
+ 
+ constructor(
     private userService: UserService,
     private formBuilder: FormBuilder,
     private router: Router,
@@ -41,7 +45,7 @@ export class EditcustomergroupComponent implements OnInit {
     this.retrievecustomers();
     this.getCustomerGroupById(this.route.snapshot.params.id);
   }
-
+ 
   async getCustomerGroupById(id: number) {
     this.customergroup = await this.userService.getCustomergroupid(id);
     this.selectCustomer = this.customergroup.customers;
@@ -52,26 +56,30 @@ export class EditcustomergroupComponent implements OnInit {
   }
   public toggleSelection(customer: Customer) {
     this.selectedCustomer = customer;
+    this.newCustomerEvent.emit(customer);
   }
   public moveSelected() {
     if (this.selectedCustomer != null) {
-      this.customerlist.push(this.selectedCustomer);
+      this.selectCustomer?.push(this.selectedCustomer);
       const index = this.customers.indexOf(this.selectedCustomer);
       if (index > -1) {
         this.customers.splice(index, 1);
+        this.currentcustomerEvent.push(this.selectedCustomer);
       }
     }
   }
 
   public toggleSelections(customer: Customer) {
     this.removedCustomer = customer;
-  }
-  public moveRight() {
+}
+
+public moveRight() {
     if (this.removedCustomer != null) {
       this.customers.push(this.removedCustomer);
-      const index = this.customerlist.indexOf(this.removedCustomer);
-      if (index > -1) {
-        this.customerlist.splice(index, 1);
+      const index = this.selectCustomer?.indexOf(this.removedCustomer);
+      if (index! > -1) {
+        this.selectCustomer?.splice(index!, 1);
+        
       }
     }
   }
@@ -82,7 +90,7 @@ export class EditcustomergroupComponent implements OnInit {
       description: this.customergroup.description,
       customers: this.customerlist,
     };
-    await this.userService.updatecustomergroup(customergroup);
+    await this.userService.updatecustomergroup(customergroup,this.customergroup.id!);
     this.router.navigate(['/group']);
   }
 
@@ -94,5 +102,8 @@ export class EditcustomergroupComponent implements OnInit {
     if (this.editcustomer.invalid) {
       return;
     }
+  }
+  Cancel() {
+    this.router.navigate(['/group']);
   }
 }

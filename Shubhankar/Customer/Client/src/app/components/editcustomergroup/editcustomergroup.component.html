@@ -32,11 +32,11 @@
   <table class="table table-bordered justify-content-center">
     <thead class="thead-light">
       <tr class="active">
-        <th class="text-center" scope="col">Assign Customer</th>
-      </tr>
+     </tr>
     </thead>
     <div style="width: 100%">
       <div style="float: left">
+        <th class="text-center" scope="col">Assign customer</th>
         <tbody *ngFor="let customer of customers; let i = index">
           <tr class="success">
             <td
@@ -49,7 +49,7 @@
           </tr>
         </tbody>
       </div>
-      <button type="button" class="btn btn-primary" (click)="moveSelected()">
+      <button type="button"class="btn btn-outline-success" (click)="moveSelected()">
         Add
       </button>
       <br />
@@ -57,6 +57,7 @@
         Remove
       </button>
       <div style="float: right">
+        <th class="text-center" scope="col">selected Customer</th>
         <tbody *ngFor="let customer of selectCustomer; let i = index">
           <tr class="success">
             <td
@@ -71,7 +72,26 @@
       </div>
     </div>
   </table>
-  <button type="button" class="btn btn-primary" (click)="Submit()">
+  <button type="button" class="btn btn-outline-success" (click)="Submit()">
     Update
   </button>
+  <button type="button" class="btn btn-outline-danger" (click)="Cancel()">
+    Cancel
+  </button>
+ <label for="item-input">Add an customer:</label>
 </form>
+  <div class="column">
+    <table class="table table-bordered justify-content-center">
+      <tr>
+        <th class="text-center" scope="col">Current</th>
+      </tr>
+      <tbody
+        *ngFor="let selectedcustomer of currentcustomerEvent; let i = index"
+      >
+        <tr class="success">
+          <th class="text-center" scope="row">
+            {{ selectedcustomer.name }}
+          </th>
+        </tr>
+      </tbody>
+    </table>
