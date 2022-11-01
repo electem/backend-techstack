@@ -9,7 +9,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class CompanylistingComponent implements OnInit {
   companies: Company[];
-  p: number;
+  page: number;
   count: number = 2;
   totalItems: any;
   pageSizes = [3, 6, 9];
@@ -40,7 +40,7 @@ export class CompanylistingComponent implements OnInit {
 
   handlePageSizeChange(event) {
     this.count = event.target.value;
-    this.p = 1;
+    this.page = 1;
     this.retrieveCompanies();
   }
 }

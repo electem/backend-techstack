@@ -11,6 +11,7 @@ describe('HeadersInterceptor', () => {
 
   it('should be created', () => {
     const interceptor: HeadersInterceptor = TestBed.inject(HeadersInterceptor);
+    console.log(interceptor);
     expect(interceptor).toBeTruthy();
   });
 });
