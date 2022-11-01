@@ -56,4 +56,10 @@ export class CompanyService {
       .put(`${baseUrl + 'updateDepartment'}/${id}`, department)
       .toPromise();
   }
+
+  async deleteCompany(id: number): Promise<Company> {
+    return await this.http
+      .delete(`${baseUrl + 'deleteCompany'}/${id}`)
+      .toPromise();
+  }
 }

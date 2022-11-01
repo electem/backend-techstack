@@ -1,7 +1,42 @@
-div{
-    align-content: center;
-    padding-left: 250px;
-}
 h4{
-    padding-left: 110px;
+    color: rgb(27, 184, 27);
+}
+  .demo{ font-family: 'Noto Sans', sans-serif; }
+  .panel{
+      background: linear-gradient(to right,#294355, #2c3e50);
+      padding: 0;
+      border-radius: 10px;
+      border: none;
+  }
+  .panel .panel-heading{
+    padding: 20px 15px;
+    border-radius: 10px 10px 0 0;
+    margin: 0;
+}
+.panel .panel-heading .btn{
+    color: rgba(195, 246, 11, 0.914);
+    background: transparent;
+    font-size: 16px;
+    text-transform: capitalize;
+    border: 2px solid #fff;
+    border-radius: 50px;
+}
+.panel .panel-heading .btn:hover{
+    color: rgb(87, 16, 239);
+}
+.panel .panel-body{ padding: 0; }
+.panel .panel-body .table thead tr th{
+    color: #fff;
+    background-color:rgba(255, 255, 255, 0.2);
+    font-size: 16px;
+    font-weight: 500;
+    text-transform: uppercase;
+    padding: 12px;
+}
+.panel .panel-body .table tbody tr td{
+    color: #fff;
+    font-size: 16px;
+    padding: 10px 12px;
+    vertical-align: middle;
+    text-align: center;
 }
