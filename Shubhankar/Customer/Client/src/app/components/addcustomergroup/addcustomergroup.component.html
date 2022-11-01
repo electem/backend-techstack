@@ -57,14 +57,14 @@
         Add
       </button>
       <br />
-      <button
+       <button
         type=" button"
         class="btn btn-outline-danger"
         (click)="moveRight()"
       >
         Remove
-      </button>
-      <div style="float: right">
+      </button> 
+       <div style="float: right">
         <tbody *ngFor="let customer of customerlist; let i = index">
           <tr class="success">
             <td
@@ -76,13 +76,16 @@
             </td>
           </tr>
         </tbody>
-      </div>
+      </div> 
     </div>
   </table>
+
+</form>
+
   <button type="button" class="btn btn-outline-success" (click)="getSubmit()">
     Save
   </button>
   <button type="button" class="btn btn-outline-danger" (click)="Cancel()">
     Cancel
   </button>
-</form>
+

@@ -17,7 +17,7 @@ import { EditcustomerComponent } from './components/editcustomer/editcustomer.co
 import { GamelistComponent } from './components/gamelist/gamelist.component';
 import { AssigncustomerchildComponent } from './components/addcustomergroup/assigncustomerchild/assigncustomerchild.component';
 import { AssigncustomerchildeditComponent } from './components/editcustomergroup/assigncustomerchildedit/assigncustomerchildedit.component';
-// import { EditgameComponent } from './components/editgame/editgame.component';
+import { EditgameComponent } from './components/editgame/editgame.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +33,7 @@ import { AssigncustomerchildeditComponent } from './components/editcustomergroup
     GamelistComponent,
     AssigncustomerchildComponent,
     AssigncustomerchildeditComponent,
-  // EditgameComponent,
+   EditgameComponent,
   ],
   imports: [
     BrowserModule,

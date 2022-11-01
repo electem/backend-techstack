@@ -8,6 +8,9 @@ import { CustomergroupComponent } from './components/customergroup/customergroup
 import { AddcustomergroupComponent } from './components/addcustomergroup/addcustomergroup.component';
 import { EditcustomergroupComponent } from './components/editcustomergroup/editcustomergroup.component';
 import { EditcustomerComponent } from './components/editcustomer/editcustomer.component';
+import { GamelistComponent } from './components/gamelist/gamelist.component';
+import { EditgameComponent } from './components/editgame/editgame.component';
+import { AssigncustomerchildeditComponent } from './components/editcustomergroup/assigncustomerchildedit/assigncustomerchildedit.component';
 const routes: Routes = [
   { path: '', redirectTo: 'loginusers', pathMatch: 'full' },
   { path: 'loginusers', component: LoginComponent },
@@ -18,6 +21,9 @@ const routes: Routes = [
   { path: 'addgroup', component: AddcustomergroupComponent },
   { path: 'editgroup/:id', component: EditcustomergroupComponent },
   { path: 'edit/:id', component: EditcustomerComponent },
+  { path: 'game', component: GamelistComponent },
+  { path: 'gameedit/:id', component: EditgameComponent },
+  { path: 'Customeredit', component: AssigncustomerchildeditComponent },
 ];
 
 @NgModule({

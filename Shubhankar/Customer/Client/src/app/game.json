@@ -1,0 +1,68 @@
+[
+  {
+    "id": 1,
+    "name": "Cricket",
+    "players": [
+      {
+        "id": 1,
+        "name": "Raj"
+      },
+      {
+        "id": 2,
+        "name": "Mukesh"
+      },
+      {
+        "id": 3,
+        "name": "Manna"
+      },
+      {
+        "id": 4,
+        "name": "Giri"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Foothball",
+    "players": [
+      {
+        "id": 5,
+        "name": "john"
+      },
+      {
+        "id": 6,
+        "name": "jay"
+      },
+      {
+        "id": 7,
+        "name": "juna"
+      },
+      {
+        "id": 8,
+        "name": "Mahadev"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Hockey",
+    "players": [
+      {
+        "id": 5,
+        "name": "john"
+      },
+      {
+        "id": 6,
+        "name": "jay"
+      },
+      {
+        "id": 7,
+        "name": "juna"
+      },
+      {
+        "id": 8,
+        "name": "Mahadev"
+      }
+    ]
+  }
+]
