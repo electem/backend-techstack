@@ -9,9 +9,17 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { CreateCompanyComponent } from './components/create-company/create-company.component';
 import { CompanyListComponent } from './components/company-list/company-list.component';
 import { DepartmentListComponent } from './components/department-list/department-list.component';
+import { CreateDepartmentComponent } from './components/create-department/create-department.component';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 @NgModule({
-  declarations: [AppComponent, CreateCompanyComponent, CompanyListComponent, DepartmentListComponent],
+  declarations: [
+    AppComponent,
+    CreateCompanyComponent,
+    CompanyListComponent,
+    DepartmentListComponent,
+    CreateDepartmentComponent,
+  ],
   imports: [
     NgxDatatableModule,
     BrowserModule,
@@ -20,6 +28,7 @@ import { DepartmentListComponent } from './components/department-list/department
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
+    NgMultiSelectDropDownModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -13,6 +13,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import org.hibernate.annotations.CreationTimestamp;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -39,8 +41,8 @@ public class Company {
 	@CreationTimestamp
 	private Date createdDate;
 
-	@JsonManagedReference
-	@ManyToMany(cascade = CascadeType.ALL)
+	@JsonIgnoreProperties("companies")
+	@ManyToMany(cascade = CascadeType.MERGE)
 	@JoinTable(name = "company_department", joinColumns = {
 			@JoinColumn(name = "company_id", referencedColumnName = "id") }, inverseJoinColumns = {
 					@JoinColumn(name = "department_id", referencedColumnName = "id") })

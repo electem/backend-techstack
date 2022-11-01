@@ -1,18 +1,21 @@
 package com.example.manytomanymapping.models;
 
 import java.util.Date;
-import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import org.hibernate.annotations.CreationTimestamp;
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -36,7 +39,10 @@ public class Department {
 	@CreationTimestamp
 	private Date createdDate;
 
-	@JsonBackReference
-	@ManyToMany(mappedBy = "departments", cascade = CascadeType.ALL)
-	private Set<Company> companies = new HashSet<Company>();
+	@JsonIgnoreProperties("departments")
+	@ManyToMany(cascade = CascadeType.MERGE)
+	@JoinTable(name = "company_department", joinColumns = {
+			@JoinColumn(name = "department_id", referencedColumnName = "id") }, inverseJoinColumns = {
+					@JoinColumn(name = "company_id", referencedColumnName = "id") })
+	private Set<Company> companies;
 }

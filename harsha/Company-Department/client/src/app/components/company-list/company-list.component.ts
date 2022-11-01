@@ -12,10 +12,10 @@ export class CompanyListComponent implements OnInit {
   constructor(private companyService: CompanyService) {}
 
   ngOnInit(): void {
-    this.getCustomers();
+    this.getCompanies();
   }
 
-  async getCustomers(): Promise<void> {
+  async getCompanies(): Promise<void> {
     this.companies = await this.companyService.getCompanies();
   }
 }
