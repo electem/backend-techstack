@@ -12,7 +12,12 @@ export class DepartmentService {
     private departmentRepository: Repository<Department>,
   ) {}
   public async getAllDepartments(): Promise<Department[]> {
-    return await this.departmentRepository.find();
+    const deptwithcomp = await this.departmentRepository
+    .createQueryBuilder('department')
+    .select(['department', 'company'])
+    .leftJoinAndSelect('department.company', 'company')
+    .getMany();
+    return await deptwithcomp;
   }
   public async createDepartment(
     departmentDto: DepartmentDto,

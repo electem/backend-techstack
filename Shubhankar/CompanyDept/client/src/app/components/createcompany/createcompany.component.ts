@@ -69,7 +69,7 @@ export class CreatecompanyComponent implements OnInit {
         department: this.company.department,
       };
       await this.userService.createcompany(companyinfo);
-      this.router.navigate(['/company']);
+      this.router.navigate(['/companylist']);
     }
   }
   
