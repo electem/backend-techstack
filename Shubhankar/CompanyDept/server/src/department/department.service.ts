@@ -32,4 +32,14 @@ export class DepartmentService {
       .getOne();
     return departmentQueryBuilder;
   }
+
+  public async updateDepartment(
+    departmentDto: DepartmentDto,
+  ): Promise<Department> {
+    try {
+      return await this.departmentRepository.save(departmentDto);
+    } catch (err) {
+      throw new HttpException(err, HttpStatus.BAD_REQUEST);
+    }
+  }
 }
