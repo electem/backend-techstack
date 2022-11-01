@@ -10,6 +10,8 @@ import { DepartmentModule } from './department/department.module';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { User } from './users/user.entity';
+import { MailerModule } from '@nestjs-modules/mailer';
+import { EmailController } from './mailsend/email.controller';
 
 @Module({
   imports: [
@@ -23,12 +25,21 @@ import { User } from './users/user.entity';
       entities: [Company, Department, User],
       synchronize: true,
     }),
+    MailerModule.forRoot({
+      transport: {
+        host: 'smtp.sendgrid.net',
+        auth: {
+          user: 'apikey',
+          pass: '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',
+        },
+      },
+    }),
     CompanyModule,
     AuthModule,
     UsersModule,
     DepartmentModule,
   ],
-  controllers: [AppController],
+  controllers: [AppController, EmailController],
   providers: [AppService],
 })
 export class AppModule {}
