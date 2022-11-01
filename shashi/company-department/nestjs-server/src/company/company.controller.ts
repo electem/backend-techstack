@@ -14,7 +14,7 @@ import { Company } from './company.model';
 import { CompanyService } from './company.service';
 import { CompanyDto } from './company.dto';
 import { AuthGuard } from '@nestjs/passport';
-
+@UseGuards(AuthGuard())
 @Controller('company')
 export class CompanyController {
   constructor(private readonly companyService: CompanyService) {}
@@ -23,7 +23,6 @@ export class CompanyController {
     return await this.companyService.createCompany(company);
   }
   @Get()
-  @UseGuards(AuthGuard())
   async getCompanies(): Promise<Array<Company>> {
     return this.companyService.getAllCompanyWithDepartment();
   }

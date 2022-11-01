@@ -15,6 +15,7 @@ import { UsersModule } from './users/users.module';
 import { UserEntity } from './users/entity/user.entity';
 import { TodoEntity } from './todo/entity/todo.entity';
 import { TaskEntity } from './todo/entity/task.entity';
+import { FileController } from './fileupload-Download/file.controller';
 
 @Module({
   imports: [
@@ -34,7 +35,7 @@ import { TaskEntity } from './todo/entity/task.entity';
     TodoModule,
     UsersModule,
   ],
-  controllers: [AppController],
+  controllers: [AppController, FileController],
   providers: [AppService],
 })
 export class AppModule {}
