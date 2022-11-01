@@ -15,10 +15,21 @@ import { EditcompanyComponent } from './components/editcompany/editcompany.compo
 import { EditdepartmentComponent } from './components/editdepartment/editdepartment.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { DataTablesModule } from 'angular-datatables';
+import { LogincomponentComponent } from './components/logincomponent/logincomponent.component';
+import { AuthService } from './auth/auth.service';
+import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
+
+export function jwtOptionFactor() {
+  return {
+    allowedDomains: ['localhost:3000'],
+    disallowedRoutes: ['http://localhost:3000/auth/login'],
+  };
+}
 
 @NgModule({
   declarations: [
     AppComponent,
+    LogincomponentComponent,
     CreatecompanyComponent,
     CompanylistingComponent,
     CreatedepartmentComponent,
@@ -35,6 +46,13 @@ import { DataTablesModule } from 'angular-datatables';
     DataTablesModule,
     NgxPaginationModule,
     NgMultiSelectDropDownModule.forRoot(),
+    JwtModule.forRoot({
+      jwtOptionsProvider: {
+        provide: JWT_OPTIONS,
+        useFactory: jwtOptionFactor,
+        deps: [AuthService],
+      },
+    }),
   ],
   providers: [
     {

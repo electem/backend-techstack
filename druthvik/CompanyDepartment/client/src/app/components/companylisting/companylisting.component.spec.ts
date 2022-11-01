@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CompanylistingComponent } from './companylisting.component';
 import { CompanyService } from 'src/app/services/company.service';
