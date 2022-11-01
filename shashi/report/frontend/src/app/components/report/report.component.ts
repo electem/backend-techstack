@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { Panel } from 'src/app/models/panel.model';
+import { Reportpaneltest } from 'src/app/models/reportpaneltest.model';
+import { Report } from 'src/app/models/report.model';
+import { Test } from 'src/app/models/test.model';
+import { PanelService } from 'src/app/services/panel.serveice';
 import { Panel } from '../../models/panel.model';
 import { Reportpaneltest } from '../../models/reportpaneltest.model';
 import { Test } from '../../models/test.model';
 import { PanelService } from '../../services/panel.serveice';
-
 @Component({
   selector: 'app-panel-test-details',
   templateUrl: './report.component.html',
@@ -12,6 +16,8 @@ import { PanelService } from '../../services/panel.serveice';
 export class ReportComponent implements OnInit {
   panels?: Panel[];
   tests?: Test[];
+  currentPanel?: Panel;
+  disableTextbox?: boolean;
   reportpaneltest?: Reportpaneltest[];
   currentPanel?: Panel;
   disableTextbox?: boolean;
@@ -31,6 +37,14 @@ export class ReportComponent implements OnInit {
   ngOnInit(): void {
     this.retrievePanels();
     this.retrieveTests();
+  }
+  async retrievePanels(): Promise<void> {
+    this.panels = await this.panelService.getAll();
+  }
+  async retrieveTests(): Promise<void> {
+    this.tests = await this.panelService.getAllTest();
+  }
+  TestPresentInPanelTextBox(currentPanel: Panel, currentTest: Test) {
     this.retrieveReportpaneltest();
   }
 
@@ -62,6 +76,15 @@ export class ReportComponent implements OnInit {
       return false;
     }
   }
+  async reportDetailsSave(event: any, panel: Panel, test: Test) {
+    const reportPanelTest: Reportpaneltest = {
+      data: event.target.value,
+      panel_fk: panel.id,
+      test_fk: test.id,
+    };
+    console.log(reportPanelTest);
+  }
+}
 
   async dataInsertInTextBox(
     currentPanel: Panel,
