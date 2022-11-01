@@ -24,10 +24,10 @@ export class UsersService {
   //   return await User.findOne(id);
   // }
 
-  async findByEmail(email: string) {
+  async findByEmail(username: string) {
     return await User.findOne({
       where: {
-        email: email,
+        username: username,
       },
     });
   }

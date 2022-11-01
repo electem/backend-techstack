@@ -10,7 +10,7 @@ import { HttpClient } from '@angular/common/http';
 export class CompanylistingComponent implements OnInit {
   companies: Company[];
   page: number;
-  count: number = 2;
+  count: number = 3;
   totalItems: any;
   pageSizes = [3, 6, 9];
   filteredItems: Company[];

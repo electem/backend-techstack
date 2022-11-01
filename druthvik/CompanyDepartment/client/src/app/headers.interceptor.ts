@@ -20,7 +20,7 @@ export class HeadersInterceptor implements HttpInterceptor {
 
     request = request.clone({
       setHeaders: {
-        Headers: apiKey,
+        Authorization: 'Bearer ' + localStorage.getItem('tokens'),
       },
     });
 

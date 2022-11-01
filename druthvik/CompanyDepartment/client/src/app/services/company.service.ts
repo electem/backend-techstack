@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Company } from '../models/company.model';
 
@@ -18,7 +18,7 @@ export class CompanyService {
       .toPromise();
   }
   async getCompanies(): Promise<Company[]> {
-    return await this.http.get<Company[]>(baseUrl + '/company').toPromise();
+    return this.http.get<Company[]>(baseUrl + '/company').toPromise();
   }
   async getAll(start: number, length: number): Promise<Company[]> {
     return await this.http.get<Company[]>(baseUrl + '/company').toPromise();
