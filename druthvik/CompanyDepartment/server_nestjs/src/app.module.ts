@@ -11,7 +11,8 @@ import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { User } from './users/user.entity';
 import { MailerModule } from '@nestjs-modules/mailer';
-import { EmailController } from './mailsend/email.controller';
+import { join } from 'path';
+import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
 
 @Module({
   imports: [
@@ -33,13 +34,20 @@ import { EmailController } from './mailsend/email.controller';
           pass: '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',
         },
       },
+      template: {
+        dir: join(__dirname, 'mails'),
+        adapter: new HandlebarsAdapter(),
+        options: {
+          strict: true,
+        },
+      },
     }),
     CompanyModule,
     AuthModule,
     UsersModule,
     DepartmentModule,
   ],
-  controllers: [AppController, EmailController],
+  controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule {}
