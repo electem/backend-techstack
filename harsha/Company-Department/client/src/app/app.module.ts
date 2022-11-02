@@ -13,6 +13,7 @@ import { CreateDepartmentComponent } from './components/create-department/create
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { EditCompanyComponent } from './components/edit-company/edit-company.component';
 import { EditDepartmentComponent } from './components/edit-department/edit-department.component';
+import { FileUploadDownloadComponent } from './components/file-upload-download/file-upload-download.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { EditDepartmentComponent } from './components/edit-department/edit-depar
     CreateDepartmentComponent,
     EditCompanyComponent,
     EditDepartmentComponent,
+    FileUploadDownloadComponent,
   ],
   imports: [
     NgxDatatableModule,
