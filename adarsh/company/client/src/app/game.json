@@ -1,0 +1,38 @@
+[
+    {
+        "id": 1,
+        "name": "Crickate",
+        "players": [
+            {
+                "id": 1,
+                "name": "adarsh"
+            },
+            {
+                "id": 2,
+                "name": "adarsh"
+            },
+            {
+                "id": 3,
+                "name": "adarsh"
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "name": "Kabaddi",
+        "players": [
+            {
+                "id": 1,
+                "name": "adarsh"
+            },
+            {
+                "id": 2,
+                "name": "adarsh"
+            },
+            {
+                "id": 3,
+                "name": "adarsh"
+            }
+        ]
+    }
+]
