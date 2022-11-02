@@ -7,13 +7,14 @@ import {
   Param,
   Post,
   Put,
+  Query,
   UseGuards,
 } from '@nestjs/common';
 import { CompanyService } from './company.service';
 import { CompanyDto } from './company.dto';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
-import { MailerService } from '@nestjs-modules/mailer';
 import { CompanyMail } from './companymail.entity';
+import { MailerService } from '@nestjs-modules/mailer';
 import { join } from 'path';
 
 //@UseGuards(JwtAuthGuard)
@@ -44,11 +45,6 @@ export class CompanyController {
     return this.companyService.findCompanyWithDepartmentById(+id);
   }
 
-  @Put('/')
-  async update(@Body() companyDto: CompanyDto) {
-    return await this.companyService.updateCompany(companyDto);
-  }
-
   @Get('email/:id')
   async plainTextEmail(@Param('id') id: string) {
     const company = await this.companyService.findCompanyWithDepartmentById(
@@ -57,8 +53,8 @@ export class CompanyController {
     const response = await this.mailService.sendMail({
       to: company.email,
       from: 'druthvik@electems.com',
-      subject: 'Plain Text Email ✔',
-      text: 'Welcome to ' + '' + company.name,
+      subject: 'Thank you for registering for company',
+      text: 'welcome to' + company.name,
     });
     return response;
   }
@@ -71,12 +67,11 @@ export class CompanyController {
     for (let i = 0; i < companybyid.department.length; i++) {
       this.companyDetails.department.push(companybyid.department[i].name);
     }
-
     const response = await this.mailService.sendMail({
       to: companybyid.email,
       from: 'druthvik@electems.com',
       subject: 'send mail with attachment',
-      template: 'company.hbs',
+      template: 'company',
       context: {
         company: this.companyDetails,
       },
@@ -88,7 +83,12 @@ export class CompanyController {
         },
       ],
     });
-    return 'success';
+    return response;
+  }
+
+  @Put('/')
+  async update(@Body() companyDto: CompanyDto) {
+    return await this.companyService.updateCompany(companyDto);
   }
 
   @Delete('/:id')
