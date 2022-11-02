@@ -16,6 +16,9 @@ export class Company {
   name: string;
 
   @Column()
+  email: string;
+
+  @Column()
   address: string;
 
   @ManyToMany(() => Department, (department) => department.company, {
