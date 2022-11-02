@@ -68,9 +68,10 @@ export class CompanyService {
     formData.append('file', file, file.name);
     return this.http.post(baseUrl + '/photos', formData).toPromise();
   }
-  async downloadFile() {
-    return await this.http
-      .get(`${baseUrl + '/photos'}/${this.file}`)
-      .toPromise();
+  downloadFile() {
+    return this.http.get(`${baseUrl + '/photos'}/${this.file}`, {
+      observe: 'response',
+      responseType: 'blob',
+    });
   }
 }
