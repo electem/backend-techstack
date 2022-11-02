@@ -12,6 +12,9 @@ export class Department {
   @Column()
   type: string;
 
+  @Column({ nullable: true })
+  date: Date;
+
   @ManyToMany((_type) => Company, (company) => company.department)
   company!: Company[];
 }

@@ -70,9 +70,13 @@ export class CreatedepartmentComponent implements OnInit {
     const departmentinfo: Department = {
       name: this.depertment.name,
       type: this.depertment.type,
+      date: this.depertment.date,
       company: this.AddedCompanies,
     };
     await this.userService.createdepartment(departmentinfo);
+    this.router.navigate(['/departmentlist']);
+  }
+  getBack(){
     this.router.navigate(['/departmentlist']);
   }
 }
