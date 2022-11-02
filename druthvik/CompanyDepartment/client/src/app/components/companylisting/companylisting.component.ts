@@ -15,6 +15,11 @@ export class CompanylistingComponent implements OnInit {
   pageSizes = [3, 6, 9];
   filteredItems: Company[];
   searchText: string;
+  mailcompany: Company = {
+    name: '',
+    address: '',
+    department: [],
+  };
   constructor(
     private companyservice: CompanyService,
     private http: HttpClient,
@@ -42,5 +47,13 @@ export class CompanylistingComponent implements OnInit {
     this.count = event.target.value;
     this.page = 1;
     this.retrieveCompanies();
+  }
+
+  async sendmails(id: number): Promise<void> {
+    this.mailcompany = await this.companyservice.sendmail(id);
+  }
+
+  async sendmailwithattachement(id: number): Promise<void> {
+    await this.companyservice.sendmailwithattachement(id);
   }
 }

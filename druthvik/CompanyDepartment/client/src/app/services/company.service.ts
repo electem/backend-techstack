@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Company } from '../models/company.model';
 
@@ -41,5 +41,16 @@ export class CompanyService {
 
   async deletCompanyById(id: number) {
     return await this.http.delete(`${baseUrl + '/company'}/${id}`).toPromise();
+  }
+
+  async sendmail(id: number) {
+    return await this.http
+      .get(`${baseUrl + '/company/email'}/${id}`)
+      .toPromise();
+  }
+  async sendmailwithattachement(id: number) {
+    return await this.http
+      .post(`${baseUrl + '/company/html-email'}/${id}`, null)
+      .toPromise();
   }
 }
