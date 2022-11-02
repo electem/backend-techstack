@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
+import { switchMap, map, tap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Company } from '../models/company.model';
 import { Department } from '../models/department.model';
+import { Observable } from 'rxjs';
 const baseUrl = environment.url;
 export class Pagination {
   startPoint?: number;
@@ -12,7 +14,10 @@ export class Pagination {
   providedIn: 'root',
 })
 export class CompanyService {
+  file = 'dnld.png';
   pagination = new Pagination();
+  imageUrl =
+    'E:/New Clone/backend-techstack/shashi/company-department/nestjs-server/uploads/';
   constructor(private http: HttpClient) {}
   async createCompany(companyData: Company): Promise<Company> {
     return this.http
@@ -56,6 +61,16 @@ export class CompanyService {
   async deleteDepartmentById(id: number): Promise<Department> {
     return await this.http
       .delete(`${baseUrl + '/department'}/${id}`)
+      .toPromise();
+  }
+  async uploadFile(file: File) {
+    const formData = new FormData();
+    formData.append('file', file, file.name);
+    return this.http.post(baseUrl + '/photos', formData).toPromise();
+  }
+  async downloadFile() {
+    return await this.http
+      .get(`${baseUrl + '/photos'}/${this.file}`)
       .toPromise();
   }
 }

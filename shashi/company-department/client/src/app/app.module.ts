@@ -13,6 +13,7 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { EditCompanyComponent } from './components/edit-company/edit-company.component';
 import { EditDepartmentComponent } from './components/edit-department/edit-department.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { FileUploadDownloadComponent } from './components/file-upload-download/file-upload-download.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     DepartmentListComponent,
     EditCompanyComponent,
     EditDepartmentComponent,
+    FileUploadDownloadComponent,
   ],
   imports: [
     NgMultiSelectDropDownModule.forRoot(),

@@ -6,6 +6,7 @@ import { CompanyListComponent } from './components/company-list/company-list.com
 import { DepartmentListComponent } from './components/department-list/department-list.component';
 import { EditCompanyComponent } from './components/edit-company/edit-company.component';
 import { EditDepartmentComponent } from './components/edit-department/edit-department.component';
+import { FileUploadDownloadComponent } from './components/file-upload-download/file-upload-download.component';
 const routes: Routes = [
   { path: '', redirectTo: 'companylist', pathMatch: 'full' },
   { path: 'createcompany', component: CreateCompanyComponent },
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'departmentlist', component: DepartmentListComponent },
   { path: 'editcompany/:id', component: EditCompanyComponent },
   { path: 'editdepartment/:id', component: EditDepartmentComponent },
+  { path: 'fileupload', component: FileUploadDownloadComponent },
 ];
 
 @NgModule({
