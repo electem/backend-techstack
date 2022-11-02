@@ -30,6 +30,7 @@
     "@nestjs/typeorm": "^9.0.1",
     "bcryptjs": "^2.4.3",
     "class-validator": "^0.12.2",
+    "handlebars-pdf": "^1.0.1",
     "keys": "^0.1.2",
     "nodemailer": "^6.8.0",
     "passport": "^0.4.1",
