@@ -25,4 +25,10 @@ export class CompanyService {
   async getDepertments(): Promise<Department[]> {
     return await this.http.get<Department[]>(url + '/depertment').toPromise();
   }
+  async updateCompany(custmer: Company): Promise<Company> {
+    return await this.http.put(url + '/updateDepartment', custmer).toPromise();
+  }
+  async getCompanyByID(id: number) {
+    return await this.http.get(`${url + '/company'}/${id}`).toPromise();
+  }
 }
