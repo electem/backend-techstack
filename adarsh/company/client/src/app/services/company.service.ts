@@ -22,6 +22,10 @@ export class CompanyService {
     return await this.http.post(url + '/createCompany', company).toPromise();
   
   }
+  async createNewDepartmement(department: Department) {
+    return await this.http.post(url + '/createDepartment', department).toPromise();
+  
+  }
   async getDepertments(): Promise<Department[]> {
     return await this.http.get<Department[]>(url + '/depertment').toPromise();
   }
