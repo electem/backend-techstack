@@ -16,6 +16,19 @@ import { EditdepartmentComponent } from './components/editdepartment/editdepartm
 import { DataTablesModule } from 'angular-datatables';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { LoginComponent } from './components/login/login.component';
+import { AuthService } from './auth/auth.service';
+import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
+import { ChartComponent } from './components/chart/chart.component';
+
+
+export function jwtOptionFactor() {
+  return {
+    allowedDomains: ['localhost:3000'],
+    disallowedRoutes: ['http://localhost:3000/login'],
+  };
+}
+
 
 
 @NgModule({
@@ -27,6 +40,8 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     DepartmentlistComponent,
     EditcompanyComponent,
     EditdepartmentComponent,
+    LoginComponent,
+    ChartComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,8 +52,8 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     ReactiveFormsModule,
     DataTablesModule,
     NgxPaginationModule,
-    NgMultiSelectDropDownModule
-  ],
+    NgMultiSelectDropDownModule,
+   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,

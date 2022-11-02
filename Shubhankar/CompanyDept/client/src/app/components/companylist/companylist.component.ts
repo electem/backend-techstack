@@ -28,6 +28,7 @@ export class CompanylistComponent implements OnInit {
 
   async retrieveCompany() {
     this.company = await this.userservice.getCompany();
+    console.log(this.company);
   }
   handlepageChange(page: number) {
     this.http
