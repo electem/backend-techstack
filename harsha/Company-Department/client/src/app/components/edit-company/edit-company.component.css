@@ -1,45 +1,29 @@
-.global-container {
-  height: 100%;
-  display: grid;
-  align-items: center;
-  justify-content: center;
-  text-align: end;
-  color: rgb(86, 7, 213);
-
-}
-form {
-  padding-top: 5px;
-  font-size: 14px;
-  margin-top: 30px;
-}
-.login-form {
-  width: 400px;
-  height: 800px;
-  margin: 10px;
-  border-radius: 10px !important;
-  background-color: rgb(242, 246, 254);
-  text-align: center;
+.form{
+  padding: 50px 0;
 }
 
-input[type="name"],
-input[type="address"],
-input[type="email"],
-input[type="number"] {
-  background-color: rgb(239, 225, 230);
-  border: 2px solid green;
-  border-radius: 10px;
+.form form{
+  background-color: #fff;
+   max-width: 400px;
+  margin: auto;
+  padding: 50px 70px;
+  border: 50px;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.075);
+}
+
+.form .item{
+border-radius: 10px;
   margin-bottom: 25px;
-  width: 300px;
+  padding: 20px 20px;
 }
 
-input[type="name"]:focus,
-input[type="address"]:focus,
-input[type="email"]:focus,
-input[type="number"]:focus {
-  outline: none;
+.form .create-account{
+  border-radius: 30px;
+  padding: 10px 20px;
+  font-size: 18px;
+  font-weight: bold;
+  background-color: #0dc031;
   border: none;
-  text-align: center;
-  background-color: slategray;
-  color: antiquewhite;
-  margin: 0;
+  color: white;
+  margin-top: 20px;
 }
