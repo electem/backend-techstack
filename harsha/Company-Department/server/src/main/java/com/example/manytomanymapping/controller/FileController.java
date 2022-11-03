@@ -52,8 +52,8 @@ public class FileController {
 	public ResponseEntity<Resource> downloadFile(@PathVariable String fileId) throws MyFileNotFoundException {
 		LOG.info("Start of FileController :: downloadFile ");
 		// Load file from database
-		File file = fileStorageService.getFile(fileId);
-//		File file = fileStorageService.getFileByName(fileId);
+//		File file = fileStorageService.getFile(fileId);
+		File file = fileStorageService.getFileByName(fileId);
 		LOG.info("End of FileController :: downloadFile ");
 		return ResponseEntity.ok().contentType(MediaType.parseMediaType(file.getFileType()))
 				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFileName() + "\"")

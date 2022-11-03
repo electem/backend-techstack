@@ -4,18 +4,10 @@
       <input type="file" (change)="selectFile($event)" />
     </label>
   </div>
-
   <button class="btn btn-success btn-sm" [disabled]="!selectedFiles" (click)="upload()">
     Upload
   </button>
-
 </div>
 <button class="btn btn-success btn-sm" (click)="downloadFile()">
   Download
 </button>
-<div *ngIf="currentFile" class="progress my-3">
-  <div class="progress-bar progress-bar-info" role="progressbar" attr.aria-valuenow="{{ progress }}" aria-valuemin="0"
-    aria-valuemax="100" [ngStyle]="{ width: progress + '%' }">
-    {{ progress }}%
-  </div>
-</div>

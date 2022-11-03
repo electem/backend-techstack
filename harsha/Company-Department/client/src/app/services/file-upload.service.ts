@@ -1,4 +1,4 @@
-import { HttpClient, HttpEvent, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 
@@ -18,20 +18,10 @@ export class FileUploadService {
       .toPromise();
   }
 
-  public getFiles() {
-    return this.http.get(
-      baseUrl + 'downloadFile' + '/3baf8108-ba94-4ae7-a959-09a52dd0f673',
-      { observe: 'response', responseType: 'blob' }
-    );
+  public getFiles(file: File) {
+    return this.http.get(baseUrl + 'downloadFile/' + file.name, {
+      observe: 'response',
+      responseType: 'blob',
+    });
   }
-
-  //   getFiles() {
-  //     return this.http.get(
-  //       'http://localhost:8080/downloadFile/3baf8108-ba94-4ae7-a959-09a52dd0f673',
-  //       {
-  //         responseType: 'blob',
-  //         headers: new HttpHeaders().append('Content-Type', 'application/json'),
-  //       }
-  //     );
-  //   }
 }
