@@ -29,10 +29,21 @@ export class CompanyService {
   async getDepertments(): Promise<Department[]> {
     return await this.http.get<Department[]>(url + '/depertment').toPromise();
   }
-  async updateCompany(custmer: Company): Promise<Company> {
-    return await this.http.put(url + '/updateDepartment', custmer).toPromise();
-  }
+ 
   async getCompanyByID(id: number) {
     return await this.http.get(`${url + '/company'}/${id}`).toPromise();
+  }
+  async updateCompany(id: number, company: Company): Promise<Company> {
+    return await this.http
+      .put(`${url + '/updateCompany'}/${id}`, company)
+      .toPromise();
+  }
+  async updateDepartment(id: number, department: Department): Promise<Company> {
+    return await this.http
+      .put(`${url + '/updateDepartment'}/${id}`, department)
+      .toPromise();
+  }
+  async getDepartmentByID(id: number) {
+    return await this.http.get(`${url + '/depertment'}/${id}`).toPromise();
   }
 }

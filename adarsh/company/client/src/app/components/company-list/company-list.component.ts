@@ -10,7 +10,7 @@ import { CompanyService } from 'src/app/services/company.service';
   styleUrls: ['./company-list.component.css']
 })
 export class CompanyLIstComponent implements OnInit {
-  companys: Company[] = [];
+  companies: Company[] = [];
 
   constructor(private companyService: CompanyService, private router: Router) { }
 
@@ -18,7 +18,7 @@ export class CompanyLIstComponent implements OnInit {
     this.retrieveCompanys();
   }
   async retrieveCompanys() {
-    this.companys = await this.companyService. getCompanys();
+    this.companies = await this.companyService. getCompanys();
    
   }
 }

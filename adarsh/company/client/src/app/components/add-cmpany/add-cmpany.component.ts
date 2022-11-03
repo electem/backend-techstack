@@ -15,9 +15,9 @@ export class AddCmpanyComponent implements OnInit {
     name: '',
     address: '',
     email: '',
-    depertement: [],
+    departments: [],
   };
-  depertments: Department[] = [];
+  departments: Department[] = [];
   slectedDepertments: Department[] = [];
   departmentSelected: Department={};
 
@@ -33,13 +33,13 @@ export class AddCmpanyComponent implements OnInit {
       name: this.newCompany.name,
       address: this.newCompany.address,
       email: this.newCompany.email,
-      depertement: this.newCompany.depertement,
+      departments: this.newCompany.departments,
     };
     await this.companyService.createNewCompany(newCompanyData);
   }
 
   async retrieveDepertments(): Promise<void> {
-    this.depertments = await this.companyService.getDepertments();
+    this.departments = await this.companyService.getDepertments();
   }
 
   async selectingDepartments(department: Department): Promise<void> {

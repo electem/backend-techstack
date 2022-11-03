@@ -9,16 +9,19 @@ import { AddCmpanyComponent } from './components/add-cmpany/add-cmpany.component
 import { EditCompanyComponent } from './components/edit-company/edit-company.component';
 import { DepartmentListingComponent } from './components/department-listing/department-listing.component';
 import { AddDepartmentComponent } from './components/add-department/add-department.component';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { EditDepartmentComponent } from './components/edit-department/edit-department.component';
 
 
 @NgModule({
-  declarations: [AppComponent,CompanyLIstComponent,AddCmpanyComponent, EditCompanyComponent, DepartmentListingComponent, AddDepartmentComponent],
+  declarations: [AppComponent,CompanyLIstComponent,AddCmpanyComponent, EditCompanyComponent, DepartmentListingComponent,AddDepartmentComponent, EditDepartmentComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
+    NgMultiSelectDropDownModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent],

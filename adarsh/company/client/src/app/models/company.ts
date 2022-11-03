@@ -6,6 +6,6 @@ export class Company {
   address?: string;
   email?: string;
   createdDate?: Date;
-  depertement?:Department[];
+  departments?:Department[];
  
 }
