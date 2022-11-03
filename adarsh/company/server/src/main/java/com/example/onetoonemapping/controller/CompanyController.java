@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import com.example.onetoonemapping.models.Company;
 import com.example.onetoonemapping.repository.CompanyRepository;
+
 
 @RestController
 @CrossOrigin
@@ -50,10 +52,15 @@ public class CompanyController {
 
 	}
 
-	@PutMapping("/updateCompany")
-	public Company updateCompany(@Valid @RequestBody Company company, BindingResult result, Model model) {
+	@PutMapping("/updateCompany/{id}")
+	public Company updateCompany(@PathVariable("id") int id, @Valid @RequestBody Company company) {
 		log.info("Start of CompanyController :: updateCompany ");
 		return companyRepo.save(company);
 
 	}
+	@DeleteMapping("/company/{companyId}")
+	public void deleteCompany(@PathVariable long companyId) {
+		companyRepo.deleteById((int) companyId);
+	}
+	
 }
