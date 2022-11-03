@@ -19,8 +19,7 @@ export class AddCmpanyComponent implements OnInit {
   };
   departments: Department[] = [];
   slectedDepertments: Department[] = [];
-  departmentSelected: Department={};
-
+  departmentSelected: Department = {};
 
   constructor(private companyService: CompanyService, private router: Router) {}
 
@@ -44,6 +43,6 @@ export class AddCmpanyComponent implements OnInit {
 
   async selectingDepartments(department: Department): Promise<void> {
     this.departmentSelected = department;
-      this.slectedDepertments.push(this.departmentSelected );
-    }
+    this.slectedDepertments.push(this.departmentSelected);
+  }
 }

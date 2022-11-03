@@ -19,6 +19,7 @@
             <th class="text-center" scope="col">NAME</th>
             <th class="text-center" scope="col">ADRESS</th>
             <th class="text-center" scope="col">EMAIL</th>
+            <th class="text-center" scope="col">NO DEPARTMENTS</th>
         
   
             <th class="text-center" scope="col">EDIT</th>
@@ -29,6 +30,7 @@
             <th class="text-center" scope="row">{{ company.name }}</th>
             <th class="text-center" scope="row">{{ company.address }}</th>
             <th class="text-center" scope="row">{{ company.email }}</th>
+            <th class="text-center" scope="row">{{ company.departments?.length}}</th>
            
             <th class="text-center" scope="row">
               <button
@@ -37,6 +39,13 @@
                 routerLink="/company/{{ company.id }}"
               >
                 Edit
+              </button>
+              <button
+                type="button"
+                class="btn btn-info btn-sm mr-2"
+              (click)=" deleteCompany(company)"
+              >
+                Delete
               </button>
             </th>
           </tr>

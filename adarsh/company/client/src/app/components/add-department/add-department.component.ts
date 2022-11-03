@@ -8,7 +8,7 @@ import { CompanyService } from 'src/app/services/company.service';
 @Component({
   selector: 'app-add-department',
   templateUrl: './add-department.component.html',
-  styleUrls: ['./add-department.component.css']
+  styleUrls: ['./add-department.component.css'],
 })
 export class AddDepartmentComponent implements OnInit {
   newDepartment: Department = {
@@ -20,8 +20,8 @@ export class AddDepartmentComponent implements OnInit {
   selectedItems = [];
   addnewCompanies: Company[] = [];
   selectedCompany: Company = {};
-  
-  constructor(private companyService: CompanyService, private router: Router) { }
+
+  constructor(private companyService: CompanyService, private router: Router) {}
 
   ngOnInit(): void {
     this.dropdownSettings = {
@@ -43,16 +43,14 @@ export class AddDepartmentComponent implements OnInit {
     await this.companyService.createNewDepartmement(department);
   }
   async retrieveCompanys() {
-    this.companies = await this.companyService. getCompanys();
+    this.companies = await this.companyService.getCompanys();
   }
   onItemSelect(item: any) {
     this.selectedCompany = item;
     this.addnewCompanies.push(this.selectedCompany);
   }
-  onSelectAll(items:any) {
+  onSelectAll(items: any) {
     this.selectedCompany = items;
     this.addnewCompanies.push(this.selectedCompany);
-   
   }
-
 }

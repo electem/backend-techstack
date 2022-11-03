@@ -1,0 +1,30 @@
+<h1 class="card-title text-center">Edit Department</h1>
+<div class="global-container">
+  <div class="card login-form">
+    <form>
+      <div class="form-group col-md-4">
+        <label for="name">Name</label>
+        <input
+          type="name"
+          name="name"
+          class="form-control"
+          [(ngModel)]="newDepartment.name"
+        />
+      </div>
+      <div class="form-group col-md-4">
+        <ng-multiselect-dropdown
+          [placeholder]="'Select Companies'"
+          name="companies"
+          [settings]="dropdownSettings"
+          [data]="companies"
+          [(ngModel)]="newDepartment.companies"
+          (onSelect)="onItemSelect($event)"
+          (onSelectAll)="onSelectAll($event)"
+        >
+        </ng-multiselect-dropdown>
+      </div>
+      <button type="button" class="btn btn-success" (click)="updateDepartment()">Update</button>
+      <button type=" button" class="btn btn-warning">Cancel</button>
+    </form>
+  </div>
+</div>
