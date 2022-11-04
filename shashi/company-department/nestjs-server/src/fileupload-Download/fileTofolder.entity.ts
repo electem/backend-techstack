@@ -1,8 +1,8 @@
 /* eslint-disable prettier/prettier */
-import { Column, Entity, PrimaryGeneratedColumn, TableColumn } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity()
-export class Image {
+@Entity('fileTable')
+export class FileToFolder {
   @PrimaryGeneratedColumn()
   id: number;
   @Column()
@@ -14,10 +14,11 @@ export class Image {
   @Column()
   originalname: string;
   @Column()
+  destination: number;
+  @Column()
+  filename: number;
+  @Column()
+  path: number;
+  @Column()
   size: number;
-  @Column({
-    type: 'bytea',
-    nullable: false,
-  })
-  buffer?: Uint8Array;
 }

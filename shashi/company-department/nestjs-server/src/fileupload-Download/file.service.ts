@@ -1,42 +1,17 @@
 /* eslint-disable prettier/prettier */
-/* eslint-disable prettier/prettier */
-import { extname } from 'path';
-import { existsSync, mkdirSync } from 'fs';
-import { diskStorage } from 'multer';
-import { v4 as uuid } from 'uuid';
-import { HttpException, HttpStatus } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { Image } from './file.entity';
 
-export const multerConfig = {
-  dest: './uploads',
-};
+@Injectable()
+export class ImageService {
+  constructor(
+    @InjectRepository(Image)
+    private readonly imageRepository: Repository<Image>,
+  ) {}
 
-export const multerOptions = {
-  fileFilter: (req: any, file: any, cb: any) => {
-    if (file.mimetype.match(/\/(jpg|jpeg|png|gif)$/)) {
-      cb(null, true);
-    } else {
-      cb(
-        new HttpException(
-          `Unsupported file type ${extname(file.originalname)}`,
-          HttpStatus.BAD_REQUEST,
-        ),
-        false,
-      );
-    }
-  },
-
-  storage: diskStorage({
-    destination: (req: any, file: any, cb: any) => {
-      const uploadPath = multerConfig.dest;
-
-      if (!existsSync(uploadPath)) {
-        mkdirSync(uploadPath);
-      }
-      cb(null, uploadPath);
-    },
-
-    filename: (req: any, file: any, cb: any) => {
-      cb(null, file.originalname);
-    },
-  }),
-};
+  async saveImage(file_url: string) {
+    //await this.imageRepository.save({ image_url: file_url });
+  }
+}

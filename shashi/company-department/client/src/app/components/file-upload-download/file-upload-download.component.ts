@@ -26,17 +26,15 @@ export class FileUploadDownloadComponent implements OnInit {
   editFile = true;
   removeUpload = false;
   downloadFileName!: string;
-  file1 = 'dnld.png';
   file!: File;
-  data?: string;
 
   ngOnInit(): void {}
 
   async uploadImage(): Promise<void> {
-    await this.companyService.uploadFile(this.file);
+    this.companyService.uploadFile(this.file);
   }
 
-  uploadFile(event: any) {
+  chooseFile(event: any) {
     const reader = new FileReader();
     const file = event.target.files[0];
     this.file = file;
@@ -53,16 +51,18 @@ export class FileUploadDownloadComponent implements OnInit {
     }
   }
   async downloadFile() {
-    return await this.companyService.downloadFile().subscribe((response) => {
-      let filename = response.headers
-        .get('content-disposition')
-        ?.split(';')[1]
-        .split('=')[1];
-      let blob: Blob = response.body as Blob;
-      let a = document.createElement('a');
-      a.download = filename!;
-      a.href = window.URL.createObjectURL(blob);
-      a.click();
-    });
+    return await this.companyService
+      .downloadFile(this.file)
+      .subscribe((response) => {
+        const filename = response.headers
+          .get('content-disposition')
+          ?.split(';')[1]
+          .split('=')[1];
+        const blob: Blob = response.body as Blob;
+        const a = document.createElement('a');
+        a.download = filename!;
+        a.href = window.URL.createObjectURL(blob);
+        a.click();
+      });
   }
 }

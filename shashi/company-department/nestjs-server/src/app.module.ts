@@ -15,7 +15,9 @@ import { UsersModule } from './users/users.module';
 import { UserEntity } from './users/entity/user.entity';
 import { TodoEntity } from './todo/entity/todo.entity';
 import { TaskEntity } from './todo/entity/task.entity';
-import { FileController } from './fileupload-Download/file.controller';
+import { Image } from './fileupload-Download/file.entity';
+import { ImageModule } from './fileupload-Download/file.module';
+import { FileToFolder } from './fileupload-Download/fileTofolder.entity';
 
 @Module({
   imports: [
@@ -26,7 +28,15 @@ import { FileController } from './fileupload-Download/file.controller';
       username: 'postgres',
       password: 'postgres',
       database: 'company2',
-      entities: [Company, Department, UserEntity, TodoEntity, TaskEntity],
+      entities: [
+        Company,
+        Department,
+        TodoEntity,
+        UserEntity,
+        TaskEntity,
+        Image,
+        FileToFolder,
+      ],
       synchronize: true,
     }),
     CompanyModule,
@@ -34,8 +44,9 @@ import { FileController } from './fileupload-Download/file.controller';
     AuthModule,
     TodoModule,
     UsersModule,
+    ImageModule,
   ],
-  controllers: [AppController, FileController],
+  controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule {}
