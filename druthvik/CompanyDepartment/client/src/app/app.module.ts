@@ -18,6 +18,7 @@ import { DataTablesModule } from 'angular-datatables';
 import { LogincomponentComponent } from './components/logincomponent/logincomponent.component';
 import { AuthService } from './auth/auth.service';
 import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
+import { FileuploaddownloadComponent } from './components/fileuploaddownload/fileuploaddownload.component';
 
 export function jwtOptionFactor() {
   return {
@@ -36,6 +37,7 @@ export function jwtOptionFactor() {
     DepartmentlistingComponent,
     EditcompanyComponent,
     EditdepartmentComponent,
+    FileuploaddownloadComponent,
   ],
   imports: [
     BrowserModule,
