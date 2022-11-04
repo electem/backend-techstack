@@ -2,8 +2,9 @@ import { Company } from "./company";
 
 export interface Department {
     id?: number;
-    name?: String;
-    type?: String;
+    name?: string;
+    type?: string;
+    date?:Date;
     company?:Company[];
     
    

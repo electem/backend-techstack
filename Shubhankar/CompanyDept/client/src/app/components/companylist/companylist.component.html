@@ -6,7 +6,7 @@
       <th class="text-center" scope="col">Id</th>
       <th class="text-center" scope="col">Name</th>
       <th class="text-center" scope="col">Address</th>
-
+      <th class="text-center" scope="col">CreatedAt</th>
       <th class="text-center" scope="col">Option</th>
     </tr>
   </thead>
@@ -26,6 +26,7 @@
       <th class="text-center" scope="row">{{ company.id }}</th>
       <th class="text-center" scope="row">{{ company.name }}</th>
       <th class="text-center" scope="row">{{ company.address }}</th>
+      <th class="text-center" scope="row">{{ company.createdAt }}</th>
       <button
         class="btn btn-outline-success"
         scope="row"
@@ -50,4 +51,5 @@
       </option>
     </select>
   </div>
+  <button  type="button" class="btn btn-primary"  (click)="clickDept()" >Department</button>
 </table>

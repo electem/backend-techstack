@@ -1,17 +1,20 @@
 <div>
   <nav class="navbar navbar-expand navbar-dark bg-dark">
     <a href="#" class="navbar-brand">Company-Department</a>
-    <div class="navbar-nav mr-auto">
+     <div class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a routerLink="companylist" class="nav-link">Company</a>
+        <a routerLink="chart" class="nav-link">Chart</a>
       </li>
+      <a routerLink="login" class="nav-link">login</a>
+    
+    <ul class="navbar-nav ml-auto">
       <li class="nav-item">
-        <a routerLink="departmentlist" class="nav-link">Department</a>
+        <a href class="nav-link" (click)="logout()">LogOut</a>
       </li>
-    </div>
+    </ul>
+      </div> 
   </nav>
-
-  <div class="container mt-3">
+ <div class="container mt-3">
     <router-outlet></router-outlet>
   </div>
 </div>

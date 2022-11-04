@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient} from '@angular/common/http';
 import { Company } from '../models/company';
 import { Department } from '../models/department';
 import { environment } from '../../environments/environment';
+
+
 
 const baseUrl = environment.url;
 @Injectable({
@@ -12,10 +14,14 @@ export class UserService {
   constructor(private http: HttpClient) {}
 
   async getCompany(): Promise<Company[]> {
-    return await this.http.get<Company[]>(baseUrl + '/company').toPromise();
+    return  this.http.get<Company[]>(baseUrl + '/company').toPromise();
   }
 
-  createcompany(data: Company): Promise<Company> {
+  async getCompanys(): Promise<Company[]> {
+    return  this.http.get<Company[]>(baseUrl + '/company').toPromise();
+  }
+
+ createcompany(data: Company): Promise<Company> {
     return this.http.post<Company>(baseUrl + '/company', data).toPromise();
   }
 
@@ -40,5 +46,13 @@ export class UserService {
 
   async updateCompany(data: Company) {
     return this.http.put<Company>(baseUrl + '/company', data).toPromise();
+  }
+
+  async getDepartments(): Promise<Department[]> {
+    return  this.http.get<Department[]>(baseUrl + '/department').toPromise();
+  }
+
+  async updateDepartment(data: Department) {
+    return this.http.put<Department>(baseUrl + '/department', data).toPromise();
   }
 }

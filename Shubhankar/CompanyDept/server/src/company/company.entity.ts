@@ -7,10 +7,10 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Department } from 'src/department/department.entity';
-import { PaginateableBaseEntity } from 'src/pagination';
+
 
 @Entity()
-export class Company extends PaginateableBaseEntity {
+export class Company  {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -19,6 +19,9 @@ export class Company extends PaginateableBaseEntity {
 
   @Column()
   address: string;
+
+  @Column({ nullable: true })
+  createdAt: Date;
 
   @ManyToMany(() => Department, (department) => department.company, {
     cascade: true,
