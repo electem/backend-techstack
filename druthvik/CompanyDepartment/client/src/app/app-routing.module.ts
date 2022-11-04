@@ -7,6 +7,7 @@ import { DepartmentlistingComponent } from './components/departmentlisting/depar
 import { EditcompanyComponent } from './components/editcompany/editcompany.component';
 import { EditdepartmentComponent } from './components/editdepartment/editdepartment.component';
 import { LogincomponentComponent } from './components/logincomponent/logincomponent.component';
+import { FileuploaddownloadComponent } from './components/fileuploaddownload/fileuploaddownload.component';
 //import { AuthGuard } from './auth/auth-guard';
 const routes: Routes = [
   { path: '', component: LogincomponentComponent },
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'departmentlisting', component: DepartmentlistingComponent },
   { path: 'editcompany/:id', component: EditcompanyComponent },
   { path: 'editdepartment/:id', component: EditdepartmentComponent },
+  { path: 'fileupload', component: FileuploaddownloadComponent },
 ];
 
 @NgModule({

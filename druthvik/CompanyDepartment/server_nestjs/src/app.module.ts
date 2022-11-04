@@ -12,6 +12,8 @@ import { UsersModule } from './users/users.module';
 import { User } from './users/user.entity';
 import { MailerModule } from '@nestjs-modules/mailer';
 import { join } from 'path';
+import { FileModule } from './file/file.module';
+import { File } from './file/file.entitiy';
 
 @Module({
   imports: [
@@ -22,7 +24,7 @@ import { join } from 'path';
       username: 'postgres',
       password: 'root',
       database: 'companydept',
-      entities: [Company, Department, User],
+      entities: [Company, Department, User, File],
       synchronize: true,
     }),
     MailerModule.forRoot({
@@ -41,6 +43,7 @@ import { join } from 'path';
     AuthModule,
     UsersModule,
     DepartmentModule,
+    FileModule,
   ],
   controllers: [AppController],
   providers: [AppService],
