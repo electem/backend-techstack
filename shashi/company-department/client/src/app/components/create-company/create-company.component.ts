@@ -19,6 +19,7 @@ export class CreateCompanyComponent implements OnInit {
   company: Company = {
     companyname: '',
     address: '',
+    email: '',
     department: [],
   };
 
@@ -32,6 +33,7 @@ export class CreateCompanyComponent implements OnInit {
     this.createCompanyForm = this.formBuilder.group({
       companyname: ['', Validators.required],
       address: ['', Validators.required],
+      email: ['', Validators.required],
     });
     this.retrieveDepartments();
   }
@@ -60,6 +62,7 @@ export class CreateCompanyComponent implements OnInit {
     const companyData: Company = {
       companyname: this.company.companyname,
       address: this.company.address,
+      email: this.company.email,
       department: this.AdddepartmentsList,
     };
     await this.companyService.createCompany(companyData);

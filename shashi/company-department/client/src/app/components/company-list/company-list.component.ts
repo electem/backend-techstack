@@ -26,6 +26,7 @@ export class CompanyListComponent implements OnInit {
 
   async deleteCompanyById(id: number): Promise<void> {
     await this.companyService.deleteCompanyById(id);
+    this.retrievecompanies();
   }
 
   async retrievecompanies(): Promise<void> {

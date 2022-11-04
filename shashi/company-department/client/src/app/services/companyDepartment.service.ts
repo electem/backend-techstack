@@ -23,9 +23,14 @@ export class CompanyService {
       .post<Department>(baseUrl + '/department', departmentData)
       .toPromise();
   }
-
   async getCompanies(): Promise<Company[]> {
-    return await this.http.get<Company[]>(baseUrl + '/company').toPromise();
+    var reqHeader = new HttpHeaders({
+      Authorization: 'Bearer ' + localStorage.getItem('tokens'),
+    });
+    console.log(localStorage.getItem('tokens'));
+    return await this.http
+      .get<Company[]>(baseUrl + '/company', { headers: reqHeader })
+      .toPromise();
   }
 
   async getDepartments(): Promise<Department[]> {

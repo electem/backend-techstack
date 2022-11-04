@@ -18,21 +18,14 @@ export class AppHttpInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
     console.log(request);
-
-    //const body = { title: request.body.title };
-
-    const reqCopy = request.clone({
-      //body,
+    const apiKey = 'Headers';
+    request = request.clone({
+      setHeaders: {
+        Authorization: 'Bearer ' + localStorage.getItem('tokens'),
+      },
     });
+    console.log(localStorage.getItem('tokens'));
 
-    if (baseUrl && request.url.startsWith(baseUrl)) {
-      if (
-        request.method == 'POST' &&
-        request.url == 'localhost:8000/tutorials'
-      ) {
-        console.log(request.body)
-      }
-    }
     return next.handle(request);
   }
 }
