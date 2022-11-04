@@ -1,6 +1,11 @@
-import { Component } from '@angular/core'
-import { Router } from '@angular/router';
+import { Component } from '@angular/core';
 import { AuthService } from './auth/auth.service';
+
+interface SideNavToggle {
+  screenWidth: number;
+  collapsed: boolean;
+}
+
 
 @Component({
   selector: 'app-root',
@@ -8,11 +13,18 @@ import { AuthService } from './auth/auth.service';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  constructor(private auth: AuthService, private router: Router) {}
-  title = 'Angular 12 Crud'
+  constructor( private auth: AuthService,) {}
+  title = 'sidenav';
+
+  isSideNavCollapsed = false;
+  screenWidth = 0;
+
+  onToggleSideNav(data: SideNavToggle): void {
+    this.screenWidth = data.screenWidth;
+    this.isSideNavCollapsed = data.collapsed;
+  }
 
   logout(): void {
     this.auth.signOut();
-    this.router.navigate(['companylist']);
   }
 }

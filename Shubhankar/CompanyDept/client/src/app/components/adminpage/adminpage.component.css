@@ -1,4 +1,4 @@
-.nav-link{
+.pb-3, .py-3 {
     padding-bottom: 1rem!important;
-    float: right; 
+    float: left;
 }

@@ -20,7 +20,9 @@ import { LoginComponent } from './components/login/login.component';
 import { AuthService } from './auth/auth.service';
 import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { ChartComponent } from './components/chart/chart.component';
-
+import { AdminpageComponent } from './components/adminpage/adminpage.component';
+import { SidenavComponent } from './components/sidenav/sidenav.component';
+import { BodyComponent } from './components/body/body.component';
 
 export function jwtOptionFactor() {
   return {
@@ -28,8 +30,6 @@ export function jwtOptionFactor() {
     disallowedRoutes: ['http://localhost:3000/login'],
   };
 }
-
-
 
 @NgModule({
   declarations: [
@@ -42,6 +42,9 @@ export function jwtOptionFactor() {
     EditdepartmentComponent,
     LoginComponent,
     ChartComponent,
+    AdminpageComponent,
+    SidenavComponent,
+    BodyComponent,
   ],
   imports: [
     BrowserModule,
@@ -53,7 +56,7 @@ export function jwtOptionFactor() {
     DataTablesModule,
     NgxPaginationModule,
     NgMultiSelectDropDownModule,
-   ],
+  ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,

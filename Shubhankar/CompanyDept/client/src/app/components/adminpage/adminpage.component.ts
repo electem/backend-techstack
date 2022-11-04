@@ -1,28 +1,31 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart, registerables } from 'chart.js';
+import { AuthService } from 'src/app/auth/auth.service';
 import { Company } from '../../models/company';
 import { Department } from '../../models/department';
 import { UserService } from '../../services/user.service';
 
 @Component({
-  selector: 'app-chart',
-  templateUrl: './chart.component.html',
-  styleUrls: ['./chart.component.css'],
+  selector: 'app-adminpage',
+  templateUrl: './adminpage.component.html',
+  styleUrls: ['./adminpage.component.css'],
 })
-export class ChartComponent implements OnInit {
+export class AdminpageComponent implements OnInit {
   companys: Company[] = [];
   companyNames: string[] = [];
   departmentCount: number[] = [];
   departments: Department[] = [];
   departmentNames: string[] = [];
   companyCounts: number[] = [];
-
-  constructor(private userservice: UserService) {}
+  constructor(
+    private userservice: UserService,
+    private auth: AuthService,
+  ) {}
 
   ngOnInit(): void {
     this.retrieveCompany();
-    this.retrieveDepartment();
     this.callMixedChart();
+     this.callMixedChart1();
   }
 
   async retrieveCompany() {
@@ -32,6 +35,7 @@ export class ChartComponent implements OnInit {
       this.departmentCount.push(compnay.department?.length!);
     }
     this.callBarChart();
+    this.retrieveDepartment();
   }
 
   public callBarChart() {
@@ -112,9 +116,9 @@ export class ChartComponent implements OnInit {
             borderWidth: 1,
           },
           {
-            type: 'line',
+            type: 'bar',
             label:
-              'Line Dataset # Number of Companys present in each department',
+              '# Number of Companys present in each department',
             data: this.companyCounts,
             backgroundColor: ['rgba(255, 159, 64, 0.2)'],
             borderColor: ['rgba(54, 162, 235, 1)'],
@@ -131,5 +135,44 @@ export class ChartComponent implements OnInit {
         },
       },
     });
+  }
+
+  public callMixedChart1() {
+    Chart.register(...registerables);
+    const mixedChart = new Chart('myMixedChart1', {
+      data: {
+        datasets: [
+          {
+            type: 'line',
+            label:
+              '# Number of Departments present in each company',
+            data: this.departmentCount,
+            backgroundColor: ['rgba(59, 162, 235, 0.2)'],
+            borderColor: ['rgba(54, 162, 235, 1)'],
+            borderWidth: 1,
+          },
+          {
+            type: 'line',
+            label:
+              '# Number of Companys present in each department',
+            data: this.companyCounts,
+            backgroundColor: ['rgba(255, 159, 64, 0.2)'],
+            borderColor: ['rgba(54, 162, 235, 1)'],
+            borderWidth: 1,
+          },
+        ],
+        labels: this.departmentNames,
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+          },
+        },
+      },
+    });
+  }
+  logout(): void {
+    this.auth.signOut();
   }
 }

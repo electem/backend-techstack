@@ -1,20 +1,26 @@
-<div>
-  <nav class="navbar navbar-expand navbar-dark bg-dark">
-    <a href="#" class="navbar-brand">Company-Department</a>
-     <div class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <a routerLink="chart" class="nav-link">Chart</a>
-      </li>
-      <a routerLink="login" class="nav-link">login</a>
-    
-    <ul class="navbar-nav ml-auto">
-      <li class="nav-item">
-        <a href class="nav-link" (click)="logout()">LogOut</a>
-      </li>
-    </ul>
-      </div> 
-  </nav>
- <div class="container mt-3">
-    <router-outlet></router-outlet>
+<!-- <nav class="navbar navbar-expand navbar-dark bg-dark ">
+  <div class="navbar-nav mr-auto">
+   <li class="nav-item">
+    <a routerLink="companylist" class="nav-link">................</a>
+  </li>
+ <li class="nav-item">
+   <a routerLink="companylist" class="nav-link">Companies List</a>
+</li>
+<li class="nav-item">
+  <a routerLink="departmentlist" class="nav-link">Departments List</a>
+</li>
+<li class="nav-item">
+  <a href class="nav-link" (click)="logout()">LogOut</a>
+</li>
   </div>
+  </nav> -->
+
+<app-sidenav (onToggleSideNav)="onToggleSideNav($event)"></app-sidenav>
+<app-body
+    [collapsed]="isSideNavCollapsed"
+    [screenWidth]="screenWidth"
+></app-body>
+
+<div class="container mt-3">
+  <router-outlet></router-outlet>
 </div>

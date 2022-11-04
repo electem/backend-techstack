@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
   LoginDetail() {
     this.authService.userLogin(this.login).subscribe((data) => {
       if (data) {
-        this.router.navigate(['companylist']);
+        this.router.navigate(['admin']);
       }
     });
   }
