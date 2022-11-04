@@ -51,4 +51,8 @@ export class UserService {
   async getDepartments(): Promise<Department[]> {
     return  this.http.get<Department[]>(baseUrl + '/department').toPromise();
   }
+
+  async updateDepartment(data: Department) {
+    return this.http.put<Department>(baseUrl + '/department', data).toPromise();
+  }
 }

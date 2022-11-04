@@ -30,6 +30,37 @@
       <div *ngIf="fval.address.errors.required">Address Field is required</div>
     </div>
   </div>
+
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input
+      type="email"
+      class="form-control"
+      id="email"
+      formControlName="email"
+      [(ngModel)]="company.email"
+      [ngClass]="{ 'is-invalid': submitted && fval.email.errors }"
+    />
+    <div *ngIf="submitted && fval.email.errors" class="invalid-feedback">
+      <div *ngIf="fval.email.errors.required">Email Field is required</div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="phone">Phonenumber</label>
+    <input
+      type="phone"
+      class="form-control"
+      id="phone"
+      formControlName="phone"
+      [(ngModel)]="company.phone"
+      [ngClass]="{ 'is-invalid': submitted && fval.phone.errors }"
+    />
+    <div *ngIf="submitted && fval.phone.errors" class="invalid-feedback">
+      <div *ngIf="fval.phone.errors.required">Phone Field is required</div>
+    </div>
+  </div>
+
   <label>Choose Department</label>
   <li *ngFor="let depertment of department">
     <input type="checkbox"  (click)="onSelectPushExtraPlayerToPlayersList(depertment)"/>
@@ -37,6 +68,9 @@
   </li>
   <button type="button" class="btn btn-outline-success" (click)="getSubmit()">
     Save
+  </button>
+  <button type="button" class="btn btn-outline-danger" (click)="getBack()">
+    Cancel
   </button>
 </form>
   </div>

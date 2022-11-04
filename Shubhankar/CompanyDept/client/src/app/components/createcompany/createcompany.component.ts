@@ -21,6 +21,7 @@ export class CreatecompanyComponent implements OnInit {
     company: Company = {
       name: '',
       address: '',
+      email:'',
       department: [],
     };
   
@@ -35,6 +36,8 @@ export class CreatecompanyComponent implements OnInit {
         name: ['', Validators.required],
         department: ['', Validators.required],
         address: ['', Validators.required],
+        email: ['', Validators.required],
+        phone:['', Validators.required],
       });
       this.retrieveDepartment();
     }
@@ -45,10 +48,6 @@ export class CreatecompanyComponent implements OnInit {
     public onSelectPushExtraPlayerToPlayersList(department: Department) {
       this.selecteddepartment = department;
       this.company.department?.push(this.selecteddepartment );
-      // this.extraDepartment.splice(
-      //   this.extraDepartment.indexOf(this.removeDepartmentFromList!),
-      //   1
-      // );
     }
   
     get fval() {
@@ -66,9 +65,15 @@ export class CreatecompanyComponent implements OnInit {
       const companyinfo: Company = {
         name: this.company.name,
         address: this.company.address,
+        email:this.company.email,
+        phone:this.company.phone,
         department: this.company.department,
       };
       await this.userService.createcompany(companyinfo);
+      this.router.navigate(['/companylist']);
+    }
+
+    getBack(){
       this.router.navigate(['/companylist']);
     }
   }

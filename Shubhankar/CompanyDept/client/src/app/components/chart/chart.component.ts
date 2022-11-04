@@ -22,6 +22,7 @@ export class ChartComponent implements OnInit {
   ngOnInit(): void {
     this.retrieveCompany();
     this.retrieveDepartment();
+    this.callMixedChart();
   }
 
   async retrieveCompany() {
@@ -94,5 +95,41 @@ export class ChartComponent implements OnInit {
       console.log(this.companyCounts);
     }
     this.callLineChart();
+  }
+
+  public callMixedChart() {
+    Chart.register(...registerables);
+    const mixedChart = new Chart('myMixedChart', {
+      data: {
+        datasets: [
+          {
+            type: 'bar',
+            label:
+              'Bar Dataset # Number of Departments present in each company',
+            data: this.departmentCount,
+            backgroundColor: ['rgba(59, 162, 235, 0.2)'],
+            borderColor: ['rgba(54, 162, 235, 1)'],
+            borderWidth: 1,
+          },
+          {
+            type: 'bar',
+            label:
+              'Line Dataset # Number of Companys present in each department',
+            data: this.companyCounts,
+            backgroundColor: ['rgba(255, 159, 64, 0.2)'],
+            borderColor: ['rgba(54, 162, 235, 1)'],
+            borderWidth: 1,
+          },
+        ],
+        labels: this.departmentNames,
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+          },
+        },
+      },
+    });
   }
 }

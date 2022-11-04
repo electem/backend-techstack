@@ -20,6 +20,9 @@ export class Company  {
   @Column()
   address: string;
 
+  @Column({ nullable: true })
+  createdAt: Date;
+
   @ManyToMany(() => Department, (department) => department.company, {
     cascade: true,
   })
