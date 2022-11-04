@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable prettier/prettier */
 import {
   Body,
   Controller,
@@ -7,29 +9,24 @@ import {
   Param,
   Post,
   Put,
-  Query,
   UseGuards,
 } from '@nestjs/common';
 import { CompanyService } from './company.service';
 import { CompanyDto } from './company.dto';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
-import { CompanyMail } from './companymail.entity';
 import { MailerService } from '@nestjs-modules/mailer';
 import { join } from 'path';
+import * as fs from 'fs';
+import hbs from 'handlebars';
+import puppeteer from 'puppeteer';
 
-//@UseGuards(JwtAuthGuard)
+@UseGuards(JwtAuthGuard)
 @Controller('company')
 export class CompanyController {
   constructor(
     private companyService: CompanyService,
     private mailService: MailerService,
   ) {}
-  companyDetails: CompanyMail = {
-    name: '',
-    email: '',
-    address: '',
-    department: [],
-  };
   @Get()
   findAll() {
     return this.companyService.getAllCompanyWithDepartment();
@@ -58,26 +55,36 @@ export class CompanyController {
     });
     return response;
   }
-  @Post('html-email/:id')
+  @Post('pdf-email/:id')
   async postHTMLEmail(@Param('id') id: string) {
     const companybyid = await this.companyService.findCompanyWithDepartmentById(
       +id,
     );
-    this.companyDetails.name = companybyid.name;
-    for (let i = 0; i < companybyid.department.length; i++) {
-      this.companyDetails.department.push(companybyid.department[i].name);
-    }
+    const compile = async function (templatename, data) {
+      const html = fs.readFileSync(
+        join(__dirname, '../../src/mails/company.hbs'),
+        'utf-8',
+      );
+      return hbs.compile(html)(companybyid);
+    };
+    const browser = await puppeteer.launch({
+      headless: true,
+    });
+    const page = await browser.newPage();
+    const content = compile('company', companybyid);
+    console.log(content);
+    await page.setContent(await content);
+    await page.pdf({
+      format: 'A4',
+      path: join(__dirname, '../../src/mails/company.pdf'),
+    });
     const response = await this.mailService.sendMail({
       to: companybyid.email,
       from: 'druthvik@electems.com',
       subject: 'send mail with attachment',
-      template: 'company',
-      context: {
-        company: this.companyDetails,
-      },
       attachments: [
         {
-          path: join(__dirname, '../../src/mails/electems.pdf'),
+          path: join(__dirname, '../../src/mails/company.pdf'),
           filename: 'electems.pdf',
           contentDisposition: 'attachment',
         },

@@ -12,7 +12,6 @@ import { UsersModule } from './users/users.module';
 import { User } from './users/user.entity';
 import { MailerModule } from '@nestjs-modules/mailer';
 import { join } from 'path';
-import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
 
 @Module({
   imports: [
@@ -28,17 +27,13 @@ import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handleba
     }),
     MailerModule.forRoot({
       transport: {
-        host: 'smtp.sendgrid.net',
+        host: 'mail.electems.com',
+        port: 465,
+        ssl: false,
+        tls: true,
         auth: {
-          user: 'apikey',
-          pass: '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',
-        },
-      },
-      template: {
-        dir: join(__dirname, 'mails'),
-        adapter: new HandlebarsAdapter(),
-        options: {
-          strict: true,
+          user: 'druthvik@electems.com',
+          pass: 'cybRVE12#',
         },
       },
     }),
