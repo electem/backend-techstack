@@ -21,7 +21,7 @@ import com.example.manytomanymapping.models.Company;
 import com.example.manytomanymapping.repository.CompanyRepository;
 
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "*", maxAge = 3600)
 public class CompanyController {
 
 	/**
