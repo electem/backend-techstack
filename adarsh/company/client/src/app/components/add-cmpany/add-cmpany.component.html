@@ -1,0 +1,59 @@
+<div class="customer-form">
+  <h4>CREATE COMPANY</h4>
+  <form>
+    <div>
+      <div class="form-group">
+        <label for="title">NAME</label>
+        <input
+          type="text"
+          class="form-control"
+          id="title"
+          required
+          [(ngModel)]="newCompany.name"
+          name="title"
+        />
+      </div>
+      <div>
+        <div class="form-group">
+          <label for="title">ADDRESS</label>
+          <input
+            type="text"
+            class="form-control"
+            id="title"
+            required
+            [(ngModel)]="newCompany.address"
+            name="title"
+          />
+        </div>
+        <div>
+          <div class="form-group">
+            <label for="title">EMAIL</label>
+            <input
+              type="text"
+              class="form-control"
+              id="title"
+              required
+              [(ngModel)]="newCompany.email"
+              name="title"
+            />
+          </div>
+          <div class="form-group">
+            <label for="options">DEPERTMENT:</label>
+            <div *ngFor="let department of departments">
+              <label>
+                <input type="checkbox" (click)="selectingDepartments(department)" />
+                {{ department.name }}
+              </label>
+            </div>
+          </div>
+         
+        </div>
+      </div>
+    </div>
+
+    <br />
+    <button type="submit" class="btn btn-info btn-sm mr-2"   (click)=" saveNewCompany()">Submit</button>
+  </form>
+</div>
+
+
