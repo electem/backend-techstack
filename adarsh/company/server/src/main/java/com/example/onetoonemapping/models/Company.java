@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,6 +14,9 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import org.hibernate.annotations.CreationTimestamp;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -37,8 +41,9 @@ public class Company {
 	@Column(name = "created_date", nullable = false, updatable = false)
 	@CreationTimestamp
 	private Date createdDate;
-
-	@ManyToMany(cascade = CascadeType.ALL)
+	
+	@JsonIgnoreProperties("companies")
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	@JoinTable(name = "companies_departments", joinColumns = { @JoinColumn(name = "companies_id") }, inverseJoinColumns = {
 			@JoinColumn(name = "departments_id") })
 	private List<Department> departments;

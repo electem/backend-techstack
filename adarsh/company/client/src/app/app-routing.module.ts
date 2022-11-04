@@ -6,6 +6,7 @@ import { EditCompanyComponent } from './components/edit-company/edit-company.com
 import { Department } from './models/depertment';
 import { DepartmentListingComponent } from './components/department-listing/department-listing.component';
 import { AddDepartmentComponent } from './components/add-department/add-department.component';
+import { EditDepartmentComponent } from './components/edit-department/edit-department.component';
 
 
 
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'company/:id', component: EditCompanyComponent },
   { path: 'departmenstList', component: DepartmentListingComponent },
   { path: 'adddepartment', component: AddDepartmentComponent },
+  { path: 'department/:id', component: EditDepartmentComponent },
 ];
 
 @NgModule({

@@ -50,10 +50,11 @@ public class DepertmentController {
 
 	}
 
-	@PutMapping("/updateDepartment")
-	public Department updateDepartment(@Valid @RequestBody Department depertment, BindingResult result, Model model) {
-		log.info("Start of DepertmentController :: updateDepartment ");
+	@PutMapping("/updateDepartment/{id}")
+	public Department updateDepartment(@PathVariable("id") int id, @Valid @RequestBody Department depertment) {
+		log.info("Start of CompanyController :: updateDepartment ");
 		return depermentRepo.save(depertment);
 
 	}
+
 }

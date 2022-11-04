@@ -7,7 +7,7 @@ import { CompanyService } from 'src/app/services/company.service';
 @Component({
   selector: 'app-edit-company',
   templateUrl: './edit-company.component.html',
-  styleUrls: ['./edit-company.component.css']
+  styleUrls: ['./edit-company.component.css'],
 })
 export class EditCompanyComponent implements OnInit {
   companies: Company[] = [];
@@ -17,12 +17,16 @@ export class EditCompanyComponent implements OnInit {
     email: '',
     departments: [],
   };
-departments:Department[]=[];
-departmentList: Department[] = [];
-selectedDepartment: Department = {};
-removeDepartment: Department = {};
+  departments: Department[] = [];
+  departmentList: Department[] = [];
+  selectedDepartment: Department = {};
+  removeDepartment: Department = {};
 
-  constructor(private companyService: CompanyService, private router: Router, private route: ActivatedRoute) { }
+  constructor(
+    private companyService: CompanyService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     this.getCompanyId(this.route.snapshot.params.id);
@@ -35,7 +39,9 @@ removeDepartment: Department = {};
     this.departments = await this.companyService.getDepertments();
     this.departmentList = this.departments;
   }
-  async onSelectPushToCurrentDepartment(departments: Department): Promise<void> {
+  async onSelectPushToCurrentDepartment(
+    departments: Department
+  ): Promise<void> {
     this.selectedDepartment = departments;
     this.newCompany.departments?.push(this.selectedDepartment);
     this.departmentList.splice(
@@ -59,10 +65,6 @@ removeDepartment: Department = {};
       email: this.newCompany.email,
       depertements: this.newCompany.departments,
     };
-    // await this.companyService.updateCompany(this.newCompany.id!, companydata);
-    
+    await this.companyService.updateCompany(this.newCompany.id!, companydata);
   }
 }
-
-
-

@@ -46,4 +46,9 @@ export class CompanyService {
   async getDepartmentByID(id: number) {
     return await this.http.get(`${url + '/depertment'}/${id}`).toPromise();
   }
+  async deleteCompany(id: number): Promise<Company> {
+    return await this.http
+      .delete(`${url + '/company'}/${id}`)
+      .toPromise();
+  }
 }

@@ -6,19 +6,17 @@ import { CompanyService } from 'src/app/services/company.service';
 @Component({
   selector: 'app-department-listing',
   templateUrl: './department-listing.component.html',
-  styleUrls: ['./department-listing.component.css']
+  styleUrls: ['./department-listing.component.css'],
 })
 export class DepartmentListingComponent implements OnInit {
   departments: Department[] = [];
-  constructor(private companyService: CompanyService, private router: Router) { }
+  constructor(private companyService: CompanyService, private router: Router) {}
 
   ngOnInit(): void {
     this.retrieveDepartments();
-
   }
 
   async retrieveDepartments() {
-    this.departments = await this.companyService. getDepertments();
-   
+    this.departments = await this.companyService.getDepertments();
   }
 }
