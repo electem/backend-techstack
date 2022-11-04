@@ -17,9 +17,17 @@ import { CompanyService } from './company.service';
 import { CompanyDto } from './company.dto';
 import { AuthGuard } from '@nestjs/passport';
 import { MailerService } from '@nestjs-modules/mailer';
-@UseGuards(AuthGuard())
+import { CompanyMail } from './companyEmail.model';
+import { join } from 'path';
+//@UseGuards(AuthGuard())
 @Controller('company')
 export class CompanyController {
+  companyDetails: CompanyMail = {
+    name: '',
+    email: '',
+    address: '',
+    department: [],
+  };
   constructor(
     private readonly companyService: CompanyService,
     private mailService: MailerService,
@@ -70,5 +78,33 @@ export class CompanyController {
       text: 'Welcome NestJS Email Sending Tutorial',
     });
     return response;
+  }
+
+  @Post('html-email/:id')
+  async postHTMLEmail(@Param('id') id: string) {
+    const companybyid = await this.companyService.findOneCompany(+id);
+    this.companyDetails.name = companybyid.companyname;
+    for (let i = 0; i < companybyid.department.length; i++) {
+      const u = this.companyDetails.department.push(
+        companybyid.department[i].departmentname,
+      );
+    }
+    const response = await this.mailService.sendMail({
+      to: companybyid.email,
+      from: 'shashi@electems.com',
+      subject: 'send mail with attachment',
+      template: 'company.hbs',
+      context: {
+        company: this.companyDetails,
+      },
+      // attachments: [
+      //   {
+      //     path: join(__dirname, '../../src/mails/electems.pdf'),
+      //     filename: 'electems.pdf',
+      //     contentDisposition: 'attachment',
+      //   },
+      // ],
+    });
+    return { response, message: 'success' };
   }
 }

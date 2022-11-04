@@ -33,6 +33,10 @@ export class CompanyListComponent implements OnInit {
     this.companiesList = await this.companyService.getCompanies();
   }
 
+  async sendEmailById(id: number): Promise<void> {
+    await this.companyService.sendEmailById(id);
+  }
+
   async pagination(page: number): Promise<void> {
     this.http
       .get(

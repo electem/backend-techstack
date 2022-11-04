@@ -84,6 +84,12 @@ export class CompanyService {
     });
   }
 
+  async sendEmailById(id: number): Promise<Department> {
+    return await this.http
+      .post(`${baseUrl + '/company'}/${id}`, null)
+      .toPromise();
+  }
+
   // this block of code is used to upload file and download both database and folder
 
   // async uploadFile(file: File): Promise<File> {
