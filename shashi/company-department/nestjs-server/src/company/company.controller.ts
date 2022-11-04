@@ -17,7 +17,7 @@ import { CompanyService } from './company.service';
 import { CompanyDto } from './company.dto';
 import { AuthGuard } from '@nestjs/passport';
 import { MailerService } from '@nestjs-modules/mailer';
-//@UseGuards(AuthGuard())
+@UseGuards(AuthGuard())
 @Controller('company')
 export class CompanyController {
   constructor(

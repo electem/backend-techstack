@@ -21,9 +21,6 @@ import { Strategy } from 'passport-local';
     JwtModule.register({
       //secret: process.env.SECRETKEY,
       secret: 'My Secret Never let outsiders',
-      signOptions: {
-        expiresIn: '120s',
-      },
     }),
   ],
   controllers: [AuthController],
