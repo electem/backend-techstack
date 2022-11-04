@@ -5,6 +5,7 @@ import { Company } from 'src/app/models/company.model';
 import { Department } from 'src/app/models/department.model';
 import { DepartmentService } from 'src/app/services/department.service';
 import { CompanyService } from 'src/app/services/company.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-createdepartment',
@@ -28,6 +29,7 @@ export class CreatedepartmentComponent implements OnInit {
     private departmentservice: DepartmentService,
     private formBuilder: FormBuilder,
     private companyService: CompanyService,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -63,6 +65,7 @@ export class CreatedepartmentComponent implements OnInit {
       company: this.AddedCompanies,
     };
     await this.departmentservice.createDepartment(createDepartment);
+    this.router.navigate(['/comapanylisting']);
   }
 
   onSelectCompany(company: Company) {
