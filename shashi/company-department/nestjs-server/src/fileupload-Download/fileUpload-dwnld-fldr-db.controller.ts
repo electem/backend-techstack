@@ -19,28 +19,29 @@ import {
 import { FileInterceptor } from '@nestjs/platform-express';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Image } from './file.entity';
-import { Readable } from 'stream';
-
-@Controller('photos')
-export class FileController {
+import { multerOptions } from './file.Multerservice';
+import { FileToFolder } from './fileTofolder.entity';
+@Controller('photosToFolder')
+export class FileToFolderController {
   constructor(
-    @InjectRepository(Image)
-    private readonly imageRepository: Repository<Image>,
+    @InjectRepository(FileToFolder)
+    private readonly imageRepository: Repository<FileToFolder>,
   ) {}
 
-  // this block of code will upload image/file  database
+  // this block of code will upload image to a folder and database at a time
 
   @Post()
-  @UseInterceptors(FileInterceptor('image'))
-  async create(@UploadedFile() file: Express.Multer.File) {
+  @UseInterceptors(FileInterceptor('file', multerOptions))
+  async upload(@UploadedFile() file) {
     try {
-      this.imageRepository.save(file);
+      await this.imageRepository.save(file);
     } catch (err) {
       throw new HttpException(err, HttpStatus.BAD_REQUEST);
     }
-    return 'uploaded successfully';
+    return { message: 'uploaded successfully' };
   }
+
+  // this block of code will download the image based on the filename
 
   @Get('/:originalname')
   @UseInterceptors()
@@ -48,7 +49,7 @@ export class FileController {
     const imageDownloadFromDB = await this.imageRepository.findOneBy({
       originalname,
     });
-    const stream = Readable.from(imageDownloadFromDB.buffer);
-    return stream.pipe(res);
+    const filepath = './uploads/' + originalname;
+    return res.download(filepath);
   }
 }

@@ -1,18 +1,17 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { switchMap, map, tap } from 'rxjs/operators';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Company } from '../models/company.model';
 import { Department } from '../models/department.model';
+import { Observable } from 'rxjs';
 const baseUrl = environment.url;
-export class Pagination {
-  startPoint?: number;
-  pageLength?: number;
-}
+
 @Injectable({
   providedIn: 'root',
 })
 export class CompanyService {
-  pagination = new Pagination();
+  file = File;
   constructor(private http: HttpClient) {}
   async createCompany(companyData: Company): Promise<Company> {
     return this.http
@@ -58,4 +57,41 @@ export class CompanyService {
       .delete(`${baseUrl + '/department'}/${id}`)
       .toPromise();
   }
+
+  async uploadFile(file: File) {
+    const headerDict = {
+      Accept: 'application/json',
+      'Access-Control-Allow-Headers': 'Content-Type',
+    };
+    const requestOptions = {
+      headers: new HttpHeaders(headerDict),
+    };
+    const formData = new FormData();
+    formData.append('image', file);
+    return await this.http
+      .post(baseUrl + '/photos', formData, requestOptions)
+      .subscribe();
+  }
+
+  downloadFile(file: File) {
+    return this.http.get(`${baseUrl + '/photos'}/${file.name}`, {
+      observe: 'response',
+    });
+  }
+
+  // this block of code is used to upload file and download both database and folder
+
+  // async uploadFile(file: File): Promise<File> {
+  //   const formData: FormData = new FormData();
+  //   formData.append('image', file);
+  //   return await this.http
+  //     .post<File>(baseUrl + '/photos', formData)
+  //     .toPromise();
+  // }
+  // downloadFile(file: File) {
+  //   return this.http.get(`${baseUrl + '/photos'}/${file.name}`, {
+  //     observe: 'response',
+  //     responseType: 'blob',
+  //   });
+  // }
 }
