@@ -30,10 +30,7 @@ export class FileController {
     console.log(file);
     return 'file uploaded successfully';
   }
-  @Get()
-  findAllFiles(): Promise<File[]> {
-    return this.fileRepository.find();
-  }
+
   @Get('/:originalname')
   @UseInterceptors()
   async download(@Res() res, @Param('originalname') originalname) {
