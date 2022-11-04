@@ -47,4 +47,12 @@ export class UserService {
   async updateCompany(data: Company) {
     return this.http.put<Company>(baseUrl + '/company', data).toPromise();
   }
+
+  async getDepartments(): Promise<Department[]> {
+    return  this.http.get<Department[]>(baseUrl + '/department').toPromise();
+  }
+
+  async updateDepartment(data: Department) {
+    return this.http.put<Department>(baseUrl + '/department', data).toPromise();
+  }
 }

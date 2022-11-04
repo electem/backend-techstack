@@ -4,7 +4,7 @@ export interface Department {
     id?: number;
     name?: string;
     type?: string;
-    createdAt?:Date;
+    date?:Date;
     company?:Company[];
     
    

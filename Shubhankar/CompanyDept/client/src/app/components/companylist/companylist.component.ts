@@ -47,4 +47,7 @@ export class CompanylistComponent implements OnInit {
   click() {
     this.router.navigate(['/create']);
   }
+  clickDept(){
+    this.router.navigate(['/departmentlist']);
+  }
 }
