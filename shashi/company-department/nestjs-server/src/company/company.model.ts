@@ -20,8 +20,13 @@ export class Company {
 
   @Column()
   address?: string;
+
+  @Column()
+  email?: string;
+
   @CreateDateColumn()
   createdAt!: Date;
+
   @ManyToMany(() => Department, (department) => department.company, {
     cascade: true,
   })

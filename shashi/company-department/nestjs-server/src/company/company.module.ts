@@ -8,6 +8,7 @@ import { CompanyService } from './company.service';
 import { CompanyProviders } from './company.provider';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from 'src/auth/auth.module';
+import { MailerModule } from '@nestjs-modules/mailer';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Company]), AuthModule],

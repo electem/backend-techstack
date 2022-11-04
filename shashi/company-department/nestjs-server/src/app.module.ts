@@ -18,6 +18,7 @@ import { TaskEntity } from './todo/entity/task.entity';
 import { Image } from './fileupload-Download/file.entity';
 import { ImageModule } from './fileupload-Download/file.module';
 import { FileToFolder } from './fileupload-Download/fileTofolder.entity';
+import { MailerModule } from '@nestjs-modules/mailer';
 
 @Module({
   imports: [
@@ -45,6 +46,18 @@ import { FileToFolder } from './fileupload-Download/fileTofolder.entity';
     TodoModule,
     UsersModule,
     ImageModule,
+    MailerModule.forRoot({
+      transport: {
+        host: 'mail.electems.com',
+        port: 465,
+        ssl: false,
+        tls: true,
+        auth: {
+          user: 'shashi@electems.com',
+          pass: 'cybRVE12#',
+        },
+      },
+    }),
   ],
   controllers: [AppController],
   providers: [AppService],
