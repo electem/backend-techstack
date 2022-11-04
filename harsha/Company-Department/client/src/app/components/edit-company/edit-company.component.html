@@ -40,7 +40,19 @@
         </div>
       </div>
     </div>
-
+    <div class="row">
+      <div>
+        <label class="btn btn-default p-0">
+          <input type="file" (change)="selectFile($event)" />
+        </label>
+      </div>
+      <button class="btn btn-success btn-sm" [disabled]="!selectedFiles" (click)="upload()">
+        Upload
+      </button>
+      <button class="btn btn-warning btn-sm" (click)="downloadFile()">
+        Download
+      </button>
+    </div>
     <button type="button" class="btn btn-success create-account" (click)="updateCompany()">
       Update
     </button>
