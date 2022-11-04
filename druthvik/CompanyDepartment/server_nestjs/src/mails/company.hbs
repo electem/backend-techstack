@@ -8,11 +8,11 @@
   <body>
     <div class='card'>
       <div class='inner'>
-        <h2 class='title'>{{company.name}}</h2>
+        <h2 class='title'>{{name}}</h2>
         <div>
           <ul>
-            {{#each company.department}}
-              <li>{{this}}</li>
+            {{#each department}}
+              <li>{{this.name}}</li>
             {{/each}}
           </ul>
         </div>
