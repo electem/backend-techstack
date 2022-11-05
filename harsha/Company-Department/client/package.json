@@ -32,8 +32,6 @@
     "modules": "^0.4.0",
     "moment-timezone": "^0.5.37",
     "ng-multiselect-dropdown": "^0.2.11",
-    "@types/file-saver": "^2.0.2",
-    "file-saver": "^2.0.5",
     "node": "^17.1.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.1.0",

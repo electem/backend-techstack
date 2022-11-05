@@ -10,9 +10,11 @@ import { CompanyService } from 'src/app/services/company.service';
 })
 export class CompanyListComponent implements OnInit {
   companies: Company[] = [];
+  Token: any;
   constructor(private companyService: CompanyService, private router: Router) {}
 
   ngOnInit(): void {
+    this.getAuthentication();
     this.getCompanies();
   }
 
@@ -24,5 +26,10 @@ export class CompanyListComponent implements OnInit {
     var delBtn = confirm(' Do you want to delete ?');
     await this.companyService.deleteCompany(id);
     this.router.navigate(['/company-list']);
+  }
+
+  async getAuthentication() {
+    const expiration = localStorage.getItem('id_token');
+    console.log(expiration);
   }
 }

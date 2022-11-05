@@ -22,6 +22,7 @@ import com.example.manytomanymapping.models.FileResponse;
 import com.example.manytomanymapping.service.FileStorageService;
 
 @RestController
+@CrossOrigin
 public class FileController {
 
 	/**
@@ -33,7 +34,6 @@ public class FileController {
 	private FileStorageService fileStorageService;
 
 	// This block of code is used to upload the file to the DB.
-	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping("/uploadFile")
 	public FileResponse uploadFile(@RequestParam("file") MultipartFile multipartFile) {
 		LOG.info("Start of FileController :: uploadFile ");
@@ -47,7 +47,6 @@ public class FileController {
 
 	// This block of code is used to download the file from the DB and converted
 	// into ByteArrayResource.
-	@CrossOrigin(origins = "http://localhost:4200")
 	@GetMapping("/downloadFile/{fileId}")
 	public ResponseEntity<Resource> downloadFile(@PathVariable String fileId) throws MyFileNotFoundException {
 		LOG.info("Start of FileController :: downloadFile ");

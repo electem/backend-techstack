@@ -26,7 +26,7 @@ export class FileUploadDownloadComponent implements OnInit {
       const file: File | null = this.selectedFiles.item(0);
       if (file) {
         this.currentFile = file;
-        this.fileUploadService.upload(this.currentFile);
+        // this.fileUploadService.upload(this.currentFile);
       }
       this.selectedFiles = undefined;
     }

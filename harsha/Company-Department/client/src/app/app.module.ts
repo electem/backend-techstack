@@ -14,6 +14,9 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { EditCompanyComponent } from './components/edit-company/edit-company.component';
 import { EditDepartmentComponent } from './components/edit-department/edit-department.component';
 import { FileUploadDownloadComponent } from './components/file-upload-download/file-upload-download.component';
+import { UserLoginComponent } from './components/user-login/user-login.component';
+import { authInterceptorProviders } from './auth.interceptor';
+import { RegisterUserComponent } from './components/register-user/register-user.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +28,8 @@ import { FileUploadDownloadComponent } from './components/file-upload-download/f
     EditCompanyComponent,
     EditDepartmentComponent,
     FileUploadDownloadComponent,
+    UserLoginComponent,
+    RegisterUserComponent,
   ],
   imports: [
     NgxDatatableModule,
@@ -36,7 +41,7 @@ import { FileUploadDownloadComponent } from './components/file-upload-download/f
     ReactiveFormsModule,
     NgMultiSelectDropDownModule.forRoot(),
   ],
-  providers: [],
+  providers: [authInterceptorProviders],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
