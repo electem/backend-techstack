@@ -9,6 +9,7 @@ import { EditDepartmentComponent } from './components/edit-department/edit-depar
 import { FileUploadDownloadComponent } from './components/file-upload-download/file-upload-download.component';
 import { UserLoginComponent } from './components/user-login/user-login.component';
 import { RegisterUserComponent } from './components/register-user/register-user.component';
+import { ChartsComponent } from './components/charts/charts.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path: 'edit-company/:id', component: EditCompanyComponent },
   { path: 'edit-department/:id', component: EditDepartmentComponent },
   { path: 'file', component: FileUploadDownloadComponent },
+  { path: 'charts', component: ChartsComponent },
 ];
 
 @NgModule({
