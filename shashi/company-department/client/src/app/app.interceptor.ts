@@ -4,11 +4,10 @@ import {
   HttpHandler,
   HttpEvent,
   HttpInterceptor,
+  HttpHeaders,
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Title } from '@angular/platform-browser';
 
-const baseUrl = 'http://localhost:8000/tutorial';
 @Injectable()
 export class AppHttpInterceptor implements HttpInterceptor {
   constructor() {}
@@ -19,6 +18,7 @@ export class AppHttpInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<unknown>> {
     console.log(request);
     const apiKey = 'Headers';
+
     request = request.clone({
       setHeaders: {
         Authorization: 'Bearer ' + localStorage.getItem('tokens'),
