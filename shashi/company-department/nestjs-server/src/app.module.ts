@@ -19,6 +19,8 @@ import { Image } from './fileupload-Download/file.entity';
 import { ImageModule } from './fileupload-Download/file.module';
 import { FileToFolder } from './fileupload-Download/fileTofolder.entity';
 import { MailerModule } from '@nestjs-modules/mailer';
+import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
+import { join } from 'path';
 
 @Module({
   imports: [

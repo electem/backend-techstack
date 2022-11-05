@@ -47,6 +47,7 @@
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
     "pg": "^8.8.0",
+    "puppeteer": "^19.2.2",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.5.5",
     "typeorm": "^0.3.10",
