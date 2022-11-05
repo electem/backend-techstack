@@ -66,5 +66,6 @@ export class EditCompanyComponent implements OnInit {
       depertements: this.newCompany.departments,
     };
     await this.companyService.updateCompany(this.newCompany.id!, companydata);
+    this.router.navigate(['/list']);
   }
 }

@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { Company } from 'src/app/models/company';
 import { Department } from 'src/app/models/depertment';
+import { LoginUser } from 'src/app/models/ligin-user';
 import { CompanyService } from 'src/app/services/company.service';
 
 @Component({
@@ -66,5 +67,7 @@ export class EditDepartmentComponent implements OnInit {
       this.newDepartment.id!,
       department
     );
+    this.router.navigate(['/departmenstList']);
   }
+ 
 }

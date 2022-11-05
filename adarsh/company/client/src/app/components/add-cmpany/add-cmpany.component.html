@@ -1,4 +1,4 @@
-<div class="customer-form">
+<!-- <div class="customer-form">
   <h4>CREATE COMPANY</h4>
   <form>
     <div>
@@ -52,8 +52,60 @@
     </div>
 
     <br />
-    <button type="submit" class="btn btn-info btn-sm mr-2"   (click)=" saveNewCompany()">Submit</button>
+    <button type="submit" class="btn btn-info btn-sm mr-2"   (click)=" saveNewCompany()" >Submit</button>
+    <button type="cancle" class="btn btn-info btn-sm mr-2" routerLink="/list"  >cancal</button>
   </form>
+</div> -->
+
+<h1 class="card-title text-center">Add Company</h1>
+<div class="global-container">
+  <div class="card login-form">
+    <form [formGroup]="registerForm">
+      <div class="form-group col-md-4">
+        <label for="name">Name</label>
+        <input type="name" formControlName="name" class="form-control" [(ngModel)]="newCompany.name"
+          [ngClass]="{ 'is-invalid': submitted && validation.name.errors }" />
+        <div *ngIf="this.submitted && validation.name.errors" class="invalid-feedback">
+          <div *ngIf="validation.name.errors.required">
+            Name Field is required
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group col-md-4">
+        <label for="address">Address</label>
+        <input type="address" formControlName="address" class="form-control" [(ngModel)]="newCompany.address"
+          [ngClass]="{ 'is-invalid': submitted && validation.address.errors }" />
+        <div *ngIf="this.submitted && validation.address.errors" class="invalid-feedback">
+          <div *ngIf="validation.address.errors.required">
+            Address Field is required
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group col-md-4">
+        <label for="email">Email</label>
+        <input type="email" formControlName="email" class="form-control" [(ngModel)]="newCompany.email"
+          [ngClass]="{ 'is-invalid': submitted && validation.email.errors }" />
+        <div *ngIf="this.submitted && validation.email.errors" class="invalid-feedback">
+          <div *ngIf="validation.email.errors.required">
+            Email Field is required
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="options">Departments:</label>
+        <div *ngFor="let department of departments">
+          <label>
+            <input type="checkbox" (click)="selectingDepartments(department)" />
+            {{ department.name }}
+          </label>
+        </div>
+      </div>
+      <button type="button" class="btn btn-success" (click)="signup()">
+        Save
+      </button>
+      <button type=" button" class="btn btn-warning" routerLink="/list">Cancel</button>
+    </form>
+  </div>
 </div>
-
-

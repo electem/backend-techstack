@@ -1,10 +1,12 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Company } from '../models/company';
 import { Department } from '../models/depertment';
+import { LoginUser } from '../models/ligin-user';
 
 const url = environment.url;
+const AUTH_API = 'http://localhost:8080/api/auth/';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +14,8 @@ const url = environment.url;
 export class CompanyService {
   companys: Company[] = [];
   department: Department[] = [];
+  tokenIs?: string;
+  
 
   constructor(private http: HttpClient) { }
 
@@ -51,4 +55,12 @@ export class CompanyService {
       .delete(`${url + '/company'}/${id}`)
       .toPromise();
   }
+  async getAthontication() {
+    return await this.http
+      .post( AUTH_API + 'signin', {
+        
+
+      })
+      .toPromise();
+}
 }
