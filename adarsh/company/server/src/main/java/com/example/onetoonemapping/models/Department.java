@@ -2,7 +2,6 @@ package com.example.onetoonemapping.models;
 
 import java.util.Date;
 import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -43,4 +42,8 @@ public class Department {
 	@JoinTable(name = "companies_departments", joinColumns = { @JoinColumn(name = "departments_id") }, inverseJoinColumns = {
 			@JoinColumn(name ="companies_id") })
 	private List<Company> companies;
+	
+//	@JsonBackReference
+//	@ManyToMany(cascade = CascadeType.ALL, mappedBy = "departments")
+//	private List<Company> companies;
 }

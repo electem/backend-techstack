@@ -47,4 +47,9 @@ public class Company {
 	@JoinTable(name = "companies_departments", joinColumns = { @JoinColumn(name = "companies_id") }, inverseJoinColumns = {
 			@JoinColumn(name = "departments_id") })
 	private List<Department> departments;
+	
+//	@ManyToMany(cascade = CascadeType.ALL)
+//	@JoinTable(name = "companies_departments", joinColumns = {
+//			@JoinColumn(name = "companies_id") }, inverseJoinColumns = { @JoinColumn(name = "departments_id") })
+//	private List<Department> departments;
 }
