@@ -17,7 +17,7 @@ import { SchoolDto } from './school.dto';
 import { SchoolService } from './school.service';
 import { AuthGuard } from '@nestjs/passport';
 
-//@UseGuards(AuthGuard())
+@UseGuards(AuthGuard())
 @Controller('school')
 export class SchoolController {
   constructor(private readonly schoolService: SchoolService) {}
