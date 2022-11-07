@@ -8,9 +8,13 @@ import { Company } from './company/company.entity';
 import { CompanyModule } from './company/company.module';
 import { Department } from './department/department.entity';
 import { DepartmentModule } from './department/department.module';
-import { User } from './user/user.entity';
+import { TaskEntity } from './ToDo/task.entity';
+import { TodoEntity } from './ToDo/toDo.entity';
+import { TodoModule } from './ToDo/toDo.module';
+import { UserEntity } from './user/user.entity';
+
 import { UsersModule } from './user/user.module';
-import { UsersService } from './user/user.service';
+
 
 
 @Module({
@@ -21,10 +25,10 @@ import { UsersService } from './user/user.service';
     username: 'postgres',
     password: 'cybis@ban',
     database: 'nestjs',
-    entities: [Company,Department,User],
+    entities: [Company,Department,UserEntity,TodoEntity,TaskEntity],
     synchronize: true,
   }),
-      CompanyModule,DepartmentModule,AuthModule,UsersModule,],
+      CompanyModule,DepartmentModule,AuthModule,UsersModule, TodoModule,],
   controllers: [AppController],
   providers: [AppService],
 })
