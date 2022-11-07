@@ -1,0 +1,33 @@
+.sidenav {
+  height: 100%; /* Full-height: remove this if you want "auto" height */
+  width: 270px; /* Set the width of the sidebar */
+  position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+  z-index: 1; /* Stay on top */
+  top: 70; /* Stay at the top */
+  left: 0;
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding: 1.5rem;
+  padding-bottom: 30px;
+}
+.marginright {
+  margin-right: 100px;
+}
+.nav {
+  height: 50px;
+  width: 100%;
+  position: relative;
+  margin-right: 100px;
+  position: relative;
+  margin: 2px;
+}
+.chart_container {
+  float: left;
+  margin-left: 170px;
+}
+#myChart {
+  width: 320px;
+  height: 350px;
+}
+.color {
+  background-color: black;
+}

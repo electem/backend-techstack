@@ -19,14 +19,15 @@ import { LogincomponentComponent } from './components/logincomponent/logincompon
 import { AuthService } from './auth/auth.service';
 import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { FileuploaddownloadComponent } from './components/fileuploaddownload/fileuploaddownload.component';
-
+import { NavigationComponent } from './components/navigation/navigation.component';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { SidebarModule } from 'ng-cdbangular';
 export function jwtOptionFactor() {
   return {
     allowedDomains: ['localhost:3000'],
     disallowedRoutes: ['http://localhost:3000/auth/login'],
   };
 }
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,6 +39,7 @@ export function jwtOptionFactor() {
     EditcompanyComponent,
     EditdepartmentComponent,
     FileuploaddownloadComponent,
+    NavigationComponent,
   ],
   imports: [
     BrowserModule,
@@ -47,6 +49,8 @@ export function jwtOptionFactor() {
     ReactiveFormsModule,
     DataTablesModule,
     NgxPaginationModule,
+    SidebarModule,
+    MDBBootstrapModule.forRoot(),
     NgMultiSelectDropDownModule.forRoot(),
     JwtModule.forRoot({
       jwtOptionsProvider: {

@@ -66,4 +66,7 @@ export class EditcompanyComponent implements OnInit {
       1,
     );
   }
+  cancel() {
+    this.router.navigate(['/companylisting']);
+  }
 }

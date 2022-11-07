@@ -54,4 +54,7 @@ export class EditdepartmentComponent implements OnInit {
   async retrieveCompanies(): Promise<void> {
     this.companies = await this.companyService.getCompanies();
   }
+  cancel() {
+    this.router.navigate(['/companylisting']);
+  }
 }
