@@ -9,16 +9,24 @@ import { EditDepartmentComponent } from './components/edit-department/edit-depar
 import { FileUploadDownloadComponent } from './components/file-upload-download/file-upload-download.component';
 import { LoginComponent } from './components/login/login.component';
 import { ChartsComponent } from './components/charts/charts.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 const routes: Routes = [
   { path: '', component: LoginComponent },
-  { path: 'createcompany', component: CreateCompanyComponent },
+  {
+    path: 'createcompany',
+    component: CreateCompanyComponent,
+  },
   { path: 'createdepartment', component: CreateDepartmentComponent },
-  { path: 'companylist', component: CompanyListComponent },
+  {
+    path: 'companylist',
+    component: CompanyListComponent,
+  },
   { path: 'departmentlist', component: DepartmentListComponent },
   { path: 'editcompany/:id', component: EditCompanyComponent },
   { path: 'editdepartment/:id', component: EditDepartmentComponent },
   { path: 'fileupload', component: FileUploadDownloadComponent },
   { path: 'charts', component: ChartsComponent },
+  { path: 'dashboard', component: DashboardComponent },
 ];
 
 @NgModule({

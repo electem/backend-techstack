@@ -18,7 +18,6 @@ export class AppHttpInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<unknown>> {
     console.log(request);
     const apiKey = 'Headers';
-
     request = request.clone({
       setHeaders: {
         Authorization: 'Bearer ' + localStorage.getItem('tokens'),

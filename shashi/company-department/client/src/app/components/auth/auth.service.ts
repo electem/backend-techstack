@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { BehaviorSubject, of } from 'rxjs';
 import { Login } from '../../models/login.model';
 import { TokenModel } from './token.model';
@@ -8,14 +8,18 @@ import { map, catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
-
-
 })
-export class AuthService {
+export class AuthService implements OnInit {
   constructor(private httpClient: HttpClient) {}
+
   userProfile = new BehaviorSubject<UserProfile | null>(null);
 
-  userLogin(payload: Login) {
+  ngOnInit(): void {
+    localStorage.clear();
+    localStorage.removeItem('tokens');
+  }
+
+  userLogin(payload: Login) {    
     return this.httpClient
       .post('http://localhost:3000/auth/login', payload)
       .pipe(

@@ -1,0 +1,16 @@
+<div class="sidebar-opener" (click)="sidebarShow = !sidebarShow">
+  Click me tofor menu
+</div>
+<div class="sidebar-slider" [class.sidebar-slide-in]="sidebarShow">
+  <div class="sidebar-close" (click)="sidebarShow = !sidebarShow"></div>
+  <div class="sidebar-content">
+    <h2>Sidebar</h2>
+    <div><a routerLink="companylist" class="nav-link">company list</a></div>
+    <div>
+      <a routerLink="departmentlist" class="nav-link">department list</a>
+    </div>
+    <div><a routerLink="fileupload" class="nav-link">fileupload</a></div>
+    <div><a routerLink="charts" class="nav-link">charts</a></div>
+    <div><a routerLink="login" class="nav-link">login</a></div>
+  </div>
+</div>
