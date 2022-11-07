@@ -23,6 +23,7 @@ const routes: Routes = [
   { path: 'deptedit/:id', component: EditdepartmentComponent },
   { path: 'chart', component: ChartComponent },
   { path: 'nav', component: SidenavComponent },
+  
 ];
 
 @NgModule({
