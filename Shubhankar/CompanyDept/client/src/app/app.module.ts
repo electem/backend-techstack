@@ -23,6 +23,9 @@ import { ChartComponent } from './components/chart/chart.component';
 import { AdminpageComponent } from './components/adminpage/adminpage.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { BodyComponent } from './components/body/body.component';
+import { FileuploadComponent } from './components/fileupload/fileupload.component';
+
+
 
 export function jwtOptionFactor() {
   return {
@@ -45,6 +48,7 @@ export function jwtOptionFactor() {
     AdminpageComponent,
     SidenavComponent,
     BodyComponent,
+    FileuploadComponent,
   ],
   imports: [
     BrowserModule,
@@ -56,6 +60,8 @@ export function jwtOptionFactor() {
     DataTablesModule,
     NgxPaginationModule,
     NgMultiSelectDropDownModule,
+   
+    
   ],
   providers: [
     {

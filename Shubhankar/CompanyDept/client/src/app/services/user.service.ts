@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient} from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Company } from '../models/company';
 import { Department } from '../models/department';
 import { environment } from '../../environments/environment';
-
-
 
 const baseUrl = environment.url;
 @Injectable({
@@ -14,14 +12,14 @@ export class UserService {
   constructor(private http: HttpClient) {}
 
   async getCompany(): Promise<Company[]> {
-    return  this.http.get<Company[]>(baseUrl + '/company').toPromise();
+    return this.http.get<Company[]>(baseUrl + '/company').toPromise();
   }
 
   async getCompanys(): Promise<Company[]> {
-    return  this.http.get<Company[]>(baseUrl + '/company').toPromise();
+    return this.http.get<Company[]>(baseUrl + '/company').toPromise();
   }
 
- createcompany(data: Company): Promise<Company> {
+  createcompany(data: Company): Promise<Company> {
     return this.http.post<Company>(baseUrl + '/company', data).toPromise();
   }
 
@@ -49,10 +47,32 @@ export class UserService {
   }
 
   async getDepartments(): Promise<Department[]> {
-    return  this.http.get<Department[]>(baseUrl + '/department').toPromise();
+    return this.http.get<Department[]>(baseUrl + '/department').toPromise();
   }
 
   async updateDepartment(data: Department) {
     return this.http.put<Department>(baseUrl + '/department', data).toPromise();
+  }
+
+  async uploadFile(file: File) {
+    const headerDict = {
+      Accept: 'application/json',
+      'Access-Control-Allow-Headers': 'Content-Type',
+    };
+    const requestOptions = {
+      headers: new HttpHeaders(headerDict),
+    };
+    const formData = new FormData();
+    formData.append('image', file);
+    return await this.http
+      .post(baseUrl + '/photos', formData, requestOptions)
+      .subscribe();
+  }
+
+  downloadFile(file: File): any {
+    return this.http.get(`${baseUrl + '/photos'}/${file.name}`, {
+      observe: 'response',
+      responseType: 'blob',
+    });
   }
 }
