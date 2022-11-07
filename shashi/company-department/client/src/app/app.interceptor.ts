@@ -4,11 +4,10 @@ import {
   HttpHandler,
   HttpEvent,
   HttpInterceptor,
+  HttpHeaders,
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Title } from '@angular/platform-browser';
 
-const baseUrl = 'http://localhost:8000/tutorial';
 @Injectable()
 export class AppHttpInterceptor implements HttpInterceptor {
   constructor() {}

@@ -7,9 +7,10 @@ import { DepartmentProviders } from './department.providers';
 import { DepartmentService } from './department.service';
 import { Department } from './department.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { AuthModule } from 'src/auth/auth.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Department])],
+  imports: [TypeOrmModule.forFeature([Department]), AuthModule],
   providers: [...DepartmentProviders, DepartmentService],
   controllers: [DepartmentController],
 })

@@ -23,7 +23,7 @@ import * as fs from 'fs';
 import hbs from 'handlebars';
 import puppeteer from 'puppeteer';
 
-//@UseGuards(AuthGuard())
+@UseGuards(AuthGuard())
 @Controller('company')
 export class CompanyController {
   companyDetails: CompanyMail = {

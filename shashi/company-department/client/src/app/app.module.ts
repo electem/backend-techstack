@@ -15,6 +15,7 @@ import { EditDepartmentComponent } from './components/edit-department/edit-depar
 import { NgxPaginationModule } from 'ngx-pagination';
 import { FileUploadDownloadComponent } from './components/file-upload-download/file-upload-download.component';
 import { LoginComponent } from './components/login/login.component';
+import { ChartsComponent } from './components/charts/charts.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { LoginComponent } from './components/login/login.component';
     EditDepartmentComponent,
     FileUploadDownloadComponent,
     LoginComponent,
+    ChartsComponent,
   ],
   imports: [
     NgMultiSelectDropDownModule.forRoot(),

@@ -22,7 +22,9 @@ export class LoginComponent implements OnInit {
   errorMessage = '';
   constructor(private authService: AuthService, private router: Router) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    localStorage.clear();
+  }
   userLogin() {
     this.authService.userLogin(this.loginForm).subscribe((data) => {
       if (data) {
