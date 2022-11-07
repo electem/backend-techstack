@@ -8,9 +8,10 @@ import { AppHttpInterceptor } from './app.interceptor';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { LoginComponent } from './components/login/login.component';
+import { CreateSchoolComponent } from './components/create-school/create-school.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent],
+  declarations: [AppComponent, LoginComponent, CreateSchoolComponent],
   imports: [
     NgMultiSelectDropDownModule.forRoot(),
     BrowserModule,
