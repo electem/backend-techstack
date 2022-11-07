@@ -56,12 +56,9 @@ export class AuthService {
   }
 
   private _createToken({ username }: UserDto): any {
-    const expiresIn = '120s';
-
     const user: JwtPayload = { username };
     const accessToken = this.jwtService.sign(user);
     return {
-      expiresIn,
       accessToken,
     };
   }

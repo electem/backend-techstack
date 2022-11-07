@@ -48,6 +48,27 @@
               </div>
             </div>
             <br />
+            <div class="form-group">
+              <label>Email</label>
+              <input
+                type="text"
+                formControlName="email"
+                class="form-control"
+                [ngClass]="{
+                  'is-invalid': submitted && formValidation.email.errors
+                }"
+                [(ngModel)]="company.email"
+              />
+              <div
+                *ngIf="submitted && formValidation.email.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="formValidation.email.errors.required">
+                  email is required
+                </div>
+              </div>
+            </div>
+            <br />
             <div class="column">
               <h2>Departments List</h2>
               <div *ngFor="let department of departmentsList">
@@ -56,17 +77,18 @@
                   (click)="selectedDepartment(department)"
                 />{{ department.departmentname }}
               </div>
+              <br />
+              <div class="text-center">
+                <button class="btn btn-outline-primary btn-sm">Submit</button>
+                <button
+                  class="btn btn-outline-danger btn-sm btn-space"
+                  routerLink="/companylist"
+                >
+                  Cancel
+                </button>
+              </div>
             </div>
           </form>
-        </div>
-        <div class="text-center">
-          <button class="btn btn-outline-primary btn-sm">Submit</button>
-          <button
-            class="btn btn-outline-danger btn-sm btn-space"
-            routerLink="/companylist"
-          >
-            Cancel
-          </button>
         </div>
         <br />
       </div>

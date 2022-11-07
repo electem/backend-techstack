@@ -26,10 +26,15 @@ export class CompanyListComponent implements OnInit {
 
   async deleteCompanyById(id: number): Promise<void> {
     await this.companyService.deleteCompanyById(id);
+    this.retrievecompanies();
   }
 
   async retrievecompanies(): Promise<void> {
     this.companiesList = await this.companyService.getCompanies();
+  }
+
+  async sendEmailById(id: number): Promise<void> {
+    await this.companyService.sendEmailById(id);
   }
 
   async pagination(page: number): Promise<void> {

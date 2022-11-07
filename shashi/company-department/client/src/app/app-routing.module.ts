@@ -7,8 +7,9 @@ import { DepartmentListComponent } from './components/department-list/department
 import { EditCompanyComponent } from './components/edit-company/edit-company.component';
 import { EditDepartmentComponent } from './components/edit-department/edit-department.component';
 import { FileUploadDownloadComponent } from './components/file-upload-download/file-upload-download.component';
+import { LoginComponent } from './components/login/login.component';
 const routes: Routes = [
-  { path: '', redirectTo: 'companylist', pathMatch: 'full' },
+  { path: '', component: LoginComponent },
   { path: 'createcompany', component: CreateCompanyComponent },
   { path: 'createdepartment', component: CreateDepartmentComponent },
   { path: 'companylist', component: CompanyListComponent },

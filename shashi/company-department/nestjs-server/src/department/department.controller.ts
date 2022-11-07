@@ -8,11 +8,14 @@ import {
   Put,
   Delete,
   NotFoundException,
+  UseGuards,
 } from '@nestjs/common';
 import { Department } from './department.entity';
 import { DepartmentService } from './department.service';
 import { DepartmentDto } from './department.dto';
+import { AuthGuard } from '@nestjs/passport';
 
+@UseGuards(AuthGuard())
 @Controller('department')
 export class DepartmentController {
   constructor(private readonly departmentService: DepartmentService) {}

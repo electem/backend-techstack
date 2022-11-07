@@ -14,6 +14,7 @@ import { EditCompanyComponent } from './components/edit-company/edit-company.com
 import { EditDepartmentComponent } from './components/edit-department/edit-department.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { FileUploadDownloadComponent } from './components/file-upload-download/file-upload-download.component';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { FileUploadDownloadComponent } from './components/file-upload-download/f
     EditCompanyComponent,
     EditDepartmentComponent,
     FileUploadDownloadComponent,
+    LoginComponent,
   ],
   imports: [
     NgMultiSelectDropDownModule.forRoot(),

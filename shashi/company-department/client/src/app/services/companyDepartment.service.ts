@@ -23,9 +23,14 @@ export class CompanyService {
       .post<Department>(baseUrl + '/department', departmentData)
       .toPromise();
   }
-
   async getCompanies(): Promise<Company[]> {
-    return await this.http.get<Company[]>(baseUrl + '/company').toPromise();
+    var reqHeader = new HttpHeaders({
+      Authorization: 'Bearer ' + localStorage.getItem('tokens'),
+    });
+    console.log(localStorage.getItem('tokens'));
+    return await this.http
+      .get<Company[]>(baseUrl + '/company', { headers: reqHeader })
+      .toPromise();
   }
 
   async getDepartments(): Promise<Department[]> {
@@ -77,6 +82,12 @@ export class CompanyService {
     return this.http.get(`${baseUrl + '/photos'}/${file.name}`, {
       observe: 'response',
     });
+  }
+
+  async sendEmailById(id: number): Promise<Department> {
+    return await this.http
+      .post(`${baseUrl + '/company'}/${id}`, null)
+      .toPromise();
   }
 
   // this block of code is used to upload file and download both database and folder
