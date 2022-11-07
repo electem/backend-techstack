@@ -8,6 +8,13 @@ import { UsersModule } from './users/users.module';
 import { MailerModule } from '@nestjs-modules/mailer';
 import { FileModule } from './file/file.module';
 import { User } from './users/user.entity';
+import { Student } from './student/student.entity';
+import { Subject } from 'typeorm/persistence/Subject';
+import { Teacher } from './teacher/teacher.entity';
+import { SchoolModule } from './school/school.module';
+import { School } from './school/school.entity';
+import { StudentModule } from './student/student.module';
+import { TeacherModule } from './teacher/teacher.module';
 
 @Module({
   imports: [
@@ -18,7 +25,7 @@ import { User } from './users/user.entity';
       username: 'postgres',
       password: 'root',
       database: 'studentmanagement',
-      entities: [User],
+      entities: [User, Student, Subject, Teacher, School],
       synchronize: true,
     }),
     MailerModule.forRoot({
@@ -36,6 +43,9 @@ import { User } from './users/user.entity';
     AuthModule,
     UsersModule,
     FileModule,
+    SchoolModule,
+    StudentModule,
+    TeacherModule,
   ],
   controllers: [AppController],
   providers: [AppService],

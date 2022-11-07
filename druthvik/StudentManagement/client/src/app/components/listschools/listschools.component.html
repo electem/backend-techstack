@@ -1,0 +1,49 @@
+<div class="list row">
+  <h2 class="py-4">Schools Lists</h2>
+  <div class="col-md-8">
+    <div class="input-group mb-3"></div>
+  </div>
+
+  <div class="col-md-6">
+    <ul class="list-group"></ul>
+    <td>
+      <button routerLink="/createcompany">ADD COMPANY</button>
+    </td>
+  </div>
+  <div class="container">
+    <br />
+    <table
+      class="table table-bordered table-hover table-bordered border-secondary"
+    >
+      <thead class="thead-light">
+        <tr class="active">
+          <th class="text-center" scope="col">Name</th>
+          <th class="text-center" scope="col">Address</th>
+          <th class="text-center" scope="col">Created AT</th>
+          <th class="text-center" scope="col">Length of student</th>
+          <th class="text-center" scope="col">Length of Teachers</th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let school of schools; let i = index">
+        <tr>
+          <th class="text-center" scope="row">{{ school.name }}</th>
+          <th class="text-center" scope="row">{{ school.address }}</th>
+          <th class="text-center" scope="row">{{ school.createdAt }}</th>
+          <th class="text-center" scope="row">{{ school.student.length }}</th>
+          <th class="text-center" scope="row">{{ school.teacher.length }}</th>
+          <th class="text-center" scope="row">
+            <button type="button" class="btn btn-warning btn-sm mr-2">
+              Edit
+            </button>
+            <button type="button" class="btn btn-danger btn-sm mr-2 marignleft">
+              Delete
+            </button>
+            <button type="button" class="btn button btn-sm mr-2 marignleft">
+              send mail
+            </button>
+          </th>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
