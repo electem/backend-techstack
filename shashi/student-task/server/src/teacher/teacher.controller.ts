@@ -13,6 +13,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { TeacherDto } from './teacher.dto';
+import { Teacher } from './teacher.entity';
 import { TeacherService } from './teacher.service';
 import { AuthGuard } from '@nestjs/passport';
 
@@ -23,5 +24,10 @@ export class TeacherController {
   @Post()
   async createTeacher(@Body() teacher: TeacherDto) {
     return await this.teacherService.createTeacher(teacher);
+  }
+
+  @Get()
+  async findAllTeacher(): Promise<Array<Teacher>> {
+    return this.teacherService.findAllTeacher();
   }
 }

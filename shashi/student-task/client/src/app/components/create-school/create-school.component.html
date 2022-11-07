@@ -48,6 +48,15 @@
               </div>
             </div>
             <br />
+            <div style="width: 50%">
+              <ng-multiselect-dropdown
+                [settings]="dropdownSettings"
+                [data]="teachersList"
+                (onSelect)="selectedTeacher($event)"
+              >
+              </ng-multiselect-dropdown>
+            </div>
+            <br />
             <div class="text-center">
               <button class="btn btn-primary btn-sm">Submit</button>
               <button

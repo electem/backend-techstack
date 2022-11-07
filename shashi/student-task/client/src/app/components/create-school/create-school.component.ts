@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { School } from 'src/app/models/school.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SchoolService } from 'src/app/services/student-task-service';
+import { Teacher } from 'src/app/models/teacher.model';
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
 
 @Component({
   selector: 'app-create-school',
@@ -9,11 +11,18 @@ import { SchoolService } from 'src/app/services/student-task-service';
   styleUrls: ['./create-school.component.css'],
 })
 export class CreateSchoolComponent implements OnInit {
+  teachersList: Teacher[] = [];
+  dropdownSettings: IDropdownSettings = {};
   createSchoolForm!: FormGroup;
+  currentTeacher!: Teacher;
+  AddedTeachers: Teacher[] = [];
+  AllSelectedTeachers: Teacher[] = [];
+  requiredField: boolean = false;
   submitted = false;
   school: School = {
     schoolname: '',
     address: '',
+    teacher: [],
   };
   constructor(
     private schoolService: SchoolService,
@@ -25,6 +34,11 @@ export class CreateSchoolComponent implements OnInit {
       schoolname: ['', Validators.required],
       address: ['', Validators.required],
     });
+    this.retriveTeachers();
+    this.dropdownSettings = {
+      idField: 'id',
+      textField: 'teachername',
+    };
   }
   get formValidation() {
     return this.createSchoolForm.controls;
@@ -38,10 +52,18 @@ export class CreateSchoolComponent implements OnInit {
       this.saveSchoolDetails();
     }
   }
-  async saveSchoolDetails(): Promise<void> {
+  async retriveTeachers(): Promise<void> {
+    this.teachersList = await this.schoolService.getTeachers();
+  }
+  async selectedTeacher(teacher: any): Promise<void> {
+    this.currentTeacher = teacher;
+    this.AddedTeachers?.push(this.currentTeacher);
+  }
+    async saveSchoolDetails(): Promise<void> {
     const schoolData: School = {
       schoolname: this.school.schoolname,
       address: this.school.address,
+      teacher: this.AddedTeachers,
     };
     await this.schoolService.createSchool(schoolData);
   }

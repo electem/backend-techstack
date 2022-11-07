@@ -18,4 +18,7 @@ export class TeacherService {
       throw new HttpException(err, HttpStatus.BAD_REQUEST);
     }
   }
+  public async findAllTeacher(): Promise<Teacher[]> {
+    return await this.teacherRepository.find();
+  }
 }
