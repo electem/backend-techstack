@@ -16,4 +16,8 @@ export class SchoolService {
       .post<School>(baseUrl + 'createSchool', school)
       .toPromise();
   }
+
+  async getSchools(): Promise<School[]> {
+    return await this.http.get<School[]>(baseUrl + 'schools').toPromise();
+  }
 }

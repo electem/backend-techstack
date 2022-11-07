@@ -10,9 +10,10 @@ import { UserLoginComponent } from './components/user-login/user-login.component
 import { authInterceptorProviders } from './auth.interceptor';
 import { RegisterUserComponent } from './components/register-user/register-user.component';
 import { CreateSchoolComponent } from './components/create-school/create-school.component';
+import { SchoolListComponent } from './components/school-list/school-list.component';
 
 @NgModule({
-  declarations: [AppComponent, UserLoginComponent, RegisterUserComponent, CreateSchoolComponent],
+  declarations: [AppComponent, UserLoginComponent, RegisterUserComponent, CreateSchoolComponent, SchoolListComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

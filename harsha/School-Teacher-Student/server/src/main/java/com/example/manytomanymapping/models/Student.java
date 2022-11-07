@@ -30,10 +30,10 @@ public class Student {
 	private int id;
 	private String name;
 	private String gender;
-	
+
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/YYYY")
 	private Date dateOfBirth;
-	
+
 	private String address;
 	private String email;
 	private long phoneNo;
@@ -41,8 +41,8 @@ public class Student {
 	@Column(name = "created_date", nullable = false, updatable = false)
 	@CreationTimestamp
 	private Date createdDate;
-	
-	@OneToOne(cascade = {CascadeType.ALL})
+
+	@OneToOne(cascade = { CascadeType.ALL })
 	@JoinColumn(name = "school_id")
 	private School school;
 }

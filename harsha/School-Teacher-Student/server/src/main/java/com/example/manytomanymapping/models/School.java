@@ -46,6 +46,7 @@ public class School {
 					@JoinColumn(name = "teacher_id", referencedColumnName = "id") })
 	private List<Teacher> teachers;
 
+	@JsonIgnoreProperties("school")
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "school_id")
 	private List<Student> students;
