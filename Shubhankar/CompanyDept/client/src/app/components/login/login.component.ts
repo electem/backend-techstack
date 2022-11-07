@@ -4,20 +4,22 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
 import { LoginUser } from 'src/app/models/login';
 
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
+
 export class LoginComponent implements OnInit {
+ 
   loginform!: FormGroup;
   login: LoginUser = {
-    username:'',
-    password:'',
+    username: '',
+    password: '',
   };
   submitted = false;
-  constructor(private authService: AuthService, 
+  constructor(
+    private authService: AuthService,
     private router: Router,
     private formBuilder: FormBuilder
   ) {}
@@ -29,14 +31,16 @@ export class LoginComponent implements OnInit {
     });
   }
 
- get fval() {
+  get fval() {
     return this.loginform.controls;
   }
+  
   async signup() {
     if (this.loginform.invalid) {
       return;
     }
   }
+ 
   LoginDetail() {
     this.authService.userLogin(this.login).subscribe((data) => {
       if (data) {
@@ -44,5 +48,4 @@ export class LoginComponent implements OnInit {
       }
     });
   }
- 
 }
