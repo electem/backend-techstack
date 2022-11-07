@@ -47,5 +47,4 @@ public class FileStorageService {
 		LOG.info("Start of FileStorageService :: getFileByName ");
 		return fileRepository.getByFileName(fileName);
 	}
-
 }

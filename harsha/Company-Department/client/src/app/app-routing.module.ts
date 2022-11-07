@@ -7,9 +7,14 @@ import { CreateDepartmentComponent } from './components/create-department/create
 import { EditCompanyComponent } from './components/edit-company/edit-company.component';
 import { EditDepartmentComponent } from './components/edit-department/edit-department.component';
 import { FileUploadDownloadComponent } from './components/file-upload-download/file-upload-download.component';
+import { UserLoginComponent } from './components/user-login/user-login.component';
+import { RegisterUserComponent } from './components/register-user/register-user.component';
+import { ChartsComponent } from './components/charts/charts.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'company-list', pathMatch: 'full' },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: 'login', component: UserLoginComponent },
+  { path: 'register', component: RegisterUserComponent },
   { path: 'company', component: CreateCompanyComponent },
   { path: 'company-list', component: CompanyListComponent },
   { path: 'dept-list', component: DepartmentListComponent },
@@ -17,6 +22,7 @@ const routes: Routes = [
   { path: 'edit-company/:id', component: EditCompanyComponent },
   { path: 'edit-department/:id', component: EditDepartmentComponent },
   { path: 'file', component: FileUploadDownloadComponent },
+  { path: 'charts', component: ChartsComponent },
 ];
 
 @NgModule({

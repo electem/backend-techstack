@@ -22,6 +22,10 @@ export class CompanyService {
     return await this.http.get<Company[]>(baseUrl + 'companies').toPromise();
   }
 
+  getCompany() {
+    return this.http.get<Company[]>(baseUrl + 'companies');
+  }
+
   async getDepartments(): Promise<Department[]> {
     return await this.http
       .get<Department[]>(baseUrl + 'departments')
