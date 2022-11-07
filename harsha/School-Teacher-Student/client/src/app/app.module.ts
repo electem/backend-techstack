@@ -9,9 +9,10 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { UserLoginComponent } from './components/user-login/user-login.component';
 import { authInterceptorProviders } from './auth.interceptor';
 import { RegisterUserComponent } from './components/register-user/register-user.component';
+import { CreateSchoolComponent } from './components/create-school/create-school.component';
 
 @NgModule({
-  declarations: [AppComponent, UserLoginComponent, RegisterUserComponent],
+  declarations: [AppComponent, UserLoginComponent, RegisterUserComponent, CreateSchoolComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
