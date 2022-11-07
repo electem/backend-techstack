@@ -8,9 +8,12 @@ import { EditcompanyComponent } from './components/editcompany/editcompany.compo
 import { EditdepartmentComponent } from './components/editdepartment/editdepartment.component';
 import { LogincomponentComponent } from './components/logincomponent/logincomponent.component';
 import { FileuploaddownloadComponent } from './components/fileuploaddownload/fileuploaddownload.component';
+import { DashboardwithchartsComponent } from './components/dashboardwithcharts/dashboardwithcharts.component';
+import { NavigationComponent } from './components/navigation/navigation.component';
 //import { AuthGuard } from './auth/auth-guard';
 const routes: Routes = [
   { path: '', component: LogincomponentComponent },
+  { path: 'login', component: LogincomponentComponent },
   { path: 'createcompany', component: CreatecompanyComponent },
   { path: 'companylisting', component: CompanylistingComponent },
   { path: 'createdepartment', component: CreatedepartmentComponent },
@@ -18,6 +21,8 @@ const routes: Routes = [
   { path: 'editcompany/:id', component: EditcompanyComponent },
   { path: 'editdepartment/:id', component: EditdepartmentComponent },
   { path: 'fileupload', component: FileuploaddownloadComponent },
+  { path: 'navi', component: NavigationComponent },
+  { path: 'dash', component: DashboardwithchartsComponent },
 ];
 
 @NgModule({
