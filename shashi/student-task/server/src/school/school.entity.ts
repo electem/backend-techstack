@@ -7,6 +7,7 @@ import {
   ManyToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { Teacher } from 'src/teacher/teacher.entity';
 
 @Entity()
 export class School {
@@ -21,4 +22,10 @@ export class School {
 
   @CreateDateColumn()
   createdAt: Date;
+
+  @ManyToMany(() => Teacher, (teacher) => teacher.school, {
+    cascade: true,
+  })
+  @JoinTable()
+  teacher!: Teacher[];
 }
