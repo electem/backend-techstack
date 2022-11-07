@@ -1,0 +1,70 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-4 offset-md-3 col-md-6 col-sm-offset-2 col-sm-8">
+      <h5>Edit Company</h5>
+      <form>
+        <div class="form-group input center">
+          <label for="name">company name</label>
+          <input
+            type="text"
+            name="name"
+            class="form-control"
+            [(ngModel)]="company.name"
+          />
+        </div>
+        <br />
+        <div class="form-group input center">
+          <label for="name">address</label>
+          <input
+            name="address"
+            type="text"
+            class="form-control"
+            [(ngModel)]="company.address"
+          />
+        </div>
+        <label for="options">Departments:</label>
+        <div *ngFor="let department of company.department">
+          <label>
+            <input
+              type="checkbox"
+              name="options"
+              [(ngModel)]="company.department"
+              (click)="removeDepartmentFromCompany(department)"
+            />
+            {{ department.name }}
+          </label>
+        </div>
+
+        <div class="form-group input center">
+          <div class="form-group">
+            <label for="options">Click to add departments:</label>
+            <div *ngFor="let department of departmentsList">
+              <label>
+                <input
+                  type="checkbox"
+                  name="options"
+                  (click)="removeDepartments(department)"
+                />
+                {{ department.name }}
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <button
+          class="btn btn-outline-danger btn-sm btn-space"
+          routerLink="/companylist"
+        >
+          Cancel
+        </button>
+        <button
+          class="btn btn-outline-success btn-sm"
+          routerLink="/companylist"
+          (click)="updateCompany()"
+        >
+          Update
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

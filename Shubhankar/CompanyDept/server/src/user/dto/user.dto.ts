@@ -1,6 +1,16 @@
 /* eslint-disable prettier/prettier */
-export class UserDto {  
-    readonly id: number;
-    readonly username: string;
-    readonly email: string;
+import { IsNotEmpty, IsEmail } from 'class-validator';
+
+export class UserDto {
+  @IsNotEmpty()
+  id: string;
+
+  @IsNotEmpty()
+  username: string;
+
+  @IsNotEmpty()
+  @IsEmail()
+  email: string;
+
+  createdOn?: Date;
 }

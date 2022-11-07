@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import { Company } from '../../models/company';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-companylist',
@@ -19,7 +20,8 @@ export class CompanylistComponent implements OnInit {
   constructor(
     private userservice: UserService,
     private router: Router,
-    private http: HttpClient
+    private http: HttpClient,
+    private auth: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -47,7 +49,8 @@ export class CompanylistComponent implements OnInit {
   click() {
     this.router.navigate(['/create']);
   }
-  clickDept(){
-    this.router.navigate(['/departmentlist']);
+
+  logout(): void {
+    this.auth.signOut();
   }
 }

@@ -22,7 +22,8 @@
     "@auth0/angular-jwt": "^5.1.0",
     "@ng-select/ng-select": "^8.1.1",
     "angular-datatables": "^6.0.0",
-    "bootstrap": "^5.2.0",
+    "bootstrap": "^5.2.2",
+    "bootstrap-icons": "^1.9.1",
     "chart.js": "^3.9.1",
     "datatables.net": "^1.12.1",
     "datatables.net-bs5": "^1.11.3",
@@ -35,6 +36,7 @@
     "ngx-pagination": "^6.0.2",
     "node": "^17.1.0",
     "rxjs": "~6.6.0",
+    "tempusdominus-bootstrap-4": "^5.39.2",
     "tslib": "^2.1.0",
     "zone.js": "~0.11.4"
   },

@@ -7,6 +7,7 @@ import { Company } from './company.entity';
 import { CompanyService } from './company.service';
 import { CompanyDto } from './dto/company.dto';
 
+@UseGuards(AuthGuard('jwt'))
 @Controller('company')
 export class CompanyController {
   constructor(private companyService: CompanyService) {}

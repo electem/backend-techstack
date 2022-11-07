@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Department } from 'src/app/models/department';
 import { UserService } from 'src/app/services/user.service';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-departmentlist',
@@ -10,7 +11,7 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./departmentlist.component.css'],
 })
 export class DepartmentlistComponent implements OnInit {
-  departments: Department[]=[];
+  departments: Department[] = [];
   page = 3;
   itemsPerPage? = 2;
   totalItems?: string;
@@ -18,7 +19,8 @@ export class DepartmentlistComponent implements OnInit {
   constructor(
     private userservice: UserService,
     private router: Router,
-    private http: HttpClient
+    private http: HttpClient,
+    private auth: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -45,5 +47,9 @@ export class DepartmentlistComponent implements OnInit {
 
   click() {
     this.router.navigate(['/dept']);
+  }
+
+  logout(): void {
+    this.auth.signOut();
   }
 }

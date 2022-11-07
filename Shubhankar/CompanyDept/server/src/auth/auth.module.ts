@@ -1,28 +1,34 @@
 /* eslint-disable prettier/prettier */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable prettier/prettier */
 import { Module } from '@nestjs/common';
-import { JwtModule } from '@nestjs/jwt';
-import { PassportModule } from '@nestjs/passport';
-import { UsersModule } from 'src/user/user.module';
-import { UsersService } from 'src/user/user.service';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
-import { jwtConstants } from './constant';
-import { JwtStrategy } from './jwt.strategy';
-import { LocalStrategy } from './local.strategy';
 
+import { JwtModule } from '@nestjs/jwt';
+import { PassportModule } from '@nestjs/passport';
+import { JwtStrategy } from './jwt.strategy';
+import { Strategy } from 'passport-local';
+import { UsersModule } from 'src/user/user.module';
 
 @Module({
   imports: [
-    
     UsersModule,
-    PassportModule,
+    PassportModule.register({
+      defaultStrategy: 'jwt',
+      property: 'user',
+      session: false,
+    }),
     JwtModule.register({
-      secret: jwtConstants.secret,
-      signOptions: { expiresIn: '60s' },
+      //secret: process.env.SECRETKEY,
+      secret: 'My Secret Never let outsiders',
+      signOptions: {
+        expiresIn: '120s',
+      },
     }),
   ],
   controllers: [AuthController],
-  providers: [UsersService,AuthService, JwtStrategy,LocalStrategy],
-  exports: [AuthService],
+  providers: [AuthService, JwtStrategy],
+  exports: [PassportModule, JwtModule],
 })
 export class AuthModule {}
