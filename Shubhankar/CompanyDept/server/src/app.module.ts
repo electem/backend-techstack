@@ -16,9 +16,21 @@ import { TodoModule } from './ToDo/toDo.module';
 import { UserEntity } from './user/user.entity';
 import { UsersModule } from './user/user.module';
 import { Image} from './fileupload/file.entity'
+import { MailerModule } from '@nestjs-modules/mailer';
 
 @Module({
-  imports: [ TypeOrmModule.forRoot({
+  imports: [ MailerModule.forRoot({
+    transport: {
+      host: 'mail.electems.com',
+      port: 465,
+      ssl: false,
+      tls: true,
+      auth: {
+        user: 'shubhankar@electems.com',
+        pass: 'cybis@ban',
+      },
+    },
+  }), TypeOrmModule.forRoot({
     type: 'postgres',
     host: 'localhost',
     port: 5432,

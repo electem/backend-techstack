@@ -18,7 +18,7 @@ export class Company  {
   name: string;
 
   @Column()
-  address: string;
+  email: string;
 
   @Column({ nullable: true })
   createdAt: Date;
