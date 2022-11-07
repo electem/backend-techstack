@@ -5,13 +5,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgSelectModule } from '@ng-select/ng-select';
-import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { UserLoginComponent } from './components/user-login/user-login.component';
+import { authInterceptorProviders } from './auth.interceptor';
+import { RegisterUserComponent } from './components/register-user/register-user.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, UserLoginComponent, RegisterUserComponent],
   imports: [
-    NgxDatatableModule,
     BrowserModule,
     AppRoutingModule,
     NgSelectModule,
@@ -20,7 +21,7 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     ReactiveFormsModule,
     NgMultiSelectDropDownModule.forRoot(),
   ],
-  providers: [],
+  providers: [authInterceptorProviders],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
