@@ -1,22 +1,54 @@
 /* eslint-disable prettier/prettier */
-import { Controller, Get, Post, Request, UseGuards } from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
+import {
+  Controller,
+  Body,
+  Post,
+  HttpException,
+  HttpStatus,
+  UsePipes,
+  Get,
+  Req,
+  UseGuards,
+} from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { JwtAuthGuard } from './jwt-auth.gaurd';
 
-@Controller()
+
+
+import { AuthGuard } from '@nestjs/passport';
+import { CreateUserDto } from 'src/user/dto/createUserDto';
+import { RegistrationStatus } from './interface/registration-status';
+
+import { LoginStatus } from './interface/loginstatus';
+import { LoginUserDto } from 'src/user/dto/loginUserDto';
+import { JwtPayload } from './interface/payload.interface';
+
+@Controller('auth')
 export class AuthController {
-  constructor(private authService: AuthService) {}
+  constructor(private readonly authService: AuthService) {}
 
-  @UseGuards(AuthGuard('local'))
-  @Post('login')
-  async login(@Request() req) {
-    return this.authService.loginWithCredentials(req.user);
+  @Post('register')
+  public async register(
+    @Body() createUserDto: CreateUserDto,
+  ): Promise<RegistrationStatus> {
+    const result: RegistrationStatus = await this.authService.register(
+      createUserDto,
+    );
+
+    if (!result.success) {
+      throw new HttpException(result.message, HttpStatus.BAD_REQUEST);
+    }
+
+    return result;
   }
 
-  @UseGuards(JwtAuthGuard)
-  @Get()
-  getUserInfo(@Request() req) {
-    return req.user
+  @Post('login')
+  public async login(@Body() loginUserDto: LoginUserDto): Promise<LoginStatus> {
+    return await this.authService.login(loginUserDto);
+  }
+
+  @Get('whoami')
+  @UseGuards(AuthGuard())
+  public async testAuth(@Req() req: any): Promise<JwtPayload> {
+    return req.user;
   }
 }
