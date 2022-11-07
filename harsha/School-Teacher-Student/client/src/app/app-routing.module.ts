@@ -4,6 +4,7 @@ import { UserLoginComponent } from './components/user-login/user-login.component
 import { RegisterUserComponent } from './components/register-user/register-user.component';
 import { CreateSchoolComponent } from './components/create-school/create-school.component';
 import { SchoolListComponent } from './components/school-list/school-list.component';
+import { TeacherListComponent } from './components/teacher-list/teacher-list.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -11,6 +12,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterUserComponent },
   { path: 'add-school', component: CreateSchoolComponent },
   { path: 'school-list', component: SchoolListComponent },
+  { path: 'teacher-list', component: TeacherListComponent },
 ];
 
 @NgModule({

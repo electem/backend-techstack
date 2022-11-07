@@ -11,9 +11,10 @@ import { authInterceptorProviders } from './auth.interceptor';
 import { RegisterUserComponent } from './components/register-user/register-user.component';
 import { CreateSchoolComponent } from './components/create-school/create-school.component';
 import { SchoolListComponent } from './components/school-list/school-list.component';
+import { TeacherListComponent } from './components/teacher-list/teacher-list.component';
 
 @NgModule({
-  declarations: [AppComponent, UserLoginComponent, RegisterUserComponent, CreateSchoolComponent, SchoolListComponent],
+  declarations: [AppComponent, UserLoginComponent, RegisterUserComponent, CreateSchoolComponent, SchoolListComponent, TeacherListComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
