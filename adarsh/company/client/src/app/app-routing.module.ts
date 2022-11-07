@@ -7,17 +7,23 @@ import { Department } from './models/depertment';
 import { DepartmentListingComponent } from './components/department-listing/department-listing.component';
 import { AddDepartmentComponent } from './components/add-department/add-department.component';
 import { EditDepartmentComponent } from './components/edit-department/edit-department.component';
+import { LoginUserComponent } from './components/login-user/login-user.component';
+import { ChartComponent } from './components/chart/chart.component';
 
 
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: 'loginuser', component: LoginUserComponent },
   { path: 'list', component: CompanyLIstComponent },
   { path: 'add', component: AddCmpanyComponent },
   { path: 'company/:id', component: EditCompanyComponent },
   { path: 'departmenstList', component: DepartmentListingComponent },
   { path: 'adddepartment', component: AddDepartmentComponent },
   { path: 'department/:id', component: EditDepartmentComponent },
+  { path: 'chart', component: ChartComponent },
+  
+
 ];
 
 @NgModule({

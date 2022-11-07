@@ -21,6 +21,7 @@
     "@angular/platform-browser-dynamic": "~12.0.2",
     "@angular/router": "~12.0.2",
     "@ng-select/ng-select": "^8.1.1",
+    "chart.js": "^3.9.1",
     "http-server-header": "^1.0.22",
     "modules": "^0.4.0",
     "moment-timezone": "^0.5.37",

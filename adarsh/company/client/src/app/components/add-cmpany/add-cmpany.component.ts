@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Company } from 'src/app/models/company';
 import { Department } from 'src/app/models/depertment';
@@ -20,10 +20,18 @@ export class AddCmpanyComponent implements OnInit {
   departments: Department[] = [];
   slectedDepertments: Department[] = [];
   departmentSelected: Department = {};
+  registerForm!: FormGroup;
+  submitted?: boolean;
 
-  constructor(private companyService: CompanyService, private router: Router) {}
+  constructor(private companyService: CompanyService, private router: Router, private formBuilder: FormBuilder,) {}
 
   ngOnInit(): void {
+    this.registerForm = this.formBuilder.group({
+      name: ['', Validators.required],
+      address: ['', Validators.required],
+      email: ['', Validators.required],
+      
+    });
     this.retrieveDepertments();
   }
 
@@ -35,6 +43,7 @@ export class AddCmpanyComponent implements OnInit {
       departments: this.newCompany.departments,
     };
     await this.companyService.createNewCompany(newCompanyData);
+    this.router.navigate(['/list']);
   }
 
   async retrieveDepertments(): Promise<void> {
@@ -44,5 +53,16 @@ export class AddCmpanyComponent implements OnInit {
   async selectingDepartments(department: Department): Promise<void> {
     this.departmentSelected = department;
     this.slectedDepertments.push(this.departmentSelected);
+  }
+  signup() {
+    this.submitted = true;
+    if (this.registerForm.invalid) {
+      return;
+    }
+    alert('form fields are validated successfully!');
+    this.saveNewCompany();
+  }
+  get validation() {
+    return this.registerForm.controls;
   }
 }

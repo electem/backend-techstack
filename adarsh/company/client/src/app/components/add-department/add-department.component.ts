@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { Company } from 'src/app/models/company';
@@ -20,8 +21,10 @@ export class AddDepartmentComponent implements OnInit {
   selectedItems = [];
   addnewCompanies: Company[] = [];
   selectedCompany: Company = {};
+  registerForm!: FormGroup;
+  submitted?: boolean;
 
-  constructor(private companyService: CompanyService, private router: Router) {}
+  constructor(private companyService: CompanyService, private router: Router,private formBuilder: FormBuilder,) {}
 
   ngOnInit(): void {
     this.dropdownSettings = {
@@ -33,9 +36,14 @@ export class AddDepartmentComponent implements OnInit {
       itemsShowLimit: 3,
       allowSearchFilter: true,
     };
+    this.registerForm = this.formBuilder.group({
+      name: ['', Validators.required],
+      
+      
+    });
     this.retrieveCompanys();
   }
-  async saveNewCompany(): Promise<void> {
+  async saveNewdepartment(): Promise<void> {
     const department: Department = {
       name: this.newDepartment.name,
       companies: this.addnewCompanies,
@@ -52,5 +60,16 @@ export class AddDepartmentComponent implements OnInit {
   onSelectAll(items: any) {
     this.selectedCompany = items;
     this.addnewCompanies.push(this.selectedCompany);
+  }
+  get validation() {
+    return this.registerForm.controls;
+  }
+  signup() {
+    this.submitted = true;
+    if (this.registerForm.invalid) {
+      return;
+    }
+    alert('form fields are validated successfully!');
+    this.saveNewdepartment();
   }
 }
