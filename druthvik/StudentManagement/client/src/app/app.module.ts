@@ -9,6 +9,12 @@ import { HeadersInterceptor } from './headers.interceptor';
 import { LogincomponentComponent } from './components/logincomponent/logincomponent.component';
 import { AuthService } from './auth/auth.service';
 import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { CreateschoolComponent } from './components/createschool/createschool.component';
+import { ListstudentsComponent } from './components/liststudents/liststudents.component';
+import { ListschoolsComponent } from './components/listschools/listschools.component';
+import { ListteachersComponent } from './components/listteachers/listteachers.component';
+
 export function jwtOptionFactor() {
   return {
     allowedDomains: ['localhost:3000'],
@@ -16,13 +22,14 @@ export function jwtOptionFactor() {
   };
 }
 @NgModule({
-  declarations: [AppComponent, LogincomponentComponent],
+  declarations: [AppComponent, LogincomponentComponent, CreateschoolComponent, ListstudentsComponent, ListschoolsComponent, ListteachersComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
+    NgMultiSelectDropDownModule.forRoot(),
     JwtModule.forRoot({
       jwtOptionsProvider: {
         provide: JWT_OPTIONS,

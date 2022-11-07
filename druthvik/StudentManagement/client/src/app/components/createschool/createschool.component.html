@@ -1,0 +1,78 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-4 offset-md-4">
+      <div class="card mb-4">
+        <div class="card-body">
+          <form
+            [formGroup]="createschoolForm"
+            (ngSubmit)="createSchoolValidate()"
+          >
+            <div class="form-group">
+              <label>Name</label>
+              <input
+                type="text"
+                formControlName="name"
+                class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.name.errors }"
+                [(ngModel)]="createschool.name"
+              />
+              <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                <div *ngIf="f.name.errors.required">Name is required</div>
+              </div>
+            </div>
+            <br />
+            <div class="form-group">
+              <label>Address</label>
+              <input
+                type="text"
+                formControlName="address"
+                class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.address.errors }"
+                [(ngModel)]="createschool.address"
+              />
+              <div
+                *ngIf="submitted && f.address.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="f.address.errors.required">Type is required</div>
+              </div>
+            </div>
+            <br />
+            <div class="form-group">
+              <ng-multiselect-dropdown
+                formControlName="teacher"
+                [settings]="dropdownSettings"
+                [data]="teachers"
+                (onSelect)="onSelectTeachers($event)"
+                [class.is-invalid]="
+                  f?.teacher?.errors?.required && f?.teacher?.touched
+                "
+              >
+              </ng-multiselect-dropdown>
+            </div>
+            <br />
+            <div class="form-group">
+              <ng-multiselect-dropdown
+                formControlName="student"
+                [settings]="dropdownSettings"
+                [data]="students"
+                (onSelect)="onSelectStudents($event)"
+                [class.is-invalid]="
+                  f?.student?.errors?.required && f?.student?.touched
+                "
+              >
+              </ng-multiselect-dropdown>
+            </div>
+            <br />
+            <div class="text-center">
+              <button class="btn btn-primary">Create</button>
+              <button class="btn btn-secondary btn-space" type="reset">
+                Cancel
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
