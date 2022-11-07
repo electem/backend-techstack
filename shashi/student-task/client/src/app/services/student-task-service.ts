@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { School } from '../models/school.model';
 import { Teacher } from '../models/teacher.model';
+import { Student } from '../models/student.model';
 const baseUrl = environment.url;
 
 @Injectable({
@@ -15,5 +16,8 @@ export class SchoolService {
   }
   async getTeachers(): Promise<Teacher[]> {
     return await this.http.get<Teacher[]>(baseUrl + '/teacher').toPromise();
+  }
+  async getStudents(): Promise<Student[]> {
+    return await this.http.get<Student[]>(baseUrl + '/student').toPromise();
   }
 }

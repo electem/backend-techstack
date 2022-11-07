@@ -48,11 +48,22 @@
               </div>
             </div>
             <br />
+            SELECT TEACHERS
             <div style="width: 50%">
               <ng-multiselect-dropdown
                 [settings]="dropdownSettings"
                 [data]="teachersList"
                 (onSelect)="selectedTeacher($event)"
+              >
+              </ng-multiselect-dropdown>
+            </div>
+            <br />
+            SELECT STUDENTS
+            <div style="width: 50%">
+              <ng-multiselect-dropdown
+                [settings]="dropdownSettingsForStudent"
+                [data]="studentsList"
+                (onSelect)="selectedStudent($event)"
               >
               </ng-multiselect-dropdown>
             </div>
