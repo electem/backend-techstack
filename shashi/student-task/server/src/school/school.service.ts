@@ -18,4 +18,14 @@ export class SchoolService {
       throw new HttpException(err, HttpStatus.BAD_REQUEST);
     }
   }
+  async findOneSchool(id: number) {
+    const postWithQueryBuilder = await this.schoolRepository
+      .createQueryBuilder('school')
+      .select(['school', 'teacher'])
+      .leftJoinAndSelect('school.teacher', 'teacher')
+      .leftJoinAndSelect('school.students', 'students')
+      .where('school.id= :id', { id: id })
+      .getOne();
+    return postWithQueryBuilder;
+  }
 }

@@ -15,6 +15,8 @@ import { School } from './school/school.entity';
 import { SchoolModule } from './school/school.module';
 import { Teacher } from './teacher/teacher.entity';
 import { TeacherModule } from './teacher/teacher.module';
+import { Student } from './student/student.entity';
+import { StudentModule } from './student/student.module';
 
 @Module({
   imports: [
@@ -25,7 +27,7 @@ import { TeacherModule } from './teacher/teacher.module';
       username: 'postgres',
       password: 'postgres',
       database: 'DBstudentTask',
-      entities: [TodoEntity, UserEntity, TaskEntity, School, Teacher],
+      entities: [TodoEntity, UserEntity, TaskEntity, School, Teacher, Student],
       synchronize: true,
     }),
     AuthModule,
@@ -33,6 +35,7 @@ import { TeacherModule } from './teacher/teacher.module';
     UsersModule,
     SchoolModule,
     TeacherModule,
+    StudentModule,
   ],
   controllers: [AppController],
   providers: [AppService],
