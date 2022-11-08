@@ -6,7 +6,8 @@ import { CreateschoolComponent } from './components/createschool/createschool.co
 import { ListschoolsComponent } from './components/listschools/listschools.component';
 import { ListstudentsComponent } from './components/liststudents/liststudents.component';
 import { ListteachersComponent } from './components/listteachers/listteachers.component';
-//import { AuthGuard } from './auth/auth-guard';
+import { CreateteacherComponent } from './components/createteacher/createteacher.component';
+import { CreatestudentComponent } from './components/createstudent/createstudent.component';
 const routes: Routes = [
   { path: '', component: LogincomponentComponent },
   { path: 'login', component: LogincomponentComponent },
@@ -14,6 +15,8 @@ const routes: Routes = [
   { path: 'listschools', component: ListschoolsComponent },
   { path: 'liststudents', component: ListstudentsComponent },
   { path: 'listteachers', component: ListteachersComponent },
+  { path: 'createteachers', component: CreateteacherComponent },
+  { path: 'createstudents', component: CreatestudentComponent },
 ];
 
 @NgModule({

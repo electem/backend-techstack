@@ -14,6 +14,9 @@ import { CreateschoolComponent } from './components/createschool/createschool.co
 import { ListstudentsComponent } from './components/liststudents/liststudents.component';
 import { ListschoolsComponent } from './components/listschools/listschools.component';
 import { ListteachersComponent } from './components/listteachers/listteachers.component';
+import { CreateteacherComponent } from './components/createteacher/createteacher.component';
+import { CreatestudentComponent } from './components/createstudent/createstudent.component';
+import { DatepickerModule } from 'ng2-datepicker';
 
 export function jwtOptionFactor() {
   return {
@@ -22,13 +25,23 @@ export function jwtOptionFactor() {
   };
 }
 @NgModule({
-  declarations: [AppComponent, LogincomponentComponent, CreateschoolComponent, ListstudentsComponent, ListschoolsComponent, ListteachersComponent],
+  declarations: [
+    AppComponent,
+    LogincomponentComponent,
+    CreateschoolComponent,
+    ListstudentsComponent,
+    ListschoolsComponent,
+    ListteachersComponent,
+    CreateteacherComponent,
+    CreatestudentComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
+    DatepickerModule,
     NgMultiSelectDropDownModule.forRoot(),
     JwtModule.forRoot({
       jwtOptionsProvider: {

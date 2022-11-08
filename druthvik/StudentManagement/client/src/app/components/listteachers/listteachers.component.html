@@ -1,5 +1,5 @@
 <div class="list row">
-  <h2 class="py-4">Schools Lists</h2>
+  <h2 class="py-4">Teachers Lists</h2>
   <div class="col-md-8">
     <div class="input-group mb-3"></div>
   </div>
@@ -7,7 +7,7 @@
   <div class="col-md-6">
     <ul class="list-group"></ul>
     <td>
-      <button routerLink="/createcompany">ADD COMPANY</button>
+      <button routerLink="/createcompany">Add Teachers</button>
     </td>
   </div>
   <div class="container">
@@ -20,19 +20,15 @@
           <th class="text-center" scope="col">Name</th>
           <th class="text-center" scope="col">Address</th>
           <th class="text-center" scope="col">Created AT</th>
-          <th class="text-center" scope="col">Length of student</th>
-          <th class="text-center" scope="col">Length of Teachers</th>
         </tr>
       </thead>
-      <tbody *ngFor="let school of schools; let i = index">
+      <tbody *ngFor="let teacher of teachers; let i = index">
         <tr>
-          <th class="text-center" scope="row">{{ school.name }}</th>
-          <th class="text-center" scope="row">{{ school.address }}</th>
+          <th class="text-center" scope="row">{{ teacher.name }}</th>
+          <th class="text-center" scope="row">{{ teacher.address }}</th>
           <th class="text-center" scope="row">
-            {{ school.createdAt | date: 'long' }}
+            {{ teacher.createdAt | date: 'medium' }}
           </th>
-          <th class="text-center" scope="row">{{ school.student.length }}</th>
-          <th class="text-center" scope="row">{{ school.teacher.length }}</th>
           <th class="text-center" scope="row">
             <button type="button" class="btn btn-warning btn-sm mr-2">
               Edit
