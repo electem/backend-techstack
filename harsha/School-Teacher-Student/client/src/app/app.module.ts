@@ -12,9 +12,10 @@ import { RegisterUserComponent } from './components/register-user/register-user.
 import { CreateSchoolComponent } from './components/create-school/create-school.component';
 import { SchoolListComponent } from './components/school-list/school-list.component';
 import { TeacherListComponent } from './components/teacher-list/teacher-list.component';
+import { StudentListComponent } from './components/student-list/student-list.component';
 
 @NgModule({
-  declarations: [AppComponent, UserLoginComponent, RegisterUserComponent, CreateSchoolComponent, SchoolListComponent, TeacherListComponent],
+  declarations: [AppComponent, UserLoginComponent, RegisterUserComponent, CreateSchoolComponent, SchoolListComponent, TeacherListComponent, StudentListComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

@@ -18,7 +18,7 @@
             <tr>
               <td class="text-center">{{ school.name }}</td>
               <td class="text-center">{{ school.address }}</td>
-              <td class="text-center">{{ school.createdDate }}</td>
+              <td class="text-center">{{ school.createdDate | date:'long' }}</td>
               <td class="text-center">
                 <button type="button" class="btn btn-info btn-space" routerLink="/edit-school/{{ school.id }}">
                   Edit
