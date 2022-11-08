@@ -5,6 +5,7 @@ import { SchoolService } from 'src/app/services/student-task-service';
 import { Teacher } from 'src/app/models/teacher.model';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { Student } from 'src/app/models/student.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-school',
@@ -31,7 +32,8 @@ export class CreateSchoolComponent implements OnInit {
   };
   constructor(
     private schoolService: SchoolService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -84,5 +86,6 @@ export class CreateSchoolComponent implements OnInit {
       students: this.AddedStudents,
     };
     await this.schoolService.createSchool(schoolData);
+    this.router.navigate(['/schoollisting']);
   }
 }

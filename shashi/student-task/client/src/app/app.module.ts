@@ -9,9 +9,15 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { LoginComponent } from './components/login/login.component';
 import { CreateSchoolComponent } from './components/create-school/create-school.component';
+import { SchoolListingComponent } from './components/school-listing/school-listing.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, CreateSchoolComponent],
+  declarations: [
+    AppComponent,
+    LoginComponent,
+    CreateSchoolComponent,
+    SchoolListingComponent,
+  ],
   imports: [
     NgMultiSelectDropDownModule.forRoot(),
     BrowserModule,

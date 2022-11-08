@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
   userLogin() {
     this.authService.userLogin(this.loginForm).subscribe((data) => {
       if (data) {
-        this.router.navigate(['companylist']);
+        this.router.navigate(['schoollisting']);
       }
     });
   }

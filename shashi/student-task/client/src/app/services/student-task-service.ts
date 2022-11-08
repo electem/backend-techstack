@@ -20,4 +20,7 @@ export class SchoolService {
   async getStudents(): Promise<Student[]> {
     return await this.http.get<Student[]>(baseUrl + '/student').toPromise();
   }
+  async getSchools(): Promise<School[]> {
+    return await this.http.get<School[]>(baseUrl + '/school').toPromise();
+  }
 }
