@@ -46,4 +46,9 @@ public async createCompany(companyDto: CompanyDto): Promise<Company> {
       throw new HttpException(err, HttpStatus.BAD_REQUEST);
     }
   }
+
+  public async deleteCompanyById(id: number): Promise<void> {
+    const comapany = await this.getCompanyById(id);
+    await this.companyRepository.remove(comapany);
+  }
 }
