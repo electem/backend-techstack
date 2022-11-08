@@ -25,6 +25,10 @@ export class SchoolController {
   async createSchool(@Body() school: SchoolDto) {
     return await this.schoolService.createSchool(school);
   }
+  @Get()
+  async findAllSchool(): Promise<Array<School>> {
+    return this.schoolService.findAllSchool();
+  }
   @Get('/:id')
   async findOneSchool(@Param('id') id): Promise<School> {
     return this.schoolService.findOneSchool(id);

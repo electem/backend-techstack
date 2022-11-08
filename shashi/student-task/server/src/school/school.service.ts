@@ -18,6 +18,9 @@ export class SchoolService {
       throw new HttpException(err, HttpStatus.BAD_REQUEST);
     }
   }
+  public async findAllSchool(): Promise<School[]> {
+    return await this.schoolRepository.find();
+  }
   async findOneSchool(id: number) {
     const postWithQueryBuilder = await this.schoolRepository
       .createQueryBuilder('school')
