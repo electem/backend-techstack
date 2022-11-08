@@ -1,3 +1,4 @@
+import { School } from './school.model';
 export class Student {
   id?: number;
   name?: string;
@@ -7,4 +8,5 @@ export class Student {
   gender?: string;
   createdAt?: string;
   dateofbirth?: string;
+  school: School[];
 }
