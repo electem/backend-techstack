@@ -7,7 +7,7 @@
       <tr class="active">
         <th class="text-center" scope="col">Id</th>
         <th class="text-center" scope="col">Name</th>
-        <th class="text-center" scope="col">Address</th>
+        <th class="text-center" scope="col">Email Address</th>
         <th class="text-center" scope="col">CreatedAt</th>
         <th class="text-center" scope="col">Option</th>
       </tr>
@@ -27,7 +27,7 @@
       <tr class="success">
         <th class="text-center" scope="row">{{ company.id }}</th>
         <th class="text-center" scope="row">{{ company.name }}</th>
-        <th class="text-center" scope="row">{{ company.address }}</th>
+        <th class="text-center" scope="row">{{ company.email }}</th>
         <th class="text-center" scope="row">{{ company.createdAt }}</th>
         <button
           class="btn btn-outline-success"
@@ -36,6 +36,13 @@
         >
           Edit
         </button>
+        <button
+        class="btn btn-outline-danger"
+        scope="row"
+        (click)="deleteCompany(company.id!)"
+      >
+        Delete
+      </button>
       </tr>
     </tbody>
     <pagination-controls

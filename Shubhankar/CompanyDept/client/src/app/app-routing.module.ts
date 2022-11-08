@@ -14,7 +14,7 @@ import { FileuploadComponent } from './components/fileupload/fileupload.componen
 
 
 const routes: Routes = [
-  { path: '', component: LoginComponent},
+  { path: '', component: LoginComponent },
   { path: 'admin', component: AdminpageComponent },
   { path: 'companylist', component: CompanylistComponent },
   { path: 'create', component: CreatecompanyComponent },
