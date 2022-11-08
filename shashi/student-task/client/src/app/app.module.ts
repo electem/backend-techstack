@@ -10,6 +10,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { LoginComponent } from './components/login/login.component';
 import { CreateSchoolComponent } from './components/create-school/create-school.component';
 import { SchoolListingComponent } from './components/school-listing/school-listing.component';
+import { CreateTeacherComponent } from './components/create-teacher/create-teacher.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { SchoolListingComponent } from './components/school-listing/school-listi
     LoginComponent,
     CreateSchoolComponent,
     SchoolListingComponent,
+    CreateTeacherComponent,
   ],
   imports: [
     NgMultiSelectDropDownModule.forRoot(),

@@ -64,20 +64,6 @@ export class CreateSchoolComponent implements OnInit {
       this.saveSchoolDetails();
     }
   }
-  async retriveTeachers(): Promise<void> {
-    this.teachersList = await this.schoolService.getTeachers();
-  }
-  async retriveStudents(): Promise<void> {
-    this.studentsList = await this.schoolService.getStudents();
-  }
-  async selectedTeacher(teacher: any): Promise<void> {
-    this.currentTeacher = teacher;
-    this.AddedTeachers?.push(this.currentTeacher);
-  }
-  async selectedStudent(student: any): Promise<void> {
-    this.currentStudent = student;
-    this.AddedStudents?.push(this.currentStudent);
-  }
   async saveSchoolDetails(): Promise<void> {
     const schoolData: School = {
       schoolname: this.school.schoolname,
@@ -87,5 +73,20 @@ export class CreateSchoolComponent implements OnInit {
     };
     await this.schoolService.createSchool(schoolData);
     this.router.navigate(['/schoollisting']);
+  }
+  async retriveTeachers(): Promise<void> {
+    this.teachersList = await this.schoolService.getTeachers();
+  }
+  async retriveStudents(): Promise<void> {
+    this.studentsList = await this.schoolService.getStudents();
+  }
+
+  async selectedTeacher(teacher: any): Promise<void> {
+    this.currentTeacher = teacher;
+    this.AddedTeachers?.push(this.currentTeacher);
+  }
+  async selectedStudent(student: any): Promise<void> {
+    this.currentStudent = student;
+    this.AddedStudents?.push(this.currentStudent);
   }
 }

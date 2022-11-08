@@ -1,7 +1,9 @@
+import { School } from './school.model';
 export class Teacher {
-  id!: number;
-  schoolname!: string;
+  id?: number;
+  teachername!: string;
   address!: string;
   email!: string;
-  gender!: string;
+  gender?: string;
+  school!: School[];
 }
