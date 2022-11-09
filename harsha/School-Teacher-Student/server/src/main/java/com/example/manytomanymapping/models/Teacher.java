@@ -42,7 +42,7 @@ public class Teacher {
 	private Date createdDate;
 
 	@JsonIgnoreProperties("teachers")
-	@ManyToMany(cascade = {CascadeType.MERGE,CascadeType.PERSIST}, fetch = FetchType.EAGER)
+	@ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
 	@JoinTable(name = "school_teacher", joinColumns = {
 			@JoinColumn(name = "teacher_id", referencedColumnName = "id") }, inverseJoinColumns = {
 					@JoinColumn(name = "school_id", referencedColumnName = "id") })

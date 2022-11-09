@@ -3,7 +3,7 @@
   <form [formGroup]="registerForm">
     <div class="form-group">
       <label for="name">Name</label>
-      <input type="name" formControlName="name" class="form-control" [(ngModel)]="currentSchool.name"
+      <input type="name" formControlName="name" class="form-control item" [(ngModel)]="currentSchool.name"
         [ngClass]="{ 'is-invalid': submitted && validation.name.errors }" />
       <div *ngIf="this.submitted && validation.name.errors" class="invalid-feedback">
         <div *ngIf="validation.name.errors.required">
@@ -14,7 +14,7 @@
 
     <div class="form-group">
       <label for="address">Address</label>
-      <input type="address" formControlName="address" class="form-control" [(ngModel)]="currentSchool.address"
+      <input type="address" formControlName="address" class="form-control item" [(ngModel)]="currentSchool.address"
         [ngClass]="{ 'is-invalid': submitted && validation.address.errors }" />
       <div *ngIf="this.submitted && validation.address.errors" class="invalid-feedback">
         <div *ngIf="validation.address.errors.required">
@@ -23,34 +23,21 @@
       </div>
     </div>
 
-    <div class="form-group">
-      <ng-multiselect-dropdown [placeholder]="'Select Teachers'" formControlName="teachers" id="teachers"
-        [settings]="dropdownSettings" [data]="teachers" (onSelect)="onSelectingTeacher($event)"
-        (onSelectAll)="onSelectAllTeachers($event)"
-        [ngClass]="{ 'is-invalid': submitted && validation.teachers.errors }">
+    <div>
+      <ng-multiselect-dropdown [placeholder]="'Select Teachers'" [settings]="dropdownSettings" [data]="teachers"
+        (onSelect)="onSelectingTeacher($event)" (onSelectAll)="onSelectAllTeachers($event)">
       </ng-multiselect-dropdown>
-      <div *ngIf="this.submitted && validation.teachers.errors" class="invalid-feedback">
-        <div *ngIf="validation.teachers.errors.required">
-          Selecting atleast 1 Teacher is required
-        </div>
-      </div>
     </div>
 
-    <div class="form-group">
+    <div>
       <ng-multiselect-dropdown [placeholder]="'Select Students'" [settings]="dropdownSettings" [data]="students"
-        (onSelect)="onSelectingStudent($event)" (onSelectAll)="onSelectAllStudents($event)"
-        [ngClass]="{ 'is-invalid': submitted && validation.students.errors }">
+        (onSelect)="onSelectingStudent($event)" (onSelectAll)="onSelectAllStudents($event)">
       </ng-multiselect-dropdown>
-      <div *ngIf="this.submitted && validation.students.errors" class="invalid-feedback">
-        <div *ngIf="validation.students.errors.required">
-          Selecting atleast 1 Student is required
-        </div>
-      </div>
     </div>
 
-    <button type="button" class="btn btn-success create-account" (click)="signup()">
+    <button type="button" class="btn btn-success" (click)="signup()">
       Save
     </button>
-    <button type=" button" class="btn btn-warning create-account" routerLink="/school-list">Cancel</button>
+    <button type=" button" class="btn btn-warning" routerLink="/school-list">Cancel</button>
   </form>
 </div>

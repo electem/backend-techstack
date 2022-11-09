@@ -13,9 +13,19 @@ import { CreateSchoolComponent } from './components/create-school/create-school.
 import { SchoolListComponent } from './components/school-list/school-list.component';
 import { TeacherListComponent } from './components/teacher-list/teacher-list.component';
 import { StudentListComponent } from './components/student-list/student-list.component';
+import { CreateTeacherComponent } from './components/create-teacher/create-teacher.component';
 
 @NgModule({
-  declarations: [AppComponent, UserLoginComponent, RegisterUserComponent, CreateSchoolComponent, SchoolListComponent, TeacherListComponent, StudentListComponent],
+  declarations: [
+    AppComponent,
+    UserLoginComponent,
+    RegisterUserComponent,
+    CreateSchoolComponent,
+    SchoolListComponent,
+    TeacherListComponent,
+    StudentListComponent,
+    CreateTeacherComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

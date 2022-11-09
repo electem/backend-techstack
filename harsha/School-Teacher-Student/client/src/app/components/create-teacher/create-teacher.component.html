@@ -1,0 +1,70 @@
+<h1 class="card-title text-center">Add Teacher</h1>
+<div class="form">
+  <form [formGroup]="registerForm">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="name" formControlName="name" placeholder="Enter your name" class="form-control item"
+        [(ngModel)]="currentTeacher.name" [ngClass]="{ 'is-invalid': submitted && validation.name.errors }" />
+      <div *ngIf="this.submitted && validation.name.errors" class="invalid-feedback">
+        <div *ngIf="validation.name.errors.required">
+          Name Field is required
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="gender">Gender</label>
+      <input type="gender" formControlName="gender" placeholder="Enter your gender" class="form-control item"
+        [(ngModel)]="currentTeacher.gender" [ngClass]="{ 'is-invalid': submitted && validation.gender.errors }" />
+      <div *ngIf="this.submitted && validation.gender.errors" class="invalid-feedback">
+        <div *ngIf="validation.gender.errors.required">
+          Gender Field is required
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="address">Address</label>
+      <input type="address" formControlName="address" placeholder="Enter your address" class="form-control item"
+        [(ngModel)]="currentTeacher.address" [ngClass]="{ 'is-invalid': submitted && validation.address.errors }" />
+      <div *ngIf="this.submitted && validation.address.errors" class="invalid-feedback">
+        <div *ngIf="validation.address.errors.required">
+          Address Field is required
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" formControlName="email" placeholder="Enter your email" class="form-control item"
+        [(ngModel)]="currentTeacher.email" [ngClass]="{ 'is-invalid': submitted && validation.email.errors }" />
+      <div *ngIf="this.submitted && validation.email.errors" class="invalid-feedback">
+        <div *ngIf="validation.email.errors.required">
+          Email Field is required
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="phoneNo">Phone No</label>
+      <input type="phoneNo" formControlName="phoneNo" placeholder="Enter your phoneNo" class="form-control item"
+        [(ngModel)]="currentTeacher.phoneNo" [ngClass]="{ 'is-invalid': submitted && validation.phoneNo.errors }" />
+      <div *ngIf="this.submitted && validation.phoneNo.errors" class="invalid-feedback">
+        <div *ngIf="validation.phoneNo.errors.required">
+          Phone No Field is required
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="options">Schools:</label>
+      <div *ngFor="let school of schools">
+        <label>
+          <input type="checkbox" (click)="onSelectingSchool(school)" />
+          {{ school.name }}
+        </label>
+      </div>
+    </div>
+    <button type="button" class="btn btn-success" (click)="signup()">
+      Save
+    </button>
+    <button type=" button" class="btn btn-warning" routerLink="/teacher-list">
+      Cancel
+    </button>
+  </form>
+</div>

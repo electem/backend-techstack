@@ -42,8 +42,8 @@ export class CreateSchoolComponent implements OnInit {
     this.registerForm = this.formBuilder.group({
       name: ['', Validators.required],
       address: ['', Validators.required],
-      teachers: ['', Validators.required],
-      students: ['', Validators.required],
+      // teachers: ['', Validators.required],
+      // students: ['', Validators.required],
     });
     this.getTeachers();
     this.getStudents();
