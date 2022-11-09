@@ -12,6 +12,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { LoginComponent } from './components/login/login.component';
 import { CreateschoolComponent } from './components/createschool/createschool.component';
+import { SchoollistingComponent } from './components/schoollisting/schoollisting.component';
 
 export function jwtOptionFactor() {
   return {
@@ -21,7 +22,7 @@ export function jwtOptionFactor() {
 }
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, CreateschoolComponent],
+  declarations: [AppComponent, LoginComponent, CreateschoolComponent, SchoollistingComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

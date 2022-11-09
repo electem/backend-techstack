@@ -1,0 +1,13 @@
+.justify-content-center {
+    background-color: blanchedalmond;
+    -ms-flex-pack: center!important;
+    justify-content: center!important;
+}
+
+.btn-outline-success {
+    margin-left: 55px;
+    color: #28a745;
+    background-color: transparent;
+    background-image: none;
+    border-color: #28a745;
+}
