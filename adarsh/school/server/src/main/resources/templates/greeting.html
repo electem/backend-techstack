@@ -1,0 +1,39 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bootstrap demo</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+	crossorigin="anonymous">
+
+</head>
+<body>
+	<h1>Customer Email Data</h1>
+	<br>
+	<table class="table table border table script">
+		<thead class=thead-dark>
+			<tr>
+				<th>ID</th>
+				<th>EMAIL</th>
+				<th>DATA1</th>
+				<th>DATA2</th>
+				<th>DATA3</th>
+				<th>DATA4</th>
+			</tr>
+		</thead>
+		<tbody>
+			
+				<td th:text="${id}">ID</td>
+				<td th:text="${email}" >EMAIL</td>
+				<td th:text="${data1}" >DATA1</td>
+				<td th:text="${data2}" >DATA2</td>
+				<td th:text="${data3}" >DATA3</td>
+				<td th:text="${data4}" >DATA4</td>
+		</tbody>
+	</table>
+</body>

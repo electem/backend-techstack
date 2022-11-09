@@ -1,0 +1,88 @@
+[
+    {
+        	
+        "name": "1",
+       "adress": "ranebennur",
+        "Email":"Adarsh@gmail.com",
+        "discription":90,
+         "parecentage":85
+    },
+    {
+        "name": "2",
+        "adress": "bengalore",
+         "Email":"Adarsh@gmail.com",
+         "discription":80,
+         "parecentage":70
+    },
+    {
+        "name": "3",
+        "adress": "haveri",
+         "Email":"Adarsh@gmail.com",
+        "discription":85,
+        "parecentage":74
+    },
+     {
+        
+        "name": "4",
+       "adress": "ranebennur",
+        "Email":"Adarsh@gmail.com",
+        "discription":95,
+         "parecentage":90
+    },
+    {
+        "name": "5",
+        "adress": "bengalore",
+         "Email":"Adarsh@gmail.com",
+        "discription":80,
+         "parecentage":73
+    },
+    {
+        "name": "6",
+        "adress": "haveri",
+         "Email":"Adarsh@gmail.com",
+        "discription":60,
+         "parecentage":50
+    }, {
+        
+        "name": "7",
+       "adress": "ranebennur",
+        "Email":"Adarsh@gmail.com",
+        "discription":68,
+         "parecentage":55
+    },
+    {
+        "name": "8",
+        "adress": "bengalore",
+         "Email":"Adarsh@gmail.com",
+        "discription":93,
+         "parecentage":85
+    },
+    {
+        "name": "9",
+        "adress": "haveri",
+         "Email":"Adarsh@gmail.com",
+        "discription":86,
+         "parecentage":75
+    }, {
+        
+        "name": "10",
+       "adress": "ranebennur",
+        "Email":"Adarsh@gmail.com",
+        "discription":72,
+         "parecentage":70
+    },
+    {
+        "name": "11",
+        "adress": "bengalore",
+         "Email":"Adarsh@gmail.com",
+        "discription":65,
+         "parecentage":80
+    },
+    {
+        "name": "12",
+        "adress": "haveri",
+         "Email":"Adarsh@gmail.com",
+         "discription":81,
+         "parecentage":60
+    }
+]
