@@ -1,17 +1,7 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable no-var */
 /* eslint-disable prettier/prettier */
-import {
-  Body,
-  Controller,
-  Delete,
-  Get,
-  NotFoundException,
-  Param,
-  Post,
-  Put,
-  UseGuards,
-} from '@nestjs/common';
+import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
 import { Student } from './student.entity';
 import { StudentDto } from './student.dto';
 import { StudentService } from './student.service';
