@@ -4,7 +4,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable prettier/prettier */
 import { MailerService } from '@nestjs-modules/mailer';
-import { Body, Controller, Delete, Get, NotFoundException, Param, Post, Put, Query, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, NotFoundException, Param, Post, Put, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { Company } from './company.entity';
 import { CompanyService } from './company.service';
@@ -14,7 +14,7 @@ import { join } from 'path';
 import hbs from 'handlebars';
 import puppeteer from 'puppeteer';
 
-// @UseGuards(AuthGuard('jwt'))
+@UseGuards(AuthGuard('jwt'))
 @Controller('company')
 export class CompanyController {
   constructor(private companyService: CompanyService,
@@ -38,7 +38,7 @@ export class CompanyController {
     const companybyid = await this.companyService.getCompanyById(
       +id,
     );
-    const compile = async function (templatename, data) {
+    const compile = async function (templatename, data) {               
       const html = fs.readFileSync(
         join(__dirname, '../../src/mails/email.hbs'),
         'utf-8',
