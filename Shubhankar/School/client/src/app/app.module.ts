@@ -11,6 +11,7 @@ import { DataTablesModule } from 'angular-datatables';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { LoginComponent } from './components/login/login.component';
+import { CreateschoolComponent } from './components/createschool/createschool.component';
 
 export function jwtOptionFactor() {
   return {
@@ -20,7 +21,7 @@ export function jwtOptionFactor() {
 }
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent],
+  declarations: [AppComponent, LoginComponent, CreateschoolComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
