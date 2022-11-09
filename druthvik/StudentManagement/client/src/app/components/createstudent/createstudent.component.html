@@ -3,7 +3,10 @@
     <div class="col-md-4 offset-md-4">
       <div class="card mb-4">
         <div class="card-body">
-          <form [formGroup]="createtTeacherForm" (ngSubmit)="createTeacher()">
+          <form
+            [formGroup]="createtStudentForm"
+            (ngSubmit)="createStudentValidate()"
+          >
             <div class="form-group">
               <label>Name</label>
               <input
@@ -11,7 +14,7 @@
                 formControlName="name"
                 class="form-control"
                 [ngClass]="{ 'is-invalid': submitted && f.name.errors }"
-                [(ngModel)]="createteacher.name"
+                [(ngModel)]="createstudent.name"
               />
               <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
                 <div *ngIf="f.name.errors.required">Name is required</div>
@@ -25,7 +28,7 @@
                 formControlName="address"
                 class="form-control"
                 [ngClass]="{ 'is-invalid': submitted && f.address.errors }"
-                [(ngModel)]="createteacher.address"
+                [(ngModel)]="createstudent.address"
               />
               <div
                 *ngIf="submitted && f.address.errors"
@@ -34,6 +37,7 @@
                 <div *ngIf="f.address.errors.required">Address is required</div>
               </div>
             </div>
+            <br />
             <div class="form-group">
               <label>Phone Number</label>
               <input
@@ -41,7 +45,7 @@
                 formControlName="phonenumber"
                 class="form-control"
                 [ngClass]="{ 'is-invalid': submitted && f.phonenumber.errors }"
-                [(ngModel)]="createteacher.phonenumber"
+                [(ngModel)]="createstudent.phonenumber"
               />
               <div
                 *ngIf="submitted && f.phonenumber.errors"
@@ -52,6 +56,7 @@
                 </div>
               </div>
             </div>
+            <br />
             <div class="form-group">
               <label>Email</label>
               <input
@@ -59,12 +64,13 @@
                 formControlName="email"
                 class="form-control"
                 [ngClass]="{ 'is-invalid': submitted && f.email.errors }"
-                [(ngModel)]="createteacher.email"
+                [(ngModel)]="createstudent.email"
               />
               <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
                 <div *ngIf="f.email.errors.required">Email is required</div>
               </div>
             </div>
+            <br />
             <br />
             <div class="form-group">
               <label>Genders</label>
@@ -73,28 +79,61 @@
                   name="gender"
                   type="radio"
                   [value]="gender"
-                  [(ngModel)]="createteacher.gender"
-                  (change)="onSelectTeacherGender(gender)"
+                  [(ngModel)]="radioSelected"
+                  (change)="onItemChange(gender)"
                 />
 
                 {{ gender.name }}
               </div>
             </div>
             <div class="form-group">
-              <label for="options">Departments:</label>
-              <div *ngFor="let students of studentlist">
-                <label>
-                  <input
-                    type="checkbox"
-                    name="options"
-                    value="{{ students.name }}"
-                    (click)="selectedStudents(students)"
-                  />
-                  {{ students.name }}
-                </label>
-              </div>
+              <label>Date of birth</label>
+              <ngx-datepicker
+                [(ngModel)]="date"
+                [options]="options"
+              ></ngx-datepicker>
             </div>
             <br />
+            <!-- <div class="form-group">
+              <p>
+                Category :
+                <select
+                  class="form-control"
+                  style="width: 50%"
+                  [ngClass]="{
+                    'is-invalid': submitted && f.school.errors
+                  }"
+                  [(ngModel)]="currentschool.id"
+                  (ngModelChange)="onSelectedSchool(currentschool)"
+                >
+                  <option value="Choose Category">Choose School</option>
+                  <option *ngFor="let school of schools" [ngValue]="school.id">
+                    {{ school.name }}
+                  </option>
+                </select>
+              </p>
+
+              <div
+                *ngIf="this.submitted && f.school.errors"
+                s
+                tyle="color: red"
+              >
+                <div *ngIf="fval.school.errors.required">
+                  Selecting atleast one Category is required
+                </div>
+              </div>
+            </div> -->
+            <div class="form-group dropdown dropdownwidth">
+              <select
+                class="custom-select"
+                [(ngModel)]="selectedSchool"
+                (ngModelChange)="onSelectedSchool(selectedSchool)"
+              >
+                <option *ngFor="let school of schools" [ngValue]="school">
+                  {{ school.name }}
+                </option>
+              </select>
+            </div>
             <div class="text-center">
               <button class="btn btn-primary">Create</button>
               <button class="btn btn-secondary btn-space" type="reset">

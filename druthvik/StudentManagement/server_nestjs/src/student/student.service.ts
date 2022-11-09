@@ -14,4 +14,12 @@ export class StudentService {
   public async findAllSchool(): Promise<Student[]> {
     return await this.studentRepository.find();
   }
+
+  public async createSchool(studentdto: StudentDto): Promise<Student> {
+    try {
+      return await this.studentRepository.save(studentdto);
+    } catch (err) {
+      throw new HttpException(err, HttpStatus.BAD_REQUEST);
+    }
+  }
 }

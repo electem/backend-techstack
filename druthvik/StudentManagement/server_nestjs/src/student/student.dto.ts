@@ -4,5 +4,5 @@ export class StudentDto {
   readonly phonenumber: number;
   readonly email: string;
   readonly gender: string;
-  readonly dateofbirth: Date;
+  readonly dateofbirth: string;
 }
