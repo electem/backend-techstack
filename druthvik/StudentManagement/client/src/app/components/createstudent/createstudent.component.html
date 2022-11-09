@@ -3,10 +3,7 @@
     <div class="col-md-4 offset-md-4">
       <div class="card mb-4">
         <div class="card-body">
-          <form
-            [formGroup]="createtStudentForm"
-            (ngSubmit)="createStudentValidate()"
-          >
+          <form [formGroup]="createtStudentForm" (ngSubmit)="createStudent()">
             <div class="form-group">
               <label>Name</label>
               <input
@@ -79,8 +76,8 @@
                   name="gender"
                   type="radio"
                   [value]="gender"
-                  [(ngModel)]="radioSelected"
-                  (change)="onItemChange(gender)"
+                  [(ngModel)]="createstudent.gender"
+                  (change)="onStudentGenderChange(gender)"
                 />
 
                 {{ gender.name }}
@@ -94,6 +91,23 @@
               ></ngx-datepicker>
             </div>
             <br />
+            <div class="form-group">
+              <p class="text-center">
+                Schools
+                <select
+                  class="form-control"
+                  formControlName="school"
+                  name="school"
+                  [(ngModel)]="selectedSchool"
+                  (ngModelChange)="onSelected(selectedSchool)"
+                >
+                  <option disabled [value]="" selected>Choose School</option>
+                  <option *ngFor="let school of schools" [ngValue]="school">
+                    {{ school.name }}
+                  </option>
+                </select>
+              </p>
+            </div>
             <!-- <div class="form-group">
               <p>
                 Category :
@@ -123,17 +137,17 @@
                 </div>
               </div>
             </div> -->
-            <div class="form-group dropdown dropdownwidth">
+            <!-- <div class="form-group dropdown dropdownwidth">
               <select
                 class="custom-select"
                 [(ngModel)]="selectedSchool"
-                (ngModelChange)="onSelectedSchool(selectedSchool)"
+                (ngModelChange)="onSelected(selectedSchool)"
               >
                 <option *ngFor="let school of schools" [ngValue]="school">
                   {{ school.name }}
                 </option>
               </select>
-            </div>
+            </div> -->
             <div class="text-center">
               <button class="btn btn-primary">Create</button>
               <button class="btn btn-secondary btn-space" type="reset">

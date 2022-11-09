@@ -21,7 +21,7 @@ export class CreatestudentComponent implements OnInit {
     email: '',
     gender: '',
     dateofbirth: '',
-    school: [],
+    school: {},
   };
   schools: School[];
   genders: Gender[];
@@ -34,7 +34,7 @@ export class CreatestudentComponent implements OnInit {
     placeholder: 'select date',
     calendarClass: 'datepicker-default',
   };
-  selectedTests: School[] = [];
+
   selectedSchool = new School();
   selectedGender: string;
   constructor(
@@ -51,6 +51,7 @@ export class CreatestudentComponent implements OnInit {
       phonenumber: ['', Validators.required],
       email: ['', Validators.required],
       gender: ['', Validators.required],
+      school: ['', Validators.required],
     });
     this.retrieveSchools();
     this.getGenders();
@@ -72,7 +73,7 @@ export class CreatestudentComponent implements OnInit {
       address: this.createstudent.address,
       phonenumber: this.createstudent.phonenumber,
       email: this.createstudent.email,
-      gender: this.createstudent.gender,
+      gender: this.selectedGender,
       dateofbirth: this.createstudent.dateofbirth,
       school: this.createstudent.school,
     };
@@ -85,14 +86,8 @@ export class CreatestudentComponent implements OnInit {
   getGenders() {
     this.genders = this.teacherservice.getGenders();
   }
-  async onSelectedSchool(schools: School) {
-    if (this.schools) {
-      for (const school of this.schools) {
-        if (school.id === schools.id) {
-          this.selectedTests.push(school);
-        }
-      }
-    }
+  onSelected(value: School) {
+    this.createstudent.school = value;
   }
 
   getSelectedGenderChange(gender: Gender) {

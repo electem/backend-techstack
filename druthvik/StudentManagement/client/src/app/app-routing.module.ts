@@ -12,6 +12,7 @@ const routes: Routes = [
   { path: '', component: LogincomponentComponent },
   { path: 'login', component: LogincomponentComponent },
   { path: 'createschool', component: CreateschoolComponent },
+  { path: 'createschool/:id', component: CreateschoolComponent },
   { path: 'listschools', component: ListschoolsComponent },
   { path: 'liststudents', component: ListstudentsComponent },
   { path: 'listteachers', component: ListteachersComponent },

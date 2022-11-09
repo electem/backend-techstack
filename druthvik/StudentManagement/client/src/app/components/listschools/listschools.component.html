@@ -34,7 +34,11 @@
           <th class="text-center" scope="row">{{ school.student.length }}</th>
           <th class="text-center" scope="row">{{ school.teacher.length }}</th>
           <th class="text-center" scope="row">
-            <button type="button" class="btn btn-warning btn-sm mr-2">
+            <button
+              type="button"
+              class="btn btn-warning btn-sm mr-2"
+              routerLink="/createschool/{{ school.id }}"
+            >
               Edit
             </button>
             <button type="button" class="btn btn-danger btn-sm mr-2 marignleft">

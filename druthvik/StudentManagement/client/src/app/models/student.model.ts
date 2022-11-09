@@ -8,5 +8,5 @@ export class Student {
   gender?: string;
   createdAt?: string;
   dateofbirth?: string;
-  school: School[];
+  school: School;
 }
