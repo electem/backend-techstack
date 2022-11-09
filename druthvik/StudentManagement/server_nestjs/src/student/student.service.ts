@@ -15,7 +15,7 @@ export class StudentService {
     return await this.studentRepository.find();
   }
 
-  public async createSchool(studentdto: StudentDto): Promise<Student> {
+  public async createStudent(studentdto: StudentDto): Promise<Student> {
     try {
       return await this.studentRepository.save(studentdto);
     } catch (err) {

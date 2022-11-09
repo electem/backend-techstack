@@ -10,4 +10,9 @@ export class StudentController {
   findAll() {
     return this.studentService.findAllSchool();
   }
+
+  @Post()
+  async create(@Body() studentDto: StudentDto) {
+    return await this.studentService.createStudent(studentDto);
+  }
 }

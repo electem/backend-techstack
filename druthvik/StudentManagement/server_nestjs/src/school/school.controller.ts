@@ -1,4 +1,4 @@
-import { Body, Controller, Post, Get, Param } from '@nestjs/common';
+import { Body, Controller, Post, Get, Param, Put } from '@nestjs/common';
 
 import { SchoolService } from './school.service';
 import { SchoolDto } from './school.dto';
@@ -18,5 +18,10 @@ export class SchoolController {
   @Get()
   findAll() {
     return this.schoolService.getAllSchool();
+  }
+
+  @Put('/')
+  async update(@Body() schoolDto: SchoolDto) {
+    return await this.schoolService.updateSchool(schoolDto);
   }
 }
