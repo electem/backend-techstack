@@ -14,6 +14,7 @@ export class StudentListingComponent implements OnInit {
   itemsPerPage?: string;
   pagesizes = ['all', 2, 4, 6];
   totalItems?: number;
+  file!: File;
   constructor(private schoolService: SchoolService, private http: HttpClient) {}
 
   ngOnInit(): void {
@@ -34,5 +35,20 @@ export class StudentListingComponent implements OnInit {
     this.itemsPerPage = (event.target as HTMLInputElement).value;
     this.page = 1;
     this.retrieveStudents();
+  }
+  async downloadFile() {
+    return await this.schoolService
+      .downloadFile(this.file)
+      .subscribe((response) => {
+        const filename = response.headers
+          .get('content-disposition')
+          ?.split(';')[1]
+          .split('=')[1];
+        const blob: Blob = response.body as Blob;
+        const a = document.createElement('a');
+        a.download = filename!;
+        a.href = window.URL.createObjectURL(blob);
+        a.click();
+      });
   }
 }

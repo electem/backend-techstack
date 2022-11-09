@@ -69,27 +69,18 @@
               </div>
             </div>
             <br />
-            <div class="form-group">
-              <label>gender</label>
-              <input
-                type="text"
-                formControlName="gender"
-                class="form-control"
-                [ngClass]="{
-                  'is-invalid': submitted && formValidation.gender.errors
-                }"
-                [(ngModel)]="teacher.gender"
-              />
-              <div
-                *ngIf="submitted && formValidation.gender.errors"
-                class="invalid-feedback"
-              >
-                <div *ngIf="formValidation.gender.errors.required">
-                  gender is required
-                </div>
+            <div class="column">
+              <h2>select gender</h2>
+              <div *ngFor="let gender of gendersList">
+                <input
+                  type="radio"
+                  name="gender"
+                  [value]="gender"
+                  [(ngModel)]="teacher.gender"
+                  (change)="getSelectedTeacherGender(gender)"
+                />{{ gender.name }}
               </div>
             </div>
-            <br />
             <div class="column">
               <h2>Schools List</h2>
               <div *ngFor="let school of schoolsList">
@@ -97,17 +88,6 @@
                   type="checkbox"
                   (click)="selectedSchoolMethod(school)"
                 />{{ school.schoolname }}
-              </div>
-            </div>
-            <br />
-            <div class="column">
-              <h2>select gender</h2>
-              <div *ngFor="let gender of gendersList">
-                <input
-                  type="radio"
-                  name="gender"
-                  (click)="selectedGenderMethod(gender)"
-                />{{ gender }}
               </div>
             </div>
             <br />

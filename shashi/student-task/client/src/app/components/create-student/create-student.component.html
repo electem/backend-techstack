@@ -1,11 +1,13 @@
 <div class="container">
-  <h5 class="card-title text-center pb-0 fs-4">Create Teacher</h5>
-  <br />
+  <h5 class="card-title text-center pb-0 fs-4">Create Student</h5>
   <div class="row">
-    <div class="col-md-6 offset-md-4">
+    <div class="col-md-4 offset-md-4">
       <div class="card mb-4">
         <div class="card-body">
-          <form [formGroup]="createStudentForm" (ngSubmit)="checkValidation()">
+          <form
+            [formGroup]="createStudentForm"
+            (ngSubmit)="saveStudentDetails()"
+          >
             <div class="form-group">
               <label>student name</label>
               <input
@@ -13,15 +15,15 @@
                 formControlName="studentname"
                 class="form-control"
                 [ngClass]="{
-                  'is-invalid': submitted && formValidation.studentname.errors
+                  'is-invalid': submitted && f.studentname.errors
                 }"
                 [(ngModel)]="student.studentname"
               />
               <div
-                *ngIf="submitted && formValidation.studentname.errors"
+                *ngIf="submitted && f.studentname.errors"
                 class="invalid-feedback"
               >
-                <div *ngIf="formValidation.studentname.errors.required">
+                <div *ngIf="f.studentname.errors.required">
                   student name is required
                 </div>
               </div>
@@ -33,17 +35,32 @@
                 type="text"
                 formControlName="address"
                 class="form-control"
-                [ngClass]="{
-                  'is-invalid': submitted && formValidation.address.errors
-                }"
+                [ngClass]="{ 'is-invalid': submitted && f.address.errors }"
                 [(ngModel)]="student.address"
               />
               <div
-                *ngIf="submitted && formValidation.address.errors"
+                *ngIf="submitted && f.address.errors"
                 class="invalid-feedback"
               >
-                <div *ngIf="formValidation.address.errors.required">
-                  address is required
+                <div *ngIf="f.address.errors.required">Address is required</div>
+              </div>
+            </div>
+            <br />
+            <div class="form-group">
+              <label>Phone Number</label>
+              <input
+                type="text"
+                formControlName="phonenumber"
+                class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.phonenumber.errors }"
+                [(ngModel)]="student.phonenumber"
+              />
+              <div
+                *ngIf="submitted && f.phonenumber.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="f.phonenumber.errors.required">
+                  Phone is required
                 </div>
               </div>
             </div>
@@ -54,39 +71,26 @@
                 type="text"
                 formControlName="email"
                 class="form-control"
-                [ngClass]="{
-                  'is-invalid': submitted && formValidation.email.errors
-                }"
+                [ngClass]="{ 'is-invalid': submitted && f.email.errors }"
                 [(ngModel)]="student.email"
               />
-              <div
-                *ngIf="submitted && formValidation.email.errors"
-                class="invalid-feedback"
-              >
-                <div *ngIf="formValidation.email.errors.required">
-                  email is required
-                </div>
+              <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                <div *ngIf="f.email.errors.required">Email is required</div>
               </div>
             </div>
             <br />
+            <br />
             <div class="form-group">
-              <label>gender</label>
-              <input
-                type="text"
-                formControlName="gender"
-                class="form-control"
-                [ngClass]="{
-                  'is-invalid': submitted && formValidation.gender.errors
-                }"
-                [(ngModel)]="student.gender"
-              />
-              <div
-                *ngIf="submitted && formValidation.gender.errors"
-                class="invalid-feedback"
-              >
-                <div *ngIf="formValidation.gender.errors.required">
-                  gender is required
-                </div>
+              <label>Genders</label>
+              <div *ngFor="let gender of gendersList; let i = index">
+                <input
+                  name="gender"
+                  type="radio"
+                  [value]="gender"
+                  [(ngModel)]="student.gender"
+                  (change)="getSelectedStudentGender(gender)"
+                />
+                {{ gender.name }}
               </div>
             </div>
             <div class="form-group">
@@ -97,45 +101,35 @@
               ></ngx-datepicker>
             </div>
             <br />
-            <div class="column">
-              <h2>select gender</h2>
-              <div *ngFor="let gender of gendersList">
-                <input
-                  type="radio"
-                  name="gender"
-                  (click)="selectedGenderMethod(gender)"
-                />{{ gender }}
-              </div>
-            </div>
-            <br />
             <div class="form-group">
-              <p>
+              <p class="text-center">
+                Schools
                 <select
                   class="form-control"
-                  placeholder="Choose school"
-                  style="width: 50%"
-                  name="schoolsList"
+                  formControlName="school"
+                  name="school"
+                  [(ngModel)]="currentSchool"
                   (ngModelChange)="selectedSchool(currentSchool)"
                 >
-                  <option value="Choose school">Choose school</option>
-                  <option *ngFor="let school of schoolsList">
+                  <option disabled [value]="" selected>Choose School</option>
+                  <option *ngFor="let school of schoolsList" [ngValue]="school">
                     {{ school.schoolname }}
                   </option>
                 </select>
               </p>
             </div>
             <div class="text-center">
-              <button class="btn btn-primary btn-sm">Submit</button>
+              <button class="btn btn-primary">Create</button>
               <button
-                class="btn btn-danger btn-sm btn-space"
-                routerLink="/schoollisting"
+                class="btn btn-secondary btn-space"
+                type="reset"
+                routerLink="/studentslist"
               >
                 Cancel
               </button>
             </div>
           </form>
         </div>
-        <br />
       </div>
     </div>
   </div>

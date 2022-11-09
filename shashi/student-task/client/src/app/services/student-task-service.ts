@@ -1,18 +1,24 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { School } from '../models/school.model';
 import { Teacher } from '../models/teacher.model';
 import { Student } from '../models/student.model';
 const baseUrl = environment.url;
 
-export class Gender {}
+export class Gender {
+  name!: string;
+}
 
 @Injectable({
   providedIn: 'root',
 })
 export class SchoolService {
-  genderList: Gender[] = ['male', 'female', 'others'];
+  genderList: Gender[] = [
+    { name: 'male' },
+    { name: 'female' },
+    { name: 'others' },
+  ];
   constructor(private http: HttpClient) {}
 
   async genderListmethod() {
@@ -40,5 +46,32 @@ export class SchoolService {
     return this.http
       .post<Student>(baseUrl + '/student', studentData)
       .toPromise();
+  }
+  async uploadFile(file: File) {
+    const headerDict = {
+      Accept: 'application/json',
+      'Access-Control-Allow-Headers': 'Content-Type',
+    };
+    const requestOptions = {
+      headers: new HttpHeaders(headerDict),
+    };
+    const formData = new FormData();
+    formData.append('image', file);
+    return await this.http
+      .post(baseUrl + '/photos', formData, requestOptions)
+      .subscribe();
+  }
+
+  downloadFile(file: File) {
+    return this.http.get(`${baseUrl + '/photos'}/${file.name}`, {
+      observe: 'response',
+      responseType: 'blob',
+    });
+  }
+  async getSchoolById(id: number) {
+    return this.http.get(`${baseUrl + '/school'}/${id}`).toPromise();
+  }
+  async getCompanyById(id: number) {
+    return await this.http.get(`${baseUrl + '/teacher'}/${id}`).toPromise();
   }
 }

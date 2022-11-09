@@ -35,4 +35,5 @@ export class SchoolListingComponent implements OnInit {
     this.page = 1;
     this.retrieveschools();
   }
+  
 }

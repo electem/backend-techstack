@@ -25,7 +25,7 @@ export class CreateTeacherComponent implements OnInit {
     school: [],
   };
   gendersList?: Gender[];
-  currentGender!: Gender;
+  currentGender!: string;
   selectedGender!: any;
   model = { option: 'option3' };
   constructor(
@@ -39,7 +39,6 @@ export class CreateTeacherComponent implements OnInit {
       teachername: ['', Validators.required],
       address: ['', Validators.required],
       email: ['', Validators.required],
-      gender: ['', Validators.required],
     });
     this.retieveGenders();
     this.retrieveschools();
@@ -66,15 +65,14 @@ export class CreateTeacherComponent implements OnInit {
       teachername: this.teacher.teachername,
       address: this.teacher.address,
       email: this.teacher.email,
-      gender: this.teacher.gender,
+      gender: this.currentGender,
       school: this.selectedSchool,
     };
     await this.schoolService.createTeacher(teacherData);
-    this.router.navigate(['/schoollisting']);
+    this.router.navigate(['/teacherslist']);
   }
-  async selectedGenderMethod(gender: any): Promise<void> {
-    this.currentGender = gender;
-    this.selectedGender?.push(this.currentGender);
+  getSelectedTeacherGender(gender: Gender) {
+    this.currentGender = gender.name;
   }
   async selectedSchoolMethod(school: School): Promise<void> {
     this.currentSchool = school;
