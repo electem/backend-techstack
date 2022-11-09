@@ -21,4 +21,8 @@ public async createSchool(schoolDto: SchoolDto): Promise<School> {
       throw new HttpException(err, HttpStatus.BAD_REQUEST);
     }
   }
+
+  async getAllSchool() : Promise<School[]> {
+    return await this.schoolRepository.find();
+  }
 }
