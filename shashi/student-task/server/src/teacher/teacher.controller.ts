@@ -30,4 +30,8 @@ export class TeacherController {
   async findAllTeacher(): Promise<Array<Teacher>> {
     return this.teacherService.findAllTeacher();
   }
+  @Get('/:id')
+  async findOneTeacheer(@Param('id') id): Promise<Teacher> {
+    return this.teacherService.findOneTeacheer(id);
+  }
 }

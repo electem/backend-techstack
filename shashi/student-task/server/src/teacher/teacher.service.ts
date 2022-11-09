@@ -21,4 +21,13 @@ export class TeacherService {
   public async findAllTeacher(): Promise<Teacher[]> {
     return await this.teacherRepository.find();
   }
+  async findOneTeacheer(id: number) {
+    const postWithQueryBuilder = await this.teacherRepository
+      .createQueryBuilder('teacher')
+      .select(['teacher', 'school'])
+      .leftJoinAndSelect('teacher.school', 'school')
+      .where('teacher.id= :id', { id: id })
+      .getOne();
+    return postWithQueryBuilder;
+  }
 }

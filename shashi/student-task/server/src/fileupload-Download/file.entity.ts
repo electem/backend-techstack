@@ -1,5 +1,12 @@
 /* eslint-disable prettier/prettier */
-import { Column, Entity, PrimaryGeneratedColumn, TableColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  OneToOne,
+  PrimaryGeneratedColumn,
+  TableColumn,
+} from 'typeorm';
+import { Student } from 'src/student/student.entity';
 
 @Entity()
 export class Image {
@@ -20,4 +27,6 @@ export class Image {
     nullable: false,
   })
   buffer?: Uint8Array;
+  @OneToOne(() => Student, (student) => student.image)
+  students: Student;
 }
