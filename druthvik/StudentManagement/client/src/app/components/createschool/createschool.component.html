@@ -39,11 +39,13 @@
             </div>
             <br />
             <div class="form-group">
+              <label>Select Teachers</label>
               <ng-multiselect-dropdown
                 formControlName="teacher"
                 [settings]="dropdownSettings"
                 [data]="teachers"
                 (onSelect)="onSelectTeachers($event)"
+                [(ngModel)]="createschool.teacher"
                 [class.is-invalid]="
                   f?.teacher?.errors?.required && f?.teacher?.touched
                 "
@@ -52,11 +54,13 @@
             </div>
             <br />
             <div class="form-group">
+              <label>Select Students</label>
               <ng-multiselect-dropdown
                 formControlName="student"
                 [settings]="dropdownSettings"
                 [data]="students"
                 (onSelect)="onSelectStudents($event)"
+                [(ngModel)]="createschool.student"
                 [class.is-invalid]="
                   f?.student?.errors?.required && f?.student?.touched
                 "
@@ -64,8 +68,16 @@
               </ng-multiselect-dropdown>
             </div>
             <br />
-            <div class="text-center">
+            <div class="text-center" *ngIf="showcreatebutton">
               <button class="btn btn-primary">Create</button>
+              <button class="btn btn-secondary btn-space" type="reset">
+                Cancel
+              </button>
+            </div>
+            <div class="text-center" *ngIf="showUpdateButton">
+              <button class="btn btn-primary" (click)="updateSchool()">
+                Update
+              </button>
               <button class="btn btn-secondary btn-space" type="reset">
                 Cancel
               </button>

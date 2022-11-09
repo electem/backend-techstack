@@ -7,6 +7,7 @@ import { TeacherService } from 'src/app/services/teacher.service';
 import { SchoolService } from 'src/app/services/school.service';
 import { StudentService } from 'src/app/services/student.service';
 import { Student } from '../../models/student.model';
+import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-createschool',
   templateUrl: './createschool.component.html',
@@ -29,11 +30,15 @@ export class CreateschoolComponent implements OnInit {
   students: Student[] = [];
   requiredField: boolean = false;
   dropdownSettings: IDropdownSettings = {};
+  showUpdateButton: boolean;
+  showcreatebutton: boolean;
   constructor(
     private schoolservice: SchoolService,
     private teacherservice: TeacherService,
     private studentservice: StudentService,
     private formBuilder: FormBuilder,
+    private router: Router,
+    private route: ActivatedRoute,
   ) {}
 
   ngOnInit(): void {
@@ -49,6 +54,8 @@ export class CreateschoolComponent implements OnInit {
       idField: 'id',
       textField: 'name',
     };
+
+    this.getSchoolById(this.route.snapshot.params.id);
   }
 
   get f() {
@@ -88,5 +95,22 @@ export class CreateschoolComponent implements OnInit {
   onSelectStudents(student: Student) {
     this.currentStudent = student;
     this.addedStudents?.push(this.currentStudent);
+  }
+
+  async getSchoolById(id: number) {
+    this.showcreatebutton = false;
+    this.showUpdateButton = true;
+    this.createschool = await this.schoolservice.getSchoolById(id);
+  }
+  async updateSchool(): Promise<void> {
+    this.showcreatebutton = false;
+    const school: School = {
+      id: this.createschool.id,
+      name: this.createschool.name,
+      teacher: this.createschool.teacher,
+      student: this.createschool.student,
+    };
+    await this.schoolservice.updateSchool(school);
+    this.router.navigate(['/listschools']);
   }
 }
