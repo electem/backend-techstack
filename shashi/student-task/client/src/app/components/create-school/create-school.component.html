@@ -1,0 +1,86 @@
+<div class="container">
+  <h5 class="card-title text-center pb-0 fs-4">Create School</h5>
+  <br />
+  <div class="row">
+    <div class="col-md-6 offset-md-4">
+      <div class="card mb-4">
+        <div class="card-body">
+          <form [formGroup]="createSchoolForm" (ngSubmit)="checkValidation()">
+            <div class="form-group">
+              <label>school name</label>
+              <input
+                type="text"
+                formControlName="schoolname"
+                class="form-control"
+                [ngClass]="{
+                  'is-invalid': submitted && formValidation.schoolname.errors
+                }"
+                [(ngModel)]="school.schoolname"
+              />
+              <div
+                *ngIf="submitted && formValidation.schoolname.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="formValidation.schoolname.errors.required">
+                  school name is required
+                </div>
+              </div>
+            </div>
+            <br />
+            <div class="form-group">
+              <label>Address</label>
+              <input
+                type="text"
+                formControlName="address"
+                class="form-control"
+                [ngClass]="{
+                  'is-invalid': submitted && formValidation.address.errors
+                }"
+                [(ngModel)]="school.address"
+              />
+              <div
+                *ngIf="submitted && formValidation.address.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="formValidation.address.errors.required">
+                  address is required
+                </div>
+              </div>
+            </div>
+            <br />
+            SELECT TEACHERS
+            <div style="width: 50%">
+              <ng-multiselect-dropdown
+                [settings]="dropdownSettings"
+                [data]="teachersList"
+                (onSelect)="selectedTeacher($event)"
+              >
+              </ng-multiselect-dropdown>
+            </div>
+            <br />
+            SELECT STUDENTS
+            <div style="width: 50%">
+              <ng-multiselect-dropdown
+                [settings]="dropdownSettingsForStudent"
+                [data]="studentsList"
+                (onSelect)="selectedStudent($event)"
+              >
+              </ng-multiselect-dropdown>
+            </div>
+            <br />
+            <div class="text-center">
+              <button class="btn btn-primary btn-sm">Submit</button>
+              <button
+                class="btn btn-danger btn-sm btn-space"
+                routerLink="/schoollisting"
+              >
+                Cancel
+              </button>
+            </div>
+          </form>
+        </div>
+        <br />
+      </div>
+    </div>
+  </div>
+</div>

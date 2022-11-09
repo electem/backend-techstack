@@ -1,0 +1,88 @@
+<div class="list row">
+  <h2 class="py-4">Teachers List</h2>
+  <div class="col-md-8">
+    <div class="input-group mb-3"></div>
+  </div>
+  <div class="col-md-6">
+    <ul class="list-group"></ul>
+    <td>
+      <button routerLink="/createstudent">ADD NEW STUDENT</button>
+    </td>
+  </div>
+  <div class="container">
+    <br />
+    <table datatable class="row-border hover">
+      <thead>
+        <tr>
+          <th>Student name</th>
+          <th>Address</th>
+          <th>Email</th>
+          <th>Date of birth</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="studentsList?.length != 0">
+        <tr
+          *ngFor="
+            let school of studentsList
+              | paginate
+                : {
+                    itemsPerPage: itemsPerPage,
+                    currentPage: page,
+                    totalItems: totalItems
+                  }
+          "
+        >
+          <td>{{ school.studentname }}</td>
+          <td>{{ school.address }}</td>
+          <td>{{ school.email }}</td>
+          <td>{{ school.dob }}</td>
+          <td>
+            <button
+              type="button"
+              class="btn btn-outline-secondary btn-rounded btn-sm fw-bold"
+              mdbRipple
+              rippleColor="dark"
+              routerLink="/editcompany/{{ school.id }}"
+            >
+              Edit
+            </button>
+            <button
+              type="button"
+              style="margin: px"
+              class="btn-outline-danger btn btn-sm mr-2 btn-space"
+            >
+              delete
+            </button>
+            <button
+              type="button"
+              style="margin: px"
+              class="btn-secondary btn btn-sm mr-2 btn-space"
+            >
+              Email
+            </button>
+          </td>
+          <br />
+        </tr>
+      </tbody>
+      <tbody *ngIf="studentsList?.length == 0">
+        <tr>
+          <td colspan="3" class="no-data-available">No data!</td>
+        </tr>
+      </tbody>
+    </table>
+    <br />
+    <pagination-controls
+      class="pagi"
+      (pageChange)="pagination((page = $event))"
+    ></pagination-controls>
+  </div>
+</div>
+<div class="marginleftpage">
+  Items per Page:
+  <select (change)="handlePageSizeChange($event)">
+    <option *ngFor="let size of pagesizes" [ngValue]="size">
+      {{ size }}
+    </option>
+  </select>
+</div>

@@ -11,6 +11,12 @@ import { UsersModule } from './users/users.module';
 import { UserEntity } from './users/entity/user.entity';
 import { TodoEntity } from './todo/entity/todo.entity';
 import { TaskEntity } from './todo/entity/task.entity';
+import { School } from './school/school.entity';
+import { SchoolModule } from './school/school.module';
+import { Teacher } from './teacher/teacher.entity';
+import { TeacherModule } from './teacher/teacher.module';
+import { Student } from './student/student.entity';
+import { StudentModule } from './student/student.module';
 
 @Module({
   imports: [
@@ -21,12 +27,15 @@ import { TaskEntity } from './todo/entity/task.entity';
       username: 'postgres',
       password: 'postgres',
       database: 'DBstudentTask',
-      entities: [TodoEntity, UserEntity, TaskEntity],
+      entities: [TodoEntity, UserEntity, TaskEntity, School, Teacher, Student],
       synchronize: true,
     }),
     AuthModule,
     TodoModule,
     UsersModule,
+    SchoolModule,
+    TeacherModule,
+    StudentModule,
   ],
   controllers: [AppController],
   providers: [AppService],
