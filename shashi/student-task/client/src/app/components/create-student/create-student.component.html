@@ -5,24 +5,24 @@
     <div class="col-md-6 offset-md-4">
       <div class="card mb-4">
         <div class="card-body">
-          <form [formGroup]="createTeacherForm" (ngSubmit)="checkValidation()">
+          <form [formGroup]="createStudentForm" (ngSubmit)="checkValidation()">
             <div class="form-group">
-              <label>teacher name</label>
+              <label>student name</label>
               <input
                 type="text"
-                formControlName="teachername"
+                formControlName="studentname"
                 class="form-control"
                 [ngClass]="{
-                  'is-invalid': submitted && formValidation.teachername.errors
+                  'is-invalid': submitted && formValidation.studentname.errors
                 }"
-                [(ngModel)]="teacher.teachername"
+                [(ngModel)]="student.studentname"
               />
               <div
-                *ngIf="submitted && formValidation.teachername.errors"
+                *ngIf="submitted && formValidation.studentname.errors"
                 class="invalid-feedback"
               >
-                <div *ngIf="formValidation.teachername.errors.required">
-                  teacher name is required
+                <div *ngIf="formValidation.studentname.errors.required">
+                  student name is required
                 </div>
               </div>
             </div>
@@ -36,7 +36,7 @@
                 [ngClass]="{
                   'is-invalid': submitted && formValidation.address.errors
                 }"
-                [(ngModel)]="teacher.address"
+                [(ngModel)]="student.address"
               />
               <div
                 *ngIf="submitted && formValidation.address.errors"
@@ -57,7 +57,7 @@
                 [ngClass]="{
                   'is-invalid': submitted && formValidation.email.errors
                 }"
-                [(ngModel)]="teacher.email"
+                [(ngModel)]="student.email"
               />
               <div
                 *ngIf="submitted && formValidation.email.errors"
@@ -78,7 +78,7 @@
                 [ngClass]="{
                   'is-invalid': submitted && formValidation.gender.errors
                 }"
-                [(ngModel)]="teacher.gender"
+                [(ngModel)]="student.gender"
               />
               <div
                 *ngIf="submitted && formValidation.gender.errors"
@@ -89,15 +89,12 @@
                 </div>
               </div>
             </div>
-            <br />
-            <div class="column">
-              <h2>Schools List</h2>
-              <div *ngFor="let school of schoolsList">
-                <input
-                  type="checkbox"
-                  (click)="selectedSchoolMethod(school)"
-                />{{ school.schoolname }}
-              </div>
+            <div class="form-group">
+              <label>Date of birth</label>
+              <ngx-datepicker
+                [(ngModel)]="date"
+                [options]="options"
+              ></ngx-datepicker>
             </div>
             <br />
             <div class="column">
@@ -111,11 +108,27 @@
               </div>
             </div>
             <br />
+            <div class="form-group">
+              <p>
+                <select
+                  class="form-control"
+                  placeholder="Choose school"
+                  style="width: 50%"
+                  name="schoolsList"
+                  (ngModelChange)="selectedSchool(currentSchool)"
+                >
+                  <option value="Choose school">Choose school</option>
+                  <option *ngFor="let school of schoolsList">
+                    {{ school.schoolname }}
+                  </option>
+                </select>
+              </p>
+            </div>
             <div class="text-center">
               <button class="btn btn-primary btn-sm">Submit</button>
               <button
                 class="btn btn-danger btn-sm btn-space"
-                routerLink="/teacherslist"
+                routerLink="/schoollisting"
               >
                 Cancel
               </button>

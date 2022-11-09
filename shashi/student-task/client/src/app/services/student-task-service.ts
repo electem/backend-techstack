@@ -36,4 +36,9 @@ export class SchoolService {
       .post<Teacher>(baseUrl + '/teacher', teacherData)
       .toPromise();
   }
+  async createStudent(studentData: Student): Promise<Student> {
+    return this.http
+      .post<Student>(baseUrl + '/student', studentData)
+      .toPromise();
+  }
 }
