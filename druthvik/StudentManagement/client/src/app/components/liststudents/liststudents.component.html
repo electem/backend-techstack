@@ -1,0 +1,45 @@
+<div class="list row">
+  <h2 class="py-4">Students Lists</h2>
+  <div class="col-md-8">
+    <div class="input-group mb-3"></div>
+  </div>
+
+  <div class="col-md-6">
+    <ul class="list-group"></ul>
+    <td>
+      <button routerLink="/createcompany">Add Students</button>
+    </td>
+  </div>
+  <div class="container">
+    <br />
+    <table
+      class="table table-bordered table-hover table-bordered border-secondary"
+    >
+      <thead class="thead-light">
+        <tr class="active">
+          <th class="text-center" scope="col">Name</th>
+          <th class="text-center" scope="col">Address</th>
+          <th class="text-center" scope="col">Created AT</th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let student of students; let i = index">
+        <tr>
+          <th class="text-center" scope="row">{{ student.name }}</th>
+          <th class="text-center" scope="row">{{ student.address }}</th>
+          <th class="text-center" scope="row">{{ student.createdAt }}</th>
+          <th class="text-center" scope="row">
+            <button type="button" class="btn btn-warning btn-sm mr-2">
+              Edit
+            </button>
+            <button type="button" class="btn btn-danger btn-sm mr-2 marignleft">
+              Delete
+            </button>
+            <button type="button" class="btn button btn-sm mr-2 marignleft">
+              send mail
+            </button>
+          </th>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

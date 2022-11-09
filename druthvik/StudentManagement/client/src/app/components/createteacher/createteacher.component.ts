@@ -78,11 +78,11 @@ export class CreateteacherComponent implements OnInit {
     this.genders = this.teacherService.getGenders();
   }
 
-  getSelecteditem(gender: Gender) {
+  getSelectedTeacherGender(gender: Gender) {
     this.selectedGender = gender.name;
   }
 
-  onItemChange(gender: Gender) {
-    this.getSelecteditem(gender);
+  onSelectTeacherGender(gender: Gender) {
+    this.getSelectedTeacherGender(gender);
   }
 }
