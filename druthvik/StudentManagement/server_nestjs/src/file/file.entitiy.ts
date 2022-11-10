@@ -1,7 +1,9 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Teacher } from '../teacher/teacher.entity';
+import { Student } from '../student/student.entity';
 
 @Entity()
-export class File {
+export class Files {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -26,4 +28,10 @@ export class File {
     nullable: false,
   })
   buffer?: Uint8Array;
+
+  @OneToOne(() => Teacher, (teacher) => teacher.file)
+  teacher: Teacher;
+
+  @OneToOne(() => Student, (student) => student.file)
+  student: Student;
 }

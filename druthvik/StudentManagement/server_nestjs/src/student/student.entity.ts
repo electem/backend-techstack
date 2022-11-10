@@ -7,6 +7,7 @@ import {
   CreateDateColumn,
 } from 'typeorm';
 import { School } from 'src/school/school.entity';
+import { Files } from 'src/file/file.entitiy';
 @Entity()
 export class Student {
   @PrimaryGeneratedColumn()
@@ -36,4 +37,8 @@ export class Student {
   @OneToOne(() => School, { cascade: true })
   @JoinColumn()
   school: School;
+
+  @OneToOne(() => Files, (file) => file.student)
+  @JoinColumn()
+  file: Files;
 }

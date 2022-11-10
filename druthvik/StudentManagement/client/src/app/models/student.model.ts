@@ -1,3 +1,4 @@
+import { Files } from './file.model';
 import { School } from './school.model';
 export class Student {
   id?: number;
@@ -8,5 +9,6 @@ export class Student {
   gender?: string;
   createdAt?: string;
   dateofbirth?: Date;
-  school: School;
+  school?: School;
+  file?: Files;
 }

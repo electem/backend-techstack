@@ -1,4 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Student } from 'src/app/models/student.model';
 import { StudentService } from 'src/app/services/student.service';
@@ -7,6 +13,7 @@ import { School } from 'src/app/models/school.model';
 import { Gender, TeacherService } from 'src/app/services/teacher.service';
 import { DatepickerOptions } from 'ng2-datepicker';
 import { ActivatedRoute, Router } from '@angular/router';
+import { FileService } from 'src/app/services/file.service';
 @Component({
   selector: 'app-createstudent',
   templateUrl: './createstudent.component.html',
@@ -31,9 +38,11 @@ export class CreatestudentComponent implements OnInit {
     placeholder: 'select date',
     calendarClass: 'datepicker-default',
   };
-
   selectedSchool = new School();
   selectedGender: string;
+  file: File;
+  editFile = true;
+  removeUpload = false;
   constructor(
     private studentservice: StudentService,
     private formBuilder: FormBuilder,
@@ -41,8 +50,10 @@ export class CreatestudentComponent implements OnInit {
     private teacherservice: TeacherService,
     private route: ActivatedRoute,
     private router: Router,
+    private cd: ChangeDetectorRef,
+    private fileService: FileService,
   ) {}
-
+  @ViewChild('fileInput') el: ElementRef | undefined;
   ngOnInit(): void {
     this.createtStudentForm = this.formBuilder.group({
       name: ['', Validators.required],
@@ -114,5 +125,24 @@ export class CreatestudentComponent implements OnInit {
     };
     await this.studentservice.updateStudent(student);
     this.router.navigate(['/liststudents']);
+  }
+  async uploadImage(): Promise<void> {
+    this.fileService.uploadFile(this.file);
+  }
+  chooseFile(event: any) {
+    const reader = new FileReader();
+    const file = event.target.files[0];
+    this.file = file;
+    if (event.target.files && event.target.files[0]) {
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        this.createtStudentForm.patchValue({
+          file: reader.result,
+        });
+        this.editFile = false;
+        this.removeUpload = true;
+      };
+      this.cd.markForCheck();
+    }
   }
 }

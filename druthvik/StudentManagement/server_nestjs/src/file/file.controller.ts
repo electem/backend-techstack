@@ -10,7 +10,7 @@ import {
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { multerOptions } from './file.service';
-import { File } from './file.entitiy';
+import { Files } from './file.entitiy';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Express } from 'express';
@@ -19,8 +19,8 @@ import { createReadStream } from 'fs';
 @Controller('file')
 export class FileController {
   constructor(
-    @InjectRepository(File)
-    private fileRepository: Repository<File>,
+    @InjectRepository(Files)
+    private fileRepository: Repository<Files>,
   ) {}
 
   @Post()
@@ -38,6 +38,9 @@ export class FileController {
       originalname,
     });
     const stream = Readable.from(imageDownloadFromDB.buffer);
-    return stream.pipe(res);
+    const downloadFile = res.set({
+      'Content-Type': 'image/pdf/txt',
+    });
+    return stream.pipe(downloadFile);
   }
 }

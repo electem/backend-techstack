@@ -1,12 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Student } from 'src/app/models/student.model';
 import { Teacher } from 'src/app/models/teacher.model';
 import { Gender, TeacherService } from 'src/app/services/teacher.service';
 import { SchoolService } from 'src/app/services/school.service';
 import { School } from 'src/app/models/school.model';
 import { ActivatedRoute, Router } from '@angular/router';
-
+import { FileService } from 'src/app/services/file.service';
+import { Files } from 'src/app/models/file.model';
 @Component({
   selector: 'app-createteacher',
   templateUrl: './createteacher.component.html',
@@ -30,15 +36,19 @@ export class CreateteacherComponent implements OnInit {
   selectedGender: string;
   showeditedform: boolean;
   showform: boolean;
-  isAddMode: boolean;
+  file: File;
+  editFile = true;
+  removeUpload = false;
   constructor(
     private teacherService: TeacherService,
     private formBuilder: FormBuilder,
     private schoolservice: SchoolService,
     private route: ActivatedRoute,
     private router: Router,
+    private cd: ChangeDetectorRef,
+    private fileService: FileService,
   ) {}
-
+  @ViewChild('fileInput') el: ElementRef | undefined;
   ngOnInit(): void {
     this.createtTeacherForm = this.formBuilder.group({
       name: ['', Validators.required],
@@ -47,11 +57,11 @@ export class CreateteacherComponent implements OnInit {
       email: ['', Validators.required],
       gender: ['', Validators.required],
       school: ['', Validators.required],
+      file: ['', Validators.required],
     });
     this.getGenders();
     this.retrieveSchools();
     this.getTeacherById(this.route.snapshot.params.id);
-    this.isAddMode = !this.getTeacherById(this.route.snapshot.params.id);
   }
   get f() {
     return this.createtTeacherForm.controls;
@@ -72,6 +82,7 @@ export class CreateteacherComponent implements OnInit {
       email: this.createteacher.email,
       gender: this.selectedGender,
       school: this.AdddedSchoolList,
+      file: this.createteacher.file,
     };
     await this.teacherService.createTeacher(createCompany);
   }
@@ -111,5 +122,25 @@ export class CreateteacherComponent implements OnInit {
     };
     await this.teacherService.updateTeacher(teacher);
     this.router.navigate(['/listteachers']);
+  }
+
+  async uploadImage(): Promise<void> {
+    this.fileService.uploadFile(this.file);
+  }
+  chooseFile(event: any) {
+    const reader = new FileReader();
+    const file = event.target.files[0];
+    this.file = file;
+    if (event.target.files && event.target.files[0]) {
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        this.createtTeacherForm.patchValue({
+          file: reader.result,
+        });
+        this.editFile = false;
+        this.removeUpload = true;
+      };
+      this.cd.markForCheck();
+    }
   }
 }
