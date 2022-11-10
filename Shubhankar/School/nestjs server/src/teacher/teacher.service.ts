@@ -1,7 +1,8 @@
 /* eslint-disable prettier/prettier */
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { TeacherDto } from './dto/teacher.dto';
 import { Teacher } from './teacher.entity';
 
 @Injectable()
@@ -14,4 +15,13 @@ export class TeacherService {
   async getAllTeachers(): Promise<Teacher[]> {
     return await this.teacherRepository.find();
   }
+
+  public async createTeacher(teacherDto: TeacherDto): Promise<Teacher> {
+    try {
+      return await this.teacherRepository.save(teacherDto);
+    } catch (err) {
+      throw new HttpException(err, HttpStatus.BAD_REQUEST);
+    }
+  }
+
 }
