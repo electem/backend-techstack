@@ -7,6 +7,7 @@ import { SchoolListComponent } from './components/school-list/school-list.compon
 import { TeacherListComponent } from './components/teacher-list/teacher-list.component';
 import { StudentListComponent } from './components/student-list/student-list.component';
 import { CreateTeacherComponent } from './components/create-teacher/create-teacher.component';
+import { CreateStudentComponent } from './components/create-student/create-student.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'teacher-list', component: TeacherListComponent },
   { path: 'student-list', component: StudentListComponent },
   { path: 'teacher', component: CreateTeacherComponent },
+  { path: 'student', component: CreateStudentComponent },
 ];
 
 @NgModule({

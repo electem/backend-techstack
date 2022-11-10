@@ -1,3 +1,6 @@
+import { File } from './file.model';
+import { School } from './school.model';
+
 export interface Student {
   id?: number;
   name?: string;
@@ -7,4 +10,6 @@ export interface Student {
   email?: string;
   phoneNo?: number;
   createdDate?: string;
+  school?: School;
+  file?: File;
 }

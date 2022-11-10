@@ -12,6 +12,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import org.hibernate.annotations.CreationTimestamp;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -31,7 +32,7 @@ public class Student {
 	private String name;
 	private String gender;
 
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/YYYY")
+	@JsonFormat(pattern = "YYYY-MM-dd")
 	private Date dateOfBirth;
 
 	private String address;
@@ -42,7 +43,8 @@ public class Student {
 	@CreationTimestamp
 	private Date createdDate;
 
-	@OneToOne(cascade = { CascadeType.ALL })
+	@JsonIgnoreProperties("students")
+	@OneToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "school_id")
 	private School school;
 }

@@ -14,6 +14,9 @@ import { SchoolListComponent } from './components/school-list/school-list.compon
 import { TeacherListComponent } from './components/teacher-list/teacher-list.component';
 import { StudentListComponent } from './components/student-list/student-list.component';
 import { CreateTeacherComponent } from './components/create-teacher/create-teacher.component';
+import { CreateStudentComponent } from './components/create-student/create-student.component';
+import { AngularMaterialModule } from './angular-material.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -25,6 +28,7 @@ import { CreateTeacherComponent } from './components/create-teacher/create-teach
     TeacherListComponent,
     StudentListComponent,
     CreateTeacherComponent,
+    CreateStudentComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,6 +38,8 @@ import { CreateTeacherComponent } from './components/create-teacher/create-teach
     HttpClientModule,
     ReactiveFormsModule,
     NgMultiSelectDropDownModule.forRoot(),
+    AngularMaterialModule,
+    BrowserAnimationsModule,
   ],
   providers: [authInterceptorProviders],
   bootstrap: [AppComponent],

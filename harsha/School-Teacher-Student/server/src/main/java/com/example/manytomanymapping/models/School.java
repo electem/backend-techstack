@@ -47,7 +47,7 @@ public class School {
 	private List<Teacher> teachers;
 
 	@JsonIgnoreProperties("school")
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "school_id")
 	private List<Student> students;
 }
