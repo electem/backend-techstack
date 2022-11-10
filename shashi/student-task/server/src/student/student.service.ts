@@ -21,4 +21,20 @@ export class StudentService {
   public async findAllStudent(): Promise<Student[]> {
     return await this.studentRepository.find();
   }
+  async findOneStudent(id: number) {
+    const postWithQueryBuilder = await this.studentRepository
+      .createQueryBuilder('students')
+      .select(['students', 'school'])
+      .leftJoinAndSelect('students.school', 'school')
+      .where('school.id= :id', { id: id })
+      .getOne();
+    return postWithQueryBuilder;
+  }
+  public async updateStudent(studentDto: StudentDto): Promise<Student> {
+    try {
+      return await this.studentRepository.save(studentDto);
+    } catch (err) {
+      throw new HttpException(err, HttpStatus.BAD_REQUEST);
+    }
+  }
 }

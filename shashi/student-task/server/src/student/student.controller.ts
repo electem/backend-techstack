@@ -1,7 +1,15 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable no-var */
 /* eslint-disable prettier/prettier */
-import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Post,
+  Put,
+  UseGuards,
+} from '@nestjs/common';
 import { Student } from './student.entity';
 import { StudentDto } from './student.dto';
 import { StudentService } from './student.service';
@@ -19,5 +27,13 @@ export class StudentController {
   @Get()
   async findAllStudent(): Promise<Array<Student>> {
     return this.StudentService.findAllStudent();
+  }
+  @Get('/:id')
+  async findOneSchool(@Param('id') id): Promise<Student> {
+    return this.StudentService.findOneStudent(id);
+  }
+  @Put('/')
+  async updateStudent(@Body() studentDto: StudentDto) {
+    return await this.StudentService.updateStudent(studentDto);
   }
 }
