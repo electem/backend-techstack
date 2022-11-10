@@ -1,3 +1,5 @@
+import { School } from "./school";
+
 export interface Teacher {
   id?: number;
   teachername?: string;
@@ -6,4 +8,5 @@ export interface Teacher {
   email?: string;
   gender?: string;
   createdAt?: Date;
+  schools?:School[];
 }

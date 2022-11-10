@@ -22,4 +22,12 @@ export class SchoolService {
   async getallTeachers(): Promise<Teacher[]> {
     return await this.http.get<Teacher[]>(baseUrl + '/teacher').toPromise();
   }
+
+ async  getallSchoolRecords(): Promise<School[]> {
+    return await this.http.get<School[]>(baseUrl + '/school').toPromise();
+  }
+
+  async createTeacher(data: Teacher): Promise<Teacher> {
+    return this.http.post<Teacher>(baseUrl + '/teacher', data).toPromise();
+  }
 }
