@@ -8,6 +8,7 @@ import { School } from './school/school.entity';
 import { SchoolModule } from './school/school.module';
 import { Student } from './student/student.entity';
 import { Teacher } from './teacher/teacher.entity';
+import { TeacherModule } from './teacher/teacher.module';
 import { TaskEntity } from './ToDo/task.entity';
 import { TodoEntity } from './ToDo/toDo.entity';
 import { TodoModule } from './ToDo/toDo.module';
@@ -23,13 +24,14 @@ import { UsersModule } from './user/user.module';
       username: 'postgres',
       password: 'cybis@ban',
       database: 'School',
-      entities: [UserEntity, TodoEntity, TaskEntity,School,Teacher,Student],
+      entities: [UserEntity, TodoEntity, TaskEntity, School, Teacher, Student],
       synchronize: true,
     }),
-   AuthModule,
+    AuthModule,
     UsersModule,
     TodoModule,
-    SchoolModule
+    SchoolModule,
+    TeacherModule,
   ],
   controllers: [AppController],
   providers: [AppService],
