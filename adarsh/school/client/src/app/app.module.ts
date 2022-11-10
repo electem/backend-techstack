@@ -9,6 +9,11 @@ import { AddSchoolComponent } from './components/add-school/add-school.component
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { TeacherListingComponent } from './components/teacher-listing/teacher-listing.component';
 import { AddTeachersComponent } from './components/add-teachers/add-teachers.component';
+import { StudentListingComponent } from './components/student-listing/student-listing.component';
+import { AddStudentComponent } from './components/add-student/add-student.component';
+import { AuthInterceptor } from 'src/helpers/auth.interceptor';
+import { LoginUserComponent } from './components/login-user/login-user.component';
+
 
 @NgModule({
   declarations: [
@@ -17,6 +22,10 @@ import { AddTeachersComponent } from './components/add-teachers/add-teachers.com
     AddSchoolComponent,
     TeacherListingComponent,
     AddTeachersComponent,
+    StudentListingComponent,
+    AddStudentComponent,
+    LoginUserComponent
+    
     
 
   ],
@@ -29,9 +38,11 @@ import { AddTeachersComponent } from './components/add-teachers/add-teachers.com
     NgMultiSelectDropDownModule.forRoot(),
     
   ],
-  providers: [
-     
-  ],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true,
+},],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

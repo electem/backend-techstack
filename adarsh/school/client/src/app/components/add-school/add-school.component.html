@@ -30,6 +30,7 @@
             [data]="teachers"
             (onSelect)="onItemSelect($event)"
             (onSelectAll)="onSelectAll($event)"
+            [(ngModel)]="newSchool.teachers"
           >
           </ng-multiselect-dropdown>
         </div>
@@ -41,6 +42,7 @@
                 [data]="students"
                 (onSelect)="onStudentSelect($event)"
                 (onSelectAll)="onStudentSelectAll($event)"
+                [(ngModel)]="newSchool.students"
               >
               </ng-multiselect-dropdown>
             </div>

@@ -52,6 +52,7 @@ export class AddSchoolComponent implements OnInit {
     });
     this.retrieveTeachers();
     this.retrieveStudents();
+    this.getSchoolId(this.route.snapshot.params.id);
   }
   async retrieveTeachers() {
     this.teachers = await this.schoolService.getTeachers();
@@ -89,5 +90,17 @@ export class AddSchoolComponent implements OnInit {
     // await this.schoolService.createNewSchool(school);
     this.router.navigate(['/schoolList']);
   }
-
+  private async getSchoolId(id: number) {
+    this.newSchool = await this.schoolService.getSchoolByID(id);
+  }
+  async updateTeacher(): Promise<void> {
+    const teacherdata = {
+      id: this.newSchool.id,
+      name: this.newSchool.name,
+      address: this.newSchool.address,
+     
+    };
+    // await this.schoolService.updateStudent(this.newTeacher.id!, teacherdata);
+    this.router.navigate(['/teacherList']);
+  }
 }

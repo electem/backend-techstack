@@ -10,6 +10,7 @@ import { SchoolService } from 'src/app/services/school.service';
 })
 export class SchoolListingComponent implements OnInit {
 schools:School[]=[];
+
   constructor( private schoolService: SchoolService,
     private router: Router,
     private route: ActivatedRoute) { }

@@ -7,7 +7,8 @@ export class Student {
   address?: string;
   email?: string;
   gender?:string;
-  phone?:string;
+  phone?:number;
+  dateOfBirth?:string;
   schools?:School;
  
 }

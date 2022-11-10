@@ -7,7 +7,7 @@ export class Teacher {
   address?: string;
   email?: string;
   gender?:string;
-  phone?:string;
+  phone?:number;
   schools?:School[];
  
 }
