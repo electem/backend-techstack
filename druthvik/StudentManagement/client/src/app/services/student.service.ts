@@ -30,4 +30,8 @@ export class StudentService {
       .put<Student>(baseUrl + '/student', updatestudent)
       .toPromise();
   }
+
+  async deletStudentById(id: number) {
+    return await this.http.delete(`${baseUrl + '/student'}/${id}`).toPromise();
+  }
 }

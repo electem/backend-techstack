@@ -36,4 +36,9 @@ export class ListstudentsComponent implements OnInit {
     this.page = 1;
     this.retrieveStudents();
   }
+
+  async deleteStudentById(id: number) {
+    await this.studentservice.deletStudentById(id);
+    this.retrieveStudents();
+  }
 }

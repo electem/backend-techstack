@@ -39,4 +39,9 @@ export class StudentService {
       throw new HttpException(err, HttpStatus.BAD_REQUEST);
     }
   }
+
+  public async deleteStudent(id: number): Promise<void> {
+    const student = await this.findStudentByID(id);
+    await this.studentRepository.remove(student);
+  }
 }
