@@ -6,7 +6,7 @@ import { SchoolService } from 'src/app/services/school.service';
 import { School } from 'src/app/models/school.model';
 import { Gender, TeacherService } from 'src/app/services/teacher.service';
 import { DatepickerOptions } from 'ng2-datepicker';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-createstudent',
   templateUrl: './createstudent.component.html',
@@ -40,6 +40,7 @@ export class CreatestudentComponent implements OnInit {
     private schoolservice: SchoolService,
     private teacherservice: TeacherService,
     private route: ActivatedRoute,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -78,6 +79,7 @@ export class CreatestudentComponent implements OnInit {
       school: this.createstudent.school,
     };
     await this.studentservice.createStudent(createStudents);
+    this.router.navigate(['/liststudents']);
   }
 
   async retrieveSchools(): Promise<void> {
@@ -98,5 +100,19 @@ export class CreatestudentComponent implements OnInit {
   }
   async getStudentById(id: number) {
     this.createstudent = await this.studentservice.getStudentById(id);
+  }
+
+  async updateStudent(): Promise<void> {
+    const student: Student = {
+      id: this.createstudent.id,
+      name: this.createstudent.name,
+      phonenumber: this.createstudent.phonenumber,
+      email: this.createstudent.email,
+      gender: this.createstudent.gender,
+      dateofbirth: this.createstudent.dateofbirth,
+      school: this.createstudent.school,
+    };
+    await this.studentservice.updateStudent(student);
+    this.router.navigate(['/liststudents']);
   }
 }
