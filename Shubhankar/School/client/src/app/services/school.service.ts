@@ -3,13 +3,32 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { School } from '../models/school';
 import { Teacher } from '../models/teacher';
+import { Student } from '../models/student';
+
 
 const baseUrl = environment.url;
+export class Gender {
+  name!: string;
+}
 @Injectable({
   providedIn: 'root',
+  
 })
 export class SchoolService {
+
+  
   constructor(private http: HttpClient) {}
+
+  gender: Gender[] = [
+    { name: 'male' },
+    { name: 'female' },
+    { name: 'others' },
+  ];
+
+
+  async genderList() {
+   return await this.gender;
+  }
 
   createSchool(data: School): Promise<School> {
     return this.http.post<School>(baseUrl + '/school', data).toPromise();
@@ -29,5 +48,13 @@ export class SchoolService {
 
   async createTeacher(data: Teacher): Promise<Teacher> {
     return this.http.post<Teacher>(baseUrl + '/teacher', data).toPromise();
+  }
+
+  async createStudent(data: Student): Promise<Student> {
+    return this.http.post<Student>(baseUrl + '/student', data).toPromise();
+  }
+
+  async getallStudents(): Promise<Student[]> {
+    return await this.http.get<Student[]>(baseUrl + '/student').toPromise();
   }
 }
