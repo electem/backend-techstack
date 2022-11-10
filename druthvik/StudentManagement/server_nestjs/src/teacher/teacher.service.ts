@@ -21,4 +21,20 @@ export class TeacherService {
       throw new HttpException(err, HttpStatus.BAD_REQUEST);
     }
   }
+  async findTeacherByID(id: number) {
+    const postWithQueryBuilder = await this.teacherRepository
+      .createQueryBuilder('teacher')
+      .select(['teacher', 'school'])
+      .leftJoinAndSelect('teacher.school', 'school')
+      .where('school.id= :id', { id: id })
+      .getOne();
+    return postWithQueryBuilder;
+  }
+  public async updateTeacher(teacherDto: TeacherDto): Promise<Teacher> {
+    try {
+      return await this.teacherRepository.save(teacherDto);
+    } catch (err) {
+      throw new HttpException(err, HttpStatus.BAD_REQUEST);
+    }
+  }
 }
