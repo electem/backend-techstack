@@ -10,6 +10,7 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { School } from 'src/school/school.entity';
+import { Image } from 'src/fileupload-Download/file.entity';
 
 @Entity()
 export class Student {
@@ -28,13 +29,17 @@ export class Student {
   @Column()
   gender: string;
 
-  @Column()
+  @Column({ nullable: true })
   phonenumber: number;
 
-  @Column({ type: 'date' })
-  dob: Date;
+  @Column({ nullable: true })
+  dob?: Date;
 
-  @OneToOne(() => School, (school) => school.students)
+  @OneToOne(() => School, { cascade: true })
   @JoinColumn()
   school: School;
+
+  @OneToOne(() => Image, (image) => image.students)
+  @JoinColumn()
+  image: Image;
 }

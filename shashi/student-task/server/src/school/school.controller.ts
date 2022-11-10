@@ -33,4 +33,8 @@ export class SchoolController {
   async findOneSchool(@Param('id') id): Promise<School> {
     return this.schoolService.findOneSchool(id);
   }
+  @Put('/')
+  async updateSchool(@Body() schoolDto: SchoolDto) {
+    return await this.schoolService.updateSchool(schoolDto);
+  }
 }

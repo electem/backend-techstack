@@ -53,6 +53,7 @@
               <ng-multiselect-dropdown
                 [settings]="dropdownSettings"
                 [data]="teachersList"
+                [(ngModel)]="school.teacher"
                 (onSelect)="selectedTeacher($event)"
               >
               </ng-multiselect-dropdown>
@@ -63,6 +64,7 @@
               <ng-multiselect-dropdown
                 [settings]="dropdownSettingsForStudent"
                 [data]="studentsList"
+                [(ngModel)]="school.students"
                 (onSelect)="selectedStudent($event)"
               >
               </ng-multiselect-dropdown>
@@ -70,6 +72,13 @@
             <br />
             <div class="text-center">
               <button class="btn btn-primary btn-sm">Submit</button>
+              <button
+                class="btn btn-outline-success btn-sm btn-space"
+                routerLink="/schoollisting"
+                (click)="updateSchool()"
+              >
+                Update
+              </button>
               <button
                 class="btn btn-danger btn-sm btn-space"
                 routerLink="/schoollisting"

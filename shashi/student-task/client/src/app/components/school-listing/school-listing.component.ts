@@ -10,6 +10,12 @@ import { SchoolService } from 'src/app/services/student-task-service';
 })
 export class SchoolListingComponent implements OnInit {
   schoolsList: School[] = [];
+  school: School = {
+    schoolname: '',
+    address: '',
+    teacher: [],
+    students: [],
+  };
   page?: number;
   itemsPerPage?: string;
   pagesizes = ['all', 2, 4, 6];
@@ -34,5 +40,8 @@ export class SchoolListingComponent implements OnInit {
     this.itemsPerPage = (event.target as HTMLInputElement).value;
     this.page = 1;
     this.retrieveschools();
+  }
+  async getSchoolById(id: number): Promise<void> {
+    this.school = await this.schoolService.getSchoolById(id);
   }
 }

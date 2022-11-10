@@ -5,7 +5,7 @@ import { SchoolService } from 'src/app/services/student-task-service';
 import { Teacher } from 'src/app/models/teacher.model';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { Student } from 'src/app/models/student.model';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-school',
@@ -33,10 +33,12 @@ export class CreateSchoolComponent implements OnInit {
   constructor(
     private schoolService: SchoolService,
     private formBuilder: FormBuilder,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
+    this.getSchoolById(this.route.snapshot.params.id);
     this.createSchoolForm = this.formBuilder.group({
       schoolname: ['', Validators.required],
       address: ['', Validators.required],
@@ -88,5 +90,18 @@ export class CreateSchoolComponent implements OnInit {
   async selectedStudent(student: any): Promise<void> {
     this.currentStudent = student;
     this.AddedStudents?.push(this.currentStudent);
+  }
+  async getSchoolById(id: number): Promise<void> {
+    this.school = await this.schoolService.getSchoolById(id);
+  }
+  async updateSchool(): Promise<void> {
+    const school: School = {
+      id: this.school.id,
+      schoolname: this.school.schoolname,
+      address: this.school.address,
+      teacher: this.school.teacher,
+      students: this.school.students,
+    };
+    await this.schoolService.updateSchool(school);
   }
 }

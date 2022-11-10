@@ -15,6 +15,7 @@ import { CreateStudentComponent } from './components/create-student/create-stude
 import { DatepickerModule } from 'ng2-datepicker';
 import { TeacherListingComponent } from './components/teacher-listing/teacher-listing.component';
 import { StudentListingComponent } from './components/student-listing/student-listing.component';
+import { FileUploadDownloadComponent } from './components/file-upload-download/file-upload-download.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { StudentListingComponent } from './components/student-listing/student-li
     CreateStudentComponent,
     TeacherListingComponent,
     StudentListingComponent,
+    FileUploadDownloadComponent,
   ],
   imports: [
     NgMultiSelectDropDownModule.forRoot(),

@@ -31,4 +31,11 @@ export class SchoolService {
       .getOne();
     return postWithQueryBuilder;
   }
+  public async updateSchool(schoolDto: SchoolDto): Promise<School> {
+    try {
+      return await this.schoolRepository.save(schoolDto);
+    } catch (err) {
+      throw new HttpException(err, HttpStatus.BAD_REQUEST);
+    }
+  }
 }
