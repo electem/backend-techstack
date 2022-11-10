@@ -15,6 +15,7 @@ import { SchoolModule } from './school/school.module';
 import { School } from './school/school.entity';
 import { StudentModule } from './student/student.module';
 import { TeacherModule } from './teacher/teacher.module';
+import { Files } from './file/file.entitiy';
 
 @Module({
   imports: [
@@ -25,7 +26,7 @@ import { TeacherModule } from './teacher/teacher.module';
       username: 'postgres',
       password: 'root',
       database: 'studentmanagement',
-      entities: [User, Student, Subject, Teacher, School],
+      entities: [User, Student, Subject, Teacher, School, Files],
       synchronize: true,
     }),
     MailerModule.forRoot({
