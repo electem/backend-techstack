@@ -109,6 +109,7 @@
                   formControlName="school"
                   name="school"
                   [(ngModel)]="currentSchool"
+                  [(ngModel)]="student.school"
                   (ngModelChange)="selectedSchool(currentSchool)"
                 >
                   <option disabled [value]="" selected>Choose School</option>
@@ -120,6 +121,13 @@
             </div>
             <div class="text-center">
               <button class="btn btn-primary">Create</button>
+              <button
+                class="btn btn-outline-success btn-sm btn-space"
+                routerLink="/studentslist"
+                (click)="updateStudent()"
+              >
+                Update
+              </button>
               <button
                 class="btn btn-secondary btn-space"
                 type="reset"

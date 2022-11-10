@@ -12,7 +12,7 @@ import { SchoolService } from 'src/app/services/student-task-service';
 import { Teacher } from 'src/app/models/teacher.model';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { Student } from 'src/app/models/student.model';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Gender } from 'src/app/services/student-task-service';
 import { DatepickerOptions } from 'ng2-datepicker';
 import { Image } from 'src/app/models/image.model';
@@ -50,7 +50,8 @@ export class CreateStudentComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     public fb: FormBuilder,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    private route: ActivatedRoute
   ) {}
   registrationForm = this.fb.group({
     file: [null],
@@ -62,6 +63,7 @@ export class CreateStudentComponent implements OnInit {
   file!: File;
 
   ngOnInit(): void {
+    this.getStudentById(this.route.snapshot.params.id);
     this.createStudentForm = this.formBuilder.group({
       studentname: ['', Validators.required],
       address: ['', Validators.required],
@@ -129,5 +131,20 @@ export class CreateStudentComponent implements OnInit {
   }
   async selectedSchool(school: School) {
     this.currentSchool = school;
+  }
+  async getStudentById(id: number): Promise<void> {
+    this.student = await this.schoolService.getStudentById(id);
+  }
+  async updateStudent(): Promise<void> {
+    const StudentData: Student = {
+      id: this.student.id,
+      studentname: this.student.studentname,
+      address: this.student.address,
+      email: this.student.email,
+      dob: this.student.dob,
+      gender: this.student.gender,
+      school: this.student.school,
+    };
+    await this.schoolService.updateStudent(StudentData);
   }
 }
