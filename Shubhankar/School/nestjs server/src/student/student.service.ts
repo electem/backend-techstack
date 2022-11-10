@@ -9,15 +9,18 @@ import { Student } from './student.entity';
 export class StudentService {
   constructor(
     @InjectRepository(Student)
-    private teacherRepository: Repository<Student>,
+    private studentRepository: Repository<Student>,
   ) {}
 
   public async createStudent(studentDto: StudentDto): Promise<Student> {
     try {
-      return await this.teacherRepository.save(studentDto);
+      return await this.studentRepository.save(studentDto);
     } catch (err) {
       throw new HttpException(err, HttpStatus.BAD_REQUEST);
     }
   }
 
+  async getAllStudents(): Promise<Student[]> {
+    return await this.studentRepository.find();
+  }
 }
