@@ -1,5 +1,14 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Body, Controller, Post, Get, Param, Put } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Post,
+  Get,
+  Param,
+  Put,
+  Delete,
+  NotFoundException,
+} from '@nestjs/common';
 import { TeacherService } from './teacher.service';
 import { TeacherDto } from './teacher.dto';
 import { MailerService } from '@nestjs-modules/mailer';
@@ -68,5 +77,14 @@ export class TeacherController {
       ],
     });
     return response;
+  }
+
+  @Delete('/:id')
+  public async deleteTeacher(@Param('id') id: string): Promise<void> {
+    const teacher = this.teacherService.deleteTeacher(+id);
+    if (!teacher) {
+      throw new NotFoundException('School does not exist!');
+    }
+    return teacher;
   }
 }

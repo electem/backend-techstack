@@ -37,4 +37,8 @@ export class TeacherService {
       throw new HttpException(err, HttpStatus.BAD_REQUEST);
     }
   }
+  public async deleteTeacher(id: number): Promise<void> {
+    const teacher = await this.findTeacherByID(id);
+    await this.teacherRepository.remove(teacher);
+  }
 }
