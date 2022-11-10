@@ -68,10 +68,13 @@ export class SchoolService {
       responseType: 'blob',
     });
   }
-  async getSchoolById(id: number) {
-    return this.http.get(`${baseUrl + '/school'}/${id}`).toPromise();
+  async getSchoolById(id: number): Promise<School> {
+    return this.http.get<School>(`${baseUrl + '/school'}/${id}`).toPromise();
   }
-  async getCompanyById(id: number) {
+  async getTeacherById(id: number) {
     return await this.http.get(`${baseUrl + '/teacher'}/${id}`).toPromise();
+  }
+  async updateSchool(school: School): Promise<School> {
+    return await this.http.put<School>(baseUrl + '/school', school).toPromise();
   }
 }
