@@ -7,6 +7,7 @@ import { AuthModule } from './auth/auth.module';
 import { School } from './school/school.entity';
 import { SchoolModule } from './school/school.module';
 import { Student } from './student/student.entity';
+import { StudentModule } from './student/student.module';
 import { Teacher } from './teacher/teacher.entity';
 import { TeacherModule } from './teacher/teacher.module';
 import { TaskEntity } from './ToDo/task.entity';
@@ -32,6 +33,7 @@ import { UsersModule } from './user/user.module';
     TodoModule,
     SchoolModule,
     TeacherModule,
+    StudentModule
   ],
   controllers: [AppController],
   providers: [AppService],
