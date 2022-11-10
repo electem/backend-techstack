@@ -13,6 +13,7 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { LoginComponent } from './components/login/login.component';
 import { CreateschoolComponent } from './components/createschool/createschool.component';
 import { SchoollistingComponent } from './components/schoollisting/schoollisting.component';
+import { TeacherlistingComponent } from './components/teacherlisting/teacherlisting.component';
 
 export function jwtOptionFactor() {
   return {
@@ -22,7 +23,7 @@ export function jwtOptionFactor() {
 }
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, CreateschoolComponent, SchoollistingComponent],
+  declarations: [AppComponent, LoginComponent, CreateschoolComponent, SchoollistingComponent, TeacherlistingComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

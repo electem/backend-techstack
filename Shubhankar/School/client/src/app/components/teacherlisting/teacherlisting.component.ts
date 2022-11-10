@@ -1,15 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { School } from '../../models/school';
+import { Teacher } from '../../models/teacher';
 import { SchoolService } from '../../services/school.service';
 
 @Component({
-  selector: 'app-schoollisting',
-  templateUrl: './schoollisting.component.html',
-  styleUrls: ['./schoollisting.component.css'],
+  selector: 'app-teacherlisting',
+  templateUrl: './teacherlisting.component.html',
+  styleUrls: ['./teacherlisting.component.css'],
 })
-export class SchoollistingComponent implements OnInit {
-  Schools: School[] = [];
+export class TeacherlistingComponent implements OnInit {
+  Teachers: Teacher[] = [];
   page = 3;
   itemsPerPage? = 2;
   totalItems?: string;
@@ -17,17 +17,15 @@ export class SchoollistingComponent implements OnInit {
   constructor(private schoolService: SchoolService, private http: HttpClient) {}
 
   ngOnInit(): void {
-    this.retrieveAllSchools();
+    this.retrieveAllTeachers();
   }
-
-  async retrieveAllSchools(): Promise<void> {
-    this.Schools = await this.schoolService.getallSchools();
+  async retrieveAllTeachers(): Promise<void> {
+    this.Teachers = await this.schoolService.getallTeachers();
   }
-
   handlepageChange(page: number) {
     this.http
       .get(
-        `http://localhost:3000/school?page=${page}&size=${this.itemsPerPage}`
+        `http://localhost:3000/teacher?page=${page}&size=${this.itemsPerPage}`
       )
       .subscribe();
   }
@@ -35,6 +33,6 @@ export class SchoollistingComponent implements OnInit {
   handlePageSizeChange(event: any) {
     this.itemsPerPage = event.target.value;
     this.page = 1;
-    this.retrieveAllSchools();
+    this.retrieveAllTeachers();
   }
 }

@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { School } from '../models/school';
-
-
+import { Teacher } from '../models/teacher';
 
 const baseUrl = environment.url;
 @Injectable({
@@ -18,5 +17,9 @@ export class SchoolService {
 
   async getallSchools(): Promise<School[]> {
     return await this.http.get<School[]>(baseUrl + '/school').toPromise();
+  }
+
+  async getallTeachers(): Promise<Teacher[]> {
+    return await this.http.get<Teacher[]>(baseUrl + '/teacher').toPromise();
   }
 }
