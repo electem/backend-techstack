@@ -40,4 +40,9 @@ export class ListteachersComponent implements OnInit {
   async sendmailwithattachement(id: number): Promise<void> {
     await this.teacherservice.sendmailwithattachement(id);
   }
+
+  async deleteTeacherById(id: number) {
+    await this.teacherservice.deletTeacherById(id);
+    this.retrieveTeachers();
+  }
 }

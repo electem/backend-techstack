@@ -43,4 +43,7 @@ export class TeacherService {
       .post(`${baseUrl + '/teacher/pdf-email'}/${id}`, null)
       .toPromise();
   }
+  async deletTeacherById(id: number) {
+    return await this.http.delete(`${baseUrl + '/teacher'}/${id}`).toPromise();
+  }
 }
