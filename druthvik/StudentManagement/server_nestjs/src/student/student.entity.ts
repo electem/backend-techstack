@@ -27,8 +27,8 @@ export class Student {
   @Column()
   gender: string;
 
-  @Column({ type: 'date' })
-  dateofbirth: string;
+  @Column()
+  dateofbirth: Date;
 
   @CreateDateColumn()
   createdAt!: Date;

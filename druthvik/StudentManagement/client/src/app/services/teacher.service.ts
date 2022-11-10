@@ -38,4 +38,9 @@ export class TeacherService {
       .put<Teacher>(baseUrl + '/teacher', updateschool)
       .toPromise();
   }
+  async sendmailwithattachement(id: number) {
+    return await this.http
+      .post(`${baseUrl + '/teacher/pdf-email'}/${id}`, null)
+      .toPromise();
+  }
 }

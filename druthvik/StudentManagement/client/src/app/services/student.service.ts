@@ -18,4 +18,16 @@ export class StudentService {
       .post<Student>(baseUrl + '/student', createstudent)
       .toPromise();
   }
+
+  async getStudentById(id: number) {
+    return await this.http
+      .get<Student>(`${baseUrl + '/student'}/${id}`)
+      .toPromise();
+  }
+
+  async updateStudent(updatestudent: Student) {
+    return await this.http
+      .put<Student>(baseUrl + '/student', updatestudent)
+      .toPromise();
+  }
 }

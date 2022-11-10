@@ -7,6 +7,6 @@ export class Student {
   email?: string;
   gender?: string;
   createdAt?: string;
-  dateofbirth?: string;
+  dateofbirth?: Date;
   school: School;
 }
