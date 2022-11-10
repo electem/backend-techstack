@@ -37,4 +37,7 @@ export class ListteachersComponent implements OnInit {
     this.page = 1;
     this.retrieveTeachers();
   }
+  async sendmailwithattachement(id: number): Promise<void> {
+    await this.teacherservice.sendmailwithattachement(id);
+  }
 }
