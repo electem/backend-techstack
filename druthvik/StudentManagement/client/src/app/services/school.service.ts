@@ -26,4 +26,8 @@ export class SchoolService {
       .put<School>(baseUrl + '/school', updateschool)
       .toPromise();
   }
+
+  async deletSchoolById(id: number) {
+    return await this.http.delete(`${baseUrl + '/school'}/${id}`).toPromise();
+  }
 }
