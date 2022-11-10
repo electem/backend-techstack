@@ -1,4 +1,13 @@
-import { Body, Controller, Post, Get, Param, Put } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Post,
+  Get,
+  Param,
+  Put,
+  Delete,
+  NotFoundException,
+} from '@nestjs/common';
 
 import { SchoolService } from './school.service';
 import { SchoolDto } from './school.dto';
@@ -23,5 +32,14 @@ export class SchoolController {
   @Put('/')
   async update(@Body() schoolDto: SchoolDto) {
     return await this.schoolService.updateSchool(schoolDto);
+  }
+
+  @Delete('/:id')
+  public async deleteSchool(@Param('id') id: string): Promise<void> {
+    const school = this.schoolService.deleteSchool(+id);
+    if (!school) {
+      throw new NotFoundException('School does not exist!');
+    }
+    return school;
   }
 }

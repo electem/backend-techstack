@@ -49,4 +49,9 @@ export class SchoolService {
       throw new HttpException(err, HttpStatus.BAD_REQUEST);
     }
   }
+
+  public async deleteSchool(id: number): Promise<void> {
+    const school = await this.findSchoolByID(id);
+    await this.schoolRepository.remove(school);
+  }
 }
