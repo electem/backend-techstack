@@ -17,6 +17,7 @@ import { ListteachersComponent } from './components/listteachers/listteachers.co
 import { CreateteacherComponent } from './components/createteacher/createteacher.component';
 import { CreatestudentComponent } from './components/createstudent/createstudent.component';
 import { DatepickerModule } from 'ng2-datepicker';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 export function jwtOptionFactor() {
   return {
@@ -40,8 +41,9 @@ export function jwtOptionFactor() {
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    ReactiveFormsModule,
     DatepickerModule,
+    ReactiveFormsModule,
+    NgxPaginationModule,
     NgMultiSelectDropDownModule.forRoot(),
     JwtModule.forRoot({
       jwtOptionsProvider: {

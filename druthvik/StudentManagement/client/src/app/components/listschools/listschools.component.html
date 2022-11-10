@@ -24,7 +24,18 @@
           <th class="text-center" scope="col">Length of Teachers</th>
         </tr>
       </thead>
-      <tbody *ngFor="let school of schools; let i = index">
+      <tbody
+        *ngFor="
+          let school of schools
+            | paginate
+              : {
+                  itemsPerPage: count,
+                  currentPage: page,
+                  totalItems: totalItems
+                };
+          let i = index
+        "
+      >
         <tr>
           <th class="text-center" scope="row">{{ school.name }}</th>
           <th class="text-center" scope="row">{{ school.address }}</th>
@@ -51,5 +62,19 @@
         </tr>
       </tbody>
     </table>
+  </div>
+  <div class="text-right">
+    <pagination-controls
+      (pageChange)="pagination((page = $event))"
+    ></pagination-controls>
+  </div>
+
+  <div class="marginleftpage">
+    Items per Page:
+    <select (change)="handlePageSizeChange($event)">
+      <option *ngFor="let size of pageSizes" [ngValue]="size">
+        {{ size }}
+      </option>
+    </select>
   </div>
 </div>

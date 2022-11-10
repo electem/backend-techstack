@@ -6,6 +6,7 @@ import { SchoolService } from 'src/app/services/school.service';
 import { School } from 'src/app/models/school.model';
 import { Gender, TeacherService } from 'src/app/services/teacher.service';
 import { DatepickerOptions } from 'ng2-datepicker';
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-createstudent',
   templateUrl: './createstudent.component.html',
@@ -20,14 +21,10 @@ export class CreatestudentComponent implements OnInit {
     phonenumber: null,
     email: '',
     gender: '',
-    dateofbirth: '',
     school: {},
   };
   schools: School[];
   genders: Gender[];
-  radioSel: any;
-  radioSelected: string;
-  radioSelectedString: string;
   date = new Date();
   options: DatepickerOptions = {
     format: 'DD-MM-YYYY',
@@ -42,6 +39,7 @@ export class CreatestudentComponent implements OnInit {
     private formBuilder: FormBuilder,
     private schoolservice: SchoolService,
     private teacherservice: TeacherService,
+    private route: ActivatedRoute,
   ) {}
 
   ngOnInit(): void {
@@ -52,9 +50,11 @@ export class CreatestudentComponent implements OnInit {
       email: ['', Validators.required],
       gender: ['', Validators.required],
       school: ['', Validators.required],
+      dateofbirth: ['', Validators.required],
     });
     this.retrieveSchools();
     this.getGenders();
+    this.getStudentById(this.route.snapshot.params.id);
   }
   get f() {
     return this.createtStudentForm.controls;
@@ -86,8 +86,8 @@ export class CreatestudentComponent implements OnInit {
   getGenders() {
     this.genders = this.teacherservice.getGenders();
   }
-  onSelected(value: School) {
-    this.createstudent.school = value;
+  onSelected(school: School) {
+    this.createstudent.school = school;
   }
 
   getSelectedGenderChange(gender: Gender) {
@@ -95,5 +95,8 @@ export class CreatestudentComponent implements OnInit {
   }
   onStudentGenderChange(gender: Gender) {
     this.getSelectedGenderChange(gender);
+  }
+  async getStudentById(id: number) {
+    this.createstudent = await this.studentservice.getStudentById(id);
   }
 }
