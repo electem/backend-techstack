@@ -30,7 +30,7 @@ export class CreateschoolComponent implements OnInit {
   students: Student[] = [];
   requiredField: boolean = false;
   dropdownSettings: IDropdownSettings = {};
-  showUpdateButton: boolean;
+  showUpdateButton: boolean = true;
   showcreatebutton: boolean;
   constructor(
     private schoolservice: SchoolService,
@@ -79,6 +79,7 @@ export class CreateschoolComponent implements OnInit {
     }
   }
   async createSchool(): Promise<void> {
+    this.showcreatebutton = true;
     const createSchool: School = {
       name: this.createschool.name,
       address: this.createschool.address,

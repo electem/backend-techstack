@@ -22,9 +22,20 @@ export class TeacherService {
   async getTeachers(): Promise<Teacher[]> {
     return this.http.get<Teacher[]>(baseUrl + '/teacher').toPromise();
   }
+
   async createTeacher(createteacher: Teacher): Promise<Teacher> {
     return await this.http
       .post<Teacher>(baseUrl + '/teacher', createteacher)
+      .toPromise();
+  }
+
+  async getTeacherById(id: number) {
+    return await this.http.get(`${baseUrl + '/teacher'}/${id}`).toPromise();
+  }
+
+  async updateTeacher(updateschool: Teacher) {
+    return await this.http
+      .put<Teacher>(baseUrl + '/teacher', updateschool)
       .toPromise();
   }
 }

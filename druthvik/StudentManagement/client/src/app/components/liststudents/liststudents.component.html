@@ -22,13 +22,28 @@
           <th class="text-center" scope="col">Created AT</th>
         </tr>
       </thead>
-      <tbody *ngFor="let student of students; let i = index">
+      <tbody
+        *ngFor="
+          let student of students
+            | paginate
+              : {
+                  itemsPerPage: count,
+                  currentPage: page,
+                  totalItems: totalItems
+                };
+          let i = index
+        "
+      >
         <tr>
           <th class="text-center" scope="row">{{ student.name }}</th>
           <th class="text-center" scope="row">{{ student.address }}</th>
           <th class="text-center" scope="row">{{ student.createdAt }}</th>
           <th class="text-center" scope="row">
-            <button type="button" class="btn btn-warning btn-sm mr-2">
+            <button
+              type="button"
+              class="btn btn-warning btn-sm mr-2"
+              routerLink="/createstudents/{{ student.id }}"
+            >
               Edit
             </button>
             <button type="button" class="btn btn-danger btn-sm mr-2 marignleft">
@@ -41,5 +56,19 @@
         </tr>
       </tbody>
     </table>
+  </div>
+  <div class="text-right">
+    <pagination-controls
+      (pageChange)="pagination((page = $event))"
+    ></pagination-controls>
+  </div>
+
+  <div class="marginleftpage">
+    Items per Page:
+    <select (change)="handlePageSizeChange($event)">
+      <option *ngFor="let size of pageSizes" [ngValue]="size">
+        {{ size }}
+      </option>
+    </select>
   </div>
 </div>
