@@ -1,9 +1,12 @@
-<div class="container" *ngIf="!isAddMode">
+<div class="container">
   <div class="row">
     <div class="col-md-4 offset-md-4">
       <div class="card mb-4">
         <div class="card-body">
-          <form [formGroup]="createtTeacherForm" (ngSubmit)="createTeacher()">
+          <form
+            [formGroup]="createtTeacherForm"
+            (ngSubmit)="createTeacher(); uploadImage()"
+          >
             <div class="form-group">
               <label>Name</label>
               <input
@@ -11,7 +14,6 @@
                 formControlName="name"
                 name="name"
                 class="form-control"
-                [ngModelOptions]="{ standalone: true }"
                 [ngClass]="{ 'is-invalid': submitted && f.name.errors }"
                 [(ngModel)]="createteacher.name"
               />
@@ -27,7 +29,6 @@
                 formControlName="address"
                 name="address"
                 class="form-control"
-                [ngModelOptions]="{ standalone: true }"
                 [ngClass]="{ 'is-invalid': submitted && f.address.errors }"
                 [(ngModel)]="createteacher.address"
               />
@@ -46,7 +47,6 @@
                 name="phonenumber"
                 formControlName="phonenumber"
                 class="form-control"
-                [ngModelOptions]="{ standalone: true }"
                 [ngClass]="{ 'is-invalid': submitted && f.phonenumber.errors }"
                 [(ngModel)]="createteacher.phonenumber"
               />
@@ -67,7 +67,6 @@
                 formControlName="email"
                 name="email"
                 class="form-control"
-                [ngModelOptions]="{ standalone: true }"
                 [ngClass]="{ 'is-invalid': submitted && f.email.errors }"
                 [(ngModel)]="createteacher.email"
               />
@@ -84,13 +83,27 @@
                   formControlName="gender"
                   type="radio"
                   [value]="gender"
-                  [ngModelOptions]="{ standalone: true }"
                   [(ngModel)]="createteacher.gender"
                   (change)="onSelectTeacherGender(gender)"
                 />
 
                 {{ gender.name }}
               </div>
+            </div>
+            <br />
+            <div class="form-group">
+              <label>File</label>
+              <input
+                type="file"
+                id="imageUpload"
+                accept=".pdf, .txt"
+                class="form-control"
+                name="file"
+                formControlName="file"
+                #fileInput
+                (change)="chooseFile($event)"
+                [(ngModel)]="createteacher.file"
+              />
             </div>
             <br />
             <div class="form-group">
