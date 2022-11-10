@@ -33,4 +33,9 @@ export class ListschoolsComponent implements OnInit {
     this.page = 1;
     this.retrieveSchools();
   }
+
+  async deleteSchoolById(id: number) {
+    await this.schoolservice.deletSchoolById(id);
+    this.retrieveSchools();
+  }
 }
