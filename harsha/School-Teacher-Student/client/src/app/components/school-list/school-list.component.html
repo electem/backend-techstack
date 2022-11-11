@@ -1,0 +1,33 @@
+<div class="panel">
+  <div class="panel-heading">
+    <div class="panel-body table-responsive">
+      <h4 class="text-center">Schools List</h4>
+      <button class="btn btn-info" routerLink="/add-school">Add School</button>
+      <br /><br />
+      <div>
+        <table class="table table-bordered table-striped table-hover">
+          <thead>
+            <tr>
+              <th class="text-center">Name</th>
+              <th class="text-center">Address</th>
+              <th class="text-center">Created Date</th>
+              <th class="text-center">Action</th>
+            </tr>
+          </thead>
+          <tbody *ngFor="let school of schools; let i = index">
+            <tr>
+              <td class="text-center">{{ school.name }}</td>
+              <td class="text-center">{{ school.address }}</td>
+              <td class="text-center">{{ school.createdDate | date:'long' }}</td>
+              <td class="text-center">
+                <button type="button" class="btn btn-info btn-space" routerLink="/edit-school/{{ school.id }}">
+                  Edit
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

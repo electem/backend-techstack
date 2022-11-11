@@ -1,0 +1,33 @@
+.form {
+  padding: 50px 0;
+}
+
+.form form {
+  background-color: rgb(61, 58, 58);
+  color: rgb(64, 255, 5);
+  max-width: 400px;
+  margin: auto;
+  padding: 50px 70px;
+  border: 50px;
+}
+
+.form .item {
+  border-radius: 10px;
+  margin-bottom: 25px;
+  padding: 20px 20px;
+}
+ng-multiselect-dropdown {
+  margin-bottom: 25px;
+  padding: 10px 20px;
+}
+
+.form .btn {
+  border-radius: 20px;
+  padding: 10px 20px;
+  font-size: 18px;
+  font-weight: bold;
+  background-color: #9bec82;
+  border: none;
+  color: rgb(23, 23, 17);
+  margin-top: 20px;
+}
