@@ -24,4 +24,16 @@ export class TeacherService {
     }
   }
 
+  async teacherbyId(id: number): Promise<Teacher> {
+    return this.teacherRepository.findOneBy({ id });
+  }
+
+  public async updateTeacher(teacherDto: TeacherDto): Promise<Teacher> {
+    try {
+      return await this.teacherRepository.save(teacherDto);
+    } catch (err) {
+      throw new HttpException(err, HttpStatus.BAD_REQUEST);
+    }
+  }
+
 }

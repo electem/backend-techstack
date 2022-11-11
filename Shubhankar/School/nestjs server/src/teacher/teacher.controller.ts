@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable prettier/prettier */
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
 import { TeacherDto } from './dto/teacher.dto';
 import { Teacher } from './teacher.entity';
 import { TeacherService } from './teacher.service';
@@ -18,5 +18,15 @@ export class TeacherController {
   @Post()
   async createTeacher(@Body() teacherDto: TeacherDto) {
     return await this.teacherService.createTeacher(teacherDto);
+  }
+
+  @Get(':id')
+  schoolbyId(@Param('id') id: string) {
+    return this.teacherService.teacherbyId(+id);
+  }
+
+  @Put('/')
+  async updateSchool(@Body() teacherDto: TeacherDto) {
+    return await this.teacherService.updateTeacher(teacherDto);
   }
 }
