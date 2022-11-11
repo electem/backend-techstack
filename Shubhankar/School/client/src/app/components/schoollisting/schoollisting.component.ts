@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { School } from '../../models/school';
 import { SchoolService } from '../../services/school.service';
 
@@ -14,10 +15,23 @@ export class SchoollistingComponent implements OnInit {
   itemsPerPage? = 2;
   totalItems?: string;
   pageSizes = [3, 6, 9];
-  constructor(private schoolService: SchoolService, private http: HttpClient) {}
+
+  school: School = {
+    schoolname: '',
+    address: '',
+    teachers: [],
+    students: [],
+  };
+  constructor(
+    private schoolService: SchoolService,
+    private http: HttpClient,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     this.retrieveAllSchools();
+    this.retrieveSchool(this.route.snapshot.params.id);
   }
 
   async retrieveAllSchools(): Promise<void> {
@@ -36,5 +50,9 @@ export class SchoollistingComponent implements OnInit {
     this.itemsPerPage = event.target.value;
     this.page = 1;
     this.retrieveAllSchools();
+  }
+
+  async retrieveSchool(id: number): Promise<void> {
+    this.school = await this.schoolService.getSchoolbyid(id);
   }
 }

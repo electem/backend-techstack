@@ -5,29 +5,20 @@ import { School } from '../models/school';
 import { Teacher } from '../models/teacher';
 import { Student } from '../models/student';
 
-
 const baseUrl = environment.url;
 export class Gender {
   name!: string;
 }
 @Injectable({
   providedIn: 'root',
-  
 })
 export class SchoolService {
-
-  
   constructor(private http: HttpClient) {}
 
-  gender: Gender[] = [
-    { name: 'male' },
-    { name: 'female' },
-    { name: 'others' },
-  ];
-
+  gender: Gender[] = [{ name: 'male' }, { name: 'female' }, { name: 'others' }];
 
   async genderList() {
-   return await this.gender;
+    return await this.gender;
   }
 
   createSchool(data: School): Promise<School> {
@@ -42,7 +33,7 @@ export class SchoolService {
     return await this.http.get<Teacher[]>(baseUrl + '/teacher').toPromise();
   }
 
- async  getallSchoolRecords(): Promise<School[]> {
+  async getallSchoolRecords(): Promise<School[]> {
     return await this.http.get<School[]>(baseUrl + '/school').toPromise();
   }
 
@@ -56,5 +47,13 @@ export class SchoolService {
 
   async getallStudents(): Promise<Student[]> {
     return await this.http.get<Student[]>(baseUrl + '/student').toPromise();
+  }
+
+  async getSchoolbyid(id: number): Promise<School> {
+    return await this.http.get(`${baseUrl + '/school'}/${id}`).toPromise();
+  }
+
+  async updateSchool(school: School): Promise<School> {
+    return await this.http.put<School>(baseUrl + '/school', school).toPromise();
   }
 }

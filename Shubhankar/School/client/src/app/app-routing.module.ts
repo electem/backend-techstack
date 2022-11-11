@@ -9,15 +9,15 @@ import { CreatestudentComponent } from './components/createstudent/createstudent
 import { StudentlistComponent } from './components/studentlist/studentlist.component';
 
 const routes: Routes = [
-  { path: 'login', component: LoginComponent},
-  { path: 'addschool', component: CreateschoolComponent},
-  { path: 'school-list', component: SchoollistingComponent},
-  { path: 'teacher-list', component: TeacherlistingComponent},
-  { path: 'addteacher', component: CreateteacherComponent},
-  { path: 'addstudent', component: CreatestudentComponent},
-  { path: 'student-list', component: StudentlistComponent},
+  { path: 'login', component: LoginComponent },
+  { path: 'addschool', component: CreateschoolComponent },
+  { path: 'school-list', component: SchoollistingComponent },
+  { path: 'teacher-list', component: TeacherlistingComponent },
+  { path: 'addteacher', component: CreateteacherComponent },
+  { path: 'addstudent', component: CreatestudentComponent },
+  { path: 'student-list', component: StudentlistComponent },
+  { path: 'addschool/:id', component: CreateschoolComponent },
 ];
-
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

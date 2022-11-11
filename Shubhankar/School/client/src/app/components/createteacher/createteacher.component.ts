@@ -55,6 +55,7 @@ export class CreateteacherComponent implements OnInit {
     if (this.createTeacher.invalid) {
       return;
     }
+    this.getSubmit();
   }
 
   async getSubmit() {
