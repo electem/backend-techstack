@@ -55,7 +55,7 @@ export class CreateteacherComponent implements OnInit {
   get fval() {
     return this.createTeacher.controls;
   }
-  async create() {
+  async updateTeacher() {
     this.submitted = true;
     if (this.createTeacher.invalid) {
       return;
