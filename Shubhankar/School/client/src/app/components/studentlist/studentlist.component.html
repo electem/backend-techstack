@@ -7,6 +7,11 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
 <h4>Student</h4>
+<td>
+  <button class="btn btn-outline-success" routerLink="/addstudent">
+    ADD NEW Student
+  </button>
+</td>
 <table class="table table-striped table-bordered justify-content-center">
   <thead class="thead-light">
     <tr class="active">
@@ -31,7 +36,14 @@
       <th class="text-center" scope="row">{{ student.gender }}</th>
       <th class="text-center" scope="row">{{ student.dateofbirth }}</th>
       <th class="text-center" scope="row">{{ student.createdAt }}</th>
-      <button class="btn btn-outline-success" scope="row">Edit</button>
+      <button
+        class="btn btn-outline-success"
+        scope="row"
+        routerLink="/addstudent/{{ student.id }}"
+      >
+        Edit
+      </button>
+      <button class="btn btn-outline-danger" scope="row">Delete</button>
     </tr>
   </tbody>
 </table>
