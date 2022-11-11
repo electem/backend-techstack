@@ -25,4 +25,16 @@ public async createSchool(schoolDto: SchoolDto): Promise<School> {
   async getAllSchool() : Promise<School[]> {
     return await this.schoolRepository.find();
   }
+
+  async schoolbyId(id: number): Promise<School> {
+    return this.schoolRepository.findOneBy({ id });
+  }
+
+  public async updateSchool(schoolDto: SchoolDto): Promise<School> {
+    try {
+      return await this.schoolRepository.save(schoolDto);
+    } catch (err) {
+      throw new HttpException(err, HttpStatus.BAD_REQUEST);
+    }
+  }
 }
