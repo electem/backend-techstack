@@ -51,16 +51,16 @@ export class StudentController {
       path: join(__dirname, '../../src/mailsfolder/student.pdf'),
     });
     const response = await this.mailService.sendMail({
-      // to: studentmail.email,
-      // from: 'shashi@electems.com',
-      // subject: 'send mail with attachment',
-      // attachments: [
-      //   {
-      //     path: join(__dirname, '../../src/mailsfolder/student.pdf'),
-      //     filename: 'electems.pdf',
-      //     contentDisposition: 'attachment',
-      //   },
-      // ],
+      to: studentmail.email,
+      from: 'shashi@electems.com',
+      subject: 'send mail with attachment',
+      attachments: [
+        {
+          path: join(__dirname, '../../src/mailsfolder/student.pdf'),
+          filename: 'electems.pdf',
+          contentDisposition: 'attachment',
+        },
+      ],
     });
     return { response, message: 'success' };
   }

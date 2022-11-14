@@ -30,6 +30,14 @@ export class TeacherService {
       .getOne();
     return postWithQueryBuilder;
   }
+  async getAllTeacherWithSchool() {
+    const getAll = await this.teacherRepository
+      .createQueryBuilder('teacher')
+      .select(['teacher', 'school'])
+      .leftJoinAndSelect('teacher.school', 'school')
+      .getMany();
+    return getAll;
+  }
   public async updateTeacher(teacherDto: TeacherDto): Promise<Teacher> {
     try {
       return await this.teacherRepository.save(teacherDto);
