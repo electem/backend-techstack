@@ -12,7 +12,7 @@ export class Gender {
   providedIn: 'root',
 })
 export class TeacherService {
-  private gender: Gender[] = [{ name: 'Male' }, { name: 'Female' }];
+  private gender: string[] = ['Male', 'Female'];
   constructor(private http: HttpClient) {}
 
   getGenders() {
@@ -38,7 +38,7 @@ export class TeacherService {
       .put<Teacher>(baseUrl + '/teacher', updateschool)
       .toPromise();
   }
- 
+
   async deletTeacherById(id: number) {
     return await this.http.delete(`${baseUrl + '/teacher'}/${id}`).toPromise();
   }

@@ -7,7 +7,7 @@
   <div class="col-md-6">
     <ul class="list-group"></ul>
     <td>
-      <button routerLink="/createcompany">ADD COMPANY</button>
+      <button routerLink="/createschool">Add School</button>
     </td>
   </div>
   <div class="container">
@@ -20,8 +20,7 @@
           <th class="text-center" scope="col">Name</th>
           <th class="text-center" scope="col">Address</th>
           <th class="text-center" scope="col">Created AT</th>
-          <th class="text-center" scope="col">Length of student</th>
-          <th class="text-center" scope="col">Length of Teachers</th>
+          <th class="text-center" scope="col">Buttons</th>
         </tr>
       </thead>
       <tbody
@@ -42,13 +41,11 @@
           <th class="text-center" scope="row">
             {{ school.createdAt | date: 'long' }}
           </th>
-          <th class="text-center" scope="row">{{ school.student.length }}</th>
-          <th class="text-center" scope="row">{{ school.teacher.length }}</th>
           <th class="text-center" scope="row">
             <button
               type="button"
               class="btn btn-warning btn-sm mr-2"
-              routerLink="/createschool/{{ school.id }}"
+              routerLink="/createschool/{{ school.schoolid }}"
             >
               Edit
             </button>
@@ -58,9 +55,6 @@
               (click)="deleteSchoolById(school.id)"
             >
               Delete
-            </button>
-            <button type="button" class="btn button btn-sm mr-2 marignleft">
-              send mail
             </button>
           </th>
         </tr>
