@@ -24,7 +24,7 @@
       <tbody *ngIf="studentsList?.length != 0">
         <tr
           *ngFor="
-            let school of studentsList
+            let student of studentsList
               | paginate
                 : {
                     itemsPerPage: itemsPerPage,
@@ -33,17 +33,17 @@
                   }
           "
         >
-          <td>{{ school.studentname }}</td>
-          <td>{{ school.address }}</td>
-          <td>{{ school.email }}</td>
-          <td>{{ school.dob }}</td>
+          <td>{{ student.studentname }}</td>
+          <td>{{ student.address }}</td>
+          <td>{{ student.email }}</td>
+          <td>{{ student.dob }}</td>
           <td>
             <button
               type="button"
               class="btn btn-outline-secondary btn-rounded btn-sm fw-bold"
               mdbRipple
               rippleColor="dark"
-              routerLink="/createstudent/{{ school.id }}"
+              routerLink="/createstudent/{{ student.studentid }}"
             >
               Edit
             </button>
@@ -51,12 +51,13 @@
               type="button"
               style="margin: px"
               class="btn-outline-danger btn btn-sm mr-2 btn-space"
+              (click)="deleteStudentById(student.studentid!)"
             >
               delete
             </button>
-            <button style="background-color: yellow" (click)="downloadFile()">
+            <!-- <button style="background-color: yellow" (click)="downloadFile()">
               Download
-            </button>
+            </button> -->
           </td>
           <br />
         </tr>

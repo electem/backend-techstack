@@ -4,10 +4,7 @@
     <div class="col-md-4 offset-md-4">
       <div class="card mb-4">
         <div class="card-body">
-          <form
-            [formGroup]="createStudentForm"
-            (ngSubmit)="saveStudentDetails()"
-          >
+          <form [formGroup]="createStudentForm" (ngSubmit)="checkValidation()">
             <div class="form-group">
               <label>student name</label>
               <input
@@ -55,6 +52,14 @@
                 [ngClass]="{ 'is-invalid': submitted && f.phonenumber.errors }"
                 [(ngModel)]="student.phonenumber"
               />
+              <!-- <small
+                class="form-text text-danger"
+                *ngIf="createStudentForm.controls.phoneNumber.errors"
+                >{{
+                  createStudentForm.controls.phoneNumber.errors.onlyDigit
+                    .message
+                }}<br
+              /></small> -->
               <div
                 *ngIf="submitted && f.phonenumber.errors"
                 class="invalid-feedback"
@@ -74,53 +79,145 @@
                 [ngClass]="{ 'is-invalid': submitted && f.email.errors }"
                 [(ngModel)]="student.email"
               />
+              <span
+                class="text-danger"
+                *ngIf="
+                  createStudentForm.controls['email'].hasError('pattern') &&
+                  (createStudentForm.controls['email'].dirty ||
+                    createStudentForm.controls['email'].touched)
+                "
+                >Please enter valid email address</span
+              >
               <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
                 <div *ngIf="f.email.errors.required">Email is required</div>
               </div>
             </div>
             <br />
-            <br />
             <div class="form-group">
               <label>Genders</label>
               <div *ngFor="let gender of gendersList; let i = index">
                 <input
+                  formControlName="gender"
                   name="gender"
                   type="radio"
                   [value]="gender"
+                  [ngClass]="{ 'is-invalid': submitted && f.gender.errors }"
                   [(ngModel)]="student.gender"
-                  (change)="getSelectedStudentGender(gender)"
                 />
-                {{ gender.name }}
+                {{ gender }}
+                <div
+                  *ngIf="submitted && f.gender.errors"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="f.gender.errors.required">gender is required</div>
+                </div>
               </div>
-            </div>
-            <div class="form-group">
-              <label>Date of birth</label>
-              <ngx-datepicker
-                [(ngModel)]="date"
-                [options]="options"
-              ></ngx-datepicker>
             </div>
             <br />
             <div class="form-group">
+              <label>Date of Birth</label>
+              <input
+                type="text"
+                formControlName="dob"
+                class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.dob.errors }"
+                [(ngModel)]="student.dob"
+              />
+              <div *ngIf="submitted && f.dob.errors" class="invalid-feedback">
+                <div *ngIf="f.dob.errors.required">dob is required</div>
+              </div>
+            </div>
+            <br />
+            <div class="form-group">
+              <label>Select Your Birth Date</label>
+              <input
+                type="date"
+                formControlName="dob"
+                name="dob"
+                class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.dob.errors }"
+                [(ngModel)]="student.dob"
+              />
+              <div *ngIf="submitted && f.dob.errors" class="invalid-feedback">
+                <div *ngIf="f.dob.errors.required">dob is required</div>
+              </div>
+            </div>
+            <br />
+            <label>Select One School</label>
+            <select
+              class="select-option"
+              formControlName="school"
+              required
+              [(ngModel)]="student.school && student.school.schoolid"
+              class="form-control"
+              (ngModelChange)="selectedSchool($event)"
+            >
+              <option
+                class="option"
+                *ngFor="let option of schoolsList"
+                [value]="option.schoolid"
+              >
+                {{ option.schoolname }}
+              </option>
+            </select>
+
+            <div class="group-gap">
+              <div class="avatar-upload">
+                <div class="avatar-edit">
+                  <input
+                    type="file"
+                    id="imageUpload"
+                    accept=".png, .jpg, .jpeg, .pdf, .txt"
+                    #fileInput
+                    (change)="chooseFile($event)"
+                  />
+                </div>
+              </div>
+            </div>
+            <br />
+            <!-- <button
+              type="submit"
+              class="btn btn btn-success btn-sm"
+              (click)="uploadImage()"
+            >
+              Upload Image
+            </button> -->
+
+            <!-- <div class="form-group">
               <p class="text-center">
                 Schools
                 <select
                   class="form-control"
                   formControlName="school"
                   name="school"
-                  [(ngModel)]="currentSchool"
-                  [(ngModel)]="student.school"
-                  (ngModelChange)="selectedSchool(currentSchool)"
+                  placeholder="currentSchool"
+                  [(ngModel)]="student.school && student.school.schoolname"
+                  [ngClass]="{ 'is-invalid': submitted && f.school.errors }"
+                  (ngModelChange)="selectedSchool($event)"
                 >
-                  <option disabled [value]="" selected>Choose School</option>
-                  <option *ngFor="let school of schoolsList" [ngValue]="school">
+                  <option
+                    *ngFor="let school of schoolsList"
+                    [value]="optionSelected"
+                  >
                     {{ school.schoolname }}
+                  </option>
+                  <div
+                    *ngIf="submitted && f.school.errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="f.school.errors.required">
+                      school is required
+                    </div>
+                  </div>
+                  <option [value]="currentSchool" selected>
+                    Choose School
                   </option>
                 </select>
               </p>
-            </div>
+            </div> -->
+
             <div class="text-center">
-              <button class="btn btn-primary">Create</button>
+              <button class="btn btn-primary">Submit</button>
               <button
                 class="btn btn-outline-success btn-sm btn-space"
                 routerLink="/studentslist"
@@ -137,6 +234,20 @@
               </button>
             </div>
           </form>
+          <!-- <select
+            class="select-option"
+            required
+            [(ngModel)]="student.school && student.school.schoolid"
+            (ngModelChange)="selectedSchool($event)"
+          >
+            <option
+              class="option"
+              *ngFor="let option of schoolsList"
+              [value]="option.schoolid"
+            >
+              {{ option.schoolname }}
+            </option>
+          </select> -->
         </div>
       </div>
     </div>

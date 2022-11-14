@@ -51,7 +51,9 @@
             SELECT TEACHERS
             <div style="width: 50%">
               <ng-multiselect-dropdown
-                [settings]="dropdownSettings"
+                formControlName="teacher"
+                name="teacher"
+                [settings]="dropdownSettings" 
                 [data]="teachersList"
                 [(ngModel)]="school.teacher"
                 (onSelect)="selectedTeacher($event)"
@@ -62,6 +64,8 @@
             SELECT STUDENTS
             <div style="width: 50%">
               <ng-multiselect-dropdown
+                formControlName="students"
+                name="students"
                 [settings]="dropdownSettingsForStudent"
                 [data]="studentsList"
                 [(ngModel)]="school.students"

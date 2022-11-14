@@ -34,4 +34,8 @@ export class TeacherListingComponent implements OnInit {
     this.page = 1;
     this.retrieveTeachers();
   }
+  async deleteTeacherById(id: number): Promise<void> {
+    await this.schoolService.deleteTeacherById(id);
+    this.retrieveTeachers();
+  }
 }

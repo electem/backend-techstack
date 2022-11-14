@@ -8,6 +8,8 @@
     <td>
       <button routerLink="/createschool">ADD NEW SCHOOL</button>
     </td>
+    <button routerLink="/teacherslist">Teachers List</button>
+    <button routerLink="/studentslist">Students List</button>
   </div>
   <div class="container">
     <br />
@@ -41,17 +43,18 @@
               class="btn btn-outline-secondary btn-rounded btn-sm fw-bold"
               mdbRipple
               rippleColor="dark"
-              routerLink="/createschool/{{ school.id }}"
+              routerLink="/createschool/{{ school.schoolid }}"
             >
               Edit
             </button>
-            <button
+            <!-- <button
               type="button"
               style="margin: px"
               class="btn-outline-danger btn btn-sm mr-2 btn-space"
+              (click)="deleteSchoolById(school.schoolid!)"
             >
               delete
-            </button>
+            </button> -->
           </td>
           <br />
         </tr>

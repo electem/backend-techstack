@@ -38,19 +38,23 @@ export class CreateSchoolComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getSchoolById(this.route.snapshot.params.id);
+    if (this.route.snapshot.params.id) {
+      this.getSchoolById(this.route.snapshot.params.id);
+    }
     this.createSchoolForm = this.formBuilder.group({
       schoolname: ['', Validators.required],
       address: ['', Validators.required],
+      teacher: ['', Validators.required],
+      students: ['', Validators.required],
     });
     this.retriveTeachers();
     this.retriveStudents();
     this.dropdownSettings = {
-      idField: 'id',
+      idField: 'teacherid',
       textField: 'teachername',
     };
     this.dropdownSettingsForStudent = {
-      idField: 'id',
+      idField: 'studentid',
       textField: 'studentname',
     };
   }
@@ -96,7 +100,7 @@ export class CreateSchoolComponent implements OnInit {
   }
   async updateSchool(): Promise<void> {
     const school: School = {
-      id: this.school.id,
+      schoolid: this.school.schoolid,
       schoolname: this.school.schoolname,
       address: this.school.address,
       teacher: this.school.teacher,

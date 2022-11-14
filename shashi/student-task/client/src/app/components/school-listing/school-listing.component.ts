@@ -44,4 +44,8 @@ export class SchoolListingComponent implements OnInit {
   async getSchoolById(id: number): Promise<void> {
     this.school = await this.schoolService.getSchoolById(id);
   }
+  async deleteSchoolById(id: number): Promise<void> {
+    await this.schoolService.deleteSchoolById(id);
+    this.retrieveschools();
+  }
 }

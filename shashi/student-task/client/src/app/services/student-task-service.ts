@@ -14,11 +14,7 @@ export class Gender {
   providedIn: 'root',
 })
 export class SchoolService {
-  genderList: Gender[] = [
-    { name: 'male' },
-    { name: 'female' },
-    { name: 'others' },
-  ];
+  genderList: string[] = ['male', 'female', 'others'];
   constructor(private http: HttpClient) {}
 
   async genderListmethod() {
@@ -71,9 +67,7 @@ export class SchoolService {
   async getSchoolById(id: number): Promise<School> {
     return this.http.get<School>(`${baseUrl + '/school'}/${id}`).toPromise();
   }
-  async getTeacherById(id: number) {
-    return await this.http.get(`${baseUrl + '/teacher'}/${id}`).toPromise();
-  }
+
   async updateSchool(school: School): Promise<School> {
     return await this.http.put<School>(baseUrl + '/school', school).toPromise();
   }
@@ -83,6 +77,31 @@ export class SchoolService {
   async updateStudent(student: Student): Promise<Student> {
     return await this.http
       .put<Student>(baseUrl + '/student', student)
+      .toPromise();
+  }
+  async getTeacherById(id: number): Promise<Teacher> {
+    return await this.http
+      .get<Teacher>(`${baseUrl + '/teacher'}/${id}`)
+      .toPromise();
+  }
+  async updateTeacher(teacher: Teacher): Promise<Teacher> {
+    return await this.http
+      .put<Teacher>(baseUrl + '/teacher', teacher)
+      .toPromise();
+  }
+  async deleteSchoolById(id: number): Promise<School> {
+    return await this.http
+      .delete<School>(`${baseUrl + '/school'}/${id}`)
+      .toPromise();
+  }
+  async deleteStudentById(id: number): Promise<Student> {
+    return await this.http
+      .delete<Student>(`${baseUrl + '/student'}/${id}`)
+      .toPromise();
+  }
+  async deleteTeacherById(id: number): Promise<Teacher> {
+    return await this.http
+      .delete<Teacher>(`${baseUrl + '/teacher'}/${id}`)
       .toPromise();
   }
 }

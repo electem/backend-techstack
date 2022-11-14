@@ -6,6 +6,7 @@ import { SchoolListingComponent } from './components/school-listing/school-listi
 import { CreateTeacherComponent } from './components/create-teacher/create-teacher.component';
 import { CreateStudentComponent } from './components/create-student/create-student.component';
 import { TeacherListingComponent } from './components/teacher-listing/teacher-listing.component';
+import { ChartSchoolTeacherComponent } from './components/chart-school-teacher/chart-school-teacher.component';
 import { StudentListingComponent } from './components/student-listing/student-listing.component';
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -17,6 +18,8 @@ const routes: Routes = [
   { path: 'studentslist', component: StudentListingComponent },
   { path: 'createschool/:id', component: CreateSchoolComponent },
   { path: 'createstudent/:id', component: CreateStudentComponent },
+  { path: 'createteacher/:id', component: CreateTeacherComponent },
+  { path: 'charts', component: ChartSchoolTeacherComponent },
 ];
 
 @NgModule({
