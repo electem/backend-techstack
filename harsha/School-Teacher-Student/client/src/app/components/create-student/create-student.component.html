@@ -2,11 +2,12 @@
 <div class="form">
   <form [formGroup]="registerForm">
     <div class="form-group">
-      <label for="name">Name</label>
-      <input type="name" formControlName="name" placeholder="Enter your name" class="form-control item"
-        [(ngModel)]="currentStudent.name" [ngClass]="{ 'is-invalid': submitted && validation.name.errors }" />
-      <div *ngIf="this.submitted && validation.name.errors" class="invalid-feedback">
-        <div *ngIf="validation.name.errors.required">
+      <label for="studentName">Name</label>
+      <input type="studentName" formControlName="studentName" placeholder="Enter your name" class="form-control item"
+        [(ngModel)]="currentStudent.studentName"
+        [ngClass]="{ 'is-invalid': submitted && validation.studentName.errors }" />
+      <div *ngIf="this.submitted && validation.studentName.errors" class="invalid-feedback">
+        <div *ngIf="validation.studentName.errors.required">
           Name Field is required
         </div>
       </div>
@@ -22,8 +23,8 @@
     </div>
 
     <div class="form-group">
-      <input matInput [matDatepicker]="picker" placeholder="Choose a date" [(ngModel)]="currentStudent.dateOfBirth"
-        formControlName="dateOfBirth" name="dateOfBirth" />
+      <input matInput [matDatepicker]="picker" class="form-control item" placeholder="Choose a date"
+        [(ngModel)]="currentStudent.dateOfBirth" formControlName="dateOfBirth" name="dateOfBirth" />
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </div>
@@ -80,7 +81,7 @@
           (ngModelChange)="onSelected(selectedSchool)">
           <option disabled [value]="" selected>Choose School</option>
           <option *ngFor="let school of schools" [ngValue]="school">
-            {{ school.name }}
+            {{ school.schoolName }}
           </option>
         </select>
       </p>

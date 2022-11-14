@@ -2,11 +2,12 @@
 <div class="form">
   <form [formGroup]="registerForm">
     <div class="form-group">
-      <label for="name">Name</label>
-      <input type="name" formControlName="name" placeholder="Enter your name" class="form-control item"
-        [(ngModel)]="currentTeacher.name" [ngClass]="{ 'is-invalid': submitted && validation.name.errors }" />
-      <div *ngIf="this.submitted && validation.name.errors" class="invalid-feedback">
-        <div *ngIf="validation.name.errors.required">
+      <label for="teacherName">Name</label>
+      <input type="teacherName" formControlName="teacherName" placeholder="Enter your name" class="form-control item"
+        [(ngModel)]="currentTeacher.teacherName"
+        [ngClass]="{ 'is-invalid': submitted && validation.teacherName.errors }" />
+      <div *ngIf="this.submitted && validation.teacherName.errors" class="invalid-feedback">
+        <div *ngIf="validation.teacherName.errors.required">
           Name Field is required
         </div>
       </div>
@@ -56,7 +57,7 @@
       <div *ngFor="let school of schools">
         <label>
           <input type="checkbox" (click)="onSelectingSchool(school)" />
-          {{ school.name }}
+          {{ school.schoolName }}
         </label>
       </div>
     </div>

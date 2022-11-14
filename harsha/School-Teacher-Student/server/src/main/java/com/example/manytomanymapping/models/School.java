@@ -31,8 +31,11 @@ public class School {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
-	private String name;
+	@Column(name = "school_id")
+	private int schoolId;
+
+	@Column(name = "school_name")
+	private String schoolName;
 	private String address;
 
 	@Column(name = "created_date", nullable = false, updatable = false)
@@ -40,14 +43,14 @@ public class School {
 	private Date createdDate;
 
 	@JsonIgnoreProperties("schools")
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+	@ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	@JoinTable(name = "school_teacher", joinColumns = {
-			@JoinColumn(name = "school_id", referencedColumnName = "id") }, inverseJoinColumns = {
-					@JoinColumn(name = "teacher_id", referencedColumnName = "id") })
+			@JoinColumn(name = "school_id", referencedColumnName = "school_id") }, inverseJoinColumns = {
+					@JoinColumn(name = "teacher_id", referencedColumnName = "teacher_id") })
 	private List<Teacher> teachers;
 
 	@JsonIgnoreProperties("school")
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "school_id")
 	private List<Student> students;
 }

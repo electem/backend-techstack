@@ -23,7 +23,7 @@ export class CreateStudentComponent implements OnInit {
   progress = 0;
   message = '';
   currentStudent: Student = {
-    name: '',
+    studentName: '',
     gender: '',
     address: '',
     email: '',
@@ -40,11 +40,16 @@ export class CreateStudentComponent implements OnInit {
 
   ngOnInit(): void {
     this.registerForm = this.formBuilder.group({
-      name: ['', Validators.required],
+      studentName: ['', Validators.required],
       genders: ['', Validators.required],
       dateOfBirth: ['', Validators.required],
       address: ['', Validators.required],
-      email: ['', Validators.required],
+      email: [
+        '',
+        Validators.required,
+        Validators.email,
+        Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
+      ],
       phoneNo: ['', Validators.required],
       school: ['', Validators.required],
     });
@@ -79,7 +84,7 @@ export class CreateStudentComponent implements OnInit {
 
   async saveStudent(): Promise<void> {
     const student: Student = {
-      name: this.currentStudent.name,
+      studentName: this.currentStudent.studentName,
       gender: this.currentStudent.gender,
       dateOfBirth: this.currentStudent.dateOfBirth,
       address: this.currentStudent.address,

@@ -18,7 +18,7 @@ export class CreateTeacherComponent implements OnInit {
   addedSchools: School[] = [];
   selectedSchool: School = {};
   currentTeacher: Teacher = {
-    name: '',
+    teacherName: '',
     gender: '',
     address: '',
     email: '',
@@ -34,7 +34,7 @@ export class CreateTeacherComponent implements OnInit {
 
   ngOnInit(): void {
     this.registerForm = this.formBuilder.group({
-      name: ['', Validators.required],
+      teacherName: ['', Validators.required],
       gender: ['', Validators.required],
       address: ['', Validators.required],
       email: ['', Validators.required],
@@ -67,7 +67,7 @@ export class CreateTeacherComponent implements OnInit {
 
   async saveTeacher(): Promise<void> {
     const teacher: Teacher = {
-      name: this.currentTeacher.name,
+      teacherName: this.currentTeacher.teacherName,
       gender: this.currentTeacher.gender,
       address: this.currentTeacher.address,
       email: this.currentTeacher.email,

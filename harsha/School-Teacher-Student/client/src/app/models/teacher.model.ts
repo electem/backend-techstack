@@ -1,8 +1,8 @@
 import { School } from './school.model';
 
 export interface Teacher {
-  id?: number;
-  name?: string;
+  teacherId?: number;
+  teacherName?: string;
   gender?: string;
   address?: string;
   email?: string;

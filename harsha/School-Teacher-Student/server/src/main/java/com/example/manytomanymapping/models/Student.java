@@ -28,8 +28,11 @@ public class Student {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
-	private String name;
+	@Column(name = "student_id")
+	private int studentId;
+	
+	@Column(name = "student_name")
+	private String studentName;
 	private String gender;
 
 	@JsonFormat(pattern = "YYYY-MM-dd")
