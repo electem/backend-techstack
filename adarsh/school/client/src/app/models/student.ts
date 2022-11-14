@@ -1,5 +1,5 @@
 import { School } from "./school";
-
+import { File } from "./file";
 
 export class Student {
   id?: number;
@@ -10,5 +10,6 @@ export class Student {
   phone?:number;
   dateOfBirth?:string;
   schools?:School;
+  files?:File;
  
 }

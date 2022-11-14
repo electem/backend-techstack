@@ -26,7 +26,9 @@
         <div class="form-group col-md-4">
           <ng-multiselect-dropdown
             [placeholder]="'Select Teachers'"
+            formControlName="teachers"
             [settings]="dropdownSettings"
+            formControlName="teachers"
             [data]="teachers"
             (onSelect)="onItemSelect($event)"
             (onSelectAll)="onSelectAll($event)"
@@ -34,27 +36,34 @@
           >
           </ng-multiselect-dropdown>
         </div>
-        <div>
-            <div class="form-group col-md-4">
-              <ng-multiselect-dropdown
-                [placeholder]="'Select Students'"
-                [settings]="dropdownSettings"
-                [data]="students"
-                (onSelect)="onStudentSelect($event)"
-                (onSelectAll)="onStudentSelectAll($event)"
-                [(ngModel)]="newSchool.students"
-              >
-              </ng-multiselect-dropdown>
-            </div>
+        <div class="form-group col-md-4">
+          <ng-multiselect-dropdown
+            [placeholder]="'Select students'"
+            name="students" formControlName="students"
+            [settings]="dropdownSettings"
+            [data]="students"
+            [(ngModel)]="newSchool.students"
+            (onSelect)="onItemSelect($event)"
+            (onSelectAll)="onSelectAll($event)"
+          >
+          </ng-multiselect-dropdown>
+        </div>
         <button
           type="button"
           class="btn btn-success"
-          (click)="saveNewSchool()"
+          (click)="signup()"
         >
           Save
         </button>
+        <button type=" button"   class="btn btn-success" (click)="updateSchool()" >Update</button>
         <button type=" button" class="btn btn-warning" routerLink="/schoolList">Cancel</button>
-      </div>
       </div>
   </form>
 </div>
+
+
+
+
+
+
+

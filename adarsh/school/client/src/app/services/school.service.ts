@@ -1,9 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { Pagination } from '../models/pagination';
 import { School } from '../models/school';
 import { Student } from '../models/student';
 import { Teacher } from '../models/teacher';
+
 
 const url = environment.url;
 
@@ -16,6 +18,7 @@ schools:School[]=[];
 teachers:Teacher[]=[];
 students:Student[]=[];
 genders: string[] = ['MALE', 'FEMALE'];
+pagination = new Pagination();
 
   constructor(private http: HttpClient) { }
   
@@ -31,9 +34,7 @@ genders: string[] = ['MALE', 'FEMALE'];
   async getTeachers(): Promise<Teacher[]> {
     return await this.http.get<Teacher[]>(url + '/teachers').toPromise();
   }
-  async getStudents(): Promise<Student[]> {
-    return await this.http.get<Student[]>(url + '/students').toPromise();
-  }
+ 
   async createNewTeacher(teacher: Teacher) {
     return await this.http.post(url + '/addTeachers', teacher).toPromise();
   }
@@ -51,7 +52,7 @@ genders: string[] = ['MALE', 'FEMALE'];
   }
   async updateSchool(id: number, school: School): Promise<School> {
     return await this.http
-      .put(`${url + '/updateSchools'}/${id}`, school)
+      .put(`${url + '/updateSchool'}/${id}`, school)
       .toPromise();
   }
   async updateTeacher(id: number, teacher: Teacher): Promise<Teacher> {
@@ -63,5 +64,14 @@ genders: string[] = ['MALE', 'FEMALE'];
     return await this.http
       .put(`${url + '/updateStudents'}/${id}`, student)
       .toPromise();
+  }
+  async getStudents(): Promise<Student[]> {
+    return await this.http.get<Student[]>(url + '/students').toPromise();
+  }
+  public getFiles(file: File) {
+    return this.http.get(url + 'downloadFile/' + file.name, {
+      observe: 'response',
+      responseType: 'blob',
+    });
   }
 }

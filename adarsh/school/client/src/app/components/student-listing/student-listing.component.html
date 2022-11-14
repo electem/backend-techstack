@@ -22,9 +22,8 @@
             <th class="text-center" scope="col">DATE OF BIRTH</th>
             <th class="text-center" scope="col">GENDER</th>
             <th class="text-center" scope="col">PHONE</th>
-        
-  
             <th class="text-center" scope="col">EDIT</th>
+
           </tr>
         </thead>
         <tbody *ngFor="let student of students;">
@@ -35,7 +34,6 @@
             <th class="text-center" scope="row">{{ student.dateOfBirth }}</th>
             <th class="text-center" scope="row">{{ student.gender}}</th>
             <th class="text-center" scope="row">{{ student.phone}}</th>
-           
             <th class="text-center" scope="row">
               <button
                 type="button"
@@ -44,19 +42,15 @@
               >
                 Edit
               </button>
-              <button
-                type="button"
-                class="btn btn-info btn-sm mr-2"
-            
-              >
-                Delete
-              </button>
+             
             </th>
           </tr>
         </tbody>
       </table>
     </div>
-  </div>
+    </div>
+
+  
   
   
     

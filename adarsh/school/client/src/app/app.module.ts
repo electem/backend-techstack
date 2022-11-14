@@ -13,6 +13,8 @@ import { StudentListingComponent } from './components/student-listing/student-li
 import { AddStudentComponent } from './components/add-student/add-student.component';
 import { AuthInterceptor } from 'src/helpers/auth.interceptor';
 import { LoginUserComponent } from './components/login-user/login-user.component';
+import { ChartComponent } from './components/chart/chart.component';
+
 
 
 @NgModule({
@@ -24,7 +26,8 @@ import { LoginUserComponent } from './components/login-user/login-user.component
     AddTeachersComponent,
     StudentListingComponent,
     AddStudentComponent,
-    LoginUserComponent
+    LoginUserComponent,
+    ChartComponent
     
     
 
@@ -36,7 +39,7 @@ import { LoginUserComponent } from './components/login-user/login-user.component
     HttpClientModule,
     ReactiveFormsModule,
     NgMultiSelectDropDownModule.forRoot(),
-    
+   
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

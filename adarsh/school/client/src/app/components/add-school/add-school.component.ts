@@ -49,6 +49,9 @@ export class AddSchoolComponent implements OnInit {
     this.registerForm = this.formBuilder.group({
       name: ['', Validators.required],
       address:['', Validators.required],
+      students:[''],
+      teachers:['']
+      
     });
     this.retrieveTeachers();
     this.retrieveStudents();
@@ -87,20 +90,29 @@ export class AddSchoolComponent implements OnInit {
       teachers: this.addnewTeacher,
       students:this.addnewStudent,
     };
-    // await this.schoolService.createNewSchool(school);
+    await this.schoolService.createNewSchool(school);
     this.router.navigate(['/schoolList']);
   }
   private async getSchoolId(id: number) {
     this.newSchool = await this.schoolService.getSchoolByID(id);
   }
-  async updateTeacher(): Promise<void> {
-    const teacherdata = {
+  async updateSchool(): Promise<void> {
+    const schooldata = {
       id: this.newSchool.id,
       name: this.newSchool.name,
       address: this.newSchool.address,
-     
+      teachers: this.newSchool.teachers,
+      students:this.newSchool.students,
     };
-    // await this.schoolService.updateStudent(this.newTeacher.id!, teacherdata);
+    await this.schoolService.updateSchool(this.newSchool.id!, schooldata);
     this.router.navigate(['/teacherList']);
+  }
+  signup() {
+    this.submitted = true;
+    if (this.registerForm.invalid) {
+      return;
+    }
+    alert('form fields are validated successfully!');
+    this.saveNewSchool();
   }
 }
