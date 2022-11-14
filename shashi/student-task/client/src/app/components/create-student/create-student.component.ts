@@ -139,8 +139,8 @@ export class CreateStudentComponent implements OnInit {
       school: this.currentSchool,
       //imageid?: Image?['id']
     };
-    await this.schoolService.uploadFile(this.file);
-    console.log(this.file)
+    // await this.schoolService.uploadFile(this.file);
+    // console.log(this.file)
     await this.schoolService.createStudent(StudentData);
     this.router.navigate(['/studentslist']);
   }

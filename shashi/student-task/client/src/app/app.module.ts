@@ -16,7 +16,8 @@ import { DatepickerModule } from 'ng2-datepicker';
 import { TeacherListingComponent } from './components/teacher-listing/teacher-listing.component';
 import { StudentListingComponent } from './components/student-listing/student-listing.component';
 import { FileUploadDownloadComponent } from './components/file-upload-download/file-upload-download.component';
-import { ChartSchoolTeacherComponent } from './components/chart-school-teacher/chart-school-teacher.component';
+//import { ChartSchoolTeacherComponent } from './components/chart-school-teacher/chart-school-teacher.component';
+import { DashBoardComponent } from './components/dash-board/dash-board.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,7 @@ import { ChartSchoolTeacherComponent } from './components/chart-school-teacher/c
     TeacherListingComponent,
     StudentListingComponent,
     FileUploadDownloadComponent,
-    ChartSchoolTeacherComponent,
+    DashBoardComponent,
   ],
   imports: [
     NgMultiSelectDropDownModule.forRoot(),

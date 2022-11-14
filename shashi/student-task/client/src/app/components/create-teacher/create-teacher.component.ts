@@ -28,7 +28,6 @@ export class CreateTeacherComponent implements OnInit {
   currentGender!: string;
   selectedGender!: any;
   model = { option: 'option3' };
-  ischecked?: boolean;
   constructor(
     private schoolService: SchoolService,
     private formBuilder: FormBuilder,
@@ -46,6 +45,7 @@ export class CreateTeacherComponent implements OnInit {
       email: ['', Validators.required],
       gender: ['', Validators.required],
       school: ['', Validators.required],
+      //school2: ['', Validators.required],
     });
     this.retieveGenders();
     this.retrieveschools();
@@ -85,19 +85,8 @@ export class CreateTeacherComponent implements OnInit {
     this.currentSchool = school;
     this.selectedSchool?.push(this.currentSchool);
   }
-
   async getTeacherById(id: number): Promise<void> {
     this.teacher = await this.schoolService.getTeacherById(id);
-    this.teacherSchool(this.currentSchool);
-  }
-  async teacherSchool(school: School) {
-    if ((this.ischecked = true)) {
-      console.log(school);
-      const data = this.teacher.school?.filter(
-        (s) => s.schoolid === school.schoolname
-      );
-      //this.currentSchool = data[0];
-    }
   }
   async updateTeacher(): Promise<void> {
     const teacherData: Teacher = {
@@ -106,7 +95,7 @@ export class CreateTeacherComponent implements OnInit {
       address: this.teacher.address,
       email: this.teacher.email,
       gender: this.teacher.gender,
-      school: this.teacher.school,
+      school: this.selectedSchool,
     };
     await this.schoolService.updateTeacher(teacherData);
   }
