@@ -1,3 +1,5 @@
+<h2 *ngIf="addForm" class="text-center">Add Schools</h2>
+<h2 *ngIf="!addForm" class="text-center">Update Schools</h2>
 <div class="container">
   <div class="row">
     <div class="col-md-4 offset-md-4">
@@ -12,6 +14,7 @@
               <input
                 type="text"
                 formControlName="name"
+                name="name"
                 class="form-control"
                 [ngClass]="{ 'is-invalid': submitted && f.name.errors }"
                 [(ngModel)]="createschool.name"
@@ -26,6 +29,7 @@
               <input
                 type="text"
                 formControlName="address"
+                name="address"
                 class="form-control"
                 [ngClass]="{ 'is-invalid': submitted && f.address.errors }"
                 [(ngModel)]="createschool.address"
@@ -34,7 +38,7 @@
                 *ngIf="submitted && f.address.errors"
                 class="invalid-feedback"
               >
-                <div *ngIf="f.address.errors.required">Type is required</div>
+                <div *ngIf="f.address.errors.required">Address is required</div>
               </div>
             </div>
             <br />
@@ -42,43 +46,53 @@
               <label>Select Teachers</label>
               <ng-multiselect-dropdown
                 formControlName="teacher"
-                [settings]="dropdownSettings"
+                [settings]="teacherDropdownSettings"
                 [data]="teachers"
                 (onSelect)="onSelectTeachers($event)"
                 [(ngModel)]="createschool.teacher"
-                [class.is-invalid]="
-                  f?.teacher?.errors?.required && f?.teacher?.touched
-                "
               >
               </ng-multiselect-dropdown>
+              <div
+                *ngIf="submitted && f.teacher.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="f.teacher.errors.required">Teacher is required</div>
+              </div>
             </div>
-            <br />
+
             <div class="form-group">
-              <label>Select Students</label>
+              <label>Select students</label>
               <ng-multiselect-dropdown
-                formControlName="student"
-                [settings]="dropdownSettings"
+                formControlName="students"
+                [settings]="studentDropdownSettings"
                 [data]="students"
                 (onSelect)="onSelectStudents($event)"
-                [(ngModel)]="createschool.student"
-                [class.is-invalid]="
-                  f?.student?.errors?.required && f?.student?.touched
-                "
+                [(ngModel)]="createschool.students"
               >
               </ng-multiselect-dropdown>
+              <div
+                *ngIf="submitted && f.students.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="f.students.errors.required">
+                  students is required
+                </div>
+              </div>
             </div>
             <br />
-            <div class="text-center" *ngIf="showcreatebutton">
-              <button class="btn btn-primary">Create</button>
-              <button class="btn btn-secondary btn-space" type="reset">
-                Cancel
-              </button>
-            </div>
-            <div class="text-center" *ngIf="showUpdateButton">
-              <button class="btn btn-primary" (click)="updateSchool()">
+            <div class="text-center">
+              <button *ngIf="addForm" class="btn btn-primary">Create</button>
+              <button
+                *ngIf="!addForm"
+                class="btn btn-primary"
+                (click)="updateSchool()"
+              >
                 Update
               </button>
-              <button class="btn btn-secondary btn-space" type="reset">
+              <button
+                class="btn btn-secondary btn-space"
+                routerLink="/listteachers"
+              >
                 Cancel
               </button>
             </div>
