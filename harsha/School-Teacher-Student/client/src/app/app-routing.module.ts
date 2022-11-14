@@ -19,6 +19,7 @@ const routes: Routes = [
   { path: 'teacher-list', component: TeacherListComponent },
   { path: 'student-list', component: StudentListComponent },
   { path: 'teacher', component: CreateTeacherComponent },
+  { path: 'teacher/:id', component: CreateTeacherComponent },
   { path: 'student', component: CreateStudentComponent },
   { path: 'student/:id', component: CreateStudentComponent },
 ];

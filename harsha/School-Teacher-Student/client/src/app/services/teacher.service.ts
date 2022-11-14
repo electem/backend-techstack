@@ -20,4 +20,14 @@ export class TeacherService {
       .post<Teacher>(baseUrl + 'createTeacher', teacher)
       .toPromise();
   }
+
+  async getTeacherById(id: number): Promise<Teacher> {
+    return await this.http.get(`${baseUrl + 'teacher'}/${id}`).toPromise();
+  }
+
+  async updateTeacher(id: number, teacher: Teacher): Promise<Teacher> {
+    return await this.http
+      .put(`${baseUrl + 'updateTeacher'}/${id}`, teacher)
+      .toPromise();
+  }
 }

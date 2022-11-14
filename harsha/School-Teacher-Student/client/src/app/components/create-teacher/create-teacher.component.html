@@ -1,4 +1,5 @@
-<h1 class="card-title text-center">Add Teacher</h1>
+<h1 class="card-title text-center" *ngIf="addForm">ADD TEACHER</h1>
+<h1 class="card-title text-center" *ngIf="!addForm">EDIT TEACHER</h1>
 <div class="form">
   <form [formGroup]="registerForm">
     <div class="form-group">
@@ -52,17 +53,42 @@
         </div>
       </div>
     </div>
-    <div class="form-group">
+    <div *ngIf="addForm" class="form-group">
       <label for="options">Schools:</label>
       <div *ngFor="let school of schools">
         <label>
-          <input type="checkbox" (click)="onSelectingSchool(school)" />
+          <input type="checkbox" formControlName="schools" (click)="onSelectingSchool(school)" />
           {{ school.schoolName }}
         </label>
       </div>
     </div>
-    <button type="button" class="btn btn-success" (click)="signup()">
+
+
+    <div *ngIf="!addForm" class="form-group">
+      <label for="options">Current Schools</label>
+      <div *ngFor="let school of currentTeacher.schools">
+        <label>
+          <input type="checkbox" formControlName="schools" [(ngModel)]="schools"
+            (click)="onSelectPushToSchoolsList(school)" />
+          {{ school.schoolName }}
+        </label>
+      </div><br>
+      <div>
+        <label for="options">Schools List</label>
+        <div *ngFor="let school of schoolsList">
+          <label>
+            <input type="checkbox" (click)="onSelectPushToCurrentSchool(school)" />
+            {{ school.schoolName }}
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <button *ngIf="addForm" type="button" class="btn btn-success" (click)="signup()">
       Save
+    </button>
+    <button *ngIf="!addForm" type="button" class="btn btn-success" (click)="updateTeacher()">
+      Update
     </button>
     <button type=" button" class="btn btn-warning" routerLink="/teacher-list">
       Cancel
