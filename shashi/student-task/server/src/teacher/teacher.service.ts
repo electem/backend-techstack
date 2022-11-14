@@ -21,13 +21,24 @@ export class TeacherService {
   public async findAllTeacher(): Promise<Teacher[]> {
     return await this.teacherRepository.find();
   }
-  async findOneTeacheer(id: number) {
+  async findOneTeacheer(teacherid: number) {
     const postWithQueryBuilder = await this.teacherRepository
       .createQueryBuilder('teacher')
       .select(['teacher', 'school'])
       .leftJoinAndSelect('teacher.school', 'school')
-      .where('teacher.id= :id', { id: id })
+      .where('teacher.teacherid= :id', { id: teacherid })
       .getOne();
     return postWithQueryBuilder;
+  }
+  public async updateTeacher(teacherDto: TeacherDto): Promise<Teacher> {
+    try {
+      return await this.teacherRepository.save(teacherDto);
+    } catch (err) {
+      throw new HttpException(err, HttpStatus.BAD_REQUEST);
+    }
+  }
+  public async deleteTeacher(id: number): Promise<void> {
+    const teacher = await this.findOneTeacheer(id);
+    await this.teacherRepository.remove(teacher);
   }
 }

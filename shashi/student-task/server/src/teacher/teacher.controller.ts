@@ -20,7 +20,9 @@ import { AuthGuard } from '@nestjs/passport';
 @UseGuards(AuthGuard())
 @Controller('teacher')
 export class TeacherController {
-  constructor(private readonly teacherService: TeacherService) {}
+  constructor(
+    private readonly teacherService: TeacherService,
+  ) {}
   @Post()
   async createTeacher(@Body() teacher: TeacherDto) {
     return await this.teacherService.createTeacher(teacher);
@@ -34,4 +36,17 @@ export class TeacherController {
   async findOneTeacheer(@Param('id') id): Promise<Teacher> {
     return this.teacherService.findOneTeacheer(id);
   }
+  @Put('/')
+  async updateTeacher(@Body() teacherDto: TeacherDto) {
+    return await this.teacherService.updateTeacher(teacherDto);
+  }
+  @Delete('/:id')
+  public async deleteTeacher(@Param('id') id: string): Promise<void> {
+    const teacher = this.teacherService.deleteTeacher(+id);
+    if (!teacher) {
+      throw new NotFoundException('teacher does not exist!');
+    }
+    return teacher;
+  }
+ 
 }

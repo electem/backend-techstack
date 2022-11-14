@@ -21,12 +21,13 @@ export class StudentService {
   public async findAllStudent(): Promise<Student[]> {
     return await this.studentRepository.find();
   }
-  async findOneStudent(id: number) {
+  async findOneStudent(studentsid: number) {
     const postWithQueryBuilder = await this.studentRepository
       .createQueryBuilder('students')
       .select(['students', 'school'])
       .leftJoinAndSelect('students.school', 'school')
-      .where('school.id= :id', { id: id })
+      .leftJoinAndSelect('students.image', 'image')
+      .where('students.studentid= :id', { id: studentsid })
       .getOne();
     return postWithQueryBuilder;
   }
@@ -36,5 +37,9 @@ export class StudentService {
     } catch (err) {
       throw new HttpException(err, HttpStatus.BAD_REQUEST);
     }
+  }
+  public async deleteStudent(id: number): Promise<void> {
+    const student = await this.findOneStudent(id);
+    await this.studentRepository.remove(student);
   }
 }

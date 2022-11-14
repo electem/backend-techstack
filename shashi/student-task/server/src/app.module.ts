@@ -20,6 +20,8 @@ import { StudentModule } from './student/student.module';
 import { Image } from './fileupload-Download/file.entity';
 import { ImageModule } from './fileupload-Download/file.module';
 
+import { MailerModule } from '@nestjs-modules/mailer';
+
 @Module({
   imports: [
     TypeOrmModule.forRoot({
@@ -47,6 +49,18 @@ import { ImageModule } from './fileupload-Download/file.module';
     TeacherModule,
     StudentModule,
     ImageModule,
+    MailerModule.forRoot({
+      transport: {
+        host: 'mail.electems.com',
+        port: 465,
+        ssl: false,
+        tls: true,
+        auth: {
+          user: 'shashi@electems.com',
+          pass: 'cybRVE12#',
+        },
+      },
+    }),
   ],
   controllers: [AppController],
   providers: [AppService],
