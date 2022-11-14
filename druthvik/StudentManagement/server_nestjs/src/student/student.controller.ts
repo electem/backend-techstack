@@ -7,10 +7,19 @@ import {
   Put,
   Delete,
   NotFoundException,
+  UseGuards,
+  UseInterceptors,
+  UploadedFile,
 } from '@nestjs/common';
 import { StudentService } from './student.service';
 import { StudentDto } from './student.dto';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { diskStorage } from 'multer';
+import { extname } from 'path';
+import { Student } from './student.entity';
 
+//@UseGuards(JwtAuthGuard)
 @Controller('student')
 export class StudentController {
   constructor(private studentService: StudentService) {}

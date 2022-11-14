@@ -7,11 +7,14 @@ import {
   Put,
   Delete,
   NotFoundException,
+  UseGuards,
 } from '@nestjs/common';
 
 import { SchoolService } from './school.service';
 import { SchoolDto } from './school.dto';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
+//@UseGuards(JwtAuthGuard)
 @Controller('school')
 export class SchoolController {
   constructor(private schoolService: SchoolService) {}

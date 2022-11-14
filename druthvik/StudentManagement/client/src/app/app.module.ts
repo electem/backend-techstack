@@ -18,6 +18,7 @@ import { CreateteacherComponent } from './components/createteacher/createteacher
 import { CreatestudentComponent } from './components/createstudent/createstudent.component';
 import { DatepickerModule } from 'ng2-datepicker';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { SchoolstudentshartComponent } from './components/schoolstudentshart/schoolstudentshart.component';
 
 export function jwtOptionFactor() {
   return {
@@ -35,6 +36,7 @@ export function jwtOptionFactor() {
     ListteachersComponent,
     CreateteacherComponent,
     CreatestudentComponent,
+    SchoolstudentshartComponent,
   ],
   imports: [
     BrowserModule,

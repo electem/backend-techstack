@@ -26,7 +26,7 @@ export class TeacherService {
       .createQueryBuilder('teacher')
       .select(['teacher', 'school'])
       .leftJoinAndSelect('teacher.school', 'school')
-      .where('school.id= :id', { id: id })
+      .where('teacher.teacherid= :id', { id: id })
       .getOne();
     return postWithQueryBuilder;
   }

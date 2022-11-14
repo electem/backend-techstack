@@ -1,7 +1,7 @@
 import { Files } from './file.model';
 import { School } from './school.model';
 export class Student {
-  id?: number;
+  studentid?: number;
   name?: string;
   address?: string;
   phonenumber?: number;

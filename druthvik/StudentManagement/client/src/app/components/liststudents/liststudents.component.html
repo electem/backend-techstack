@@ -7,7 +7,7 @@
   <div class="col-md-6">
     <ul class="list-group"></ul>
     <td>
-      <button routerLink="/createcompany">Add Students</button>
+      <button routerLink="/createstudents">Add Students</button>
     </td>
   </div>
   <div class="container">
@@ -20,6 +20,7 @@
           <th class="text-center" scope="col">Name</th>
           <th class="text-center" scope="col">Address</th>
           <th class="text-center" scope="col">Created AT</th>
+          <th class="text-center" scope="col">Buttons</th>
         </tr>
       </thead>
       <tbody
@@ -44,7 +45,7 @@
             <button
               type="button"
               class="btn btn-warning btn-sm mr-2"
-              routerLink="/createstudents/{{ student.id }}"
+              routerLink="/createstudents/{{ student.studentid }}"
             >
               Edit
             </button>
@@ -54,9 +55,6 @@
               (click)="deleteStudentById(student.id)"
             >
               Delete
-            </button>
-            <button type="button" class="btn button btn-sm mr-2 marignleft">
-              send mail
             </button>
           </th>
         </tr>

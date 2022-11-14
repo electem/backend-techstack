@@ -12,7 +12,6 @@ import { SchoolService } from 'src/app/services/school.service';
 import { School } from 'src/app/models/school.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FileService } from 'src/app/services/file.service';
-import { Files } from 'src/app/models/file.model';
 @Component({
   selector: 'app-createteacher',
   templateUrl: './createteacher.component.html',
@@ -32,13 +31,14 @@ export class CreateteacherComponent implements OnInit {
   schools: School[] = [];
   currentSchool = new School();
   AdddedSchoolList: School[] = [];
-  genders: Gender[];
+  genders: string[];
   selectedGender: string;
-  showeditedform: boolean;
-  showform: boolean;
   file: File;
   editFile = true;
   removeUpload = false;
+  id: number;
+  addForm: boolean;
+  boolean: boolean;
   constructor(
     private teacherService: TeacherService,
     private formBuilder: FormBuilder,
@@ -53,15 +53,18 @@ export class CreateteacherComponent implements OnInit {
     this.createtTeacherForm = this.formBuilder.group({
       name: ['', Validators.required],
       address: ['', Validators.required],
-      phonenumber: ['', Validators.required],
-      email: ['', Validators.required],
+      phonenumber: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
+      email: ['', [Validators.required, Validators.email]],
       gender: ['', Validators.required],
       school: ['', Validators.required],
-      file: ['', Validators.required],
     });
     this.getGenders();
     this.retrieveSchools();
-    this.getTeacherById(this.route.snapshot.params.id);
+    if (this.route.snapshot.params.id) {
+      this.getTeacherById(this.route.snapshot.params.id);
+    }
+    this.id = this.route.snapshot.params.id;
+    this.addForm = !this.id;
   }
   get f() {
     return this.createtTeacherForm.controls;
@@ -75,16 +78,15 @@ export class CreateteacherComponent implements OnInit {
     }
   }
   async createTeacher(): Promise<void> {
-    const createCompany: Teacher = {
+    const createTeacher: Teacher = {
       name: this.createteacher.name,
       address: this.createteacher.address,
       phonenumber: this.createteacher.phonenumber,
       email: this.createteacher.email,
-      gender: this.selectedGender,
+      gender: this.createteacher.gender,
       school: this.AdddedSchoolList,
-      file: this.createteacher.file,
     };
-    await this.teacherService.createTeacher(createCompany);
+    await this.teacherService.createTeacher(createTeacher);
   }
   async retrieveSchools(): Promise<void> {
     this.schools = await this.schoolservice.getSchools();
@@ -98,23 +100,15 @@ export class CreateteacherComponent implements OnInit {
     this.genders = this.teacherService.getGenders();
   }
 
-  getSelectedTeacherGender(gender: Gender) {
-    this.selectedGender = gender.name;
-  }
-
-  onSelectTeacherGender(gender: Gender) {
-    this.getSelectedTeacherGender(gender);
-  }
   async getTeacherById(id: number) {
-    this.showform = false;
-    this.showeditedform = true;
     this.createteacher = await this.teacherService.getTeacherById(id);
   }
 
   async updateTeacher(): Promise<void> {
     const teacher: Teacher = {
-      id: this.createteacher.id,
+      teacherid: this.createteacher.teacherid,
       name: this.createteacher.name,
+      address: this.createteacher.address,
       phonenumber: this.createteacher.phonenumber,
       email: this.createteacher.email,
       gender: this.createteacher.gender,

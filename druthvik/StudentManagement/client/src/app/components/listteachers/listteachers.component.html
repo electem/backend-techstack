@@ -7,7 +7,7 @@
   <div class="col-md-6">
     <ul class="list-group"></ul>
     <td>
-      <button routerLink="/createcompany">Add Teachers</button>
+      <button routerLink="/createteachers">Add Teachers</button>
     </td>
   </div>
   <div class="container">
@@ -19,6 +19,7 @@
         <tr class="active">
           <th class="text-center" scope="col">Name</th>
           <th class="text-center" scope="col">Address</th>
+          <th class="text-center" scope="col">Gender</th>
           <th class="text-center" scope="col">Created AT</th>
         </tr>
       </thead>
@@ -36,6 +37,7 @@
       >
         <tr>
           <th class="text-center" scope="row">{{ teacher.name }}</th>
+          <th class="text-center" scope="row">{{ teacher.gender }}</th>
           <th class="text-center" scope="row">{{ teacher.address }}</th>
           <th class="text-center" scope="row">
             {{ teacher.createdAt | date: 'medium' }}
@@ -44,14 +46,14 @@
             <button
               type="button"
               class="btn btn-warning btn-sm mr-2"
-              routerLink="/createteachers/{{ teacher.id }}"
+              routerLink="/createteachers/{{ teacher.teacherid }}"
             >
               Edit
             </button>
             <button
               type="button"
               class="btn btn-danger btn-sm mr-2 marignleft"
-              (click)="deleteTeacherById(teacher.id)"
+              (click)="deleteTeacherById(teacher.teacherid)"
             >
               Delete
             </button>

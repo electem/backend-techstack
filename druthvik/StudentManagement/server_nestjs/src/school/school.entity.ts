@@ -6,13 +6,14 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   OneToMany,
+  ManyToOne,
 } from 'typeorm';
 import { Teacher } from 'src/teacher/teacher.entity';
 import { Student } from 'src/student/student.entity';
 @Entity()
 export class School {
   @PrimaryGeneratedColumn()
-  id: number;
+  schoolid: number;
 
   @Column()
   name: string;
@@ -29,6 +30,6 @@ export class School {
   @JoinTable()
   teacher!: Teacher[];
 
-  @OneToMany((_type) => Student, (student: Student) => student.school)
-  student!: Array<Student>;
+  @OneToMany((_type) => Student, (students: Student) => students.school)
+  students!: Array<Student>;
 }
