@@ -22,22 +22,22 @@ export class SchoolService {
     return await this.schoolRepository.find();
   }
 
-  async findSchoolByID(id: number) {
+  async findSchoolByID(schoolid: number) {
     const postWithQueryBuilder = await this.schoolRepository
       .createQueryBuilder('school')
-      .select(['school', 'teacher', 'student'])
+      .select(['school', 'teacher', 'students'])
       .leftJoinAndSelect('school.teacher', 'teacher')
-      .leftJoinAndSelect('school.student', 'student')
-      .where('school.id= :id', { id: id })
+      .leftJoinAndSelect('school.students', 'students')
+      .where('school.schoolid= :id', { id: schoolid })
       .getOne();
     return postWithQueryBuilder;
   }
   async getAllSchool() {
     const getAll = await this.schoolRepository
       .createQueryBuilder('school')
-      .select(['school', 'teacher', 'student'])
+      .select(['school', 'teacher', 'students'])
       .leftJoinAndSelect('school.teacher', 'teacher')
-      .leftJoinAndSelect('school.student', 'student')
+      .leftJoinAndSelect('school.students', 'students')
       .getMany();
     return getAll;
   }

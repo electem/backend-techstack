@@ -12,7 +12,7 @@ import { Files } from 'src/file/file.entitiy';
 @Entity()
 export class Teacher {
   @PrimaryGeneratedColumn()
-  id: number;
+  teacherid: number;
 
   @Column()
   name: string;

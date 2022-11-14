@@ -22,12 +22,13 @@ export class StudentService {
       throw new HttpException(err, HttpStatus.BAD_REQUEST);
     }
   }
-  async findStudentByID(id: number) {
+  async findStudentByID(studentid: number) {
     const postWithQueryBuilder = await this.studentRepository
-      .createQueryBuilder('student')
-      .select(['student', 'school'])
-      .leftJoinAndSelect('student.school', 'school')
-      .where('school.id= :id', { id: id })
+      .createQueryBuilder('students')
+      .select(['students', 'school', 'file'])
+      .leftJoinAndSelect('students.school', 'school')
+      .leftJoinAndSelect('students.file', 'file')
+      .where('students.studentid= :id', { id: studentid })
       .getOne();
     return postWithQueryBuilder;
   }

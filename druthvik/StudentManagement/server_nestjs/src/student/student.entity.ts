@@ -5,13 +5,16 @@ import {
   PrimaryGeneratedColumn,
   JoinColumn,
   CreateDateColumn,
+  OneToMany,
+  ManyToOne,
 } from 'typeorm';
 import { School } from 'src/school/school.entity';
 import { Files } from 'src/file/file.entitiy';
+
 @Entity()
 export class Student {
   @PrimaryGeneratedColumn()
-  id: number;
+  studentid: number;
 
   @Column()
   name: string;
@@ -34,9 +37,10 @@ export class Student {
   @CreateDateColumn()
   createdAt!: Date;
 
-  @OneToOne(() => School, { cascade: true })
+  schoolId!: number;
+  @ManyToOne((_type) => School, (school: School) => school.students)
   @JoinColumn()
-  school: School;
+  school!: School;
 
   @OneToOne(() => Files, (file) => file.student)
   @JoinColumn()
