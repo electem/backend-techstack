@@ -18,6 +18,9 @@ export class CreateschoolComponent implements OnInit {
   dropdownSettings: IDropdownSettings = {};
   dropdownSettingstudent: IDropdownSettings = {};
 
+  id?: number;
+  isAddMode?: boolean;
+
   school: School = {
     schoolname: '',
     address: '',
@@ -42,22 +45,32 @@ export class CreateschoolComponent implements OnInit {
     this.createSchool = this.formBuilder.group({
       schoolname: ['', Validators.required],
       address: ['', Validators.required],
+      teachers: ['', Validators.required],
+      students: ['', Validators.required],
     });
+   
     this.dropdownSettings = {
-      idField: 'id',
+      idField: 'teacherid',
       textField: 'teachername',
       selectAllText: 'Select All',
+      itemsShowLimit: 3,
+      allowSearchFilter: true
     };
 
     this.retrieveTeachers();
     this.dropdownSettingstudent = {
-      idField: 'id',
+      idField: 'studentid',
       textField: 'studentname',
       selectAllText: 'Select All',
+      itemsShowLimit: 3,
+      allowSearchFilter: true
     };
 
     this.retrieveStudents();
     this.retrieveSchool(this.route.snapshot.params.id);
+
+    this.id = this.route.snapshot.params['id'];
+    this.isAddMode = !this.id;
   }
 
   async retrieveTeachers(): Promise<void> {
@@ -68,7 +81,7 @@ export class CreateschoolComponent implements OnInit {
     this.students = await this.schoolService.getallStudents();
   }
 
-  async selectedTeachers(teacher: any): Promise<void> {
+  async selectedTeacher(teacher: any): Promise<void> {
     this.currentTeacher = teacher;
     this.AddedTeachers?.push(this.currentTeacher);
   }
@@ -91,12 +104,13 @@ export class CreateschoolComponent implements OnInit {
   get fval() {
     return this.createSchool.controls;
   }
-  async updateSchool() {
+
+  async saveSchool() {
     this.submitted = true;
     if (this.createSchool.invalid) {
       return;
     }
-    this.getUpdated();
+    this.getSubmit();
   }
 
   async getSubmit() {
@@ -112,17 +126,25 @@ export class CreateschoolComponent implements OnInit {
   }
 
   getBack() {
-    this.router.navigate([]);
+    this.router.navigate(['school-list']);
   }
 
   async retrieveSchool(id: number): Promise<void> {
     this.school = await this.schoolService.getSchoolbyid(id);
   }
 
+  async updateSchool() {
+    this.submitted = true;
+    if (this.createSchool.invalid) {
+      return;
+    }
+    this.getUpdated();
+  }
+
   async getUpdated() {
     this.submitted = true;
     const schoolinfo: School = {
-      id:this.school.id,
+      schoolid:this.school.schoolid,
       schoolname: this.school.schoolname,
       address: this.school.address,
       teachers: this.AddedTeachers,

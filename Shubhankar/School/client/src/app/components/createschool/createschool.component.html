@@ -1,6 +1,7 @@
 <div class="row">
   <div class="col-md-4 offset-md-3 col-md-6 col-sm-offset-2 col-sm-8">
-    <h4>Create School</h4>
+    <h4 *ngIf="isAddMode">Add School</h4>
+    <h4 *ngIf="!isAddMode">Edit School</h4>
     <form [formGroup]="createSchool" (ngSubmit)="updateSchool()">
       <div class="form-group">
         <label for="schoolname">schoolName</label>
@@ -40,17 +41,20 @@
       <div class="form-group">
         <label for="teachers">Teacher</label>
         <ng-multiselect-dropdown
+         formControlName="teachers"
           [(ngModel)]="school.teachers"
           [settings]="dropdownSettings"
           [data]="teachers"
-          (onSelect)="selectedTeachers($event)"
+          (onSelect)="selectedTeacher($event)"
           (onSelectAll)="onSelectAllTeachers($event)"
+          
         >
         </ng-multiselect-dropdown>
       </div>
       <div class="form-group">
-        <label for="student">Student</label>
+        <label for="students">Student</label>
         <ng-multiselect-dropdown
+          formControlName="students"
           [(ngModel)]="school.students"
           [settings]="dropdownSettingstudent"
           [data]="students"
@@ -60,6 +64,13 @@
         </ng-multiselect-dropdown>
       </div>
       <button
+      type="button"  *ngIf="isAddMode"
+      class="btn btn-outline-success"
+      (click)="saveSchool()"
+    >
+      Save
+    </button>
+      <button *ngIf="!isAddMode"
         type="button"
         class="btn btn-outline-success"
         (click)="updateSchool()"

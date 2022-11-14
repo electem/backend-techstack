@@ -1,7 +1,8 @@
 <div class="row">
   <div class="col-md-4 offset-md-3 col-md-6 col-sm-offset-2 col-sm-8">
-    <h4>Edit Teacher</h4>
-    <form [formGroup]="createTeacher" (ngSubmit)="create()">
+    <h4 *ngIf="isAddMode">Add Teacher</h4>
+    <h4 *ngIf="!isAddMode">Edit Teacher</h4>
+    <form [formGroup]="createTeacher" (ngSubmit)="updateTeacher()">
       <div class="form-group">
         <label for="teachername">TeacherName</label>
         <input
@@ -86,15 +87,40 @@
           </div>
         </div>
       </div>
-      <label>Select School</label>
-      <li *ngFor="let school of schools">
-        <input
-          type="checkbox"
-          (click)="onSelectPushExtraSchoolToSchoolsList(school)"
-        />
-        {{ school.schoolname }}
-      </li>
-      <button type="button" class="btn btn-outline-success" (click)="updateTeacher()">
+     <div class="column">
+        <label>Select School</label>
+        <div *ngFor="let school of schools">
+          <input
+            type="checkbox"
+            (click)="selectedSchoolRecord(school)"
+            [ngClass]="{ 'is-invalid': submitted && fval.schools.errors }"
+            id="schools"
+            name="schools"
+            formControlName="schools"
+           
+          />{{ school.schoolname }}
+          <div *ngIf="submitted && fval.schools.errors" class="invalid-feedback">
+            <div *ngIf="fval.schools.errors.required">
+              Schools Field is required
+            </div>
+          </div>
+          </div>
+     </div>
+     
+
+      <button  *ngIf="isAddMode"
+      type="button"
+      class="btn btn-outline-success"
+      (click)="saveTeacher()"
+    >
+      Save
+    </button>
+
+      <button *ngIf="!isAddMode"
+        type="button"
+        class="btn btn-outline-success"
+        (click)="updateTeacher()"
+      >
         Update
       </button>
       <button type="button" class="btn btn-outline-danger" (click)="getBack()">
