@@ -1,4 +1,5 @@
-<h1 class="card-title text-center">Add Student</h1>
+<h1 class="card-title text-center" *ngIf="addForm">ADD STUDENT</h1>
+<h1 class="card-title text-center" *ngIf="!addForm">EDIT STUDENT</h1>
 <div class="form">
   <form [formGroup]="registerForm">
     <div class="form-group">
@@ -16,15 +17,15 @@
     <div class="form-group">
       <label for="genders">Select a gender</label>
       <div *ngFor="let gender of genders; let i = index">
-        <input id="gender{{ i }}" formControlName="genders" name="genders" type="radio" [value]="gender"
+        <input formControlName="genders" name="genders" type="radio" [value]="gender"
           [(ngModel)]="currentStudent.gender" />
         <label for="">{{ gender }}</label>
       </div>
     </div>
 
     <div class="form-group">
-      <input matInput [matDatepicker]="picker" class="form-control item" placeholder="Choose a date"
-        [(ngModel)]="currentStudent.dateOfBirth" formControlName="dateOfBirth" name="dateOfBirth" />
+      <input matInput [matDatepicker]="picker" placeholder="Choose a date" [(ngModel)]="currentStudent.dateOfBirth"
+        formControlName="dateOfBirth" name="dateOfBirth" />
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </div>
@@ -62,32 +63,32 @@
       </div>
     </div>
 
-    <div class="row">
+    <div class="form-group">
       <label>
         <input type="file" (change)="selectFile($event)" />
       </label>
     </div>
-    <button class="btn btn-success" [disabled]="!selectedFiles" (click)="upload()">
+    <button class="btn-primary" [disabled]="!selectedFiles" (click)="upload()">
       Upload
     </button>
-    <button class="btn btn-success" (click)="downloadFile()">
-      Download
-    </button><br><br>
 
     <div class="form-group">
       <p class="text-center">
         Schools
-        <select class="form-control" formControlName="school" name="school" [(ngModel)]="selectedSchool"
-          (ngModelChange)="onSelected(selectedSchool)">
+        <select class="form-control" formControlName="school" name="school"
+          [(ngModel)]="currentStudent.school && currentStudent.school.schoolId" (ngModelChange)="onSelected($event)">
           <option disabled [value]="" selected>Choose School</option>
-          <option *ngFor="let school of schools" [ngValue]="school">
+          <option *ngFor="let school of schools" [ngValue]="school.schoolId">
             {{ school.schoolName }}
           </option>
         </select>
       </p>
     </div>
-    <button type="button" class="btn btn-success" (click)="signup()">
+    <button *ngIf="addForm" type="button" class="btn btn-success" (click)="signup()">
       Save
+    </button>
+    <button *ngIf="!addForm" type="button" class="btn btn-success" (click)="updateStudent()">
+      Update
     </button>
     <button type=" button" class="btn btn-warning" routerLink="/student-list">
       Cancel

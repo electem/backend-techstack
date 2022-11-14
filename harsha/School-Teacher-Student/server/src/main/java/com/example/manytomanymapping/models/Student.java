@@ -46,7 +46,7 @@ public class Student {
 	@CreationTimestamp
 	private Date createdDate;
 
-	@JsonIgnoreProperties("students")
+	@JsonIgnoreProperties({"students","teachers"})
 	@OneToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "school_id")
 	private School school;

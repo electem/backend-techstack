@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FileUploadService } from 'src/app/services/file-upload.service';
 import { School } from '../../models/school.model';
 import { Student } from '../../models/student.model';
@@ -22,6 +22,8 @@ export class CreateStudentComponent implements OnInit {
   currentFile?: File;
   progress = 0;
   message = '';
+  id?: number;
+  addForm?: boolean;
   currentStudent: Student = {
     studentName: '',
     gender: '',
@@ -35,7 +37,8 @@ export class CreateStudentComponent implements OnInit {
     private studentService: StudentService,
     private router: Router,
     private formBuilder: FormBuilder,
-    private fileUploadService: FileUploadService
+    private fileUploadService: FileUploadService,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -46,15 +49,20 @@ export class CreateStudentComponent implements OnInit {
       address: ['', Validators.required],
       email: [
         '',
-        Validators.required,
-        Validators.email,
-        Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
+        [
+          Validators.required,
+          Validators.email,
+          Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
+        ],
       ],
       phoneNo: ['', Validators.required],
       school: ['', Validators.required],
     });
     this.getSchools();
     this.getGenders();
+    this.getStudentById(this.route.snapshot.params.id);
+    this.id = this.route.snapshot.params.id;
+    this.addForm = !this.id;
   }
 
   get validation() {
@@ -78,8 +86,13 @@ export class CreateStudentComponent implements OnInit {
     this.genders = await this.studentService.getGender();
   }
 
-  onSelected(value: School) {
-    this.currentStudent.school = value;
+  onSelected(school: string) {
+    const schoolData = this.schools.filter((s) => s.schoolId === +school);
+    this.selectedSchool = schoolData[0];
+  }
+
+  async getStudentById(id: number): Promise<void> {
+    this.currentStudent = await this.studentService.getStudentById(id);
   }
 
   async saveStudent(): Promise<void> {
@@ -93,6 +106,24 @@ export class CreateStudentComponent implements OnInit {
       school: this.currentStudent.school,
     };
     await this.studentService.createStudent(student);
+    this.router.navigate(['/student-list']);
+  }
+
+  async updateStudent(): Promise<void> {
+    const student: Student = {
+      studentId: this.currentStudent.studentId,
+      studentName: this.currentStudent.studentName,
+      gender: this.currentStudent.gender,
+      dateOfBirth: this.currentStudent.dateOfBirth,
+      address: this.currentStudent.address,
+      email: this.currentStudent.email,
+      phoneNo: this.currentStudent.phoneNo,
+      school: this.currentStudent.school,
+    };
+    await this.studentService.updateStudent(
+      this.currentStudent.studentId!,
+      student
+    );
     this.router.navigate(['/student-list']);
   }
 
@@ -110,19 +141,5 @@ export class CreateStudentComponent implements OnInit {
       }
       this.selectedFiles = undefined;
     }
-  }
-
-  public downloadFile(): void {
-    this.fileUploadService.getFiles(this.currentFile!).subscribe((response) => {
-      let fileName = response.headers
-        .get('Content-Disposition')
-        ?.split(';')[1]
-        .split('=')[1];
-      let blob: Blob = response.body as Blob;
-      let a = document.createElement('a');
-      a.download = fileName!;
-      a.href = window.URL.createObjectURL(blob);
-      a.click();
-    });
   }
 }
