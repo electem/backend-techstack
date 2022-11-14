@@ -20,7 +20,7 @@ export class CreateschoolComponent implements OnInit {
     name: '',
     address: '',
     teacher: [],
-    student: [],
+    students: [],
   };
   currentTeacher = new Teacher();
   addedTeachers: Teacher[] = [];
@@ -28,10 +28,12 @@ export class CreateschoolComponent implements OnInit {
   currentStudent = new Student();
   addedStudents: Student[] = [];
   students: Student[] = [];
+  schools: School[] = [];
   requiredField: boolean = false;
-  dropdownSettings: IDropdownSettings = {};
-  showUpdateButton: boolean = true;
-  showcreatebutton: boolean;
+  teacherDropdownSettings: IDropdownSettings = {};
+  studentDropdownSettings: IDropdownSettings = {};
+  id: number;
+  addForm: boolean;
   constructor(
     private schoolservice: SchoolService,
     private teacherservice: TeacherService,
@@ -46,16 +48,23 @@ export class CreateschoolComponent implements OnInit {
       name: ['', Validators.required],
       address: ['', Validators.required],
       teacher: ['', Validators.required],
-      student: ['', Validators.required],
+      students: ['', Validators.required],
     });
     this.retrieveTeachers();
     this.retrieveStudents();
-    this.dropdownSettings = {
-      idField: 'id',
+    this.teacherDropdownSettings = {
+      idField: 'teacherid',
       textField: 'name',
     };
-
-    this.getSchoolById(this.route.snapshot.params.id);
+    this.studentDropdownSettings = {
+      idField: 'studentid',
+      textField: 'name',
+    };
+    if (this.route.snapshot.params.id) {
+      this.getSchoolById(this.route.snapshot.params.id);
+    }
+    this.id = this.route.snapshot.params.id;
+    this.addForm = !this.id;
   }
 
   get f() {
@@ -79,14 +88,14 @@ export class CreateschoolComponent implements OnInit {
     }
   }
   async createSchool(): Promise<void> {
-    this.showcreatebutton = true;
     const createSchool: School = {
       name: this.createschool.name,
       address: this.createschool.address,
       teacher: this.addedTeachers,
-      student: this.addedStudents,
+      students: this.addedStudents,
     };
     await this.schoolservice.createSchool(createSchool);
+    this.router.navigate(['/listschools']);
   }
   onSelectTeachers(teacher: Teacher) {
     this.currentTeacher = teacher;
@@ -99,19 +108,19 @@ export class CreateschoolComponent implements OnInit {
   }
 
   async getSchoolById(id: number) {
-    this.showcreatebutton = false;
-    this.showUpdateButton = true;
     this.createschool = await this.schoolservice.getSchoolById(id);
   }
   async updateSchool(): Promise<void> {
-    this.showcreatebutton = false;
     const school: School = {
-      id: this.createschool.id,
+      schoolid: this.createschool.schoolid,
       name: this.createschool.name,
+      address: this.createschool.address,
       teacher: this.createschool.teacher,
-      student: this.createschool.student,
+      students: this.createschool.students,
     };
-    await this.schoolservice.updateSchool(school);
-    this.router.navigate(['/listschools']);
+    if (this.route.snapshot.params.id) {
+      await this.schoolservice.updateSchool(school);
+      this.router.navigate(['/listschools']);
+    }
   }
 }

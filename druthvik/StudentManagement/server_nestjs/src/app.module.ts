@@ -29,7 +29,18 @@ import { Files } from './file/file.entitiy';
       entities: [User, Student, Subject, Teacher, School, Files],
       synchronize: true,
     }),
-
+    MailerModule.forRoot({
+      transport: {
+        host: 'mail.electems.com',
+        port: 465,
+        ssl: false,
+        tls: true,
+        auth: {
+          user: 'druthvik@electems.com',
+          pass: 'cybRVE12#',
+        },
+      },
+    }),
     AuthModule,
     UsersModule,
     FileModule,
