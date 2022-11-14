@@ -1,0 +1,147 @@
+<div class="school-form">
+    <h1>Add Student</h1>
+    <form [formGroup]="registerForm">
+      <div class="form-group col-md-4">
+        <label for="name">Name</label>
+        <input
+          type="name"
+          formControlName="name"
+          class="form-control"
+          [(ngModel)]="newStudent.name"
+          [ngClass]="{ 'is-invalid': submitted && validation.name.errors }"
+        />
+        <div
+          *ngIf="this.submitted && validation.name.errors"
+          class="invalid-feedback"
+        >
+          <div *ngIf="validation.name.errors.required">
+            Name Field is required
+          </div>
+        </div>
+      </div>
+      <div class="form-group col-md-4">
+        <label for="name">Address</label>
+        <input
+          type="name"
+          formControlName="address"
+          class="form-control"
+          [(ngModel)]="newStudent.address"
+          [ngClass]="{ 'is-invalid': submitted && validation.address.errors }"
+        />
+        <div
+          *ngIf="this.submitted && validation.address.errors"
+          class="invalid-feedback"
+        >
+          <div *ngIf="validation.address.errors.required">
+            Address Field is required
+          </div>
+        </div>
+      </div>
+      <div class="form-group col-md-4">
+        <label for="name">Email</label>
+        <input
+          type="name"
+          formControlName="email"
+          class="form-control"
+          [(ngModel)]="newStudent.email"
+          [ngClass]="{ 'is-invalid': submitted && validation.email.errors }"
+        />
+        <div
+          *ngIf="this.submitted && validation.email.errors"
+          class="invalid-feedback"
+        >
+          <div *ngIf="validation.email.errors.required">
+            Email Field is required
+          </div>
+        </div>
+      </div>
+      <div class="form-group col-md-4">
+        <label for="name">Phone</label>
+        <input
+          type="phone"
+          formControlName="phone"
+          class="form-control"
+          [(ngModel)]="newStudent.phone"
+          [ngClass]="{ 'is-invalid': submitted && validation.phone.errors }"
+        />
+        <div
+          *ngIf="this.submitted && validation.phone.errors"
+          class="invalid-feedback"
+        >
+          <div *ngIf="validation.phone.errors.required">
+            Phone Field is required
+          </div>
+        </div>
+      </div>
+      <div class="form-group col-md-4">
+        <label for="name">Date Of Birth</label>
+        <input
+          type="date"
+          formControlName="dateOfBirth"
+          class="form-control"
+          [(ngModel)]="newStudent.dateOfBirth"
+          [ngClass]="{ 'is-invalid': submitted && validation.dateOfBirth.errors }"
+        />
+        <div
+          *ngIf="this.submitted && validation.dateOfBirth.errors"
+          class="invalid-feedback"
+        >
+          <div *ngIf="validation.dateOfBirth.errors.required">
+            Date Of Birth Field is required
+          </div>
+        </div>
+      </div>
+      <div class="form-group col-md-4"></div>
+          <label for="name">Gender:</label>
+      <div *ngFor="let gender of genders; let i = index">
+          <input id="gender{{i}}" formControlName="gender" type="radio"
+            [value]="gender" [(ngModel)]="newStudent.gender" />
+          <label for="">{{gender}}</label>
+        </div>
+
+        <div class="form-group col-md-4">
+          <label for="name">School : </label>
+        
+        <select
+        class="select-option"
+        formControlName="schools" 
+        required
+        [(ngModel)]="newStudent.schools && newStudent.schools.id"
+        (ngModelChange)="onSelectedSchool($event)"
+      >
+        <option
+          class="option"
+          *ngFor="let option of schools"
+          [value]="option.id"
+        >
+          {{ option.name }}
+        </option>
+      </select>
+        </div>
+          <div class="form-group col-md-4"></div>
+          <div *ngIf="selectedFile" class="progress">
+            <div
+              class="progress-bar progress-bar-info progress-bar-striped"
+              role="progressbar"
+              attr.aria-valuenow="{{ progress }}"
+              aria-valuemin="0"
+              aria-valuemax="100"
+              [ngStyle]="{ width: progress + '%' }"
+            >
+              {{ progress }}%
+            </div>
+          </div>
+          <label class="btn btn-default">
+            <input type="file" (change)="selectFile($event)" (change)="uploadNewFile()" />
+          </label>  
+        <br>
+      <button type="button" class="btn btn-success" (click)="signup()">Save</button>
+      <button type=" button" class="btn btn-warning" (click)="updateStudent()" >Update</button>
+      <button type=" button" class="btn btn-warning" routerLink="/studentList">
+        Cancel
+      </button>
+      
+    </form>
+ 
+  </div>
+ 
