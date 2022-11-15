@@ -6,7 +6,6 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   OneToMany,
-  ManyToOne,
 } from 'typeorm';
 import { Teacher } from 'src/teacher/teacher.entity';
 import { Student } from 'src/student/student.entity';
