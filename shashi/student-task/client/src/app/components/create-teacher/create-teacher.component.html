@@ -1,5 +1,6 @@
+<h2 *ngIf="addForm" class="text-center">Create Teacher</h2>
+<h2 *ngIf="!addForm" class="text-center">Update teacher</h2>
 <div class="container">
-  <h5 class="card-title text-center pb-0 fs-4">Create Teacher</h5>
   <br />
   <div class="row">
     <div class="col-md-6 offset-md-4">
@@ -61,12 +62,21 @@
                 }"
                 [(ngModel)]="teacher.email"
               />
+              <span
+                class="text-danger"
+                *ngIf="
+                  createTeacherForm.controls['email'].hasError('pattern') &&
+                  (createTeacherForm.controls['email'].dirty ||
+                    createTeacherForm.controls['email'].touched)
+                "
+                >Please enter valid email address</span
+              >
               <div
                 *ngIf="submitted && formValidation.email.errors"
                 class="invalid-feedback"
               >
                 <div *ngIf="formValidation.email.errors.required">
-                  email is required
+                  Email is required
                 </div>
               </div>
             </div>
@@ -117,24 +127,26 @@
                 </div>
               </div>
             </div>
-            <!-- <div class="form-group">
+            <div class="form-group">
               <label for="options">Current Schools</label>
               <div *ngFor="let school of teacher.school">
                 <label>
                   <input
                     type="checkbox"
-                    
                     [(ngModel)]="school.schoolid"
-                    (click)="selectedSchoolMethod(school)"
+                    (click)="removeActiveDepartment(school)"
                   />
                   {{ school.schoolname }}
                 </label>
               </div>
-            </div> -->
+            </div>
             <br />
             <div class="text-center">
-              <button class="btn btn-primary btn-sm">Submit</button>
+              <button class="btn btn-primary btn-sm" *ngIf="addForm">
+                Submit
+              </button>
               <button
+                *ngIf="!addForm"
                 class="btn btn-outline-success btn-sm btn-space"
                 routerLink="/teacherslist"
                 (click)="updateTeacher()"

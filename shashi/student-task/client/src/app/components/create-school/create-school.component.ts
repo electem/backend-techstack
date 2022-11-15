@@ -30,6 +30,8 @@ export class CreateSchoolComponent implements OnInit {
     teacher: [],
     students: [],
   };
+  id?: number;
+  addForm?: boolean;
   constructor(
     private schoolService: SchoolService,
     private formBuilder: FormBuilder,
@@ -57,6 +59,8 @@ export class CreateSchoolComponent implements OnInit {
       idField: 'studentid',
       textField: 'studentname',
     };
+    this.id = this.route.snapshot.params.id;
+    this.addForm = !this.id;
   }
   get formValidation() {
     return this.createSchoolForm.controls;

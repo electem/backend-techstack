@@ -60,7 +60,8 @@ export class CreateStudentComponent implements OnInit {
   removeUpload = false;
   downloadFileName!: string;
   file!: File;
-  id: Image['id'];
+  id?: number;
+  addForm?: boolean;
   ngOnInit(): void {
     if (this.route.snapshot.params.id) {
       this.getStudentById(this.route.snapshot.params.id);
@@ -90,6 +91,8 @@ export class CreateStudentComponent implements OnInit {
     });
     this.retrieveschools();
     this.retieveGenders();
+    this.id = this.route.snapshot.params.id;
+    this.addForm = !this.id;
   }
   //async uploadImage(): Promise<void> {}
   chooseFile(event: any) {
@@ -137,10 +140,9 @@ export class CreateStudentComponent implements OnInit {
       dob: this.student.dob,
       gender: this.student.gender,
       school: this.currentSchool,
-      //imageid?: Image?['id']
     };
-    // await this.schoolService.uploadFile(this.file);
-    // console.log(this.file)
+    await this.schoolService.uploadFile(this.file);
+    // console.log(this.file);
     await this.schoolService.createStudent(StudentData);
     this.router.navigate(['/studentslist']);
   }

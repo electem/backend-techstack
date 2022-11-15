@@ -1,5 +1,6 @@
+<h2 *ngIf="addForm" class="text-center">Create School</h2>
+<h2 *ngIf="!addForm" class="text-center">Update School</h2>
 <div class="container">
-  <h5 class="card-title text-center pb-0 fs-4">Create School</h5>
   <br />
   <div class="row">
     <div class="col-md-6 offset-md-4">
@@ -53,7 +54,7 @@
               <ng-multiselect-dropdown
                 formControlName="teacher"
                 name="teacher"
-                [settings]="dropdownSettings" 
+                [settings]="dropdownSettings"
                 [data]="teachersList"
                 [(ngModel)]="school.teacher"
                 (onSelect)="selectedTeacher($event)"
@@ -75,8 +76,11 @@
             </div>
             <br />
             <div class="text-center">
-              <button class="btn btn-primary btn-sm">Submit</button>
+              <button class="btn btn-primary btn-sm" *ngIf="addForm">
+                Submit
+              </button>
               <button
+                *ngIf="!addForm"
                 class="btn btn-outline-success btn-sm btn-space"
                 routerLink="/schoollisting"
                 (click)="updateSchool()"

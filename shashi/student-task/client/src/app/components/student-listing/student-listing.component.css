@@ -38,3 +38,6 @@
   .btn-space {
     margin-left: 10px;
   }
+  .sidebar-opener {
+    cursor: pointer;
+}

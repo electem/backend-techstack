@@ -1,5 +1,6 @@
+<h2 *ngIf="addForm" class="text-center">Add Students</h2>
+<h2 *ngIf="!addForm" class="text-center">Update Students</h2>
 <div class="container">
-  <h5 class="card-title text-center pb-0 fs-4">Create Student</h5>
   <div class="row">
     <div class="col-md-4 offset-md-4">
       <div class="card mb-4">
@@ -160,8 +161,7 @@
                 {{ option.schoolname }}
               </option>
             </select>
-
-            <!-- <div class="group-gap">
+            <div class="group-gap">
               <div class="avatar-upload">
                 <div class="avatar-edit">
                   <input
@@ -173,7 +173,7 @@
                   />
                 </div>
               </div>
-            </div> -->
+            </div>
             <br />
             <!-- <button
               type="submit"
@@ -217,8 +217,9 @@
             </div> -->
 
             <div class="text-center">
-              <button class="btn btn-primary">Submit</button>
+              <button class="btn btn-primary" *ngIf="addForm">Submit</button>
               <button
+                *ngIf="!addForm"
                 class="btn btn-outline-success btn-sm btn-space"
                 routerLink="/studentslist"
                 (click)="updateStudent()"

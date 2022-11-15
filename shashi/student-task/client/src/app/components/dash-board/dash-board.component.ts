@@ -10,6 +10,7 @@ import { Chart, registerables } from 'chart.js';
   styleUrls: ['./dash-board.component.css'],
 })
 export class DashBoardComponent implements OnInit {
+  public sidebarShow: boolean = false;
   schoolsList: School[] = [];
   teachersList: Teacher[] = [];
   schoolnames: string[] = [];
