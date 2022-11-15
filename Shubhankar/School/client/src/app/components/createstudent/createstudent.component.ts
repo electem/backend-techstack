@@ -13,12 +13,20 @@ import { School } from 'src/app/models/school';
 import { Student } from 'src/app/models/student';
 import { Gender, SchoolService } from 'src/app/services/school.service';
 
+class ImageSnippet {
+  constructor(public src: string, public file: File) {}
+}
+
+
 @Component({
   selector: 'app-createstudent',
   templateUrl: './createstudent.component.html',
   styleUrls: ['./createstudent.component.css'],
 })
 export class CreatestudentComponent implements OnInit {
+
+  selectedFile?: ImageSnippet;
+
   id?: number;
   isAddMode?: boolean;
   createStudent!: FormGroup;
@@ -38,6 +46,7 @@ export class CreatestudentComponent implements OnInit {
     gender: '',
     dateofbirth: '',
     school: {},
+    file: {},
   };
 
   schoolsList: School[] = [];
@@ -59,14 +68,17 @@ export class CreatestudentComponent implements OnInit {
   removeUpload = false;
   downloadFileName!: string;
   file!: File;
-  progress?: number;
+  progress = 0;
+  message = '';
+  preview = '';
 
   ngOnInit(): void {
     this.createStudent = this.formBuilder.group({
       studentname: ['', Validators.required],
       address: ['', Validators.required],
       phonenumber: ['', Validators.required],
-      email: ['',
+      email: [
+        '',
         [
           Validators.required,
           Validators.email,
@@ -108,8 +120,8 @@ export class CreatestudentComponent implements OnInit {
   }
 
   async getSubmit() {
-    this.submitted = true;
-    const studentinfo: Student = {
+      this.submitted = true;
+      const studentinfo: Student = {
       studentname: this.student.studentname,
       address: this.student.address,
       phonenumber: this.student.phonenumber,
@@ -183,8 +195,11 @@ export class CreatestudentComponent implements OnInit {
   }
 
   chooseFile(event: any) {
+    this.message = '';
+    this.preview = '';
+    this.progress = 0;
     const reader = new FileReader();
-    const file = event.target.files[0];
+    const file: File = event.target.files[0];
     this.file = file;
   }
 

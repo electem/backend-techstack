@@ -52,7 +52,6 @@ export class CreateschoolComponent implements OnInit {
     this.dropdownSettings = {
       idField: 'teacherid',
       textField: 'teachername',
-      selectAllText: 'Select All',
       itemsShowLimit: 3,
       allowSearchFilter: true
     };
@@ -61,7 +60,6 @@ export class CreateschoolComponent implements OnInit {
     this.dropdownSettingstudent = {
       idField: 'studentid',
       textField: 'studentname',
-      selectAllText: 'Select All',
       itemsShowLimit: 3,
       allowSearchFilter: true
     };
@@ -86,17 +84,7 @@ export class CreateschoolComponent implements OnInit {
     this.AddedTeachers?.push(this.currentTeacher);
   }
 
-  async onSelectAllTeachers(teacher: any): Promise<void> {
-    this.currentTeacher = teacher;
-    this.AddedTeachers?.push(this.currentTeacher);
-  }
-
   async selectedStudent(student: any): Promise<void> {
-    this.currentStudent = student;
-    this.AddedStudent?.push(this.currentStudent);
-  }
-
-  async onSelectAllStudent(student: any): Promise<void> {
     this.currentStudent = student;
     this.AddedStudent?.push(this.currentStudent);
   }

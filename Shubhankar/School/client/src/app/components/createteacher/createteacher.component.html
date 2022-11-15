@@ -87,7 +87,8 @@
           </div>
         </div>
       </div>
-     <div class="column">
+
+      <div *ngIf="isAddMode" class="column">
         <label>Select School</label>
         <div *ngFor="let school of schools">
           <input
@@ -97,26 +98,54 @@
             id="schools"
             name="schools"
             formControlName="schools"
-           
           />{{ school.schoolname }}
-          <div *ngIf="submitted && fval.schools.errors" class="invalid-feedback">
+          <div
+            *ngIf="submitted && fval.schools.errors"
+            class="invalid-feedback"
+          >
             <div *ngIf="fval.schools.errors.required">
               Schools Field is required
             </div>
           </div>
+        </div>
+      </div>
+
+      <div *ngIf="!isAddMode" class="form-group">
+        <label for="options">Current Schools</label>
+         <div *ngFor="let school of teacher.schools">
+          <label>
+            <input
+              type="checkbox"
+              formControlName="schools"
+              [(ngModel)]="school.schoolid"
+              (click)="onSelectPushToSchoolsList(school)"
+            />
+             {{ school.schoolname }}
+          </label>
+        </div>
+        <br />
+         <div>
+          <label for="options">Schools List</label>
+          <div *ngFor="let school of schools">
+            <label>
+              <input
+                type="checkbox"
+                (click)="onSelectPushToCurrentSchool(school)"
+              />
+              {{ school.schoolname }}
+            </label>
           </div>
-     </div>
-     
-
-      <button  *ngIf="isAddMode"
-      type="button"
-      class="btn btn-outline-success"
-      (click)="saveTeacher()"
-    >
-      Save
-    </button>
-
-      <button *ngIf="!isAddMode"
+        </div>
+      </div>
+      <button
+        *ngIf="isAddMode"
+        type="button"
+        class="btn btn-outline-success"
+        (click)="saveTeacher()"
+      > Save
+      </button>
+     <button
+        *ngIf="!isAddMode"
         type="button"
         class="btn btn-outline-success"
         (click)="updateTeacher()"

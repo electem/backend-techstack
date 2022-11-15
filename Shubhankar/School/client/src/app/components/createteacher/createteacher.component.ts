@@ -25,9 +25,14 @@ export class CreateteacherComponent implements OnInit {
   id?: number;
   isAddMode?: boolean;
 
-  schools: School[] = [];
+   schools: School[] = [];
   currentSchool: School = {};
   selectedSchool: School[] = [];
+
+  
+  schoolList:School[]=[];
+  addedSchools: School[] = [];
+  SelectedSchool: School = {};
 
   constructor(
     private schoolService: SchoolService,
@@ -112,7 +117,7 @@ export class CreateteacherComponent implements OnInit {
       phonenumber: this.teacher.phonenumber,
       email: this.teacher.email,
       gender: this.teacher.gender,
-      schools: this.selectedSchool,
+      schools: this.teacher.schools,
     };
     await this.schoolService.updateTeacher(teacherinfo);
     this.router.navigate(['/teacher-list']);
@@ -122,5 +127,19 @@ export class CreateteacherComponent implements OnInit {
     console.log(school);
     const data = this.schools.filter((s) => s.schoolid === +school);
     this.currentSchool = data[0];
+  }
+  
+  async onSelectPushToCurrentSchool(school: School): Promise<void> {
+    this.SelectedSchool = school;
+    this.teacher.schools?.push(this.SelectedSchool);
+    this.schools.splice(this.schools.indexOf(this.SelectedSchool), 1);
+  }
+  async onSelectPushToSchoolsList(school: School) {
+    this.SelectedSchool = school;
+    this.schools.push(this.SelectedSchool!);
+    this.teacher.schools?.splice(
+      this.teacher.schools?.indexOf(this.SelectedSchool),
+      1
+    );
   }
 }

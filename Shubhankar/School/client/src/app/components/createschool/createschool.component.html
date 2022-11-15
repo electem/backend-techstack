@@ -41,26 +41,45 @@
       <div class="form-group">
         <label for="teachers">Teacher</label>
         <ng-multiselect-dropdown
+        type="teachers"
+        class="form-control"
+        id="teachers"
          formControlName="teachers"
           [(ngModel)]="school.teachers"
           [settings]="dropdownSettings"
           [data]="teachers"
           (onSelect)="selectedTeacher($event)"
-          (onSelectAll)="onSelectAllTeachers($event)"
+          [ngClass]="{ 'is-invalid': submitted && fval.teachers.errors }"
           
         >
+        <div *ngIf="submitted && fval.teachers.errors" class="invalid-feedback">
+          <div *ngIf="fval.teachers.errors.required">
+            Teacher Field is required
+          </div>
+        </div>
+      
+
         </ng-multiselect-dropdown>
       </div>
       <div class="form-group">
         <label for="students">Student</label>
         <ng-multiselect-dropdown
+        type="students"
+        class="form-control"
+        id="students"
           formControlName="students"
           [(ngModel)]="school.students"
           [settings]="dropdownSettingstudent"
           [data]="students"
           (onSelect)="selectedStudent($event)"
-          (onSelectAll)="onSelectAllStudent($event)"
+         [ngClass]="{ 'is-invalid': submitted && fval.students.errors }"
         >
+        <div *ngIf="submitted && fval.students.errors" class="invalid-feedback">
+          <div *ngIf="fval.students.errors.required">
+            Student Field is required
+          </div>
+        </div>
+
         </ng-multiselect-dropdown>
       </div>
       <button
