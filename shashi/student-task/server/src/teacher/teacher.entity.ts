@@ -12,7 +12,7 @@ import { School } from 'src/school/school.entity';
 @Entity()
 export class Teacher {
   @PrimaryGeneratedColumn()
-  id: number;
+  teacherid: number;
 
   @Column()
   teachername: string;

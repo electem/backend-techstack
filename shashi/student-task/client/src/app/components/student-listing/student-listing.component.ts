@@ -51,4 +51,8 @@ export class StudentListingComponent implements OnInit {
         a.click();
       });
   }
+  async deleteStudentById(id: number): Promise<void> {
+    await this.schoolService.deleteStudentById(id);
+    this.retrieveStudents();
+  }
 }

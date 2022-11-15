@@ -21,15 +21,23 @@ export class SchoolService {
   public async findAllSchool(): Promise<School[]> {
     return await this.schoolRepository.find();
   }
-  async findOneSchool(id: number) {
+  async findOneSchool(schoolid: number) {
     const postWithQueryBuilder = await this.schoolRepository
       .createQueryBuilder('school')
       .select(['school', 'teacher'])
       .leftJoinAndSelect('school.teacher', 'teacher')
       .leftJoinAndSelect('school.students', 'students')
-      .where('school.id= :id', { id: id })
+      .where('school.schoolid= :id', { id: schoolid })
       .getOne();
     return postWithQueryBuilder;
+  }
+  async getAllSchoolWithTeacher() {
+    const getAll = await this.schoolRepository
+      .createQueryBuilder('school')
+      .select(['school', 'teacher'])
+      .leftJoinAndSelect('school.teacher', 'teacher')
+      .getMany();
+    return getAll;
   }
   public async updateSchool(schoolDto: SchoolDto): Promise<School> {
     try {
@@ -37,5 +45,9 @@ export class SchoolService {
     } catch (err) {
       throw new HttpException(err, HttpStatus.BAD_REQUEST);
     }
+  }
+  public async deleteSchool(id: number): Promise<void> {
+    const school = await this.findOneSchool(id);
+    await this.schoolRepository.remove(school);
   }
 }

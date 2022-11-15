@@ -28,10 +28,22 @@ export class TeacherController {
 
   @Get()
   async findAllTeacher(): Promise<Array<Teacher>> {
-    return this.teacherService.findAllTeacher();
+    return this.teacherService.getAllTeacherWithSchool();
   }
   @Get('/:id')
   async findOneTeacheer(@Param('id') id): Promise<Teacher> {
     return this.teacherService.findOneTeacheer(id);
+  }
+  @Put('/')
+  async updateTeacher(@Body() teacherDto: TeacherDto) {
+    return await this.teacherService.updateTeacher(teacherDto);
+  }
+  @Delete('/:id')
+  public async deleteTeacher(@Param('id') id: string): Promise<void> {
+    const teacher = this.teacherService.deleteTeacher(+id);
+    if (!teacher) {
+      throw new NotFoundException('teacher does not exist!');
+    }
+    return teacher;
   }
 }

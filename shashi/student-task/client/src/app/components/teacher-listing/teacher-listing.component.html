@@ -9,6 +9,9 @@
       <button routerLink="/createteacher">ADD NEW TEACHER</button>
     </td>
   </div>
+  <div class="sidebar-opener" routerLink="/dashboard">
+    Click Here For Dashboard
+  </div>
   <div class="container">
     <br />
     <table datatable class="row-border hover">
@@ -23,7 +26,7 @@
       <tbody *ngIf="teachersList?.length != 0">
         <tr
           *ngFor="
-            let school of teachersList
+            let teacher of teachersList
               | paginate
                 : {
                     itemsPerPage: itemsPerPage,
@@ -32,16 +35,16 @@
                   }
           "
         >
-          <td>{{ school.teachername }}</td>
-          <td>{{ school.address }}</td>
-          <td>{{ school.gender }}</td>
+          <td>{{ teacher.teachername }}</td>
+          <td>{{ teacher.address }}</td>
+          <td>{{ teacher.gender }}</td>
           <td>
             <button
               type="button"
               class="btn btn-outline-secondary btn-rounded btn-sm fw-bold"
               mdbRipple
               rippleColor="dark"
-              routerLink="/editcompany/{{ school.id }}"
+              routerLink="/createteacher/{{ teacher.teacherid }}"
             >
               Edit
             </button>
@@ -49,16 +52,17 @@
               type="button"
               style="margin: px"
               class="btn-outline-danger btn btn-sm mr-2 btn-space"
+              (click)="deleteTeacherById(teacher.teacherid!)"
             >
               delete
             </button>
-            <button
+            <!-- <button
               type="button"
               style="margin: px"
               class="btn-secondary btn btn-sm mr-2 btn-space"
             >
               Email
-            </button>
+            </button> -->
           </td>
           <br />
         </tr>

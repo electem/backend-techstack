@@ -1,5 +1,6 @@
+<h2 *ngIf="addForm" class="text-center">Create Teacher</h2>
+<h2 *ngIf="!addForm" class="text-center">Update teacher</h2>
 <div class="container">
-  <h5 class="card-title text-center pb-0 fs-4">Create Teacher</h5>
   <br />
   <div class="row">
     <div class="col-md-6 offset-md-4">
@@ -11,6 +12,7 @@
               <input
                 type="text"
                 formControlName="teachername"
+                name="teachername"
                 class="form-control"
                 [ngClass]="{
                   'is-invalid': submitted && formValidation.teachername.errors
@@ -32,6 +34,7 @@
               <input
                 type="text"
                 formControlName="address"
+                name="address"
                 class="form-control"
                 [ngClass]="{
                   'is-invalid': submitted && formValidation.address.errors
@@ -59,40 +62,97 @@
                 }"
                 [(ngModel)]="teacher.email"
               />
+              <span
+                class="text-danger"
+                *ngIf="
+                  createTeacherForm.controls['email'].hasError('pattern') &&
+                  (createTeacherForm.controls['email'].dirty ||
+                    createTeacherForm.controls['email'].touched)
+                "
+                >Please enter valid email address</span
+              >
               <div
                 *ngIf="submitted && formValidation.email.errors"
                 class="invalid-feedback"
               >
                 <div *ngIf="formValidation.email.errors.required">
-                  email is required
+                  Email is required
                 </div>
               </div>
             </div>
             <br />
             <div class="column">
-              <h2>select gender</h2>
+              <label for="options">select gender:</label>
               <div *ngFor="let gender of gendersList">
                 <input
-                  type="radio"
                   name="gender"
+                  formControlName="gender"
+                  type="radio"
                   [value]="gender"
                   [(ngModel)]="teacher.gender"
-                  (change)="getSelectedTeacherGender(gender)"
-                />{{ gender.name }}
+                  [ngClass]="{
+                    'is-invalid': submitted && formValidation.gender.errors
+                  }"
+                />{{ gender }}
+                <div
+                  *ngIf="submitted && formValidation.gender.errors"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="formValidation.gender.errors.required">
+                    gender is required
+                  </div>
+                </div>
               </div>
             </div>
             <div class="column">
-              <h2>Schools List</h2>
+              <label for="options">schoolsList:</label>
               <div *ngFor="let school of schoolsList">
                 <input
+                  name="options"
+                  formControlName="school"
                   type="checkbox"
+                  checked="ischecked"
+                  [ngClass]="{
+                    'is-invalid': submitted && formValidation.school.errors
+                  }"
                   (click)="selectedSchoolMethod(school)"
                 />{{ school.schoolname }}
+                <div
+                  *ngIf="submitted && formValidation.school.errors"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="formValidation.school.errors.required">
+                    school is required
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="options">Current Schools</label>
+              <div *ngFor="let school of teacher.school">
+                <label>
+                  <input
+                    type="checkbox"
+                    [(ngModel)]="school.schoolid"
+                    (click)="removeActiveDepartment(school)"
+                  />
+                  {{ school.schoolname }}
+                </label>
               </div>
             </div>
             <br />
             <div class="text-center">
-              <button class="btn btn-primary btn-sm">Submit</button>
+              <button class="btn btn-primary btn-sm" *ngIf="addForm">
+                Submit
+              </button>
+              <button
+                *ngIf="!addForm"
+                class="btn btn-outline-success btn-sm btn-space"
+                routerLink="/teacherslist"
+                (click)="updateTeacher()"
+              >
+                Update
+              </button>
               <button
                 class="btn btn-danger btn-sm btn-space"
                 routerLink="/teacherslist"

@@ -27,7 +27,7 @@ export class SchoolController {
   }
   @Get()
   async findAllSchool(): Promise<Array<School>> {
-    return this.schoolService.findAllSchool();
+    return this.schoolService.getAllSchoolWithTeacher();
   }
   @Get('/:id')
   async findOneSchool(@Param('id') id): Promise<School> {
@@ -36,5 +36,13 @@ export class SchoolController {
   @Put('/')
   async updateSchool(@Body() schoolDto: SchoolDto) {
     return await this.schoolService.updateSchool(schoolDto);
+  }
+  @Delete('/:id')
+  public async deleteSchool(@Param('id') id: string): Promise<void> {
+    const school = this.schoolService.deleteSchool(+id);
+    if (!school) {
+      throw new NotFoundException('school does not exist!');
+    }
+    return school;
   }
 }

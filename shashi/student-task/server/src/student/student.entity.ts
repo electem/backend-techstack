@@ -6,6 +6,7 @@ import {
   JoinColumn,
   JoinTable,
   ManyToMany,
+  ManyToOne,
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
@@ -15,7 +16,7 @@ import { Image } from 'src/fileupload-Download/file.entity';
 @Entity()
 export class Student {
   @PrimaryGeneratedColumn()
-  id: number;
+  studentid: number;
 
   @Column()
   studentname: string;
@@ -26,18 +27,18 @@ export class Student {
   @Column()
   email: string;
 
-  @Column()
+  @Column({ nullable: true })
   gender: string;
 
-  @Column({ nullable: true })
+  @Column()
   phonenumber: number;
 
-  @Column({ nullable: true })
+  @Column()
   dob?: Date;
 
-  @OneToOne(() => School, { cascade: true })
+  @ManyToOne(() => School, (school) => school.students)
   @JoinColumn()
-  school: School;
+  school: School[]
 
   @OneToOne(() => Image, (image) => image.students)
   @JoinColumn()
