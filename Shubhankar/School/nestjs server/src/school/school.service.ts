@@ -23,12 +23,25 @@ public async createSchool(schoolDto: SchoolDto): Promise<School> {
   }
 
   async getAllSchool() : Promise<School[]> {
-    return await this.schoolRepository.find();
+    const schoolteacherstudent =  await this.schoolRepository
+    .createQueryBuilder('schools')
+      .select(['schools', 'teachers'])
+      .leftJoinAndSelect('schools.teachers', 'teachers')
+      .leftJoinAndSelect('schools.students', 'students')
+      .getMany();
+    return schoolteacherstudent;
   }
 
   async schoolbyId(id: number): Promise<School> {
-    return this.schoolRepository.findOneBy({ id });
-  }
+    const schoolteacherstudent =  await this.schoolRepository
+    .createQueryBuilder('schools')
+    .select(['schools', 'teachers'])
+    .leftJoinAndSelect('schools.teachers', 'teachers')
+    .leftJoinAndSelect('schools.students', 'students')
+    .where("schools.schoolid= :schoolId", { schoolId: id })
+    .getOne();
+  return schoolteacherstudent;
+}
 
   public async updateSchool(schoolDto: SchoolDto): Promise<School> {
     try {
@@ -36,5 +49,10 @@ public async createSchool(schoolDto: SchoolDto): Promise<School> {
     } catch (err) {
       throw new HttpException(err, HttpStatus.BAD_REQUEST);
     }
+  }
+
+  public async removeSchool(id: number): Promise<void> {
+    const school = await this.schoolbyId(id);
+    await this.schoolRepository.remove(school);
   }
 }
