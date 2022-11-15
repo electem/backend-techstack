@@ -35,7 +35,7 @@ public async createSchool(schoolDto: SchoolDto): Promise<School> {
   async schoolbyId(id: number): Promise<School> {
     const schoolteacherstudent =  await this.schoolRepository
     .createQueryBuilder('schools')
-    .select(['schools', 'teachers'])
+    .select(['schools', 'teachers', 'students'])
     .leftJoinAndSelect('schools.teachers', 'teachers')
     .leftJoinAndSelect('schools.students', 'students')
     .where("schools.schoolid= :schoolId", { schoolId: id })
