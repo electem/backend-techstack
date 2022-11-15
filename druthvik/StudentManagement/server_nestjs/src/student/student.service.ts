@@ -1,4 +1,10 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import {
+  HttpException,
+  HttpStatus,
+  Injectable,
+  UploadedFile,
+  UseInterceptors,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Student } from './student.entity';
@@ -22,6 +28,7 @@ export class StudentService {
       throw new HttpException(err, HttpStatus.BAD_REQUEST);
     }
   }
+
   async findStudentByID(studentid: number) {
     const postWithQueryBuilder = await this.studentRepository
       .createQueryBuilder('students')

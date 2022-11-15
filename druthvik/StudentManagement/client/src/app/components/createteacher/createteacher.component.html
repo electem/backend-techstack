@@ -105,8 +105,17 @@
                     name="options"
                     formControlName="school"
                     value="{{ school.name }}"
-                    (click)="selectedSchoolss(school)"
+                    (click)="selectedSchools(school)"
                   />
+                  {{ school.name }}
+                </label>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="options">Current Schools</label>
+              <div *ngFor="let school of createteacher.school">
+                <label>
+                  <input type="checkbox" [(ngModel)]="createteacher.school" />
                   {{ school.name }}
                 </label>
               </div>

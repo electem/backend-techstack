@@ -5,4 +5,5 @@ export class StudentDto {
   readonly email: string;
   readonly gender: string;
   readonly dateofbirth: string;
+  readonly file: File;
 }

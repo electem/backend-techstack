@@ -39,6 +39,8 @@ export class CreateteacherComponent implements OnInit {
   id: number;
   addForm: boolean;
   boolean: boolean;
+  selectedSchool = new School();
+  currentSchools: School[] = [];
   constructor(
     private teacherService: TeacherService,
     private formBuilder: FormBuilder,
@@ -57,6 +59,7 @@ export class CreateteacherComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       gender: ['', Validators.required],
       school: ['', Validators.required],
+      school2: ['', Validators.required],
     });
     this.getGenders();
     this.retrieveSchools();
@@ -65,6 +68,7 @@ export class CreateteacherComponent implements OnInit {
     }
     this.id = this.route.snapshot.params.id;
     this.addForm = !this.id;
+    this.boolean = !this.id;
   }
   get f() {
     return this.createtTeacherForm.controls;
@@ -87,6 +91,7 @@ export class CreateteacherComponent implements OnInit {
       school: this.AdddedSchoolList,
     };
     await this.teacherService.createTeacher(createTeacher);
+    this.router.navigate(['/listteachers']);
   }
   async retrieveSchools(): Promise<void> {
     this.schools = await this.schoolservice.getSchools();
@@ -94,6 +99,12 @@ export class CreateteacherComponent implements OnInit {
   async selectedSchools(school: School): Promise<void> {
     this.currentSchool = school;
     this.AdddedSchoolList?.push(this.currentSchool);
+  }
+
+  async onSelectedSchool(school: School) {
+    console.log(school);
+    const data = this.schools.filter((s) => s.schoolid === school.schoolid);
+    this.AdddedSchoolList = data;
   }
 
   getGenders() {
@@ -112,7 +123,7 @@ export class CreateteacherComponent implements OnInit {
       phonenumber: this.createteacher.phonenumber,
       email: this.createteacher.email,
       gender: this.createteacher.gender,
-      school: this.createteacher.school,
+      school: this.AdddedSchoolList,
     };
     await this.teacherService.updateTeacher(teacher);
     this.router.navigate(['/listteachers']);

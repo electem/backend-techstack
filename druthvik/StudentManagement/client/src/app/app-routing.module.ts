@@ -11,6 +11,7 @@ import { SchoolstudentshartComponent } from './components/schoolstudentshart/sch
 const routes: Routes = [
   { path: '', component: LogincomponentComponent },
   { path: 'login', component: LogincomponentComponent },
+  { path: 'chart', component: SchoolstudentshartComponent },
   { path: 'createschool', component: CreateschoolComponent },
   { path: 'createschool/:id', component: CreateschoolComponent },
   { path: 'listschools', component: ListschoolsComponent },
@@ -20,7 +21,6 @@ const routes: Routes = [
   { path: 'createteachers/:id', component: CreateteacherComponent },
   { path: 'createstudents', component: CreatestudentComponent },
   { path: 'createstudents/:id', component: CreatestudentComponent },
-  { path: 'chart', component: SchoolstudentshartComponent },
 ];
 
 @NgModule({
