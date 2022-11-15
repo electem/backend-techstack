@@ -19,6 +19,7 @@ import puppeteer from 'puppeteer';
 import { MailerService } from '@nestjs-modules/mailer';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
+@UseGuards(JwtAuthGuard)
 @Controller('teacher')
 export class TeacherController {
   constructor(
