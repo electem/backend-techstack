@@ -9,6 +9,6 @@ export class Student {
   gender?: string;
   createdAt?: string;
   dateofbirth?: Date;
+  originalname?: string;
   school?: School;
-  file?: Files;
 }

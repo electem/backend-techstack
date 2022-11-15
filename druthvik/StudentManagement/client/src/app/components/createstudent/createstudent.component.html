@@ -47,7 +47,7 @@
               <input
                 type="text"
                 name="phonenumber"
-                maxlength="12"
+                maxlength="10"
                 minlength="10"
                 formControlName="phonenumber"
                 class="form-control"
@@ -130,7 +130,6 @@
                     type="file"
                     class="form-control"
                     formControlName="file"
-                    [(ngModel)]="createstudent.file"
                     id="imageUpload"
                     accept=".png, .jpg, .jpeg"
                     #fileInput
@@ -164,6 +163,7 @@
             <div *ngIf="submitted && f.school.errors" class="invalid-feedback">
               <div *ngIf="f.school.errors.required">School is required</div>
             </div>
+            <br />
             <br />
             <div class="text-center">
               <button *ngIf="addForm" class="btn btn-primary">Create</button>

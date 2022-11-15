@@ -10,5 +10,4 @@ export class Teacher {
   gender?: string;
   createdAt?: string;
   school?: School[];
-  file?: Files[];
 }

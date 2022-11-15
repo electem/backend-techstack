@@ -5,10 +5,7 @@
     <div class="col-md-4 offset-md-4">
       <div class="card mb-4">
         <div class="card-body">
-          <form
-            [formGroup]="createtTeacherForm"
-            (ngSubmit)="createTeacherValidate()"
-          >
+          <form [formGroup]="createtTeacherForm" (ngSubmit)="createTeacher()">
             <div class="form-group">
               <label>Name</label>
               <input
@@ -105,7 +102,7 @@
                     name="options"
                     formControlName="school"
                     value="{{ school.name }}"
-                    (click)="selectedSchoolss(school)"
+                    (click)="selectedSchools(school)"
                   />
                   {{ school.name }}
                 </label>
