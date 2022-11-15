@@ -117,6 +117,8 @@ uploadNewFile(): void {
       this.selectedFile = this.selectedFiles && this.selectedFiles;
 }
 
+
+
 signup() {
   this.submitted = true;
   if (this.registerForm.invalid) {
@@ -129,6 +131,5 @@ async onSelectedSchool(school: string) {
   const data = this.schools.filter((s) => s.id === +school);
   this.currentSchool = data[0];
 }
-
 
 }
