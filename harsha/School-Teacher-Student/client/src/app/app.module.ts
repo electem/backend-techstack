@@ -17,6 +17,7 @@ import { CreateTeacherComponent } from './components/create-teacher/create-teach
 import { CreateStudentComponent } from './components/create-student/create-student.component';
 import { AngularMaterialModule } from './angular-material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ChartsComponent } from './components/charts/charts.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     StudentListComponent,
     CreateTeacherComponent,
     CreateStudentComponent,
+    ChartsComponent,
   ],
   imports: [
     BrowserModule,
