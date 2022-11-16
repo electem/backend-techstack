@@ -1,12 +1,14 @@
-<h1 class="card-title text-center">Add Student</h1>
+<h1 class="card-title text-center" *ngIf="addForm">ADD STUDENT</h1>
+<h1 class="card-title text-center" *ngIf="!addForm">EDIT STUDENT</h1>
 <div class="form">
   <form [formGroup]="registerForm">
     <div class="form-group">
-      <label for="name">Name</label>
-      <input type="name" formControlName="name" placeholder="Enter your name" class="form-control item"
-        [(ngModel)]="currentStudent.name" [ngClass]="{ 'is-invalid': submitted && validation.name.errors }" />
-      <div *ngIf="this.submitted && validation.name.errors" class="invalid-feedback">
-        <div *ngIf="validation.name.errors.required">
+      <label for="studentName">Name</label>
+      <input type="studentName" formControlName="studentName" placeholder="Enter your name" class="form-control item"
+        [(ngModel)]="currentStudent.studentName"
+        [ngClass]="{ 'is-invalid': submitted && validation.studentName.errors }" />
+      <div *ngIf="this.submitted && validation.studentName.errors" class="invalid-feedback">
+        <div *ngIf="validation.studentName.errors.required">
           Name Field is required
         </div>
       </div>
@@ -15,7 +17,7 @@
     <div class="form-group">
       <label for="genders">Select a gender</label>
       <div *ngFor="let gender of genders; let i = index">
-        <input id="gender{{ i }}" formControlName="genders" name="genders" type="radio" [value]="gender"
+        <input formControlName="genders" name="genders" type="radio" [value]="gender"
           [(ngModel)]="currentStudent.gender" />
         <label for="">{{ gender }}</label>
       </div>
@@ -61,32 +63,32 @@
       </div>
     </div>
 
-    <div class="row">
+    <div class="form-group">
       <label>
         <input type="file" (change)="selectFile($event)" />
       </label>
     </div>
-    <button class="btn btn-success" [disabled]="!selectedFiles" (click)="upload()">
+    <button class="btn-primary" [disabled]="!selectedFiles" (click)="upload()">
       Upload
     </button>
-    <button class="btn btn-success" (click)="downloadFile()">
-      Download
-    </button><br><br>
 
     <div class="form-group">
       <p class="text-center">
         Schools
-        <select class="form-control" formControlName="school" name="school" [(ngModel)]="selectedSchool"
-          (ngModelChange)="onSelected(selectedSchool)">
+        <select class="form-control" formControlName="school" name="school"
+          [(ngModel)]="currentStudent.school && currentStudent.school.schoolId" (ngModelChange)="onSelected($event)">
           <option disabled [value]="" selected>Choose School</option>
-          <option *ngFor="let school of schools" [ngValue]="school">
-            {{ school.name }}
+          <option *ngFor="let school of schools" [ngValue]="school.schoolId">
+            {{ school.schoolName }}
           </option>
         </select>
       </p>
     </div>
-    <button type="button" class="btn btn-success" (click)="signup()">
+    <button *ngIf="addForm" type="button" class="btn btn-success" (click)="signup()">
       Save
+    </button>
+    <button *ngIf="!addForm" type="button" class="btn btn-success" (click)="updateStudent()">
+      Update
     </button>
     <button type=" button" class="btn btn-warning" routerLink="/student-list">
       Cancel

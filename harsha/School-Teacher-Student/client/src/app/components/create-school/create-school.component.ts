@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { School } from 'src/app/models/school.model';
 import { Student } from 'src/app/models/student.model';
@@ -23,9 +23,12 @@ export class CreateSchoolComponent implements OnInit {
   students: Student[] = [];
   addedStudents: Student[] = [];
   selectedStudent?: Student = {};
+  dropdownSettingsForTeacher: IDropdownSettings = {};
   dropdownSettings: IDropdownSettings = {};
+  id?: number;
+  addForm?: boolean;
   currentSchool: School = {
-    name: '',
+    schoolName: '',
     address: '',
     teachers: [],
     students: [],
@@ -35,18 +38,30 @@ export class CreateSchoolComponent implements OnInit {
     private teacherService: TeacherService,
     private studentService: StudentService,
     private router: Router,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
     this.registerForm = this.formBuilder.group({
-      name: ['', Validators.required],
+      schoolName: ['', Validators.required],
       address: ['', Validators.required],
-      // teachers: ['', Validators.required],
-      // students: ['', Validators.required],
+      teachers: ['', Validators.required],
+      students: ['', Validators.required],
     });
     this.getTeachers();
     this.getStudents();
+    this.getSchoolById(this.route.snapshot.params.id);
+    this.dropdownSettingsForTeacher = {
+      idField: 'teacherId',
+      textField: 'teacherName',
+    };
+    this.dropdownSettings = {
+      idField: 'studentId',
+      textField: 'studentName',
+    };
+    this.id = this.route.snapshot.params.id;
+    this.addForm = !this.id;
   }
 
   get validation() {
@@ -68,6 +83,10 @@ export class CreateSchoolComponent implements OnInit {
 
   async getStudents(): Promise<void> {
     this.students = await this.studentService.getStudents();
+  }
+
+  async getSchoolById(id: number) {
+    this.currentSchool = await this.schoolService.getSchoolById(id);
   }
 
   async onSelectingTeacher(teacher: any): Promise<void> {
@@ -92,12 +111,24 @@ export class CreateSchoolComponent implements OnInit {
 
   async saveSchool(): Promise<void> {
     const school: School = {
-      name: this.currentSchool.name,
+      schoolName: this.currentSchool.schoolName,
       address: this.currentSchool.address,
       teachers: this.addedTeachers,
       students: this.addedStudents,
     };
     await this.schoolService.createSchool(school);
+    this.router.navigate(['/school-list']);
+  }
+
+  async updateSchool(): Promise<void> {
+    const school: School = {
+      schoolId: this.currentSchool.schoolId,
+      schoolName: this.currentSchool.schoolName,
+      address: this.currentSchool.address,
+      teachers: this.addedTeachers,
+      students: this.addedStudents,
+    };
+    await this.schoolService.updateSchool(this.currentSchool.schoolId!, school);
     this.router.navigate(['/school-list']);
   }
 }

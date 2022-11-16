@@ -20,4 +20,14 @@ export class SchoolService {
   async getSchools(): Promise<School[]> {
     return await this.http.get<School[]>(baseUrl + 'schools').toPromise();
   }
+
+  async getSchoolById(id: number) {
+    return await this.http.get(`${baseUrl + 'school'}/${id}`).toPromise();
+  }
+
+  async updateSchool(id: number, school: School): Promise<School> {
+    return await this.http
+      .put(`${baseUrl + 'updateSchool'}/${id}`, school)
+      .toPromise();
+  }
 }

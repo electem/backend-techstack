@@ -1,12 +1,14 @@
-<h1 class="card-title text-center">Add School</h1>
+<h2 *ngIf="addForm" class="text-center">ADD SCHOOL</h2>
+<h2 *ngIf="!addForm" class="text-center">EDIT SCHOOL</h2>
 <div class="form">
   <form [formGroup]="registerForm">
     <div class="form-group">
-      <label for="name">Name</label>
-      <input type="name" formControlName="name" class="form-control item" [(ngModel)]="currentSchool.name"
-        [ngClass]="{ 'is-invalid': submitted && validation.name.errors }" />
-      <div *ngIf="this.submitted && validation.name.errors" class="invalid-feedback">
-        <div *ngIf="validation.name.errors.required">
+      <label for="schoolName">Name</label>
+      <input type="schoolName" formControlName="schoolName" class="form-control item"
+        [(ngModel)]="currentSchool.schoolName"
+        [ngClass]="{ 'is-invalid': submitted && validation.schoolName.errors }" />
+      <div *ngIf="this.submitted && validation.schoolName.errors" class="invalid-feedback">
+        <div *ngIf="validation.schoolName.errors.required">
           Name Field is required
         </div>
       </div>
@@ -23,20 +25,25 @@
       </div>
     </div>
 
-    <div>
-      <ng-multiselect-dropdown [placeholder]="'Select Teachers'" [settings]="dropdownSettings" [data]="teachers"
-        (onSelect)="onSelectingTeacher($event)" (onSelectAll)="onSelectAllTeachers($event)">
+    <div class="form-group">
+      <ng-multiselect-dropdown [placeholder]="'Select Teachers'" formControlName="teachers" name="teachers"
+        [settings]="dropdownSettingsForTeacher" [data]="teachers" (onSelect)="onSelectingTeacher($event)"
+        (onSelectAll)="onSelectAllTeachers($event)" [(ngModel)]="currentSchool.teachers">
       </ng-multiselect-dropdown>
     </div>
 
-    <div>
-      <ng-multiselect-dropdown [placeholder]="'Select Students'" [settings]="dropdownSettings" [data]="students"
-        (onSelect)="onSelectingStudent($event)" (onSelectAll)="onSelectAllStudents($event)">
+    <div class="form-group">
+      <ng-multiselect-dropdown [placeholder]="'Select Students'" name="students" formControlName="students"
+        [settings]="dropdownSettings" [data]="students" (onSelect)="onSelectingStudent($event)"
+        (onSelectAll)="onSelectAllStudents($event)" [(ngModel)]="currentSchool.students">
       </ng-multiselect-dropdown>
     </div>
 
-    <button type="button" class="btn btn-success" (click)="signup()">
+    <button *ngIf="addForm" type="button" class="btn btn-success" (click)="signup()">
       Save
+    </button>
+    <button *ngIf="!addForm" type="button" class="btn btn-success" (click)="updateSchool()">
+      Update
     </button>
     <button type=" button" class="btn btn-warning" routerLink="/school-list">Cancel</button>
   </form>
