@@ -50,6 +50,11 @@ const routes: Array<RouteRecordRaw> = [
     name: "addteacher",
     component: () => import("./components/AddTeacher.vue"),
   },
+  {
+    path: "/school/:id",
+    name: "edit-school",
+    component: () => import("./components/EditSchool.vue"),
+  },
 ];
 
 const router = createRouter({

@@ -1,5 +1,4 @@
 <!-- eslint-disable prettier/prettier -->
-
 <template>
   <div class="submit-form">
     <div v-if="!submitted">

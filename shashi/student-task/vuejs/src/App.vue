@@ -1,3 +1,11 @@
+<!-- eslint-disable prettier/prettier -->
+<script lang="ts">
+/* eslint-disable prettier/prettier */
+import { defineComponent } from "vue";
+export default defineComponent({
+  name: "App",
+});
+</script>
 <template>
   <div id="app">
     <nav class="navbar navbar-expand navbar-dark bg-dark">
@@ -34,12 +42,3 @@
     </div>
   </div>
 </template>
-
-<script lang="ts">
-/* eslint-disable prettier/prettier */
-import { defineComponent } from "vue";
-
-export default defineComponent({
-  name: "App",
-});
-</script>

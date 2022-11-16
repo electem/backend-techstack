@@ -26,6 +26,9 @@ class SchoolDataService {
   createTeacher(data: any): Promise<any> {
     return http.post("/teacher", data);
   }
+  getSchoolById(id: any): Promise<any> {
+    return http.get(`/school/${id}`);
+  }
   //   update(id: any, data: any): Promise<any> {
   //     return http.put(`/tutorials/${id}`, data);
   //   }
