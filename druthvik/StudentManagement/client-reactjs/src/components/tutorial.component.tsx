@@ -1,10 +1,11 @@
 import { Component, ChangeEvent } from "react";
-import { RouteComponentProps } from 'react-router-dom';
+import { RouteComponentProps } from "react-router-dom";
 
 import TutorialDataService from "../services/tutorial.service";
 import ITutorialData from "../types/tutorial.type";
 
-interface RouterProps { // type for `match.params`
+interface RouterProps {
+  // type for `match.params`
   id: string; // must be type `string` since value comes from the URL
 }
 
@@ -13,7 +14,7 @@ type Props = RouteComponentProps<RouterProps>;
 type State = {
   currentTutorial: ITutorialData;
   message: string;
-}
+};
 
 export default class Tutorial extends Component<Props, State> {
   constructor(props: Props) {
@@ -92,7 +93,7 @@ export default class Tutorial extends Component<Props, State> {
             ...prevState.currentTutorial,
             published: status,
           },
-          message: "The status was updated successfully!"
+          message: "The status was updated successfully!",
         }));
         console.log(response.data);
       })

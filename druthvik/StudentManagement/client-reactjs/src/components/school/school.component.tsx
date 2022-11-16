@@ -15,7 +15,6 @@ type State = ISchoolData & {
   students: Array<IStudentData>;
   teachers: Array<TeacherData>;
 };
-const [valueState, setValueState] = useState("");
 
 export default class AddSchool extends Component<Props, State> {
   students: IStudentData[] = [];
@@ -27,7 +26,7 @@ export default class AddSchool extends Component<Props, State> {
     this.onChangeName = this.onChangeName.bind(this);
     this.onChangeAddress = this.onChangeAddress.bind(this);
     this.state = {
-      schoolid: null,
+      schoolid: 0,
       name: "",
       address: "",
       students: [],

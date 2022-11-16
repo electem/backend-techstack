@@ -26,7 +26,7 @@ export default class StudentsList extends Component<Props, State> {
         this.setState({
           students: response.data,
         });
-        console.log(response.data);
+        console.log(this.students);
       })
       .catch((e: Error) => {
         console.log(e);

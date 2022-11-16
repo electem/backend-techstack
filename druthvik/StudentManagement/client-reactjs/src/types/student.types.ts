@@ -1,6 +1,6 @@
 export class IStudentData {
   studentid?: number | null;
-  name?: string;
+  name!: string;
   address?: string;
   phonenumber?: number;
   email?: string;

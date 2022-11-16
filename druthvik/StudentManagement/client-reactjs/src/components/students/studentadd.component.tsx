@@ -1,14 +1,18 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { Component, ChangeEvent } from "react";
 import schoolService from "../../services/school.service";
 import studentService from "../../services/student.service";
 import ISchoolData from "../../types/school.types";
 import { IStudentData } from "../../types/student.types";
-import Select from "react-select";
+import * as Yup from "yup";
+
 type Props = {
   student?: IStudentData;
 };
 type State = IStudentData & {
   schools: Array<ISchoolData>;
+  fields: {};
+  errors: {};
 };
 const genderList = [
   { value: "male", label: "Male" },
@@ -25,6 +29,7 @@ export default class AddStudent extends Component<Props, State> {
     this.onChangeemail = this.onChangeemail.bind(this);
     this.onChangegender = this.onChangegender.bind(this);
     this.onChangedateofbirth = this.onChangedateofbirth.bind(this);
+
     this.state = {
       name: "",
       address: "",
@@ -33,8 +38,11 @@ export default class AddStudent extends Component<Props, State> {
       gender: "",
       dateofbirth: "",
       schools: [],
+      fields: {},
+      errors: {},
     };
   }
+
   componentDidMount() {
     this.retrieveSchools();
   }
@@ -114,8 +122,22 @@ export default class AddStudent extends Component<Props, State> {
         console.log(e);
       });
   };
+
   render() {
-    const { name, address, phonenumber, email, gender, dateofbirth, schools } =
+    const validationSchema = Yup.object().shape({
+      name: Yup.string().required("Fullname is required"),
+      address: Yup.string().required("Fullname is required"),
+      email: Yup.string()
+        .required("Email is required")
+        .email("Email is invalid"),
+      phonenumber: Yup.string().required("Fullname is required"),
+      dateofbirth: Yup.string().required("Fullname is required"),
+    });
+    const onSubmit = (data: State) => {
+      console.log(JSON.stringify(data, null, 2));
+    };
+
+    const { name, address, phonenumber, email, dateofbirth, schools } =
       this.state;
 
     return (

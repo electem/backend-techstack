@@ -8,6 +8,11 @@ import StudentsList from "./components/students/sudents-list.component";
 import AddStudent from "./components/students/studentadd.component";
 import TeacherList from "./components/teacher/teacherlist.component";
 import AddTeacher from "./components/teacher/addteacher.component";
+import { charts } from "./components/chartjs/chartjs.component";
+import DataTable from "./components/datatble/datatable";
+import datatables from "./components/datatble/datatables";
+import StudentsListDatatables from "./components/students/studentlistingdatatbles";
+import { chartsStudents } from "./components/chartjs/chartstudent";
 class App extends Component {
   render() {
     return (
@@ -59,6 +64,11 @@ class App extends Component {
             <Route path="/student" component={AddStudent} />
             <Route path="/teacherlist" component={TeacherList} />
             <Route path="/teacher" component={AddTeacher} />
+            <Route path="/charts" component={charts} />
+            <Route path="/table" component={DataTable} />
+            <Route path="/datatable" component={datatables} />
+            <Route path="/stud" component={StudentsListDatatables} />
+            <Route path="/chartstud" component={chartsStudents} />
           </Switch>
         </div>
       </div>
