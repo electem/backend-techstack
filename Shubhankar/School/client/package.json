@@ -22,6 +22,7 @@
     "@auth0/angular-jwt": "^5.1.0",
     "@ng-select/ng-select": "^8.1.1",
     "angular-datatables": "^6.0.0",
+    "auth-guard": "^1.0.12",
     "bootstrap": "^5.2.0",
     "chart.js": "^3.9.1",
     "datatables.net": "^1.12.1",

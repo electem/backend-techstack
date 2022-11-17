@@ -1,0 +1,22 @@
+.btn-outline-success {
+  margin-right: 10px;
+  margin-left: 350px;
+  color: #28a745;
+  border-color: #28a745;
+}
+
+.mt-3,
+.my-3 {
+  margin-top: 1rem !important;
+  background-color: peachpuff;
+}
+
+.row {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+  background-color: peachpuff;
+}
