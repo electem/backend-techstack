@@ -1,0 +1,36 @@
+<div class="jumbotron text-center"></div>
+<div class="container">
+  <div class="row custom-wrapper">
+    <div class="col-md-12">
+      <form [formGroup]="registrationForm">
+        <div class="group-gap">
+          <div class="avatar-upload">
+            <div class="avatar-edit">
+              <input
+                type="file"
+                id="imageUpload"
+                accept=".png, .jpg, .jpeg"
+                #fileInput
+                (change)="chooseFile($event)"
+              />
+            </div>
+          </div>
+        </div>
+        <br />
+        <button
+          type="submit"
+          class="btn btn btn-success btn-sm"
+          (click)="uploadImage()"
+        >
+          Upload Image
+        </button>
+        <button
+          style="background-color: rgb(14, 147, 255)"
+          (click)="downloadFile()"
+        >
+          Download
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

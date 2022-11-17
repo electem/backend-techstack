@@ -52,4 +52,8 @@ export class DepartmentlistComponent implements OnInit {
   logout(): void {
     this.auth.signOut();
   }
+
+ async deleteDepartment(id:number){
+ await this.userservice.deleteDepartment(id)
+  }
 }

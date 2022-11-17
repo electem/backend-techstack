@@ -10,10 +10,11 @@ import { LoginComponent } from './components/login/login.component';
 import { ChartComponent } from './components/chart/chart.component';
 import { AdminpageComponent } from './components/adminpage/adminpage.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
+import { FileuploadComponent } from './components/fileupload/fileupload.component';
 
 
 const routes: Routes = [
-  { path: '', component: LoginComponent},
+  { path: '', component: LoginComponent },
   { path: 'admin', component: AdminpageComponent },
   { path: 'companylist', component: CompanylistComponent },
   { path: 'create', component: CreatecompanyComponent },
@@ -23,6 +24,7 @@ const routes: Routes = [
   { path: 'deptedit/:id', component: EditdepartmentComponent },
   { path: 'chart', component: ChartComponent },
   { path: 'nav', component: SidenavComponent },
+  { path: 'upload', component: FileuploadComponent },
   
 ];
 
