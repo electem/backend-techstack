@@ -6,7 +6,9 @@ class SchoolService {
 
     getAllSchool(): Promise<any> {
         return http.get("/school");
-      }  
+      } 
+      
+      
 }
 
 export default new SchoolService();

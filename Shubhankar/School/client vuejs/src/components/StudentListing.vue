@@ -1,10 +1,16 @@
 <!-- eslint-disable prettier/prettier -->
+<!-- eslint-disable prettier/prettier -->
 <template>
 <h4>Student List</h4>
-  <div class="list row">
-    <div class="col-md-6">
-      
+ <div class="col-md-6">
+      <button
+           type="button"
+            v-on:click='addMessage'>
+          Search
+          </button>
+     <input v-model="txtInput" @keyup.enter="addMessage()"/>
     </div>
+  <div class="list row">
    <table class="table table-striped table-bordered justify-content-center">
   <thead class="thead-light">
     <tr class="active">
@@ -33,8 +39,14 @@
    </tbody>
 </table>
 </div>
+ <button @click="show = !show">Message</button>
+<Transition name="slide-fade">
+  <p v-if="show">hello,This is the list of all student present</p>
+</Transition>
+
 </template>
 
+<!-- eslint-disable prettier/prettier -->
 <script lang="ts">
 import { defineComponent } from "vue";
 import Student from "@/types/Student";
@@ -45,10 +57,13 @@ export default defineComponent({
   name: "school-list",
   data() {
     return {
+      txtInput: '',
       students: [] as Student[],
       currentStudent: {} as Student,
       currentIndex: -1,
       title: "",
+      show: true,
+        studentname: "",
     };
   },
   methods: {
@@ -62,13 +77,24 @@ export default defineComponent({
           console.log(e);
         });
     },
+    
+    addMessage() {
+    console.log(this.txtInput);
+    if (this.txtInput != '' && this.txtInput) {
+     this.students = this.students.filter((obj) => {
+       return obj.studentname.toLowerCase()
+       .includes(this.txtInput.toLowerCase());
+  })
+  }},
 },
   mounted() {
     this.retrieveStudents();
   },
 });
+
 </script>
 
+<!-- eslint-disable prettier/prettier -->
 <style>
 .list {
   text-align: left;
@@ -76,4 +102,22 @@ export default defineComponent({
   margin: auto;
  background-color: blanchedalmond;
 }
+/*
+  Enter and leave animations can use different
+  durations and timing functions.
+*/
+.slide-fade-enter-active {
+  transition: all 0.3s ease-out;
+}
+
+.slide-fade-leave-active {
+  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+  transform: translateX(20px);
+  opacity: 0;
+}
+
 </style>

@@ -1,6 +1,18 @@
 <!-- eslint-disable prettier/prettier -->
+<!-- eslint-disable prettier/prettier -->
+
 <template>
   <h4>School List</h4>
+   <div class="input-group mb-3">
+        <button
+           type="button"
+            v-on:click='addMessage'
+          >
+          Search
+          </button>
+
+        <input v-model="txtInput" @keyup.enter="addMessage()"/>
+      </div>
   <div class="list row">
     <div class="col-md-6"></div>
     <table class="table table-striped table-bordered justify-content-center">
@@ -24,8 +36,9 @@
       </tbody>
     </table>
   </div>
-</template>
 
+</template>
+<!-- eslint-disable prettier/prettier -->
 <script lang="ts">
 import { defineComponent } from "vue";
 import School from "@/types/School";
@@ -36,30 +49,48 @@ export default defineComponent({
   name: "school-list",
   data() {
     return {
+      txtInput: '',
       schools: [] as School[],
       currentSchool: {} as School,
       currentIndex: -1,
-      title: "",
+      schoolname: "",
     };
+    
   },
   methods: {
+   
+    setActiveSchool(school: School, index = -1) {
+      this.currentSchool = school;
+      this.currentIndex = index;
+    },
+
     retrieveSchools() {
       SchoolService.getAllSchool()
         .then((response: ResponseData) => {
           this.schools = response.data;
-          console.log(response.data);
+          
         })
         .catch((e: Error) => {
           console.log(e);
         });
     },
+    addMessage() {
+    console.log(this.txtInput);
+    if (this.txtInput != '' && this.txtInput) {
+     this.schools = this.schools.filter((obj) => {
+       return obj.schoolname.toLowerCase()
+       .includes(this.txtInput.toLowerCase());
+  })
+  }},
   },
+
   mounted() {
     this.retrieveSchools();
-  },
-});
+  }
+  
+})
 </script>
-
+<!-- eslint-disable prettier/prettier -->
 <style>
 .list {
   text-align: left;

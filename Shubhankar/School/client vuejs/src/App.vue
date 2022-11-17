@@ -12,20 +12,28 @@
         </li>  
         <li class="nav-item">
           <router-link to="/student" class="nav-link">Student</router-link>
-        </li>     
-      </div>
+        </li> 
+         <li class="nav-item">
+          <router-link to="/createteacher" class="nav-link">Create Teacher</router-link>
+         </li>
+         <li class="nav-item">
+          <router-link to="/createstudent" class="nav-link">Create Student</router-link>
+         </li>
+           
+    </div>
     </nav>
     <div class="container mt-3">
       <router-view />
     </div>
   </div>
+    
 </template>
 
 <script lang="ts">
 /* eslint-disable prettier/prettier */
 import { defineComponent } from "vue";
-
 export default defineComponent({
   name: "App",
+  
 });
 </script>

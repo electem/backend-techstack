@@ -31,7 +31,20 @@ const routes: Array<RouteRecordRaw> = [
     alias: "/student-list",
     name: "students",
     component: () => import("./components/StudentListing.vue"),
+  },
+  {
+    path: "/createteacher",
+    alias: "/createteacher",
+    name: "teacher",
+    component: () => import("./components/CreateTeacher.vue"),
+  },
+  {
+    path: "/createstudent",
+    alias: "/createstudent",
+    name: "student",
+    component: () => import("./components/CreateStudent.vue"),
   }
+  
 ];
 
 const router = createRouter({
