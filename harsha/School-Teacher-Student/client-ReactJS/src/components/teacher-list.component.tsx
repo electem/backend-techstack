@@ -15,7 +15,7 @@ export default class TeachersList extends Component<Props, State> {
     this.retrieveTeachers = this.retrieveTeachers.bind(this);
 
     this.state = {
-        teachers: [],
+      teachers: [],
     };
   }
 
@@ -27,16 +27,16 @@ export default class TeachersList extends Component<Props, State> {
     TeacherService.getTeachers()
       .then((response: any) => {
         this.setState({
-            teachers: response.data,
+          teachers: response.data,
         });
       })
       .catch((e: Error) => {
         console.log(e);
       });
-  };
-  
+  }
+
   render() {
-    const { teachers} = this.state;
+    const { teachers } = this.state;
 
     return (
       <>
@@ -47,9 +47,9 @@ export default class TeachersList extends Component<Props, State> {
             </button>
           </Link>
         </div>
+        <h4>Teachers List</h4>
         <div className="list row">
-          <div className="col-md-6">
-            <h4 >Teachers List</h4>
+          <div className="col-md-8">
             <table className="table table-bordered table-striped table-hover">
               <thead>
                 <tr>
@@ -67,7 +67,7 @@ export default class TeachersList extends Component<Props, State> {
                 {teachers.map((teacher: Teacher) => {
                   return (
                     <tr key={teacher.teacherId}>
-                      <td >{teacher.teacherId}</td>
+                      <td>{teacher.teacherId}</td>
                       <td>{teacher.teacherName}</td>
                       <td>{teacher.address}</td>
                       <td>{teacher.gender}</td>

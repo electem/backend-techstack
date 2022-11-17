@@ -1,9 +1,27 @@
 .list {
   text-align: center;
   justify-content: center;
-  padding-right: 500px;
+  padding-right: 800px;
 }
+
 .list1 {
   text-align: center;
   justify-content: center;
+}
+
+.submit-form {
+  max-width: 300px;
+  margin: auto;
+}
+
+.edit-form {
+  max-width: 300px;
+  margin: auto;
+}
+.badge {
+  width: 80%;
+}
+
+h4 {
+  padding-left: 400px;
 }

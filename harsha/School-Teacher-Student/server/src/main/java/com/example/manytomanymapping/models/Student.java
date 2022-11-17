@@ -47,7 +47,7 @@ public class Student {
 	private Date createdDate;
 
 	@JsonIgnoreProperties({"students","teachers"})
-	@OneToOne(cascade = CascadeType.MERGE)
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "school_id")
 	private School school;
 }
