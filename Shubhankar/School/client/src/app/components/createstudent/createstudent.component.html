@@ -1,0 +1,221 @@
+<div class="row">
+  <div class="col-md-4 offset-md-3 col-md-6 col-sm-offset-2 col-sm-8">
+    <h4 *ngIf="isAddMode">Add Student</h4>
+    <h4 *ngIf="!isAddMode">Edit Student</h4>
+    <form [formGroup]="createStudent" (ngSubmit)="create()">
+      <div class="form-group">
+        <label for="studentname">StudentName</label>
+        <input
+          type="studentname"
+          class="form-control"
+          id="studentname"
+          formControlName="studentname"
+          [(ngModel)]="student.studentname"
+          [ngClass]="{ 'is-invalid': submitted && fval.studentname.errors }"
+        />
+        <div
+          *ngIf="submitted && fval.studentname.errors"
+          class="invalid-feedback"
+        >
+          <div *ngIf="fval.studentname.errors.required">
+            Name Field is required
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="address">Address</label>
+          <input
+            type="address"
+            class="form-control"
+            id="address"
+            formControlName="address"
+            [(ngModel)]="student.address"
+            [ngClass]="{ 'is-invalid': submitted && fval.address.errors }"
+          />
+          <div
+            *ngIf="submitted && fval.address.errors"
+            class="invalid-feedback"
+          >
+            <div *ngIf="fval.address.errors.required">
+              Address Field is required
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="phonenumber">Contact</label>
+            <input
+              type="phonenumber"
+              class="form-control"
+              id="phonenumber"
+              formControlName="phonenumber"
+              [(ngModel)]="student.phonenumber"
+              [ngClass]="{ 'is-invalid': submitted && fval.phonenumber.errors }"
+            />
+            <div
+              *ngIf="submitted && fval.phonenumber.errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="fval.phonenumber.errors.required">
+                Contact Field is required
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                formControlName="email"
+                [(ngModel)]="student.email"
+                [ngClass]="{ 'is-invalid': submitted && fval.email.errors }"
+              />
+              <div
+                *ngIf="submitted && fval.email.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="fval.email.errors.required">
+                  Email Field is required
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="gender">Gender</label>
+                <div class="radio">
+                  <label>
+                    <input
+                      type="radio"
+                      name="gender"
+                      id="gender"
+                      formControlName="gender"
+                      value="Male"
+                      (click)="setradio('Male')"
+                      [checked]="true"
+                      [(ngModel)]="student.gender"
+                      [ngClass]="{
+                        'is-invalid': submitted && fval.gender.errors
+                      }"
+                    />
+                    Male
+                  </label>
+
+                  <div class="radio">
+                    <label>
+                      <input
+                        type="radio"
+                        name="gender"
+                        id="gender"
+                        formControlName="gender"
+                        value="Female"
+                        (click)="setradio('Female')"
+                        [(ngModel)]="student.gender"
+                        [ngClass]="{
+                          'is-invalid': submitted && fval.gender.errors
+                        }"
+                      />
+                      Female
+                    </label>
+                  </div>
+
+                  <div
+                    *ngIf="submitted && fval.gender.errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="fval.gender.errors.required">
+                      gender Field is required
+                    </div>
+                  </div>
+                </div>
+
+                <div class="image-upload-container btn btn-bwm">
+                  <span>Select Image</span>
+                  <label>
+                    <input
+                      #imageInput
+                      type="file"
+                      accept="image/*"
+                      (change)="selectFile($event)"
+                      (change)="uploadNewFile()"
+                    />
+                  </label>
+                </div>
+                <div  class="form-group">
+                  <label for="dateofbirth">Date Of Birth</label>
+                  <input
+                    type="date"
+                    name="date"
+                    formControlName="dateofbirth"
+                    class="form-control"
+                    [(ngModel)]="student.dateofbirth"
+                    [ngClass]="{
+                      'is-invalid': submitted && fval.dateofbirth.errors
+                    }"
+                  />
+                  <div
+                    *ngIf="submitted && fval.dateofbirth.errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="fval.dateofbirth.errors.required">
+                      Date Of Birth Field is required
+                    </div>
+                  </div>
+                </div>
+
+                  <div class="form-group">
+                  <label for="school">School</label>
+                  <select
+                    class="form-control"
+                    id="school"
+                    formControlName="school"
+                    required
+                    [(ngModel)]="student.school && student.school.schoolid"
+                    (ngModelChange)="selectedSchool($event)"
+                    [ngClass]="{
+                      'is-invalid': submitted && fval.school.errors
+                    }"
+                  >
+                    <option
+                      class="option"
+                      *ngFor="let option of schoolsList"
+                      [value]="option.schoolid"
+                    >
+                      {{ option.schoolname }}
+                    </option>
+                  </select>
+                  <div
+                    *ngIf="submitted && fval.school.errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="fval.school.errors.required">
+                      School Field is required
+                    </div>
+                  </div>
+                </div>
+                <button
+                  *ngIf="isAddMode"
+                  type="button"
+                  class="btn btn-outline-success"
+                  (click)="create()"
+                >
+                  Save
+                </button>
+
+                <button
+                  *ngIf="!isAddMode"
+                  type="button"
+                  class="btn btn-outline-success"
+                  (click)="update()"
+                >
+                  Update
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-outline-danger"
+                  (click)="getBack()"
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

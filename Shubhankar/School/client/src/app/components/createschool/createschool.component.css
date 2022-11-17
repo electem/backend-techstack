@@ -1,0 +1,16 @@
+.btn-outline-success {
+    margin-left: 350px;
+    margin-right: 10px;
+    color: #28a745;
+    border-color: #28a745;
+}
+
+.row {
+    background-color: peachpuff;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+}
