@@ -2,11 +2,11 @@
   <nav class="navbar navbar-expand navbar-dark bg-dark">
     <a href="#" class="navbar-brand">School Management</a>
      <div class="navbar-nav mr-auto">
-      <li class="nav-item">
-      <a routerLink="login" class="nav-link">Login</a>
+     <li class="nav-item">
+      <a href class="nav-link" (click)="logout()">LogOut</a>
     </li>
     <li class="nav-item">
-      <a routerLink="addschool" class="nav-link">CreateSchool</a>
+      <a routerLink="dash" class="nav-link">Dashboard</a>
     </li>
     <li class="nav-item">
       <a routerLink="school-list" class="nav-link">School</a>
@@ -15,12 +15,9 @@
       <a routerLink="teacher-list" class="nav-link">Teacher</a>
     </li>
     <li class="nav-item">
-      <a routerLink="addteacher" class="nav-link">CreateTeacher</a>
+      <a routerLink="student-list" class="nav-link">Student</a>
     </li>
-    <li class="nav-item">
-      <a routerLink="addstudent" class="nav-link">Createstudent</a>
-    </li>
-   </div> 
+    </div> 
   </nav>
  <div class="container mt-3">
     <router-outlet></router-outlet>

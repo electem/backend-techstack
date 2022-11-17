@@ -1,5 +1,5 @@
 import { Component } from '@angular/core'
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from './auth/auth.service';
 
 @Component({
@@ -8,7 +8,12 @@ import { AuthService } from './auth/auth.service';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  constructor(private auth: AuthService, private router: Router) {}
+
+  id?: number;
+  isLoggedIn?: boolean;
+
+  constructor(private auth: AuthService, private router: Router,
+    private route: ActivatedRoute) {}
   title = 'Angular 12 Crud'
 
   logout(): void {

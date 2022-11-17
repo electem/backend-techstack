@@ -14,7 +14,7 @@ import {
 @Entity()
 export class School {
   @PrimaryGeneratedColumn()
-  id: number;
+  schoolid: number;
 
   @Column()
   schoolname: string;
@@ -31,6 +31,9 @@ export class School {
   @JoinTable()
   teachers!: Teacher[];
 
-  @OneToMany(() => Student, (student) => student.school)
-  students: Student[];
+  @OneToMany((_type) => Student, (student: Student) => student.school)
+  students!: Array<Student>;
 }
+
+
+

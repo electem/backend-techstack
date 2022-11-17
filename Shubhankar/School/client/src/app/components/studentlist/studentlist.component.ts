@@ -19,4 +19,9 @@ export class StudentlistComponent implements OnInit {
   async retrieveAllStudents(): Promise<void> {
     this.students = await this.schoolService.getallStudents();
   }
+
+  async deleteStudent(id:number){
+    await this.schoolService.deleteStudent(id);
+    this.retrieveAllStudents();
+  }
 }
