@@ -14,6 +14,14 @@ type Props = {};
 type State = ISchoolData & {
   students: Array<IStudentData>;
   teachers: Array<TeacherData>;
+  errors: ISchoolData;
+};
+const validEmailIdPattern = RegExp(
+  /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
+);
+const handleValidateForm = (errors: any) => {
+  let isValid = true;
+  return isValid;
 };
 
 export default class AddSchool extends Component<Props, State> {
@@ -25,18 +33,57 @@ export default class AddSchool extends Component<Props, State> {
     super(props);
     this.onChangeName = this.onChangeName.bind(this);
     this.onChangeAddress = this.onChangeAddress.bind(this);
+    this.handleFieldChange = this.handleFieldChange.bind(this);
     this.state = {
       schoolid: 0,
       name: "",
       address: "",
       students: [],
       teachers: [],
+      errors: {
+        name: "",
+        address: "",
+      },
     };
   }
   componentDidMount() {
     this.retrieveStudents();
     this.retrieveTeachers();
   }
+
+  handleFieldChange = (event: any) => {
+    event.preventDefault();
+    const { name, value } = event.target.value;
+    let errors = this.state.errors;
+
+    switch (name) {
+      case "name":
+        errors.name =
+          value.length < 6
+            ? "Full Name must be at least 6 characters long!"
+            : "";
+        break;
+      case "emailId":
+        errors.address =
+          value.length < 6
+            ? "Full Name must be at least 6 characters long!"
+            : "";
+        break;
+      default:
+        break;
+    }
+
+    this.setState({ errors, name });
+  };
+  onSubmit = (event: any) => {
+    event.preventDefault();
+    if (handleValidateForm(this.state.errors)) {
+      console.info("Valid Form");
+      this.saveSchool();
+    } else {
+      console.error("Invalid Form");
+    }
+  };
 
   retrieveTeachers() {
     teacherService
@@ -102,57 +149,54 @@ export default class AddSchool extends Component<Props, State> {
       });
   };
 
-  newSchool = () => {
-    this.setState({
-      schoolid: null,
-      name: "",
-      address: "",
-    });
-  };
   render() {
-    const { name, address, students, teachers } = this.state;
+    const { name, address, students, teachers, errors } = this.state;
 
     return (
       <div className="submit-form">
-        <div>
-          <div className="form-group">
-            <label htmlFor="name">Name</label>
-            <input
-              type="text"
-              className="form-control"
-              id="name"
-              required
-              value={name}
-              onChange={this.onChangeName}
-              name="name"
-            />
-          </div>
+        <div className="form-group">
+          <h2>add form</h2>
+          <form onSubmit={this.onSubmit} noValidate>
+            <div>
+              <label htmlFor="name">Name</label>
+              <input
+                type="text"
+                className="form-control"
+                id="name"
+                required
+                value={name}
+                name="name"
+                onChange={this.handleFieldChange}
+              />
+              {errors.name?.length > 0 && (
+                <span className="error">{errors.name}</span>
+              )}
+            </div>
 
-          <div className="form-group">
-            <label htmlFor="address">Address</label>
-            <input
-              type="text"
-              className="form-control"
-              id="address"
-              required
-              value={address}
-              onChange={this.onChangeAddress}
-              name="address"
+            <div className="form-group">
+              <label htmlFor="address">Address</label>
+              <input
+                type="text"
+                className="form-control"
+                id="address"
+                required
+                value={address}
+                onChange={this.onChangeAddress}
+                name="address"
+              />
+            </div>
+            <br />
+            <label htmlFor="address">Students</label>
+            <Multiselect options={students} displayValue="name" />
+            <br />
+            <label htmlFor="address">Students</label>
+            <Multiselect
+              options={teachers} // Options to display in the dropdown
+              displayValue="name" // Property name to display in the dropdown options
             />
-          </div>
-          <br />
-          <label htmlFor="address">Students</label>
-          <Multiselect options={students} displayValue="name" />
-          <br />
-          <label htmlFor="address">Students</label>
-          <Multiselect
-            options={teachers} // Options to display in the dropdown
-            displayValue="name" // Property name to display in the dropdown options
-          />
-          <br />
-          <button onClick={this.saveSchool} className="btn btn-success">
-            Submit
-          </button>
+            <br />
+            <button className="btn btn-success">Submit</button>
+          </form>
         </div>
       </div>
     );

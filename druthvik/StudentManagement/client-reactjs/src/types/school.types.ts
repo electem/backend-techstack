@@ -1,5 +1,5 @@
 export default interface ISchoolData {
   schoolid?: number | null;
-  name?: string;
+  name: string;
   address?: string;
 }

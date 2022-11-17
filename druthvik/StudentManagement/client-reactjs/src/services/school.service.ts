@@ -11,6 +11,9 @@ class SchoolDataService {
   get(id: string) {
     return http.get<ISchoolData>(`/school/${id}`);
   }
+  update(data: ISchoolData, id: any) {
+    return http.put<any>(`/school/`, data);
+  }
 }
 
 export default new SchoolDataService();
