@@ -55,6 +55,36 @@ const routes: Array<RouteRecordRaw> = [
     name: "edit-school",
     component: () => import("./components/EditSchool.vue"),
   },
+  {
+    path: "/student/:id",
+    name: "edit-student",
+    component: () => import("./components/EditStudent.vue"),
+  },
+  {
+    path: "/teacher/:id",
+    name: "edit-teacher",
+    component: () => import("./components/EditTeacher.vue"),
+  },
+  // {
+  //   path: "/validation",
+  //   name: "validation",
+  //   component: () => import("./components/Validation.vue"),
+  // },
+  {
+    path: "/datatable",
+    name: "datatable",
+    component: () => import("./components/Datatable.vue"),
+  },
+  {
+    path: "/charts",
+    name: "charts",
+    component: () => import("./components/Charts"),
+  },
+  {
+    path: "/validation2",
+    name: "validation2",
+    component: () => import("./components/VeeValidation.vue"),
+  },
 ];
 
 const router = createRouter({

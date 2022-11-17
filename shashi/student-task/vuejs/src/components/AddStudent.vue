@@ -46,21 +46,20 @@
           name="phonenumber"
         />
       </div>
-      <div class="form-group">
-        <label for="gender">Gender</label>
+      <div class="form-group" v-for="(entry, index) in genderList" :key="index">     
         <input
-          type="text"
+          type="radio"
           class="form-control"
-          id="gender"
+          id="gender" 
           required
-          v-model="student.gender"
+          v-model="entry.value"
           name="gender"
-        />
+        />{{entry.label}}
       </div>
       <div class="form-group">
         <label for="dob">Date of birth</label>
         <input
-          type="text"
+          type="Date"
           class="form-control"
           id="dob"
           required
@@ -92,9 +91,9 @@ export default defineComponent({
         address: "",
         email: "",
         gender: "",
-        dob: new Date()
       } as Student,
-
+      genderList:[{ value: "male", label: "Male" },
+{ value: "female", label: "Female" }],
       submitted: false,      
     };
   },

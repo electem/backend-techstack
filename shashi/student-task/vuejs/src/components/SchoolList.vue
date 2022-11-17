@@ -35,7 +35,14 @@
             <router-link 
           :to="'/school/' + entry.schoolid"
           class="badge badge-warning"
-          >Edit</router-link
+          custom
+      v-slot="{ navigate }"
+          > <button  
+          class="badge badge-success mr-2" 
+          @click="navigate"  
+        role="link"
+        >EDIT</button>
+      </router-link
         >
           </tr>
         </tbody>
@@ -56,8 +63,7 @@ import type { Header, Item } from "vue3-easy-data-table";
 export default defineComponent({
   name: "schools-list",
   data() {
-    return {
-      currentSchool: {} as School,
+    return {   
       schoolList: [] as School[],
       //studentData: [] as School[],
       schoolname: "",
@@ -86,21 +92,9 @@ export default defineComponent({
           console.log(e);
         });
     },
-    getSchool(id: any) {
-      studentservice
-        .getSchoolById(id)
-        .then((response: ResponseData) => {
-          this.currentSchool = response.data;
-          console.log(response.data);
-        })
-        .catch((e: Error) => {
-          console.log(e);
-        });
-    },
   },
   mounted() {
-    this.retrieveSchools();
-    this.getSchool(this.$route.params.id);
+    this.retrieveSchools();   
   },
   setup() {
     const fields = ["ID", "SCHOOL_NAME", "ADDRESS","TOTAL_TEACHERS","ACTIONS"];
