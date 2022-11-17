@@ -75,4 +75,12 @@ export class UserService {
       responseType: 'blob',
     });
   }
+
+  deletecompany(id:number){
+    return this.http.delete<Company>(`${baseUrl + '/company'}/${id}`).toPromise();
+  }
+
+  deleteDepartment(id:number){
+    return this.http.delete<Department>(`${baseUrl + '/department'}/${id}`).toPromise();
+  }
 }

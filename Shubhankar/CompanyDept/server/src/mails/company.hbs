@@ -1,0 +1,24 @@
+<html>
+  <head>
+    <title>
+      Company Details
+    </title>
+  </head>
+  <body>
+
+    <h2>Company Details</h2>
+    <table border='1'>
+      <tr>
+        <th>NAME</th>
+        <th>AGE</th>
+        <th>BRANCH</th>
+      </tr>
+      {{#each this}}
+        <tr>
+          <td>{{this.name}}</td>
+          <td>{{this.email}}</td>
+          <td>{{this.createdAt}}</td>
+        </tr>{{/each}}
+    </table>
+  </body>
+</html>
