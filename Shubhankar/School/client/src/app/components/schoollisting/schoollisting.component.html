@@ -6,14 +6,20 @@
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
-<h4>School</h4>
+
+<td>
+  <button class="btn btn-outline-success" routerLink="/addschool">
+    ADD NEW SCHOOL
+  </button>
+  <h4>School</h4>
+</td>
 <table class="table table-striped table-bordered justify-content-center">
   <thead class="thead-light">
     <tr class="active">
-      <th class="text-center" scope="col">Id</th>
       <th class="text-center" scope="col">Name</th>
       <th class="text-center" scope="col">Address</th>
-      <th class="text-center" scope="col">CreatedAt</th>
+      <th class="text-center" scope="col">Teacher Count</th>
+      <th class="text-center" scope="col">Student Count</th>
       <th class="text-center" scope="col">Option</th>
     </tr>
   </thead>
@@ -30,11 +36,24 @@
     "
   >
     <tr class="success">
-      <th class="text-center" scope="row">{{ school.id }}</th>
       <th class="text-center" scope="row">{{ school.schoolname }}</th>
       <th class="text-center" scope="row">{{ school.address }}</th>
-      <th class="text-center" scope="row">{{ school.createdAt }}</th>
-      <button class="btn btn-outline-success" scope="row">Edit</button>
+      <th class="text-center" scope="row">{{ school.teachers?.length }}</th>
+      <th class="text-center" scope="row">{{ school.students?.length }}</th>
+      <button
+        class="btn btn-outline-success"
+        scope="row"
+        routerLink="/addschool/{{ school.schoolid }}"
+      >
+        Edit
+      </button>
+      <button
+        class="btn btn-outline-danger"
+        scope="row"
+        (click)="Deleteschool(school.schoolid!)"
+      >
+        Delete
+      </button>
     </tr>
   </tbody>
   <pagination-controls

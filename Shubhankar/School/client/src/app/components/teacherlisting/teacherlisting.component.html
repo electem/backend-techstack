@@ -6,17 +6,21 @@
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
+
+
+<button class="btn btn-outline-success" routerLink="/addteacher">
+  ADD NEW Teacher
+</button>
+<br>
 <h4>Teacher</h4>
 <table class="table table-striped table-bordered justify-content-center">
   <thead class="thead-light">
     <tr class="active">
-      <th class="text-center" scope="col">Id</th>
-      <th class="text-center" scope="col">Name</th>
+     <th class="text-center" scope="col">Name</th>
       <th class="text-center" scope="col">Address</th>
       <th class="text-center" scope="col">Contact</th>
       <th class="text-center" scope="col">Email</th>
       <th class="text-center" scope="col">Gender</th>
-      <th class="text-center" scope="col">CreatedAt</th>
       <th class="text-center" scope="col">Option</th>
     </tr>
   </thead>
@@ -29,18 +33,22 @@
               currentPage: page,
               totalItems: totalItems
             };
-      let i = index
-    "
-  >
+      let i = index">
     <tr class="success">
-      <th class="text-center" scope="row">{{ teacher.id }}</th>
       <th class="text-center" scope="row">{{ teacher.teachername }}</th>
       <th class="text-center" scope="row">{{ teacher.address }}</th>
       <th class="text-center" scope="row">{{ teacher.phonenumber }}</th>
       <th class="text-center" scope="row">{{ teacher.email }}</th>
       <th class="text-center" scope="row">{{ teacher.gender }}</th>
-      <th class="text-center" scope="row">{{ teacher.createdAt }}</th>
-      <button class="btn btn-outline-success" scope="row">Edit</button>
+      
+      <button
+        class="btn btn-outline-success"
+        scope="row"
+        routerLink="/addteacher/{{ teacher.teacherid }}"
+      >
+        Edit
+      </button>
+      <button class="btn btn-outline-danger" scope="row"  (click)="deleteTeacher(teacher.teacherid!)">Delete</button>
     </tr>
   </tbody>
   <pagination-controls

@@ -10,7 +10,7 @@ import { SchoolService } from '../../services/school.service';
 })
 export class TeacherlistingComponent implements OnInit {
   Teachers: Teacher[] = [];
-  page = 3;
+  page = 1;
   itemsPerPage? = 2;
   totalItems?: string;
   pageSizes = [3, 6, 9];
@@ -33,6 +33,11 @@ export class TeacherlistingComponent implements OnInit {
   handlePageSizeChange(event: any) {
     this.itemsPerPage = event.target.value;
     this.page = 1;
+    this.retrieveAllTeachers();
+  }
+
+  async deleteTeacher(id:number){
+    await this.schoolService.deleteTeacher(id);
     this.retrieveAllTeachers();
   }
 }

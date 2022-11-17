@@ -14,6 +14,10 @@ import { LoginComponent } from './components/login/login.component';
 import { CreateschoolComponent } from './components/createschool/createschool.component';
 import { SchoollistingComponent } from './components/schoollisting/schoollisting.component';
 import { TeacherlistingComponent } from './components/teacherlisting/teacherlisting.component';
+import { CreateteacherComponent } from './components/createteacher/createteacher.component';
+import { CreatestudentComponent } from './components/createstudent/createstudent.component';
+import { StudentlistComponent } from './components/studentlist/studentlist.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 export function jwtOptionFactor() {
   return {
@@ -23,7 +27,17 @@ export function jwtOptionFactor() {
 }
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, CreateschoolComponent, SchoollistingComponent, TeacherlistingComponent],
+  declarations: [
+    AppComponent,
+    LoginComponent,
+    CreateschoolComponent,
+    SchoollistingComponent,
+    TeacherlistingComponent,
+    CreateteacherComponent,
+    CreatestudentComponent,
+    StudentlistComponent,
+    DashboardComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
