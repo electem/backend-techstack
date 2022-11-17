@@ -1,0 +1,54 @@
+<div class="list row">
+    <div class="col-md-8">
+      <div class="input-group mb-3"></div>
+    </div>
+    <div class="col-md-6">
+      <h4>School List</h4>
+      <ul class="list-group"></ul>
+      <td>
+        <button routerLink="/add">ADD SCHOOL</button>
+      </td>
+    <br>
+    </div>
+   
+  
+    <div class="container">
+      <table class="table table-bordered justify-content-center">
+        <thead class="thead-light">
+          <tr class="active">
+            <th class="text-center" scope="col">NAME</th>
+            <th class="text-center" scope="col">ADRESS</th>
+            <th class="text-center" scope="col">NO STUDENT</th>
+            <th class="text-center" scope="col">NO TESCHERS</th>
+        
+  
+            <th class="text-center" scope="col">EDIT</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let school of schools;">
+          <tr class="success">
+            <th class="text-center" scope="row">{{ school.name }}</th>
+            <th class="text-center" scope="row">{{ school.address }}</th>
+            <th class="text-center" scope="row">{{ school.students?.length }}</th>
+            <th class="text-center" scope="row">{{ school.teachers?.length}}</th>
+           
+            <th class="text-center" scope="row">
+              <button
+                type="button"
+                class="btn btn-info btn-sm mr-2"
+                routerLink="/school/{{ school.id }}"
+                
+              >
+                Edit
+              </button>
+      
+            </th>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+  
+    
+   
