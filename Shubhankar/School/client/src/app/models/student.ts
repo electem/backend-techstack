@@ -1,13 +1,15 @@
+import { Image } from './image';
 import { School } from './school';
 
 export interface Student {
-  id?: number;
+  studentid?: number;
   studentname?: string;
   address?: string;
   phonenumber?: string;
   email?: string;
   gender?: string;
-  dateofbirth?: Date;
+  file?:Image
+  dateofbirth?: string;
   createdAt?: Date;
-  schools?: School;
+  school?: School;
 }

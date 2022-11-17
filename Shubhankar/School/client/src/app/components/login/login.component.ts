@@ -15,17 +15,27 @@ export class LoginComponent implements OnInit {
   };
   isLoggedIn = false;
   isLoginFailed = false;
-  errorMessage = '';
+  errorMessage = 'login failed';
 
   constructor(private authService: AuthService, private router: Router) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    
+  }
 
   LoginDetail() {
     this.authService.userLogin(this.form).subscribe((data) => {
       if (data) {
-        this.router.navigate(['school-list']);
+        this.isLoggedIn = true;
+        this.isLoginFailed = false;
+        alert('username and password is correct login successful');
+        this.router.navigate(['dash']);
       }
+      else{
+       
+        alert('username and password is not valid login unsuccessful');
+        this.isLoginFailed = true;
+      };
     });
   }
 }

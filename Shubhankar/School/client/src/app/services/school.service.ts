@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { School } from '../models/school';
 import { Teacher } from '../models/teacher';
@@ -56,4 +56,57 @@ export class SchoolService {
   async updateSchool(school: School): Promise<School> {
     return await this.http.put<School>(baseUrl + '/school', school).toPromise();
   }
+
+  async getTeacherbyid(id: number): Promise<Teacher> {
+    return await this.http.get(`${baseUrl + '/teacher'}/${id}`).toPromise();
+  }
+
+  async updateTeacher(teacher: Teacher): Promise<Teacher> {
+    return await this.http.put<School>(baseUrl + '/teacher', teacher).toPromise();
+  }
+
+  async getStudentbyid(id: number): Promise<Student> {
+    return await this.http.get(`${baseUrl + '/student'}/${id}`).toPromise();
+  }
+
+  async updateStudent(student: Student): Promise<Student> {
+    return await this.http.put<Student>(baseUrl + '/student', student).toPromise();
+  }
+
+  async uploadFile (file: File) {
+    const headerDict = {
+      Accept: 'application/json',
+      'Access-Control-Allow-Headers': 'Content-Type',
+    };
+    const requestOptions = {
+      headers: new HttpHeaders(headerDict),
+    };
+    const formData = new FormData();
+    formData.append('image', file);
+    return await this.http
+      .post(baseUrl + '/photos', formData, requestOptions)
+      .subscribe();
+  }
+
+  downloadFile(file: File): any {
+    return this.http.get(`${baseUrl + '/photos'}/${file.name}`, {
+      observe: 'response',
+      responseType: 'blob',
+    });
+  }
+
+ async deleteSchool(id:number) {
+    return  this.http.delete(`${baseUrl + '/school'}/${id}`).toPromise();
+  }
+
+ async deleteStudent(id:number) {
+    return  this.http.delete(`${baseUrl + '/student'}/${id}`).toPromise();
+  }
+
+  async deleteTeacher(id:number) {
+    return  this.http.delete(`${baseUrl + '/teacher'}/${id}`).toPromise();
+  }
 }
+
+  
+

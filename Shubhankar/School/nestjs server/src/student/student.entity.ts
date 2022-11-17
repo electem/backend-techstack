@@ -1,10 +1,12 @@
 /* eslint-disable prettier/prettier */
+import { Image } from 'src/fileupload/file.entity';
 import { School } from 'src/school/school.entity';
 import {
     Column,
     CreateDateColumn,
     Entity,
     JoinColumn,
+    ManyToOne,
     OneToOne,
     PrimaryGeneratedColumn,
   } from 'typeorm';
@@ -12,7 +14,7 @@ import {
   @Entity()
   export class Student {
     @PrimaryGeneratedColumn()
-    id: number;
+    studentid: number;
   
     @Column()
     studentname: string;
@@ -33,10 +35,13 @@ import {
     dateofbirth?: Date;
 
     @CreateDateColumn()
-    createdAt: Date;
+    createdAt?: Date;
 
-    @OneToOne(() => School, { cascade: true }) 
-    @JoinColumn()
+   @ManyToOne(() => School, (school) => school.students)
     school: School
+
+    @OneToOne(() => Image,(image) => image.students) 
+    @JoinColumn()
+    image?: Image
   }
   

@@ -11,7 +11,7 @@ import { SchoolService } from '../../services/school.service';
 })
 export class SchoollistingComponent implements OnInit {
   Schools: School[] = [];
-  page = 3;
+  page = 1;
   itemsPerPage? = 2;
   totalItems?: string;
   pageSizes = [3, 6, 9];
@@ -55,4 +55,14 @@ export class SchoollistingComponent implements OnInit {
   async retrieveSchool(id: number): Promise<void> {
     this.school = await this.schoolService.getSchoolbyid(id);
   }
+
+ async Deleteschool(id:number){
+   await this.schoolService.deleteSchool(id);
+   this.retrieveAllSchools();
+ }
+
+//  async deleteStudentById(id: number) {
+//   await this.studentservice.deletStudentById(id);
+//   this.retrieveStudents();
+// }
 }

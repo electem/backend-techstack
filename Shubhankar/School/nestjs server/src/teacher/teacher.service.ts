@@ -13,7 +13,12 @@ export class TeacherService {
   ) {}
 
   async getAllTeachers(): Promise<Teacher[]> {
-    return await this.teacherRepository.find();
+    const teacherschool = await this.teacherRepository
+      .createQueryBuilder('teachers')
+      .select(['teachers', 'schools'])
+      .leftJoinAndSelect('teachers.schools', 'schools')
+      .getMany();
+    return teacherschool;
   }
 
   public async createTeacher(teacherDto: TeacherDto): Promise<Teacher> {
@@ -24,4 +29,26 @@ export class TeacherService {
     }
   }
 
+  async teacherbyId(id: number): Promise<Teacher> {
+    const teacherschool = await this.teacherRepository
+      .createQueryBuilder('teachers')
+      .select(['teachers', 'schools'])
+      .leftJoinAndSelect('teachers.schools', 'schools')
+      .where('teachers.teacherid= :teachersid', { teachersid: id })
+      .getOne();
+    return teacherschool;
+  }
+
+  public async updateTeacher(teacherDto: TeacherDto): Promise<Teacher> {
+    try {
+      return await this.teacherRepository.save(teacherDto);
+    } catch (err) {
+      throw new HttpException(err, HttpStatus.BAD_REQUEST);
+    }
+  }
+
+  public async removeTeacher(id: number): Promise<void> {
+    const school = await this.teacherbyId(id);
+    await this.teacherRepository.remove(school);
+  }
 }

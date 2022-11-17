@@ -1,7 +1,7 @@
 import { School } from "./school";
 
 export interface Teacher {
-  id?: number;
+  teacherid?: number;
   teachername?: string;
   address?: string;
   phonenumber?: string;
