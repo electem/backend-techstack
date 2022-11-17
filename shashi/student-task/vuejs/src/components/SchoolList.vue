@@ -31,8 +31,12 @@
             <td>{{ entry.schoolid }}</td>
             <td>{{ entry.schoolname }}</td>
             <td>{{ entry.address }}</td>
-            <td>{{ entry.teacher.length }}</td>
-            <td class="btn btn-outline-primary btn-sm">EDIT</td>  
+            <td>{{ entry.teacher.length }}</td>           
+            <router-link 
+          :to="'/school/' + entry.schoolid"
+          class="badge badge-warning"
+          >Edit</router-link
+        >
           </tr>
         </tbody>
       </table>
@@ -53,12 +57,13 @@ export default defineComponent({
   name: "schools-list",
   data() {
     return {
+      currentSchool: {} as School,
       schoolList: [] as School[],
       //studentData: [] as School[],
       schoolname: "",
     };
   },
-  methods: {
+  methods: {    
     retrieveSchools() {
       studentservice
         .getAll()
@@ -81,9 +86,21 @@ export default defineComponent({
           console.log(e);
         });
     },
+    getSchool(id: any) {
+      studentservice
+        .getSchoolById(id)
+        .then((response: ResponseData) => {
+          this.currentSchool = response.data;
+          console.log(response.data);
+        })
+        .catch((e: Error) => {
+          console.log(e);
+        });
+    },
   },
   mounted() {
     this.retrieveSchools();
+    this.getSchool(this.$route.params.id);
   },
   setup() {
     const fields = ["ID", "SCHOOL_NAME", "ADDRESS","TOTAL_TEACHERS","ACTIONS"];

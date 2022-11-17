@@ -9,6 +9,7 @@
           type="text"
           class="form-control"
           id="schoolname"
+          placeholder="schoolname"
           required
           v-model="school.schoolname"
           name="schoolname"
@@ -26,15 +27,7 @@
         ></textarea>
       </div>
       <div>
-    <multiselect v-model="selected" :options="options1"> </multiselect>
-  </div>
-      <!-- <button
-        class="btn btn-outline-danger btn-sm btn-space"
-        router-link to="/school"
-      >
-        Cancel
-      </button> -->
-    
+  </div>    
       <button @click="saveTutorial" class="btn btn-success">Submit</button>
     </div>
     
@@ -48,9 +41,9 @@
 </template>
 <!-- eslint-disable prettier/prettier -->
 <script lang="ts">
-import Vue from 'vue';
-
-import { defineComponent} from "vue";
+import { Field, useValidation } from "vue3-form-validation";
+import { computed, PropType } from "vue";
+import { defineComponent } from "vue";
 import Multiselect from '@suadelabs/vue3-multiselect'
 import studentservice from "@/services/studentservice";
 import School from "@/types/school";
@@ -58,7 +51,26 @@ import ResponseData from "@/types/ResponseData";
 export default defineComponent({
   name: "add-tutorial",
   Multiselect,
- 
+  validating: {
+    type: Boolean,
+    required: true,
+  },
+  submitting: {
+    type: Boolean,
+    required: true,
+  },
+  hasError: {
+    type: Boolean,
+    required: true,
+  },
+  errors: {
+    type: Object as PropType<string[]>,
+    required: true,
+  },
+  form: {
+    type: Object,
+    required: true,
+  },
   data() {
     return {
       school: {
@@ -100,8 +112,9 @@ export default defineComponent({
       this.submitted = false;
       this.school = {} as School;
     },
-  },
+  },  
 });
+
 
 </script>
 <style></style>
