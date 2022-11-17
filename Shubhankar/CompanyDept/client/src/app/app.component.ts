@@ -12,7 +12,8 @@ interface SideNavToggle {
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  constructor(private auth: AuthService) {}
+  constructor(private auth: AuthService,
+    ) {}
   title = 'sidenav';
 
   isSideNavCollapsed = false;

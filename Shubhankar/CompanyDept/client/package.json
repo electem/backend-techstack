@@ -29,6 +29,7 @@
     "datatables.net-bs5": "^1.11.3",
     "datatables.net-dt": "^1.12.1",
     "jquery": "^3.6.1",
+    "material-icons": "^1.12.1",
     "modules": "^0.4.0",
     "moment-timezone": "^0.5.37",
     "ng-multiselect-dropdown": "^0.2.11",

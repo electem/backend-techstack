@@ -17,15 +17,12 @@ export class AdminpageComponent implements OnInit {
   departments: Department[] = [];
   departmentNames: string[] = [];
   companyCounts: number[] = [];
-  constructor(
-    private userservice: UserService,
-    private auth: AuthService,
-  ) {}
+  constructor(private userservice: UserService, private auth: AuthService) {}
 
   ngOnInit(): void {
     this.retrieveCompany();
     this.callMixedChart();
-     this.callMixedChart1();
+    this.callMixedChart1();
   }
 
   async retrieveCompany() {
@@ -117,8 +114,7 @@ export class AdminpageComponent implements OnInit {
           },
           {
             type: 'bar',
-            label:
-              '# Number of Companys present in each department',
+            label: '# Number of Companys present in each department',
             data: this.companyCounts,
             backgroundColor: ['rgba(255, 159, 64, 0.2)'],
             borderColor: ['rgba(54, 162, 235, 1)'],
@@ -144,8 +140,7 @@ export class AdminpageComponent implements OnInit {
         datasets: [
           {
             type: 'line',
-            label:
-              '# Number of Departments present in each company',
+            label: '# Number of Departments present in each company',
             data: this.departmentCount,
             backgroundColor: ['rgba(59, 162, 235, 0.2)'],
             borderColor: ['rgba(54, 162, 235, 1)'],
@@ -153,8 +148,7 @@ export class AdminpageComponent implements OnInit {
           },
           {
             type: 'line',
-            label:
-              '# Number of Companys present in each department',
+            label: '# Number of Companys present in each department',
             data: this.companyCounts,
             backgroundColor: ['rgba(255, 159, 64, 0.2)'],
             borderColor: ['rgba(54, 162, 235, 1)'],

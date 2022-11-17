@@ -13,7 +13,7 @@ export class EditcompanyComponent implements OnInit {
   departmentsList: Department[] = [];
   company: Company = {
     name: '',
-    address: '',
+    email: '',
     department: [],
   };
   removeDepartment?: Department;
@@ -56,7 +56,7 @@ async updateCompany(): Promise<void> {
     const company: Company = {
       id: this.company.id,
       name: this.company.name,
-      address: this.company.address,
+      email: this.company.email,
       department:this.company.department,
     };
     await this.userService.updateCompany(company);
