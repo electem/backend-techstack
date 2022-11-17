@@ -1,46 +1,44 @@
 import { Component } from "react";
-import schoolService from "../../services/school.service";
 import { Link } from "react-router-dom";
-import ISchoolData from "../../types/school.types";
+import StudentDataService from "../../services/student.service";
+import { IStudentData } from "../../types/student.types";
 
 type Props = {};
 
 type State = {
-  schools: Array<ISchoolData>;
+  students: Array<IStudentData>;
 };
-export default class SchoolList extends Component<Props, State> {
-  schools: ISchoolData[] = [];
+export default class StudentsList extends Component<Props, State> {
+  students: IStudentData[] = [];
   constructor(props: Props) {
     super(props);
 
     this.state = {
-      schools: [],
+      students: [],
     };
   }
   componentDidMount() {
-    this.retrieveSchools();
+    this.retrieveStudents();
   }
-
-  retrieveSchools() {
-    schoolService
-      .getAll()
+  retrieveStudents() {
+    StudentDataService.getAll()
       .then((response: any) => {
         this.setState({
-          schools: response.data,
+          students: response.data,
         });
-        console.log(response.data);
+        console.log(this.students);
       })
       .catch((e: Error) => {
         console.log(e);
       });
   }
   render() {
-    const { schools } = this.state;
+    const { students } = this.state;
 
     return (
       <div className="list row">
         <div className="col-md-6">
-          <h4>Schools List</h4>
+          <h4>Students List</h4>
 
           <table className="table table-bordered table-hover table-bordered border-secondary">
             <thead>
@@ -53,17 +51,17 @@ export default class SchoolList extends Component<Props, State> {
             </thead>
 
             <tbody>
-              {schools.map((item) => {
+              {students.map((item) => {
                 return (
                   <tr key={item.name}>
-                    <td>{item.schoolid}</td>
+                    <td>{item.studentid}</td>
 
                     <td>{item.name}</td>
 
                     <td>{item.address}</td>
                     <td>
                       <Link
-                        to={"/school/" + item.schoolid}
+                        to={"/student/" + item.studentid}
                         className="badge badge-warning"
                       >
                         Edit

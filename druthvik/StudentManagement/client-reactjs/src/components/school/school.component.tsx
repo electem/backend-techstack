@@ -1,30 +1,68 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable react/require-render-return */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Component, ChangeEvent } from "react";
+import { Component, ChangeEvent, useState } from "react";
 import schoolService from "../../services/school.service";
 import ISchoolData from "../../types/school.types";
-
+import { IStudentData } from "../../types/student.types";
+import studentService from "../../services/student.service";
+import Multiselect from "multiselect-react-dropdown";
+import { TeacherData } from "../../types/teacher.types";
+import teacherService from "../../services/teacher.service";
 type Props = {};
 
 type State = ISchoolData & {
-  submitted: boolean;
-};
-type UserSubmitForm = {
-  name: string;
-  address: string;
+  students: Array<IStudentData>;
+  teachers: Array<TeacherData>;
 };
 
 export default class AddSchool extends Component<Props, State> {
+  students: IStudentData[] = [];
+  teachers: TeacherData[] = [];
+  addedStudents: IStudentData[] = [];
+  currentStudent = new IStudentData();
   constructor(props: Props) {
     super(props);
     this.onChangeName = this.onChangeName.bind(this);
     this.onChangeAddress = this.onChangeAddress.bind(this);
     this.state = {
-      schoolid: null,
+      schoolid: 0,
       name: "",
       address: "",
-      submitted: false,
+      students: [],
+      teachers: [],
     };
+  }
+  componentDidMount() {
+    this.retrieveStudents();
+    this.retrieveTeachers();
+  }
+
+  retrieveTeachers() {
+    teacherService
+      .getAll()
+      .then((response: any) => {
+        this.setState({
+          teachers: response.data,
+        });
+        console.log(response.data);
+      })
+      .catch((e: Error) => {
+        console.log(e);
+      });
+  }
+  retrieveStudents() {
+    studentService
+      .getAll()
+      .then((response: any) => {
+        this.setState({
+          students: response.data,
+        });
+        console.log(response.data);
+      })
+      .catch((e: Error) => {
+        console.log(e);
+      });
   }
   onChangeName(e: ChangeEvent<HTMLInputElement>) {
     this.setState({
@@ -37,6 +75,12 @@ export default class AddSchool extends Component<Props, State> {
       address: e.target.value,
     });
   }
+
+  onSelectStudents(student: IStudentData) {
+    this.currentStudent = student;
+    this.addedStudents?.push(this.currentStudent);
+  }
+
   saveSchool = () => {
     const data: ISchoolData = {
       name: this.state.name,
@@ -50,7 +94,6 @@ export default class AddSchool extends Component<Props, State> {
           schoolid: response.data.schoolid,
           name: response.data.name,
           address: response.data.address,
-          submitted: true,
         });
         console.log(response.data);
       })
@@ -64,54 +107,53 @@ export default class AddSchool extends Component<Props, State> {
       schoolid: null,
       name: "",
       address: "",
-      submitted: false,
     });
   };
   render() {
-    const { submitted, name, address } = this.state;
+    const { name, address, students, teachers } = this.state;
 
     return (
       <div className="submit-form">
-        {submitted ? (
-          <div>
-            <h4>You submitted successfully!</h4>
-            <button className="btn btn-success" onClick={this.newSchool}>
-              Add
-            </button>
+        <div>
+          <div className="form-group">
+            <label htmlFor="name">Name</label>
+            <input
+              type="text"
+              className="form-control"
+              id="name"
+              required
+              value={name}
+              onChange={this.onChangeName}
+              name="name"
+            />
           </div>
-        ) : (
-          <div>
-            <div className="form-group">
-              <label htmlFor="name">Name</label>
-              <input
-                type="text"
-                className="form-control"
-                id="name"
-                required
-                value={name}
-                onChange={this.onChangeName}
-                name="name"
-              />
-            </div>
 
-            <div className="form-group">
-              <label htmlFor="address">Address</label>
-              <input
-                type="text"
-                className="form-control"
-                id="address"
-                required
-                value={address}
-                onChange={this.onChangeAddress}
-                name="address"
-              />
-            </div>
-
-            <button onClick={this.saveSchool} className="btn btn-success">
-              Submit
-            </button>
+          <div className="form-group">
+            <label htmlFor="address">Address</label>
+            <input
+              type="text"
+              className="form-control"
+              id="address"
+              required
+              value={address}
+              onChange={this.onChangeAddress}
+              name="address"
+            />
           </div>
-        )}
+          <br />
+          <label htmlFor="address">Students</label>
+          <Multiselect options={students} displayValue="name" />
+          <br />
+          <label htmlFor="address">Students</label>
+          <Multiselect
+            options={teachers} // Options to display in the dropdown
+            displayValue="name" // Property name to display in the dropdown options
+          />
+          <br />
+          <button onClick={this.saveSchool} className="btn btn-success">
+            Submit
+          </button>
+        </div>
       </div>
     );
   }
