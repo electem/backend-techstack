@@ -60,6 +60,15 @@
           <button class="btn btn-primary btn-block" (click)="LoginDetail()">
             Login
           </button>
+          <div class="form-group">
+            <div
+              class="alert alert-danger"
+              role="alert"
+              *ngIf="f.submitted && isLoginFailed"
+            >
+              Login failed: {{ errorMessage }}
+            </div>
+          </div>
         </div>
         <div class="form-group">
           <a href="#" class="btnForgetPwd">Forget Password?</a>

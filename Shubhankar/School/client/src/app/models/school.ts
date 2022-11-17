@@ -2,7 +2,7 @@ import { Student } from './student';
 import { Teacher } from './teacher';
 
 export interface School {
-  id?: number;
+  schoolid?: number;
   schoolname?: string;
   address?: string;
   teachers?: Teacher[];
