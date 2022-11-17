@@ -1,10 +1,12 @@
 import { ChangeEvent, Component } from "react";
 import SchoolService from "../services/school.service";
 import TeacherService from "../services/teacher.service";
-import { Link } from "react-router-dom";
+import { Link, RouteComponentProps } from "react-router-dom";
 import { Teacher } from "../types/teacher.type";
 
-type Props = {};
+interface RouterProps {}
+
+type Props = RouteComponentProps<RouterProps>;
 
 type State = Teacher & {
   submitted: boolean;

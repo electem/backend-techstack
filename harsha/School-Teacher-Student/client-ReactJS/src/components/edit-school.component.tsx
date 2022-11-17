@@ -1,7 +1,12 @@
+import Multiselect from "multiselect-react-dropdown";
 import { Component, ChangeEvent } from "react";
 import { Link, RouteComponentProps } from "react-router-dom";
 import SchoolService from "../services/school.service";
+import TeacherService from "../services/teacher.service";
+import StudentService from "../services/student.service";
 import { School } from "../types/school.type";
+import { Student } from "../types/student.type";
+import { Teacher } from "../types/teacher.type";
 
 interface RouterProps {
   // type for `match.params`
@@ -12,6 +17,8 @@ type Props = RouteComponentProps<RouterProps>;
 
 type State = {
   currentSchool: School;
+  students:Array<Student>,
+  teachers:Array<Teacher>
 };
 
 export default class EditSchool extends Component<Props, State> {
@@ -28,11 +35,15 @@ export default class EditSchool extends Component<Props, State> {
         schoolName: "",
         address: "",
       },
+      teachers:[],
+      students:[]
     };
   }
 
   componentDidMount() {
     this.getSchool(this.props.match.params.id);
+    this.retrieveTeachers();
+    this.retrieveStudents();
   }
 
   onChangeName(e: ChangeEvent<HTMLInputElement>) {
@@ -57,6 +68,29 @@ export default class EditSchool extends Component<Props, State> {
         address: address,
       },
     }));
+  }
+  retrieveTeachers() {
+    TeacherService.getTeachers()
+      .then((response: any) => {
+        this.setState({
+          teachers: response.data,
+        });
+      })
+      .catch((e: Error) => {
+        console.log(e);
+      });
+  }
+
+  retrieveStudents() {
+    StudentService.getStudents()
+      .then((response: any) => {
+        this.setState({
+          students: response.data,
+        });
+      })
+      .catch((e: Error) => {
+        console.log(e);
+      });
   }
 
   getSchool(id: string) {
@@ -87,7 +121,7 @@ export default class EditSchool extends Component<Props, State> {
   }
 
   render() {
-    const { currentSchool } = this.state;
+    const { currentSchool, teachers, students } = this.state;
 
     return (
       <>
@@ -114,6 +148,28 @@ export default class EditSchool extends Component<Props, State> {
                 onChange={this.onChangeAddress}
               />
             </div>
+
+            <div className="form-group">
+            <label >Teachers</label>
+            <Multiselect
+              options={teachers}
+              selectedValues={currentSchool.teachers}
+              closeIcon="close"
+              placeholder="Choose Teachers"
+              displayValue="teacherName"
+            />
+          </div>
+
+            <div className="form-group">
+            <label >Teachers</label>
+            <Multiselect
+              options={students}
+              selectedValues={currentSchool.students}
+              closeIcon="close"
+              placeholder="Choose Students"
+              displayValue="studentName"
+            />
+          </div>
           </form>
 
           <button

@@ -1,16 +1,23 @@
 import { ChangeEvent, Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, RouteComponentProps } from "react-router-dom";
 import { Student } from "../types/student.type";
 import SchoolService from "../services/school.service";
 import StudentService from "../services/student.service";
 import { School } from "../types/school.type";
 
-type Props = {};
+interface RouterProps {}
+
+type Props = RouteComponentProps<RouterProps>;
 
 type State = Student & {
   schools: Array<School>;
   submitted: boolean;
 };
+
+const genders = [
+  { value: "Male" },
+  { value: "Female" },
+];
 
 export default class AddStudent extends Component<Props, State> {
   constructor(props: Props) {
@@ -19,6 +26,7 @@ export default class AddStudent extends Component<Props, State> {
     this.onChangeAddress = this.onChangeAddress.bind(this);
     this.onChangeGender = this.onChangeGender.bind(this);
     this.onChangeEmail = this.onChangeEmail.bind(this);
+    this.onChangeDateOfBirth = this.onChangeDateOfBirth.bind(this);
     this.onChangePhoneNo = this.onChangePhoneNo.bind(this);
     this.onChangeSchools = this.onChangeSchools.bind(this);
     this.saveStudent = this.saveStudent.bind(this);
@@ -28,6 +36,7 @@ export default class AddStudent extends Component<Props, State> {
       address: "",
       gender: "",
       email: "",
+      dateOfBirth:"",
       phoneNo: undefined,
       school: {},
       schools: [],
@@ -60,6 +69,12 @@ export default class AddStudent extends Component<Props, State> {
   onChangeEmail(e: ChangeEvent<HTMLInputElement>) {
     this.setState({
       email: e.target.value,
+    });
+  }
+
+  onChangeDateOfBirth(e: ChangeEvent<HTMLInputElement>) {
+    this.setState({
+      dateOfBirth: e.target.value,
     });
   }
 
@@ -120,7 +135,7 @@ export default class AddStudent extends Component<Props, State> {
   }
 
   render() {
-    const { studentName, address, gender, email, phoneNo, schools } =
+    const { studentName, address, email, dateOfBirth, phoneNo, schools } =
       this.state;
 
     return (
@@ -153,18 +168,19 @@ export default class AddStudent extends Component<Props, State> {
             />
           </div>
 
-          <div className="form-group">
-            <label htmlFor="gender">Gender</label>
-            <input
-              type="gender"
-              className="form-control"
-              id="gender"
-              required
-              value={gender}
-              onChange={this.onChangeGender}
-              name="gender"
-            />
-          </div>
+          <div className="form-group">Select a Gender</div>
+          {genders.map((gender, i) => (
+            <label key={i}>
+              <input
+                type="radio"
+                name="gender"
+                value={gender.value}
+                onChange={this.onChangeGender}
+              />{" "}
+              {gender.value}
+            </label>
+          ))}
+          <br />
 
           <div className="form-group">
             <label htmlFor="email">Email</label>
@@ -180,9 +196,21 @@ export default class AddStudent extends Component<Props, State> {
           </div>
 
           <div className="form-group">
+            <label htmlFor="date">DOB</label>
+            <input
+              type="date"
+              className="form-control"
+              required
+              value={dateOfBirth}
+              onChange={this.onChangeDateOfBirth}
+              name="date"
+            />
+          </div>
+
+          <div className="form-group">
             <label htmlFor="phoneNo">Phone No</label>
             <input
-              type="text"
+              type="number"
               className="form-control"
               id="phoneNo"
               required

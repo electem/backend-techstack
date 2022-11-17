@@ -2,11 +2,13 @@ import { ChangeEvent, Component } from "react";
 import SchoolService from "../services/school.service";
 import TeacherService from "../services/teacher.service";
 import StudentService from "../services/student.service";
-import { Link } from "react-router-dom";
+import { Link, RouteComponentProps } from "react-router-dom";
 import { School } from "../types/school.type";
 import Multiselect from "multiselect-react-dropdown";
 
-type Props = {};
+interface RouterProps {}
+
+type Props = RouteComponentProps<RouterProps>;
 
 type State = School & {
   submitted: boolean;
@@ -81,6 +83,7 @@ export default class AddSchool extends Component<Props, State> {
           address: response.data.address,
           submitted: true,
         });
+        this.props.history.push("/schools");
       })
       .catch((e: Error) => {
         console.log(e);
