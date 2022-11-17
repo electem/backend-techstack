@@ -1,6 +1,7 @@
 <div class="row">
   <div class="col-md-4 offset-md-3 col-md-6 col-sm-offset-2 col-sm-8">
-    <h4>Create School</h4>
+    <h4 *ngIf="isAddMode">Add School</h4>
+    <h4 *ngIf="!isAddMode">Edit School</h4>
     <form [formGroup]="createSchool" (ngSubmit)="updateSchool()">
       <div class="form-group">
         <label for="schoolname">schoolName</label>
@@ -40,26 +41,55 @@
       <div class="form-group">
         <label for="teachers">Teacher</label>
         <ng-multiselect-dropdown
+        type="teachers"
+        class="form-control"
+        id="teachers"
+         formControlName="teachers"
           [(ngModel)]="school.teachers"
           [settings]="dropdownSettings"
           [data]="teachers"
-          (onSelect)="selectedTeachers($event)"
-          (onSelectAll)="onSelectAllTeachers($event)"
+          (onSelect)="selectedTeacher($event)"
+          [ngClass]="{ 'is-invalid': submitted && fval.teachers.errors }"
+          
         >
+        <div *ngIf="submitted && fval.teachers.errors" class="invalid-feedback">
+          <div *ngIf="fval.teachers.errors.required">
+            Teacher Field is required
+          </div>
+        </div>
+      
+
         </ng-multiselect-dropdown>
       </div>
       <div class="form-group">
-        <label for="student">Student</label>
+        <label for="students">Student</label>
         <ng-multiselect-dropdown
+        type="students"
+        class="form-control"
+        id="students"
+          formControlName="students"
           [(ngModel)]="school.students"
           [settings]="dropdownSettingstudent"
           [data]="students"
           (onSelect)="selectedStudent($event)"
-          (onSelectAll)="onSelectAllStudent($event)"
+         [ngClass]="{ 'is-invalid': submitted && fval.students.errors }"
         >
+        <div *ngIf="submitted && fval.students.errors" class="invalid-feedback">
+          <div *ngIf="fval.students.errors.required">
+            Student Field is required
+          </div>
+        </div>
+
         </ng-multiselect-dropdown>
       </div>
       <button
+      type="button"  *ngIf="isAddMode"
+      class="btn btn-outline-success"
+      (click)="saveSchool()"
+    >
+      Save
+    </button>
+      <button *ngIf="!isAddMode"
         type="button"
         class="btn btn-outline-success"
         (click)="updateSchool()"

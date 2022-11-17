@@ -11,7 +11,7 @@ import {
 @Entity()
 export class Teacher {
   @PrimaryGeneratedColumn()
-  id: number;
+  teacherid: number;
 
   @Column()
   teachername: string;

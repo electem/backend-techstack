@@ -22,9 +22,9 @@ export class AuthService {
       .pipe(
         map((data) => {
           var token = data as TokenModel;
-          localStorage.setItem('tokens', token.access_token);
+          localStorage.setItem('tokens', token.accessToken);
           var userInfo = this.jwtService.decodeToken(
-            token.access_token,
+            token.accessToken,
           ) as UserProfile;
 
           this.userProfile.next(userInfo);
