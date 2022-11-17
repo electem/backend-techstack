@@ -5,9 +5,11 @@
 }
 
 .btn-outline-success {
-    margin-left: 55px;
+    margin-left: 0px;
+    margin-right: 2px;
     color: #28a745;
     background-color: transparent;
     background-image: none;
     border-color: #28a745;
 }
+
