@@ -13,10 +13,10 @@ export class DepartmentService {
   ) {}
   public async getAllDepartments(): Promise<Department[]> {
     const deptwithcomp = await this.departmentRepository
-    .createQueryBuilder('department')
-    .select(['department', 'company'])
-    .leftJoinAndSelect('department.company', 'company')
-    .getMany();
+      .createQueryBuilder('department')
+      .select(['department', 'company'])
+      .leftJoinAndSelect('department.company', 'company')
+      .getMany();
     return await deptwithcomp;
   }
   public async createDepartment(
@@ -46,5 +46,10 @@ export class DepartmentService {
     } catch (err) {
       throw new HttpException(err, HttpStatus.BAD_REQUEST);
     }
+  }
+
+  public async deleteDepartmentById(id: number): Promise<void> {
+    const department = await this.findDepartmentById(id);
+    await this.departmentRepository.remove(department);
   }
 }

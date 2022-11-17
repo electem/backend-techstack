@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { Body, Controller, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, NotFoundException, Param, Post, Put, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { DepartmentService } from './department.service';
 import { DepartmentDto } from './dto/depertment.dto';
@@ -27,5 +27,14 @@ export class DepartmentController {
   @Put('/')
   async updateDepartment(@Body() companyDto: DepartmentDto) {
     return await this.departmentService.updateDepartment(companyDto);
+  }
+
+  @Delete('/:id')
+  public async deleteCompany(@Param('id') id: string): Promise<void> {
+    const department = this.departmentService.deleteDepartmentById(+id);
+    if (!department) {
+      throw new NotFoundException('department not exist');
+    }
+    return department;
   }
 }

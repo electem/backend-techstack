@@ -1,22 +1,24 @@
 <html>
-<head>
-    <meta charset='utf-8' />
-    <title></title>
+  <head>
+    <title>
+      Company Details
+    </title>
   </head>
-
   <body>
-    <div class='card'>
-      <div class='inner'>
-        <h2 class='title'>{{name}}</h2>
-        <div>
-          <ul>
-            {{#each department}}
-              <li>{{this.name}}</li>
-            {{/each}}
-          </ul>
-        </div>
-      </div>
-    </div>
-  </body>
 
+    <h2>Company Details</h2>
+    <table border='1'>
+      <tr>
+        <th>NAME</th>
+        <th>AGE</th>
+        <th>BRANCH</th>
+      </tr>
+      {{#each this}}
+        <tr>
+          <td>{{this.name}}</td>
+          <td>{{this.email}}</td>
+          <td>{{this.createdAt}}</td>
+        </tr>{{/each}}
+    </table>
+  </body>
 </html>

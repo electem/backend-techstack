@@ -53,4 +53,8 @@ export class CompanylistComponent implements OnInit {
   logout(): void {
     this.auth.signOut();
   }
+
+async  deleteCompany(id: number){
+    await this.userservice.deletecompany(id);
+  }
 }
