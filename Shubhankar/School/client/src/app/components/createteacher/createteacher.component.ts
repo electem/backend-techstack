@@ -13,7 +13,6 @@ import { SchoolService } from 'src/app/services/school.service';
 export class CreateteacherComponent implements OnInit {
   createTeacher!: FormGroup;
   submitted: boolean = false;
-  selectedschool?: School;
   teacher: Teacher = {
     teachername: '',
     address: '',
@@ -23,7 +22,18 @@ export class CreateteacherComponent implements OnInit {
     schools: [],
   };
 
-  schools: School[] = [];
+  id?: number;
+  isAddMode?: boolean;
+
+   schools: School[] = [];
+  currentSchool: School = {};
+  selectedSchool: School[] = [];
+
+  
+  schoolList:School[]=[];
+  addedSchools: School[] = [];
+  SelectedSchool: School = {};
+
   constructor(
     private schoolService: SchoolService,
     private router: Router,
@@ -38,29 +48,34 @@ export class CreateteacherComponent implements OnInit {
       phonenumber: ['', Validators.required],
       email: ['', Validators.required],
       gender: ['', Validators.required],
+      schools:['', Validators.required],
     });
     this.retrieveSchool();
     this.retrieveTeacher(this.route.snapshot.params.id);
+
+    this.id = this.route.snapshot.params['id'];
+    this.isAddMode = !this.id;
   }
 
   async retrieveSchool(): Promise<void> {
     this.schools = await this.schoolService.getallSchoolRecords();
   }
 
-  public onSelectPushExtraSchoolToSchoolsList(school: School) {
-    this.selectedschool = school;
-    this.teacher.schools?.push(this.selectedschool);
+   async selectedSchoolRecord(school: School): Promise<void> {
+    this.currentSchool = school;
+    this.selectedSchool?.push(this.currentSchool);
   }
 
   get fval() {
     return this.createTeacher.controls;
   }
-  async updateTeacher() {
+ 
+  async saveTeacher() {
     this.submitted = true;
     if (this.createTeacher.invalid) {
       return;
     }
-    this.getUpdated();
+    this.getSubmit();
   }
 
   async getSubmit() {
@@ -71,7 +86,7 @@ export class CreateteacherComponent implements OnInit {
       phonenumber: this.teacher.phonenumber,
       email: this.teacher.email,
       gender: this.teacher.gender,
-      schools: this.teacher.schools,
+      schools: this.selectedSchool,
     };
     await this.schoolService.createTeacher(teacherinfo);
     this.router.navigate(['/teacher-list']);
@@ -85,10 +100,18 @@ export class CreateteacherComponent implements OnInit {
     this.teacher = await this.schoolService.getTeacherbyid(id);
   }
 
+  async updateTeacher() {
+    this.submitted = true;
+    if (this.createTeacher.invalid) {
+      return;
+    }
+    this.getUpdated();
+  }
+
   async getUpdated() {
     this.submitted = true;
     const teacherinfo: Teacher = {
-      id: this.teacher.id,
+      teacherid: this.teacher.teacherid,
       teachername: this.teacher.teachername,
       address: this.teacher.address,
       phonenumber: this.teacher.phonenumber,
@@ -98,5 +121,25 @@ export class CreateteacherComponent implements OnInit {
     };
     await this.schoolService.updateTeacher(teacherinfo);
     this.router.navigate(['/teacher-list']);
+  }
+
+  async selectedSchools(school: string) {
+    console.log(school);
+    const data = this.schools.filter((s) => s.schoolid === +school);
+    this.currentSchool = data[0];
+  }
+  
+  async onSelectPushToCurrentSchool(school: School): Promise<void> {
+    this.SelectedSchool = school;
+    this.teacher.schools?.push(this.SelectedSchool);
+    this.schools.splice(this.schools.indexOf(this.SelectedSchool), 1);
+  }
+  async onSelectPushToSchoolsList(school: School) {
+    this.SelectedSchool = school;
+    this.schools.push(this.SelectedSchool!);
+    this.teacher.schools?.splice(
+      this.teacher.schools?.indexOf(this.SelectedSchool),
+      1
+    );
   }
 }
