@@ -5,8 +5,10 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -61,5 +63,14 @@ public class SchoolController {
 	public School updateSchool(@PathVariable("id") int id, @Valid @RequestBody School school) {
 		LOG.info("Start of SchoolController :: updateSchool ");
 		return schoolRepository.save(school);
+	}
+
+	// This method is used to delete school by id from DB.
+	@DeleteMapping("/deleteSchool/{id}")
+	public ResponseEntity<HttpStatus> deleteSchool(@PathVariable("id") int id) {
+		LOG.info("Start of SchoolController :: deleteSchool ");
+		schoolRepository.deleteById(id);
+		LOG.info("End of SchoolController :: deleteSchool ");
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 }

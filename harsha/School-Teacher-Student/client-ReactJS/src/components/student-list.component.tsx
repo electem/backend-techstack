@@ -33,10 +33,10 @@ export default class StudentsList extends Component<Props, State> {
       .catch((e: Error) => {
         console.log(e);
       });
-  };
-  
+  }
+
   render() {
-    const { students} = this.state;
+    const { students } = this.state;
 
     return (
       <>
@@ -47,9 +47,9 @@ export default class StudentsList extends Component<Props, State> {
             </button>
           </Link>
         </div>
+        <h4>Students List</h4>
         <div className="list row">
           <div className="col-md-6">
-            <h4 >Students List</h4>
             <table className="table table-bordered table-striped table-hover">
               <thead>
                 <tr>
@@ -68,7 +68,7 @@ export default class StudentsList extends Component<Props, State> {
                 {students.map((student: Student) => {
                   return (
                     <tr key={student.studentId}>
-                      <td >{student.studentId}</td>
+                      <td>{student.studentId}</td>
                       <td>{student.studentName}</td>
                       <td>{student.address}</td>
                       <td>{student.gender}</td>

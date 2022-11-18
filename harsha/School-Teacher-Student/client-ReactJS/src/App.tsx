@@ -6,6 +6,10 @@ import "./App.css";
 import SchoolsList from "./components/school-list.component";
 import TeachersList from "./components/teacher-list.component";
 import StudentsList from "./components/student-list.component";
+import AddSchool from "./components/add-school.component";
+import AddTeacher from "./components/add-teacher.component";
+import AddStudent from "./components/add-student.component";
+import EditSchool from "./components/edit-school.component";
 
 class App extends Component {
   render() {
@@ -34,8 +38,12 @@ class App extends Component {
         <div className="container mt-3">
           <Switch>
             <Route exact path={["/", "/schools"]} component={SchoolsList} />
-            <Route exact path= "/teachers" component={TeachersList} />
-            <Route exact path= "/students" component={StudentsList} />
+            <Route exact path="/teachers" component={TeachersList} />
+            <Route exact path="/students" component={StudentsList} />
+            <Route path="/add-school" component={AddSchool} />
+            <Route path="/add-teacher" component={AddTeacher} />
+            <Route path="/add-student" component={AddStudent} />
+            <Route path="/schools/:id" component={EditSchool} />
           </Switch>
         </div>
       </div>
