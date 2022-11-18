@@ -12,6 +12,14 @@ class StudentService {
     return http.post<Student>("/createStudent", student);
   }
 
+  get(id: any) {
+    return http.get<Student>(`/student/${id}`);
+  }
+
+  update(student: Student, id: any) {
+    return http.put<any>(`/updateStudent/${id}`, student);
+  }
+
   delete(id: any) {
     return http.delete<any>(`/deleteStudent/${id}`);
   }

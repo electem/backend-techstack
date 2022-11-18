@@ -10,6 +10,7 @@ import StudentsList from "./components/student/student-list.component";
 import AddTeacher from "./components/teacher/add-teacher.component";
 import TeachersList from "./components/teacher/teacher-list.component";
 import EditTeacher from "./components/teacher/edit-teacher.component";
+import EditStudent from "./components/student/edit-student.component";
 
 
 class App extends Component {
@@ -38,7 +39,7 @@ class App extends Component {
 
         <div className="container mt-3">
           <Switch>
-            <Route exact path={["/", "/schools"]} component={SchoolsList} />
+            <Route exact path={["/schools"]} component={SchoolsList} />
             <Route exact path="/teachers" component={TeachersList} />
             <Route exact path="/students" component={StudentsList} />
             <Route path="/add-school" component={AddSchool} />
@@ -46,6 +47,7 @@ class App extends Component {
             <Route path="/add-student" component={AddStudent} />
             <Route path="/schools/:id" component={EditSchool} />
             <Route path="/teachers/:id" component={EditTeacher} />
+            <Route path="/students/:id" component={EditStudent} />
           </Switch>
         </div>
       </div>

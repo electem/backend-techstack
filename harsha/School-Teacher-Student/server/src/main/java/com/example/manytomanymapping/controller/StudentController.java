@@ -5,17 +5,17 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.example.manytomanymapping.exceptions.ResourceNotFoundException;
-import com.example.manytomanymapping.models.School;
 import com.example.manytomanymapping.models.Student;
 import com.example.manytomanymapping.repository.StudentRepository;
 
@@ -63,5 +63,14 @@ public class StudentController {
 	public Student updateStudent(@PathVariable("id") int id, @Valid @RequestBody Student student) {
 		LOG.info("Start of StudentController :: updateStudent ");
 		return studentRepository.save(student);
+	}
+
+	// This method is used to delete student by id from DB.
+	@DeleteMapping("/deleteStudent/{id}")
+	public ResponseEntity<HttpStatus> deleteStudent(@PathVariable("id") int id) {
+		LOG.info("Start of StudentController :: deleteStudent ");
+		studentRepository.deleteById(id);
+		LOG.info("End of StudentController :: deleteStudent ");
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 }

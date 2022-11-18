@@ -85,9 +85,9 @@ export default class AddStudent extends Component<Props, State> {
     });
   }
 
-  onChangeSchools(event: any) {
+  onChangeSchools(event: Student) {
     this.setState({
-      school: event.target.value,
+      school: event.school,
     });
   }
 
@@ -228,7 +228,7 @@ export default class AddStudent extends Component<Props, State> {
                   key={school.schoolId}
                   typeof="checked"
                   value={school.schoolName}
-                  onChange={this.onChangeSchools}
+                  onChange={()=>this.onChangeSchools(school)}
                 >
                   {school.schoolName}
                 </option>
