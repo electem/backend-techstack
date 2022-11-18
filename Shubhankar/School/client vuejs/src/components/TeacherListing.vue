@@ -1,6 +1,15 @@
 <!-- eslint-disable prettier/prettier -->
 <template>
     <h4>Teacher List</h4>
+      <div class="col-md-6">
+      <button
+           type="button"
+            v-on:click='addMessage'>
+          Search
+          </button>
+     <input v-model="txtInput" @keyup.enter="addMessage()"/>
+    </div>
+
   <div class="list row">
     <div class="col-md-6">
    </div>
@@ -31,6 +40,7 @@
 </div>
 </template>
 
+<!-- eslint-disable prettier/prettier -->
 <script lang="ts">
 import { defineComponent } from "vue";
 import Teacher from "@/types/Teacher";
@@ -45,6 +55,8 @@ export default defineComponent({
       currentTeachers: {} as Teacher,
       currentIndex: -1,
       title: "",
+       txtInput: '',
+       teachername: "",
     };
   },
   methods: {
@@ -58,13 +70,24 @@ export default defineComponent({
           console.log(e);
         });
     },
+
+    addMessage() {
+    console.log(this.txtInput);
+    if (this.txtInput != '' && this.txtInput) {
+     this.teachers = this.teachers.filter((obj) => {
+       return obj.teachername.toLowerCase()
+       .includes(this.txtInput.toLowerCase());
+  })
+  }},
 },
+
   mounted() {
     this.retrieveTeachers();
   },
 });
 </script>
 
+<!-- eslint-disable prettier/prettier -->
 <style>
 .list {
   text-align: left;

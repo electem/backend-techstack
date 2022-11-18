@@ -1,3 +1,5 @@
+import School from "./School";
+
 /* eslint-disable */
 export default interface Student {
     studentid: number;
@@ -7,4 +9,7 @@ export default interface Student {
     email:string;
     gender:string;
     dateofbirth:string;
+    createdAt:Date;
+    school:School[];
+    
 }
