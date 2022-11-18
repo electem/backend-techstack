@@ -13,6 +13,9 @@ import DataTable from "./components/datatble/datatable";
 import datatables from "./components/datatble/datatables";
 import StudentsListDatatables from "./components/students/studentlistingdatatbles";
 import { chartsStudents } from "./components/chartjs/chartstudent";
+import TutorialsList from "./components/tutorials-list.component";
+import studentedit from "./components/students/studentedit.component";
+import EditSchool from "./components/school/schooledit.component";
 class App extends Component {
   render() {
     return (
@@ -28,7 +31,7 @@ class App extends Component {
               </Link>
             </li>
             <li className="nav-item">
-              <Link to={"/schoollist"} className="nav-link">
+              <Link to={"/schools"} className="nav-link">
                 School List
               </Link>
             </li>
@@ -52,14 +55,20 @@ class App extends Component {
                 Add Teacher
               </Link>
             </li>
+            <li className="nav-item">
+              <Link to={"/schools/:id"} className="nav-link">
+                edit
+              </Link>
+            </li>
           </div>
         </nav>
 
         <div className="container mt-3">
           <Switch>
-            <Route exact path={["/", "/schoollist"]} component={SchoolList} />
+            <Route exact path={["/", "/schools"]} component={SchoolList} />
             <Route path="/school" component={AddSchool} />
-            <Route path="/schoollist" component={SchoolList} />
+            <Route path="/schoolsedit/:id" component={EditSchool} />
+            <Route path="/students/:id" component={studentedit} />
             <Route path="/studentlist" component={StudentsList} />
             <Route path="/student" component={AddStudent} />
             <Route path="/teacherlist" component={TeacherList} />
@@ -69,6 +78,7 @@ class App extends Component {
             <Route path="/datatable" component={datatables} />
             <Route path="/stud" component={StudentsListDatatables} />
             <Route path="/chartstud" component={chartsStudents} />
+            <Route path="/tut" component={TutorialsList} />
           </Switch>
         </div>
       </div>
