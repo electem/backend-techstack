@@ -3,6 +3,8 @@
 
 <template>
   <h4>School List</h4>
+   <input  value="Add" @click="createschool" class="btn float-right btn-primary">
+    
    <div class="input-group mb-3">
         <button
            type="button"
@@ -10,7 +12,6 @@
           >
           Search
           </button>
-
         <input v-model="txtInput" @keyup.enter="addMessage()"/>
       </div>
   <div class="list row">
@@ -21,6 +22,7 @@
           <th class="text-center" scope="col">Name</th>
           <th class="text-center" scope="col">Address</th>
           <th class="text-center" scope="col">Created At</th>
+           <th class="text-center" scope="col">Option</th>
         </tr>
       </thead>
       <tbody
@@ -32,6 +34,18 @@
           <th class="text-center" scope="row">{{ school.schoolname }}</th>
           <th class="text-center" scope="row">{{ school.address }}</th>
           <th class="text-center" scope="row">{{ school.createdAt }}</th>
+          <router-link
+      :to="'/school/' + school.schoolid"
+       class="badge badge-warning"
+       custom
+       v-slot="{ navigate }"
+      > <button  
+      class="badge badge-success mr-2"
+       @click="navigate"  
+     role="link"
+     >EDIT</button>
+
+      </router-link>
         </tr>
       </tbody>
     </table>
@@ -82,6 +96,13 @@ export default defineComponent({
        .includes(this.txtInput.toLowerCase());
   })
   }},
+
+  createschool(){
+    this.$router.replace('/createschool');
+  },
+
+
+
   },
 
   mounted() {

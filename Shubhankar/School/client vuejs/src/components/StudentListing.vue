@@ -2,6 +2,7 @@
 <!-- eslint-disable prettier/prettier -->
 <template>
 <h4>Student List</h4>
+<input  value="Add" @click="addStudent" class="btn float-right btn-primary">
  <div class="col-md-6">
       <button
            type="button"
@@ -21,6 +22,7 @@
        <th class="text-center" scope="col">Email</th>
      <th class="text-center" scope="col">Gender</th>
        <th class="text-center" scope="col">Born year</th>
+        <th class="text-center" scope="col">Option</th>
     </tr>
   </thead>
   <tbody  
@@ -34,6 +36,18 @@
        <th class="text-center" scope="row">{{ student.email }}</th>
        <th class="text-center" scope="row">{{ student.gender }}</th>
        <th class="text-center" scope="row">{{ student.dateofbirth}}</th>
+       <router-link
+      :to="'/student/' + student.studentid"
+       class="badge badge-warning"
+       custom
+       v-slot="{ navigate }"
+      > <button  
+      class="badge badge-success mr-2"
+       @click="navigate"  
+     role="link"
+     >EDIT</button>
+
+      </router-link>
        
       </tr>
    </tbody>
@@ -86,6 +100,11 @@ export default defineComponent({
        .includes(this.txtInput.toLowerCase());
   })
   }},
+
+addStudent(){
+    this.$router.replace('/createstudent');
+  }
+
 },
   mounted() {
     this.retrieveStudents();

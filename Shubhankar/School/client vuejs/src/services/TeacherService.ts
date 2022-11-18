@@ -11,6 +11,14 @@ class TeacherService {
       createTeacher(data: any): Promise<any> {
         return http.post("/teacher",data);
       }  
+
+      updateTeacher(data: any): Promise<any> {
+        return http.put("/teacher",data);
+      } 
+      
+      createTeacherbyId(id: any) {
+        return http.get(`/teacher/${id}`);
+       }
 }
 
 export default new TeacherService();

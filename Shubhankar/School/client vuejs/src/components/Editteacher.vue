@@ -1,5 +1,6 @@
 <!-- eslint-disable prettier/prettier -->
 <template>
+<h1>hello</h1>
   <div class="submit-form">
     <div v-if="!submitted">
       <div class="form-group">
@@ -9,7 +10,7 @@
           class="form-control"
           id="teachername"
           required
-          v-model="teacher.teachername"
+          v-model="selectedTeacher.teachername"
           name="teachername"
         />
       </div>
@@ -20,7 +21,7 @@
           class="form-control"
           id="address"
           required
-          v-model="teacher.address"
+          v-model="selectedTeacher.address"
           name="address"
         />
       </div>
@@ -32,7 +33,7 @@
           class="form-control"
           id="phonenumber"
           required
-          v-model="teacher.phonenumber"
+          v-model="selectedTeacher.phonenumber"
           name="phonenumber"
         />
       </div>
@@ -44,18 +45,18 @@
           class="form-control"
           id="email"
           required
-          v-model="teacher.email"
+          v-model="selectedTeacher.email"
           name="email"
         />
       </div>
 
    <div class="form-group">
     <label for="gender">Gender</label><br>
-  <input type="radio" id="Male" value="Male" v-model="picked">
+  <input type="radio" id="Male" value="Male" v-model="selectedTeacher.gender">
   <label for="Male">Male</label><br>
-  <input type="radio" id="Female" value="Female" v-model="picked">
+  <input type="radio" id="Female" value="Female" v-model="selectedTeacher.gender">
   <label for="Female">Female</label><br>
-  <input type="radio" id="Others" value="Others" v-model="picked">
+  <input type="radio" id="Others" value="Others" v-model="selectedTeacher.gender">
   <label for="Female">Others</label><br>
   <span>Picked: {{ picked }}</span><br>
    </div>
@@ -68,7 +69,7 @@
         :key="index">
              <label v-bind:for="school.schoolid">
         <div  >
-          <input type="checkbox" v-model="selectedSchool" v-bind:value="school">
+          <input type="checkbox" v-model="selectedTeacher.school" v-bind:value="school">
             <span>{{ school.schoolname }}</span>
         </div>
         </label>
@@ -79,68 +80,58 @@
         </div>
       </div>
 
-      <button @click="saveTeacher" class="btn btn-success">Submit</button>
+      <button @click="updateSchool" class="btn btn-success">Update</button>
       <button @click="listingPage" class="btn btn-danger">Cancel</button>
  
 </template>
 
+<!-- eslint-disable prettier/prettier -->
 <script lang="ts">
-/* eslint-disable */
 import { defineComponent } from "vue";
 import ResponseData from "@/types/ResponseData";
-import Teacher from "@/types/Teacher";
-import TeacherService from "@/services/TeacherService";
-import SchoolService from "@/services/SchoolService";
 import School from "@/types/School";
+import SchoolService from "@/services/SchoolService";
+ import TeacherService from "@/services/TeacherService";
+import Teacher from "@/types/Teacher";
 
 export default defineComponent({
-  name: "teacher",
-
+  name: "edit-teacher", 
+  
+  
   data() {
-    
     return {
-      schools : [] as School[],
-      selectedSchool:[],
-       currentSchool: {} as School,
-      teacher: {
-        teachername: "",
-        address: "",
-        email: "",
-        gender: "",
-      } as Teacher,
-      submitted: false,
-      picked: '',
-    selected: 'Male',
-    options: [
-      { value: 'Male' },
-      { value: 'Female' },
-      { value: 'Others' }
-    ]
+        schools:[] as School[],
+         selectedTeacher:{} as Teacher,
+          message: "",
+          submitted: false,
     };
-  },
-  methods: {
-    saveTeacher() {
-      let data = {
-        teacherid: this.teacher.teacherid,
-        teachername: this.teacher.teachername,
-        address: this.teacher.address,
-        phonenumber: this.teacher.phonenumber,
-        email: this.teacher.email,
-        gender: this.picked,
-        schools:this.selectedSchool,
-      };
+},
 
-      TeacherService.createTeacher(data)
+methods: {
+    updateSchool() {
+     
+     TeacherService.updateTeacher(this.selectedTeacher)
         .then((response: ResponseData) => {
-          this.teacher.teacherid = response.data.teacherid;
           console.log(response.data);
-          this.submitted = true;
+          this.message = "the teacher is updated";
         })
         .catch((e: Error) => {
           console.log(e);
         });
     },
-     retrieveSchools() {
+
+    retrieveTeachers(id: any) {
+      TeacherService.createTeacherbyId(id)
+        .then((response: ResponseData) => {
+          this.selectedTeacher = response.data;
+          console.log(response.data);
+        })
+        .catch((e: Error) => {
+          console.log(e);
+        });
+    },
+  
+   retrieveSchools() {
       SchoolService.getAllSchool()
         .then((response: ResponseData) => {
           this.schools = response.data;
@@ -150,21 +141,19 @@ export default defineComponent({
           console.log(e);
         });
     },
-
-  listingPage(){
-      this.$router.replace('/teacher');
-    }
-  },
-  
- 
-  mounted() {
-    this.saveTeacher();
+    
+    
+    
+},
+   mounted() {
+    this.retrieveTeachers(this.$route.params.id);
     this.retrieveSchools();
-  },
+ },
 });
 </script>
 
-<style>
+<!-- eslint-disable prettier/prettier -->
+<style src="vue-multiselect/dist/vue-multiselect.min.css">
 .edit-form {
   max-width: 300px;
   margin: auto;
