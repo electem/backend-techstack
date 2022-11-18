@@ -5,6 +5,12 @@ import { RouteRecordRaw } from "vue-router";
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
+    alias: "/school",
+    name: "schoolist",
+    component: () => import("./components/SchoolList.vue"),
+  },
+  {
+    path: "/",
     alias: "/tutorials",
     name: "tutorials",
     component: () => import("./components/TutorialsList.vue"),
@@ -19,12 +25,7 @@ const routes: Array<RouteRecordRaw> = [
     name: "add",
     component: () => import("./components/AddTutorial.vue"),
   },
-  {
-    path: "/",
-    alias: "/school",
-    name: "schoolist",
-    component: () => import("./components/SchoolList.vue"),
-  },
+
   {
     path: "/addschool",
     name: "addschool",
@@ -65,11 +66,6 @@ const routes: Array<RouteRecordRaw> = [
     name: "edit-teacher",
     component: () => import("./components/EditTeacher.vue"),
   },
-  // {
-  //   path: "/validation",
-  //   name: "validation",
-  //   component: () => import("./components/Validation.vue"),
-  // },
   {
     path: "/datatable",
     name: "datatable",

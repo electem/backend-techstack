@@ -49,8 +49,8 @@
       </div>
     </div>
   </template>
-  
   <script lang="ts">
+  
   /* eslint-disable */
   
   import { computed, ref } from "vue";

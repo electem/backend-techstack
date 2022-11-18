@@ -5,12 +5,18 @@ import studentservice from "@/services/studentservice";
 import { Student } from "@/types/student";
 import ResponseData from "@/types/ResponseData";
 
+import { Teacher } from "@/types/teacher";
 export default defineComponent({
+
   name: "edit-student",
   data() {
     return {
       currentStudent: {} as Student,
       message: "",
+      teacherData: [] as Teacher[],
+      studentData: [] as Student[],
+      selectedTeachers: [] as Teacher[],
+      selectedStudents: [] as Teacher[],
     };
   },
   methods: {
@@ -108,7 +114,7 @@ export default defineComponent({
         v-for="(entry, index) in currentStudent.school"
         :key="index"       
       >   
-          {{ entry.schoolname }}
+          {{ entry}}
       </div>
       <br />
     </form>

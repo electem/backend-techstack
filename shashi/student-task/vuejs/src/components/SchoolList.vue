@@ -26,7 +26,7 @@
             </th>
           </tr>
         </thead>
-        <tbody>
+        <tbody v-if="schoolList?.length !=0">
           <tr v-for="(entry, index) in schoolList" :key="index">
             <td>{{ entry.schoolid }}</td>
             <td>{{ entry.schoolname }}</td>
@@ -65,7 +65,6 @@ export default defineComponent({
   data() {
     return {   
       schoolList: [] as School[],
-      //studentData: [] as School[],
       schoolname: "",
     };
   },

@@ -13,11 +13,8 @@ class SchoolDataService {
   getAllTeacherss(): Promise<any> {
     return http.get("/teacher");
   }
-  //   get(id: any): Promise<any> {
-  //     return http.get(`/tutorials/${id}`);
-  //   }
 
-  create(data: any): Promise<any> {
+  createSchool(data: any): Promise<any> {
     return http.post("/school", data);
   }
   createStudent(data: any): Promise<any> {

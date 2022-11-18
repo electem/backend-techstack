@@ -26,14 +26,15 @@ export default defineComponent({
         });
     },
     updateTeacher() {
-        studentservice.updateTeacher(this.currentTeacher)
+      studentservice
+        .updateTeacher(this.currentTeacher)
         .then((response: ResponseData) => {
           console.log(response.data);
           this.message = "The teacher was updated successfully!";
         })
         .catch((e: Error) => {
           console.log(e);
-        });       
+        });
     },
   },
   mounted() {
@@ -61,7 +62,7 @@ export default defineComponent({
           class="form-control"
           id="address"
           required
-          v-model="currentTeacher.address"     
+          v-model="currentTeacher.address"
         ></textarea>
       </div>
       <div class="form-group">
@@ -72,7 +73,7 @@ export default defineComponent({
           id="email"
           v-model="currentTeacher.email"
         />
-      </div>     
+      </div>
       <div class="form-group">
         <label for="gender">Gender</label>
         <input
@@ -81,23 +82,41 @@ export default defineComponent({
           id="gender"
           v-model="currentTeacher.gender"
         />
-      </div>      
-      <label for="school">School List:-</label>
-      <div
-        class="col-md-6"
-        v-for="(entry, index) in currentTeacher.school"
-        :key="index"       
-      >   <li>
-          {{ entry.schoolname }}
-        </li>
+      </div>
+      <div class="form-group input center">
+        <div class="form-group">
+          <label for="options">School List:-</label>
+          <div
+            class="form-check"
+            v-for="(entry, index) in currentTeacher.school"
+            :key="index"
+          >
+            <label
+              ><input
+                name="options"
+                type="checkbox"
+                v-model="currentTeacher.school"
+                 
+              />{{ entry.schoolname }}</label
+            >
+          </div>
+        </div>
       </div>
       <br />
     </form>
     <button class="badge badge-danger mr-2">Delete</button>
 
-    <button type="submit" class="badge badge-success mr-2" @click="updateTeacher()">Update</button>
+    <button
+      type="submit"
+      class="badge badge-success mr-2"
+      @click="updateTeacher()"
+    >
+      Update
+    </button>
 
-    <router-link :to="'/teacherslist'" class="badge badge-success">Back</router-link>
+    <router-link :to="'/teacherslist'" class="badge badge-success"
+      >Back</router-link
+    >
     <p>{{ message }}</p>
   </div>
   <div v-else>

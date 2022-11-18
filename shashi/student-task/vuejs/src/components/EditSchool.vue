@@ -4,13 +4,21 @@ import { defineComponent } from "vue";
 import studentservice from "@/services/studentservice";
 import School from "@/types/school";
 import ResponseData from "@/types/ResponseData";
+import Multiselect from "@suadelabs/vue3-multiselect";
+import { Student } from "@/types/student";
+import { Teacher } from "@/types/teacher";
 
 export default defineComponent({
+  components: { Multiselect },
   name: "edit-school",
   data() {
     return {
       currentSchool: {} as School,
       message: "",
+      teacherData: [] as Teacher[],
+      studentData: [] as Student[],
+      selectedTeachers: [] as Teacher[],
+      selectedStudents: [] as Teacher[],
     };
   },
   methods: {
@@ -35,10 +43,34 @@ export default defineComponent({
           console.log(e);
         });
     },
+    retrieveTeachers() {
+      studentservice
+        .getAllTeacherss()
+        .then((response: ResponseData) => {
+          this.teacherData = response.data;
+          console.log(response.data);
+        })
+        .catch((e: Error) => {
+          console.log(e);
+        });
+    },
+    retrieveStudents() {
+      studentservice
+        .getAllStudents()
+        .then((response: ResponseData) => {
+          this.studentData = response.data;
+          console.log(response.data);
+        })
+        .catch((e: Error) => {
+          console.log(e);
+        });
+    }, 
   },
   mounted() {
     this.message = "";
     this.getSchool(this.$route.params.id);
+    this.retrieveStudents();
+      this.retrieveTeachers()
   },
 });
 </script>
@@ -85,6 +117,44 @@ export default defineComponent({
           {{ entry.studentname }}
         </li>
       </div>
+      <div class="form-group">
+          <multiselect
+            class="form-control"
+            id="teacher"
+            required
+            v-model="currentSchool.teacher"
+            name="teacher"
+            :options="teacherData"
+            :multiple="true"
+            :close-on-select="false"
+            :clear-on-select="false"
+            :preserve-search="true"
+            placeholder="Select Teacher"
+            label="teachername"
+            track-by="teachername"
+            :preselect-first="true"
+          >
+          </multiselect>
+        </div>
+        <div class="form-group">
+          <multiselect
+            class="form-control"
+            id="student"
+            required
+            v-model="currentSchool.students"
+            name="student"
+            :options="studentData"
+            :multiple="true"
+            :close-on-select="false"
+            :clear-on-select="false"
+            :preserve-search="true"
+            placeholder="Select Student"
+            label="studentname"
+            track-by="studentname"
+            :preselect-first="true"
+          >
+          </multiselect>
+        </div>
     </form>
     <button class="badge badge-danger mr-2">Delete</button>
 
@@ -99,7 +169,7 @@ export default defineComponent({
     <p>Please click on a Tutorial...</p>
   </div>
 </template>
-<style>
+<style src="vue-multiselect/dist/vue-multiselect.min.css">
 .edit-form {
   max-width: 300px;
   margin: auto;
