@@ -1,7 +1,7 @@
 import { Component } from "react";
-import StudentService from "../services/student.service";
+import StudentService from "../../services/student.service";
 import { Link } from "react-router-dom";
-import { Student } from "../types/student.type";
+import { Student } from "../../types/student.type";
 
 type Props = {};
 

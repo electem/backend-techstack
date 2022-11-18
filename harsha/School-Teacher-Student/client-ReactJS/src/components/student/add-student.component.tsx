@@ -1,9 +1,9 @@
 import { ChangeEvent, Component } from "react";
 import { Link, RouteComponentProps } from "react-router-dom";
-import { Student } from "../types/student.type";
-import SchoolService from "../services/school.service";
-import StudentService from "../services/student.service";
-import { School } from "../types/school.type";
+import { Student } from "../../types/student.type";
+import SchoolService from "../../services/school.service";
+import StudentService from "../../services/student.service";
+import { School } from "../../types/school.type";
 
 interface RouterProps {}
 
@@ -37,8 +37,9 @@ export default class AddStudent extends Component<Props, State> {
       gender: "",
       email: "",
       dateOfBirth:"",
-      phoneNo: undefined,
-      school: {},
+      school: {
+        schoolName:''
+      },
       schools: [],
       submitted: false,
     };
@@ -102,16 +103,13 @@ export default class AddStudent extends Component<Props, State> {
       });
   }
 
-  getGenders() {
-    StudentService.getGenders();
-  }
-
   saveStudent() {
     const student: Student = {
       studentName: this.state.studentName,
       address: this.state.address,
       email: this.state.email,
       gender: this.state.gender,
+      dateOfBirth: this.state.dateOfBirth,
       phoneNo: this.state.phoneNo,
       school: this.state.school,
     };
@@ -124,10 +122,12 @@ export default class AddStudent extends Component<Props, State> {
           address: response.data.address,
           email: response.state.email,
           gender: response.state.gender,
+          dateOfBirth: response.state.dateOfBirth,
           phoneNo: response.state.phoneNo,
           school: response.data.school,
           submitted: true,
         });
+        this.props.history.push("/students");
       })
       .catch((e: Error) => {
         console.log(e);

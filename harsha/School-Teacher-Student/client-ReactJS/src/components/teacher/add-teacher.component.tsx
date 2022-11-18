@@ -1,14 +1,16 @@
 import { ChangeEvent, Component } from "react";
-import SchoolService from "../services/school.service";
-import TeacherService from "../services/teacher.service";
+import SchoolService from "../../services/school.service";
+import TeacherService from "../../services/teacher.service";
 import { Link, RouteComponentProps } from "react-router-dom";
-import { Teacher } from "../types/teacher.type";
+import { Teacher } from "../../types/teacher.type";
+import { School } from "../../types/school.type";
 
 interface RouterProps {}
 
 type Props = RouteComponentProps<RouterProps>;
 
 type State = Teacher & {
+  schools:Array<School>
   submitted: boolean;
 };
 
@@ -28,7 +30,6 @@ export default class AddTeacher extends Component<Props, State> {
       address: "",
       gender: "",
       email: "",
-      phoneNo: 0,
       schools: [],
       submitted: false,
     };
@@ -69,8 +70,10 @@ export default class AddTeacher extends Component<Props, State> {
   }
 
   onChangeSchools(event: any) {
+    const target = event.target;
+    const value = target.name === 'school 3' ? target.checked : target.value;
     this.setState({
-      schools: event.target.value,
+      schools: value,
     });
   }
 
@@ -106,6 +109,7 @@ export default class AddTeacher extends Component<Props, State> {
           schools: response.data.schools,
           submitted: true,
         });
+        this.props.history.push("/teachers");
       })
       .catch((e: Error) => {
         console.log(e);
@@ -113,7 +117,7 @@ export default class AddTeacher extends Component<Props, State> {
   }
 
   render() {
-    const { teacherName, address, gender, email, phoneNo } = this.state;
+    const { teacherName, address, gender, email, phoneNo, schools } = this.state;
 
     return (
       <div className="submit-form">
@@ -174,7 +178,7 @@ export default class AddTeacher extends Component<Props, State> {
           <div className="form-group">
             <label htmlFor="phoneNo">Phone No</label>
             <input
-              type="text"
+              type="number"
               className="form-control"
               id="phoneNo"
               required
@@ -185,14 +189,19 @@ export default class AddTeacher extends Component<Props, State> {
           </div>
 
           <div className="form-group">
-            <label htmlFor="schools">Schools</label>
-            <input
-              type="checkbox"
-              name="schools"
-              className="form-control"
-              value="schools"
-            />
-          </div>
+          <label >Schools</label>
+          {schools.map((school, i) => (
+            <div key={i}>
+              <input
+                type="checkbox"
+                name="schools"
+                value={school.schoolName}
+                // onChange={this.onChangeSchools}
+              />{" "}
+              {school.schoolName}
+            </div>
+          ))}</div>
+          <br />
 
           <button
             onClick={this.saveTeacher}

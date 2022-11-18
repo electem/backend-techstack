@@ -2,14 +2,15 @@ import { Component } from "react";
 import { Switch, Route, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
+import AddSchool from "./components/school/add-school.component";
+import EditSchool from "./components/school/edit-school.component";
+import SchoolsList from "./components/school/school-list.component";
+import AddStudent from "./components/student/add-student.component";
+import StudentsList from "./components/student/student-list.component";
+import AddTeacher from "./components/teacher/add-teacher.component";
+import TeachersList from "./components/teacher/teacher-list.component";
+import EditTeacher from "./components/teacher/edit-teacher.component";
 
-import SchoolsList from "./components/school-list.component";
-import TeachersList from "./components/teacher-list.component";
-import StudentsList from "./components/student-list.component";
-import AddSchool from "./components/add-school.component";
-import AddTeacher from "./components/add-teacher.component";
-import AddStudent from "./components/add-student.component";
-import EditSchool from "./components/edit-school.component";
 
 class App extends Component {
   render() {
@@ -44,6 +45,7 @@ class App extends Component {
             <Route path="/add-teacher" component={AddTeacher} />
             <Route path="/add-student" component={AddStudent} />
             <Route path="/schools/:id" component={EditSchool} />
+            <Route path="/teachers/:id" component={EditTeacher} />
           </Switch>
         </div>
       </div>

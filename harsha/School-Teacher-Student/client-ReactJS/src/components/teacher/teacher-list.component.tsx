@@ -1,7 +1,7 @@
 import { Component } from "react";
-import TeacherService from "../services/teacher.service";
+import TeacherService from "../../services/teacher.service";
 import { Link } from "react-router-dom";
-import { Teacher } from "../types/teacher.type";
+import { Teacher } from "../../types/teacher.type";
 
 type Props = {};
 
@@ -76,7 +76,7 @@ export default class TeachersList extends Component<Props, State> {
                       <td>{teacher.phoneNo}</td>
                       <td>
                         {
-                          <Link to={"/edit-teacher"}>
+                          <Link to={"/teachers/"+teacher.teacherId}>
                             <button type="button" className="btn btn-primary">
                               Edit
                             </button>

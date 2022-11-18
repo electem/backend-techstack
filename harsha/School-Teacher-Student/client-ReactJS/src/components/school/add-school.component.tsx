@@ -1,9 +1,9 @@
 import { ChangeEvent, Component } from "react";
-import SchoolService from "../services/school.service";
-import TeacherService from "../services/teacher.service";
-import StudentService from "../services/student.service";
+import SchoolService from "../../services/school.service";
+import TeacherService from "../../services/teacher.service";
+import StudentService from "../../services/student.service";
 import { Link, RouteComponentProps } from "react-router-dom";
-import { School } from "../types/school.type";
+import { School } from "../../types/school.type";
 import Multiselect from "multiselect-react-dropdown";
 
 interface RouterProps {}

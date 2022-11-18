@@ -1,12 +1,12 @@
 import Multiselect from "multiselect-react-dropdown";
 import { Component, ChangeEvent } from "react";
 import { Link, RouteComponentProps } from "react-router-dom";
-import SchoolService from "../services/school.service";
-import TeacherService from "../services/teacher.service";
-import StudentService from "../services/student.service";
-import { School } from "../types/school.type";
-import { Student } from "../types/student.type";
-import { Teacher } from "../types/teacher.type";
+import SchoolService from "../../services/school.service";
+import TeacherService from "../../services/teacher.service";
+import StudentService from "../../services/student.service";
+import { School } from "../../types/school.type";
+import { Student } from "../../types/student.type";
+import { Teacher } from "../../types/teacher.type";
 
 interface RouterProps {
   // type for `match.params`
@@ -99,7 +99,6 @@ export default class EditSchool extends Component<Props, State> {
         this.setState({
           currentSchool: response.data,
         });
-        console.log(response.data);
       })
       .catch((e: Error) => {
         console.log(e);
@@ -161,7 +160,7 @@ export default class EditSchool extends Component<Props, State> {
           </div>
 
             <div className="form-group">
-            <label >Teachers</label>
+            <label >Students</label>
             <Multiselect
               options={students}
               selectedValues={currentSchool.students}
