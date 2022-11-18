@@ -31,6 +31,18 @@
               <td>{{ entry.studentname }}</td>
               <td>{{ entry.email }}</td>
               <td>{{ entry.dob }}</td>
+              <router-link 
+          :to="'/student/' + entry.studentid"
+          class="badge badge-warning"
+          custom
+      v-slot="{ navigate }"
+          > <button  
+          class="badge badge-success mr-2" 
+          @click="navigate"  
+        role="link"
+        >EDIT</button>
+      </router-link
+        >
             </tr>
           </tbody>
         </table>
@@ -84,7 +96,7 @@
       this.retrieveStudents();
     },
     setup() {
-      const fields = ["STUDENT_NAME", "E-MAIL", "DATE_OF_BIRTH"];
+      const fields = ["STUDENT_NAME", "E-MAIL", "DATE_OF_BIRTH","ACTIONS"];
       return { fields };
     },
   });

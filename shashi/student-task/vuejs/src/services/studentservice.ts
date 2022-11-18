@@ -4,8 +4,8 @@ import http from "@/http-Studentcommon";
 //const baseUrl = "http://localhost:3000";
 
 class SchoolDataService {
-  getAll(): Promise<any> {
-    return http.get("/school");
+  async getAll(): Promise<any> {
+    return await http.get("/school");
   }
   getAllStudents(): Promise<any> {
     return http.get("/student");
@@ -29,9 +29,21 @@ class SchoolDataService {
   getSchoolById(id: any): Promise<any> {
     return http.get(`/school/${id}`);
   }
-  //   update(id: any, data: any): Promise<any> {
-  //     return http.put(`/tutorials/${id}`, data);
-  //   }
+  updateSchool(data: any): Promise<any> {
+    return http.put(`/school/`, data);
+  }
+  getStudentById(id: any): Promise<any> {
+    return http.get(`/student/${id}`);
+  }
+  updateStudent(data: any): Promise<any> {
+    return http.put(`/student/`, data);
+  }
+  getTeacherById(id: any): Promise<any> {
+    return http.get(`/teacher/${id}`);
+  }
+  updateTeacher(data: any): Promise<any> {
+    return http.put(`/teacher/`, data);
+  }
 
   //   delete(id: any): Promise<any> {
   //     return http.delete(`/tutorials/${id}`);

@@ -24,7 +24,17 @@ export default defineComponent({
         .catch((e: Error) => {
           console.log(e);
         });
-    },   
+    },
+    updateSchool() {
+        studentservice.updateSchool(this.currentSchool)
+        .then((response: ResponseData) => {
+          console.log(response.data);
+          this.message = "The tutorial was updated successfully!";
+        })
+        .catch((e: Error) => {
+          console.log(e);
+        });
+    },
   },
   mounted() {
     this.message = "";
@@ -55,22 +65,32 @@ export default defineComponent({
         />
       </div>
       <label for="address">Teachers List:-</label>
-      <div class="col-md-6" v-for="(entry, index) in currentSchool.teacher" :key="index">     
-      <label>
-         {{ entry.teachername }}
-    </label>    
-           
-    </div>
-    <br />              
+      <div
+        class="col-md-6"
+        v-for="(entry, index) in currentSchool.teacher"
+        :key="index"
+      >
+        <li>
+          {{ entry.teachername }}
+        </li>
+      </div>
+      <br />
+      <label for="address">Students List:-</label>
+      <div
+        class="col-md-6"
+        v-for="(entry, index) in currentSchool.students"
+        :key="index"
+      >
+        <li>
+          {{ entry.studentname }}
+        </li>
+      </div>
     </form>
     <button class="badge badge-danger mr-2">Delete</button>
 
-    <button type="submit" class="badge badge-success mr-2" >Update</button>
+    <button type="submit" class="badge badge-success mr-2" @click="updateSchool()">Update</button>
 
-    <router-link 
-          :to="'/school/'"
-          class="badge badge-success"
-          >Back</router-link>
+    <router-link :to="'/school'" class="badge badge-success">Back</router-link>
     <p>{{ message }}</p>
   </div>
 

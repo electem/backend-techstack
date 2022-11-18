@@ -32,7 +32,18 @@
               <td>{{ entry.teachername }}</td>
               <td>{{ entry.email }}</td>
               <td>{{ entry.school.length }}</td>
-              
+              <router-link 
+          :to="'/teacher/' + entry.teacherid"
+          class="badge badge-warning"
+          custom
+      v-slot="{ navigate }"
+          > <button  
+          class="badge badge-success mr-2" 
+          @click="navigate"  
+        role="link"
+        >EDIT</button>
+      </router-link
+        >
             </tr>
           </tbody>
         </table>
@@ -87,7 +98,7 @@
       this.retrieveTeachers();
     },
     setup() {
-      const fields = ["ID", "TEACHER_NAME", "E-MAIL","TOTAL_SCHOOLS"];
+      const fields = ["ID", "TEACHER_NAME", "E-MAIL","TOTAL_SCHOOLS","ACTIONS"];
       return { fields };
     },
   });

@@ -1,4 +1,5 @@
 /* eslint-disable prettier/prettier */
+import School from "./school";
 export interface Student {
   studentid: number;
   studentname: string;
@@ -7,4 +8,5 @@ export interface Student {
   gender: string;
   phonenumber: number;
   dob: Date;
+  school: School[];
 }
