@@ -1,7 +1,8 @@
+/* eslint-disable no-useless-escape */
 /* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable react/require-render-return */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Component, ChangeEvent, useState } from "react";
+import { Component, ChangeEvent } from "react";
 import schoolService from "../../services/school.service";
 import ISchoolData from "../../types/school.types";
 import { IStudentData } from "../../types/student.types";
@@ -11,11 +12,7 @@ import { TeacherData } from "../../types/teacher.types";
 import teacherService from "../../services/teacher.service";
 type Props = {};
 
-type State = ISchoolData & {
-  students: Array<IStudentData>;
-  teachers: Array<TeacherData>;
-  errors: ISchoolData;
-};
+type State = ISchoolData;
 const validEmailIdPattern = RegExp(
   /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
 );
@@ -25,25 +22,16 @@ const handleValidateForm = (errors: any) => {
 };
 
 export default class AddSchool extends Component<Props, State> {
-  students: IStudentData[] = [];
-  teachers: TeacherData[] = [];
+  schools: ISchoolData[] = [];
   addedStudents: IStudentData[] = [];
   currentStudent = new IStudentData();
   constructor(props: Props) {
     super(props);
     this.onChangeName = this.onChangeName.bind(this);
     this.onChangeAddress = this.onChangeAddress.bind(this);
-    this.handleFieldChange = this.handleFieldChange.bind(this);
     this.state = {
-      schoolid: 0,
       name: "",
       address: "",
-      students: [],
-      teachers: [],
-      errors: {
-        name: "",
-        address: "",
-      },
     };
   }
   componentDidMount() {
@@ -51,46 +39,46 @@ export default class AddSchool extends Component<Props, State> {
     this.retrieveTeachers();
   }
 
-  handleFieldChange = (event: any) => {
-    event.preventDefault();
-    const { name, value } = event.target.value;
-    let errors = this.state.errors;
+  // handleFieldChange = (event: any) => {
+  //   event.preventDefault();
+  //   const { name, value } = event.target.value;
+  //   let errors = this.state.errors;
 
-    switch (name) {
-      case "name":
-        errors.name =
-          value.length < 6
-            ? "Full Name must be at least 6 characters long!"
-            : "";
-        break;
-      case "emailId":
-        errors.address =
-          value.length < 6
-            ? "Full Name must be at least 6 characters long!"
-            : "";
-        break;
-      default:
-        break;
-    }
+  //   switch (name) {
+  //     case "name":
+  //       errors.name =
+  //         value.length < 6
+  //           ? "Full Name must be at least 6 characters long!"
+  //           : "";
+  //       break;
+  //     case "emailId":
+  //       errors.address =
+  //         value.length < 6
+  //           ? "Full Name must be at least 6 characters long!"
+  //           : "";
+  //       break;
+  //     default:
+  //       break;
+  //   }
 
-    this.setState({ errors, name });
-  };
-  onSubmit = (event: any) => {
-    event.preventDefault();
-    if (handleValidateForm(this.state.errors)) {
-      console.info("Valid Form");
-      this.saveSchool();
-    } else {
-      console.error("Invalid Form");
-    }
-  };
+  //   this.setState({ errors, name });
+  // };
+  // onSubmit = (event: any) => {
+  //   event.preventDefault();
+  //   if (handleValidateForm(this.state.errors)) {
+  //     console.info("Valid Form");
+  //     this.saveSchool();
+  //   } else {
+  //     console.error("Invalid Form");
+  //   }
+  // };
 
   retrieveTeachers() {
     teacherService
       .getAll()
       .then((response: any) => {
         this.setState({
-          teachers: response.data,
+          teacher: response.data,
         });
         console.log(response.data);
       })
@@ -150,53 +138,50 @@ export default class AddSchool extends Component<Props, State> {
   };
 
   render() {
-    const { name, address, students, teachers, errors } = this.state;
+    const { name, address, students, teacher } = this.state;
 
     return (
       <div className="submit-form">
         <div className="form-group">
           <h2>add form</h2>
-          <form onSubmit={this.onSubmit} noValidate>
-            <div>
-              <label htmlFor="name">Name</label>
-              <input
-                type="text"
-                className="form-control"
-                id="name"
-                required
-                value={name}
-                name="name"
-                onChange={this.handleFieldChange}
-              />
-              {errors.name?.length > 0 && (
-                <span className="error">{errors.name}</span>
-              )}
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="address">Address</label>
-              <input
-                type="text"
-                className="form-control"
-                id="address"
-                required
-                value={address}
-                onChange={this.onChangeAddress}
-                name="address"
-              />
-            </div>
-            <br />
-            <label htmlFor="address">Students</label>
-            <Multiselect options={students} displayValue="name" />
-            <br />
-            <label htmlFor="address">Students</label>
-            <Multiselect
-              options={teachers} // Options to display in the dropdown
-              displayValue="name" // Property name to display in the dropdown options
+          {/* <form onSubmit={this.onSubmit} noValidate> */}
+          <div>
+            <label htmlFor="name">Name</label>
+            <input
+              type="text"
+              className="form-control"
+              id="name"
+              required
+              value={name}
+              name="name"
+              onChange={this.onChangeName}
             />
-            <br />
-            <button className="btn btn-success">Submit</button>
-          </form>
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="address">Address</label>
+            <input
+              type="text"
+              className="form-control"
+              id="address"
+              required
+              value={address}
+              onChange={this.onChangeAddress}
+              name="address"
+            />
+          </div>
+          <br />
+          <label htmlFor="address">Students</label>
+          <Multiselect options={students} displayValue="name" />
+          <br />
+          <label htmlFor="address">Teacher</label>
+          <Multiselect
+            options={teacher} // Options to display in the dropdown
+            displayValue="name" // Property name to display in the dropdown options
+          />
+          <br />
+          <button className="btn btn-success">Submit</button>
+          {/* </form> */}
         </div>
       </div>
     );

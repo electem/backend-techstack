@@ -2,6 +2,8 @@ import { Component, ChangeEvent } from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { IStudentData } from "../../types/student.types";
 import studentService from "../../services/student.service";
+import schoolService from "../../services/school.service";
+import ISchoolData from "../../types/school.types";
 interface RouterProps {
   // type for `match.params`
   id: string; // must be type `string` since value comes from the URL
@@ -9,7 +11,10 @@ interface RouterProps {
 type Props = RouteComponentProps<RouterProps>;
 type State = {
   currentStudent: IStudentData;
+  school?: Array<ISchoolData>;
 };
+
+const genderList = [{ value: "Male" }, { value: "Female" }];
 export default class studentedit extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
@@ -27,10 +32,12 @@ export default class studentedit extends Component<Props, State> {
         gender: "",
         dateofbirth: "",
       },
+      school: [],
     };
   }
   componentDidMount() {
     this.getStudentById(this.props.match.params.id);
+    this.retrieveSchools();
   }
   onChangeName(e: ChangeEvent<HTMLInputElement>) {
     const name = e.target.value;
@@ -96,8 +103,37 @@ export default class studentedit extends Component<Props, State> {
         console.log(e);
       });
   }
+  retrieveSchools() {
+    schoolService
+      .getAll()
+      .then((response: any) => {
+        this.setState({
+          school: response.data,
+        });
+      })
+      .catch((e: Error) => {
+        console.log(e);
+      });
+  }
+
+  updateStudents() {
+    studentService
+      .update(this.state.currentStudent, this.state.currentStudent.studentid)
+      .then((response: any) => {
+        console.log(response.data);
+        this.setState((prevState) => ({
+          currentStudent: {
+            ...prevState.currentStudent,
+          },
+          message: "The status was updated successfully!",
+        }));
+      })
+      .catch((e: Error) => {
+        console.log(e);
+      });
+  }
   render() {
-    const { currentStudent } = this.state;
+    const { currentStudent, school } = this.state;
 
     return (
       <div>
@@ -126,7 +162,7 @@ export default class studentedit extends Component<Props, State> {
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="description">Address</label>
+                <label htmlFor="description">Email</label>
                 <input
                   type="text"
                   className="form-control"
@@ -135,27 +171,36 @@ export default class studentedit extends Component<Props, State> {
                   onChange={this.onChangeEmail}
                 />
               </div>
-              <div className="form-group">
-                <label htmlFor="description">Address</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="description"
-                  value={currentStudent.email}
-                  onChange={this.onChangeEmail}
-                />
-              </div>
+
               <div className="title">Select gender from the list</div>
               <label>
                 <input
                   type="radio"
                   name="gender"
                   value={currentStudent.gender}
+                  checked={currentStudent.gender}
                   onChange={this.onChangeGender}
                 />{" "}
                 {currentStudent.gender}
               </label>
+              <div className="form-group">
+                <select>
+                  <option
+                    key={currentStudent.school?.schoolid}
+                    value={currentStudent.school?.name}
+                  >
+                    {currentStudent.school?.name}
+                  </option>
+                </select>
+              </div>
             </form>
+            <button
+              type="submit"
+              className="badge badge-success"
+              onClick={this.updateStudents}
+            >
+              Update
+            </button>
           </div>
         ) : (
           <div>

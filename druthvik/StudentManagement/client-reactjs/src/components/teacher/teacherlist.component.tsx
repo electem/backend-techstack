@@ -62,7 +62,7 @@ export default class TeacherList extends Component<Props, State> {
                     <td>{item.address}</td>
                     <td>
                       <Link
-                        to={"/student/" + item.teacherid}
+                        to={"/teacheredit/" + item.teacherid}
                         className="badge badge-warning"
                       >
                         Edit

@@ -1,12 +1,11 @@
+/* eslint-disable no-useless-escape */
 /* eslint-disable react-hooks/rules-of-hooks */
-import { Component, ChangeEvent, useState, useEffect } from "react";
+import { Component, ChangeEvent } from "react";
 import schoolService from "../../services/school.service";
 import studentService from "../../services/student.service";
 import ISchoolData from "../../types/school.types";
 import { IStudentData } from "../../types/student.types";
-import * as Yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { useForm } from "react-hook-form";
+import * as React from "react";
 
 type Props = {
   student?: IStudentData;
@@ -14,6 +13,7 @@ type Props = {
 type State = IStudentData & {
   schools: Array<ISchoolData>;
   formErrors?: {};
+  studentSchool?: {};
 };
 const genderList = [
   { value: "male", label: "Male" },
@@ -40,11 +40,12 @@ export default class AddStudent extends Component<Props, State> {
       dateofbirth: "",
       schools: [],
       formErrors: {},
+      studentSchool: {},
     };
   }
+
   onFormValidation() {
-    const { name, address, phonenumber, email, dateofbirth, schools } =
-      this.state;
+    const { name, address, phonenumber, email, dateofbirth } = this.state;
     let formErrors: any = {};
     let formIsValid = true;
 
@@ -139,6 +140,18 @@ export default class AddStudent extends Component<Props, State> {
     this.setState({
       dateofbirth: e.target.value,
     });
+  }
+
+  onChangeDropDown(e: ChangeEvent<HTMLInputElement>) {
+    this.setState({
+      studentSchool: e.target.value,
+    });
+  }
+
+  handleSelectChange(event: any) {
+    var selectElement = event.target;
+    var value = selectElement.value;
+    console.log(value);
   }
 
   saveStudent = () => {
@@ -265,11 +278,18 @@ export default class AddStudent extends Component<Props, State> {
                 name="name"
               />
             </div>
+            <label>School</label>
             <div className="form-group">
               <select>
                 <option value="">Select</option>
                 {schools.map((options) => (
-                  <option key={options.schoolid} value={options.name}>
+                  <option
+                    key={options.schoolid}
+                    value={options.name}
+                    onChange={(e: ChangeEvent<HTMLOptionElement>) => {
+                      return console.info(e.target.value);
+                    }}
+                  >
                     {options.name}
                   </option>
                 ))}

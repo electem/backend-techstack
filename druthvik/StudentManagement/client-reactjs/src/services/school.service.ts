@@ -14,6 +14,9 @@ class SchoolDataService {
   update(data: ISchoolData, id: any) {
     return http.put<any>(`/school/`, data);
   }
+  delete(id: any) {
+    return http.delete<any>(`/school/${id}`);
+  }
 }
 
 export default new SchoolDataService();

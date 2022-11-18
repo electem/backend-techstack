@@ -10,6 +10,13 @@ class StudentDataService {
   get(id: string) {
     return http.get<IStudentData>(`/student/${id}`);
   }
+
+  update(data: IStudentData, id: any) {
+    return http.put<any>(`/student/`, data);
+  }
+  delete(id: any) {
+    return http.delete<any>(`/student/${id}`);
+  }
 }
 
 export default new StudentDataService();

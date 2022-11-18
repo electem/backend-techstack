@@ -1,5 +1,4 @@
 import { Component } from "react";
-import { Link } from "react-router-dom";
 import DataTable from "react-data-table-component";
 import StudentDataService from "../../services/student.service";
 import { IStudentData } from "../../types/student.types";
@@ -10,20 +9,6 @@ type State = {
   students: Array<IStudentData>;
 };
 
-const columns = [
-  {
-    name: "studentid",
-    selector: "studentid",
-  },
-  {
-    name: "",
-    selector: "name",
-  },
-  {
-    name: "",
-    selector: "address",
-  },
-];
 export default class StudentsListDatatables extends Component<Props, State> {
   students: IStudentData[] = [];
   studentid: string = "";
@@ -54,6 +39,7 @@ export default class StudentsListDatatables extends Component<Props, State> {
         console.log(e);
       });
   }
+
   render() {
     const columnss = [
       {

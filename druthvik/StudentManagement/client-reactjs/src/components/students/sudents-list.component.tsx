@@ -1,18 +1,21 @@
 import { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, RouteComponentProps } from "react-router-dom";
 import StudentDataService from "../../services/student.service";
 import { IStudentData } from "../../types/student.types";
 
-type Props = {};
+interface RouterProps {}
+
+type Props = RouteComponentProps<RouterProps>;
 
 type State = {
   students: Array<IStudentData>;
 };
 export default class StudentsList extends Component<Props, State> {
   students: IStudentData[] = [];
+
   constructor(props: Props) {
     super(props);
-
+    this.deleteStudent = this.deleteStudent.bind(this);
     this.state = {
       students: [],
     };
@@ -28,6 +31,17 @@ export default class StudentsList extends Component<Props, State> {
         });
         console.log(this.students);
       })
+      .catch((e: Error) => {
+        console.log(e);
+      });
+  }
+  deleteStudent(id: any) {
+    StudentDataService.delete(id)
+      .then((response: any) => {
+        console.log(response.data);
+        this.props.history.push("/studentlist");
+      })
+
       .catch((e: Error) => {
         console.log(e);
       });
@@ -66,6 +80,13 @@ export default class StudentsList extends Component<Props, State> {
                       >
                         Edit
                       </Link>
+                      <button
+                        type="button"
+                        className="badge badge-danger"
+                        onClick={() => this.deleteStudent(item.studentid)}
+                      >
+                        Delete
+                      </button>
                     </td>
                   </tr>
                 );

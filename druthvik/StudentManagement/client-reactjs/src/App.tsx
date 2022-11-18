@@ -13,9 +13,9 @@ import DataTable from "./components/datatble/datatable";
 import datatables from "./components/datatble/datatables";
 import StudentsListDatatables from "./components/students/studentlistingdatatbles";
 import { chartsStudents } from "./components/chartjs/chartstudent";
-import TutorialsList from "./components/tutorials-list.component";
 import studentedit from "./components/students/studentedit.component";
 import EditSchool from "./components/school/schooledit.component";
+import EditTeacher from "./components/teacher/editteacher.component";
 class App extends Component {
   render() {
     return (
@@ -71,6 +71,7 @@ class App extends Component {
             <Route path="/students/:id" component={studentedit} />
             <Route path="/studentlist" component={StudentsList} />
             <Route path="/student" component={AddStudent} />
+            <Route path="/teacheredit/:id" component={EditTeacher} />
             <Route path="/teacherlist" component={TeacherList} />
             <Route path="/teacher" component={AddTeacher} />
             <Route path="/charts" component={charts} />
@@ -78,7 +79,6 @@ class App extends Component {
             <Route path="/datatable" component={datatables} />
             <Route path="/stud" component={StudentsListDatatables} />
             <Route path="/chartstud" component={chartsStudents} />
-            <Route path="/tut" component={TutorialsList} />
           </Switch>
         </div>
       </div>
