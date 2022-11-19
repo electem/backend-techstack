@@ -17,14 +17,16 @@
     "core-js": "^3.6.5",
     "jquery": "^3.6.0",
     "lodash": "^4.17.21",
+    "mdb-vue-ui-kit": "^3.1.0",
     "popper.js": "^1.16.1",
-    "vee-validate": "^4.7.2",
+    "vee-validate": "^3.4.14",
     "vue": "^3.2.45",
     "vue-chartjs": "^4.1.2",
     "vue-multiselect": "^2.1.6",
     "vue-router": "^4.0.6",
     "vue3-easy-data-table": "^1.5.12",
-    "vue3-form-validation": "^5.1.0"
+    "vue3-form-validation": "^5.1.0",
+    "vuejs-datepicker": "^1.6.2"
   },
   "devDependencies": {
     "@types/lodash": "^4.14.188",

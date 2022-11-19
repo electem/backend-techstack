@@ -18,7 +18,11 @@ class SchoolService {
 
     updateSchool(data: any): Promise<any> {
       return http.put("/school",data);
-    }  
+    } 
+    
+    deleteSchool(id:any){
+      return http.delete(`/school/${id}`);
+    }
 }
 
 export default new SchoolService();

@@ -9,7 +9,7 @@
           class="form-control"
           id="studentname"
           required
-          v-model="student.studentname"
+          v-model="selectedStudent.studentname"
           name="studentname"
         />
       </div>
@@ -20,7 +20,7 @@
           class="form-control"
           id="address"
           required
-          v-model="student.address"
+          v-model="selectedStudent.address"
           name="address"
         />
       </div>
@@ -32,7 +32,7 @@
           class="form-control"
           id="phonenumber"
           required
-          v-model="student.phonenumber"
+          v-model="selectedStudent.phonenumber"
           name="phonenumber"
         />
       </div>
@@ -44,7 +44,7 @@
           class="form-control"
           id="email"
           required
-          v-model="student.email"
+          v-model="selectedStudent.email"
           name="email"
         />
       </div>
@@ -56,11 +56,11 @@
           class="form-control"
           id="gender"
           required
-          v-model="student.gender"
+          v-model="selectedStudent.gender"
           name="gender"
         />
       </div>
-
+        
       <div class="form-group">
         <label for="dateofbirth">Born </label>
         <input
@@ -68,29 +68,15 @@
           class="form-control"
           id="dateofbirth"
           required
-          v-model="student.dateofbirth"
+          v-model="selectedStudent.dateofbirth"
           name="dateofbirth"
+          
         />
       </div>
 
-    <!-- <div class="form-group">
-    <label for="school">School List: </label>        
-     <select  v-model="addedSchool"
-     >
-     <option >Select School</option>
-      <option          
-       placeholder="select school"
-        v-for="(school, index) in schools"
-         :key="index"
-       >
-        {{ school.schoolname }}
-      </option>
-        </select>
-		</div> -->
-
-     <div class="form-group">
+       <div class="form-group">
         <label>School List: </label>
-        <select  v-model="student.school" @change="onSchoolSelect($event)">
+        <select  v-model="selectedStudent.school.schoolid" @change="onSchoolSelect($event)">
           <option>Select School</option>
           <option           
             placeholder="select school"           
@@ -104,69 +90,67 @@
       </div>
 
 
-      <button @click="saveStudent" class="btn btn-success">Submit</button>
+      <button @click="updateStudent" class="btn btn-success">Update</button>
        <button @click="listingPage" class="btn btn-danger">Cancel</button>
     </div>
     </div>
 </template>
 
+<!-- eslint-disable prettier/prettier -->
 <script lang="ts">
-/* eslint-disable */
 import { defineComponent } from "vue";
 import ResponseData from "@/types/ResponseData";
-import Student from "@/types/Student";
-import StudentService from "@/services/StudentService";
-import SchoolService from "@/services/SchoolService";
 import School from "@/types/School";
+import StudentService from "@/services/StudentService";
+import Student from "@/types/Student";
+import SchoolService from "@/services/SchoolService";
 
 export default defineComponent({
-  name: "student",
+  name: "edit-student", 
 
+  
   data() {
     return {
-     schools:  [] as School[],
-      student: {
-        studentname: "",
-        address: "",
-        email: "",
-        gender: "",
-        dateofbirth:"",
-       } as Student,
-      submitted: false,
-       currentSchool: {} as School,
-       
-    };
-  },
+          schools:  [] as School[],
+         selectedStudent:{
+          studentname: '',
+          address: '',
+          phonenumber: '',
+          email: '',
+          gender: '',
+          dateofbirth: '',
+          school: {},
   
-  methods: {
-    saveStudent() {
-      let data = {
-        studentid: this.student.studentid,
-        studentname: this.student.studentname,
-        address: this.student.address,
-        phonenumber: this.student.phonenumber,
-        email: this.student.email,
-        gender: this.student.gender,
-        dateofbirth:this.student.dateofbirth,
-        school:this.student.school,
-     };
+         } as Student,
+          message: "",
+          submitted: false,
+    };
+},
 
-      StudentService.createStudent(data)
+methods: {
+    updateStudent() {
+     
+     StudentService.updateStudent(this.selectedStudent)
         .then((response: ResponseData) => {
-          this.student.studentid = response.data.studentid;
           console.log(response.data);
-          this.submitted = true;
+          this.message = "the school is updated";
         })
         .catch((e: Error) => {
           console.log(e);
         });
     },
 
-  listingPage(){
-      this.$router.replace('/student');
+    retrieveStudent(id:any) {
+      StudentService.getStudentbyId(id)
+        .then((response: ResponseData) => {
+          this.selectedStudent = response.data;
+          console.log(response.data);
+        })
+        .catch((e: Error) => {
+          console.log(e);
+        });
     },
-
-   retrieveSchools() {
+     retrieveSchools() {
       SchoolService.getAllSchool()
         .then((response: ResponseData) => {
           this.schools = response.data;
@@ -176,22 +160,21 @@ export default defineComponent({
           console.log(e);
         });
     },
- 
-   onSchoolSelect(event:any) { 
-      const src = event.target.value;
-      const data = this.schools.filter((s) => s.schoolid === +src);
-     this.currentSchool = data[0];
-     console.log(this.currentSchool);
-    },  
-  },
-  mounted() {
-    this.saveStudent();
-    this.retrieveSchools()
-  },
+
+     listingPage(){
+      this.$router.replace('/student');
+    },
+
+},
+   mounted() {
+    this.retrieveStudent(this.$route.params.id);
+    this.retrieveSchools();
+ },
 });
 </script>
 
-<style>
+<!-- eslint-disable prettier/prettier -->
+<style src="vue-multiselect/dist/vue-multiselect.min.css">
 .edit-form {
   max-width: 300px;
   margin: auto;

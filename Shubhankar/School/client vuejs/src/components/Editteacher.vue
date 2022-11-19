@@ -1,7 +1,6 @@
 <!-- eslint-disable prettier/prettier -->
 <template>
-<h1>hello</h1>
-  <div class="submit-form">
+<div class="submit-form">
     <div v-if="!submitted">
       <div class="form-group">
         <label for="teachername">Name</label>
@@ -61,26 +60,37 @@
   <span>Picked: {{ picked }}</span><br>
    </div>
   
-         <div class="form-group">
-    <label for="schools">Select School</label><br>
-      <ul class="object administrator-checkbox-list">
-          <li  :class="{ active: index == currentIndex }"
-           v-for="(school, index) in schools"
-        :key="index">
-             <label v-bind:for="school.schoolid">
-        <div  >
-          <input type="checkbox" v-model="selectedTeacher.school" v-bind:value="school">
-            <span>{{ school.schoolname }}</span>
-        </div>
-        </label>
-    </li>
-      </ul>
-         </div>
-          
+         <!-- <div class="form-group">
+          <label for="schools">Select School</label><br>
+                <li  :class="{ active: index == currentIndex }"
+                v-for="(school, index) in schools"
+              :key="index">
+                  <label v-bind:for="school.schoolid">
+              <div  >
+                <input type="checkbox" v-model="selectedTeacher.school" v-bind:value="school">
+                  <span>{{ school.schoolname }}</span>
+              </div>
+              </label>
+          </li> -->
+
+      
+          <div  class="form-group">
+            <label for="schools">Select School</label><br>
+            <li v-for="(school, index) in schools"
+                  :key="index">
+            <input type="checkbox"
+              :fieldId="school.schoolname"
+              :label="school.schoolname"
+              :checked="value.includes(school.schoolid)"
+              :key="school"
+               />
+              <span>{{ school.schoolname }}</span>
+              </li>
+          </div>
         </div>
       </div>
 
-      <button @click="updateSchool" class="btn btn-success">Update</button>
+      <button @click="updateTeacher" class="btn btn-success">Update</button>
       <button @click="listingPage" class="btn btn-danger">Cancel</button>
  
 </template>
@@ -101,14 +111,21 @@ export default defineComponent({
   data() {
     return {
         schools:[] as School[],
-         selectedTeacher:{} as Teacher,
+         selectedTeacher: {
+             teachername: "",
+             address: "",
+             email: "",
+             gender: "",
+             schools:{}
+           } as Teacher,
           message: "",
           submitted: false,
+          value : [] as number[],
     };
 },
 
 methods: {
-    updateSchool() {
+    updateTeacher() {
      
      TeacherService.updateTeacher(this.selectedTeacher)
         .then((response: ResponseData) => {
@@ -124,7 +141,9 @@ methods: {
       TeacherService.createTeacherbyId(id)
         .then((response: ResponseData) => {
           this.selectedTeacher = response.data;
-          console.log(response.data);
+          for(const i of this.selectedTeacher.schools){
+            this.value.push(i.schoolid!);
+        }
         })
         .catch((e: Error) => {
           console.log(e);
@@ -141,8 +160,9 @@ methods: {
           console.log(e);
         });
     },
-    
-    
+ listingPage(){
+      this.$router.replace('/teacher');
+    }
     
 },
    mounted() {

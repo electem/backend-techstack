@@ -142,6 +142,10 @@ methods: {
         });
       },
 
+      listingPage(){
+      this.$router.replace('/school');
+    }
+
     
 },
    mounted() {

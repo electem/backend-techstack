@@ -19,6 +19,10 @@ class TeacherService {
       createTeacherbyId(id: any) {
         return http.get(`/teacher/${id}`);
        }
+
+       deleteTeacher(id:any){
+        return http.delete(`/teacher/${id}`);
+      }
 }
 
 export default new TeacherService();

@@ -83,9 +83,8 @@
       <button @click="listingPage" class="btn btn-danger">Cancel</button>
  
 </template>
-
+<!-- eslint-disable prettier/prettier -->
 <script lang="ts">
-/* eslint-disable */
 import { defineComponent } from "vue";
 import ResponseData from "@/types/ResponseData";
 import Teacher from "@/types/Teacher";
@@ -110,7 +109,7 @@ export default defineComponent({
       } as Teacher,
       submitted: false,
       picked: '',
-    selected: 'Male',
+    // selected: 'Male',
     options: [
       { value: 'Male' },
       { value: 'Female' },
@@ -135,10 +134,12 @@ export default defineComponent({
           this.teacher.teacherid = response.data.teacherid;
           console.log(response.data);
           this.submitted = true;
+           this.$router.replace('/teacher');
         })
         .catch((e: Error) => {
           console.log(e);
         });
+        
     },
      retrieveSchools() {
       SchoolService.getAllSchool()

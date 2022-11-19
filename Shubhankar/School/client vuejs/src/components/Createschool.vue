@@ -82,10 +82,12 @@ import Teacher from "@/types/Teacher";
 import StudentService from "@/services/StudentService";
 import Student from "@/types/Student";
 
-
 export default defineComponent({
+
   name: "add-school", 
-  components: { Multiselect },
+  components: { Multiselect  },
+
+  
 
   data() {
     return {
@@ -102,8 +104,8 @@ export default defineComponent({
        
     };
 },
-
-methods: {
+ 
+ methods: {
     saveSchool() {
       let data = {
         schoolid: this.school.schoolid,
