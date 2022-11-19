@@ -4,6 +4,6 @@ export default interface ISchoolData {
   schoolid?: number | null;
   name?: string;
   address?: string;
-  teacher?: TeacherData;
-  students?: IStudentData;
+  teacher?: TeacherData[];
+  students?: IStudentData[];
 }

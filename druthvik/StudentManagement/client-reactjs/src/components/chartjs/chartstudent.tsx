@@ -1,33 +1,48 @@
 import React, { Component } from "react";
-import { Line } from "react-chartjs-2";
+import { Bar, Line } from "react-chartjs-2";
 import { Chart, registerables } from "chart.js";
 import { IStudentData } from "../../types/student.types";
 import StudentDataService from "../../services/student.service";
-
 Chart.register(...registerables);
 type Props = {};
 type State = {
-  name: string;
   data: any;
-  students: Array<IStudentData>;
+  options: any;
+  students?: Array<IStudentData>;
 };
 
 export class chartsStudents extends Component<Props, State> {
   students: IStudentData[] = [];
   studentNames: string[] = [];
-  studentId: number[] = [];
   constructor(props: Props) {
     super(props);
     this.state = {
       students: [],
-      name: "React",
       data: {
+        labels: ["red", "blue", "white"],
         datasets: [
           {
-            data: this.studentId,
+            label: "Rainfall",
+            fill: false,
+            lineTension: 0.5,
+            backgroundColor: "rgba(75,192,192,1)",
+            borderColor: "rgba(0,0,0,1)",
+            borderWidth: 2,
+            data: [65, 59, 80, 81, 56],
           },
         ],
-        labels: this.studentNames,
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: "top",
+          },
+          title: {
+            display: true,
+            text: "Chart.js Line Chart",
+          },
+        },
       },
     };
   }
@@ -40,22 +55,9 @@ export class chartsStudents extends Component<Props, State> {
       this.setState({
         students: response.data,
       });
-      this.students = this.state.students;
-      this.studentNames = this.students.map((option) => option.name);
-      this.studentId = this.students.map((option) => option.studentid!);
-      console.log(this.studentNames);
     });
   }
-
   render() {
-    return (
-      <Line
-        data={this.state.data}
-        options={{
-          responsive: true,
-          maintainAspectRatio: true,
-        }}
-      />
-    );
+    return <Line data={this.state.data} options={this.state.options} />;
   }
 }

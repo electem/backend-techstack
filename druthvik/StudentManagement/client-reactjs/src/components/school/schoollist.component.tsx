@@ -74,13 +74,14 @@ export default class SchoolList extends Component<Props, State> {
 
     return (
       <>
-        <div className="list row">
+        <div className="form-group">
           <input
             type="text"
             className="form-control"
             placeholder="Search by title"
             value={searchTitle}
             onChange={this.onChangeSearchTitle}
+            onKeyUp={() => this.retriveSerchedSchools(searchTitle)}
           />
           <div className="input-group-append">
             <button
