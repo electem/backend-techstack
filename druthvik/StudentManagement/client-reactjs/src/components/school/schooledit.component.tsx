@@ -1,8 +1,10 @@
 import Multiselect from "multiselect-react-dropdown";
-import { Component, ChangeEvent, useState } from "react";
-import { Link, RouteComponentProps, useParams } from "react-router-dom";
+import { Component, ChangeEvent } from "react";
+import { Link, RouteComponentProps } from "react-router-dom";
 import SchoolService from "../../services/school.service";
 import ISchoolData from "../../types/school.types";
+import { TeacherData } from "../../types/teacher.types";
+import { IStudentData } from "../../types/student.types";
 interface RouterProps {
   // type for `match.params`
   id: string; // must be type `string` since value comes from the URL
@@ -10,9 +12,12 @@ interface RouterProps {
 type Props = RouteComponentProps<RouterProps>;
 type State = {
   currentSchool: ISchoolData;
+  teachers: Array<TeacherData>;
+  students: Array<IStudentData>;
   message: string;
 };
 export default class EditSchool extends Component<Props, State> {
+  teachers: TeacherData[] = [];
   constructor(props: Props) {
     super(props);
     this.onChangeName = this.onChangeName.bind(this);
@@ -26,6 +31,8 @@ export default class EditSchool extends Component<Props, State> {
         name: "",
         address: "",
       },
+      teachers: [],
+      students: [],
       message: "",
     };
   }
@@ -101,7 +108,7 @@ export default class EditSchool extends Component<Props, State> {
   }
 
   render() {
-    const { currentSchool } = this.state;
+    const { currentSchool, teachers, students } = this.state;
     return (
       <>
         <h4>EDIT SCHOOL</h4>
@@ -125,6 +132,28 @@ export default class EditSchool extends Component<Props, State> {
                 id="address"
                 value={currentSchool.address}
                 onChange={this.onChangeAddress}
+              />
+            </div>
+            <div className="form-group">
+              <label>Teachers</label>
+
+              <Multiselect
+                options={teachers}
+                selectedValues={currentSchool.teacher}
+                closeIcon="close"
+                placeholder="Choose Teachers"
+                displayValue="name"
+              />
+            </div>
+            <div className="form-group">
+              <label>Students</label>
+
+              <Multiselect
+                options={students}
+                selectedValues={currentSchool.students}
+                closeIcon="close"
+                placeholder="Choose School"
+                displayValue="name"
               />
             </div>
           </form>

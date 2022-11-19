@@ -1,10 +1,11 @@
 /* eslint-disable array-callback-return */
-import { ChangeEvent, ChangeEventHandler, Component } from "react";
+import { ChangeEvent, Component } from "react";
 import schoolService from "../../services/school.service";
-import { Link } from "react-router-dom";
+import { Link, RouteComponentProps } from "react-router-dom";
 import ISchoolData from "../../types/school.types";
 
-type Props = {};
+interface RouterProps {}
+type Props = RouteComponentProps<RouterProps>;
 type State = {
   schools: Array<ISchoolData>;
   searchTitle: string;
@@ -12,6 +13,7 @@ type State = {
 };
 export default class SchoolList extends Component<Props, State> {
   schools: ISchoolData[] = [];
+  schoolsSearch: ISchoolData[] = [];
   searchSchools: ISchoolData[] = [];
 
   constructor(props: Props) {
@@ -33,10 +35,10 @@ export default class SchoolList extends Component<Props, State> {
     });
   }
 
-  retriveSerchedSchools(e: ChangeEvent<HTMLInputElement>) {
+  retriveSerchedSchools(search: string) {
     this.setState({
       schools: this.schools.filter((option) => {
-        return option.name.startsWith(e.target.value);
+        return option.name?.startsWith(search);
       }),
     });
   }
@@ -48,25 +50,47 @@ export default class SchoolList extends Component<Props, State> {
         this.setState({
           schools: response.data,
         });
-        console.log(response.data);
         this.schools = this.state.schools;
-        console.log(this.schools);
       })
       .catch((e: Error) => {
         console.log(e);
       });
   }
+  deleteSchools(id: any) {
+    schoolService
+      .delete(id)
+      .then((response: any) => {
+        console.log(response.data);
+        this.props.history.push("/studentlist");
+      })
+
+      .catch((e: Error) => {
+        console.log(e);
+      });
+  }
+
   render() {
     const { schools, searchTitle } = this.state;
 
     return (
       <>
         <div className="list row">
-          <Link to={"/add-school"}>
-            <button type="button" className="btn btn-success">
-              Add School
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Search by title"
+            value={searchTitle}
+            onChange={this.onChangeSearchTitle}
+          />
+          <div className="input-group-append">
+            <button
+              onClick={() => this.retriveSerchedSchools(searchTitle)}
+              className="btn btn-outline-secondary"
+              type="button"
+            >
+              Search
             </button>
-          </Link>
+          </div>
         </div>
         <h4>Schools List</h4>
         <div className="list1 row">
@@ -96,6 +120,15 @@ export default class SchoolList extends Component<Props, State> {
                                 className="badge badge-primary"
                               >
                                 Edit
+                              </button>
+                              <button
+                                type="button"
+                                className="badge badge-danger"
+                                onClick={() =>
+                                  this.deleteSchools(school.schoolid)
+                                }
+                              >
+                                Delete
                               </button>
                             </Link>
                           </>

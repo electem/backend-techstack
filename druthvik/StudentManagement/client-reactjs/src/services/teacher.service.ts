@@ -11,6 +11,9 @@ class TeacherDataService {
   get(id: string) {
     return http.get<TeacherData>(`/teacher/${id}`);
   }
+  update(data: TeacherData, id: any) {
+    return http.put<any>(`/school/`, data);
+  }
 }
 
 export default new TeacherDataService();

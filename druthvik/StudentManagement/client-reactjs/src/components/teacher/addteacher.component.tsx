@@ -1,21 +1,28 @@
+/* eslint-disable no-labels */
+/* eslint-disable @typescript-eslint/no-unused-expressions */
+/* eslint-disable no-unused-labels */
 import { Component, ChangeEvent } from "react";
 import teacherService from "../../services/teacher.service";
 import { TeacherData } from "../../types/teacher.types";
-import ISchoolData from "../../types/school.types";
 import schoolService from "../../services/school.service";
+import ISchoolData from "../../types/school.types";
 
 type Props = {
   teacher?: TeacherData;
 };
 type State = TeacherData & {
-  schools: Array<ISchoolData>;
+  schools?: Array<ISchoolData>;
 };
+
 const genderList = [
   { value: "Male", label: "Male" },
   { value: "Female", label: "Female" },
 ];
 export default class AddTeacher extends Component<Props, State> {
+  currentSchool = {} as ISchoolData;
+  addedSchool: ISchoolData[] = [];
   schools: ISchoolData[] = [];
+  onchooseoption: {} = {};
   constructor(props: Props) {
     super(props);
     this.onChangeName = this.onChangeName.bind(this);
@@ -23,13 +30,15 @@ export default class AddTeacher extends Component<Props, State> {
     this.onChangephonenumber = this.onChangephonenumber.bind(this);
     this.onChangeemail = this.onChangeemail.bind(this);
     this.onChangegender = this.onChangegender.bind(this);
+    this.onSelectedSchool = this.onSelectedSchool.bind(this.currentSchool);
     this.state = {
       name: "",
       address: "",
       email: "",
       gender: "",
-      schools: [],
+      school: [],
     };
+    schools: [];
   }
   componentDidMount() {
     this.retrieveSchools();
@@ -65,6 +74,14 @@ export default class AddTeacher extends Component<Props, State> {
       address: e.target.value,
     });
   }
+  onSelectedSchool(e: ChangeEvent<HTMLOptionElement>) {
+    this.onchooseoption = e.target.value;
+  }
+
+  // onSelectedSchool(school = {} as ISchoolData) {
+  //   console.log(school);
+  //   this.currentSchool = school;
+  // }
 
   onChangeemail(e: ChangeEvent<HTMLInputElement>) {
     this.setState({
@@ -76,6 +93,7 @@ export default class AddTeacher extends Component<Props, State> {
       gender: e.target.value,
     });
   }
+
   saveTeacher = () => {
     const data: TeacherData = {
       name: this.state.name,
@@ -102,7 +120,7 @@ export default class AddTeacher extends Component<Props, State> {
       });
   };
   render() {
-    const { name, address, phonenumber, email, gender, schools } = this.state;
+    const { name, address, phonenumber, email, schools } = this.state;
 
     return (
       <div className="submit-form">
@@ -156,18 +174,6 @@ export default class AddTeacher extends Component<Props, State> {
               name="name"
             />
           </div>
-          <div className="form-group">
-            <label htmlFor="name">Gender</label>
-            <input
-              type="text"
-              className="form-control"
-              id="name"
-              required
-              value={gender}
-              onChange={this.onChangegender}
-              name="name"
-            />
-          </div>
           <div className="title">
             <label htmlFor="name">Gender</label>
             {genderList.map((x, i) => (
@@ -180,6 +186,21 @@ export default class AddTeacher extends Component<Props, State> {
                 />{" "}
                 {x.label}
               </label>
+            ))}
+          </div>
+          <div className="form-group">
+            <label>Schools</label>
+
+            {schools?.map((school, i) => (
+              <div key={i}>
+                <input
+                  type="checkbox"
+                  name="schools"
+                  value={school}
+                  onChange={() => this.onSelectedSchool}
+                />{" "}
+                {school.name}
+              </div>
             ))}
           </div>
           <button onClick={this.saveTeacher} className="btn btn-success">

@@ -1,3 +1,4 @@
+import ISchoolData from "./school.types";
 export class IStudentData {
   studentid?: number | null;
   name!: string;
@@ -6,4 +7,5 @@ export class IStudentData {
   email?: string;
   gender?: string;
   dateofbirth?: string;
+  school?: ISchoolData;
 }

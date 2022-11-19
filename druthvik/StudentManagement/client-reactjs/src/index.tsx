@@ -1,16 +1,12 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
 import "font-awesome/css/font-awesome.min.css";
-import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
-import DataTable from "../src/components/datatables/datatable";
-import * as dataSource from "./data.json";
 import "./data-table.css";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { IHeaderType, PropDataType } from "./types/headerType";
 
 ReactDOM.render(
   <BrowserRouter>
