@@ -8,6 +8,7 @@
           type="text"
           class="form-control"
           id="studentname"
+          placeholder="studentname"
           required
           v-model="student.studentname"
           name="studentname"
@@ -30,6 +31,7 @@
           type="text"
           class="form-control"
           id="email"
+          placeholder="email"
           required
           v-model="student.email"
           name="email"
@@ -41,6 +43,7 @@
           type="text"
           class="form-control"
           id="phonenumber"
+          placeholder="phonenumber"
           required
           v-model="student.phonenumber"
           name="phonenumber"
@@ -51,18 +54,23 @@
         <input
           type="text"
           class="form-control"
+          placeholder="gender"
           id="gender"
           required
           v-model="student.gender"
           name="gender"
         />
-      </div>   
-      <label for="gender">Select Gender</label>
-      <div class="form-group" v-for="(entry, index) in genderList" :key="index">
-        <input type="radio" v-model="student.gender" name="gender" />{{
-          entry.label
-        }}
-      </div>
+      </div>  
+      
+      <label for="gender">Select Gender</label>      
+      <div class="form-group">
+  <input type="radio" id="Male" value="Male" v-model="student.gender">
+  <label for="Male">Male</label><br>
+  <input type="radio" id="Female" value="Female" v-model="student.gender">
+  <label for="Female">Female</label><br>
+  <input type="radio" id="Others" value="Others" v-model="student.gender"> 
+  <label for="Female">Others</label><br>
+</div>
       <div class="form-group">
         <label for="dob">Date of birth</label>
         <input
@@ -75,14 +83,14 @@
         />
       </div> 
       <div class="form-group">
-        <label>School List: </label>        
-        <select  v-model="student.school">
-          <option :value=null disabled>Select School</option>
+        <label>School List: </label>      
+        <select  v-model="student.school" @change="onSchoolSelect($event)">
+          <option>Select School</option>
           <option           
-            placeholder="select school"
-           
+            placeholder="select school"           
             v-for="(entry, index) in schoolList"
             :key="index"
+            :value="entry.schoolid"
           >
             {{ entry.schoolname }}
           </option>
@@ -94,6 +102,19 @@
       <h4>You submitted successfully!</h4>
       <button class="btn btn-success" @click="newTutorial">Add</button>
     </div>
+    <br />
+      <router-link 
+          :to="'/studentlist'"
+          class="badge badge-warning"
+          custom
+      v-slot="{ navigate }"
+          > <button  
+          class="btn btn-danger" 
+          @click="navigate"  
+        role="link"
+        >Cancel</button>
+      </router-link
+        >  
   </div>
 </template>
 <!-- eslint-disable prettier/prettier -->
@@ -112,7 +133,6 @@ export default defineComponent({
         address: "",
         email: "",
         gender: "",
-        school: {},
       } as Student,
       genderList: [
         { value: "male", label: "Male" },
@@ -121,7 +141,6 @@ export default defineComponent({
       submitted: false,
       schoolList: [] as School[],
       currentSchool: {} as School,
-      selectedSchools: [] as School[],
     };
   },
   methods: {
@@ -133,6 +152,7 @@ export default defineComponent({
         gender: this.student.gender,
         dob: this.student.dob,
         phonenumber: this.student.phonenumber,
+        school: this.student.school
       };
 console.log('create url starts')
       studentservice
@@ -159,9 +179,12 @@ console.log('create url starts')
           console.log(e);
         });
     },
-    selectedSchoolMethod(school: School) {
-      this.currentSchool = school;
-      //this.selectedSchools?.push(this.currentSchool);
+    
+    onSchoolSelect(event:any) { 
+      const src = event.target.value;
+      const data = this.schoolList.filter((s) => s.schoolid === +src);
+     this.currentSchool = data[0];
+     console.log(this.currentSchool);
     },
 
     newTutorial() {

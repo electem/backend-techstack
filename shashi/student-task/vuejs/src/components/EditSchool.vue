@@ -64,6 +64,16 @@ export default defineComponent({
         .catch((e: Error) => {
           console.log(e);
         });
+    },
+    deleteSchool() {
+      studentservice.deleteSchool(this.currentSchool.schoolid)
+        .then((response: ResponseData) => {
+          console.log(response.data);
+          this.$router.push({ name: "schoolist" });
+        })
+        .catch((e: Error) => {
+          console.log(e);
+        });
     }, 
   },
   mounted() {
@@ -95,28 +105,7 @@ export default defineComponent({
           id="address"
           v-model="currentSchool.address"
         />
-      </div>
-      <label for="address">Teachers List:-</label>
-      <div
-        class="col-md-6"
-        v-for="(entry, index) in currentSchool.teacher"
-        :key="index"
-      >
-        <li>
-          {{ entry.teachername }}
-        </li>
-      </div>
-      <br />
-      <label for="address">Students List:-</label>
-      <div
-        class="col-md-6"
-        v-for="(entry, index) in currentSchool.students"
-        :key="index"
-      >
-        <li>
-          {{ entry.studentname }}
-        </li>
-      </div>
+      </div>      
       <div class="form-group">
           <multiselect
             class="form-control"
@@ -156,11 +145,22 @@ export default defineComponent({
           </multiselect>
         </div>
     </form>
-    <button class="badge badge-danger mr-2">Delete</button>
+    <button class="badge badge-danger mr-2" @click="deleteSchool">Delete</button>
 
     <button type="submit" class="badge badge-success mr-2" @click="updateSchool()">Update</button>
 
-    <router-link :to="'/school'" class="badge badge-success">Back</router-link>
+    <router-link 
+          :to="'/school'"
+          class="badge badge-warning"
+          custom
+      v-slot="{ navigate }"
+          > <button  
+          class="badge badge-primary mr-2" 
+          @click="navigate"  
+        role="link"
+        >Back</button>
+      </router-link
+        >   
     <p>{{ message }}</p>
   </div>
 

@@ -13,6 +13,7 @@ export default defineComponent({
 });
 </script>
 <template>
+    <PieChart />
   <div id="app">
     <nav class="navbar navbar-expand navbar-dark bg-dark">
       <router-link to="/school" class="navbar-brand">bezKoder</router-link>

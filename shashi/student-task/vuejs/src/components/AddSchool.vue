@@ -1,7 +1,7 @@
 <!-- eslint-disable prettier/prettier -->
 <template>
     <div class="submit-form">
-     <form> <div v-if="!submitted">
+ <div v-if="!submitted">
         <div class="form-group">
           <label for="schoolname">school name</label>
           <input
@@ -67,7 +67,20 @@
       <div v-else>
         <h4>You submitted successfully!</h4>
         <button class="btn btn-success" @click="newTutorial">Add</button>
-      </div>  </form> 
+      </div>
+      <br />
+      <router-link 
+          :to="'/school'"
+          class="badge badge-warning"
+          custom
+      v-slot="{ navigate }"
+          > <button  
+          class="btn btn-danger" 
+          @click="navigate"  
+        role="link"
+        >Cancel</button>
+      </router-link
+        >        
     </div>
   </template>
   <!-- eslint-disable prettier/prettier -->
@@ -92,7 +105,7 @@ import Multiselect from "@suadelabs/vue3-multiselect";
       studentData: [] as Student[],
       submitted: false,
       selectedTeachers: [] as Teacher[],
-      selectedStudents: [] as Teacher[],
+      selectedStudents: [] as Student[],
     };
   },
     methods: {

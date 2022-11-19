@@ -15,7 +15,21 @@
               aria-describedby="button-addon2"
             />
           </div>
-        </div>
+        </div>    
+        <router-link 
+          :to="'/addteacher'"
+          class="badge badge-warning"
+          custom
+      v-slot="{ navigate }"
+          > <button  
+          class="badge badge-secondary mr-2" 
+          @click="navigate"  
+        role="link"
+        >ADD TEACHER</button>
+      </router-link
+        > 
+        <br />
+        <br />
         <table id="schools-list" class="table table-bordered table-striped">
           <thead>
             <tr>
@@ -48,6 +62,8 @@
           </tbody>
         </table>
       </div>
+      
+      
     </div>
   </template>
 

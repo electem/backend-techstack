@@ -46,12 +46,15 @@
           name="gender"
         />
       </div>
-      <label for="gender">Select Gender</label>
-      <div class="form-group" v-for="(entry, index) in genderList" :key="index">
-        <input type="radio" v-model="teacher.gender" name="gender" />{{
-          entry.label
-        }}
-      </div>
+      <label for="gender">Select Gender</label>      
+      <div class="form-group">
+  <input type="radio" id="Male" value="Male" v-model="teacher.gender">
+  <label for="Male">Male</label><br>
+  <input type="radio" id="Female" value="Female" v-model="teacher.gender">
+  <label for="Female">Female</label><br>
+  <input type="radio" id="Others" value="Others" v-model="teacher.gender">
+  <label for="Female">Others</label><br>
+   </div>
       <label>schoolsList:</label>
       <div class="form-check" v-for="(entry, index) in schoolList" :key="index">
         <input
@@ -66,6 +69,18 @@
       <h4>You submitted successfully!</h4>
       <button class="btn btn-success" @click="newTutorial">Add</button>
     </div>
+    <router-link 
+          :to="'/teacherslist'"
+          class="badge badge-warning"
+          custom
+      v-slot="{ navigate }"
+          > <button  
+          class="btn btn-danger" 
+          @click="navigate"  
+        role="link"
+        >Cancel</button>
+      </router-link
+        >  
   </div>
 </template>
 <!-- eslint-disable prettier/prettier -->

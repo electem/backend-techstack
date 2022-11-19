@@ -1,8 +1,7 @@
-/* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable prettier/prettier */
 import { defineComponent, h, PropType } from "vue";
 
-import { Doughnut } from "vue-chartjs";
+import { Pie, Bar } from "vue-chartjs";
 import {
   Chart as ChartJS,
   Title,
@@ -13,50 +12,30 @@ import {
   Plugin,
 } from "chart.js";
 import School from "@/types/school";
-import studentservice from "@/services/studentservice";
 import ResponseData from "@/types/ResponseData";
+import studentservice from "@/services/studentservice";
 
 ChartJS.register(Title, Tooltip, Legend, ArcElement, CategoryScale);
 
 export default defineComponent({
-  name: "DoughnutChart",
+  name: "PieChart",
+  // data() {
+  //   return {
+  //     schoolList: [] as School[],
+  //     schoolname: "",
+  //     schoolNames: [] as string[],
+  //     teacherCountInschool: [] as number[],
+  //   };
+  // },
   components: {
-    Doughnut,
+    Pie,
+    Bar,
   },
 
-  data() {
-    return {
-      // schoolList: [] as School[],
-      //studentData: [] as School[],
-    };
-  },
-  methods: {
-    retrieveSchools() {
-      // studentservice
-      //   .getAll()
-      //   .then((response: ResponseData) => {
-      //     this.schoolList = response.data;
-      //     console.log(response.data);
-      //   })
-      //   .catch((e: Error) => {
-      //     console.log(e);
-      //   });
-      // this.schoolname = this.schoolList.map((school) => school.schoolname!);
-      // this.countOfteachers = this.schoolList.map(
-      //   (school) => school.teacher!.length
-      // );
-      // for (const school of this.schoolList) {
-      //   this.schoolname.push(school.schoolname!);
-      //   console.log(this.schoolname);
-      //   this.countOfteachers.push(school.teacher?.length);
-      //   console.log(this.countOfteachers);
-      // }
-    },
-  },
   props: {
     chartId: {
       type: String,
-      default: "doughnut-chart",
+      default: "pie-chart",
     },
     width: {
       type: Number,
@@ -72,41 +51,62 @@ export default defineComponent({
     },
     styles: {
       type: Object as PropType<Partial<CSSStyleDeclaration>>,
-      default: () => {},
     },
     plugins: {
-      type: Array as PropType<Plugin<"doughnut">[]>,
+      type: Array as PropType<Plugin<"pie">[]>,
       default: () => [],
     },
   },
-
+  methods: {
+    // retrieveSchools() {
+    //   studentservice
+    //     .getAll()
+    //     .then((response: ResponseData) => {
+    //       this.schoolList = response.data;
+    //       console.log(response.data);
+    //     })
+    //     .catch((e: Error) => {
+    //       console.log(e);
+    //     });
+    //   this.schoolNames = this.schoolList.map((school) => school.schoolname);
+    //   this.teacherCountInschool = this.schoolList.map(
+    //     (school) => school.teacher.length
+    //   );
+    //   this.$props;
+    // },
+  },
+  mounted() {
+    //this.retrieveSchools();
+  },
   setup(props) {
-    let schoolList: School[] = [];
-    const schoolname: string[] = [];
-    const countOfteachers: number[] = [];
+    let schoolList = [] as School[];
+    const schoolNames = [] as string[];
+    const teacherCountInschool = [] as number[];
     studentservice
       .getAll()
       .then((response: ResponseData) => {
         schoolList = response.data;
-        console.log(schoolList);
+        for (const i of schoolList) {
+          schoolNames.push(i.schoolname);
+        }
+        for (const j of schoolList) {
+          teacherCountInschool.push(j.teacher.length);
+        }
+
+        schoolNames.push();
+        console.log(schoolNames);
+        console.log(teacherCountInschool);
       })
       .catch((e: Error) => {
         console.log(e);
       });
-    // schoolname = schoolList.map((school) => school.schoolname!);
-    // countOfteachers = schoolList.map((school) => school.teacher!.length);
-    for (const school of schoolList) {
-      schoolname.push(school.schoolname);
-      console.log(schoolname);
-      countOfteachers.push(school.teacher.length);
-      console.log(countOfteachers);
-    }
+
     const chartData = {
-      labels: [schoolname],
+      labels: schoolNames,
       datasets: [
         {
           backgroundColor: ["#41B883", "#E46651", "#00D8FF", "#DD1B16"],
-          data: countOfteachers,
+          data: teacherCountInschool,
         },
       ],
     };
@@ -117,7 +117,7 @@ export default defineComponent({
     };
 
     return () =>
-      h(Doughnut, {
+      h(Pie, {
         chartData,
         chartOptions,
         chartId: props.chartId,
@@ -127,9 +127,5 @@ export default defineComponent({
         styles: props.styles,
         plugins: props.plugins,
       });
-  },
-  mounted() {
-    //this.retrieveSchools();
-   
   },
 });

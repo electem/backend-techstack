@@ -41,10 +41,15 @@ class SchoolDataService {
   updateTeacher(data: any): Promise<any> {
     return http.put(`/teacher/`, data);
   }
-
-  //   delete(id: any): Promise<any> {
-  //     return http.delete(`/tutorials/${id}`);
-  //   }
+  deleteSchool(id: any): Promise<any> {
+    return http.delete(`/school/${id}`);
+  }
+  deleteStudent(id: any): Promise<any> {
+    return http.delete(`/student/${id}`);
+  }
+  deleteTeacher(id: any): Promise<any> {
+    return http.delete(`/teacher/${id}`);
+  }
 
   //   deleteAll(): Promise<any> {
   //     return http.delete(`/tutorials`);

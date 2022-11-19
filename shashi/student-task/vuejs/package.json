@@ -18,6 +18,7 @@
     "jl-datatable": "^0.1.7",
     "jquery": "^3.6.0",
     "lodash": "^4.17.21",
+    "mdb-vue-ui-kit": "^3.1.0",
     "popper.js": "^1.16.1",
     "v-data-table": "^2.1.0",
     "vee-validate": "^3.3.7",

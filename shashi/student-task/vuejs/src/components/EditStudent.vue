@@ -6,17 +6,16 @@ import { Student } from "@/types/student";
 import ResponseData from "@/types/ResponseData";
 
 import { Teacher } from "@/types/teacher";
+import School from "@/types/school";
 export default defineComponent({
 
   name: "edit-student",
   data() {
     return {
       currentStudent: {} as Student,
-      message: "",
-      teacherData: [] as Teacher[],
-      studentData: [] as Student[],
-      selectedTeachers: [] as Teacher[],
-      selectedStudents: [] as Teacher[],
+      message: "",  
+      schoolList: [] as School[],
+      currentSchool: {} as School,
     };
   },
   methods: {
@@ -31,6 +30,23 @@ export default defineComponent({
           console.log(e);
         });
     },
+    retrieveSchools() {
+      studentservice
+        .getAll()
+        .then((response: ResponseData) => {
+          this.schoolList = response.data;
+          console.log(response.data);
+        })
+        .catch((e: Error) => {
+          console.log(e);
+        });
+    },
+    onSchoolSelect(event:any) { 
+      const src = event.target.value;
+      const data = this.schoolList.filter((s) => s.schoolid === +src);
+     this.currentSchool = data[0];
+     console.log(this.currentSchool);
+    },
     updateStudent() {
         studentservice.updateStudent(this.currentStudent)
         .then((response: ResponseData) => {
@@ -41,10 +57,21 @@ export default defineComponent({
           console.log(e);
         });       
     },
+    deleteStudent() {
+      studentservice.deleteStudent(this.currentStudent.studentid)
+        .then((response: ResponseData) => {
+          console.log(response.data);
+          this.$router.push({ name: "studentlist" });
+        })
+        .catch((e: Error) => {
+          console.log(e);
+        });
+    }, 
   },
   mounted() {
     this.message = "";
     this.getStudentById(this.$route.params.id);
+    this.retrieveSchools()
   },
 });
 </script>
@@ -97,6 +124,15 @@ export default defineComponent({
           v-model="currentStudent.gender"
         />
       </div>
+      <label for="gender">Select Gender</label>      
+      <div class="form-group">
+  <input type="radio" id="male" value="male" v-model="currentStudent.gender">
+  <label for="male">Male</label><br>
+  <input type="radio" id="female" value="female" v-model="currentStudent.gender">
+  <label for="female">Female</label><br>
+  <input type="radio" id="others" value="others" v-model="currentStudent.gender"> 
+  <label for="others">Others</label><br>
+</div>
       <div class="form-group">
         <label for="dob">Date of birth</label>
         <input
@@ -117,12 +153,39 @@ export default defineComponent({
           {{ entry}}
       </div>
       <br />
+      <div class="form-group">
+        <label>School List: </label>      
+        <select  v-model="currentStudent.school.schoolid" @change="onSchoolSelect($event)">
+          <option>Select School</option>
+          <option           
+            placeholder="select school"           
+            v-for="(entry, index) in schoolList"
+            :key="index"
+            :value="entry.schoolid"
+          >
+            {{ entry.schoolname }}
+          </option>
+        </select>
+
+
+      </div>  
     </form>
-    <button class="badge badge-danger mr-2">Delete</button>
+    <button class="badge badge-danger mr-2" @click="deleteStudent">Delete</button>
 
     <button type="submit" class="badge badge-success mr-2" @click="updateStudent()">Update</button>
 
-    <router-link :to="'/studentlist'" class="badge badge-success">Back</router-link>
+    <router-link 
+          :to="'/studentlist'"
+          class="badge badge-warning"
+          custom
+      v-slot="{ navigate }"
+          > <button  
+          class="badge badge-primary mr-2" 
+          @click="navigate"  
+        role="link"
+        >Back</button>
+      </router-link
+        >   
     <p>{{ message }}</p>
   </div>
 
