@@ -35,7 +35,6 @@ export default class EditStudent extends Component<Props, State> {
 
     this.state = {
       currentStudent: {
-        studentId: null,
         studentName: "",
         address: "",
         gender: "",

@@ -14,12 +14,10 @@ type State = Student & {
   submitted: boolean;
 };
 
-const genders = [
-  { value: "Male" },
-  { value: "Female" },
-];
+const genders = [{ value: "Male" }, { value: "Female" }];
 
 export default class AddStudent extends Component<Props, State> {
+  currentSchool: School={};
   constructor(props: Props) {
     super(props);
     this.onChangeName = this.onChangeName.bind(this);
@@ -28,7 +26,7 @@ export default class AddStudent extends Component<Props, State> {
     this.onChangeEmail = this.onChangeEmail.bind(this);
     this.onChangeDateOfBirth = this.onChangeDateOfBirth.bind(this);
     this.onChangePhoneNo = this.onChangePhoneNo.bind(this);
-    this.onChangeSchools = this.onChangeSchools.bind(this);
+    this.onChangeSchool = this.onChangeSchool.bind(this);
     this.saveStudent = this.saveStudent.bind(this);
 
     this.state = {
@@ -36,9 +34,9 @@ export default class AddStudent extends Component<Props, State> {
       address: "",
       gender: "",
       email: "",
-      dateOfBirth:"",
+      dateOfBirth: "",
       school: {
-        schoolName:''
+        schoolName: "",
       },
       schools: [],
       submitted: false,
@@ -85,9 +83,18 @@ export default class AddStudent extends Component<Props, State> {
     });
   }
 
-  onChangeSchools(event: Student) {
+  onChangeSchool(school: School) {
     this.setState({
-      school: event.school,
+      school:school ,
+    });
+  }
+
+  onSchoolSelect(event: any) {
+    const schoolData = this.state.schools.filter((school) => school.schoolName === event.target.value);
+    this.currentSchool = schoolData[0];
+    console.log(schoolData);
+    this.setState({
+      school: this.currentSchool,
     });
   }
 
@@ -221,14 +228,14 @@ export default class AddStudent extends Component<Props, State> {
           </div>
 
           <div className="form-group">
-            <select>
+            <select  onChange={(event) => this.onSchoolSelect(event)}>
               <option value="">Select School</option>
               {schools.map((school) => (
                 <option
                   key={school.schoolId}
                   typeof="checked"
                   value={school.schoolName}
-                  onChange={()=>this.onChangeSchools(school)}
+                 
                 >
                   {school.schoolName}
                 </option>

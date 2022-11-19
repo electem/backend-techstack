@@ -31,7 +31,6 @@ export default class EditSchool extends Component<Props, State> {
 
     this.state = {
       currentSchool: {
-        schoolId: null,
         schoolName: "",
         address: "",
       },

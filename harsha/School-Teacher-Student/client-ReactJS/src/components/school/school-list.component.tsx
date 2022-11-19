@@ -63,7 +63,7 @@ export default class SchoolsList extends Component<Props, State> {
   retriveSearchedSchools(search: string) {
     this.setState({
       schools: this.schools.filter((school) => {
-        return school.schoolName.includes(search);
+        return school.schoolName?.includes(search);
       }),
     });
   }

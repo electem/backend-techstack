@@ -23,6 +23,7 @@ const genders = [
   ];
 
 export default class EditTeacher extends Component<Props, State> {
+  schoolList:School[]=[];
   constructor(props: Props) {
     super(props);
     this.onChangeName = this.onChangeName.bind(this);
@@ -36,7 +37,6 @@ export default class EditTeacher extends Component<Props, State> {
 
     this.state = {
         currentTeacher:{
-            teacherId:null,
       teacherName: "",
       address: "",
       gender: "",
@@ -117,8 +117,8 @@ export default class EditTeacher extends Component<Props, State> {
     });
   }
 
-  onChangeSchools(e: any) {
-    const schools = e.target.value;
+  onChangeSchools(school: School) {
+    const schools =this.state.schools?.concat(school)
 
     this.setState(function (prevState) {
       return {
@@ -130,12 +130,18 @@ export default class EditTeacher extends Component<Props, State> {
     });
   }
 
+  onSelectPush(school:School){
+    this.state.currentTeacher.schools?.push(school);
+  }
+
   retrieveSchools() {
     SchoolService.getSchools()
       .then((response: any) => {
         this.setState({
           schools: response.data,
         });
+        this.schoolList = this.state.schools
+        console.log(this.schoolList)
       })
       .catch((e: Error) => {
         console.log(e);
@@ -169,7 +175,7 @@ export default class EditTeacher extends Component<Props, State> {
   }
 
   render() {
-    const { currentTeacher,  schools } = this.state;
+    const { currentTeacher, schools } = this.state;
 
     return (
       <div className="edit-form">
@@ -240,14 +246,29 @@ export default class EditTeacher extends Component<Props, State> {
           </div>
 
           <div className="form-group">
+          <label >Current Schools</label>
+          {currentTeacher.schools?.map((school, i) => (
+            <div key={i}>
+              <input
+                type="checkbox"
+                name="schools"
+                checked={true}
+                value={school.schoolName}
+                onChange={()=>this.onChangeSchools}
+              />{" "}
+              {school.schoolName}
+        </div>))}
+        </div>
+
+          <div className="form-group">
           <label >Schools</label>
           {schools.map((school, i) => (
             <div key={i}>
               <input
                 type="checkbox"
-                name="schools"
+                name="schoolList"
                 value={school.schoolName}
-                onChange={this.onChangeSchools}
+                onChange={()=>this.onSelectPush(school)}
               />{" "}
               {school.schoolName}
             </div>

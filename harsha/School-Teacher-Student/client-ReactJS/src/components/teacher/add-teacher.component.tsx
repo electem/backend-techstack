@@ -10,9 +10,11 @@ interface RouterProps {}
 type Props = RouteComponentProps<RouterProps>;
 
 type State = Teacher & {
-  schools:Array<School>
+  schoolList?: Array<School>;
   submitted: boolean;
 };
+
+const genders = [{ value: "Male" }, { value: "Female" }];
 
 export default class AddTeacher extends Component<Props, State> {
   constructor(props: Props) {
@@ -32,6 +34,7 @@ export default class AddTeacher extends Component<Props, State> {
       email: "",
       schools: [],
       submitted: false,
+      schoolList: [],
     };
   }
 
@@ -69,11 +72,9 @@ export default class AddTeacher extends Component<Props, State> {
     });
   }
 
-  onChangeSchools(event: any) {
-    const target = event.target;
-    const value = target.name === 'school 3' ? target.checked : target.value;
+  onChangeSchools(school: School) {
     this.setState({
-      schools: value,
+      schools: this.state.schools?.concat(school),
     });
   }
 
@@ -81,7 +82,7 @@ export default class AddTeacher extends Component<Props, State> {
     SchoolService.getSchools()
       .then((response: any) => {
         this.setState({
-          schools: response.data,
+          schoolList: response.data,
         });
       })
       .catch((e: Error) => {
@@ -95,6 +96,7 @@ export default class AddTeacher extends Component<Props, State> {
       address: this.state.address,
       email: this.state.email,
       gender: this.state.gender,
+      phoneNo: this.state.phoneNo,
       schools: this.state.schools,
     };
 
@@ -106,18 +108,19 @@ export default class AddTeacher extends Component<Props, State> {
           address: response.data.address,
           email: response.state.email,
           gender: response.state.gender,
+          phoneNo: response.state.phoneNo,
           schools: response.data.schools,
           submitted: true,
         });
-        this.props.history.push("/teachers");
       })
       .catch((e: Error) => {
         console.log(e);
       });
+      this.props.history.push("/teachers");
   }
 
   render() {
-    const { teacherName, address, gender, email, phoneNo, schools } = this.state;
+    const { teacherName, address, email, phoneNo, schoolList } = this.state;
 
     return (
       <div className="submit-form">
@@ -150,18 +153,19 @@ export default class AddTeacher extends Component<Props, State> {
           </div>
 
           <div className="form-group">
-            <label htmlFor="gender">Gender</label>
-            <input
-              type="text"
-              className="form-control"
-              id="gender"
-              required
-              value={gender}
-              onChange={this.onChangeGender}
-              name="gender"
-            />
+            <div className="form-group">Select a Gender</div>
+            {genders.map((gender, i) => (
+              <label key={i}>
+                <input
+                  type="radio"
+                  name="gender"
+                  value={gender.value}
+                  onChange={this.onChangeGender}
+                />{" "}
+                {gender.value}
+              </label>
+            ))}
           </div>
-
           <div className="form-group">
             <label htmlFor="email">Email</label>
             <input
@@ -189,18 +193,19 @@ export default class AddTeacher extends Component<Props, State> {
           </div>
 
           <div className="form-group">
-          <label >Schools</label>
-          {schools.map((school, i) => (
-            <div key={i}>
-              <input
-                type="checkbox"
-                name="schools"
-                value={school.schoolName}
-                // onChange={this.onChangeSchools}
-              />{" "}
-              {school.schoolName}
-            </div>
-          ))}</div>
+            <label>Schools</label>
+            {schoolList?.map((school, i) => (
+              <div key={i}>
+                <input
+                  type="checkbox"
+                  name="schools"
+                  value={school.schoolName}
+                  onChange={() => this.onChangeSchools(school)}
+                />{" "}
+                {school.schoolName}
+              </div>
+            ))}
+          </div>
           <br />
 
           <button

@@ -5,6 +5,8 @@ import StudentService from "../../services/student.service";
 import { Link, RouteComponentProps } from "react-router-dom";
 import { School } from "../../types/school.type";
 import Multiselect from "multiselect-react-dropdown";
+import { Teacher } from "../../types/teacher.type";
+import { Student } from "../../types/student.type";
 
 interface RouterProps {}
 
@@ -12,19 +14,26 @@ type Props = RouteComponentProps<RouterProps>;
 
 type State = School & {
   submitted: boolean;
+  teachersList: Array<Teacher>;
+  studentsList: Array<Student>;
 };
 
 export default class AddSchool extends Component<Props, State> {
+  addedTeachers:Teacher[]=[];
   constructor(props: Props) {
     super(props);
     this.onChangeName = this.onChangeName.bind(this);
     this.onChangeAddress = this.onChangeAddress.bind(this);
+    this.onChangeTeachers = this.onChangeTeachers.bind(this);
+    this.onChangeStudents = this.onChangeStudents.bind(this);
     this.saveSchool = this.saveSchool.bind(this);
 
     this.state = {
       schoolName: "",
       address: "",
       submitted: false,
+      teachersList:[],
+      studentsList:[],
     };
   }
 
@@ -45,11 +54,24 @@ export default class AddSchool extends Component<Props, State> {
     });
   }
 
+  onChangeTeachers(e: any) {
+    this.addedTeachers.push(e[0])    
+    this.setState({
+      teachers: this.addedTeachers,
+    });
+  }
+
+  onChangeStudents(student: School) {
+    this.setState({
+      students: this.state.students?.concat(student),
+    });
+  }
+
   retrieveTeachers() {
     TeacherService.getTeachers()
       .then((response: any) => {
         this.setState({
-          teachers: response.data,
+          teachersList: response.data,
         });
       })
       .catch((e: Error) => {
@@ -61,7 +83,7 @@ export default class AddSchool extends Component<Props, State> {
     StudentService.getStudents()
       .then((response: any) => {
         this.setState({
-          students: response.data,
+          studentsList: response.data,
         });
       })
       .catch((e: Error) => {
@@ -73,6 +95,8 @@ export default class AddSchool extends Component<Props, State> {
     const school: School = {
       schoolName: this.state.schoolName,
       address: this.state.address,
+      teachers: this.state.teachers,
+      students: this.state.students,
     };
 
     SchoolService.create(school)
@@ -81,17 +105,19 @@ export default class AddSchool extends Component<Props, State> {
           schoolId: response.data.schoolId,
           schoolName: response.data.schoolName,
           address: response.data.address,
+          teachers: response.state.teachers,
+          students: response.state.students,
           submitted: true,
         });
-        this.props.history.push("/schools");
       })
       .catch((e: Error) => {
         console.log(e);
       });
+      this.props.history.push("/schools");
   }
 
   render() {
-    const { schoolName, address, teachers, students } = this.state;
+    const { schoolName, address, teachersList, studentsList } = this.state;
 
     return (
       <div className="submit-form">
@@ -125,19 +151,21 @@ export default class AddSchool extends Component<Props, State> {
 
           <div className="form-group">
             <Multiselect
-              options={teachers}
+              options={teachersList}
               closeIcon="close"
               placeholder="Choose Teachers"
               displayValue="teacherName"
+              onSelect={this.onChangeTeachers }
             />
           </div>
 
           <div className="form-group">
             <Multiselect
-              options={students}
+              options={studentsList}
               closeIcon="close"
               placeholder="Choose Students"
               displayValue="studentName"
+              onSelect={(event) =>this.onChangeStudents(event)}
             />
           </div>
 
