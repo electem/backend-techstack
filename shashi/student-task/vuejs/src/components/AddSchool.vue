@@ -1,16 +1,13 @@
 <!-- eslint-disable prettier/prettier -->
-
 <template>
-  <form @submit="onSubmit" class="add-form">
     <div class="submit-form">
-      <div v-if="!submitted">
+ <div v-if="!submitted">
         <div class="form-group">
-          <label for="schoolname">School name</label>
+          <label for="schoolname">school name</label>
           <input
             type="text"
             class="form-control"
             id="schoolname"
-            placeholder="schoolname"
             required
             v-model="school.schoolname"
             name="schoolname"
@@ -26,84 +23,152 @@
             name="address"
             placeholder="address"
           ></textarea>
+        </div> 
+        <div class="form-group">
+          <multiselect
+            class="form-control"
+            id="teacher"
+            required
+            v-model="selectedTeachers"
+            name="teacher"
+            :options="teacherData"
+            :multiple="true"
+            :close-on-select="false"
+            :clear-on-select="false"
+            :preserve-search="true"
+            placeholder="Select Teacher"
+            label="teachername"
+            track-by="teachername"
+            :preselect-first="true"
+          >
+          </multiselect>
         </div>
-        <div></div>
-        <input
-          type="submit"
-          value="Submit"
-          @click="onSubmit"
-          class="btn-btn-block"
-        />
-        <button
-          type="submit"
-          value="Submit"
-          @click="saveTutorial"
-          class="btn btn-success"
-        >
-          Submit
-        </button>
+        <div class="form-group">
+          <multiselect
+            class="form-control"
+            id="student"
+            required
+            v-model="selectedStudents"
+            name="student"
+            :options="studentData"
+            :multiple="true"
+            :close-on-select="false"
+            :clear-on-select="false"
+            :preserve-search="true"
+            placeholder="Select Student"
+            label="studentname"
+            track-by="studentname"
+            :preselect-first="true"
+          >
+          </multiselect>
+        </div>
+        <button @click="saveSchool" class="btn btn-success">Submit</button>
       </div>
       <div v-else>
         <h4>You submitted successfully!</h4>
         <button class="btn btn-success" @click="newTutorial">Add</button>
       </div>
+      <br />
+      <router-link 
+          :to="'/school'"
+          class="badge badge-warning"
+          custom
+      v-slot="{ navigate }"
+          > <button  
+          class="btn btn-danger" 
+          @click="navigate"  
+        role="link"
+        >Cancel</button>
+      </router-link
+        >        
     </div>
-  </form>
-</template>
-<!-- eslint-disable prettier/prettier -->
-<script lang="ts">
-import { defineComponent } from "vue";
-import studentservice from "@/services/studentservice";
-import School from "@/types/school";
-import ResponseData from "@/types/ResponseData";
-export default defineComponent({
-  name: "add-tutorial",
-  data() {
+  </template>
+  <!-- eslint-disable prettier/prettier -->
+  <script lang="ts">
+  import { defineComponent } from "vue";
+  import studentservice from "@/services/studentservice";
+  import { Student } from "@/types/student";
+  import ResponseData from "@/types/ResponseData";
+  import School from "@/types/school";
+import { Teacher } from "@/types/teacher";
+import Multiselect from "@suadelabs/vue3-multiselect";
+  export default defineComponent({
+    name: "add-student",
+    components: { Multiselect },
+    data() {
     return {
       school: {
         schoolname: "",
         address: "",
       } as School,
-
+      teacherData: [] as Teacher[],
+      studentData: [] as Student[],
       submitted: false,
+      selectedTeachers: [] as Teacher[],
+      selectedStudents: [] as Student[],
     };
   },
-  methods: {
-    onSubmit(event: any) {
-      console.log(event);
-    },
-    saveTutorial() {
-      let data = {
-        schoolname: this.school.schoolname,
+    methods: {
+      saveSchool() {    
+        let data = {
+            schoolname: this.school.schoolname,
         address: this.school.address,
-      };
-
+        teacher: this.selectedTeachers,
+        student:this.selectedStudents
+        };
+  
+        studentservice
+          .createSchool(data)
+          .then((response: ResponseData) => {
+            console.log(response.data);
+            this.submitted = true;
+          })
+          .catch((e: Error) => {
+            console.log(e);
+          });
+      },  
+      retrieveTeachers() {
       studentservice
-        .create(data)
+        .getAllTeacherss()
         .then((response: ResponseData) => {
+          this.teacherData = response.data;
           console.log(response.data);
-          this.submitted = true;
         })
         .catch((e: Error) => {
           console.log(e);
         });
     },
-
-    newTutorial() {
-      this.submitted = false;
-      this.school = {} as School;
+    retrieveStudents() {
+      studentservice
+        .getAllStudents()
+        .then((response: ResponseData) => {
+          this.studentData = response.data;
+          console.log(response.data);
+        })
+        .catch((e: Error) => {
+          console.log(e);
+        });
+    },  
+  
+      newTutorial() {
+        this.submitted = false;
+        this.school = {} as School;
+      },
+     
+    },mounted() {
+      this.retrieveStudents();
+      this.retrieveTeachers()
     },
-  },
-});
-</script>
-<style></style>
-<!-- eslint-disable prettier/prettier -->
-<style>
-.submit-form {
-  max-width: 300px;
-  margin: auto;
-}
-.body {
-  padding: 1rem;
-}
-</style>
+  });
+  </script>
+  <!-- eslint-disable prettier/prettier -->
+  <style src="vue-multiselect/dist/vue-multiselect.min.css">
+  .submit-form {
+    max-width: 300px;
+    margin: auto;
+  }
+  .body {
+    padding: 1rem;
+  }
+  </style>
+  

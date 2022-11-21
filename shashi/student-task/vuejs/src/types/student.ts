@@ -8,5 +8,5 @@ export interface Student {
   gender: string;
   phonenumber: number;
   dob: Date;
-  school: School[];
+  school: School;
 }

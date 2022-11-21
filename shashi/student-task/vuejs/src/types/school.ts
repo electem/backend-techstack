@@ -6,5 +6,5 @@ export default interface School {
   schoolname: string;
   address: string;
   teacher: Teacher[];
-  students?: Student[];
+  students: Student[];
 }

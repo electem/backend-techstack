@@ -13,11 +13,8 @@ class SchoolDataService {
   getAllTeacherss(): Promise<any> {
     return http.get("/teacher");
   }
-  //   get(id: any): Promise<any> {
-  //     return http.get(`/tutorials/${id}`);
-  //   }
 
-  create(data: any): Promise<any> {
+  createSchool(data: any): Promise<any> {
     return http.post("/school", data);
   }
   createStudent(data: any): Promise<any> {
@@ -44,10 +41,15 @@ class SchoolDataService {
   updateTeacher(data: any): Promise<any> {
     return http.put(`/teacher/`, data);
   }
-
-  //   delete(id: any): Promise<any> {
-  //     return http.delete(`/tutorials/${id}`);
-  //   }
+  deleteSchool(id: any): Promise<any> {
+    return http.delete(`/school/${id}`);
+  }
+  deleteStudent(id: any): Promise<any> {
+    return http.delete(`/student/${id}`);
+  }
+  deleteTeacher(id: any): Promise<any> {
+    return http.delete(`/teacher/${id}`);
+  }
 
   //   deleteAll(): Promise<any> {
   //     return http.delete(`/tutorials`);

@@ -13,9 +13,10 @@ export default defineComponent({
 });
 </script>
 <template>
+    <PieChart />
   <div id="app">
     <nav class="navbar navbar-expand navbar-dark bg-dark">
-      <router-link to="/" class="navbar-brand">bezKoder</router-link>
+      <router-link to="/school" class="navbar-brand">bezKoder</router-link>
       <div class="navbar-nav mr-auto">
         <li class="nav-item">
           <router-link to="/school" class="nav-link">Schoolist</router-link>
@@ -25,10 +26,7 @@ export default defineComponent({
         </li>      
         <li class="nav-item">
           <router-link to="/teacherslist" class="nav-link">TeachersList</router-link>
-        </li>    
-        <li class="nav-item">
-          <router-link to="/validation2" class="nav-link">validation2</router-link>
-        </li>    
+        </li>        
       </div>
     </nav>
     <div class="container mt-3">

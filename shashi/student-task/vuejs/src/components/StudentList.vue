@@ -16,6 +16,23 @@
             />
           </div>
         </div>
+        <router-link 
+          :to="'/addstudent'"
+          class="badge badge-warning"
+          custom
+      v-slot="{ navigate }"
+          > <button  
+          class="badge badge-secondary mr-2" 
+          @click="navigate"  
+        role="link"
+        >ADD STUDENT</button>
+      </router-link
+        >  
+        <br />
+        <br />
+        <div class="search-wrapper panel-heading col-sm-12">
+    <input type="text" v-model="search" placeholder="Search" /> <br> <br>
+  </div> 
         <table id="schools-list" class="table table-bordered table-striped">
           <thead>
             <tr>
@@ -49,8 +66,8 @@
       </div>
     </div>
   </template>
-  
   <script lang="ts">
+
   /* eslint-disable */
   
   import { computed, ref } from "vue";
@@ -61,11 +78,12 @@
   import type { Header, Item } from "vue3-easy-data-table";
   
   export default defineComponent({
-    name: "students-list",
+    name: "students-list",    
     data() {
       return {        
         studentData: [] as Student[],
         studentname: "",
+        search: ""
       };
     },
     methods: {
@@ -80,6 +98,11 @@
             console.log(e);
           });
       },
+      filteredProducts() {
+       this.studentData.filter(p => {      
+        return p.studentname.toLowerCase().indexOf(this.search.toLowerCase()) != -1;
+      });
+    },
       searchTitle() {
         studentservice
           .findByTitle(this.studentname)
