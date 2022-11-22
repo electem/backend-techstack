@@ -50,6 +50,22 @@ class SchoolDataService {
   deleteTeacher(id: any): Promise<any> {
     return http.delete(`/teacher/${id}`);
   }
+  uploadFile(file: File) {
+    let formData = new FormData();
+    formData.append("file", file);
+    return http
+      .post("/photos", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .then(function () {
+        console.log("SUCCESS!!");
+      })
+      .catch(function () {
+        console.log("FAILURE!!");
+      });
+  }
 
   //   deleteAll(): Promise<any> {
   //     return http.delete(`/tutorials`);

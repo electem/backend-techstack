@@ -76,11 +76,6 @@ const routes: Array<RouteRecordRaw> = [
     name: "charts",
     component: () => import("./components/Charts"),
   },
-  {
-    path: "/validation2",
-    name: "validation2",
-    component: () => import("./components/VeeValidation.vue"),
-  },
 ];
 
 const router = createRouter({

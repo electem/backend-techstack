@@ -5,7 +5,7 @@
       <div class="col-md-8"></div>
       <div class="col-md-6">
         <h4>students List</h4>
-        <div class="searchBar">
+        <!-- <div class="searchBar">
           <div class="input-group mb-5">
             <input
               type="search"
@@ -15,7 +15,7 @@
               aria-describedby="button-addon2"
             />
           </div>
-        </div>
+        </div> -->
         <router-link 
           :to="'/addstudent'"
           class="badge badge-warning"
@@ -30,9 +30,13 @@
         >  
         <br />
         <br />
-        <div class="search-wrapper panel-heading col-sm-12">
-    <input type="text" v-model="search" placeholder="Search" /> <br> <br>
-  </div> 
+        <input type="text" v-model="input" placeholder="Search Students..." />
+        <button  
+          class="badge badge-success mr-2" 
+          @click="filteredList()"          
+        >Search</button>
+        <br />
+        <br />
         <table id="schools-list" class="table table-bordered table-striped">
           <thead>
             <tr>
@@ -83,7 +87,8 @@
       return {        
         studentData: [] as Student[],
         studentname: "",
-        search: ""
+        input : ref(""),
+       searchedStudents: [] as Student[],
       };
     },
     methods: {
@@ -92,16 +97,21 @@
           .getAllStudents()
           .then((response: ResponseData) => {
             this.studentData = response.data;
+            this.searchedStudents=this.studentData 
             console.log(response.data);
           })
           .catch((e: Error) => {
             console.log(e);
           });
       },
-      filteredProducts() {
-       this.studentData.filter(p => {      
-        return p.studentname.toLowerCase().indexOf(this.search.toLowerCase()) != -1;
-      });
+      filteredList() {
+      if(this.input != ""){
+        this.studentData = this.searchedStudents.filter((student) =>
+        student.studentname.toString().includes(this.input))  
+      } else {
+        this.studentData = this.searchedStudents;
+      }
+      
     },
       searchTitle() {
         studentservice

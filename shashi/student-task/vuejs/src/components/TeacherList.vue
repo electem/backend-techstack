@@ -5,7 +5,7 @@
       <div class="col-md-8"></div>
       <div class="col-md-6">
         <h4>Teachers List</h4>
-        <div class="searchBar">
+        <!-- <div class="searchBar">
           <div class="input-group mb-5">
             <input
               type="search"
@@ -15,7 +15,7 @@
               aria-describedby="button-addon2"
             />
           </div>
-        </div>    
+        </div>     -->
         <router-link 
           :to="'/addteacher'"
           class="badge badge-warning"
@@ -28,6 +28,13 @@
         >ADD TEACHER</button>
       </router-link
         > 
+        <br />
+        <br />
+        <input type="text" v-model="input" placeholder="Search Teachers..." />
+        <button  
+          class="badge badge-success mr-2" 
+          @click="filteredList()"          
+        >Search</button>
         <br />
         <br />
         <table id="schools-list" class="table table-bordered table-striped">
@@ -84,6 +91,8 @@
       return {        
         teacherData: [] as Teacher[],
         teachername: "",
+        input : ref(""),
+       searchedTeachers: [] as Teacher[],
       };
     },
     methods: {
@@ -92,12 +101,22 @@
           .getAllTeacherss()
           .then((response: ResponseData) => {
             this.teacherData = response.data;
+            this.searchedTeachers= this.teacherData
             console.log(response.data);
           })
           .catch((e: Error) => {
             console.log(e);
           });
       },
+      filteredList() {
+      if(this.input != ""){
+        this.teacherData = this.searchedTeachers.filter((teacher) =>
+        teacher.teachername.toString().includes(this.input))  
+      } else {
+        this.teacherData = this.searchedTeachers;
+      }
+      
+    },
       searchTitle() {
         studentservice
           .findByTitle(this.teachername)

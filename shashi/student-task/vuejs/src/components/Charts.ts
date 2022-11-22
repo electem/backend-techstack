@@ -87,6 +87,7 @@ export default defineComponent({
       .then((response: ResponseData) => {
         schoolList = response.data;
         for (const i of schoolList) {
+          
           schoolNames.push(i.schoolname);
         }
         for (const j of schoolList) {

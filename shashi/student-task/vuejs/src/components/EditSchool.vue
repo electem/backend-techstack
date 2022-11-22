@@ -128,10 +128,10 @@ export default defineComponent({
         <div class="form-group">
           <multiselect
             class="form-control"
-            id="student"
+            id="students"
             required
             v-model="currentSchool.students"
-            name="student"
+            name="students"
             :options="studentData"
             :multiple="true"
             :close-on-select="false"

@@ -144,8 +144,7 @@ export default defineComponent({
           type="checkbox"
           class="form-check-input"
           :fieldId="entry.schoolname"
-          :label="entry.schoolname"
-          
+          :label="entry.schoolname"          
           :checked="value.includes(entry.schoolid)"
           @click="removeSelectedSchoolFromTeacher(entry)"
         />{{ entry.schoolname }}

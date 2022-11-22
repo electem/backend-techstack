@@ -60,17 +60,26 @@
           v-model="student.gender"
           name="gender"
         />
-      </div>  
-      
-      <label for="gender">Select Gender</label>      
+      </div>
+      <label for="gender">Select Gender</label>
       <div class="form-group">
-  <input type="radio" id="Male" value="Male" v-model="student.gender">
-  <label for="Male">Male</label><br>
-  <input type="radio" id="Female" value="Female" v-model="student.gender">
-  <label for="Female">Female</label><br>
-  <input type="radio" id="Others" value="Others" v-model="student.gender"> 
-  <label for="Female">Others</label><br>
-</div>
+        <input type="radio" id="male" value="male" v-model="student.gender" />
+        <label for="male">Male</label><br />
+        <input
+          type="radio"
+          id="female"
+          value="female"
+          v-model="student.gender"
+        />
+        <label for="female">Female</label><br />
+        <input
+          type="radio"
+          id="others"
+          value="others"
+          v-model="student.gender"
+        />
+        <label for="others">Others</label><br />
+      </div>
       <div class="form-group">
         <label for="dob">Date of birth</label>
         <input
@@ -81,13 +90,13 @@
           v-model="student.dob"
           name="dob"
         />
-      </div> 
+      </div>
       <div class="form-group">
-        <label>School List: </label>      
-        <select  v-model="student.school" @change="onSchoolSelect($event)">
+        <label>School List: </label>
+        <select v-model="student.school" @change="onSchoolSelect($event)">
           <option>Select School</option>
-          <option           
-            placeholder="select school"           
+          <option
+            placeholder="select school"
             v-for="(entry, index) in schoolList"
             :key="index"
             :value="entry.schoolid"
@@ -95,27 +104,33 @@
             {{ entry.schoolname }}
           </option>
         </select>
-      </div>  
-      <button @click="saveStudent" class="btn btn-success">Submit</button>
+      </div>
+    <div>      
+      <input type="file" @change="handleFileUpload($event)"/>     
+    </div>
+  <br />     
+      <button  @click="saveStudent" class="btn btn-success">Submit</button>
     </div>
     <div v-else>
-      <h4>You submitted successfully!</h4>
+      <h4>Form submitted successfully!</h4>
       <button class="btn btn-success" @click="newTutorial">Add</button>
     </div>
     <br />
-      <router-link 
-          :to="'/studentlist'"
-          class="badge badge-warning"
-          custom
+    <router-link
+      :to="'/studentlist'"
+      class="badge badge-warning"
+      custom
       v-slot="{ navigate }"
-          > <button  
-          class="btn btn-danger" 
-          @click="navigate"  
-        role="link"
-        >Cancel</button>
-      </router-link
-        >  
-  </div>
+    >
+
+      <button class="btn btn-danger " @click="navigate" role="link">
+        Cancel
+      </button>
+    </router-link>
+  </div> 
+  <!-- <button class="btn btn-danger " @click="downloadFile" >
+        download
+      </button> -->
 </template>
 <!-- eslint-disable prettier/prettier -->
 <script lang="ts">
@@ -124,10 +139,13 @@ import studentservice from "@/services/studentservice";
 import { Student } from "@/types/student";
 import ResponseData from "@/types/ResponseData";
 import School from "@/types/school";
+import http from "@/http-Studentcommon";
 export default defineComponent({
   name: "add-student",
   data() {
     return {
+      file: "",  
+      image:File,       
       student: {
         studentname: "",
         address: "",
@@ -144,6 +162,16 @@ export default defineComponent({
     };
   },
   methods: {
+    handleFileUpload(event) {
+      this.file = event.target.files[0];
+    },   
+    downloadFile() {
+      let formData = new FormData();
+          formData.get(this.file)
+     http.get(`'/photos'}/${formData}`, {  
+      responseType: 'blob',
+    });
+  },
     saveStudent() {
       let data = {
         studentname: this.student.studentname,
@@ -152,21 +180,27 @@ export default defineComponent({
         gender: this.student.gender,
         dob: this.student.dob,
         phonenumber: this.student.phonenumber,
-        school: this.student.school
+        school: this.student.school,
       };
-console.log('create url starts')
+      console.log("create url starts");
       studentservice
         .createStudent(data)
         .then((response: ResponseData) => {
           console.log(response.data);
-          this.submitted = true;
-          console.log('student created')
+          let formData = new FormData();
+          formData.append("image", this.file);
+          http.post("/photos", formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
         })
-        
+          this.submitted = true;
+          console.log("student created");
+        })
         .catch((e: Error) => {
           console.log(e);
         });
-        console.log('student not created')
+      console.log("student not created");
     },
     retrieveSchools() {
       studentservice
@@ -179,12 +213,12 @@ console.log('create url starts')
           console.log(e);
         });
     },
-    
-    onSchoolSelect(event:any) { 
+
+    onSchoolSelect(event:any) {
       const src = event.target.value;
       const data = this.schoolList.filter((s) => s.schoolid === +src);
-     this.currentSchool = data[0];
-     console.log(this.currentSchool);
+      this.currentSchool = data[0];
+      console.log(this.currentSchool);
     },
 
     newTutorial() {
@@ -205,5 +239,8 @@ console.log('create url starts')
 }
 .body {
   padding: 1rem;
+}
+.flex {
+    display: flex;
 }
 </style>
