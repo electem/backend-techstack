@@ -75,7 +75,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: "/customecharts",
     name: "customecharts",
-    component: () => import("./components/CustomeCharts.vue"),
+    component: () => import("./components/LineCharts.vue"),
   },
   {
     path: "/piechart",
