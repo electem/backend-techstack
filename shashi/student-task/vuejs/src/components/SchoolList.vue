@@ -1,5 +1,3 @@
-<!-- eslint-disable vue/script-setup-uses-vars -->
-<!-- eslint-disable vue/no-parsing-error -->
 <!-- eslint-disable prettier/prettier -->
 <template>
   <div class="list row">
@@ -120,8 +118,7 @@
   <!-- </div>  -->
  
 </template>
-<script lang="ts">
-/* eslint-disable */
+<script lang="ts">/* eslint-disable */
 
 import { computed, ref } from "vue";
 import { defineComponent } from "vue";

@@ -1,34 +1,55 @@
 <!-- eslint-disable prettier/prettier -->
-
 <template>
-  <EasyDataTable :headers="headers" :items="items" />
+  <EasyDataTable
+    buttons-pagination
+    :headers="headers"
+    :items="items"
+    :loading="loading"
+  />
 </template>
 <!-- eslint-disable prettier/prettier -->
 <script lang="ts">
-import { defineComponent } from "vue";
-import type { Header, Item } from "vue3-easy-data-table";
+import { defineComponent, ref } from "vue";
+import type { Header, Item, ServerOptions } from "vue3-easy-data-table";
 import studentservice from "@/services/studentservice";
 import ResponseData from "@/types/ResponseData";
 import School from "@/types/school";
 
 export default defineComponent({
   name: "edit-school",
-  setup() {
-    let schoolList = [] as School[];
-    let items:Item[] =[];
-    const headers: Header[] = [
-      { text: "schoolname", value: "schoolname" },
-      { text: "address", value: "address" },
-    ];    
-    studentservice.getAll().then((response: ResponseData) => {
-      schoolList = response.data;
-      console.log(response.data);
-      items = schoolList;
-    });
+  data() {
     return {
-      headers,
-      items,
+      currentSchool: {} as School,
+      message: "",
+      headers: [] as Header[],
+      items: [] as Item[],
+      teacherCountInschool: [] as number[],
+      loading: ref(false),
+      serverItemsLength: ref(0),
+      serverOptions: ref<ServerOptions>({
+        page: 1,
+        rowsPerPage: 5,
+        sortBy: "age",
+        sortType: "desc",
+      }),
     };
+  },
+  methods: {
+    setup() {
+      this.headers = [
+        { text: "schoolname", value: "schoolname" },
+        { text: "address", value: "address" },
+        { text: "No_Of_Teachers", value: "teacher.length", sortable: true },
+      ];
+      studentservice.getAll().then((response: ResponseData) => {
+        console.log(response.data);
+        this.items = response.data;
+      });
+    },
+  },
+
+  mounted() {
+    this.setup();
   },
 });
 </script>

@@ -146,7 +146,7 @@ export default defineComponent({
     return {
       file: "",  
       image:File,       
-      student: {
+      student: {        
         studentname: "",
         address: "",
         email: "",
@@ -214,7 +214,7 @@ export default defineComponent({
         });
     },
 
-    onSchoolSelect(event:any) {
+    onSchoolSelect(event) {
       const src = event.target.value;
       const data = this.schoolList.filter((s) => s.schoolid === +src);
       this.currentSchool = data[0];

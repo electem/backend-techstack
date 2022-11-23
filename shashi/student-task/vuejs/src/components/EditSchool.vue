@@ -1,5 +1,4 @@
-<script lang="ts">
-/* eslint-disable */
+<script lang="ts">/* eslint-disable */
 import { defineComponent } from "vue";
 import studentservice from "@/services/studentservice";
 import School from "@/types/school";

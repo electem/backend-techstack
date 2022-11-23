@@ -1,14 +1,11 @@
-<!-- eslint-disable vue/no-unused-components -->
 <!-- eslint-disable prettier/prettier -->
 <script lang="ts">
 /* eslint-disable prettier/prettier */
 import { defineComponent } from "vue";
-import DoughnutChart from './components/Charts'
 
 export default defineComponent({
   name: "App",
   components: {
-  DoughnutChart
 }
 });
 </script>
@@ -18,6 +15,9 @@ export default defineComponent({
       <router-link to="/school" class="navbar-brand">bezKoder</router-link>
       <div class="navbar-nav mr-auto">
         <li class="nav-item">
+          <router-link to="/datatable" class="nav-link">data table</router-link>
+        </li>   
+        <li class="nav-item">
           <router-link to="/school" class="nav-link">Schoolist</router-link>
         </li>       
         <li class="nav-item">
@@ -25,7 +25,13 @@ export default defineComponent({
         </li>      
         <li class="nav-item">
           <router-link to="/teacherslist" class="nav-link">TeachersList</router-link>
-        </li>        
+        </li>    
+        <li class="nav-item">
+          <router-link to="/customecharts" class="nav-link">Line-Chart</router-link>
+        </li>     
+        <li class="nav-item">
+          <router-link to="/piechart" class="nav-link">Pie-Chart</router-link>
+        </li>  
       </div>
     </nav>
     <div class="container mt-3">

@@ -3,8 +3,6 @@ import { defineComponent } from "vue";
 import studentservice from "@/services/studentservice";
 import { Student } from "@/types/student";
 import ResponseData from "@/types/ResponseData";
-
-import { Teacher } from "@/types/teacher";
 import School from "@/types/school";
 export default defineComponent({
 
@@ -165,8 +163,6 @@ export default defineComponent({
             {{ entry.schoolname }}
           </option>
         </select>
-
-
       </div>  
     </form>
     <button class="badge badge-danger mr-2" @click="deleteStudent">Delete</button>
