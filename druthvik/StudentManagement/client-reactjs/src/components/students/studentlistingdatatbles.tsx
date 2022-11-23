@@ -19,7 +19,7 @@ const columns = [
     sortable: true,
   },
 ];
-export class StudentsListDatatables extends Component<Props, State> {
+export class StudentsListingDatatables extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
 
