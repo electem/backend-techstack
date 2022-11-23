@@ -11,6 +11,7 @@ import AddTeacher from "./components/teacher/add-teacher.component";
 import TeachersList from "./components/teacher/teacher-list.component";
 import EditTeacher from "./components/teacher/edit-teacher.component";
 import EditStudent from "./components/student/edit-student.component";
+import Charts from "./components/charts.component";
 
 
 class App extends Component {
@@ -34,6 +35,11 @@ class App extends Component {
                 Students
               </Link>
             </li>
+            <li className="nav-item">
+              <Link to={"/charts"} className="nav-link">
+                Charts
+              </Link>
+            </li>
           </div>
         </nav>
 
@@ -48,6 +54,7 @@ class App extends Component {
             <Route path="/schools/:id" component={EditSchool} />
             <Route path="/teachers/:id" component={EditTeacher} />
             <Route path="/students/:id" component={EditStudent} />
+            <Route path="/charts" component={Charts} />
           </Switch>
         </div>
       </div>

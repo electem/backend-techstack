@@ -4,10 +4,8 @@ import StudentService from "../../services/student.service";
 import { Link, RouteComponentProps } from "react-router-dom";
 import { School } from "../../types/school.type";
 import { Student } from "../../types/student.type";
-import Multiselect from "multiselect-react-dropdown";
 
 interface RouterProps {
-  // type for `match.params`
   id: string; // must be type `string` since value comes from the URL
 }
 
@@ -18,10 +16,9 @@ type State = {
   schools: Array<School>;
 };
 
-const genders = [{ value: "Male" }, { value: "Female" }];
-
 export default class EditStudent extends Component<Props, State> {
   constructor(props: Props) {
+    console.log("constructor");
     super(props);
     this.onChangeName = this.onChangeName.bind(this);
     this.onChangeAddress = this.onChangeAddress.bind(this);
@@ -48,6 +45,7 @@ export default class EditStudent extends Component<Props, State> {
   }
 
   componentDidMount() {
+    console.log("componentDidMount");
     this.getStudent(this.props.match.params.id);
     this.retrieveSchools();
   }
@@ -182,7 +180,9 @@ export default class EditStudent extends Component<Props, State> {
   }
 
   render() {
-    const { currentStudent, schools } = this.state;
+    console.log("render");
+
+    const { currentStudent } = this.state;
 
     return (
       <div className="edit-form">
@@ -266,17 +266,14 @@ export default class EditStudent extends Component<Props, State> {
           <div className="form-group">
             <select>
               <option value="">Select School</option>
-              {/* {schools.map((school) => ( */}
-                <option
-                //   key={school.schoolId}
-                  typeof="checked"
-                  selected={true}
-                  value={currentStudent.school?.schoolName}
-                  onChange={this.onChangeSchools}
-                >
-                  {currentStudent.school?.schoolName}
-                </option>
-                {/* ))} */}
+              <option
+                typeof="checked"
+                selected={true}
+                value={currentStudent.school?.schoolName}
+                onChange={this.onChangeSchools}
+              >
+                {currentStudent.school?.schoolName}
+              </option>
             </select>
           </div>
 

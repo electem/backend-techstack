@@ -6,7 +6,6 @@ import { Teacher } from "../../types/teacher.type";
 import { School } from "../../types/school.type";
 
 interface RouterProps {
-     // type for `match.params`
   id: string; // must be type `string` since value comes from the URL
 }
 
@@ -16,11 +15,6 @@ type State =  {
     currentTeacher: Teacher;
   schools:Array<School>
 };
-
-const genders = [
-    { value: "Male" },
-    { value: "Female" },
-  ];
 
 export default class EditTeacher extends Component<Props, State> {
   schoolList:School[]=[];
