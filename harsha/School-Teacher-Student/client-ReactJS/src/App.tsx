@@ -12,6 +12,8 @@ import TeachersList from "./components/teacher/teacher-list.component";
 import EditTeacher from "./components/teacher/edit-teacher.component";
 import EditStudent from "./components/student/edit-student.component";
 import Charts from "./components/charts.component";
+import SchoolDataTable from "./components/school/data-table.component";
+import File from "./components/file-upload.component";
 
 
 class App extends Component {
@@ -40,6 +42,16 @@ class App extends Component {
                 Charts
               </Link>
             </li>
+            <li className="nav-item">
+              <Link to={"/data"} className="nav-link">
+                DataTables
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link to={"/file"} className="nav-link">
+                File
+              </Link>
+            </li>
           </div>
         </nav>
 
@@ -55,6 +67,8 @@ class App extends Component {
             <Route path="/teachers/:id" component={EditTeacher} />
             <Route path="/students/:id" component={EditStudent} />
             <Route path="/charts" component={Charts} />
+            <Route path="/data" component={SchoolDataTable} />
+            <Route path="/file" component={File} />
           </Switch>
         </div>
       </div>
