@@ -8,23 +8,22 @@ import ISchoolData from "../../types/school.types";
 import { IStudentData } from "../../types/student.types";
 import studentService from "../../services/student.service";
 import Multiselect from "multiselect-react-dropdown";
-import { TeacherData } from "../../types/teacher.types";
 import teacherService from "../../services/teacher.service";
+import { TeacherData } from "../../types/teacher.types";
+
 type Props = {};
 
-type State = ISchoolData;
-const validEmailIdPattern = RegExp(
-  /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
-);
-const handleValidateForm = (errors: any) => {
-  let isValid = true;
-  return isValid;
+type State = ISchoolData & {
+  studentList: Array<IStudentData>;
+  teacherList: Array<TeacherData>;
 };
 
 export default class AddSchool extends Component<Props, State> {
-  schools: ISchoolData[] = [];
+  students: IStudentData[] = [];
   addedStudents: IStudentData[] = [];
+  addedTeachers: TeacherData[] = [];
   currentStudent = new IStudentData();
+  currentTeacher = new TeacherData();
   constructor(props: Props) {
     super(props);
     this.onChangeName = this.onChangeName.bind(this);
@@ -32,6 +31,8 @@ export default class AddSchool extends Component<Props, State> {
     this.state = {
       name: "",
       address: "",
+      studentList: [],
+      teacherList: [],
     };
   }
   componentDidMount() {
@@ -39,46 +40,12 @@ export default class AddSchool extends Component<Props, State> {
     this.retrieveTeachers();
   }
 
-  // handleFieldChange = (event: any) => {
-  //   event.preventDefault();
-  //   const { name, value } = event.target.value;
-  //   let errors = this.state.errors;
-
-  //   switch (name) {
-  //     case "name":
-  //       errors.name =
-  //         value.length < 6
-  //           ? "Full Name must be at least 6 characters long!"
-  //           : "";
-  //       break;
-  //     case "emailId":
-  //       errors.address =
-  //         value.length < 6
-  //           ? "Full Name must be at least 6 characters long!"
-  //           : "";
-  //       break;
-  //     default:
-  //       break;
-  //   }
-
-  //   this.setState({ errors, name });
-  // };
-  // onSubmit = (event: any) => {
-  //   event.preventDefault();
-  //   if (handleValidateForm(this.state.errors)) {
-  //     console.info("Valid Form");
-  //     this.saveSchool();
-  //   } else {
-  //     console.error("Invalid Form");
-  //   }
-  // };
-
   retrieveTeachers() {
     teacherService
       .getAll()
       .then((response: any) => {
         this.setState({
-          teacher: response.data,
+          teacherList: response.data,
         });
         console.log(response.data);
       })
@@ -91,7 +58,7 @@ export default class AddSchool extends Component<Props, State> {
       .getAll()
       .then((response: any) => {
         this.setState({
-          students: response.data,
+          studentList: response.data,
         });
         console.log(response.data);
       })
@@ -110,16 +77,26 @@ export default class AddSchool extends Component<Props, State> {
       address: e.target.value,
     });
   }
+  // onChangeFunc(student: IStudentData) {
+  //   console.log(student);
+  //   this.setState({
+  //     students: optionSelected,
+  //   });
+  // }
 
-  onSelectStudents(student: IStudentData) {
-    this.currentStudent = student;
-    this.addedStudents?.push(this.currentStudent);
+  onChangeFuncs(optionSelected: any) {
+    console.log(optionSelected);
+    this.setState({
+      teacher: optionSelected,
+    });
   }
 
   saveSchool = () => {
     const data: ISchoolData = {
       name: this.state.name,
       address: this.state.address,
+      students: this.state.students,
+      teacher: this.state.teacher,
     };
 
     schoolService
@@ -129,6 +106,8 @@ export default class AddSchool extends Component<Props, State> {
           schoolid: response.data.schoolid,
           name: response.data.name,
           address: response.data.address,
+          students: response.data.students,
+          teacher: response.data.students,
         });
         console.log(response.data);
       })
@@ -138,13 +117,12 @@ export default class AddSchool extends Component<Props, State> {
   };
 
   render() {
-    const { name, address, students, teacher } = this.state;
+    const { name, address, studentList, teacherList } = this.state;
 
     return (
       <div className="submit-form">
         <div className="form-group">
           <h2>add form</h2>
-          {/* <form onSubmit={this.onSubmit} noValidate> */}
           <div>
             <label htmlFor="name">Name</label>
             <input
@@ -166,22 +144,24 @@ export default class AddSchool extends Component<Props, State> {
               id="address"
               required
               value={address}
-              onChange={this.onChangeAddress}
               name="address"
+              onChange={this.onChangeAddress}
             />
           </div>
           <br />
           <label htmlFor="address">Students</label>
-          <Multiselect options={students} displayValue="name" />
+          <Multiselect options={studentList} displayValue="name" />
           <br />
           <label htmlFor="address">Teacher</label>
           <Multiselect
-            options={teacher} // Options to display in the dropdown
+            options={teacherList} // Options to display in the dropdown
             displayValue="name" // Property name to display in the dropdown options
+            onSelect={this.onChangeFuncs}
           />
           <br />
-          <button className="btn btn-success">Submit</button>
-          {/* </form> */}
+          <button onClick={this.saveSchool} className="btn btn-success">
+            Submit
+          </button>
         </div>
       </div>
     );

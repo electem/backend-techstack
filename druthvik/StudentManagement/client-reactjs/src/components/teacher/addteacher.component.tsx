@@ -30,7 +30,7 @@ export default class AddTeacher extends Component<Props, State> {
     this.onChangephonenumber = this.onChangephonenumber.bind(this);
     this.onChangeemail = this.onChangeemail.bind(this);
     this.onChangegender = this.onChangegender.bind(this);
-    this.onSelectedSchool = this.onSelectedSchool.bind(this.currentSchool);
+    this.pushSelectedSchool = this.pushSelectedSchool.bind(this.currentSchool);
     this.state = {
       name: "",
       address: "",
@@ -74,14 +74,16 @@ export default class AddTeacher extends Component<Props, State> {
       address: e.target.value,
     });
   }
-  onSelectedSchool(e: ChangeEvent<HTMLOptionElement>) {
-    this.onchooseoption = e.target.value;
-  }
 
-  // onSelectedSchool(school = {} as ISchoolData) {
-  //   console.log(school);
-  //   this.currentSchool = school;
-  // }
+  pushSelectedSchool(school = {} as ISchoolData) {
+    this.addedSchool.push(school);
+    console.log(this.addedSchool);
+  }
+  onChangeSchools(schools: ISchoolData) {
+    this.setState({
+      school: this.state.school?.concat(schools),
+    });
+  }
 
   onChangeemail(e: ChangeEvent<HTMLInputElement>) {
     this.setState({
@@ -101,6 +103,7 @@ export default class AddTeacher extends Component<Props, State> {
       phonenumber: this.state.phonenumber,
       email: this.state.email,
       gender: this.state.gender,
+      school: this.state.school,
     };
 
     teacherService
@@ -112,6 +115,7 @@ export default class AddTeacher extends Component<Props, State> {
           phonenumber: response.data.phonenumber,
           email: response.data.email,
           gender: response.data.gender,
+          school: response.data.school,
         });
         console.log(response.data);
       })
@@ -197,7 +201,7 @@ export default class AddTeacher extends Component<Props, State> {
                   type="checkbox"
                   name="schools"
                   value={school}
-                  onChange={() => this.onSelectedSchool}
+                  onChange={() => this.onChangeSchools(school)}
                 />{" "}
                 {school.name}
               </div>

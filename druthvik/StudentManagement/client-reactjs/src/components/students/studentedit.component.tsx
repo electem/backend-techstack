@@ -184,6 +184,17 @@ export default class studentedit extends Component<Props, State> {
                 {currentStudent.gender}
               </label>
               <div className="form-group">
+                <label htmlFor="date">DOB</label>
+
+                <input
+                  type="date"
+                  className="form-control"
+                  value={currentStudent.dateofbirth}
+                  onChange={this.onChangeDateOfBirth}
+                  name="date"
+                />
+              </div>
+              <div className="form-group">
                 <select>
                   <option
                     key={currentStudent.school?.schoolid}

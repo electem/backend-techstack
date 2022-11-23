@@ -22,6 +22,7 @@ const genderList = [
 
 export default class AddStudent extends Component<Props, State> {
   schools: ISchoolData[] = [];
+  currentSchool = {} as ISchoolData;
   constructor(props: Props) {
     super(props);
     this.onChangeName = this.onChangeName.bind(this);
@@ -107,7 +108,6 @@ export default class AddStudent extends Component<Props, State> {
         this.setState({
           schools: response.data,
         });
-        console.log(response.data);
       })
       .catch((e: Error) => {
         console.log(e);
@@ -142,16 +142,14 @@ export default class AddStudent extends Component<Props, State> {
     });
   }
 
-  onChangeDropDown(e: ChangeEvent<HTMLInputElement>) {
+  onSchoolSelect(event: any) {
+    const src = event.target.value;
+    const data = this.state.schools.filter((s) => s.name === src);
+    this.currentSchool = data[0];
+    console.log(data);
     this.setState({
-      studentSchool: e.target.value,
+      school: this.currentSchool,
     });
-  }
-
-  handleSelectChange(event: any) {
-    var selectElement = event.target;
-    var value = selectElement.value;
-    console.log(value);
   }
 
   saveStudent = () => {
@@ -162,6 +160,7 @@ export default class AddStudent extends Component<Props, State> {
       email: this.state.email,
       gender: this.state.gender,
       dateofbirth: this.state.dateofbirth,
+      school: this.state.school,
     };
 
     studentService
@@ -175,6 +174,7 @@ export default class AddStudent extends Component<Props, State> {
           email: response.data.email,
           gender: response.data.gender,
           dateofbirth: response.data.dateofbirth,
+          school: response.data.school,
         });
         console.log(response.data);
       })
@@ -186,8 +186,6 @@ export default class AddStudent extends Component<Props, State> {
   render() {
     const { name, address, phonenumber, email, dateofbirth, schools } =
       this.state;
-    // const { nameErr, addressErr, phonenumberErr, emailIdErr, dobErr } =
-    //   this.state.formErrors;
 
     return (
       <div className="submit-form">
@@ -242,18 +240,7 @@ export default class AddStudent extends Component<Props, State> {
                 name="name"
               />
             </div>
-            {/* <div className="form-group">
-            <label htmlFor="name">Gender</label>
-            <input
-              type="text"
-              className="form-control"
-              id="name"
-              required
-              value={gender}
-              onChange={this.onChangegender}
-              name="name"
-            />
-          </div> */}
+
             <div className="title">Select gender from the list</div>
             {genderList.map((x, i) => (
               <label key={i}>
@@ -280,22 +267,15 @@ export default class AddStudent extends Component<Props, State> {
             </div>
             <label>School</label>
             <div className="form-group">
-              <select>
+              <select onChange={(event) => this.onSchoolSelect(event)}>
                 <option value="">Select</option>
                 {schools.map((options) => (
-                  <option
-                    key={options.schoolid}
-                    value={options.name}
-                    onChange={(e: ChangeEvent<HTMLOptionElement>) => {
-                      return console.info(e.target.value);
-                    }}
-                  >
+                  <option key={options.schoolid} value={options.name}>
                     {options.name}
                   </option>
                 ))}
               </select>
             </div>
-
             <button onClick={this.saveStudent} className="btn btn-success">
               Submit
             </button>
