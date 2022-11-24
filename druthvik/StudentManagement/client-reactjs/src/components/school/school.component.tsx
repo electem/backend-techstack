@@ -22,12 +22,12 @@ export default class AddSchool extends Component<Props, State> {
   students: IStudentData[] = [];
   addedStudents: IStudentData[] = [];
   addedTeachers: TeacherData[] = [];
-  currentStudent = new IStudentData();
-  currentTeacher = new TeacherData();
   constructor(props: Props) {
     super(props);
     this.onChangeName = this.onChangeName.bind(this);
     this.onChangeAddress = this.onChangeAddress.bind(this);
+    this.handleOnchange = this.handleOnchange.bind(this);
+    this.handleOnChangeTeacher = this.handleOnChangeTeacher.bind(this);
     this.state = {
       name: "",
       address: "",
@@ -47,7 +47,6 @@ export default class AddSchool extends Component<Props, State> {
         this.setState({
           teacherList: response.data,
         });
-        console.log(response.data);
       })
       .catch((e: Error) => {
         console.log(e);
@@ -60,7 +59,6 @@ export default class AddSchool extends Component<Props, State> {
         this.setState({
           studentList: response.data,
         });
-        console.log(response.data);
       })
       .catch((e: Error) => {
         console.log(e);
@@ -75,19 +73,6 @@ export default class AddSchool extends Component<Props, State> {
   onChangeAddress(e: ChangeEvent<HTMLInputElement>) {
     this.setState({
       address: e.target.value,
-    });
-  }
-  // onChangeFunc(student: IStudentData) {
-  //   console.log(student);
-  //   this.setState({
-  //     students: optionSelected,
-  //   });
-  // }
-
-  onChangeFuncs(optionSelected: any) {
-    console.log(optionSelected);
-    this.setState({
-      teacher: optionSelected,
     });
   }
 
@@ -109,12 +94,24 @@ export default class AddSchool extends Component<Props, State> {
           students: response.data.students,
           teacher: response.data.students,
         });
-        console.log(response.data);
       })
       .catch((e: Error) => {
         console.log(e);
       });
   };
+
+  handleOnchange(val: []) {
+    const students = [];
+    for (let i = 0; i < val.length; i++) {
+      students.push(val[i]);
+    }
+  }
+  handleOnChangeTeacher(val: []) {
+    for (let i = 0; i < val.length; i++) {
+      this.addedTeachers.push(val[i]);
+    }
+    console.log(this.addedTeachers);
+  }
 
   render() {
     const { name, address, studentList, teacherList } = this.state;
@@ -150,17 +147,21 @@ export default class AddSchool extends Component<Props, State> {
           </div>
           <br />
           <label htmlFor="address">Students</label>
-          <Multiselect options={studentList} displayValue="name" />
+          <Multiselect
+            options={studentList}
+            displayValue="name"
+            onSelect={this.handleOnchange}
+          />
           <br />
           <label htmlFor="address">Teacher</label>
           <Multiselect
-            options={teacherList} // Options to display in the dropdown
-            displayValue="name" // Property name to display in the dropdown options
-            onSelect={this.onChangeFuncs}
+            options={teacherList}
+            displayValue="name"
+            onSelect={this.handleOnChangeTeacher}
           />
           <br />
           <button onClick={this.saveSchool} className="btn btn-success">
-            Submit
+            Create
           </button>
         </div>
       </div>

@@ -6,6 +6,7 @@ import teacherService from "../../services/teacher.service";
 import { TeacherData } from "../../types/teacher.types";
 import schoolService from "../../services/school.service";
 import ISchoolData from "../../types/school.types";
+import { Link } from "react-router-dom";
 
 type Props = {
   teacher?: TeacherData;
@@ -207,9 +208,11 @@ export default class AddTeacher extends Component<Props, State> {
               </div>
             ))}
           </div>
-          <button onClick={this.saveTeacher} className="btn btn-success">
-            Submit
-          </button>
+          <Link to={"/teacherlist"}>
+            <button onClick={this.saveTeacher} className="btn btn-success">
+              Create
+            </button>
+          </Link>
         </div>
       </div>
     );

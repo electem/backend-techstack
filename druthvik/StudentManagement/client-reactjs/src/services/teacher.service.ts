@@ -12,7 +12,10 @@ class TeacherDataService {
     return http.get<TeacherData>(`/teacher/${id}`);
   }
   update(data: TeacherData, id: any) {
-    return http.put<any>(`/school/`, data);
+    return http.put<any>(`/teacher/`, data);
+  }
+  delete(id: any) {
+    return http.delete<any>(`/teacher/${id}`);
   }
 }
 

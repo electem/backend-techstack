@@ -6,8 +6,7 @@ import ISchoolData from "../../types/school.types";
 import { TeacherData } from "../../types/teacher.types";
 import { IStudentData } from "../../types/student.types";
 interface RouterProps {
-  // type for `match.params`
-  id: string; // must be type `string` since value comes from the URL
+  id: string;
 }
 type Props = RouteComponentProps<RouterProps>;
 type State = {
@@ -23,8 +22,8 @@ export default class EditSchool extends Component<Props, State> {
     this.onChangeName = this.onChangeName.bind(this);
     this.onChangeAddress = this.onChangeAddress.bind(this);
     this.getTutorial = this.getTutorial.bind(this);
-    this.updatePublished = this.updatePublished.bind(this);
-    this.updateTutorial = this.updateTutorial.bind(this);
+    // this.updatePublished = this.updatePublished.bind(this);
+    this.updateSchool = this.updateSchool.bind(this);
     this.state = {
       currentSchool: {
         schoolid: null,
@@ -71,27 +70,27 @@ export default class EditSchool extends Component<Props, State> {
         console.log(e);
       });
   }
-  updatePublished(status: boolean) {
-    const data: ISchoolData = {
-      schoolid: this.state.currentSchool.schoolid,
-      name: this.state.currentSchool.name,
-    };
-    SchoolService.update(data, this.state.currentSchool.schoolid)
-      .then((response: any) => {
-        this.setState((prevState) => ({
-          currentSchool: {
-            ...prevState.currentSchool,
-            published: status,
-          },
-          message: "The status was updated successfully!",
-        }));
-        console.log(response.data);
-      })
-      .catch((e: Error) => {
-        console.log(e);
-      });
-  }
-  updateTutorial() {
+  // updatePublished(status: boolean) {
+  //   const data: ISchoolData = {
+  //     schoolid: this.state.currentSchool.schoolid,
+  //     name: this.state.currentSchool.name,
+  //   };
+  //   SchoolService.update(data, this.state.currentSchool.schoolid)
+  //     .then((response: any) => {
+  //       this.setState((prevState) => ({
+  //         currentSchool: {
+  //           ...prevState.currentSchool,
+  //           published: status,
+  //         },
+  //         message: "The status was updated successfully!",
+  //       }));
+  //       console.log(response.data);
+  //     })
+  //     .catch((e: Error) => {
+  //       console.log(e);
+  //     });
+  // }
+  updateSchool() {
     SchoolService.update(
       this.state.currentSchool,
       this.state.currentSchool.schoolid
@@ -157,10 +156,15 @@ export default class EditSchool extends Component<Props, State> {
               />
             </div>
           </form>
-          <button type="submit" className="btn badge-success">
-            Update
-          </button>
           <Link to={"/schools"}>
+            <button
+              onClick={this.updateSchool}
+              type="submit"
+              className="btn badge-success"
+            >
+              Update
+            </button>
+
             <button type="submit" className="btn badge-warning">
               Cancel
             </button>

@@ -1,9 +1,9 @@
 import { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, RouteComponentProps } from "react-router-dom";
 import teacherService from "../../services/teacher.service";
 import { TeacherData } from "../../types/teacher.types";
-
-type Props = {};
+interface RouterProps {}
+type Props = RouteComponentProps<RouterProps>;
 
 type State = {
   teacher: Array<TeacherData>;
@@ -29,6 +29,18 @@ export default class TeacherList extends Component<Props, State> {
         });
         console.log(response.data);
       })
+      .catch((e: Error) => {
+        console.log(e);
+      });
+  }
+  deleteTeachers(id: any) {
+    teacherService
+      .delete(id)
+      .then((response: any) => {
+        console.log(response.data);
+        this.props.history.push("/teacherlist");
+      })
+
       .catch((e: Error) => {
         console.log(e);
       });
@@ -67,6 +79,13 @@ export default class TeacherList extends Component<Props, State> {
                       >
                         Edit
                       </Link>
+                      <button
+                        type="button"
+                        className="badge badge-danger"
+                        onClick={() => this.deleteTeachers(item.teacherid)}
+                      >
+                        Delete
+                      </button>
                     </td>
                   </tr>
                 );
