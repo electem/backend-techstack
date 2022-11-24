@@ -1,4 +1,6 @@
 import ISchoolData from "./school.types";
+import { TeacherData } from "./teacher.types";
+import { Files } from "./file.type";
 export class IStudentData {
   studentid?: number | null;
   name!: string;
@@ -8,4 +10,6 @@ export class IStudentData {
   gender?: string;
   dateofbirth?: string;
   school?: ISchoolData;
+  teacher?: TeacherData;
+  file?: Files;
 }

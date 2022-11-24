@@ -1,5 +1,5 @@
 import { Component, ChangeEvent } from "react";
-import { RouteComponentProps } from "react-router-dom";
+import { Link, RouteComponentProps } from "react-router-dom";
 import { IStudentData } from "../../types/student.types";
 import studentService from "../../services/student.service";
 import schoolService from "../../services/school.service";
@@ -14,7 +14,6 @@ type State = {
   school?: Array<ISchoolData>;
 };
 
-const genderList = [{ value: "Male" }, { value: "Female" }];
 export default class studentedit extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
@@ -23,6 +22,7 @@ export default class studentedit extends Component<Props, State> {
     this.onChangeEmail = this.onChangeEmail.bind(this);
     this.onChangeGender = this.onChangeGender.bind(this);
     this.onChangeDateOfBirth = this.onChangeDateOfBirth.bind(this);
+    this.updateStudents = this.updateStudents.bind(this);
     this.state = {
       currentStudent: {
         studentid: null,
@@ -133,7 +133,7 @@ export default class studentedit extends Component<Props, State> {
       });
   }
   render() {
-    const { currentStudent, school } = this.state;
+    const { currentStudent } = this.state;
 
     return (
       <div>
@@ -205,13 +205,19 @@ export default class studentedit extends Component<Props, State> {
                 </select>
               </div>
             </form>
-            <button
-              type="submit"
-              className="badge badge-success"
-              onClick={this.updateStudents}
-            >
-              Update
-            </button>
+            <Link to={"/studentlist"}>
+              <button
+                onClick={this.updateStudents}
+                type="submit"
+                className="btn badge-success"
+              >
+                Update
+              </button>
+
+              <button type="submit" className="btn badge-warning">
+                Cancel
+              </button>
+            </Link>
           </div>
         ) : (
           <div>

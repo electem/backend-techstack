@@ -5,8 +5,7 @@ import schoolService from "../../services/school.service";
 import studentService from "../../services/student.service";
 import ISchoolData from "../../types/school.types";
 import { IStudentData } from "../../types/student.types";
-import * as React from "react";
-
+import http from "../../http-common";
 type Props = {
   student?: IStudentData;
 };
@@ -14,6 +13,7 @@ type State = IStudentData & {
   schools: Array<ISchoolData>;
   formErrors?: {};
   studentSchool?: {};
+  selectedFiles: "";
 };
 const genderList = [
   { value: "male", label: "Male" },
@@ -31,7 +31,8 @@ export default class AddStudent extends Component<Props, State> {
     this.onChangeemail = this.onChangeemail.bind(this);
     this.onChangegender = this.onChangegender.bind(this);
     this.onChangedateofbirth = this.onChangedateofbirth.bind(this);
-
+    this.onFileChange = this.onFileChange.bind(this);
+    this.onSubmits = this.onSubmits.bind(this);
     this.state = {
       name: "",
       address: "",
@@ -42,6 +43,7 @@ export default class AddStudent extends Component<Props, State> {
       schools: [],
       formErrors: {},
       studentSchool: {},
+      selectedFiles: "",
     };
   }
 
@@ -161,6 +163,7 @@ export default class AddStudent extends Component<Props, State> {
       gender: this.state.gender,
       dateofbirth: this.state.dateofbirth,
       school: this.state.school,
+      file: this.state.file,
     };
 
     studentService
@@ -177,11 +180,28 @@ export default class AddStudent extends Component<Props, State> {
           school: response.data.school,
         });
         console.log(response.data);
+        const formData = new FormData();
+        formData.append("file", this.state.selectedFiles);
+        http.post("/file", formData, {}).then((res) => {
+          console.log(res);
+        });
       })
       .catch((e: Error) => {
         console.log(e);
       });
   };
+  onFileChange(e: any) {
+    this.setState({ selectedFiles: e.target.files[0] });
+  }
+
+  onSubmits(e: any) {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("file", this.state.selectedFiles);
+    http.post("/file", formData, {}).then((res) => {
+      console.log(res);
+    });
+  }
 
   render() {
     const { name, address, phonenumber, email, dateofbirth, schools } =
@@ -265,6 +285,10 @@ export default class AddStudent extends Component<Props, State> {
                 name="name"
               />
             </div>
+            <label className="btn btn-default">
+              <input type="file" onChange={this.onFileChange} />
+            </label>
+
             <label>School</label>
             <div className="form-group">
               <select onChange={(event) => this.onSchoolSelect(event)}>

@@ -1,25 +1,27 @@
 /* eslint-disable react/require-render-return */
 import { Component, ChangeEvent } from "react";
-import { RouteComponentProps } from "react-router-dom";
+import { Link, RouteComponentProps } from "react-router-dom";
 import schoolService from "../../services/school.service";
 import teacherService from "../../services/teacher.service";
 import ISchoolData from "../../types/school.types";
 import { TeacherData } from "../../types/teacher.types";
 
 interface RouterProps {
-  // type for `match.params`
-  id: string; // must be type `string` since value comes from the URL
+  id: string;
 }
 type Props = RouteComponentProps<RouterProps>;
 
 type State = {
   currentTeacher: TeacherData;
-  school?: Array<ISchoolData>;
+  schools: Array<ISchoolData>;
 };
 const genderList = [{ value: "Male" }, { value: "Female" }];
 
 export default class EditTeacher extends Component<Props, State> {
-  school: ISchoolData[] = [];
+  schools: ISchoolData[] = [];
+  currentTeacher = {} as TeacherData;
+  currentSchool = {} as ISchoolData;
+  removeSchool = {} as ISchoolData;
   constructor(props: Props) {
     super(props);
     this.onChangeName = this.onChangeName.bind(this);
@@ -27,6 +29,10 @@ export default class EditTeacher extends Component<Props, State> {
     this.onChangePhoneNumber = this.onChangePhoneNumber.bind(this);
     this.onChangeEmail = this.onChangeEmail.bind(this);
     this.onChangeGender = this.onChangeGender.bind(this);
+    this.updateTeacher = this.updateTeacher.bind(this);
+    this.removeSchoolInSchoolList = this.removeSchoolInSchoolList.bind(this);
+    this.removeSelectedSchoolFromTeacher =
+      this.removeSelectedSchoolFromTeacher.bind(this);
     this.state = {
       currentTeacher: {
         teacherid: null,
@@ -35,7 +41,7 @@ export default class EditTeacher extends Component<Props, State> {
         email: "",
         gender: "",
       },
-      school: [],
+      schools: [],
     };
   }
 
@@ -89,8 +95,10 @@ export default class EditTeacher extends Component<Props, State> {
       .getAll()
       .then((response: any) => {
         this.setState({
-          school: response.data,
+          schools: response.data,
         });
+        this.schools = this.state.schools;
+        console.log(this.schools);
       })
       .catch((e: Error) => {
         console.log(e);
@@ -123,6 +131,9 @@ export default class EditTeacher extends Component<Props, State> {
           currentTeacher: {
             ...prevState.currentTeacher,
           },
+          schools: {
+            ...prevState.schools,
+          },
           message: "The status was updated successfully!",
         }));
       })
@@ -131,8 +142,25 @@ export default class EditTeacher extends Component<Props, State> {
       });
   }
 
+  removeSchoolInSchoolList(school: ISchoolData) {
+    this.currentSchool = school;
+    this.state.currentTeacher.school?.push(this.currentSchool);
+    this.state.schools.splice(
+      this.state.schools.indexOf(this.currentSchool),
+      1
+    );
+  }
+  async removeSelectedSchoolFromTeacher(school: ISchoolData): Promise<void> {
+    this.removeSchool = school;
+    this.state.schools.push(this.removeSchool);
+    this.state.currentTeacher.school?.splice(
+      this.state.currentTeacher.school?.indexOf(this.removeSchool),
+      1
+    );
+  }
+
   render() {
-    const { currentTeacher, school } = this.state;
+    const { currentTeacher, schools } = this.state;
     return (
       <div className="submit-form">
         <div>
@@ -207,8 +235,9 @@ export default class EditTeacher extends Component<Props, State> {
                 <input
                   type="checkbox"
                   name="schools"
-                  checked={true}
                   value={school.name}
+                  unselectable="on"
+                  onChange={() => this.removeSelectedSchoolFromTeacher(school)}
                 />{" "}
                 {school.name}
               </div>
@@ -216,24 +245,32 @@ export default class EditTeacher extends Component<Props, State> {
           </div>
           <div className="form-group">
             <label>Schools</label>
-            {school?.map((school, i) => (
+            {schools?.map((school, i) => (
               <div key={i}>
                 <input
                   type="checkbox"
                   name="schools"
                   value={currentTeacher.school}
+                  onChange={() => this.removeSchoolInSchoolList(school)}
                 />{" "}
                 {school.name}
               </div>
             ))}
           </div>
-          <button
-            type="submit"
-            className="badge badge-success"
-            onClick={this.updateTeacher}
-          >
-            Update
-          </button>
+
+          <Link to={"/teacherlist"}>
+            <button
+              onClick={this.updateTeacher}
+              type="submit"
+              className="btn badge-success"
+            >
+              Update
+            </button>
+
+            <button type="submit" className="btn badge-warning">
+              Cancel
+            </button>
+          </Link>
         </div>
       </div>
     );
