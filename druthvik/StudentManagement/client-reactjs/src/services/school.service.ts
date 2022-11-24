@@ -2,20 +2,20 @@ import http from "../http-common";
 import ISchoolData from "../types/school.types";
 
 class SchoolDataService {
-  getAll() {
-    return http.get<Array<ISchoolData>>("/school");
+  getAllSchools() {
+    return http.get("/school");
   }
-  create(school: ISchoolData) {
+  createSchool(school: ISchoolData) {
     return http.post<ISchoolData>("/school", school);
   }
-  get(id: string) {
+  getSchoolById(id: string) {
     return http.get<ISchoolData>(`/school/${id}`);
   }
-  update(data: ISchoolData, id: any) {
-    return http.put<any>(`/school/`, data);
+  updateStudent(school: ISchoolData, id: number) {
+    return http.put<ISchoolData>(`/school/${id}`, school);
   }
-  delete(id: any) {
-    return http.delete<any>(`/school/${id}`);
+  deleteSchool(id: number) {
+    return http.delete(`/school/${id}`);
   }
 }
 

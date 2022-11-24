@@ -3,7 +3,6 @@ import "bootstrap/dist/js/bootstrap.min.js";
 import "font-awesome/css/font-awesome.min.css";
 import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
-import "./data-table.css";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";

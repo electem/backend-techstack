@@ -8,15 +8,12 @@ import StudentsList from "./components/students/sudents-list.component";
 import AddStudent from "./components/students/studentadd.component";
 import TeacherList from "./components/teacher/teacherlist.component";
 import AddTeacher from "./components/teacher/addteacher.component";
-import { charts } from "./components/chartjs/chartjs.component";
 import { StudentsListingDatatables } from "./components/students/studentlistingdatatbles";
-import { chartsStudents } from "./components/chartjs/chartstudent";
 import studentedit from "./components/students/studentedit.component";
 import EditSchool from "./components/school/schooledit.component";
 import EditTeacher from "./components/teacher/editteacher.component";
-import AddSchoolValid from "./components/school/addschool.component";
-import PieChart from "./components/chartjs/chartexamples";
 import SchoolCharts from "./components/school/schoolchart.component";
+import Login from "./components/login.component";
 class App extends Component {
   render() {
     return (
@@ -66,18 +63,14 @@ class App extends Component {
                 chart
               </Link>
             </li>
-            <li className="nav-item">
-              <Link to={"/pie"} className="nav-link">
-                Pie
-              </Link>
-            </li>
           </div>
         </nav>
 
         <div className="container mt-3">
           <Switch>
-            <Route exact path={["/", "/schools"]} component={SchoolList} />
+            <Route exact path={["/", "/login"]} component={Login} />
             <Route path="/school" component={AddSchool} />
+            <Route path="/schools" component={SchoolList} />
             <Route path="/schoolsedit/:id" component={EditSchool} />
             <Route path="/students/:id" component={studentedit} />
             <Route path="/studentlist" component={StudentsList} />
@@ -85,11 +78,7 @@ class App extends Component {
             <Route path="/teacheredit/:id" component={EditTeacher} />
             <Route path="/teacherlist" component={TeacherList} />
             <Route path="/teacher" component={AddTeacher} />
-            <Route path="/charts" component={charts} />
             <Route path="/stud" component={StudentsListingDatatables} />
-            <Route path="/chartstud" component={chartsStudents} />
-            <Route path="/valid" component={AddSchoolValid} />
-            <Route path="/pie" component={PieChart} />
             <Route path="/SchoolCharts" component={SchoolCharts} />
           </Switch>
         </div>

@@ -10,6 +10,7 @@ import studentService from "../../services/student.service";
 import Multiselect from "multiselect-react-dropdown";
 import teacherService from "../../services/teacher.service";
 import { TeacherData } from "../../types/teacher.types";
+import { Link } from "react-router-dom";
 
 type Props = {};
 
@@ -29,6 +30,7 @@ export default class AddSchool extends Component<Props, State> {
     this.handleOnchange = this.handleOnchange.bind(this);
     this.handleOnChangeTeacher = this.handleOnChangeTeacher.bind(this);
     this.state = {
+      schoolid: 0,
       name: "",
       address: "",
       studentList: [],
@@ -42,8 +44,8 @@ export default class AddSchool extends Component<Props, State> {
 
   retrieveTeachers() {
     teacherService
-      .getAll()
-      .then((response: any) => {
+      .getAllTeachers()
+      .then((response) => {
         this.setState({
           teacherList: response.data,
         });
@@ -54,8 +56,8 @@ export default class AddSchool extends Component<Props, State> {
   }
   retrieveStudents() {
     studentService
-      .getAll()
-      .then((response: any) => {
+      .getAllStudents()
+      .then((response) => {
         this.setState({
           studentList: response.data,
         });
@@ -77,7 +79,8 @@ export default class AddSchool extends Component<Props, State> {
   }
 
   saveSchool = () => {
-    const data: ISchoolData = {
+    const school: ISchoolData = {
+      schoolid: this.state.schoolid,
       name: this.state.name,
       address: this.state.address,
       students: this.state.students,
@@ -85,14 +88,14 @@ export default class AddSchool extends Component<Props, State> {
     };
 
     schoolService
-      .create(data)
-      .then((response: any) => {
+      .createSchool(school)
+      .then((response) => {
         this.setState({
           schoolid: response.data.schoolid,
           name: response.data.name,
           address: response.data.address,
           students: response.data.students,
-          teacher: response.data.students,
+          teacher: response.data.teacher,
         });
       })
       .catch((e: Error) => {
@@ -117,52 +120,63 @@ export default class AddSchool extends Component<Props, State> {
     const { name, address, studentList, teacherList } = this.state;
 
     return (
-      <div className="submit-form">
-        <div className="form-group">
-          <h2>add form</h2>
-          <div>
-            <label htmlFor="name">Name</label>
-            <input
-              type="text"
-              className="form-control"
-              id="name"
-              required
-              value={name}
-              name="name"
-              onChange={this.onChangeName}
-            />
-          </div>
+      <div className="container">
+        <div className="col-md-4 offset-md-4">
+          <h2>Add School</h2>
+          <div className="card mb-4">
+            <div className="card-body">
+              <form>
+                <div className="form-group">
+                  <div>
+                    <label htmlFor="name">Name</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="name"
+                      required
+                      value={name}
+                      name="name"
+                      onChange={this.onChangeName}
+                    />
+                  </div>
 
-          <div className="form-group">
-            <label htmlFor="address">Address</label>
-            <input
-              type="text"
-              className="form-control"
-              id="address"
-              required
-              value={address}
-              name="address"
-              onChange={this.onChangeAddress}
-            />
+                  <div className="form-group">
+                    <label htmlFor="address">Address</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="address"
+                      required
+                      value={address}
+                      name="address"
+                      onChange={this.onChangeAddress}
+                    />
+                  </div>
+                  <br />
+                  <label htmlFor="address">Students</label>
+                  <Multiselect
+                    options={studentList}
+                    displayValue="name"
+                    onSelect={this.handleOnchange}
+                  />
+                  <br />
+                  <label htmlFor="address">Teacher</label>
+                  <Multiselect
+                    options={teacherList}
+                    displayValue="name"
+                    onSelect={this.handleOnChangeTeacher}
+                  />
+                  <br />
+                  <button onClick={this.saveSchool} className="btn btn-success">
+                    Create
+                  </button>
+                  <Link to={"/schools"} className="btn btn-secondary cancel">
+                    Cancel
+                  </Link>
+                </div>
+              </form>
+            </div>
           </div>
-          <br />
-          <label htmlFor="address">Students</label>
-          <Multiselect
-            options={studentList}
-            displayValue="name"
-            onSelect={this.handleOnchange}
-          />
-          <br />
-          <label htmlFor="address">Teacher</label>
-          <Multiselect
-            options={teacherList}
-            displayValue="name"
-            onSelect={this.handleOnChangeTeacher}
-          />
-          <br />
-          <button onClick={this.saveSchool} className="btn btn-success">
-            Create
-          </button>
         </div>
       </div>
     );

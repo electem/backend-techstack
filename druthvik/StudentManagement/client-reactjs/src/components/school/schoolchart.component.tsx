@@ -13,6 +13,7 @@ export default class SchoolCharts extends Component {
   }
 
   getcharts() {
+    Chart.register(...registerables);
     const myChart = new Chart("myChart", {
       type: "bar",
       data: {
@@ -85,7 +86,7 @@ export default class SchoolCharts extends Component {
     });
   }
   async retrieveSchools() {
-    await schoolService.getAll().then((response: any) => {
+    await schoolService.getAllSchools().then((response) => {
       this.schools = response.data;
       this.schoolNames = this.schools.map((name) => name.name);
       this.teachersCount = this.schools.map(
