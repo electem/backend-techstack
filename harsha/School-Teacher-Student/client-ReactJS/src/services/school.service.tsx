@@ -18,8 +18,8 @@ class SchoolService {
     return http.put<any>(`/updateSchool/${id}`, school);
   }
 
-  delete(id: any) {
-    return http.delete<any>(`/deleteSchool/${id}`);
+  delete(id: number) {
+    return http.delete(`/deleteSchool/${id}`);
   }
 }
 

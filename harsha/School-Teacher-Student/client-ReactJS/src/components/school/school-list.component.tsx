@@ -45,7 +45,7 @@ export default class SchoolsList extends Component<Props, State> {
 
   deleteSchool(id: any) {
     SchoolService.delete(id)
-      .then((response: any) => {
+      .then((response) => {
         console.log(response.data);
         this.props.history.push("/schools");
       })

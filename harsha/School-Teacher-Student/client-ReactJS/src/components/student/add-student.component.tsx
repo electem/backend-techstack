@@ -4,6 +4,7 @@ import { Student } from "../../types/student.type";
 import SchoolService from "../../services/school.service";
 import StudentService from "../../services/student.service";
 import { School } from "../../types/school.type";
+import http from "../../http-common";
 
 interface RouterProps {}
 
@@ -12,12 +13,13 @@ type Props = RouteComponentProps<RouterProps>;
 type State = Student & {
   schools: Array<School>;
   submitted: boolean;
+  selectedFiles: "";
 };
 
 const genders = [{ value: "Male" }, { value: "Female" }];
 
 export default class AddStudent extends Component<Props, State> {
-  currentSchool: School={};
+  currentSchool: School = {};
   constructor(props: Props) {
     super(props);
     this.onChangeName = this.onChangeName.bind(this);
@@ -28,6 +30,8 @@ export default class AddStudent extends Component<Props, State> {
     this.onChangePhoneNo = this.onChangePhoneNo.bind(this);
     this.onChangeSchool = this.onChangeSchool.bind(this);
     this.saveStudent = this.saveStudent.bind(this);
+    this.onFileChange = this.onFileChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
       studentName: "",
@@ -40,6 +44,7 @@ export default class AddStudent extends Component<Props, State> {
       },
       schools: [],
       submitted: false,
+      selectedFiles: "",
     };
   }
 
@@ -85,16 +90,31 @@ export default class AddStudent extends Component<Props, State> {
 
   onChangeSchool(school: School) {
     this.setState({
-      school:school ,
+      school: school,
     });
   }
 
   onSchoolSelect(event: any) {
-    const schoolData = this.state.schools.filter((school) => school.schoolName === event.target.value);
+    const schoolData = this.state.schools.filter(
+      (school) => school.schoolName === event.target.value
+    );
     this.currentSchool = schoolData[0];
     console.log(schoolData);
     this.setState({
       school: this.currentSchool,
+    });
+  }
+
+  onFileChange(e: any) {
+    this.setState({ selectedFiles: e.target.files[0] });
+  }
+
+  onSubmit(e: any) {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("file", this.state.selectedFiles);
+    http.post("uploadFile", formData, {}).then((res: any) => {
+      console.log(res);
     });
   }
 
@@ -228,14 +248,13 @@ export default class AddStudent extends Component<Props, State> {
           </div>
 
           <div className="form-group">
-            <select  onChange={(event) => this.onSchoolSelect(event)}>
+            <select onChange={(event) => this.onSchoolSelect(event)}>
               <option value="">Select School</option>
               {schools.map((school) => (
                 <option
                   key={school.schoolId}
                   typeof="checked"
                   value={school.schoolName}
-                 
                 >
                   {school.schoolName}
                 </option>
@@ -243,6 +262,18 @@ export default class AddStudent extends Component<Props, State> {
             </select>
           </div>
 
+          <div>
+            <label className="form-group">
+              <input type="file" onChange={this.onFileChange} />
+            </label>
+            <button
+            type="button"
+            className="btn btn-secondary"
+            onClick={this.onSubmit}
+          >
+            Upload
+          </button>
+          </div><br />
           <button
             onClick={this.saveStudent}
             type="button"

@@ -1,48 +1,118 @@
 import { Component } from "react";
-import { CChart } from "@coreui/react-chartjs";
 import SchoolService from "../services/school.service";
 import { School } from "../types/school.type";
+import { Chart, registerables } from "chart.js";
 
-type Props = {};
+export default class Charts extends Component {
 
-type State = {
-  schools: Array<School>;
-};
-
-export default class Charts extends Component<Props, State> {
   schoolsList: School[] = [];
-  schoolNames: any;
-  teachersCount: any;
-  studentsCount: any;
+  schoolNames: string[]=[];
+  teachersCount: number[]=[];
+  studentsCount: number[]=[];
 
   componentDidMount() {
     this.retrieveSchools();
   }
 
-  retrieveSchools() {
-    SchoolService.getSchools()
+ async retrieveSchools() {
+    await SchoolService.getSchools()
       .then((response: any) => {
-        this.setState({
-          schools: response.data,
-        });
-        this.schoolsList = response.data;
-        this.schoolsCharts();
+       this.schoolsList = response.data;
+       this.schoolNames = this.schoolsList.map((name) => {
+        return name.schoolName!;
+      });
+      this.teachersCount = this.schoolsList.map((count) => {
+        return count.teachers?.length!;
+      });
+      this.studentsCount = this.schoolsList.map((count) => {
+        return count.students?.length!;
+      });
+        this.schoolsChart();
+        this.schoolsChart2();
       })
       .catch((e: Error) => {
         console.log(e);
       });
   }
 
-  schoolsCharts() {
-    this.schoolNames = this.schoolsList.map((name) => {
-      return name.schoolName;
+  schoolsChart() {
+    Chart.register(...registerables);
+    var MultiAxisChart = new Chart("MultiAxisChart", {
+      type: "line",
+      data: {
+        labels: this.schoolNames,
+        datasets: [
+          {
+            label: "# Number Of teachers",
+            data: this.teachersCount,
+            backgroundColor: ["rgba(255, 99, 132, 0.2)"],
+            borderColor: "rgba(255, 99, 132, 1)",
+            tension: 0.4,
+            yAxisID: "teacherNumber",
+          },
+          {
+            label: "# Number Of students",
+            data: this.studentsCount,
+            backgroundColor: ["rgba(54, 162, 235, 0.2)"],
+            borderColor: "rgba(54, 162, 235, 1)",
+            tension: 0.4,
+            yAxisID: "studentNumber",
+          },
+        ],
+      },
+      options: {
+        scales: {
+          teacherNumber: {
+            beginAtZero: false,
+            type: "linear",
+            position: "left",
+          },
+          studentNumber: {
+            beginAtZero: false,
+            type: "linear",
+            position: "right",
+          },
+        },
+      },
     });
-    console.log(this.schoolNames);
-    this.teachersCount = this.schoolsList.map((count) => {
-      return count.teachers?.length;
-    });
-    this.studentsCount = this.schoolsList.map((count) => {
-      return count.students?.length!;
+  }
+  schoolsChart2() {
+    Chart.register(...registerables);
+    var MultiChart = new Chart("MultiChart", {
+      type: "bar",
+      data: {
+        labels: this.schoolNames,
+        datasets: [
+          {
+            label: "# Number Of teachers",
+            data: this.teachersCount,
+            backgroundColor: ["rgba(255, 99, 132, 0.2)"],
+            borderColor: "rgba(255, 99, 132, 1)",
+            yAxisID: "teacherNumber",
+          },
+          {
+            label: "# Number Of students",
+            data: this.studentsCount,
+            backgroundColor: ["rgba(54, 162, 235, 0.2)"],
+            borderColor: "rgba(54, 162, 235, 1)",
+            yAxisID: "studentNumber",
+          },
+        ],
+      },
+      options: {
+        scales: {
+          teacherNumber: {
+            beginAtZero: false,
+            type: "linear",
+            position: "left",
+          },
+          studentNumber: {
+            beginAtZero: false,
+            type: "linear",
+            position: "right",
+          },
+        },
+      },
     });
   }
 
@@ -50,30 +120,13 @@ export default class Charts extends Component<Props, State> {
     return (
       <>
         <h4>School Chart</h4>
-        <CChart
-          type="bar"
-          data={{
-            labels: this.schoolNames,
-            datasets: [
-              {
-                label: "No of Teachers",
-                backgroundColor: "green",
-                borderColor: "red",
-                pointBackgroundColor: "rgba(220, 220, 220, 1)",
-                pointBorderColor: "#fff",
-                data: this.teachersCount,
-              },
-              {
-                label: "No of Students",
-                backgroundColor: "grey",
-                borderColor: "yellow",
-                pointBackgroundColor: "rgba(151, 187, 205, 1)",
-                pointBorderColor: "#fff",
-                data: this.studentsCount,
-              },
-            ],
-          }}
-        />
+        <div className="chart">
+          <canvas id="MultiAxisChart"></canvas>
+        </div>
+
+        <div className="divChart">
+          <canvas id="MultiChart"></canvas>
+        </div>
       </>
     );
   }

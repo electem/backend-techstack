@@ -18,7 +18,6 @@ type State = {
 
 export default class EditStudent extends Component<Props, State> {
   constructor(props: Props) {
-    console.log("constructor");
     super(props);
     this.onChangeName = this.onChangeName.bind(this);
     this.onChangeAddress = this.onChangeAddress.bind(this);
@@ -45,7 +44,6 @@ export default class EditStudent extends Component<Props, State> {
   }
 
   componentDidMount() {
-    console.log("componentDidMount");
     this.getStudent(this.props.match.params.id);
     this.retrieveSchools();
   }
@@ -180,8 +178,6 @@ export default class EditStudent extends Component<Props, State> {
   }
 
   render() {
-    console.log("render");
-
     const { currentStudent } = this.state;
 
     return (

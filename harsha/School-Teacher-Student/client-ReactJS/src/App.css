@@ -29,3 +29,11 @@ h4 {
 .search{
   max-width: 200px;
 }
+.chart{
+  float: left;
+  width: 500px;
+}
+.divChart{
+  float: right;
+  width: 500px;
+}
