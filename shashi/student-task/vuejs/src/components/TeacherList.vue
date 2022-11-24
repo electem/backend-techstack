@@ -77,7 +77,6 @@
   import { computed, ref } from "vue";
   import { defineComponent } from "vue";
   import studentservice from "@/services/studentservice";
-  import ResponseData from "@/types/ResponseData"; 
   import { Teacher } from "@/types/teacher";
   import type { Header, Item } from "vue3-easy-data-table";
   
@@ -95,7 +94,7 @@
       retrieveTeachers() {
         studentservice
           .getAllTeacherss()
-          .then((response: ResponseData) => {
+          .then((response) => {
             this.teacherData = response.data;
             this.searchedTeachers= this.teacherData
             console.log(response.data);
@@ -112,18 +111,7 @@
         this.teacherData = this.searchedTeachers;
       }
       
-    },
-      searchTitle() {
-        studentservice
-          .findByTitle(this.teachername)
-          .then((response: ResponseData) => {
-            this.teacherData = response.data;
-            console.log(response.data);
-          })
-          .catch((e: Error) => {
-            console.log(e);
-          });
-      },
+    },     
     },
     mounted() {
       this.retrieveTeachers();
