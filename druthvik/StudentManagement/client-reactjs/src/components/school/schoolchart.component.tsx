@@ -1,71 +1,114 @@
 import { Component } from "react";
-import { CChart } from "@coreui/react-chartjs";
 import schoolService from "../../services/school.service";
 import ISchoolData from "../../types/school.types";
-type Props = {};
-type State = {
-  schools: Array<ISchoolData>;
-};
-export default class SchoolCharts extends Component<Props, State> {
-  schoolsList: ISchoolData[] = [];
-  schoolNames: any;
-  teachersCount: any;
-  studentsCount: any;
+import { Chart, registerables } from "chart.js";
+
+export default class SchoolCharts extends Component {
+  schools: ISchoolData[] = [];
+  schoolNames: string[] = [];
+  teachersCount: number[] = [];
+  studentsCount: number[] = [];
   componentDidMount() {
     this.retrieveSchools();
   }
-  retrieveSchools() {
-    schoolService
-      .getAll()
-      .then((response: any) => {
-        this.setState({
-          schools: response.data,
-        });
-        this.schoolsList = response.data;
-        this.charts();
-      })
-      .catch((e: Error) => {
-        console.log(e);
+
+  getcharts() {
+    const myChart = new Chart("myChart", {
+      type: "bar",
+      data: {
+        labels: this.schoolNames,
+        datasets: [
+          {
+            label: "Teachers",
+            backgroundColor: "yellow",
+            data: this.teachersCount,
+            borderWidth: 1,
+          },
+          {
+            label: "Students",
+            backgroundColor: "red",
+            data: this.studentsCount,
+            borderWidth: 1,
+          },
+        ],
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+          },
+        },
+      },
+    });
+  }
+  schoolsCharts() {
+    Chart.register(...registerables);
+    const MultiAxisChart = new Chart("MultiAxisChart", {
+      type: "line",
+      data: {
+        labels: this.schoolNames,
+        datasets: [
+          {
+            label: "# Number Of teachers",
+            data: this.teachersCount,
+            backgroundColor: ["rgba(255, 99, 132, 0.2)"],
+            borderColor: "rgba(255, 99, 132, 1)",
+            tension: 0.4,
+            yAxisID: "teacherNumber",
+          },
+
+          {
+            label: "# Number Of students",
+            data: this.studentsCount,
+            backgroundColor: ["rgba(54, 162, 235, 0.2)"],
+            borderColor: "rgba(54, 162, 235, 1)",
+            tension: 0.4,
+            yAxisID: "studentNumber",
+          },
+        ],
+      },
+
+      options: {
+        scales: {
+          teacherNumber: {
+            beginAtZero: false,
+            type: "linear",
+            position: "left",
+          },
+          studentNumber: {
+            beginAtZero: false,
+            type: "linear",
+            position: "right",
+          },
+        },
+      },
+    });
+  }
+  async retrieveSchools() {
+    await schoolService.getAll().then((response: any) => {
+      this.schools = response.data;
+      this.schoolNames = this.schools.map((name) => name.name);
+      this.teachersCount = this.schools.map(
+        (teacher) => teacher.teacher?.length!
+      );
+      this.studentsCount = this.schools.map((count) => {
+        return count.students?.length!;
       });
+    });
+    this.getcharts();
+    this.schoolsCharts();
   }
-  charts() {
-    this.schoolNames = this.schoolsList.map((name) => {
-      return name?.name;
-    });
-    console.log(this.schoolNames);
-    this.teachersCount = this.schoolsList.map((count) => {
-      return count.teacher?.length;
-    });
-    this.studentsCount = this.schoolsList.map((count) => {
-      return count.students?.length;
-    });
-  }
+
   render() {
     return (
-      <CChart
-        type="bar"
-        data={{
-          labels: this.schoolNames,
-          datasets: [
-            {
-              label: "My First dataset",
-              backgroundColor: "yellow",
-              borderColor: "red",
-              pointBackgroundColor: "rgba(220, 220, 220, 1)",
-              pointBorderColor: "#fff",
-              data: this.teachersCount,
-            },
-            {
-              label: "My Second dataset",
-              backgroundColor: "red",
-              borderColor: "yellow",
-              pointBackgroundColor: "rgba(151, 187, 205, 1)",
-              pointBorderColor: "#fff",
-              data: this.studentsCount,
-            },
-          ],
-        }}
-      />
+      <>
+        <div className="chart">
+          <canvas id="myChart"></canvas>
+        </div>
+        <div className="divChart">
+          <canvas id="MultiAxisChart"></canvas>
+        </div>
+      </>
     );
   }
 }
