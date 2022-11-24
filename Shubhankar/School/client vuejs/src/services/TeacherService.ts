@@ -16,11 +16,11 @@ class TeacherService {
         return http.put("/teacher",data);
       } 
       
-      createTeacherbyId(id: any) {
+      createTeacherbyId(id: number) {
         return http.get(`/teacher/${id}`);
        }
 
-       deleteTeacher(id:any){
+       deleteTeacher(id:number){
         return http.delete(`/teacher/${id}`);
       }
 }
