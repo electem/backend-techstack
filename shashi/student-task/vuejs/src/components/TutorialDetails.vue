@@ -1,5 +1,4 @@
-/* eslint-disable */
-
+<!-- eslint-disable prettier/prettier -->
 <template>
   <div v-if="currentTutorial.id" class="edit-form">
     <h4>Tutorial</h4>
@@ -59,9 +58,7 @@
     <p>Please click on a Tutorial...</p>
   </div>
 </template>
-
-<script lang="ts">
-/* eslint-disable */
+<script lang="ts">/* eslint-disable */
 import { defineComponent } from "vue";
 import TutorialDataService from "@/services/TutorialDataService";
 import Tutorial from "@/types/Tutorial";

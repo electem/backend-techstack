@@ -5,6 +5,12 @@ import { RouteRecordRaw } from "vue-router";
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
+    alias: "/datatable",
+    name: "datatable",
+    component: () => import("./components/Datatable.vue"),
+  },
+  {
+    path: "/",
     alias: "/school",
     name: "schoolist",
     component: () => import("./components/SchoolList.vue"),
@@ -67,19 +73,14 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import("./components/EditTeacher.vue"),
   },
   {
-    path: "/datatable",
-    name: "datatable",
-    component: () => import("./components/Datatable.vue"),
+    path: "/customecharts",
+    name: "customecharts",
+    component: () => import("./components/LineCharts.vue"),
   },
   {
-    path: "/charts",
-    name: "charts",
-    component: () => import("./components/Charts"),
-  },
-  {
-    path: "/validation2",
-    name: "validation2",
-    component: () => import("./components/VeeValidation.vue"),
+    path: "/piechart",
+    name: "piechart",
+    component: () => import("./components/PieChart.vue"),
   },
 ];
 

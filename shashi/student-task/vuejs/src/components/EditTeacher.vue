@@ -1,5 +1,4 @@
-<script lang="ts">
-/* eslint-disable */
+<script lang="ts">/* eslint-disable */
 import { defineComponent } from "vue";
 import studentservice from "@/services/studentservice";
 import { Teacher } from "@/types/teacher";
@@ -144,8 +143,7 @@ export default defineComponent({
           type="checkbox"
           class="form-check-input"
           :fieldId="entry.schoolname"
-          :label="entry.schoolname"
-          
+          :label="entry.schoolname"          
           :checked="value.includes(entry.schoolid)"
           @click="removeSelectedSchoolFromTeacher(entry)"
         />{{ entry.schoolname }}

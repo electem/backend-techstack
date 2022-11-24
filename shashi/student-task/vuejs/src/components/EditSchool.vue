@@ -1,5 +1,4 @@
-<script lang="ts">
-/* eslint-disable */
+<script lang="ts">/* eslint-disable */
 import { defineComponent } from "vue";
 import studentservice from "@/services/studentservice";
 import School from "@/types/school";
@@ -128,10 +127,10 @@ export default defineComponent({
         <div class="form-group">
           <multiselect
             class="form-control"
-            id="student"
+            id="students"
             required
             v-model="currentSchool.students"
-            name="student"
+            name="students"
             :options="studentData"
             :multiple="true"
             :close-on-select="false"

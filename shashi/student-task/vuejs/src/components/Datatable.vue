@@ -1,67 +1,55 @@
 <!-- eslint-disable prettier/prettier -->
-
 <template>
-  <EasyDataTable :headers="headers" :items="items" />
+  <EasyDataTable
+    buttons-pagination
+    :headers="headers"
+    :items="items"
+    :loading="loading"
+  />
 </template>
 <!-- eslint-disable prettier/prettier -->
 <script lang="ts">
-import { defineComponent } from "vue";
-import type { Header, Item } from "vue3-easy-data-table";
+import { defineComponent, ref } from "vue";
+import type { Header, Item, ServerOptions } from "vue3-easy-data-table";
 import studentservice from "@/services/studentservice";
 import ResponseData from "@/types/ResponseData";
 import School from "@/types/school";
 
 export default defineComponent({
   name: "edit-school",
-  data(){
-    return{
-      headers:[ { text: "schoolname", value: "schoolname" },
-      { text: "address", value: "address" },],
-      items:this.schollist
-    //   items,
-    }
+  data() {
+    return {
+      currentSchool: {} as School,
+      message: "",
+      headers: [] as Header[],
+      items: [] as Item[],
+      teacherCountInschool: [] as number[],
+      loading: ref(false),
+      serverItemsLength: ref(0),
+      serverOptions: ref<ServerOptions>({
+        page: 1,
+        rowsPerPage: 5,
+        sortBy: "age",
+        sortType: "desc",
+      }),
+    };
   },
-  setup() {
-    // const headers: Header[] = [
-    //   { text: "schoolname", value: "schoolname" },
-    //   { text: "address", value: "address" },
-    // ];
-
-    let schoolList: School[] = [];
-    studentservice
-      .getAll()
-      .then((response: ResponseData) => {
-        schoolList = response.data;
+  methods: {
+    setup() {
+      this.headers = [
+        { text: "schoolname", value: "schoolname" },
+        { text: "address", value: "address" },
+        { text: "No_Of_Teachers", value: "teacher.length", sortable: true },
+      ];
+      studentservice.getAll().then((response: ResponseData) => {
         console.log(response.data);
-      })
-      .catch((e: Error) => {
-        console.log(e);
+        this.items = response.data;
       });
-    // const json = JSON.stringify(schoolList);
-    // const jsonStrings = schoolList.map((item) => JSON.stringify(item));
-    // console.log(jsonStrings);
-   // const items: Item[] = schoolList;
-    // { "name": "Curry", "height": 178, "weight": 77, "age": 20 },
-    // { "name": "James", "height": 180, "weight": 75, "age": 21 },
-    // { "name": "Jordan", "height": 181, "weight": 73, "age": 22 },
-    // { "name": "Jordan", "height": 181, "weight": 73, "age": 22 },
-    // { "name": "Jordan", "height": 181, "weight": 73, "age": 22 },
-    // { "name": "Jordan", "height": 181, "weight": 73, "age": 22 },
-    // { "name": "Jordan", "height": 181, "weight": 73, "age": 22 },
-    // { "name": "Jordan", "height": 181, "weight": 73, "age": 22 },
-    // { "name": "Jordan", "height": 181, "weight": 73, "age": 22 },
-    // { "name": "Jordan", "height": 181, "weight": 73, "age": 22 },
-    // { "name": "Jordan", "height": 181, "weight": 73, "age": 22 },
-    // { "name": "Jordan", "height": 181, "weight": 73, "age": 22 },
-    // { "name": "Jordan", "height": 181, "weight": 73, "age": 22 },
-    // { "name": "Jordan", "height": 181, "weight": 73, "age": 22 },
-    // { "name": "Jordan", "height": 181, "weight": 73, "age": 22 },
-    // { "name": "Jordan", "height": 181, "weight": 73, "age": 22 },
-    // { "name": "Jordan", "height": 181, "weight": 73, "age": 22 },
-    // return {
-    //   headers,
-    //   items,
-    // };
+    },
+  },
+
+  mounted() {
+    this.setup();
   },
 });
 </script>
