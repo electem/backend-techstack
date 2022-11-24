@@ -11,7 +11,6 @@ type Props = RouteComponentProps<RouterProps>;
 
 type State = Teacher & {
   schoolList?: Array<School>;
-  submitted: boolean;
 };
 
 const genders = [{ value: "Male" }, { value: "Female" }];
@@ -33,7 +32,6 @@ export default class AddTeacher extends Component<Props, State> {
       gender: "",
       email: "",
       schools: [],
-      submitted: false,
       schoolList: [],
     };
   }
@@ -80,7 +78,7 @@ export default class AddTeacher extends Component<Props, State> {
 
   retrieveSchools() {
     SchoolService.getSchools()
-      .then((response: any) => {
+      .then((response) => {
         this.setState({
           schoolList: response.data,
         });
@@ -101,22 +99,21 @@ export default class AddTeacher extends Component<Props, State> {
     };
 
     TeacherService.create(teacher)
-      .then((response: any) => {
+      .then((response) => {
         this.setState({
           teacherId: response.data.teacherId,
           teacherName: response.data.teacherName,
           address: response.data.address,
-          email: response.state.email,
-          gender: response.state.gender,
-          phoneNo: response.state.phoneNo,
+          email: response.data.email,
+          gender: response.data.gender,
+          phoneNo: response.data.phoneNo,
           schools: response.data.schools,
-          submitted: true,
         });
       })
       .catch((e: Error) => {
         console.log(e);
       });
-      this.props.history.push("/teachers");
+    this.props.history.push("/teachers");
   }
 
   render() {

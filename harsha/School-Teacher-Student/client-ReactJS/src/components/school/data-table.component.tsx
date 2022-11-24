@@ -43,7 +43,7 @@ export default class SchoolDataTable extends Component<Props, State> {
 
   retrieveSchools() {
     SchoolService.getSchools()
-      .then((response: any) => {
+      .then((response) => {
         this.setState({
           schools: response.data,
         });

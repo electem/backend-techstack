@@ -14,12 +14,12 @@ class TeacherService {
     return http.get<Teacher>(`/teacher/${id}`);
   }
 
-  update(teacher: Teacher, id: any) {
-    return http.put<any>(`/updateTeacher/${id}`, teacher);
+  update(teacher: Teacher, id: number) {
+    return http.put<Teacher>(`/updateTeacher/${id}`, teacher);
   }
 
-  delete(id: any) {
-    return http.delete<any>(`/deleteTeacher/${id}`);
+  delete(id: number) {
+    return http.delete(`/deleteTeacher/${id}`);
   }
 }
 

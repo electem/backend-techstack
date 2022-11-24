@@ -1,21 +1,22 @@
 import http from "../http-common";
 import { School } from "../types/school.type";
+import authHeader from "./auth-header";
 
 class SchoolService {
   getSchools() {
-    return http.get<Array<School>>("/schools");
+    return http.get<Array<School>>("/schools", { headers: authHeader() });
   }
 
   create(school: School) {
     return http.post<School>("/createSchool", school);
   }
 
-  get(id: any) {
+  get(id: string) {
     return http.get<School>(`/school/${id}`);
   }
 
-  update(school: School, id: any) {
-    return http.put<any>(`/updateSchool/${id}`, school);
+  update(school: School, id: number) {
+    return http.put<School>(`/updateSchool/${id}`, school);
   }
 
   delete(id: number) {

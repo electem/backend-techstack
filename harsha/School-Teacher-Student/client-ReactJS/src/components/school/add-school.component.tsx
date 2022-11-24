@@ -13,13 +13,12 @@ interface RouterProps {}
 type Props = RouteComponentProps<RouterProps>;
 
 type State = School & {
-  submitted: boolean;
   teachersList: Array<Teacher>;
   studentsList: Array<Student>;
 };
 
 export default class AddSchool extends Component<Props, State> {
-  addedTeachers:Teacher[]=[];
+  addedTeachers: Teacher[] = [];
   constructor(props: Props) {
     super(props);
     this.onChangeName = this.onChangeName.bind(this);
@@ -31,9 +30,8 @@ export default class AddSchool extends Component<Props, State> {
     this.state = {
       schoolName: "",
       address: "",
-      submitted: false,
-      teachersList:[],
-      studentsList:[],
+      teachersList: [],
+      studentsList: [],
     };
   }
 
@@ -55,7 +53,7 @@ export default class AddSchool extends Component<Props, State> {
   }
 
   onChangeTeachers(e: any) {
-    this.addedTeachers.push(e[0])    
+    this.addedTeachers.push(e[0]);
     this.setState({
       teachers: this.addedTeachers,
     });
@@ -69,7 +67,7 @@ export default class AddSchool extends Component<Props, State> {
 
   retrieveTeachers() {
     TeacherService.getTeachers()
-      .then((response: any) => {
+      .then((response) => {
         this.setState({
           teachersList: response.data,
         });
@@ -81,7 +79,7 @@ export default class AddSchool extends Component<Props, State> {
 
   retrieveStudents() {
     StudentService.getStudents()
-      .then((response: any) => {
+      .then((response) => {
         this.setState({
           studentsList: response.data,
         });
@@ -100,20 +98,19 @@ export default class AddSchool extends Component<Props, State> {
     };
 
     SchoolService.create(school)
-      .then((response: any) => {
+      .then((response) => {
         this.setState({
           schoolId: response.data.schoolId,
           schoolName: response.data.schoolName,
           address: response.data.address,
-          teachers: response.state.teachers,
-          students: response.state.students,
-          submitted: true,
+          teachers: response.data.teachers,
+          students: response.data.students,
         });
       })
       .catch((e: Error) => {
         console.log(e);
       });
-      this.props.history.push("/schools");
+    this.props.history.push("/schools");
   }
 
   render() {
@@ -155,7 +152,7 @@ export default class AddSchool extends Component<Props, State> {
               closeIcon="close"
               placeholder="Choose Teachers"
               displayValue="teacherName"
-              onSelect={this.onChangeTeachers }
+              onSelect={this.onChangeTeachers}
             />
           </div>
 
@@ -165,7 +162,7 @@ export default class AddSchool extends Component<Props, State> {
               closeIcon="close"
               placeholder="Choose Students"
               displayValue="studentName"
-              onSelect={(event) =>this.onChangeStudents(event)}
+              onSelect={(event) => this.onChangeStudents(event)}
             />
           </div>
 

@@ -3,7 +3,7 @@ import SchoolService from "../../services/school.service";
 import { Link, RouteComponentProps } from "react-router-dom";
 import { School } from "../../types/school.type";
 
-interface RouterProps { }
+interface RouterProps {}
 
 type Props = RouteComponentProps<RouterProps>;
 
@@ -13,7 +13,7 @@ type State = {
 };
 
 export default class SchoolsList extends Component<Props, State> {
-  schools: School[] = [];
+  schoolsList: School[] = [];
   constructor(props: Props) {
     super(props);
     this.retrieveSchools = this.retrieveSchools.bind(this);
@@ -32,18 +32,18 @@ export default class SchoolsList extends Component<Props, State> {
 
   retrieveSchools() {
     SchoolService.getSchools()
-      .then((response: any) => {
+      .then((response) => {
         this.setState({
           schools: response.data,
         });
-        this.schools = response.data;
+        this.schoolsList = response.data;
       })
       .catch((e: Error) => {
         console.log(e);
       });
   }
 
-  deleteSchool(id: any) {
+  deleteSchool(id: number) {
     SchoolService.delete(id)
       .then((response) => {
         console.log(response.data);
@@ -60,10 +60,10 @@ export default class SchoolsList extends Component<Props, State> {
     });
   }
 
-  retriveSearchedSchools(search: string) {
+  retriveSearchedSchools(value: string) {
     this.setState({
-      schools: this.schools.filter((school) => {
-        return school.schoolName?.includes(search);
+      schools: this.schoolsList.filter((school) => {
+        return school.schoolName?.includes(value);
       }),
     });
   }
@@ -73,80 +73,82 @@ export default class SchoolsList extends Component<Props, State> {
 
     return (
       <>
-        <div className="list1 row">
-          <input
-            type="text"
-            className="form-control search"
-            placeholder="Search by title"
-            value={searchName}
-            onChange={this.onChangeSearchName}
-          />
-          <div>
-            <button
-              onClick={() => this.retriveSearchedSchools(searchName)}
-              className="btn btn-outline-secondary"
-              type="button"
-            >
-              Search
-            </button>
-          </div>
-        </div>
-        <Link to={"/add-school"}>
-          <button type="button" className="btn btn-success">
-            Add School
-          </button>
-        </Link>
-        <h4>Schools List</h4>
-        <div className="list1 row">
-          <div className="col-md-6">
-            <table className="table table-bordered table-striped table-hover">
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Name</th>
-                  <th>Address</th>
-                  <th>Created Date</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                {schools.map((school: School) => {
-                  return (
-                    <tr key={school.schoolId}>
-                      <td>{school.schoolId}</td>
-                      <td>{school.schoolName}</td>
-                      <td>{school.address}</td>
-                      <td>{school.createdDate}</td>
-                      <td>
-                        {
-                          <>
-                            <Link to={"/schools/" + school?.schoolId}>
-                              <button
-                                type="button"
-                                className="badge badge-primary"
-                              >
-                                Edit
-                              </button>
-                            </Link>
-                            <Link to={"/"}>
-                              <button
-                                type="button"
-                                className="badge badge-danger"
-                                onClick={() =>
-                                  this.deleteSchool(school.schoolId)
-                                }
-                              >
-                                Delete
-                              </button>
-                            </Link>
-                          </>
-                        }
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
+        <div className="panel">
+          <div className="panel-heading">
+            <div className="panel-body table-responsive">
+              <div className="list1 row">
+                <input
+                  type="text"
+                  className="form-control search"
+                  placeholder="Search by name"
+                  value={searchName}
+                  onChange={this.onChangeSearchName}
+                />
+                <div>
+                  <button
+                    onClick={() => this.retriveSearchedSchools(searchName)}
+                    className="btn btn-secondary"
+                    type="button"
+                  >
+                    Search
+                  </button>
+                </div>
+              </div>
+              <Link to={"/add-school"}>
+                <button type="button" className="btn btn-info btn-space">
+                  Add School
+                </button>
+              </Link>
+              <h4>Schools List</h4>
+              <table className="table table-bordered table-striped table-hover">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>Created Date</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {schools.map((school: School) => {
+                    return (
+                      <tr key={school.schoolId}>
+                        <td>{school.schoolId}</td>
+                        <td>{school.schoolName}</td>
+                        <td>{school.address}</td>
+                        <td>{school.createdDate}</td>
+                        <td>
+                          {
+                            <>
+                              <Link to={"/schools/" + school?.schoolId}>
+                                <button
+                                  type="button"
+                                  className="btn btn-info btn-space"
+                                >
+                                  Edit
+                                </button>
+                              </Link>
+                              <Link to={"/"}>
+                                <button
+                                  type="button"
+                                  className="btn btn-info btn-space"
+                                  onClick={() =>
+                                    this.deleteSchool(school.schoolId!)
+                                  }
+                                >
+                                  Delete
+                                </button>
+                              </Link>
+                            </>
+                          }
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </>

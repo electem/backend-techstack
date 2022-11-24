@@ -11,13 +11,12 @@ interface RouterProps {
 
 type Props = RouteComponentProps<RouterProps>;
 
-type State =  {
-    currentTeacher: Teacher;
-  schools:Array<School>
+type State = {
+  currentTeacher: Teacher;
+  schoolList: Array<School>;
 };
 
 export default class EditTeacher extends Component<Props, State> {
-  schoolList:School[]=[];
   constructor(props: Props) {
     super(props);
     this.onChangeName = this.onChangeName.bind(this);
@@ -30,14 +29,14 @@ export default class EditTeacher extends Component<Props, State> {
     this.updateTeacher = this.updateTeacher.bind(this);
 
     this.state = {
-        currentTeacher:{
-      teacherName: "",
-      address: "",
-      gender: "",
-      email: "",
-      schools: [],
-        },
-        schools:[]
+      currentTeacher: {
+        teacherName: "",
+        address: "",
+        gender: "",
+        email: "",
+        schools: [],
+      },
+      schoolList: [],
     };
   }
 
@@ -112,7 +111,7 @@ export default class EditTeacher extends Component<Props, State> {
   }
 
   onChangeSchools(school: School) {
-    const schools =this.state.schools?.concat(school)
+    const schools = this.state.schoolList?.concat(school);
 
     this.setState(function (prevState) {
       return {
@@ -124,18 +123,16 @@ export default class EditTeacher extends Component<Props, State> {
     });
   }
 
-  onSelectPush(school:School){
+  onSelectPushToCurrentSchool(school: School) {
     this.state.currentTeacher.schools?.push(school);
   }
 
   retrieveSchools() {
     SchoolService.getSchools()
-      .then((response: any) => {
+      .then((response) => {
         this.setState({
-          schools: response.data,
+          schoolList: response.data,
         });
-        this.schoolList = this.state.schools
-        console.log(this.schoolList)
       })
       .catch((e: Error) => {
         console.log(e);
@@ -144,9 +141,9 @@ export default class EditTeacher extends Component<Props, State> {
 
   getTeacher(id: string) {
     TeacherService.get(id)
-      .then((response: any) => {
+      .then((response) => {
         this.setState({
-            currentTeacher: response.data,
+          currentTeacher: response.data,
         });
       })
       .catch((e: Error) => {
@@ -157,9 +154,9 @@ export default class EditTeacher extends Component<Props, State> {
   updateTeacher() {
     TeacherService.update(
       this.state.currentTeacher,
-      this.state.currentTeacher.teacherId
+      this.state.currentTeacher.teacherId!
     )
-      .then((response: any) => {
+      .then((response) => {
         console.log(response.data);
         this.props.history.push("/teachers");
       })
@@ -169,7 +166,7 @@ export default class EditTeacher extends Component<Props, State> {
   }
 
   render() {
-    const { currentTeacher, schools } = this.state;
+    const { currentTeacher, schoolList } = this.state;
 
     return (
       <div className="edit-form">
@@ -202,16 +199,16 @@ export default class EditTeacher extends Component<Props, State> {
           </div>
 
           <div className="form-group">Select a Gender</div>
-            <label >
-              <input
-                type="radio"
-                name="gender"
-                value={currentTeacher.gender}
-                checked={currentTeacher.gender}
-                onChange={this.onChangeGender}
-              />
-              {currentTeacher.gender}
-            </label>
+          <label>
+            <input
+              type="radio"
+              name="gender"
+              value={currentTeacher.gender}
+              checked={currentTeacher.gender}
+              onChange={this.onChangeGender}
+            />
+            {currentTeacher.gender}
+          </label>
 
           <div className="form-group">
             <label htmlFor="email">Email</label>
@@ -240,33 +237,35 @@ export default class EditTeacher extends Component<Props, State> {
           </div>
 
           <div className="form-group">
-          <label >Current Schools</label>
-          {currentTeacher.schools?.map((school, i) => (
-            <div key={i}>
-              <input
-                type="checkbox"
-                name="schools"
-                checked={true}
-                value={school.schoolName}
-                onChange={()=>this.onChangeSchools}
-              />{" "}
-              {school.schoolName}
-        </div>))}
-        </div>
+            <label>Current Schools</label>
+            {currentTeacher.schools?.map((school, i) => (
+              <div key={i}>
+                <input
+                  type="checkbox"
+                  name="schools"
+                  checked={true}
+                  value={school.schoolName}
+                  onChange={() => this.onChangeSchools}
+                />{" "}
+                {school.schoolName}
+              </div>
+            ))}
+          </div>
 
           <div className="form-group">
-          <label >Schools</label>
-          {schools.map((school, i) => (
-            <div key={i}>
-              <input
-                type="checkbox"
-                name="schoolList"
-                value={school.schoolName}
-                onChange={()=>this.onSelectPush(school)}
-              />{" "}
-              {school.schoolName}
-            </div>
-          ))}</div>
+            <label>Schools</label>
+            {schoolList.map((school, i) => (
+              <div key={i}>
+                <input
+                  type="checkbox"
+                  name="schoolList"
+                  value={school.schoolName}
+                  onChange={() => this.onSelectPushToCurrentSchool(school)}
+                />{" "}
+                {school.schoolName}
+              </div>
+            ))}
+          </div>
 
           <button
             onClick={this.updateTeacher}

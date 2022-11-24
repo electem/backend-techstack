@@ -11,8 +11,7 @@ interface RouterProps {}
 type Props = RouteComponentProps<RouterProps>;
 
 type State = Student & {
-  schools: Array<School>;
-  submitted: boolean;
+  schoolsList: Array<School>;
   selectedFiles: "";
 };
 
@@ -30,7 +29,7 @@ export default class AddStudent extends Component<Props, State> {
     this.onChangePhoneNo = this.onChangePhoneNo.bind(this);
     this.onChangeSchool = this.onChangeSchool.bind(this);
     this.saveStudent = this.saveStudent.bind(this);
-    this.onFileChange = this.onFileChange.bind(this);
+    this.onChooseFile = this.onChooseFile.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
@@ -42,8 +41,7 @@ export default class AddStudent extends Component<Props, State> {
       school: {
         schoolName: "",
       },
-      schools: [],
-      submitted: false,
+      schoolsList: [],
       selectedFiles: "",
     };
   }
@@ -88,41 +86,34 @@ export default class AddStudent extends Component<Props, State> {
     });
   }
 
-  onChangeSchool(school: School) {
-    this.setState({
-      school: school,
-    });
-  }
-
-  onSchoolSelect(event: any) {
-    const schoolData = this.state.schools.filter(
+  onChangeSchool(event:  ChangeEvent<HTMLSelectElement>) {
+    const schoolData = this.state.schoolsList.filter(
       (school) => school.schoolName === event.target.value
     );
     this.currentSchool = schoolData[0];
-    console.log(schoolData);
     this.setState({
       school: this.currentSchool,
     });
   }
 
-  onFileChange(e: any) {
-    this.setState({ selectedFiles: e.target.files[0] });
+  onChooseFile(event: any) {
+    this.setState({ selectedFiles: event.target.files[0] });
   }
 
-  onSubmit(e: any) {
-    e.preventDefault();
+  onSubmit(event: any) {
+    event.preventDefault();
     const formData = new FormData();
     formData.append("file", this.state.selectedFiles);
-    http.post("uploadFile", formData, {}).then((res: any) => {
+    http.post("uploadFile", formData, {}).then((res) => {
       console.log(res);
     });
   }
 
   retrieveSchools() {
     SchoolService.getSchools()
-      .then((response: any) => {
+      .then((response) => {
         this.setState({
-          schools: response.data,
+          schoolsList: response.data,
         });
       })
       .catch((e: Error) => {
@@ -142,17 +133,16 @@ export default class AddStudent extends Component<Props, State> {
     };
 
     StudentService.create(student)
-      .then((response: any) => {
+      .then((response) => {
         this.setState({
           studentId: response.data.studentId,
           studentName: response.data.studentName,
           address: response.data.address,
-          email: response.state.email,
-          gender: response.state.gender,
-          dateOfBirth: response.state.dateOfBirth,
-          phoneNo: response.state.phoneNo,
+          email: response.data.email,
+          gender: response.data.gender,
+          dateOfBirth: response.data.dateOfBirth,
+          phoneNo: response.data.phoneNo,
           school: response.data.school,
-          submitted: true,
         });
         this.props.history.push("/students");
       })
@@ -162,7 +152,7 @@ export default class AddStudent extends Component<Props, State> {
   }
 
   render() {
-    const { studentName, address, email, dateOfBirth, phoneNo, schools } =
+    const { studentName, address, email, dateOfBirth, phoneNo, schoolsList } =
       this.state;
 
     return (
@@ -248,9 +238,9 @@ export default class AddStudent extends Component<Props, State> {
           </div>
 
           <div className="form-group">
-            <select onChange={(event) => this.onSchoolSelect(event)}>
+            <select onChange={(event) => this.onChangeSchool(event)}>
               <option value="">Select School</option>
-              {schools.map((school) => (
+              {schoolsList.map((school) => (
                 <option
                   key={school.schoolId}
                   typeof="checked"
@@ -264,16 +254,17 @@ export default class AddStudent extends Component<Props, State> {
 
           <div>
             <label className="form-group">
-              <input type="file" onChange={this.onFileChange} />
+              <input type="file" onChange={this.onChooseFile} />
             </label>
             <button
-            type="button"
-            className="btn btn-secondary"
-            onClick={this.onSubmit}
-          >
-            Upload
-          </button>
-          </div><br />
+              type="button"
+              className="btn btn-secondary"
+              onClick={this.onSubmit}
+            >
+              Upload
+            </button>
+          </div>
+          <br />
           <button
             onClick={this.saveStudent}
             type="button"

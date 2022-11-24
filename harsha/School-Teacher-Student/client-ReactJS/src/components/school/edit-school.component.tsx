@@ -17,8 +17,8 @@ type Props = RouteComponentProps<RouterProps>;
 
 type State = {
   currentSchool: School;
-  students:Array<Student>,
-  teachers:Array<Teacher>
+  students: Array<Student>;
+  teachers: Array<Teacher>;
 };
 
 export default class EditSchool extends Component<Props, State> {
@@ -34,8 +34,8 @@ export default class EditSchool extends Component<Props, State> {
         schoolName: "",
         address: "",
       },
-      teachers:[],
-      students:[]
+      teachers: [],
+      students: [],
     };
   }
 
@@ -70,7 +70,7 @@ export default class EditSchool extends Component<Props, State> {
   }
   retrieveTeachers() {
     TeacherService.getTeachers()
-      .then((response: any) => {
+      .then((response) => {
         this.setState({
           teachers: response.data,
         });
@@ -82,7 +82,7 @@ export default class EditSchool extends Component<Props, State> {
 
   retrieveStudents() {
     StudentService.getStudents()
-      .then((response: any) => {
+      .then((response) => {
         this.setState({
           students: response.data,
         });
@@ -94,7 +94,7 @@ export default class EditSchool extends Component<Props, State> {
 
   getSchool(id: string) {
     SchoolService.get(id)
-      .then((response: any) => {
+      .then((response) => {
         this.setState({
           currentSchool: response.data,
         });
@@ -107,9 +107,9 @@ export default class EditSchool extends Component<Props, State> {
   updateSchool() {
     SchoolService.update(
       this.state.currentSchool,
-      this.state.currentSchool.schoolId
+      this.state.currentSchool.schoolId!
     )
-      .then((response: any) => {
+      .then((response) => {
         console.log(response.data);
         this.props.history.push("/schools");
       })
@@ -148,26 +148,26 @@ export default class EditSchool extends Component<Props, State> {
             </div>
 
             <div className="form-group">
-            <label >Teachers</label>
-            <Multiselect
-              options={teachers}
-              selectedValues={currentSchool.teachers}
-              closeIcon="close"
-              placeholder="Choose Teachers"
-              displayValue="teacherName"
-            />
-          </div>
+              <label>Teachers</label>
+              <Multiselect
+                options={teachers}
+                selectedValues={currentSchool.teachers}
+                closeIcon="close"
+                placeholder="Choose Teachers"
+                displayValue="teacherName"
+              />
+            </div>
 
             <div className="form-group">
-            <label >Students</label>
-            <Multiselect
-              options={students}
-              selectedValues={currentSchool.students}
-              closeIcon="close"
-              placeholder="Choose Students"
-              displayValue="studentName"
-            />
-          </div>
+              <label>Students</label>
+              <Multiselect
+                options={students}
+                selectedValues={currentSchool.students}
+                closeIcon="close"
+                placeholder="Choose Students"
+                displayValue="studentName"
+              />
+            </div>
           </form>
 
           <button

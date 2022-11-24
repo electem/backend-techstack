@@ -126,8 +126,8 @@ export default class EditStudent extends Component<Props, State> {
     });
   }
 
-  onChangeSchools(e: any) {
-    const schools = e.target.value;
+  onChangeSchools(event: Event) {
+    const schools = (event.target as HTMLInputElement).value
 
     this.setState(function (prevState) {
       return {
@@ -141,7 +141,7 @@ export default class EditStudent extends Component<Props, State> {
 
   retrieveSchools() {
     SchoolService.getSchools()
-      .then((response: any) => {
+      .then((response) => {
         this.setState({
           schools: response.data,
         });
@@ -153,7 +153,7 @@ export default class EditStudent extends Component<Props, State> {
 
   getStudent(id: string) {
     StudentService.get(id)
-      .then((response: any) => {
+      .then((response) => {
         this.setState({
           currentStudent: response.data,
         });
@@ -166,9 +166,9 @@ export default class EditStudent extends Component<Props, State> {
   updateStudent() {
     StudentService.update(
       this.state.currentStudent,
-      this.state.currentStudent.studentId
+      this.state.currentStudent.studentId!
     )
-      .then((response: any) => {
+      .then((response) => {
         console.log(response.data);
         this.props.history.push("/teachers");
       })
@@ -266,7 +266,7 @@ export default class EditStudent extends Component<Props, State> {
                 typeof="checked"
                 selected={true}
                 value={currentStudent.school?.schoolName}
-                onChange={this.onChangeSchools}
+                onChange={()=>this.onChangeSchools}
               >
                 {currentStudent.school?.schoolName}
               </option>

@@ -13,9 +13,20 @@ import EditTeacher from "./components/teacher/edit-teacher.component";
 import EditStudent from "./components/student/edit-student.component";
 import Charts from "./components/charts.component";
 import SchoolDataTable from "./components/school/data-table.component";
+import Login from "./components/login.component";
+import AuthService from "./services/auth.service";
 
+type Props = {};
+
+type State = {
+  currentUser:  | undefined
+}
 
 class App extends Component {
+  logOut() {
+    AuthService.logout();
+  }
+
   render() {
     return (
       <div>
@@ -46,6 +57,16 @@ class App extends Component {
                 DataTables
               </Link>
             </li>
+            <li className="nav-item">
+              <Link to={"/login"} className="nav-link">
+                Login
+              </Link>
+            </li>
+            <li className="nav-item">
+              <a href="/login" className="nav-link" onClick={this.logOut}>
+                LogOut
+              </a>
+            </li>
           </div>
         </nav>
 
@@ -62,6 +83,7 @@ class App extends Component {
             <Route path="/students/:id" component={EditStudent} />
             <Route path="/charts" component={Charts} />
             <Route path="/data" component={SchoolDataTable} />
+            <Route path="/login" component={Login} />
           </Switch>
         </div>
       </div>

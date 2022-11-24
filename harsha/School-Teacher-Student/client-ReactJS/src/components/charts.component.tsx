@@ -16,7 +16,7 @@ export default class Charts extends Component {
 
  async retrieveSchools() {
     await SchoolService.getSchools()
-      .then((response: any) => {
+      .then((response) => {
        this.schoolsList = response.data;
        this.schoolNames = this.schoolsList.map((name) => {
         return name.schoolName!;
