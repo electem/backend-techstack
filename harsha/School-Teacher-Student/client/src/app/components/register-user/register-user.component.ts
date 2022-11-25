@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Login } from 'src/app/models/user-login.model';
 import { AuthService } from 'src/app/services/auth.service';
@@ -8,7 +8,7 @@ import { AuthService } from 'src/app/services/auth.service';
   templateUrl: './register-user.component.html',
   styleUrls: ['./register-user.component.css'],
 })
-export class RegisterUserComponent implements OnInit {
+export class RegisterUserComponent {
   userLogin: Login = {
     username: '',
     password: '',
@@ -19,13 +19,11 @@ export class RegisterUserComponent implements OnInit {
 
   constructor(private authService: AuthService, private router: Router) {}
 
-  ngOnInit(): void {}
-
   onSubmit(): void {
     const { username, password } = this.userLogin;
 
     this.authService.register(username, password).subscribe(
-      (data) => {
+      () => {
         this.isSuccessful = true;
         this.isSignUpFailed = false;
         this.router.navigate(['/login']);

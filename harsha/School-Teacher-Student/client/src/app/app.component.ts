@@ -12,8 +12,6 @@ export class AppComponent {
 
   constructor(private auth: AuthService, private router: Router) {}
 
-  ngOnInit(): void {}
-
   logout(): void {
     this.auth.signOut();
     this.router.navigate(['/login']);

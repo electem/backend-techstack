@@ -1,20 +1,20 @@
-<h1 class="card-title text-center">Login User</h1>
 <div class="col-md-12">
   <div class="card card-container">
+    <h1 class="text-center">Login User</h1>
     <img id="profile-img" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" class="profile-img-card" />
     <form *ngIf="!isLoggedIn" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
       <div class="form-group">
-        <label for="username">Username</label>
+        <label for="username">USERNAME</label>
         <input type="text" class="form-control" name="username" [(ngModel)]="userLogin.username" required
-          #username="ngModel" />
+          #username="ngModel" placeholder="Enter Your Name" />
         <div class="alert alert-danger" role="alert" *ngIf="username.errors && f.submitted">
           Username is required!
         </div>
       </div>
       <div class="form-group">
-        <label for="password">Password</label>
+        <label for="password">PASSWORD</label>
         <input type="password" class="form-control" name="password" [(ngModel)]="userLogin.password" required
-          minlength="6" #password="ngModel" />
+          minlength="6" #password="ngModel" placeholder="Enter Your Password" />
         <div class="alert alert-danger" role="alert" *ngIf="password.errors && f.submitted">
           <div *ngIf="password.errors.required">Password is required</div>
           <div *ngIf="password.errors.minlength">
