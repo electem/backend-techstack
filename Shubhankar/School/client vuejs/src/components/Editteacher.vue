@@ -111,8 +111,8 @@ methods: {
     updateTeacher() {  
        
      TeacherService.updateTeacher(this.selectedTeacher)
-        .then((response: ResponseData) => {
-          console.log(response.data);
+        .then((response) => {
+          console.log(response);
            this.$router.replace('/teacher');
           this.message = "the teacher is updated";
         })
@@ -121,9 +121,9 @@ methods: {
         });
     },
 
-    retrieveTeachers(id: number) {
+    retrieveTeachers(id: any) {
       TeacherService.createTeacherbyId(id)
-        .then((response: ResponseData) => {
+        .then((response) => {
           this.selectedTeacher = response.data;
           for(const i of this.selectedTeacher.schools){
             this.value.push(i.schoolid);
@@ -146,7 +146,7 @@ methods: {
   
    retrieveSchools() {
       SchoolService.getAllSchool()
-        .then((response: ResponseData) => {
+        .then((response) => {
           this.schools = response.data;
           
         })

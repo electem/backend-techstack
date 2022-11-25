@@ -50,7 +50,7 @@
     <multiselect
      class="form-control"
        id="students"
-        required
+       required
       v-model=" selectedstudent"
        name="students"
       :options="student"
@@ -63,20 +63,18 @@
         :preselect-first="true">
     </multiselect>
   </div>
-  
-   <button @click="saveSchool" class="btn btn-success">Submit</button>
+    <button @click="saveSchool" class="btn btn-success">Submit</button>
     <button @click="listingPage" class="btn btn-danger">Cancel</button>
     </div>
   </div>
 </template>
-
 <!-- eslint-disable prettier/prettier -->
 <script lang="ts">
 import { defineComponent } from "vue";
 import ResponseData from "@/types/ResponseData";
 import School from "@/types/School";
 import SchoolService from "@/services/SchoolService";
-  import Multiselect from '@suadelabs/vue3-multiselect'
+import Multiselect from '@suadelabs/vue3-multiselect'
 import TeacherService from "@/services/TeacherService";
 import Teacher from "@/types/Teacher";
 import StudentService from "@/services/StudentService";
@@ -85,23 +83,19 @@ import Student from "@/types/Student";
 export default defineComponent({
 
   name: "add-school", 
-  components: { Multiselect  },
-
-  
+  components: { Multiselect },
 
   data() {
     return {
-         teacher: [] as Teacher[],
-         student:[] as Student[],
+        teacher: [] as Teacher[],
+        student:[] as Student[],
         school: {
         schoolname: "",
         address: "",
        } as School,
       submitted: false,
-       
        selectedteacher: [],
        selectedstudent: [],
-       
     };
 },
  
@@ -116,10 +110,11 @@ export default defineComponent({
     };
 
       SchoolService.createSchool(data)
-        .then((response: ResponseData) => {
+        .then((response) => {
           this.school.schoolid = response.data.schoolid;
           console.log(response.data);
           this.submitted = true;
+           this.$router.replace('/school');
         })
         .catch((e: Error) => {
           console.log(e);
@@ -128,7 +123,7 @@ export default defineComponent({
 
     retrieveTeachers() {
       TeacherService.getAllTeachers()
-        .then((response: ResponseData) => {
+        .then((response) => {
           this.teacher = response.data;
           console.log(response.data);
         })
@@ -139,7 +134,7 @@ export default defineComponent({
 
      retrieveStudents() {
       StudentService.getAllStudents()
-        .then((response: ResponseData) => {
+        .then((response) => {
           this.student = response.data;
           console.log(response.data);
         })
@@ -159,7 +154,6 @@ export default defineComponent({
  },
 });
 </script>
-
 <!-- eslint-disable prettier/prettier -->
 <style src="vue-multiselect/dist/vue-multiselect.min.css">
 .edit-form {

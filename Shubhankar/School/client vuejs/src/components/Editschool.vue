@@ -69,7 +69,6 @@
     </div>
   </div>
 </template>
-
 <!-- eslint-disable prettier/prettier -->
 <script lang="ts">
 import { defineComponent } from "vue";
@@ -100,8 +99,9 @@ methods: {
     updateSchool() {
      
      SchoolService.updateSchool(this.selectedSchool)
-        .then((response: ResponseData) => {
-          console.log(response.data);
+        .then((response) => {
+          console.log(response);
+            this.$router.replace('/school');
           this.message = "the school is updated";
         })
         .catch((e: Error) => {
@@ -111,10 +111,9 @@ methods: {
 
     retrieveTeachers() {
       TeacherService.getAllTeachers()
-        .then((response: ResponseData) => {
+        .then((response) => {
           this.teacher = response.data;
-          console.log(response.data);
-        })
+         })
         .catch((e: Error) => {
           console.log(e);
         });
@@ -122,7 +121,7 @@ methods: {
 
      retrieveStudents() {
       StudentService.getAllStudents()
-        .then((response: ResponseData) => {
+        .then((response) => {
           this.student = response.data;
           console.log(response.data);
         })
@@ -131,11 +130,11 @@ methods: {
         });
     },
       
-      retrieveSchoolbyId(id: any){
+      retrieveSchoolbyId(id :any){
          SchoolService.getSchoolbyId(id)
-         .then((response: ResponseData) => {
+         .then((response) => {
           this.selectedSchool = response.data;
-          console.log(response.data);
+          console.log(response);
         })
         .catch((e: Error) => {
           console.log(e);
@@ -155,7 +154,6 @@ methods: {
  },
 });
 </script>
-
 <!-- eslint-disable prettier/prettier -->
 <style src="vue-multiselect/dist/vue-multiselect.min.css">
 .edit-form {

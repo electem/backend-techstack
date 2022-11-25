@@ -12,7 +12,6 @@
 <!-- eslint-disable prettier/prettier -->
 <script lang="ts">
 import SchoolService from "@/services/SchoolService";
-import ResponseData from "@/types/ResponseData";
 import { defineComponent } from "vue";
 import type { Header, Item } from "vue3-easy-data-table";
 
@@ -39,7 +38,7 @@ export default defineComponent({
     ];
 
       await  SchoolService.getAllSchool()
-        .then((response: ResponseData) => {
+        .then((response) => {
           this.items = response.data;
           
         })

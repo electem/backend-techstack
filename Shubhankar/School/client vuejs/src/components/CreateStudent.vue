@@ -13,7 +13,6 @@
           name="studentname"
         />
       </div>
-
       <div class="form-group">
         <label for="address">Address</label>
         <input
@@ -24,7 +23,6 @@
           name="address"
         />
       </div>
-
       <div class="form-group">
         <label for="phonenumber">Contact</label>
         <input
@@ -73,21 +71,6 @@
         />
       </div>
 
-    <!-- <div class="form-group">
-    <label for="school">School List: </label>        
-     <select  v-model="addedSchool"
-     >
-     <option >Select School</option>
-      <option          
-       placeholder="select school"
-        v-for="(school, index) in schools"
-         :key="index"
-       >
-        {{ school.schoolname }}
-      </option>
-        </select>
-		</div> -->
-
      <div class="form-group">
         <label>School List: </label>
         <select  v-model="student.school" @change="onSchoolSelect($event)">
@@ -109,11 +92,9 @@
     </div>
     </div>
 </template>
-
+<!-- eslint-disable prettier/prettier -->
 <script lang="ts">
-/* eslint-disable */
 import { defineComponent } from "vue";
-import ResponseData from "@/types/ResponseData";
 import Student from "@/types/Student";
 import StudentService from "@/services/StudentService";
 import SchoolService from "@/services/SchoolService";
@@ -133,14 +114,14 @@ export default defineComponent({
         dateofbirth:"",
        } as Student,
       submitted: false,
-       currentSchool: {} as School,
+      currentSchool: {} as School,
        
     };
   },
   
   methods: {
-    saveStudent() {
-      let data = {
+  async  saveStudent() {
+      const data = {
         studentid: this.student.studentid,
         studentname: this.student.studentname,
         address: this.student.address,
@@ -151,24 +132,25 @@ export default defineComponent({
         school:this.student.school,
      };
 
-      StudentService.createStudent(data)
-        .then((response: ResponseData) => {
+    await  StudentService.createStudent(data)
+        .then((response) => {
           this.student.studentid = response.data.studentid;
           console.log(response.data);
           this.submitted = true;
+           this.$router.replace('/student');
         })
         .catch((e: Error) => {
           console.log(e);
         });
     },
 
-  listingPage(){
+   listingPage(){
       this.$router.replace('/student');
     },
 
    retrieveSchools() {
       SchoolService.getAllSchool()
-        .then((response: ResponseData) => {
+        .then((response) => {
           this.schools = response.data;
           console.log(response.data);
         })
@@ -177,8 +159,8 @@ export default defineComponent({
         });
     },
  
-   onSchoolSelect(event:any) { 
-      const src = event.target.value;
+   onSchoolSelect(event: Event) { 
+      const src = (event.target as HTMLInputElement).value;
       const data = this.schools.filter((s) => s.schoolid === +src);
      this.currentSchool = data[0];
      console.log(this.currentSchool);
@@ -190,7 +172,7 @@ export default defineComponent({
   },
 });
 </script>
-
+<!-- eslint-disable prettier/prettier -->
 <style>
 .edit-form {
   max-width: 300px;

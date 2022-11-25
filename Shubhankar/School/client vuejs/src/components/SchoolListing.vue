@@ -1,20 +1,18 @@
 <!-- eslint-disable prettier/prettier -->
 <!-- eslint-disable prettier/prettier -->
-
 <template>
- <input
-        value="Add"
-        @click="createschool"
-        class="btn float-right btn-primary"
-      />
+  <input
+    value="Add"
+    @click="createschool"
+    class="btn float-right btn-primary"
+  />
   <div class="list row">
     <div class="col-md-8">
       <div class="input-group mb-3">
         <input type="text" v-model="input" placeholder="Search schools..." />
-        <button  
-         class="badge badge-success mr-2"
-         @click="addMessage()"          
-         >Search</button>
+        <button class="badge badge-success mr-2" @click="searchSchool()">
+          Search
+        </button>
       </div>
       <div class="col-md-6">
         <h4>School</h4>
@@ -25,8 +23,8 @@
                 <th class="text-center" scope="col">Id</th>
                 <th class="text-center" scope="col">Name</th>
                 <th class="text-center" scope="col">Address</th>
-                 <th class="text-center" scope="col">Teacher Count</th>
-                 <th class="text-center" scope="col">Student Count</th>
+                <th class="text-center" scope="col">Teacher Count</th>
+                <th class="text-center" scope="col">Student Count</th>
                 <th class="text-center" scope="col">Created At</th>
                 <th class="text-center" scope="col">Option</th>
               </tr>
@@ -40,10 +38,14 @@
                 <th class="text-center" scope="row">{{ school.schoolid }}</th>
                 <th class="text-center" scope="row">{{ school.schoolname }}</th>
                 <th class="text-center" scope="row">{{ school.address }}</th>
-                <th class="text-center" scope="row">{{ school.teachers?.length }}</th>
-                <th class="text-center" scope="row">{{ school.students?.length }}</th>
+                <th class="text-center" scope="row">
+                  {{ school.teachers?.length }}
+                </th>
+                <th class="text-center" scope="row">
+                  {{ school.students?.length }}
+                </th>
                 <th class="text-center" scope="row">{{ school.createdAt }}</th>
-                 
+
                 <router-link
                   :to="'/school/' + school.schoolid"
                   class="badge badge-warning"
@@ -83,8 +85,7 @@ export default defineComponent({
   name: "school-list",
   data() {
     return {
-      txtInput: "",
-      input:"",
+      input: "",
       schools: [] as School[],
       searchedSchool: [] as School[],
       currentSchool: {} as School,
@@ -101,32 +102,33 @@ export default defineComponent({
 
     retrieveSchools() {
       SchoolService.getAllSchool()
-        .then((response: ResponseData) => {
+        .then((response) => {
           this.schools = response.data;
-          this.searchedSchool= this.schools
+          this.searchedSchool = this.schools;
         })
         .catch((e: Error) => {
           console.log(e);
         });
     },
-    
-    addMessage() {
-    if(this.input != ""){
-    this.schools = this.searchedSchool.filter((school) =>
-    school.schoolname.toString().includes(this.input))  
-    } else {
-     this.schools = this.searchedSchool;
-    }
-},
+
+    searchSchool() {
+      if (this.input != "") {
+        this.schools = this.searchedSchool.filter((school) =>
+          school.schoolname.toString().includes(this.input)
+        );
+      } else {
+        this.schools = this.searchedSchool;
+      }
+    },
 
     createschool() {
       this.$router.replace("/createschool");
     },
 
-    removeSchool(id: any) {
+    removeSchool(id: number) {
       SchoolService.deleteSchool(id)
-        .then((response: ResponseData) => {
-          console.log(response.data);
+        .then((response) => {
+          console.log(response);
           this.message = "the school is deleted";
           this.$router.replace("/school");
         })
@@ -148,5 +150,5 @@ export default defineComponent({
   text-align: left;
   max-width: 500px;
   margin: auto;
- }
+}
 </style>
