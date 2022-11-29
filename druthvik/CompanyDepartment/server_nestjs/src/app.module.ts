@@ -11,7 +11,6 @@ import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { User } from './users/user.entity';
 import { MailerModule } from '@nestjs-modules/mailer';
-import { join } from 'path';
 import { FileModule } from './file/file.module';
 import { File } from './file/file.entitiy';
 

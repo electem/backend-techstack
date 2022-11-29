@@ -9,6 +9,7 @@ import {
   Param,
   Post,
   Put,
+  Query,
   UseGuards,
 } from '@nestjs/common';
 import { CompanyService } from './company.service';
@@ -19,6 +20,9 @@ import { join } from 'path';
 import * as fs from 'fs';
 import hbs from 'handlebars';
 import puppeteer from 'puppeteer';
+import { Page } from 'src/pagination/page.model';
+import { Company } from './company.entity';
+import { PageRequest } from 'src/pagination/page.request.model';
 
 @UseGuards(JwtAuthGuard)
 @Controller('company')
@@ -27,7 +31,7 @@ export class CompanyController {
     private companyService: CompanyService,
     private mailService: MailerService,
   ) {}
-  @Get()
+  @Get('company')
   findAll() {
     return this.companyService.getAllCompanyWithDepartment();
   }
@@ -105,5 +109,15 @@ export class CompanyController {
       throw new NotFoundException('User does not exist!');
     }
     return company;
+  }
+  @Get()
+  public async getAllCompanyByPage(
+    @Query('page') page: number,
+    @Query('size') size: number,
+  ): Promise<Page<Company>> {
+    try {
+      const pageRequest: PageRequest = PageRequest.from(page, size);
+      return this.companyService.getAllCompanyByPage(pageRequest);
+    } catch (error) {}
   }
 }
