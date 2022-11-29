@@ -1,169 +1,176 @@
-<!-- eslint-disable prettier/prettier -->
 <template>
   <div class="submit-form">
     <div v-if="!submitted">
       <div class="form-group">
-        <label for="name">Teacher name</label>
+        <label for="title">Name</label>
         <input
           type="text"
           class="form-control"
           id="name"
           required
-          v-model="teacher.name"
+          v-model="teachers.name"
           name="name"
         />
       </div>
+
       <div class="form-group">
         <label for="address">Address</label>
-        <textarea
+        <input
           class="form-control"
           id="address"
           required
-          v-model="teacher.address"
+          v-model="teachers.address"
           name="address"
-          placeholder="address"
-        ></textarea>
+        />
+        <br />
       </div>
       <div class="form-group">
-        <label for="email">Email</label>
+        <label for="email">EMAIL</label>
         <input
-          type="text"
           class="form-control"
           id="email"
           required
-          v-model="teacher.email"
+          v-model="teachers.email"
           name="email"
         />
+        <br />
       </div>
       <div class="form-group">
-        <label for="gender">Gender</label>
+        <label for="phone">PHONE</label>
         <input
-          type="text"
           class="form-control"
-          id="gender"
+          id="phone"
+          type="number"
           required
-          v-model="teacher.gender"
-          name="gender"
+          v-model="teachers.phone"
+          name="phone"
         />
+        <br />
       </div>
-      <label for="gender">Select Gender</label>      
-      <div class="form-group">
-  <input type="radio" id="Male" value="Male" v-model="teacher.gender">
-  <label for="Male">Male</label><br>
-  <input type="radio" id="Female" value="Female" v-model="teacher.gender">
-  <label for="Female">Female</label><br>
-  <input type="radio" id="Others" value="Others" v-model="teacher.gender">
-  <label for="Female">Others</label><br>
-   </div>
-      <label>schoolsList:</label>
-      <div class="form-check" v-for="(entry, index) in schoolList" :key="index">
-        <input
-          type="checkbox"
-          class="form-check-input"
-          @click="selectedSchoolMethod(entry)"
-        />{{ entry.schoolname }}
+
+      <label for="gender">Select Gender</label>
+      <div class="form-group" v-for="(gender, index) in genders" :key="index">
+        <input type="radio" v-model="teachers.gender" name="gender" />{{
+          gender
+        }}
       </div>
-      <button @click="saveTeacher" class="btn btn-success">Submit</button>
+      <br />
+
+      <div id="demo">
+        <label for="Schools">School</label>
+        <ul>
+          <li v-for="(school, index) in schools" :key="index">
+            <input
+              type="checkbox"
+              :value="school.name"
+              :id="school.id"
+              @change="onSelectedSchool(school)"
+            />
+            {{ school.name }}
+          </li>
+        </ul>
+
+        <br />
+
+        <button @click="saveStudent" class="btn btn-success">Submit</button>
+        <br />
+        <button type="cancle" @click="onCancle" class="btn btn-danger">
+          cancle
+        </button>
+      </div>
     </div>
+
     <div v-else>
       <h4>You submitted successfully!</h4>
       <button class="btn btn-success" @click="newTutorial">Add</button>
     </div>
-    <router-link 
-          :to="'/teacherslist'"
-          class="badge badge-warning"
-          custom
-      v-slot="{ navigate }"
-          > <button  
-          class="btn btn-danger" 
-          @click="navigate"  
-        role="link"
-        >Cancel</button>
-      </router-link
-        >  
   </div>
 </template>
-<!-- eslint-disable prettier/prettier -->
-<script lang="ts">
-import { defineComponent } from "vue";
-import studentservice from "@/services/studentservice";
-import { Teacher } from "@/types/teacher";
-import School from "@/types/school";
-import ResponseData from "@/types/ResponseData";
 
-export default defineComponent({
-  name: "add-teacher",  
+<script lang="ts">
+import { Component, Vue } from "vue-property-decorator";
+import { School } from "@/types/school";
+import { MultiSelectPlugin } from "@syncfusion/ej2-vue-dropdowns";
+import SchoolService from "@/services/SchoolService";
+import { Teacher } from "@/types/teacher";
+import App from "@/App.vue";
+Vue.use(MultiSelectPlugin);
+
+@Component
+export default class AddTeacher extends Vue {
+  genders: string[] = ["MALE", "FEMALE"];
+  schools: School[] = [];
+  teachers: Teacher = {
+    name: "",
+    address: "",
+    email: "",
+    gender: "",
+    schools: [],
+  };
+
+
+  schoolList: School[] = [];
+  schoolSelected: School = new School();
+  slectedSchool: School[] = [];
+
   data() {
     return {
-      teacher: {
-        name: "",
-        address: "",
-        email: "",
-        gender: "",
-      } as Teacher,
-      schoolList: [] as School[],
-      submitted: false,
-      currentSchool: {} as School,
-      selectedSchools: [] as School[],
-      genderList: [
-        { value: "male", label: "Male" },
-        { value: "female", label: "Female" },
-      ],
-  
+      fields: { text: "name", value: "id" },
+      index: 2,
     };
-  },
-  methods: {
-    saveTeacher() {
-      let data = {
-       name: this.teacher.name,
-      address: this.teacher.address,
-      email: this.teacher.email,
-      gender: this.teacher.gender,
-      schools: this.selectedSchools,
-      };
-      studentservice
-        .createTeacher(data)
-        .then((response: ResponseData) => {
-          console.log(response.data);
-          this.submitted = true;
-        })
-        .catch((e: Error) => {
-          console.log(e);
-        });
-    },
-    selectedSchoolMethod(school: School) {
-      this.currentSchool = school;
-      this.selectedSchools?.push(this.currentSchool);
-    },
-    retrieveSchools() {
-      studentservice
-        .getAllSchools()
-        .then((response: ResponseData) => {
-          this.schoolList = response.data;
-          console.log(response.data);
-        })
-        .catch((e: Error) => {
-          console.log(e);
-        });
-    },
+  }
 
-    newTutorial() {
-      this.submitted = false;
-      this.teacher = {} as Teacher;
-    },
-  },
+  private submitted: boolean = false;
+
+  retrieveSchools() {
+    SchoolService.getAllSchools()
+      .then((response) => {
+        this.schools = response.data;
+      })
+      .catch((e) => {});
+    this.schoolList = this.schools;
+  }
+  retrieveTeachers() {
+    SchoolService.getAllTeachers()
+      .then((response) => {
+        this.teachers = response.data;
+      })
+      .catch((e) => {});
+  }
+  saveStudent() {
+    let data = {
+      name: this.teachers.name,
+      address: this.teachers.address,
+      email: this.teachers.email,
+      gender: this.teachers.gender,
+      schools: this.slectedSchool,
+    };
+
+    SchoolService.createTeacher(data)
+      .then((response) => {
+        this.teachers = response.data;
+        this.submitted = true;
+      })
+      .catch((e) => {});
+  }
+  onCancle() {
+    this.$router.replace("/teacher");
+  }
+  onSelectedSchool(schools: School) {
+    this.schoolSelected = schools;
+    this.slectedSchool.push(this.schoolSelected);
+  }
+
   mounted() {
     this.retrieveSchools();
-  },
-});
+    this.retrieveTeachers();
+  }
+}
 </script>
-<!-- eslint-disable prettier/prettier -->
-<style>
+
+<style scoped>
 .submit-form {
   max-width: 300px;
   margin: auto;
-}
-.body {
-  padding: 1rem;
 }
 </style>

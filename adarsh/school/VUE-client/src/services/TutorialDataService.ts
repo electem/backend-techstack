@@ -1,33 +1,31 @@
-/* eslint-disable */
 import http from "@/http-common";
 
-
 class TutorialDataService {
-  getAll(): Promise<any> {
+  getAll() {
     return http.get("/tutorials");
   }
 
-  get(id: any): Promise<any> {
+  get(id: string) {
     return http.get(`/tutorials/${id}`);
   }
 
-  create(data: any): Promise<any> {
+  create(data: any) {
     return http.post("/tutorials", data);
   }
 
-  update(id: any, data: any): Promise<any> {
+  update(id: any, data: any) {
     return http.put(`/tutorials/${id}`, data);
   }
 
-  delete(id: any): Promise<any> {
+  delete(id: any) {
     return http.delete(`/tutorials/${id}`);
   }
 
-  deleteAll(): Promise<any> {
+  deleteAll() {
     return http.delete(`/tutorials`);
   }
 
-  findByTitle(title: string): Promise<any> {
+  findByTitle(title: string) {
     return http.get(`/tutorials?title=${title}`);
   }
 }

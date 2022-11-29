@@ -1,4 +1,3 @@
-/* eslint-disable */
 export default interface Tutorial {
   id: null;
   title: string;

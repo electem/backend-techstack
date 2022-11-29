@@ -1,148 +1,136 @@
-<!-- eslint-disable prettier/prettier -->
 <template>
-    <div class="list row">
-      <div class="col-md-8"></div>
-      <div class="col-md-6">
-        <h4>Teachers List</h4>
-        <!-- <div class="searchBar">
-          <div class="input-group mb-5">
-            <input
-              type="search"
-              class="form-control"           
-              placeholder="Teacher's Name"
-              aria-label="Recipient's username"
-              aria-describedby="button-addon2"
-            />
-          </div>
-        </div>     -->
-        <router-link 
-          :to="'/addteacher'"
-          class="badge badge-warning"
-          custom
-      v-slot="{ navigate }"
-          > <button  
-          class="badge badge-secondary mr-2" 
-          @click="navigate"  
-        role="link"
-        >ADD TEACHER</button>
-      </router-link
-        > 
-        <br />
-        <br />
-        <input type="text" v-model="input" placeholder="Search Teachers..." />
-        <button  
-          class="badge badge-success mr-2" 
-          @click="filteredList()"          
-        >Search</button>
-        <br />
-        <br />
-        <table id="schools-list" class="table table-bordered table-striped">
-          <thead>
-            <tr>
-              <!-- loop through each value of the fields to get the table header -->
-              <th v-for="field in fields" :key="field">
-                {{ field }}
-                <i class="bi bi-sort-alpha-down" aria-label="Sort Icon"></i>
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="(entry, index) in teacherData" :key="index">    
-                 <td>{{ entry.teacherid }}</td>
-              <td>{{ entry.teachername }}</td>
-              <td>{{ entry.email }}</td>
-              <td>{{ entry.school.length }}</td>
-              <router-link 
-          :to="'/teacher/' + entry.teacherid"
-          class="badge badge-warning"
-          custom
-      v-slot="{ navigate }"
-          > <button  
-          class="badge badge-success mr-2" 
-          @click="navigate"  
-        role="link"
-        >EDIT</button>
-      </router-link
-        >
-            </tr>
-          </tbody>
-        </table>
+  <div class="list row">
+    <div class="col-md-8">
+      <div class="input-group mb-3">
+        <input type="text" v-model="input" placeholder="Search teachers..." />
+        <button class="badge badge-success mr-2" @click="searchTeachers()">
+          Search
+        </button>
       </div>
-      
-      
     </div>
-  </template>
-<script lang="ts">/* eslint-disable */
-  
-  import { computed, ref } from "vue";
-  import { defineComponent } from "vue";
-  import studentservice from "@/services/studentservice";
-  import ResponseData from "@/types/ResponseData"; 
-  import { Teacher } from "@/types/teacher";
-  import type { Header, Item } from "vue3-easy-data-table";
-  
-  export default defineComponent({
-    name: "teachers-list",
-    data() {
-      return {        
-        teacherData: [] as Teacher[],
-        teachername: "",
-        input : ref(""),
-       searchedTeachers: [] as Teacher[],
-      };
-    },
-    methods: {
-      retrieveTeachers() {
-        studentservice
-          .getAllTeacherss()
-          .then((response: ResponseData) => {
-            this.teacherData = response.data;
-            this.searchedTeachers= this.teacherData
-            console.log(response.data);
-          })
-          .catch((e: Error) => {
-            console.log(e);
-          });
-      },
-      filteredList() {
-      if(this.input != ""){
-        this.teacherData = this.searchedTeachers.filter((teacher) =>
-        teacher.teachername.toString().includes(this.input))  
-      } else {
-        this.teacherData = this.searchedTeachers;
-      }
-      
-    },
-      searchTitle() {
-        studentservice
-          .findByTitle(this.teachername)
-          .then((response: ResponseData) => {
-            this.teacherData = response.data;
-            console.log(response.data);
-          })
-          .catch((e: Error) => {
-            console.log(e);
-          });
-      },
-    },
-    mounted() {
-      this.retrieveTeachers();
-    },
-    setup() {
-      const fields = ["ID", "TEACHER_NAME", "E-MAIL","TOTAL_SCHOOLS","ACTIONS"];
-      return { fields };
-    },
-  });
-  </script>
-  <style>
-  .list {
-    text-align: left;
-    max-width: 750px;
-    margin: auto;
+    <div class="col-md-6">
+      <h4 v-size="'big'">Teacher List</h4>
+      <ul class="list-group"></ul>
+      <td>
+        <input
+          value="Add"
+          @click="createTeacher"
+          class="btn float-right btn-primary"
+        />
+      </td>
+      <br />
+    </div>
+    <br />
+    <div class="container">
+      <table class="table table-bordered justify-content-center">
+        <thead class="thead-light">
+          <tr class="active">
+            <th class="text-center" scope="col">NAME</th>
+            <th class="text-center" scope="col">ADRESS</th>
+            <th class="text-center" scope="col">EMAIL</th>
+            <th class="text-center" scope="col">GENDER</th>
+            <th class="text-center" scope="col">PHON</th>
+            <th class="text-center" scope="col">EDIT</th>
+          </tr>
+        </thead>
+        <tbody v-for="(teacher, index) in teachers" :key="index">
+          <tr class="success">
+            <th class="text-center" scope="row">{{ teacher.name }}</th>
+            <th class="text-center" scope="row">{{ teacher.address }}</th>
+            <th class="text-center" scope="row">{{ teacher.email }}</th>
+            <th class="text-center" scope="row">{{ teacher.gender }}</th>
+            <th class="text-center" scope="row">{{ teacher.phone }}</th>
+
+            <th class="text-center" scope="row">
+              <router-link
+                :to="'/teachers/' + teacher.id"
+                class="badge badge-warning"
+                custom
+                v-slot="{ navigate }"
+              >
+                <button
+                  type="button"
+                  class="btn btn-info btn-sm mr-2"
+                  @click="navigate"
+                  role="link"
+                >
+                  EDIT
+                </button>
+              </router-link>
+            </th>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</template>
+
+<script lang="ts">
+import { Component, Vue } from "vue-property-decorator";
+import { School } from "@/types/school";
+import SchoolService from "@/services/SchoolService";
+import { Student } from "@/types/student";
+import { Teacher } from "@/types/teacher";
+
+@Component
+export default class TeacherList extends Vue {
+  students: Student[] = [];
+  teachers: Teacher[] = [];
+  newTeachers: Teacher = {
+    name: "",
+    address: "",
+    email: "",
+    gender: "",
+    schools: [],
+  };
+  private currentIndex: number = -1;
+  private title: string = "";
+  teacherName: string[] = [];
+  input?: string;
+  searchTeacher: Teacher[] = [];
+
+  retrieveTeachers() {
+    SchoolService.getAllTeachers()
+      .then((response) => {
+        this.teachers = response.data;
+        this.searchTeacher = this.teachers;
+        this.teacherName = this.teachers.map((item) => {
+          return item.name!;
+        });
+      })
+      .catch((e) => {});
   }
-  .table th:hover {
-    background: #f2f2f2;
-    width: 100px;
+  searchTitle() {
+    return this.teacherName;
   }
-  </style>
-  
+
+  createTeacher() {
+    this.$router.replace("/AddTeacher");
+  }
+
+  addName() {
+    console.log("adarsh");
+  }
+  searchTeachers() {
+    if (this.input != "") {
+      this.teachers = this.searchTeacher.filter((teacher) =>
+        teacher.name!.toString().includes(this.input!)
+      );
+    } else {
+      this.teachers = this.searchTeacher;
+    }
+  }
+
+  mounted() {
+    this.retrieveTeachers();
+  }
+}
+</script>
+
+<style scoped>
+.list {
+  text-align: left;
+  max-width: 750px;
+  margin: auto;
+}
+</style>

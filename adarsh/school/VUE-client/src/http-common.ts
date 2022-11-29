@@ -1,11 +1,8 @@
-/* eslint-disable prettier/prettier */
-import axios, { AxiosInstance } from "axios";
+import axios from "axios";
 
-const apiClient: AxiosInstance = axios.create({
-  baseURL: "http://localhost:8000",
+export default axios.create({
+  baseURL: "http://localhost:8080",
   headers: {
-    "Content-type": "application/json", 
-  },
+    "Content-type": "application/json"
+  }
 });
-
-export default apiClient;

@@ -1,13 +1,9 @@
-/* eslint-disable */
-
-import http from "@/http-Studentcommon";
-import School from "@/types/school";
+import http from "@/http-common";
+import { School } from "@/types/school";
 import { Student } from "@/types/student";
 import { Teacher } from "@/types/teacher";
-//const baseUrl = "http://localhost:3000";
 
-class SchoolDataService {
-  
+class SchoolService {
   getAllStudents() {
     return http.get("/students");
   }
@@ -50,30 +46,9 @@ class SchoolDataService {
   updateTeacher(id: number, data: Teacher) {
     return http.put(`/updateTeachers/${id}`, data);
   }
-  uploadFile(file: File) {
-    let formData = new FormData();
-    formData.append("file", file);
-    return http
-      .post("/photos", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      })
-      .then(function () {
-        console.log("SUCCESS!!");
-      })
-      .catch(function () {
-        console.log("FAILURE!!");
-      });
-  }
-
-  //   deleteAll(): Promise<any> {
-  //     return http.delete(`/tutorials`);
-  //   }
-
-  findByTitle(schoolname: string): Promise<any> {
-    return http.get(`/school?schoolname=${schoolname}`);
+  deleteAll() {
+    return http.delete(`/tutorials`);
   }
 }
 
-export default new SchoolDataService();
+export default new SchoolService();

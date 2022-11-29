@@ -1,6 +1,41 @@
-<!-- eslint-disable prettier/prettier -->
+<template>
+
+  <div id="app">
+    <nav class="navbar navbar-expand navbar-dark bg-dark">
+      <a href="#" class="navbar-brand" v-size="'big'">BezKoder</a>
+      <div class="navbar-nav mr-auto">
+        
+        <li class="nav-item">
+          <a href="/school" class="nav-link">School</a>
+        </li>
+         <li class="nav-item">
+          <a href="/student" class="nav-link">Student</a>
+        </li>
+          <li class="nav-item">
+          <a href="/teacher" class="nav-link">Teacher</a>
+        </li>
+         <li class="nav-item">
+          <a href="/chart" class="nav-link">Chart</a>
+        </li>
+        <li class="nav-item">
+          <a href="/table" class="nav-link">Table</a>
+        </li>
+      </div>
+    </nav>
+
+    <div class="container mt-3">
+      <router-view />
+    </div>
+      <BarChart />
+  </div>
+    
+</template>
+
 <script lang="ts">
-/* eslint-disable prettier/prettier */
+import { Component, Vue } from "vue-property-decorator";
+import BarChart from './components/SchoolChart.vue'
+
+
 import { defineComponent } from "vue";
 
 export default defineComponent({
@@ -9,33 +44,10 @@ export default defineComponent({
 }
 });
 </script>
-<template>
-  <div id="app">
-    <nav class="navbar navbar-expand navbar-dark bg-dark">
-      <router-link to="/school" class="navbar-brand">bezKoder</router-link>
-      <div class="navbar-nav mr-auto">
-        <li class="nav-item">
-          <router-link to="/datatable" class="nav-link">data table</router-link>
-        </li>   
-        <li class="nav-item">
-          <router-link to="/school" class="nav-link">Schoolist</router-link>
-        </li>       
-        <li class="nav-item">
-          <router-link to="/studentlist" class="nav-link">Studentlist</router-link>
-        </li>      
-        <li class="nav-item">
-          <router-link to="/teacherslist" class="nav-link">TeachersList</router-link>
-        </li>    
-        <li class="nav-item">
-          <router-link to="/customecharts" class="nav-link">Line-Chart</router-link>
-        </li>     
-        <li class="nav-item">
-          <router-link to="/piechart" class="nav-link">Pie-Chart</router-link>
-        </li>  
-      </div>
-    </nav>
-    <div class="container mt-3">
-      <router-view />
-    </div>
-  </div>
-</template>
+
+<style>
+@import "../node_modules/@syncfusion/ej2-base/styles/material.css";
+@import "../node_modules/@syncfusion/ej2-inputs/styles/material.css";
+@import "../node_modules/@syncfusion/ej2-vue-dropdowns/styles/material.css";
+@import "../node_modules/@syncfusion/ej2-buttons/styles/material.css";
+</style>
