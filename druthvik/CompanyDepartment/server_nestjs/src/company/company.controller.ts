@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-inferrable-types */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable prettier/prettier */
 import {
@@ -9,6 +10,7 @@ import {
   Param,
   Post,
   Put,
+  Query,
   UseGuards,
 } from '@nestjs/common';
 import { CompanyService } from './company.service';
@@ -19,15 +21,18 @@ import { join } from 'path';
 import * as fs from 'fs';
 import hbs from 'handlebars';
 import puppeteer from 'puppeteer';
+import { PageRequest } from 'src/pagination/page.request.model';
+import { Page } from 'src/pagination/page.model';
+import { Company } from './company.entity';
 
-@UseGuards(JwtAuthGuard)
+//@UseGuards(JwtAuthGuard)
 @Controller('company')
 export class CompanyController {
   constructor(
     private companyService: CompanyService,
     private mailService: MailerService,
   ) {}
-  @Get()
+  @Get('company')
   findAll() {
     return this.companyService.getAllCompanyWithDepartment();
   }
@@ -105,5 +110,15 @@ export class CompanyController {
       throw new NotFoundException('User does not exist!');
     }
     return company;
+  }
+  @Get()
+  public async getAllCompanyByPage(
+    @Query('page') page: number,
+    @Query('size') size: number,
+  ): Promise<Page<Company>> {
+    try {
+      const pageRequest: PageRequest = PageRequest.from(page, size);
+      return this.companyService.getAllCompanyByPage(pageRequest);
+    } catch (error) {}
   }
 }
