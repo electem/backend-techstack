@@ -1,0 +1,362 @@
+/* general html tags */
+* {
+	margin: 0px;
+	padding: 0px;
+}
+
+strong {
+	font-weight: bold;
+}
+
+body {
+	font: 12pt "Segoe UI", Verdana, Helvetica;
+	color: #000000;
+}
+
+hr {
+	border: 0;
+	height: 0;
+	border-top: solid 1px #CCC;
+	border-bottom: solid 1px #CCC;
+	margin-top: 2px;
+}
+
+h1 {
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	font-size: 18pt;
+	color: #000033;
+	text-align: center;
+	font-weight: normal;
+}
+
+h2 {
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	font-size: 18pt;
+	color: #000033;
+	text-align: center;
+	font-weight: bold;
+}
+
+/* header */
+.logo {
+	width: 90%;
+	margin-top: 5px;
+	margin-right: auto;
+	margin-left: auto;
+	text-align: center;
+	max-height: 120px;
+}
+
+.date {
+	font-size: 14px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	padding-bottom: 10px;
+	border-bottom: 1px solid #B5D7E6;
+	clear: both;
+}
+
+.details {
+	width: 100%;
+	margin-right: auto;
+	margin-left: auto;
+	margin-bottom: 10px;
+}
+
+/* footer */
+.footer {
+	border-top: 1px solid #B5D7E6;
+	text-align: center;
+	color: #000033;
+	padding: 10px;
+	page-break-inside: avoid;
+}
+
+.footer h2 {
+	color: #133D53;
+	font-size: 12pt;
+}
+
+.footer h3 {
+	font-size: 12pt;
+}
+
+/* icon legend */
+.legend {
+	text-align: center;
+	padding: 10px;
+	border-bottom: 1px solid #B5D7E6;
+}
+
+/* notes */
+.notes {
+	width: 80%;
+	text-align: left;
+	margin: 10px auto;
+}
+
+.notes h2 {
+	text-align: left;
+	color: #133D53;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	font-size: 14pt;
+}
+
+.notes h3 {
+	font-size: 12pt;
+}
+
+.notes p {
+	font-size: 12pt;
+	margin: 0px 10px 20px 30px;
+}
+
+/* report grid */
+table.reportGrid {
+	background-color: #FFF;
+	border: 1px solid #000033;
+	border-collapse: collapse;
+	width: 100%;
+	margin: 0 auto;
+	font-size: 10pt;
+	page-break-inside: auto;
+}
+
+table.reportGrid caption {
+	color: white;
+	background-color: #21688E;
+	font-weight: bold;
+	font: 13pt "Trebuchet MS", Verdana, Helvetica;
+	margin-top: 0;
+	margin-right: auto;
+	margin-left: auto;
+	padding: 10px;
+	border: 1px solid #000033;
+	border-bottom: none;
+	page-break-inside: avoid;
+	padding: 5px;
+}
+
+table.reportGrid .name {
+	font-weight: bold;
+	width: 20%;
+	text-align: left;
+}
+
+table.reportGrid .couponType {
+	width: 10%;
+	text-align: left;
+}
+
+table.reportGrid .timeStamp {
+	width: 10%;
+	width: auto;
+	text-align: left;
+}
+
+table.reportGrid thead {
+	display: table-header-group;
+	page-break-inside: avoid;
+}
+
+table.reportGrid tfoot {
+	display: table-header-group;
+	page-break-inside: avoid;
+}
+
+table.reportGrid th {
+	background-color: #B5D7E6;
+	color: #000000;
+	padding: 5px;
+	font-weight: bold;
+	border: 1px solid #000033;
+}
+
+table.reportGrid tr {
+	page-break-inside: avoid;
+	page-break-after: auto;
+}
+
+table.reportGrid td {
+	font-size: 8pt;
+	page-break-inside: avoid;
+	page-break-after: auto;
+	padding: 1px 3px 1px 3px;
+	border: 1px solid #000033;
+	width: 5%;
+	width: auto;
+	height: 3em; 
+	text-align: center;
+}
+
+/*
+table.reportGrid td.key {
+	padding: 2px 5px 2px 5px;
+	border: 1px solid black;
+	font-weight: bold;
+}
+*/
+
+/* misc elements */
+.range {
+	font-size: 5pt;
+}
+
+/* this one should go away */
+.icon {
+	float: left;
+	margin-top: 5px;
+	margin-right: 4px;
+	margin-left: 4px;
+}
+
+.iconNORMAL {
+	float: left;
+	width: 16px;
+	height: 16px;
+	margin-top: 2px;
+	margin-left: 0;
+	background-image: url(../img/range/icon-NORMAL.png);
+}
+
+.iconLOW {
+	float: left;
+	width: 16px;
+	height: 16px;
+	margin-top: 2px;
+	margin-left: 0;
+	background-image: url(../img/range/icon-LOW.png);
+}
+
+.iconLOWER {
+	float: left;
+	width: 16px;
+	height: 16px;
+	margin-top: 2px;
+	margin-left: 0;
+	background-image: url(../img/range/icon-LOWER.png);
+}
+
+.iconLOWEST {
+	float: left;
+	width: 16px;
+	height: 16px;
+	margin-top: 2px;
+	margin-left: 0;
+	background-image: url(../img/range/icon-LOWEST.png);
+}
+
+.iconHIGH {
+	float: left;
+	width: 16px;
+	height: 16px;
+	margin-top: 2px;
+	margin-left: 0;
+	background-image: url(../img/range/icon-HIGH.png);
+}
+
+.iconHIGHER {
+	float: left;
+	width: 16px;
+	height: 16px;
+	margin-top: 2px;
+	margin-left: 0;
+	background-image: url(../img/range/icon-HIGHER.png);
+}
+
+.iconHIGHEST {
+	float: left;
+	width: 16px;
+	height: 16px;
+	margin-top: 2px;
+	margin-left: 0;
+	background-image: url(../img/range/icon-HIGHEST.png);
+}
+
+.cellValue {
+	display: inline-block;
+}
+
+.signature {
+	text-align: left;
+	margin-top: 20px;
+	padding: 5px;
+	page-break-inside: avoid;
+}
+
+.typedSignature {
+	color: #145394;
+	font: normal 1.875em/50px "Journal", Georgia, Times, serif;
+}
+
+
+
+
+
+
+
+
+
+/* #############  Added Overrides ############# DH20150724 */
+
+.logo {
+	width: 100%;  
+}
+
+.logo hr {
+	margin-bottom: 20px;
+}
+
+table.reportGrid {
+	margin-top: 20px;
+}
+
+table.reportGrid tr {
+	vertical-align: bottom;
+}
+
+table.reportGrid th {
+	font-size: 8pt;
+	padding-bottom: 10px;
+    height: 320px;
+}
+
+table.reportGrid .timeStamp, table.reportGrid td {
+	width: auto;
+}
+
+table.reportGrid .timeStamp, table.reportGrid td {
+	width: auto;
+}
+
+table.reportGrid span {
+    width: 1.5em; 
+    white-space: nowrap;
+    color: #000;
+    display: block;
+    transform: rotate(270deg);
+	transform-origin: left bottom 20;
+}
+
+.timeStamp { 
+	white-space: nowrap; 
+	word-wrap: normal; 
+	word-break: keep-all; 
+}
+
+table.reportGrid tr th:nth-child(odd), table.reportGrid tr td:nth-child(odd){ 
+	background: #b8d1f3;
+}
+
+table.reportGrid tr th:nth-child(even), table.reportGrid tr td:nth-child(even){
+	background: #dae5f4;
+}
+  
+@media print {
+	@page {
+		size: letter landscape;
+		margin: 0.25in;
+	}
+}
+
