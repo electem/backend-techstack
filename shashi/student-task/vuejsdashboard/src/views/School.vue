@@ -182,6 +182,7 @@ export default defineComponent({
       input: ref(""),
       searchedSchools: [] as School[],
       page: 1,
+
       pageSizes: [3, 6, 9],
       listings: {
         total: 100,

@@ -14,7 +14,7 @@
             gap-5
           "
         >    
-          <!-- <Pie /> -->
+          <Pie />
           <AreaChart />        
           <BarChart />
         

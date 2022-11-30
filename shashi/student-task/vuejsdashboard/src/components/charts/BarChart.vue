@@ -22,43 +22,42 @@ export default defineComponent({
       schoolNames: [] as string[],
       teacherCountInschool: [] as number[],
       studentsCountInschool: [] as number[],
-      options: {      
-      },
-      series:{},     
+      options: {},
+      series: {},
     };
   },
   methods: {
-   async setup() {
-    await  studentservice.getAllSchool().then((response) => {
+    async setup() {
+      await studentservice.getAllSchool().then((response) => {
         this.schoolList = response.data;
         console.log(response.data);
         this.schoolNames = this.schoolList.map((school) => school.schoolname);
         console.log(this.schoolNames);
         this.teacherCountInschool = this.schoolList.map(
-          (school) => school.teacher.length);
-      });     
+          (school) => school.teacher.length
+        );
+      });
       this.options = ref({
-  chart: {
-    label: "Data One",
-    backgroundColor: "#f87979",
-    id: "vuechart-example",
-  },
-  xaxis: {
-    categories: this.schoolNames,
-  },
-});
-this.series = ref([
-  {
-    name: "series-1",
-    data:  this.teacherCountInschool,
-  },
-]);     
-    }
+        chart: {
+          label: "Data One",
+          backgroundColor: "#f87979",
+          id: "vuechart-example",
+        },
+        xaxis: {
+          categories: this.schoolNames,
+        },
+      });
+      this.series = ref([
+        {
+          name: "series-1",
+          data: this.teacherCountInschool,
+        },
+      ]);
+    },
   },
 
   mounted() {
     this.setup();
   },
 });
-
 </script>
