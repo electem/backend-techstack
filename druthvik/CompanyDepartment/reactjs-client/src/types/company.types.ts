@@ -1,6 +1,6 @@
 import { Department } from "./department.types";
 export class Company {
-  id?: number;
+  id!: number;
   name?: string;
   email?: string;
   location?: string;

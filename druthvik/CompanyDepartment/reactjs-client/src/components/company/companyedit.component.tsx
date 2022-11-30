@@ -77,33 +77,7 @@ export default class companyedit extends Component<Props, State> {
     const { currentComany } = this.state;
     return (
       <div>
-        <div className="">
-          {/* <div className="row ">
-            <div className="col-lg-24">
-              <div className="col-xs-12 pl-0">
-                <i className="fa fa-user Fs40 blue Fleft MarRight10 MarBottom10"></i>
-                <p className="font-weight-bold font">Add / Edit Company</p>
-              </div>
-              <div className="col-xs-12 text-align">
-                <Link to={"/company2"}>
-                  <button
-                    type="button"
-                    data-toggle="collapse"
-                    data-target="#collapseOne"
-                    className="btn btn-default"
-                  >
-                    Close
-                  </button>
-                </Link>
-                <a
-                  id="customerCancle"
-                  href="#"
-                  className="ui-commandlink ui-widget d-none"
-                ></a>
-              </div>
-            </div>
-          </div> */}
-        </div>
+        <div className=""></div>
         <div id="custTabs:j_idt207" className="ui-outputpanel ui-widget">
           <div
             id="custTabs:j_idt208"
@@ -111,22 +85,10 @@ export default class companyedit extends Component<Props, State> {
             className="ui-message"
           ></div>
         </div>
-        <div
-          className="row"
-          // style={{
-          //   marginLeft: "0px !important",
-          //   marginRight: "0px !important",
-          // }}
-        >
-          <div
-            className="panel with-nav-tabs panel-success2"
-            // style={{ width: "-webkit-fill-available" }}
-          >
+        <div className="row">
+          <div className="panel with-nav-tabs panel-success2">
             <div className="panel-heading padding-left">
-              <ul
-                className="nav nav-tabs nav-justified no-stack d-block"
-                // style={{ display: "block" }}
-              >
+              <ul className="nav nav-tabs nav-justified no-stack d-block">
                 <li className="active">
                   <a href="#tab1default" data-toggle="tab">
                     Add / Edit Company
@@ -155,7 +117,6 @@ export default class companyedit extends Component<Props, State> {
                     <a
                       id="custTabs:customerSharedImages"
                       className="ui-commandlink ui-widget d-none"
-                      // style={{ display: "none" }}
                     ></a>
                     <p></p>
                     <div
@@ -186,7 +147,6 @@ export default class companyedit extends Component<Props, State> {
                         id="custTabs:editHeaderFooterCustomer12"
                         href="#"
                         className="ui-commandlink ui-widget d-none"
-                        // style={{ display: "none" }}
                       ></a>
                     </div>
                   </div>
@@ -270,13 +230,6 @@ export default class companyedit extends Component<Props, State> {
                           {options.name}
                         </option>
                       ))}
-                      {/* <option value="true">Developement</option>
-                      <option value="false">Admin department</option>
-                      <option value="false">Infrastructures</option>
-                      <option value="false">Sales and marketing </option>
-                      <option value="false">Research and development</option>
-                      <option value="false">Product development</option>
-                      <option value="false">Security and transport</option> */}
                     </select>
                   </div>
                   <div className="col-md-10 col-md-offset-0 col-sm-18 col-sm-offset-3 col-xs-24">
@@ -302,10 +255,7 @@ export default class companyedit extends Component<Props, State> {
                     ></div>
                   </div>
                   <div className="row">
-                    <div
-                      className="col-xs-24 text-right close-button "
-                      // style={{ marginTop: "20px", textAlign: "right" }}
-                    >
+                    <div className="col-xs-24 text-right close-button ">
                       <Link to={"/company2"}>
                         <button
                           type="button"
@@ -320,7 +270,6 @@ export default class companyedit extends Component<Props, State> {
                         id="custTabs:customerClose"
                         href="#"
                         className="ui-commandlink ui-widget d-none"
-                        // style={{ display: "none" }}
                       ></a>
                       <Link to={"/companyList"}>
                         <button
@@ -334,62 +283,10 @@ export default class companyedit extends Component<Props, State> {
                         id="custTabs:customerUpdate"
                         href="#"
                         className="ui-commandlink ui-widget  d-none"
-                        // style={{ display: "none" }}
                       ></a>
                     </div>
                   </div>
-                  {/* <div
-                    className="modal fade"
-                    id="myModal_image_manager_customer"
-                  >
-                    <div
-                      className="modal-dialog modal-lg"
-                      role="document"
-                      style={{ width: "83%" }}
-                    >
-                      <div className="modal-content">
-                        <div className="modal-header">
-                          <button
-                            type="button"
-                            className="close"
-                            data-dismiss="modal"
-                            aria-label="Close"
-                          >
-                            <span aria-hidden="true">
-                              <i className="fa fa-times-circle Fs20 gray"></i>
-                            </span>
-                          </button>
-                          <h4
-                            className="modal-title"
-                            style={{ color: "black" }}
-                          >
-                            <b>Shared Images</b>
-                          </h4>
-                        </div>
-                        <button
-                          type="button"
-                          className="btn btn-sm btn-default"
-                          style={{ margin: "0px 0px 1% 90%" }}
-                          data-dismiss="modal"
-                        >
-                          Close
-                        </button>
-                      </div>
-                    </div>
-                  </div> */}
-                  {/* <script
-                    type="text/javascript"
-                    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyClZyu3df7iP58X9lqsv5CI4sbv1HX0J0A"
-                  ></script> */}
                 </div>
-                {/* <div
-                  className="tab-pane fade in text-center"
-                  id="tab2default"
-                ></div> */}
-                {/* <div
-                  className="tab-pane fade in text-center"
-                  id="tab3default"
-                ></div> */}
               </div>
             </div>
           </div>

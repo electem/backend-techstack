@@ -8,6 +8,7 @@ import companyService from "../../services/company.service";
 import { Company } from "../../types/company.types";
 
 import "./company.css";
+import { CompanyDelete } from "../../types/companydelete.types";
 type Props = {};
 type State = {
   company: Array<Company>;
@@ -15,6 +16,8 @@ type State = {
   pageNumber: number;
   pageSize: number;
   noOfRecords: number;
+  selectedCompanyRows: [];
+  toggleCleared: boolean;
 };
 const tableCustomStyles = {
   headCells: {
@@ -26,16 +29,25 @@ const tableCustomStyles = {
 };
 
 export default class Companylistingdatables extends Component<Props, State> {
+  companyDeletes: CompanyDelete[] = [];
   companyLists: Company[] = [];
+  companyDeleteList: Company[] = [];
+  companynumbers: number[] = [];
+  companyselected: {} = Company;
+
   constructor(props: Props) {
     super(props);
     this.onChangeSearchTitle = this.onChangeSearchTitle.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
     this.state = {
       company: [],
       searchTitle: "",
       pageNumber: 1,
       pageSize: 5,
       noOfRecords: 0,
+      toggleCleared: false,
+      selectedCompanyRows: [],
     };
   }
   componentDidMount() {
@@ -43,9 +55,9 @@ export default class Companylistingdatables extends Component<Props, State> {
   }
 
   retrieveCompany() {
-    const { pageNumber, pageSize } = this.state;
+    const { pageNumber, pageSize, searchTitle } = this.state;
     companyService
-      .getAllCompanies(pageNumber, pageSize)
+      .getAllCompanies(pageNumber, pageSize, searchTitle)
       .then((response) => {
         this.setState({
           company: response.data.elements,
@@ -58,16 +70,15 @@ export default class Companylistingdatables extends Component<Props, State> {
       });
   }
   async onChangePage(pageNumber: number) {
-    const { pageSize } = this.state;
+    const { pageSize, searchTitle } = this.state;
     await companyService
-      .getAllCompanies(pageNumber, pageSize)
+      .getAllCompanies(pageNumber, pageSize, searchTitle)
       .then((response) => {
         this.setState({
           company: response.data.elements,
           noOfRecords: response.data.totalElements,
         });
         this.companyLists = this.state.company;
-        pageNumber = pageNumber + 1;
       })
       .catch((e: Error) => {
         console.log(e);
@@ -78,18 +89,41 @@ export default class Companylistingdatables extends Component<Props, State> {
       searchTitle: e.target.value,
     });
   }
-  retriveSerchedCompany(search: string) {
+  retriveSerchedCompany() {
+    this.retrieveCompany();
+  }
+
+  // handleChanges(selectedRowas: any) {
+  //   console.log("state", selectedRowas);
+  //   this.companyDeleteList = selectedRowas;
+  // }
+
+  handleChange = (state: { selectedRows: any }) => {
     this.setState({
-      company: this.companyLists.filter((option) => {
-        return option.name?.startsWith(search);
-      }),
+      selectedCompanyRows: state.selectedRows,
     });
+    this.companyDeleteList = state.selectedRows;
+    console.log(this.companyDeleteList);
+  };
+  handleDelete() {
+    const ids = this.companyDeleteList.map((ids) => ids.id);
+    console.log(ids);
+    companyService.deleteCompany(ids);
   }
 
   render() {
     const { company, searchTitle, pageSize, noOfRecords } = this.state;
 
     const columns = [
+      {
+        name: "Id",
+        sortable: true,
+        selector: "id",
+        style: {
+          fontSize: "15px",
+          fontWeight: "heavy",
+        },
+      },
       {
         name: "Name",
         sortable: true,
@@ -137,6 +171,13 @@ export default class Companylistingdatables extends Component<Props, State> {
         ),
       },
     ];
+    const contextActions = () => {
+      return (
+        <button key="delete" style={{ backgroundColor: "red" }}>
+          {" "}
+        </button>
+      );
+    };
     return (
       <div>
         <div className="maincontent w-auto">
@@ -225,7 +266,7 @@ export default class Companylistingdatables extends Component<Props, State> {
                 placeholder="Search"
                 value={searchTitle}
                 onChange={this.onChangeSearchTitle}
-                onKeyUp={() => this.retriveSerchedCompany(searchTitle)}
+                onKeyUp={() => this.retriveSerchedCompany()}
               />
               <span className="input-group-btn">
                 <button className="btn transparent" type="reset">
@@ -253,6 +294,13 @@ export default class Companylistingdatables extends Component<Props, State> {
                 id="custTableForm:custTable"
                 className="ui-datatable ui-widget metricTable custTable"
               >
+                <button
+                  onClick={this.handleDelete}
+                  key="delete"
+                  style={{ backgroundColor: "red" }}
+                >
+                  Delete
+                </button>
                 <div className=" striped">
                   <DataTable
                     // title={
@@ -270,6 +318,17 @@ export default class Companylistingdatables extends Component<Props, State> {
                     paginationPerPage={pageSize}
                     paginationRowsPerPageOptions={[5, 10, 15, 20, 25]}
                     onChangePage={(page) => this.onChangePage(page)}
+                    selectableRows
+                    onSelectedRowsChange={this.handleChange}
+                    contextActions={
+                      <button
+                        key="delete"
+                        onClick={this.handleDelete}
+                        style={{ backgroundColor: "red" }}
+                      >
+                        Delete
+                      </button>
+                    }
                   />
                 </div>
               </div>
