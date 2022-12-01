@@ -19,7 +19,7 @@ export class Company {
   email: string;
 
   @Column()
-  address: string;
+  location: string;
 
   @ManyToMany(() => Department, (department) => department.company, {
     cascade: true,
