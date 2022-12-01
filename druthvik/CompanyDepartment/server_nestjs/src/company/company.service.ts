@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { ILike, Repository } from 'typeorm';
 import { Company } from './company.entity';
 import { CompanyDto } from './company.dto';
 import { PageRequest } from 'src/pagination/page.request.model';
@@ -58,9 +58,21 @@ export class CompanyService {
     pageRequest: PageRequest,
   ): Promise<Page<Company>> {
     const result = await this.companyRepository.findAndCount({
+      where: { name: ILike('%' + pageRequest.seachedString + '%') },
+      order: { name: 'DESC' },
       skip: (pageRequest.page - 1) * pageRequest.size,
       take: pageRequest.size,
     });
+
     return Page.from(result[0], result[1], pageRequest);
+  }
+
+  async deleteCompanyByIds(ids) {
+    const postWithQueryBuilder = await this.companyRepository
+      .createQueryBuilder('company')
+      .delete()
+      .where('company.id IN (:...ids)', { ids })
+      .execute();
+    return postWithQueryBuilder;
   }
 }
