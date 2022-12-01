@@ -13,27 +13,28 @@
         <li class="nav-item">
           <router-link to="/student" class="nav-link">Student</router-link>
         </li> 
+          <li class="nav-item">
+          <router-link to="/BarChart" class="nav-link">BarChart</router-link>
+        </li> 
          <li class="nav-item">
-          <router-link to="/createteacher" class="nav-link">Create Teacher</router-link>
-         </li>
+          <router-link to="/LineChart" class="nav-link">LineChart</router-link>
+        </li> 
          <li class="nav-item">
-          <router-link to="/createstudent" class="nav-link">Create Student</router-link>
-         </li>
-           
+          <router-link to="/datatable" class="nav-link">Datatable</router-link>
+        </li> 
     </div>
     </nav>
     <div class="container mt-3">
       <router-view />
     </div>
   </div>
-    
 </template>
-
+<!-- eslint-disable prettier/prettier -->
 <script lang="ts">
-/* eslint-disable prettier/prettier */
 import { defineComponent } from "vue";
+
 export default defineComponent({
   name: "App",
   
-});
+  });
 </script>

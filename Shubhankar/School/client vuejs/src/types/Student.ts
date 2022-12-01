@@ -10,6 +10,6 @@ export default interface Student {
     gender:string;
     dateofbirth:string;
     createdAt:Date;
-    school:School[];
+    school:School;
     
 }

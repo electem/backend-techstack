@@ -43,8 +43,43 @@ const routes: Array<RouteRecordRaw> = [
     alias: "/createstudent",
     name: "student",
     component: () => import("./components/CreateStudent.vue"),
+  },  
+  {
+    path: "/createschool",
+    alias: "/createschool",
+    name: "add-school",
+    component: () => import("./components/Createschool.vue"),
+  },{
+    path: "/school/:id",
+   name: "edit-school",
+    component: () => import("./components/Editschool.vue"),
+  },
+  {
+    path: "/teacher/:id",
+   name: "edit-teacher",
+    component: () => import("./components/Editteacher.vue"),
+  },
+  {
+    path: "/student/:id",
+   name: "edit-student",
+    component: () => import("./components/Editstudent.vue"),
   }
-  
+  ,
+  {
+    path: "/BarChart",
+   name: "bar-chart",
+    component: () => import("./components/Barchart.vue"),
+  },
+  {
+    path: "/datatable",
+   name: "Datatable",
+    component: () => import("./components/Datatable.vue"),
+  } ,
+  {
+    path: "/LineChart",
+   name: "line-chart",
+    component: () => import("./components/Linechart.vue"),
+  },
 ];
 
 const router = createRouter({
