@@ -2,7 +2,7 @@
 <template>
   <div class="flex items-center justify-center mt-5">
     <div class="flex items-center">
-      <span class="mx-2 text-2xl font-bold text-black">Schools List</span>
+      <span class="mx-2 text-2xl font-bold text-black pt-0">Schools List</span>
     </div>
   </div>
   <div class="flex justify-end mt-4">
@@ -14,14 +14,15 @@
     </button>
   </div>
   <div class="flex items-center">
-    <div class="relative mx-4 lg:mx-0">
+    <div class="relative mx-30 lg:mx-0">
       <input
-        class="w-32 pl-10 pr-4 py-2 text-indigo-600 border-gray-200 rounded-md sm:w-64 focus:border-indigo-600 focus:ring focus:ring-opacity-40 focus:ring-indigo-500"
+        class="w-50 pl-10 pr-8 py-1 text-indigo-600 border-gray-200 rounded-md sm:w-100 focus:border-indigo-600 focus:ring focus:ring-opacity-40 focus:ring-indigo-500"
         type="text"
-        v-model="input"
+        v-model="searchValue"
+         v-on:keyup="whatkey"
         placeholder="Search"
       />
-      <button class="badge badge-success mr-2" @click="filteredList()">
+      <button class="badge badge-success mr-2">
         <span class="absolute inset-y-0 left-0 flex items-center pl-3">
           <svg class="w-5 h-5 text-gray-500" viewBox="0 0 24 24" fill="none">
             <path
@@ -36,24 +37,20 @@
       </button>
     </div>
   </div> 
- 
-  <br />
+  <br />  
   <EasyDataTable
     v-model:server-options="serverOptions"
     v-model:items-selected="itemsSelected"
     header-text-direction="center"
     body-text-direction="center"
-    :headers="headers"  
-    :prev-text="'Prev'"
-    :next-text="'Next'"
-    :items="items"
-    :loading="loading"
-    :server-items-length="totalNumberOfSchools"
-    v-on:click="changeData(serverOptions.page, serverOptions.rowsPerPage,seachedString)"
-    :rows-items="rowsItemsComputed"
+    :headers="headers" 
+    :items="items"   
+    :search-value="searchValue"
+    :server-items-length="totalNumberOfSchools"    
+    v-on:click="changeData(serverOptions.page, serverOptions.rowsPerPage,seachedString)" 
+    :rows-items="rowsItemsComputed"    
     buttons-pagination
-    must-sort
-  >
+  >    
     <template #item-operation>
       <div>
         <div class="flex justify-around">
@@ -93,13 +90,13 @@
             </form>
           </span>
         </div>
-      </div>
+      </div>      
     </template>
   </EasyDataTable>
 </template>
 <!-- eslint-disable prettier/prettier -->
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { computed, defineComponent, ref } from "vue";
 import type { Header, Item, ServerOptions } from "vue3-easy-data-table";
 import studentservice from "@/studentservice";
 import School from "@/types/school";
@@ -109,7 +106,6 @@ export default defineComponent({
   name: "edit-school",
   data() {
     return {
-      input: ref(""),
       searchedSchools: [] as School[],
       schoolList: [] as School[],
       currentSchool: {} as School,
@@ -127,12 +123,25 @@ export default defineComponent({
       rowsItemsComputed: [5, 10, 15, 20],
       itemsSelected: ref<School[]>([]),
       selectedSchoolIDs: [] as number[],
-      seachedString:{} as string
+      seachedString: '',
+       searchValue : ref(""),
+        dataTable : ref(),
+        rowsPerPageOptions : ref(),
+rowsPerPageActiveOption :ref(),
     };
   },
   methods: {
+     nextPage()  {
+  this.dataTable.value.nextPage();
+},
+ prevPage() {
+  this.dataTable.value.prevPage();
+},
+     updatePage(paginationNumber: number) {
+  this.dataTable.value.updatePage(paginationNumber);
+},
     changeData(page: number, rowsPerPage: number,seachedString: string) {
-      this.serverOptions.page = page;
+      page= this.serverOptions.page;
       this.serverOptions.rowsPerPage = rowsPerPage;
       studentservice
         .getAllSchoolPagination(
@@ -146,6 +155,7 @@ export default defineComponent({
         });
     },
     async setup() {
+      this.searchValue=''
       this.headers = [
         { text: "School-ID", value: "schoolid", sortable: true },
         { text: "SchoolName", value: "schoolname" },
@@ -159,16 +169,12 @@ export default defineComponent({
           this.seachedString
         )
         .then((response) => {
-          console.log(response.data.elements);
-          this.schoolList = response.data;
-          this.searchedSchools = this.schoolList;
           this.items = response.data.elements;
-          this.totalNumberOfSchools = response.data.totalElements;
+           this.totalNumberOfSchools = response.data.totalElements;
         });
       studentservice
         .getAllSchool()
         .then((response) => {
-          this.schoolList = response.data;
           this.searchedSchools = this.schoolList;
           console.log(response.data);
         })
@@ -176,18 +182,20 @@ export default defineComponent({
           console.log(e);
         });
     },
-    filteredList() {
-      if (this.input != "") {
-        this.schoolList = this.searchedSchools.filter((school) =>
-          school.schoolname.toString().includes(this.input)
-        );
-      } else {
-        this.schoolList = this.searchedSchools;
-      }
+    whatkey(){
+      studentservice
+        .getAllSchoolPagination(
+          this.serverOptions.page,
+          this.serverOptions.rowsPerPage,
+         this.searchValue
+        )
+        .then((response) => {
+          this.items = response.data.elements;
+          this.totalNumberOfSchools = response.data.totalElements;
+        });     
     },
     async DeleteSelectedSchools() {
-      const result = this.itemsSelected.map((school) => school.schoolid);
-      console.log(this.selectedSchoolIDs);
+      const result = this.itemsSelected.map((school) => school.schoolid);     
       await studentservice.deleteSelectedSchool(result);
     },
     DeleteSchoolById(id: number) {

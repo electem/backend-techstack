@@ -80,7 +80,7 @@
                   Cancel
                 </button>
               </router-link>
-            </div>
+            </div>           
           </form>
         </div>
       </div>
@@ -114,10 +114,13 @@ export default defineComponent({
       submitted: false,
       selectedTeachers: [] as Teacher[],
       selectedStudents: [] as Student[],
+      dragAndDropList:[] as Teacher[]
     };
   },
   methods: {
+  
     saveSchool() {
+      
       let data = {
         schoolid: this.school.schoolid,
         schoolname: this.school.schoolname,

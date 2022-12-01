@@ -16,7 +16,7 @@
         <div class="flex items-center">
          
 
-          <span class="mx-2 text-2xl font-bold text-black align-center">SCHOOL MANAGEMENT</span>
+          <span class="mx-47 text-2xl font-bold text-black align-center">SCHOOL MANAGEMENT</span>
         </div>
       </div>
     </div>
