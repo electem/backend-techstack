@@ -1,38 +1,36 @@
 import { Component } from "react";
-import SchoolService from "../services/school.service";
+import StudentService from "../../services/student.service";
 import { Link, RouteComponentProps } from "react-router-dom";
-import { School } from "../types/school.type";
+import { Student } from "../../types/student.type";
 
 interface RouterProps {}
 
 type Props = RouteComponentProps<RouterProps>;
 
 type State = {
-  schools: Array<School>;
-  currentSchool: School;
+  students: Array<Student>;
 };
 
-export default class SchoolsList extends Component<Props, State> {
+export default class StudentsList extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
-    this.retrieveSchools = this.retrieveSchools.bind(this);
-    this.deleteSchool = this.deleteSchool.bind(this);
+    this.retrieveStudents = this.retrieveStudents.bind(this);
+    this.deleteStudent = this.deleteStudent.bind(this);
 
     this.state = {
-      schools: [],
-      currentSchool: {},
+      students: [],
     };
   }
 
   componentDidMount() {
-    this.retrieveSchools();
+    this.retrieveStudents();
   }
 
-  retrieveSchools() {
-    SchoolService.getSchools()
-      .then((response: any) => {
+  retrieveStudents() {
+    StudentService.getStudents()
+      .then((response) => {
         this.setState({
-          schools: response.data,
+          students: response.data,
         });
       })
       .catch((e: Error) => {
@@ -40,11 +38,11 @@ export default class SchoolsList extends Component<Props, State> {
       });
   }
 
-  deleteSchool(id: any) {
-    SchoolService.delete(id)
-      .then((response: any) => {
+  deleteStudent(id: number) {
+    StudentService.delete(id)
+      .then((response) => {
         console.log(response.data);
-        this.props.history.push("/schools");
+        this.props.history.push("/students");
       })
       .catch((e: Error) => {
         console.log(e);
@@ -52,19 +50,19 @@ export default class SchoolsList extends Component<Props, State> {
   }
 
   render() {
-    const { schools } = this.state;
+    const { students } = this.state;
 
     return (
       <>
-        <div className="list row">
-          <Link to={"/add-school"}>
+        <div>
+          <Link to={"/add-student"}>
             <button type="button" className="btn btn-success">
-              Add School
+              Add Student
             </button>
           </Link>
         </div>
-        <h4>Schools List</h4>
-        <div className="list1 row">
+        <h4>Students List</h4>
+        <div className="list row">
           <div className="col-md-6">
             <table className="table table-bordered table-striped table-hover">
               <thead>
@@ -72,22 +70,30 @@ export default class SchoolsList extends Component<Props, State> {
                   <th>ID</th>
                   <th>Name</th>
                   <th>Address</th>
+                  <th>Gender</th>
+                  <th>DOB</th>
+                  <th>Email</th>
                   <th>Created Date</th>
+                  <th>Phone No</th>
                   <th>Action</th>
                 </tr>
               </thead>
               <tbody>
-                {schools.map((school: School) => {
+                {students.map((student: Student) => {
                   return (
-                    <tr key={school.schoolId}>
-                      <td>{school.schoolId}</td>
-                      <td>{school.schoolName}</td>
-                      <td>{school.address}</td>
-                      <td>{school.createdDate}</td>
+                    <tr key={student.studentId}>
+                      <td>{student.studentId}</td>
+                      <td>{student.studentName}</td>
+                      <td>{student.address}</td>
+                      <td>{student.gender}</td>
+                      <td>{student.dateOfBirth}</td>
+                      <td>{student.email}</td>
+                      <td>{student.createdDate}</td>
+                      <td>{student.phoneNo}</td>
                       <td>
                         {
                           <>
-                            <Link to={"/schools/" + school?.schoolId}>
+                            <Link to={"/students/" + student.studentId}>
                               <button
                                 type="button"
                                 className="badge badge-primary"
@@ -100,7 +106,7 @@ export default class SchoolsList extends Component<Props, State> {
                                 type="button"
                                 className="badge badge-danger"
                                 onClick={() =>
-                                  this.deleteSchool(school.schoolId)
+                                  this.deleteStudent(student.studentId!)
                                 }
                               >
                                 Delete

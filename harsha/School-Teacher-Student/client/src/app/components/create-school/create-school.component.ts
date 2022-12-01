@@ -16,7 +16,7 @@ import { TeacherService } from 'src/app/services/teacher.service';
 })
 export class CreateSchoolComponent implements OnInit {
   registerForm!: FormGroup;
-  submitted: boolean = false;
+  submitted!: boolean;
   teachers: Teacher[] = [];
   addedTeachers: Teacher[] = [];
   selectedTeacher?: Teacher = {};
@@ -89,7 +89,7 @@ export class CreateSchoolComponent implements OnInit {
     this.currentSchool = await this.schoolService.getSchoolById(id);
   }
 
-  async onSelectingTeacher(teacher: any): Promise<void> {
+  async onSelectingTeacher(teacher: any) {
     this.selectedTeacher = teacher;
     this.addedTeachers.push(this.selectedTeacher!);
   }
@@ -99,7 +99,7 @@ export class CreateSchoolComponent implements OnInit {
     this.addedTeachers.push(this.selectedTeacher!);
   }
 
-  async onSelectingStudent(student: any): Promise<void> {
+  async onSelectingStudent(student: any) {
     this.selectedStudent = student;
     this.addedStudents.push(this.selectedStudent!);
   }

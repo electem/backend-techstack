@@ -10,8 +10,16 @@ class TeacherService {
     return http.post<Teacher>("/createTeacher", teacher);
   }
 
-  delete(id: any) {
-    return http.delete<any>(`/deleteTeacher/${id}`);
+  get(id: any) {
+    return http.get<Teacher>(`/teacher/${id}`);
+  }
+
+  update(teacher: Teacher, id: number) {
+    return http.put<Teacher>(`/updateTeacher/${id}`, teacher);
+  }
+
+  delete(id: number) {
+    return http.delete(`/deleteTeacher/${id}`);
   }
 }
 

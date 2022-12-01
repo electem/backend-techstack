@@ -19,9 +19,70 @@
   margin: auto;
 }
 .badge {
-  width: 80%;
+  width: 100%;
 }
 
 h4 {
   padding-left: 400px;
+  color: rgb(23, 131, 41);
+}
+
+.search{
+  max-width: 200px;
+}
+.chart{
+  float: left;
+  width: 500px;
+}
+.divChart{
+  float: right;
+  width: 500px;
+}
+
+.card-container.card {
+  max-width: 350px !important;
+  padding: 40px 40px;
+}
+
+.panel{
+  background: linear-gradient(to right,#353447, #211801);
+  padding: 0;
+  border-radius: 10px;
+  border: none;
+}
+
+.panel .panel-heading .btn{
+  color: rgba(215, 246, 11, 0.914);
+  background: transparent;
+  font-size: 16px;
+  text-transform: capitalize;
+  border: 2px solid #fff;
+  border-radius: 50px;
+}
+
+.panel .panel-heading{
+  padding: 20px 15px;
+  border-radius: 10px 10px 0 0;
+  margin: 0;
+}
+
+.panel .panel-heading .btn:hover{
+  color: rgb(38, 16, 239);
+}
+.panel .panel-body{ padding: 0; }
+.panel .panel-body .table thead tr th{
+  color: #fff;
+  background-color:rgba(255, 255, 255, 0.2);
+  font-size: 16px;
+  font-weight: 500;
+  text-transform: uppercase;
+  padding: 12px;
+  text-align: center;
+}
+.panel .panel-body .table tbody tr td{
+  color: #fff;
+  font-size: 16px;
+  padding: 10px 12px;
+  vertical-align: middle;
+  text-align: center;
 }

@@ -1,9 +1,11 @@
 import { Component } from "react";
-import TeacherService from "../services/teacher.service";
-import { Link } from "react-router-dom";
-import { Teacher } from "../types/teacher.type";
+import TeacherService from "../../services/teacher.service";
+import { Link, RouteComponentProps } from "react-router-dom";
+import { Teacher } from "../../types/teacher.type";
 
-type Props = {};
+interface RouterProps {}
+
+type Props = RouteComponentProps<RouterProps>;
 
 type State = {
   teachers: Array<Teacher>;
@@ -13,6 +15,7 @@ export default class TeachersList extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.retrieveTeachers = this.retrieveTeachers.bind(this);
+    this.deleteTeacher = this.deleteTeacher.bind(this);
 
     this.state = {
       teachers: [],
@@ -25,10 +28,21 @@ export default class TeachersList extends Component<Props, State> {
 
   retrieveTeachers() {
     TeacherService.getTeachers()
-      .then((response: any) => {
+      .then((response) => {
         this.setState({
           teachers: response.data,
         });
+      })
+      .catch((e: Error) => {
+        console.log(e);
+      });
+  }
+
+  deleteTeacher(id: number) {
+    TeacherService.delete(id)
+      .then((response) => {
+        console.log(response.data);
+        this.props.history.push("/teachers");
       })
       .catch((e: Error) => {
         console.log(e);
@@ -76,11 +90,27 @@ export default class TeachersList extends Component<Props, State> {
                       <td>{teacher.phoneNo}</td>
                       <td>
                         {
-                          <Link to={"/edit-teacher"}>
-                            <button type="button" className="btn btn-primary">
-                              Edit
-                            </button>
-                          </Link>
+                          <>
+                            <Link to={"/teachers/" + teacher.teacherId}>
+                              <button
+                                type="button"
+                                className="badge badge-primary"
+                              >
+                                Edit
+                              </button>
+                            </Link>
+                            <Link to={"/"}>
+                              <button
+                                type="button"
+                                className="badge badge-danger"
+                                onClick={() =>
+                                  this.deleteTeacher(teacher.teacherId!)
+                                }
+                              >
+                                Delete
+                              </button>
+                            </Link>
+                          </>
                         }
                       </td>
                     </tr>

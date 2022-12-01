@@ -1,7 +1,9 @@
 label {
-    display: block;
+    display: flex;
     margin-top: 10px;
+    padding-left:130px ;
     color: yellow;
+    font-family: 'Times New Roman', Times, serif;
   }
   
   .card-container.card {
@@ -30,4 +32,9 @@ label {
     -moz-border-radius: 50%;
     -webkit-border-radius: 50%;
     border-radius: 50%;
+  }
+
+  h1{
+    color: greenyellow;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   }

@@ -1,25 +1,24 @@
 import { ChangeEvent, Component } from "react";
 import { Link, RouteComponentProps } from "react-router-dom";
-import { Student } from "../types/student.type";
-import SchoolService from "../services/school.service";
-import StudentService from "../services/student.service";
-import { School } from "../types/school.type";
+import { Student } from "../../types/student.type";
+import SchoolService from "../../services/school.service";
+import StudentService from "../../services/student.service";
+import { School } from "../../types/school.type";
+import http from "../../http-common";
 
 interface RouterProps {}
 
 type Props = RouteComponentProps<RouterProps>;
 
 type State = Student & {
-  schools: Array<School>;
-  submitted: boolean;
+  schoolsList: Array<School>;
+  selectedFiles: "";
 };
 
-const genders = [
-  { value: "Male" },
-  { value: "Female" },
-];
+const genders = [{ value: "Male" }, { value: "Female" }];
 
 export default class AddStudent extends Component<Props, State> {
+  currentSchool: School = {};
   constructor(props: Props) {
     super(props);
     this.onChangeName = this.onChangeName.bind(this);
@@ -28,19 +27,22 @@ export default class AddStudent extends Component<Props, State> {
     this.onChangeEmail = this.onChangeEmail.bind(this);
     this.onChangeDateOfBirth = this.onChangeDateOfBirth.bind(this);
     this.onChangePhoneNo = this.onChangePhoneNo.bind(this);
-    this.onChangeSchools = this.onChangeSchools.bind(this);
+    this.onChangeSchool = this.onChangeSchool.bind(this);
     this.saveStudent = this.saveStudent.bind(this);
+    this.onChooseFile = this.onChooseFile.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
       studentName: "",
       address: "",
       gender: "",
       email: "",
-      dateOfBirth:"",
-      phoneNo: undefined,
-      school: {},
-      schools: [],
-      submitted: false,
+      dateOfBirth: "",
+      school: {
+        schoolName: "",
+      },
+      schoolsList: [],
+      selectedFiles: "",
     };
   }
 
@@ -84,26 +86,39 @@ export default class AddStudent extends Component<Props, State> {
     });
   }
 
-  onChangeSchools(event: any) {
+  onChangeSchool(event:  ChangeEvent<HTMLSelectElement>) {
+    const schoolData = this.state.schoolsList.filter(
+      (school) => school.schoolName === event.target.value
+    );
+    this.currentSchool = schoolData[0];
     this.setState({
-      school: event.target.value,
+      school: this.currentSchool,
+    });
+  }
+
+  onChooseFile(event: any) {
+    this.setState({ selectedFiles: event.target.files[0] });
+  }
+
+  onSubmit(event: any) {
+    event.preventDefault();
+    const formData = new FormData();
+    formData.append("file", this.state.selectedFiles);
+    http.post("uploadFile", formData, {}).then((res) => {
+      console.log(res);
     });
   }
 
   retrieveSchools() {
     SchoolService.getSchools()
-      .then((response: any) => {
+      .then((response) => {
         this.setState({
-          schools: response.data,
+          schoolsList: response.data,
         });
       })
       .catch((e: Error) => {
         console.log(e);
       });
-  }
-
-  getGenders() {
-    StudentService.getGenders();
   }
 
   saveStudent() {
@@ -112,22 +127,24 @@ export default class AddStudent extends Component<Props, State> {
       address: this.state.address,
       email: this.state.email,
       gender: this.state.gender,
+      dateOfBirth: this.state.dateOfBirth,
       phoneNo: this.state.phoneNo,
       school: this.state.school,
     };
 
     StudentService.create(student)
-      .then((response: any) => {
+      .then((response) => {
         this.setState({
           studentId: response.data.studentId,
           studentName: response.data.studentName,
           address: response.data.address,
-          email: response.state.email,
-          gender: response.state.gender,
-          phoneNo: response.state.phoneNo,
+          email: response.data.email,
+          gender: response.data.gender,
+          dateOfBirth: response.data.dateOfBirth,
+          phoneNo: response.data.phoneNo,
           school: response.data.school,
-          submitted: true,
         });
+        this.props.history.push("/students");
       })
       .catch((e: Error) => {
         console.log(e);
@@ -135,7 +152,7 @@ export default class AddStudent extends Component<Props, State> {
   }
 
   render() {
-    const { studentName, address, email, dateOfBirth, phoneNo, schools } =
+    const { studentName, address, email, dateOfBirth, phoneNo, schoolsList } =
       this.state;
 
     return (
@@ -221,14 +238,13 @@ export default class AddStudent extends Component<Props, State> {
           </div>
 
           <div className="form-group">
-            <select>
+            <select onChange={(event) => this.onChangeSchool(event)}>
               <option value="">Select School</option>
-              {schools.map((school) => (
+              {schoolsList.map((school) => (
                 <option
                   key={school.schoolId}
                   typeof="checked"
                   value={school.schoolName}
-                  onChange={this.onChangeSchools}
                 >
                   {school.schoolName}
                 </option>
@@ -236,6 +252,19 @@ export default class AddStudent extends Component<Props, State> {
             </select>
           </div>
 
+          <div>
+            <label className="form-group">
+              <input type="file" onChange={this.onChooseFile} />
+            </label>
+            <button
+              type="button"
+              className="btn btn-secondary"
+              onClick={this.onSubmit}
+            >
+              Upload
+            </button>
+          </div>
+          <br />
           <button
             onClick={this.saveStudent}
             type="button"

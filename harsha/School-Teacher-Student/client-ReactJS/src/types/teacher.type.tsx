@@ -1,7 +1,7 @@
 import { School } from "./school.type";
 
 export interface Teacher {
-  teacherId?: number;
+  teacherId?: number | null;
   teacherName?: string;
   gender?: string;
   address?: string;

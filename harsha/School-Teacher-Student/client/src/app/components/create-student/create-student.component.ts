@@ -14,7 +14,7 @@ import { StudentService } from '../../services/student.service';
 })
 export class CreateStudentComponent implements OnInit {
   registerForm!: FormGroup;
-  submitted: boolean = false;
+  submitted!: boolean;
   schools: School[] = [];
   genders: string[] = [];
   selectedSchool: School = {};
@@ -127,8 +127,8 @@ export class CreateStudentComponent implements OnInit {
     this.router.navigate(['/student-list']);
   }
 
-  selectFile(event: any): void {
-    this.selectedFiles = event.target.files;
+  selectFile(event: Event): void {
+    this.selectedFiles = (event.target as HTMLInputElement).files!;
   }
 
   upload(): void {

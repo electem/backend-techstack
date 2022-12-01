@@ -2,7 +2,7 @@ import { Student } from "./student.type";
 import { Teacher } from "./teacher.type";
 
 export interface School {
-  schoolId?: number | null;
+  schoolId?: number ;
   schoolName?: string;
   address?: string;
   createdDate?: string;

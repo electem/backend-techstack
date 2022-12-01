@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Login } from 'src/app/models/user-login.model';
 import { AuthService } from 'src/app/services/auth.service';
@@ -8,7 +8,7 @@ import { AuthService } from 'src/app/services/auth.service';
   templateUrl: './user-login.component.html',
   styleUrls: ['./user-login.component.css'],
 })
-export class UserLoginComponent implements OnInit {
+export class UserLoginComponent {
   userLogin: Login = {
     username: '',
     password: '',
@@ -19,11 +19,9 @@ export class UserLoginComponent implements OnInit {
 
   constructor(private authService: AuthService, private router: Router) {}
 
-  ngOnInit(): void {}
-
   onSubmit() {
     this.authService.userLogin(this.userLogin).subscribe(
-      (data) => {
+      () => {
         this.isLoggedIn = true;
         this.isLoginFailed = false;
         this.router.navigate(['/school-list']);

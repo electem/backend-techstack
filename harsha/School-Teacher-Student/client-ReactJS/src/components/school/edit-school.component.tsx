@@ -1,12 +1,12 @@
 import Multiselect from "multiselect-react-dropdown";
 import { Component, ChangeEvent } from "react";
 import { Link, RouteComponentProps } from "react-router-dom";
-import SchoolService from "../services/school.service";
-import TeacherService from "../services/teacher.service";
-import StudentService from "../services/student.service";
-import { School } from "../types/school.type";
-import { Student } from "../types/student.type";
-import { Teacher } from "../types/teacher.type";
+import SchoolService from "../../services/school.service";
+import TeacherService from "../../services/teacher.service";
+import StudentService from "../../services/student.service";
+import { School } from "../../types/school.type";
+import { Student } from "../../types/student.type";
+import { Teacher } from "../../types/teacher.type";
 
 interface RouterProps {
   // type for `match.params`
@@ -17,8 +17,8 @@ type Props = RouteComponentProps<RouterProps>;
 
 type State = {
   currentSchool: School;
-  students:Array<Student>,
-  teachers:Array<Teacher>
+  students: Array<Student>;
+  teachers: Array<Teacher>;
 };
 
 export default class EditSchool extends Component<Props, State> {
@@ -31,12 +31,11 @@ export default class EditSchool extends Component<Props, State> {
 
     this.state = {
       currentSchool: {
-        schoolId: null,
         schoolName: "",
         address: "",
       },
-      teachers:[],
-      students:[]
+      teachers: [],
+      students: [],
     };
   }
 
@@ -71,7 +70,7 @@ export default class EditSchool extends Component<Props, State> {
   }
   retrieveTeachers() {
     TeacherService.getTeachers()
-      .then((response: any) => {
+      .then((response) => {
         this.setState({
           teachers: response.data,
         });
@@ -83,7 +82,7 @@ export default class EditSchool extends Component<Props, State> {
 
   retrieveStudents() {
     StudentService.getStudents()
-      .then((response: any) => {
+      .then((response) => {
         this.setState({
           students: response.data,
         });
@@ -95,11 +94,10 @@ export default class EditSchool extends Component<Props, State> {
 
   getSchool(id: string) {
     SchoolService.get(id)
-      .then((response: any) => {
+      .then((response) => {
         this.setState({
           currentSchool: response.data,
         });
-        console.log(response.data);
       })
       .catch((e: Error) => {
         console.log(e);
@@ -109,9 +107,9 @@ export default class EditSchool extends Component<Props, State> {
   updateSchool() {
     SchoolService.update(
       this.state.currentSchool,
-      this.state.currentSchool.schoolId
+      this.state.currentSchool.schoolId!
     )
-      .then((response: any) => {
+      .then((response) => {
         console.log(response.data);
         this.props.history.push("/schools");
       })
@@ -150,26 +148,26 @@ export default class EditSchool extends Component<Props, State> {
             </div>
 
             <div className="form-group">
-            <label >Teachers</label>
-            <Multiselect
-              options={teachers}
-              selectedValues={currentSchool.teachers}
-              closeIcon="close"
-              placeholder="Choose Teachers"
-              displayValue="teacherName"
-            />
-          </div>
+              <label>Teachers</label>
+              <Multiselect
+                options={teachers}
+                selectedValues={currentSchool.teachers}
+                closeIcon="close"
+                placeholder="Choose Teachers"
+                displayValue="teacherName"
+              />
+            </div>
 
             <div className="form-group">
-            <label >Teachers</label>
-            <Multiselect
-              options={students}
-              selectedValues={currentSchool.students}
-              closeIcon="close"
-              placeholder="Choose Students"
-              displayValue="studentName"
-            />
-          </div>
+              <label>Students</label>
+              <Multiselect
+                options={students}
+                selectedValues={currentSchool.students}
+                closeIcon="close"
+                placeholder="Choose Students"
+                displayValue="studentName"
+              />
+            </div>
           </form>
 
           <button
