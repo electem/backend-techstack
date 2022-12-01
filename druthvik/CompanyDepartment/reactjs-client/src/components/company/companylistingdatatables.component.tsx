@@ -1,6 +1,3 @@
-/* eslint-disable react/jsx-no-undef */
-/* eslint-disable jsx-a11y/anchor-has-content */
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import { ChangeEvent, Component } from "react";
 import DataTable from "react-data-table-component";
 import { Link } from "react-router-dom";
@@ -70,7 +67,7 @@ export default class Companylistingdatables extends Component<Props, State> {
         this.companyLists = this.state.company;
       })
       .catch((e: Error) => {
-        console.log(e);
+        alert(e.message);
       });
   }
 
@@ -252,7 +249,6 @@ export default class Companylistingdatables extends Component<Props, State> {
                 </button>
                 <a
                   id="custTableForm:j_idt218:searchIconLinkCustomers"
-                  href="#"
                   className="ui-commandlink ui-widget"
                 ></a>
               </span>
@@ -272,7 +268,6 @@ export default class Companylistingdatables extends Component<Props, State> {
                 </button>
                 <a
                   id="custTableForm:j_idt218:customerSearchClose"
-                  href="#"
                   className="ui-commandlink ui-widget"
                 ></a>
               </span>

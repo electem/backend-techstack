@@ -50,6 +50,7 @@ export default class CreateCompany extends Component<Props, State> {
   }
   saveCompany = () => {
     const data: Company = {
+      id: this.state.id,
       name: this.state.name,
       location: this.state.location,
       email: this.state.email,
@@ -68,7 +69,7 @@ export default class CreateCompany extends Component<Props, State> {
         console.log(response.data);
       })
       .catch((e: Error) => {
-        console.log(e);
+        alert(e.message);
       });
   };
   retrieveDepartment() {
@@ -80,7 +81,7 @@ export default class CreateCompany extends Component<Props, State> {
         });
       })
       .catch((e: Error) => {
-        console.log(e);
+        alert(e.message);
       });
   }
   onDepartmentSelect(event: ChangeEvent<HTMLSelectElement>) {
