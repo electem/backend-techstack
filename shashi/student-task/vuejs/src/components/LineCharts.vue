@@ -29,7 +29,6 @@ import {
 } from "chart.js";
 import School from "@/types/school";
 import studentservice from "@/services/studentservice";
-import ResponseData from "@/types/ResponseData";
 
 ChartJS.register(
   Title,
@@ -131,7 +130,7 @@ export default defineComponent({
 
   methods: {
    async setup() {
-    await  studentservice.getAll().then((response: ResponseData) => {
+    await  studentservice.getAllSchool().then((response) => {
         this.schoolList = response.data;
         console.log(response.data);
         this.schoolNames = this.schoolList.map((school) => school.schoolname);

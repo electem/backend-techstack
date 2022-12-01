@@ -16,23 +16,6 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import("./components/SchoolList.vue"),
   },
   {
-    path: "/",
-    alias: "/tutorials",
-    name: "tutorials",
-    component: () => import("./components/TutorialsList.vue"),
-  },
-  {
-    path: "/tutorials/:id",
-    name: "tutorial-details",
-    component: () => import("./components/TutorialDetails.vue"),
-  },
-  {
-    path: "/add",
-    name: "add",
-    component: () => import("./components/AddTutorial.vue"),
-  },
-
-  {
     path: "/addschool",
     name: "addschool",
     component: () => import("./components/AddSchool.vue"),

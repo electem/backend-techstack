@@ -2,7 +2,6 @@
 import { defineComponent } from "vue";
 import studentservice from "@/services/studentservice";
 import { Student } from "@/types/student";
-import ResponseData from "@/types/ResponseData";
 import School from "@/types/school";
 export default defineComponent({
 
@@ -16,12 +15,12 @@ export default defineComponent({
     };
   },
   methods: {
-    getStudentById(id: any) {
+    getStudentById(id) {
       studentservice
         .getStudentById(id)
-        .then((response: ResponseData) => {
+        .then((response) => {
           this.currentStudent = response.data;
-          console.log(response.data);
+          console.log(response);
         })
         .catch((e: Error) => {
           console.log(e);
@@ -29,8 +28,8 @@ export default defineComponent({
     },
     retrieveSchools() {
       studentservice
-        .getAll()
-        .then((response: ResponseData) => {
+        .getAllSchool()
+        .then((response) => {
           this.schoolList = response.data;
           console.log(response.data);
         })
@@ -38,7 +37,7 @@ export default defineComponent({
           console.log(e);
         });
     },
-    onSchoolSelect(event:any) { 
+    onSchoolSelect(event) { 
       const src = event.target.value;
       const data = this.schoolList.filter((s) => s.schoolid === +src);
      this.currentSchool = data[0];
@@ -46,8 +45,8 @@ export default defineComponent({
     },
     updateStudent() {
         studentservice.updateStudent(this.currentStudent)
-        .then((response: ResponseData) => {
-          console.log(response.data);
+        .then((response) => {
+          console.log(response);
           this.message = "The student was updated successfully!";
         })
         .catch((e: Error) => {
@@ -55,9 +54,9 @@ export default defineComponent({
         });       
     },
     deleteStudent() {
-      studentservice.deleteStudent(this.currentStudent.studentid)
-        .then((response: ResponseData) => {
-          console.log(response.data);
+      studentservice.deleteStudent(this.currentStudent.studentid!)
+        .then((response) => {
+          console.log(response);
           this.$router.push({ name: "studentlist" });
         })
         .catch((e: Error) => {

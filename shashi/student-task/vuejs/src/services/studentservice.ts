@@ -1,59 +1,64 @@
 /* eslint-disable */
-
 import http from "@/http-Studentcommon";
 //const baseUrl = "http://localhost:3000";
+import { Student } from "@/types/student";
+import School from "@/types/school";
+import { Teacher } from "@/types/teacher";
 
 class SchoolDataService {
-  async getAll(): Promise<any> {
+  async getAllSchool() {
     return await http.get("/school");
   }
-  getAllStudents(): Promise<any> {
-    return http.get("/student");
+  async getAllStudents() {
+    return await http.get("/student");
   }
-  getAllTeacherss(): Promise<any> {
+  getAllTeacherss() {
     return http.get("/teacher");
   }
-
-  createSchool(data: any): Promise<any> {
-    return http.post("/school", data);
+  createSchool(schoolData) {
+    return http.post("/school", schoolData);
   }
-  createStudent(data: any): Promise<any> {
-    return http.post("/student", data);
+  // async createSchool(schoolData: School): Promise<School> {
+  //   const response = await http.post("/school", schoolData);
+  //   return response.data;
+  // }
+  createStudent(studentData) {
+    return http.post("/student", studentData).then();
   }
-  createTeacher(data: any): Promise<any> {
-    return http.post("/teacher", data);
+  async createTeacher(teacherData): Promise<Teacher> {
+    return await http.post("/teacher", teacherData);
   }
-  getSchoolById(id: any): Promise<any> {
-    return http.get(`/school/${id}`);
+  async getSchoolById(id: number) {
+    return await http.get(`/school/${id}`);
   }
-  updateSchool(data: any): Promise<any> {
-    return http.put(`/school/`, data);
+  async updateSchool(schoolData): Promise<School> {
+    return await http.put(`/school/`, schoolData);
   }
-  getStudentById(id: any): Promise<any> {
-    return http.get(`/student/${id}`);
+  async getStudentById(id: number) {
+    return await http.get(`/student/${id}`);
   }
-  updateStudent(data: any): Promise<any> {
-    return http.put(`/student/`, data);
+  async updateStudent(studentData): Promise<Student> {
+    return await http.put(`/student/`, studentData);
   }
-  getTeacherById(id: any): Promise<any> {
-    return http.get(`/teacher/${id}`);
+  async getTeacherById(id: number) {
+    return await http.get(`/teacher/${id}`);
   }
-  updateTeacher(data: any): Promise<any> {
-    return http.put(`/teacher/`, data);
+  async updateTeacher(teacherData): Promise<Teacher> {
+    return await http.put(`/teacher/`, teacherData);
   }
-  deleteSchool(id: any): Promise<any> {
-    return http.delete(`/school/${id}`);
+  async deleteSchool(id: number): Promise<School> {
+    return await http.delete(`/school/${id}`);
   }
-  deleteStudent(id: any): Promise<any> {
-    return http.delete(`/student/${id}`);
+  async deleteStudent(id: number): Promise<Student> {
+    return await http.delete(`/student/${id}`);
   }
-  deleteTeacher(id: any): Promise<any> {
-    return http.delete(`/teacher/${id}`);
+  async deleteTeacher(id: number): Promise<Teacher> {
+    return await http.delete(`/teacher/${id}`);
   }
-  uploadFile(file: File) {
+  async uploadFile(file: File) {
     let formData = new FormData();
     formData.append("file", file);
-    return http
+    return await http
       .post("/photos", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
@@ -65,14 +70,6 @@ class SchoolDataService {
       .catch(function () {
         console.log("FAILURE!!");
       });
-  }
-
-  //   deleteAll(): Promise<any> {
-  //     return http.delete(`/tutorials`);
-  //   }
-
-  findByTitle(schoolname: string): Promise<any> {
-    return http.get(`/school?schoolname=${schoolname}`);
   }
 }
 

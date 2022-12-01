@@ -36,11 +36,13 @@ export class Student {
   @Column()
   dob?: Date;
 
-  @ManyToOne(() => School, (school) => school.students)
+  @ManyToOne(() => School, (school) => school.students, {
+    onDelete: 'CASCADE',
+  })
   @JoinColumn()
-  school: School[]
+  school: School[];
 
-  @OneToOne(() => Image, (image) => image.students)
+  @OneToOne(() => Image, (image) => image.students, {})
   @JoinColumn()
   image: Image;
 }

@@ -12,7 +12,6 @@
 import { defineComponent, ref } from "vue";
 import type { Header, Item, ServerOptions } from "vue3-easy-data-table";
 import studentservice from "@/services/studentservice";
-import ResponseData from "@/types/ResponseData";
 import School from "@/types/school";
 
 export default defineComponent({
@@ -41,7 +40,7 @@ export default defineComponent({
         { text: "address", value: "address" },
         { text: "No_Of_Teachers", value: "teacher.length", sortable: true },
       ];
-      studentservice.getAll().then((response: ResponseData) => {
+      studentservice.getAllSchool().then((response) => {
         console.log(response.data);
         this.items = response.data;
       });

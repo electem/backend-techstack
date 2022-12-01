@@ -17,7 +17,7 @@ import { Teacher } from './teacher.entity';
 import { TeacherService } from './teacher.service';
 import { AuthGuard } from '@nestjs/passport';
 
-@UseGuards(AuthGuard())
+//@UseGuards(AuthGuard())
 @Controller('teacher')
 export class TeacherController {
   constructor(private readonly teacherService: TeacherService) {}

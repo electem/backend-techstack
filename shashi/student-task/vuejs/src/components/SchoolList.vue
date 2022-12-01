@@ -123,7 +123,6 @@
 import { computed, ref } from "vue";
 import { defineComponent } from "vue";
 import studentservice from "@/services/studentservice";
-import ResponseData from "@/types/ResponseData";
 import School from "@/types/school";
 import Paginate from "vuejs-paginate";
 
@@ -174,8 +173,8 @@ export default defineComponent({
 
     retrieveSchools() {
       studentservice
-        .getAll()
-        .then((response: ResponseData) => {
+        .getAllSchool()
+        .then((response) => {
           this.schoolList = response.data;
           this.searchedSchools = this.schoolList;
           console.log(response.data);

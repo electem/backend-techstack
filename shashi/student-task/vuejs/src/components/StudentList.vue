@@ -74,7 +74,6 @@
   import { computed, ref } from "vue";
   import { defineComponent } from "vue";
   import studentservice from "@/services/studentservice";
-  import ResponseData from "@/types/ResponseData"; 
   import { Student } from "@/types/student";
   import type { Header, Item } from "vue3-easy-data-table";
   
@@ -92,10 +91,10 @@
       retrieveStudents() {
         studentservice
           .getAllStudents()
-          .then((response: ResponseData) => {
+          .then((response) => {
             this.studentData = response.data;
             this.searchedStudents=this.studentData 
-            console.log(response.data);
+            console.log(response);
           })
           .catch((e: Error) => {
             console.log(e);
@@ -109,18 +108,7 @@
         this.studentData = this.searchedStudents;
       }
       
-    },
-      searchTitle() {
-        studentservice
-          .findByTitle(this.studentname)
-          .then((response: ResponseData) => {
-            this.studentData = response.data;
-            console.log(response.data);
-          })
-          .catch((e: Error) => {
-            console.log(e);
-          });
-      },
+    }      
     },
     mounted() {
       this.retrieveStudents();
