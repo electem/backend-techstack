@@ -64,6 +64,22 @@ const routes: Array<RouteRecordRaw> = [
    name: "edit-student",
     component: () => import("./components/Editstudent.vue"),
   }
+  ,
+  {
+    path: "/BarChart",
+   name: "bar-chart",
+    component: () => import("./components/Barchart.vue"),
+  },
+  {
+    path: "/datatable",
+   name: "Datatable",
+    component: () => import("./components/Datatable.vue"),
+  } ,
+  {
+    path: "/LineChart",
+   name: "line-chart",
+    component: () => import("./components/Linechart.vue"),
+  },
 ];
 
 const router = createRouter({

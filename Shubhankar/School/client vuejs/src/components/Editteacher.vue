@@ -59,42 +59,29 @@
   <label for="Female">Others</label><br>
   <span>Picked: {{ picked }}</span><br>
    </div>
-  
-         <!-- <div class="form-group">
-          <label for="schools">Select School</label><br>
-                <li  :class="{ active: index == currentIndex }"
-                v-for="(school, index) in schools"
-              :key="index">
-                  <label v-bind:for="school.schoolid">
-              <div  >
-                <input type="checkbox" v-model="selectedTeacher.school" v-bind:value="school">
-                  <span>{{ school.schoolname }}</span>
-              </div>
-              </label>
-          </li> -->
-
       
-          <div  class="form-group">
+<br />
+       <div  class="form-group">
             <label for="schools">Select School</label><br>
             <li v-for="(school, index) in schools"
                   :key="index">
-            <input type="checkbox"
+            <input type="checkbox" 
               :fieldId="school.schoolname"
               :label="school.schoolname"
               :checked="value.includes(school.schoolid)"
+              v-on:change="addSchooltoTeacher(school)"
               :key="school"
+              
                />
               <span>{{ school.schoolname }}</span>
               </li>
           </div>
         </div>
       </div>
-
       <button @click="updateTeacher" class="btn btn-success">Update</button>
       <button @click="listingPage" class="btn btn-danger">Cancel</button>
  
 </template>
-
 <!-- eslint-disable prettier/prettier -->
 <script lang="ts">
 import { defineComponent } from "vue";
@@ -111,25 +98,22 @@ export default defineComponent({
   data() {
     return {
         schools:[] as School[],
-         selectedTeacher: {
-             teachername: "",
-             address: "",
-             email: "",
-             gender: "",
-             schools:{}
-           } as Teacher,
+         selectedTeacher: {} as Teacher,
           message: "",
           submitted: false,
           value : [] as number[],
+          SelectedSchool:[] as School[],
+          currentSchool: {} as School,
     };
 },
 
 methods: {
-    updateTeacher() {
-     
+    updateTeacher() {  
+       
      TeacherService.updateTeacher(this.selectedTeacher)
-        .then((response: ResponseData) => {
-          console.log(response.data);
+        .then((response) => {
+          console.log(response);
+           this.$router.replace('/teacher');
           this.message = "the teacher is updated";
         })
         .catch((e: Error) => {
@@ -139,20 +123,30 @@ methods: {
 
     retrieveTeachers(id: any) {
       TeacherService.createTeacherbyId(id)
-        .then((response: ResponseData) => {
+        .then((response) => {
           this.selectedTeacher = response.data;
           for(const i of this.selectedTeacher.schools){
-            this.value.push(i.schoolid!);
-        }
+            this.value.push(i.schoolid);
+          }
+       
         })
         .catch((e: Error) => {
           console.log(e);
         });
     },
+
+    async addSchooltoTeacher(school: School): Promise<void> {
+      if (!this.value.includes(school.schoolid)){
+      this.currentSchool = school;
+      this.selectedTeacher.schools?.push(this.currentSchool);
+      }else{
+     this.selectedTeacher.schools.splice(this.schools.indexOf(this.currentSchool), 1);
+      }
+    },
   
    retrieveSchools() {
       SchoolService.getAllSchool()
-        .then((response: ResponseData) => {
+        .then((response) => {
           this.schools = response.data;
           
         })
@@ -171,7 +165,6 @@ methods: {
  },
 });
 </script>
-
 <!-- eslint-disable prettier/prettier -->
 <style src="vue-multiselect/dist/vue-multiselect.min.css">
 .edit-form {

@@ -1,5 +1,4 @@
 import School from "./School";
-
 /* eslint-disable */
 export default interface Teacher {
     teacherid: number;

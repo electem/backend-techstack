@@ -30,7 +30,7 @@ import {
 } from 'chart.js'
 import Teacher from '@/types/Teacher'
 import TeacherService from '@/services/TeacherService'
-import ResponseData from '@/types/ResponseData'
+
 
 ChartJS.register(
   Title,
@@ -106,7 +106,7 @@ export default defineComponent({
  async setup(){
     await  TeacherService
           .getAllTeachers()
-          .then((response: ResponseData) => {
+          .then((response) => {
               this.teachers = response.data;
               for (const teacher of  this.teachers){
                 this.teacherNames.push(teacher.teachername);
