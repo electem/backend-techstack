@@ -1,13 +1,12 @@
 /* eslint-disable */
 import http from "@/http-common";
 
-
 class TutorialDataService {
-  getAll(): Promise<any> {
-    return http.get("/tutorials");
+async  getAll() {
+    return await http.get("/tutorials");
   }
 
-  get(id: any): Promise<any> {
+  get(id: number) {
     return http.get(`/tutorials/${id}`);
   }
 
@@ -15,12 +14,12 @@ class TutorialDataService {
     return http.post("/tutorials", data);
   }
 
-  update(id: any, data: any): Promise<any> {
-    return http.put(`/tutorials/${id}`, data);
+ async update(id: any, data: any): Promise<any> {
+    return await http.put(`/tutorials/${id}`, data);
   }
 
-  delete(id: any): Promise<any> {
-    return http.delete(`/tutorials/${id}`);
+ async delete(id: any): Promise<any> {
+    return await http.delete(`/tutorials/${id}`);
   }
 
   deleteAll(): Promise<any> {
@@ -30,8 +29,6 @@ class TutorialDataService {
   findByTitle(title: string): Promise<any> {
     return http.get(`/tutorials?title=${title}`);
   }
-
- 
 }
 
 export default new TutorialDataService();

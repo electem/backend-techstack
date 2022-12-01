@@ -1,5 +1,3 @@
-<!-- @format -->
-
 <!-- eslint-disable prettier/prettier -->
 <!-- eslint-disable prettier/prettier -->
 <template>
@@ -7,8 +5,10 @@
   <div class="list row">
     <div class="col-md-8">
       <div class="input-group mb-3">
-        <button type="button" v-on:click="addMessage">Search</button>
-        <input v-model="txtInput" @keyup.enter="addMessage()" />
+        <input type="text" v-model="input" placeholder="Search students..." />
+        <button class="badge badge-success mr-2" @click="searchStudent()">
+          Search
+        </button>
       </div>
 
       <div class="col-md-6">
@@ -83,8 +83,9 @@ export default defineComponent({
   name: "school-list",
   data() {
     return {
-      txtInput: "",
+      input: "",
       students: [] as Student[],
+      searchedStudent: [] as Student[],
       currentStudent: {} as Student,
       currentIndex: -1,
       title: "",
@@ -96,23 +97,22 @@ export default defineComponent({
   methods: {
     retrieveStudents() {
       StudentService.getAllStudents()
-        .then((response: ResponseData) => {
+        .then((response) => {
           this.students = response.data;
-          console.log(response.data);
+          this.searchedStudent = this.students;
         })
         .catch((e: Error) => {
           console.log(e);
         });
     },
 
-    addMessage() {
-      console.log(this.txtInput);
-      if (this.txtInput != "" && this.txtInput) {
-        this.students = this.students.filter((obj) => {
-          return obj.studentname
-            .toLowerCase()
-            .includes(this.txtInput.toLowerCase());
-        });
+    searchStudent() {
+      if (this.input != "") {
+        this.students = this.searchedStudent.filter((student) =>
+          student.studentname.toString().includes(this.input)
+        );
+      } else {
+        this.students = this.searchedStudent;
       }
     },
 
@@ -120,10 +120,10 @@ export default defineComponent({
       this.$router.replace("/createstudent");
     },
 
-    removeStudent(id: any) {
+    removeStudent(id: number) {
       StudentService.deleteStudent(id)
-        .then((response: ResponseData) => {
-          console.log(response.data);
+        .then((response) => {
+          console.log(response);
           this.message = "the student is deleted";
           this.$router.replace("/student");
         })

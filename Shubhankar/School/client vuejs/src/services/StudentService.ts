@@ -1,27 +1,27 @@
 /* eslint-disable */
 import http from "@/http-common";
-
+import Student from "@/types/Student";
 
 class StudentService {
 
-    getAllStudents(): Promise<any> {
-        return http.get("/student");
+  async  getAllStudents() {
+        return await http.get("/student");
       }  
 
-      createStudent(data: any): Promise<any> {
+      createStudent(data: any) {
         return http.post("/student",data);
       }  
 
-      getStudentbyId(id: any) {
+      getStudentbyId(id: number) {
         return http.get(`/student/${id}`);
        }
 
-       updateStudent(data: any): Promise<any> {
-        return http.put("/student",data);
+      async updateStudent(data: any): Promise<Student> {
+        return await http.put("/student",data);
       }  
 
-      deleteStudent(id:any){
-        return http.delete(`/student/${id}`);
+     async deleteStudent(id:number){
+        return await http.delete(`/student/${id}`);
       }
 }
 

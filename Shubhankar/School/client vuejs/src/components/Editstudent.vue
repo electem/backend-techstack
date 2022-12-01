@@ -13,7 +13,6 @@
           name="studentname"
         />
       </div>
-
       <div class="form-group">
         <label for="address">Address</label>
         <input
@@ -24,7 +23,6 @@
           name="address"
         />
       </div>
-
       <div class="form-group">
         <label for="phonenumber">Contact</label>
         <input
@@ -36,7 +34,6 @@
           name="phonenumber"
         />
       </div>
-
       <div class="form-group">
         <label for="email">Email</label>
         <input
@@ -48,8 +45,7 @@
           name="email"
         />
       </div>
-
-      <div class="form-group">
+       <div class="form-group">
         <label for="gender">Gender</label>
         <input
           type="text"
@@ -60,7 +56,6 @@
           name="gender"
         />
       </div>
-        
       <div class="form-group">
         <label for="dateofbirth">Born </label>
         <input
@@ -70,16 +65,14 @@
           required
           v-model="selectedStudent.dateofbirth"
           name="dateofbirth"
-          
         />
       </div>
-
-       <div class="form-group">
+      <div class="form-group">
         <label>School List: </label>
-        <select  v-model="selectedStudent.school.schoolid" @change="onSchoolSelect($event)">
+        <select v-model="selectedStudent.school.schoolid">
           <option>Select School</option>
-          <option           
-            placeholder="select school"           
+          <option
+            placeholder="select school"
             v-for="(school, index) in schools"
             :key="index"
             :value="school.schoolid"
@@ -88,14 +81,11 @@
           </option>
         </select>
       </div>
-
-
       <button @click="updateStudent" class="btn btn-success">Update</button>
-       <button @click="listingPage" class="btn btn-danger">Cancel</button>
+      <button @click="listingPage" class="btn btn-danger">Cancel</button>
     </div>
-    </div>
+  </div>
 </template>
-
 <!-- eslint-disable prettier/prettier -->
 <script lang="ts">
 import { defineComponent } from "vue";
@@ -106,33 +96,31 @@ import Student from "@/types/Student";
 import SchoolService from "@/services/SchoolService";
 
 export default defineComponent({
-  name: "edit-student", 
+  name: "edit-student",
 
-  
   data() {
     return {
-          schools:  [] as School[],
-         selectedStudent:{
-          studentname: '',
-          address: '',
-          phonenumber: '',
-          email: '',
-          gender: '',
-          dateofbirth: '',
-          school: {},
-  
-         } as Student,
-          message: "",
-          submitted: false,
+      schools: [] as School[],
+      selectedStudent: {
+        studentname: "",
+        address: "",
+        phonenumber: "",
+        email: "",
+        gender: "",
+        dateofbirth: "",
+        school: {},
+      } as Student,
+      message: "",
+      submitted: false,
     };
-},
+  },
 
-methods: {
+ methods: {
     updateStudent() {
-     
-     StudentService.updateStudent(this.selectedStudent)
-        .then((response: ResponseData) => {
-          console.log(response.data);
+      StudentService.updateStudent(this.selectedStudent)
+        .then((response) => {
+          console.log(response);
+          this.$router.replace("/student");
           this.message = "the school is updated";
         })
         .catch((e: Error) => {
@@ -142,37 +130,33 @@ methods: {
 
     retrieveStudent(id:any) {
       StudentService.getStudentbyId(id)
-        .then((response: ResponseData) => {
+        .then((response) => {
           this.selectedStudent = response.data;
-          console.log(response.data);
         })
         .catch((e: Error) => {
           console.log(e);
         });
     },
-     retrieveSchools() {
+    retrieveSchools() {
       SchoolService.getAllSchool()
-        .then((response: ResponseData) => {
+        .then((response) => {
           this.schools = response.data;
-          console.log(response.data);
         })
         .catch((e: Error) => {
           console.log(e);
         });
     },
 
-     listingPage(){
-      this.$router.replace('/student');
+    listingPage() {
+      this.$router.replace("/student");
     },
-
-},
-   mounted() {
+  },
+  mounted() {
     this.retrieveStudent(this.$route.params.id);
     this.retrieveSchools();
- },
+  },
 });
 </script>
-
 <!-- eslint-disable prettier/prettier -->
 <style src="vue-multiselect/dist/vue-multiselect.min.css">
 .edit-form {
