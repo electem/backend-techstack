@@ -33,6 +33,7 @@ export default class AddTeacher extends Component<Props, State> {
     this.onChangegender = this.onChangegender.bind(this);
     this.pushSelectedSchool = this.pushSelectedSchool.bind(this.currentSchool);
     this.state = {
+      teacherid: 0,
       name: "",
       address: "",
       email: "",
@@ -47,8 +48,8 @@ export default class AddTeacher extends Component<Props, State> {
 
   retrieveSchools() {
     schoolService
-      .getAll()
-      .then((response: any) => {
+      .getAllSchools()
+      .then((response) => {
         this.setState({
           schools: response.data,
         });
@@ -98,7 +99,8 @@ export default class AddTeacher extends Component<Props, State> {
   }
 
   saveTeacher = () => {
-    const data: TeacherData = {
+    const teacher: TeacherData = {
+      teacherid: this.state.teacherid,
       name: this.state.name,
       address: this.state.address,
       phonenumber: this.state.phonenumber,
@@ -108,8 +110,8 @@ export default class AddTeacher extends Component<Props, State> {
     };
 
     teacherService
-      .create(data)
-      .then((response: any) => {
+      .createTeacher(teacher)
+      .then((response) => {
         this.setState({
           name: response.data.name,
           address: response.data.address,
@@ -128,91 +130,102 @@ export default class AddTeacher extends Component<Props, State> {
     const { name, address, phonenumber, email, schools } = this.state;
 
     return (
-      <div className="submit-form">
-        <div>
-          <div className="form-group">
-            <label htmlFor="name">Name</label>
-            <input
-              type="text"
-              className="form-control"
-              id="name"
-              required
-              value={name}
-              onChange={this.onChangeName}
-              name="name"
-            />
-          </div>
+      <div className="container">
+        <div className="col-md-4 offset-md-4">
+          <h2>Add Teacher</h2>
+          <div className="card mb-4">
+            <div className="card-body">
+              <form>
+                <div>
+                  <div className="form-group">
+                    <label htmlFor="name">Name</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="name"
+                      required
+                      value={name}
+                      onChange={this.onChangeName}
+                      name="name"
+                    />
+                  </div>
 
-          <div className="form-group">
-            <label htmlFor="address">Address</label>
-            <input
-              type="text"
-              className="form-control"
-              id="address"
-              required
-              value={address}
-              onChange={this.onChangeAddress}
-              name="address"
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="phonenumber">Phonenumber</label>
-            <input
-              type="number"
-              className="form-control"
-              id="phonenumber"
-              required
-              value={phonenumber}
-              onChange={this.onChangephonenumber}
-              name="name"
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="name">Email</label>
-            <input
-              type="text"
-              className="form-control"
-              id="name"
-              required
-              value={email}
-              onChange={this.onChangeemail}
-              name="name"
-            />
-          </div>
-          <div className="title">
-            <label htmlFor="name">Gender</label>
-            {genderList.map((x, i) => (
-              <label key={i}>
-                <input
-                  type="radio"
-                  name="gender"
-                  value={x.value}
-                  onChange={this.onChangegender}
-                />{" "}
-                {x.label}
-              </label>
-            ))}
-          </div>
-          <div className="form-group">
-            <label>Schools</label>
+                  <div className="form-group">
+                    <label htmlFor="address">Address</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="address"
+                      required
+                      value={address}
+                      onChange={this.onChangeAddress}
+                      name="address"
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="phonenumber">Phonenumber</label>
+                    <input
+                      type="number"
+                      className="form-control"
+                      id="phonenumber"
+                      required
+                      value={phonenumber}
+                      onChange={this.onChangephonenumber}
+                      name="name"
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="name">Email</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="name"
+                      required
+                      value={email}
+                      onChange={this.onChangeemail}
+                      name="name"
+                    />
+                  </div>
+                  <div className="title">
+                    <label htmlFor="name">Gender</label>
+                    {genderList.map((x, i) => (
+                      <label key={i}>
+                        <input
+                          type="radio"
+                          name="gender"
+                          value={x.value}
+                          onChange={this.onChangegender}
+                        />{" "}
+                        {x.label}
+                      </label>
+                    ))}
+                  </div>
+                  <div className="form-group">
+                    <label>Schools</label>
 
-            {schools?.map((school, i) => (
-              <div key={i}>
-                <input
-                  type="checkbox"
-                  name="schools"
-                  value={school}
-                  onChange={() => this.onChangeSchools(school)}
-                />{" "}
-                {school.name}
-              </div>
-            ))}
+                    {schools?.map((school, i) => (
+                      <div key={i}>
+                        <input
+                          type="checkbox"
+                          name="schools"
+                          onChange={() => this.onChangeSchools(school)}
+                        />{" "}
+                        {school.name}
+                      </div>
+                    ))}
+                  </div>
+                  <Link to={"/teacherlist"}>
+                    <button
+                      onClick={this.saveTeacher}
+                      className="btn btn-success"
+                    >
+                      Create
+                    </button>
+                  </Link>
+                </div>
+              </form>
+            </div>
           </div>
-          <Link to={"/teacherlist"}>
-            <button onClick={this.saveTeacher} className="btn btn-success">
-              Create
-            </button>
-          </Link>
         </div>
       </div>
     );

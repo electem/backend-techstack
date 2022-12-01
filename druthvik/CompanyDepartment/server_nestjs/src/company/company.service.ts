@@ -4,6 +4,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Company } from './company.entity';
 import { CompanyDto } from './company.dto';
+import { PageRequest } from 'src/pagination/page.request.model';
+import { Page } from 'src/pagination/page.model';
 
 @Injectable()
 export class CompanyService {
@@ -51,5 +53,14 @@ export class CompanyService {
   public async deleteCompany(id: number): Promise<void> {
     const comapany = await this.findCompanyWithDepartmentById(id);
     await this.companyRepository.remove(comapany);
+  }
+  public async getAllCompanyByPage(
+    pageRequest: PageRequest,
+  ): Promise<Page<Company>> {
+    const result = await this.companyRepository.findAndCount({
+      skip: (pageRequest.page - 1) * pageRequest.size,
+      take: pageRequest.size,
+    });
+    return Page.from(result[0], result[1], pageRequest);
   }
 }

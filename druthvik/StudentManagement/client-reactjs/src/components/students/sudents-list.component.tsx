@@ -24,8 +24,8 @@ export default class StudentsList extends Component<Props, State> {
     this.retrieveStudents();
   }
   retrieveStudents() {
-    StudentDataService.getAll()
-      .then((response: any) => {
+    StudentDataService.getAllStudents()
+      .then((response) => {
         this.setState({
           students: response.data,
         });
@@ -35,9 +35,9 @@ export default class StudentsList extends Component<Props, State> {
         console.log(e);
       });
   }
-  deleteStudent(id: any) {
-    StudentDataService.delete(id)
-      .then((response: any) => {
+  deleteStudent(id: number) {
+    StudentDataService.deleteStudent(id)
+      .then((response) => {
         console.log(response.data);
         this.props.history.push("/studentlist");
       })
@@ -82,7 +82,7 @@ export default class StudentsList extends Component<Props, State> {
                       </Link>
                       <button
                         type="button"
-                        className="badge badge-danger"
+                        className="badge badge-danger marignleft"
                         onClick={() => this.deleteStudent(item.studentid)}
                       >
                         Delete

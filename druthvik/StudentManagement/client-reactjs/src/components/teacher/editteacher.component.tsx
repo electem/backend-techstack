@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable react/require-render-return */
 import { Component, ChangeEvent } from "react";
 import { Link, RouteComponentProps } from "react-router-dom";
@@ -15,13 +16,13 @@ type State = {
   currentTeacher: TeacherData;
   schools: Array<ISchoolData>;
 };
-const genderList = [{ value: "Male" }, { value: "Female" }];
 
 export default class EditTeacher extends Component<Props, State> {
   schools: ISchoolData[] = [];
   currentTeacher = {} as TeacherData;
   currentSchool = {} as ISchoolData;
   removeSchool = {} as ISchoolData;
+  value: number[] = [];
   constructor(props: Props) {
     super(props);
     this.onChangeName = this.onChangeName.bind(this);
@@ -35,7 +36,7 @@ export default class EditTeacher extends Component<Props, State> {
       this.removeSelectedSchoolFromTeacher.bind(this);
     this.state = {
       currentTeacher: {
-        teacherid: null,
+        teacherid: 0,
         name: "",
         address: "",
         email: "",
@@ -92,8 +93,8 @@ export default class EditTeacher extends Component<Props, State> {
   }
   retrieveSchools() {
     schoolService
-      .getAll()
-      .then((response: any) => {
+      .getAllSchools()
+      .then((response) => {
         this.setState({
           schools: response.data,
         });
@@ -111,8 +112,8 @@ export default class EditTeacher extends Component<Props, State> {
   }
   getTeacher(id: string) {
     teacherService
-      .get(id)
-      .then((response: any) => {
+      .getTeacherById(id)
+      .then((response) => {
         this.setState({
           currentTeacher: response.data,
         });
@@ -124,8 +125,11 @@ export default class EditTeacher extends Component<Props, State> {
   }
   updateTeacher() {
     teacherService
-      .update(this.state.currentTeacher, this.state.currentTeacher.teacherid)
-      .then((response: any) => {
+      .updateTeacher(
+        this.state.currentTeacher,
+        this.state.currentTeacher.teacherid
+      )
+      .then((response) => {
         console.log(response.data);
         this.setState((prevState) => ({
           currentTeacher: {
@@ -157,6 +161,9 @@ export default class EditTeacher extends Component<Props, State> {
       this.state.currentTeacher.school?.indexOf(this.removeSchool),
       1
     );
+  }
+  handleChecked(e: any) {
+    console.log(e.target.checked);
   }
 
   render() {
@@ -215,29 +222,27 @@ export default class EditTeacher extends Component<Props, State> {
           </div>
           <div className="title">
             <label htmlFor="name">Gender</label>
-            {genderList.map((x, i) => (
-              <label key={i}>
-                <input
-                  type="radio"
-                  name="gender"
-                  value={currentTeacher.gender}
-                  onChange={this.onChangeGender}
-                />{" "}
-                {x.value}
-              </label>
-            ))}
+            <input
+              type="radio"
+              name="gender"
+              checked
+              value={currentTeacher.gender}
+              defaultChecked
+              onChange={this.onChangeGender}
+            />{" "}
+            {currentTeacher.gender}
           </div>
+
           <div className="form-group">
             <label>Current Schools</label>
-
             {currentTeacher.school?.map((school, i) => (
               <div key={i}>
                 <input
                   type="checkbox"
                   name="schools"
                   value={school.name}
-                  unselectable="on"
-                  onChange={() => this.removeSelectedSchoolFromTeacher(school)}
+                  checked
+                  onChange={this.handleChecked}
                 />{" "}
                 {school.name}
               </div>
@@ -250,7 +255,6 @@ export default class EditTeacher extends Component<Props, State> {
                 <input
                   type="checkbox"
                   name="schools"
-                  value={currentTeacher.school}
                   onChange={() => this.removeSchoolInSchoolList(school)}
                 />{" "}
                 {school.name}

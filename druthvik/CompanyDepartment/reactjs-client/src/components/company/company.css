@@ -1,0 +1,66 @@
+.buttonstyling {
+  background: #009900;
+  color: white;
+}
+.margin-right {
+  align-items: flex-start;
+}
+
+.padding-left {
+  padding-left: 100px;
+}
+.margin-bottom {
+  margin-bottom: 500px;
+}
+.text-align {
+  float: right;
+  text-align: right;
+}
+.close-button {
+  margin-top: 95px;
+}
+.font {
+  font-size: large;
+}
+.font1 {
+  font-size: medium;
+}
+.padding {
+  padding-bottom: 50px;
+}
+.footer {
+  margin-top: -10px;
+}
+.support {
+  color: crimson;
+  vertical-align: middle;
+  padding-right: 5px;
+  font-size: 32px;
+}
+.copyright {
+  padding-top: 14px;
+}
+.feedback {
+  padding-top: 7px;
+}
+.border {
+  border: white;
+}
+.marginright {
+  padding-left: 100px;
+}
+.fontfamily {
+  font-family: sans-serif;
+}
+
+.title {
+  text-align: center;
+  position: absolute;
+  margin-left: 400px;
+  margin-top: 21px;
+}
+.fontsize {
+  font-size: 30px;
+  text-align: center;
+  margin-left: 150px;
+}

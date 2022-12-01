@@ -3,7 +3,7 @@ import { ChangeEvent, Component } from "react";
 import schoolService from "../../services/school.service";
 import { Link, RouteComponentProps } from "react-router-dom";
 import ISchoolData from "../../types/school.types";
-import Pagination from "@mui/material/Pagination";
+
 //import Pagination from "react-js-pagination";
 interface RouterProps {}
 type Props = RouteComponentProps<RouterProps>;
@@ -23,8 +23,6 @@ export default class SchoolList extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.onChangeSearchTitle = this.onChangeSearchTitle.bind(this);
-    this.handlePageChange = this.handlePageChange.bind(this);
-    this.handlePageSizeChange = this.handlePageSizeChange.bind(this);
     this.state = {
       schools: [],
       searchTitle: "",
@@ -54,8 +52,8 @@ export default class SchoolList extends Component<Props, State> {
 
   retrieveSchools() {
     schoolService
-      .getAll()
-      .then((response: any) => {
+      .getAllSchools()
+      .then((response) => {
         this.setState({
           schools: response.data,
         });
@@ -65,10 +63,10 @@ export default class SchoolList extends Component<Props, State> {
         console.log(e);
       });
   }
-  deleteSchools(id: any) {
+  deleteSchools(id: number) {
     schoolService
-      .delete(id)
-      .then((response: any) => {
+      .deleteSchool(id)
+      .then((response) => {
         console.log(response.data);
         this.props.history.push("/studentlist");
       })
@@ -77,55 +75,12 @@ export default class SchoolList extends Component<Props, State> {
         console.log(e);
       });
   }
-  handlePageChange(event: any, value: any) {
-    this.setState(
-      {
-        page: value,
-      },
-      () => {
-        this.retrieveSchools();
-      }
-    );
-  }
-
-  handlePageSizeChange(event: any) {
-    this.setState(
-      {
-        pageSize: event.target.value,
-        page: 1,
-      },
-      () => {
-        this.retrieveSchools();
-      }
-    );
-  }
 
   render() {
-    const { schools, searchTitle, page, count, pageSize } = this.state;
+    const { schools, searchTitle } = this.state;
 
     return (
       <>
-        <div className="mt-3">
-          {"Items per Page: "}
-          <select onChange={this.handlePageSizeChange} value={pageSize}>
-            {this.pageSizes.map((size) => (
-              <option key={size} value={size}>
-                {size}
-              </option>
-            ))}
-          </select>
-
-          <Pagination
-            className="my-3"
-            count={count}
-            page={page}
-            siblingCount={1}
-            boundaryCount={1}
-            variant="outlined"
-            shape="rounded"
-            onChange={this.handlePageChange}
-          />
-        </div>
         <div className="form-group">
           <input
             type="text"
@@ -176,7 +131,7 @@ export default class SchoolList extends Component<Props, State> {
                               </button>
                               <button
                                 type="button"
-                                className="badge badge-danger"
+                                className="badge badge-danger marignleft"
                                 onClick={() =>
                                   this.deleteSchools(school.schoolid)
                                 }

@@ -25,7 +25,7 @@ export default class studentedit extends Component<Props, State> {
     this.updateStudents = this.updateStudents.bind(this);
     this.state = {
       currentStudent: {
-        studentid: null,
+        studentid: 0,
         name: "",
         address: "",
         email: "",
@@ -92,8 +92,8 @@ export default class studentedit extends Component<Props, State> {
 
   getStudentById(id: string) {
     studentService
-      .get(id)
-      .then((response: any) => {
+      .getStudentById(id)
+      .then((response) => {
         this.setState({
           currentStudent: response.data,
         });
@@ -105,8 +105,8 @@ export default class studentedit extends Component<Props, State> {
   }
   retrieveSchools() {
     schoolService
-      .getAll()
-      .then((response: any) => {
+      .getAllSchools()
+      .then((response) => {
         this.setState({
           school: response.data,
         });
@@ -118,8 +118,11 @@ export default class studentedit extends Component<Props, State> {
 
   updateStudents() {
     studentService
-      .update(this.state.currentStudent, this.state.currentStudent.studentid)
-      .then((response: any) => {
+      .updateStudent(
+        this.state.currentStudent,
+        this.state.currentStudent.studentid
+      )
+      .then((response) => {
         console.log(response.data);
         this.setState((prevState) => ({
           currentStudent: {
@@ -178,7 +181,7 @@ export default class studentedit extends Component<Props, State> {
                   type="radio"
                   name="gender"
                   value={currentStudent.gender}
-                  checked={currentStudent.gender}
+                  checked
                   onChange={this.onChangeGender}
                 />{" "}
                 {currentStudent.gender}

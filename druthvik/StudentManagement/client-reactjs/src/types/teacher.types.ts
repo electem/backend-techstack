@@ -1,6 +1,6 @@
 import ISchoolData from "./school.types";
 export class TeacherData {
-  teacherid?: number | null;
+  teacherid!: number;
   name?: string;
   address?: string;
   phonenumber?: number;
