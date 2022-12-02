@@ -1,5 +1,6 @@
 /* eslint-disable */
 import http from "@/http-Studentcommon";
+import School from "./types/school";
 import SchoolDelete from "./types/schooldelete";
 
 class SchoolDataService {
@@ -8,8 +9,14 @@ class SchoolDataService {
   async getAllSchool() {
     return await http.get("/school/all");
   }
+  createSchool(schoolData: School) {
+    return http.post("/school", schoolData);
+  }
   async getAllStudents() {
     return await http.get("/student");
+  }
+  async getSchoolById(id: number) {
+    return await http.get(`/school/${id}`);
   }
   getAllTeacherss() {
     return http.get("/teacher");

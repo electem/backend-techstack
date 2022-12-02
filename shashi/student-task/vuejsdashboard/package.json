@@ -21,7 +21,9 @@
     "vue-multiselect": "^2.1.6",
     "vue-router": "^4.0.3",
     "vue3-apexcharts": "^1.4.1",
+    "vue3-draggable": "^2.0.9",
     "vue3-easy-data-table": "^1.5.14",
+    "vuedraggable": "^4.1.0",
     "vuejs-paginate": "^2.1.0"
   },
   "devDependencies": {

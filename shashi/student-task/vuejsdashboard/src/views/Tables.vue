@@ -19,7 +19,7 @@
         class="w-50 pl-10 pr-8 py-1 text-indigo-600 border-gray-200 rounded-md sm:w-100 focus:border-indigo-600 focus:ring focus:ring-opacity-40 focus:ring-indigo-500"
         type="text"
         v-model="searchValue"
-         v-on:keyup="whatkey"
+         v-on:keyup="onKeyPressMethod"
         placeholder="Search"
       />
       <button class="badge badge-success mr-2">
@@ -40,28 +40,36 @@
   <br />  
   <EasyDataTable
     v-model:server-options="serverOptions"
-    v-model:items-selected="itemsSelected"
+    v-model:items-selected="selectedSchools"
     header-text-direction="center"
     body-text-direction="center"
     :headers="headers" 
     :items="items"   
     :search-value="searchValue"
     :server-items-length="totalNumberOfSchools"    
-    v-on:click="changeData(serverOptions.page, serverOptions.rowsPerPage,seachedString)" 
-    :rows-items="rowsItemsComputed"    
+    v-on:click="changeData(serverOptions.page, serverOptions.rowsPerPage,searchValue)" 
+    :rows-items="rowsItemsComputed" 
+    :key="currentSchool.schoolid"
     buttons-pagination
   >    
     <template #item-operation>
-      <div>
-        <div class="flex justify-around">
+      <div>            
+        <div class="flex justify-around" >
           <span class="text-yellow-500 flex justify-center">
-            <a href="#" class="mx-2 px-2 rounded-md"
-              ><svg
+            <a href="#" class="mx-2 px-2 rounded-md"            >
+              <router-link
+              :to="('/forms/')"
+              class="badge badge-warning"
+              custom
+              v-slot="{ navigate }"
+            >
+            <svg
                 xmlns="http://www.w3.org/2000/svg"
                 class="h-5 w-5 text-green-700"
                 viewBox="0 0 20 20"
                 fill="currentColor"
-              >
+                @click="(navigate); handleClick(currentSchool)"              
+              >             
                 <path
                   d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z"
                 />
@@ -71,6 +79,7 @@
                   clip-rule="evenodd"
                 />
               </svg>
+            </router-link>
             </a>
             <form method="POST">
               <button class="mx-2 px-2 rounded-md">
@@ -93,14 +102,15 @@
       </div>      
     </template>
   </EasyDataTable>
+  row clicked:{{selectedSchools}}<br />
+  <div id="row-clicked"></div>
 </template>
 <!-- eslint-disable prettier/prettier -->
 <script lang="ts">
-import { computed, defineComponent, ref } from "vue";
-import type { Header, Item, ServerOptions } from "vue3-easy-data-table";
+import {  defineComponent, ref } from "vue";
+import type { Header, ServerOptions } from "vue3-easy-data-table";
 import studentservice from "@/studentservice";
 import School from "@/types/school";
-import DeleteSchool from "@/types/school";
 
 export default defineComponent({
   name: "edit-school",
@@ -109,53 +119,40 @@ export default defineComponent({
       searchedSchools: [] as School[],
       schoolList: [] as School[],
       currentSchool: {} as School,
-      message: "",
       headers: [] as Header[],
       items: [] as School[],
-      teacherCountInschool: [] as number[],
-      loading: ref(false),
-      serverItemsLength: ref(0),
       serverOptions: ref<ServerOptions>({
         page: 1,
         rowsPerPage: 5,
       }),
       totalNumberOfSchools: ref(0),
       rowsItemsComputed: [5, 10, 15, 20],
-      itemsSelected: ref<School[]>([]),
-      selectedSchoolIDs: [] as number[],
-      seachedString: '',
-       searchValue : ref(""),
-        dataTable : ref(),
-        rowsPerPageOptions : ref(),
-rowsPerPageActiveOption :ref(),
+      selectedSchools: ref<School[]>([]),
+      searchValue : ref(""),
     };
   },
   methods: {
-     nextPage()  {
-  this.dataTable.value.nextPage();
-},
- prevPage() {
-  this.dataTable.value.prevPage();
-},
-     updatePage(paginationNumber: number) {
-  this.dataTable.value.updatePage(paginationNumber);
-},
-    changeData(page: number, rowsPerPage: number,seachedString: string) {
-      page= this.serverOptions.page;
+    handleClick(value:School) {
+     console.log(value.schoolid)
+    },
+
+    changeData(page: number, rowsPerPage: number,searchedString: string) {
+      this.serverOptions.page = page;
       this.serverOptions.rowsPerPage = rowsPerPage;
+      this.searchValue= searchedString
       studentservice
         .getAllSchoolPagination(
           this.serverOptions.page,
           this.serverOptions.rowsPerPage,
-         this.seachedString
+         this.searchValue
         )
         .then((response) => {
           this.items = response.data.elements;
           this.totalNumberOfSchools = response.data.totalElements;
         });
     },
+
     async setup() {
-      this.searchValue=''
       this.headers = [
         { text: "School-ID", value: "schoolid", sortable: true },
         { text: "SchoolName", value: "schoolname" },
@@ -166,7 +163,7 @@ rowsPerPageActiveOption :ref(),
         .getAllSchoolPagination(
           this.serverOptions.page,
           this.serverOptions.rowsPerPage,
-          this.seachedString
+          this.searchValue
         )
         .then((response) => {
           this.items = response.data.elements;
@@ -182,7 +179,8 @@ rowsPerPageActiveOption :ref(),
           console.log(e);
         });
     },
-    whatkey(){
+
+    onKeyPressMethod(){
       studentservice
         .getAllSchoolPagination(
           this.serverOptions.page,
@@ -195,11 +193,12 @@ rowsPerPageActiveOption :ref(),
         });     
     },
     async DeleteSelectedSchools() {
-      const result = this.itemsSelected.map((school) => school.schoolid);     
+      const result = this.selectedSchools.map((school) => school.schoolid);     
       await studentservice.deleteSelectedSchool(result);
     },
     DeleteSchoolById(id: number) {
       studentservice.deleteSchool(id);
+      this.setup()
     },
   },
   mounted() {
