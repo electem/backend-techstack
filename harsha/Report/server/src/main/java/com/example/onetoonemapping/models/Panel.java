@@ -31,7 +31,7 @@ public class Panel {
 
 	private String description;
 
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany(cascade = CascadeType.MERGE)
 	@JoinTable(name = "panels_tests", joinColumns = { @JoinColumn(name = "panels_id") }, inverseJoinColumns = {
 			@JoinColumn(name = "tests_id") })
 	private List<Tests> tests;
