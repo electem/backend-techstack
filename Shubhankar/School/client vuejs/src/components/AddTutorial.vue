@@ -1,3 +1,4 @@
+<!-- eslint-disable prettier/prettier -->
 <script lang="ts">
 import { defineComponent } from "vue";
 import TutorialDataService from "@/services/TutorialDataService";
@@ -9,7 +10,6 @@ export default defineComponent({
   data() {
     return {
       tutorial: {
-        id: null,
         title: "",
         description: "",
         published: false,
@@ -42,7 +42,7 @@ export default defineComponent({
   },
 });
 </script>
-
+<!-- eslint-disable prettier/prettier -->
 <style>
 .submit-form {
   max-width: 300px;

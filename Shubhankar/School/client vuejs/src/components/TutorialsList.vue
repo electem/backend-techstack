@@ -1,3 +1,4 @@
+<!-- eslint-disable prettier/prettier -->
 <template>
   <div class="list row">
     <div class="col-md-8">
@@ -65,7 +66,7 @@
     </div>
   </div>
 </template>
-
+<!-- eslint-disable prettier/prettier -->
 <script lang="ts">
 import { defineComponent } from "vue";
 import TutorialDataService from "@/services/TutorialDataService";
@@ -85,9 +86,9 @@ export default defineComponent({
   methods: {
     retrieveTutorials() {
       TutorialDataService.getAll()
-        .then((response: ResponseData) => {
+        .then((response) => {
           this.tutorials = response.data;
-          console.log(response.data);
+          console.log(response);
         })
         .catch((e: Error) => {
           console.log(e);
@@ -107,7 +108,7 @@ export default defineComponent({
 
     removeAllTutorials() {
       TutorialDataService.deleteAll()
-        .then((response: ResponseData) => {
+        .then((response) => {
           console.log(response.data);
           this.refreshList();
         })
@@ -118,7 +119,7 @@ export default defineComponent({
 
     searchTitle() {
       TutorialDataService.findByTitle(this.title)
-        .then((response: ResponseData) => {
+        .then((response) => {
           this.tutorials = response.data;
           this.setActiveTutorial({} as Tutorial);
           console.log(response.data);
@@ -133,7 +134,7 @@ export default defineComponent({
   },
 });
 </script>
-
+<!-- eslint-disable prettier/prettier -->
 <style>
 .list {
   text-align: left;

@@ -1,3 +1,4 @@
+import School from "./School";
 /* eslint-disable */
 export default interface Teacher {
     teacherid: number;
@@ -6,4 +7,5 @@ export default interface Teacher {
     phonenumber:string;
     email:string;
     gender:string;
+    schools:School[];
 }
