@@ -10,6 +10,7 @@ import Card from "../views/CardView.vue";
 import Blank from "../views/BlankView.vue";
 import NotFound from "../views/NotFound.vue";
 import School from "../views/School.vue";
+import Client from "../views/ClientView.vue";
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
@@ -21,6 +22,11 @@ const routes: Array<RouteRecordRaw> = [
     path: "/dashboard",
     name: "Dashboard",
     component: Dashboard,
+  },
+  {
+    path: "/client",
+    name: "Client",
+    component: Client,
   },
   {
     path: "/school",
