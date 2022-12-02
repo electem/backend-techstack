@@ -72,10 +72,9 @@
 <!-- eslint-disable prettier/prettier -->
 <script lang="ts">
 import { defineComponent } from "vue";
-import ResponseData from "@/types/ResponseData";
 import School from "@/types/School";
 import SchoolService from "@/services/SchoolService";
-  import Multiselect from '@suadelabs/vue3-multiselect'
+import Multiselect from '@suadelabs/vue3-multiselect'
 import TeacherService from "@/services/TeacherService";
 import Teacher from "@/types/Teacher";
 import StudentService from "@/services/StudentService";

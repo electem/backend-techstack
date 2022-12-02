@@ -78,7 +78,6 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import School from "@/types/School";
-import ResponseData from "@/types/ResponseData";
 import SchoolService from "@/services/SchoolService";
 
 export default defineComponent({

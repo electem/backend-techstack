@@ -6,7 +6,7 @@
     :items="items"
      border-cell
      show-index
-     multi-sort
+    
   />
 </template>
 <!-- eslint-disable prettier/prettier -->
@@ -14,6 +14,7 @@
 import SchoolService from "@/services/SchoolService";
 import { defineComponent } from "vue";
 import type { Header, Item } from "vue3-easy-data-table";
+import 'vue3-easy-data-table/dist/style.css';
 
 export default defineComponent({
 

@@ -60,8 +60,7 @@
                 </router-link>
                 <button
                   class="badge badge-danger mr-2"
-                  @click="removeStudent(student.studentid)"
-                >
+                  @click="removeStudent(student.studentid)">
                   Delete
                 </button>
               </tr>
@@ -76,7 +75,6 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import Student from "@/types/Student";
-import ResponseData from "@/types/ResponseData";
 import StudentService from "@/services/StudentService";
 
 export default defineComponent({
