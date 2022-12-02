@@ -1,5 +1,5 @@
 export class Department {
   id?: number;
-  name?: string;
+  name!: string;
   type?: string;
 }
