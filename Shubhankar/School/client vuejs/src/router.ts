@@ -4,15 +4,10 @@ import { RouteRecordRaw } from "vue-router";
 
 const routes: Array<RouteRecordRaw> = [
   {
-    path: "/",
-    alias: "/tutorials",
-    name: "tutorials",
-    component: () => import("./components/TutorialsList.vue"),
-  },
-  {
-    path: "/tutorials/:id",
-    name: "tutorial-details",
-    component: () => import("./components/TutorialDetails.vue"),
+    path: "/tablelist",
+    alias: "/tablelist",
+    name: "tablelist",
+    component: () => import("./components/TableList.vue"),
   },
   {
     path: "/school",
@@ -79,7 +74,34 @@ const routes: Array<RouteRecordRaw> = [
     path: "/LineChart",
    name: "line-chart",
     component: () => import("./components/Linechart.vue"),
+  }
+  ,
+  {
+    path: "/charts",
+   name: "charts",
+    component: () => import("./components/Chart.vue"),
   },
+  {
+    path: "/",
+   name: "dashboard",
+    component: () => import("./components/Dashboard.vue"),
+  },
+  {
+    path: "/forms",
+   name: "forms",
+    component: () => import("./components/Forms.vue"),
+  },
+  {
+    path: "/datatableapp",
+   name: "datatable",
+    component: () => import("./components/Datatableapp.vue"),
+  },
+  {
+    path: "/forms/:id",
+   name: "editforms",
+    component: () => import("./components/EditForms.vue"),
+  }
+
 ];
 
 const router = createRouter({

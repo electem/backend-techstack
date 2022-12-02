@@ -30,6 +30,7 @@
     "vuejs-datepicker": "^1.6.2"
   },
   "devDependencies": {
+    "@mdi/font": "^7.0.96",
     "@types/lodash": "^4.14.188",
     "@typescript-eslint/eslint-plugin": "^4.18.0",
     "@typescript-eslint/parser": "^4.18.0",
