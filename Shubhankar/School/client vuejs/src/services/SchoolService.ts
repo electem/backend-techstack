@@ -1,8 +1,11 @@
 /* eslint-disable */
 import http from "@/http-common";
 import School from "@/types/School";
+import schoolRemoved from "@/types/SchoolRemoved";
 
 class SchoolService {
+
+  deleteSchools = {} as schoolRemoved
 
    async getAllSchool(){
       return await http.get("/school/all");
@@ -27,6 +30,12 @@ class SchoolService {
   async getPaginatedSchool(page:number, limit:number,search:string){
   return await http.get(`/school?page=${page}&size=${limit}&search=${search}`);
   } 
+
+ 
+  async  deleteselectedSchool(ids:number[]){
+    this.deleteSchools.ids= ids;
+    return await http.delete(`/school`,{data:this.deleteSchools});
+  }
 }
 
 export default new SchoolService();

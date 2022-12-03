@@ -1,47 +1,13 @@
-<!-- @format -->
-
 <!-- eslint-disable prettier/prettier -->
 <template>
   <!DOCTYPE html>
   <html lang="en">
-    <head>
-      <!-- Required meta tags -->
-      <meta charset="utf-8" />
-      <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1, shrink-to-fit=no"
-      />
-      <title>Breeze Admin</title>
-    </head>
     <body>
       <div class="container-scroller">
         <div class="container-fluid page-body-wrapper">
-          <div id="theme-settings" class="settings-panel">
-            <i class="settings-close mdi mdi-close"></i>
-            <p class="settings-heading">SIDEBAR SKINS</p>
-            <div class="sidebar-bg-options selected" id="sidebar-default-theme">
-              <div class="img-ss rounded-circle bg-light border mr-3"></div>
-              Default
-            </div>
-            <div class="sidebar-bg-options" id="sidebar-dark-theme">
-              <div class="img-ss rounded-circle bg-dark border mr-3"></div>
-              Dark
-            </div>
-            <p class="settings-heading mt-2">HEADER SKINS</p>
-            <div class="color-tiles mx-0 px-4">
-              <div class="tiles light"></div>
-              <div class="tiles dark"></div>
-            </div>
-          </div>
-
           <div class="main-panel">
             <div class="content-wrapper center">
               <div class="page-header">
-                <input
-                  value="Add"
-                  @click="createschool"
-                  class="btn float-right btn-primary"
-                />
                 <h4 class="page-title">School Listing</h4>
                 <nav aria-label="breadcrumb">
                   <ol class="breadcrumb">
@@ -79,14 +45,19 @@
                          :server-items-length="totalNumberOfSchools"
                          :search-value="searchValue"
                           v-on:click="
-                            changeSchool(
-                              serverOptions.page,
-                              serverOptions.rowsPerPage,
-                              seachedkeyword)"
-                              :rows-items="rowsItemsComputed"
+                          changeSchool(
+                          serverOptions.page,
+                          serverOptions.rowsPerPage,
+                          seachedkeyword)"
+                          :rows-items="rowsItemsComputed"
+                          v-model:items-selected="itemsSelected"
                            />
+                            <br />
+                           items selected:<br />
+                          {{ itemsSelected }}
                       </div>
                     </div>
+                    <button class="btn btn-primary mr-2" @click="deleteRow(itemsSelected)">Delete Selected</button>
                   </div>
                 </div>
               </div>
@@ -128,10 +99,24 @@ export default defineComponent({
         rowsPerPage: 5,
       }),
       totalNumberOfSchools: ref(0),
+      itemsSelected: ref<School[]>([]),
     };
   },
 
   methods: {
+
+    deleteRow() {
+      console.log(this.itemsSelected);
+
+      var data = this.itemsSelected.map(t=>t.schoolid);
+      console.log(data);
+       SchoolService.deleteselectedSchool(data)
+      .then((response) => {
+          console.log(response);
+         })
+         this.setup();
+       },
+
     nextPage() {
       this.dataTable.value.nextPage();
     },
