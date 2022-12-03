@@ -53,6 +53,7 @@ export default class Companylistingdatables extends Component<Props, State> {
   }
   componentDidMount() {
     this.retrieveCompany();
+    console.log(this.companyLists);
   }
 
   getAllCompanies(pageNumber: number, pageSize: number, searchTitle: string) {

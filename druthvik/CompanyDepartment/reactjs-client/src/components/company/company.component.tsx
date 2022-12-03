@@ -12,6 +12,7 @@ import {
   Draggable,
   Droppable,
   DropResult,
+  ResponderProvided,
 } from "react-beautiful-dnd";
 import "./company.css";
 type Props = {};
@@ -28,7 +29,7 @@ const getListStyle = (isDraggingOver: boolean) => ({
 const getItemStyle = (isDragging: any, draggableStyle: any) => ({
   // some basic styles to make the items look a bit nicer
   userSelect: "none",
-  padding: grid * 2,
+  padding: grid * 1,
   margin: `0 0 ${grid}px 0`,
 
   // change background colour if dragging
@@ -37,8 +38,11 @@ const getItemStyle = (isDragging: any, draggableStyle: any) => ({
   // styles we need to apply on draggables
   ...draggableStyle,
 });
+const deleteItem = (list: Department[], index: number) => {
+  return list.splice(index, 1);
+};
 export default class CreateCompany extends Component<Props, State> {
-  departmentList: Department[] = [];
+  departmentsLists: Department[] = [];
   selectedDepartments: Department[] = [];
   draggedDepartments: Department[] = [];
   constructor(props: Props) {
@@ -48,6 +52,7 @@ export default class CreateCompany extends Component<Props, State> {
     this.onChangeemail = this.onChangeemail.bind(this);
     this.onDepartmentSelect = this.onDepartmentSelect.bind(this);
     this.saveCompany = this.saveCompany.bind(this);
+    this.onDragEnd = this.onDragEnd.bind(this);
     this.state = {
       id: 0,
       name: "",
@@ -98,7 +103,6 @@ export default class CreateCompany extends Component<Props, State> {
           email: response.data.email,
           department: response.data.department,
         });
-        console.log(response.data);
       })
       .catch((e: Error) => {
         alert(e.message);
@@ -111,7 +115,7 @@ export default class CreateCompany extends Component<Props, State> {
         this.setState({
           departments: response.data,
         });
-        this.departmentList = this.state.departments;
+        this.departmentsLists = this.state.departments;
       })
       .catch((e: Error) => {
         alert(e.message);
@@ -127,27 +131,22 @@ export default class CreateCompany extends Component<Props, State> {
       department: this.selectedDepartments,
     });
   }
-  onDragEnd(e: any) {
-    e.destination = Droppable;
-    console.log(e);
+  onDragEnd(result: DropResult) {
+    const { source, destination } = result;
+    if (!destination) {
+      return;
+    }
+    if (
+      destination.droppableId === source.droppableId &&
+      destination.index === source.index
+    ) {
+      return;
+    }
+    const newDatas = this.state.departments;
+    const [removed] = newDatas.splice(source.index, 1);
+    this.state.draggedDepartments.push(removed);
   }
-  handleOnDragEnd(result: any) {
-    const items = Array.from(this.draggedDepartments);
-    const [reorderedItems] = items.splice(result.source.index, 1);
-    items.splice(result.destination.index, 0, reorderedItems);
 
-    console.log(this.state.draggedDepartments);
-  }
-  handleDragEnd(result: DropResult) {
-    const { draggableId, source, destination } = result;
-    if (!destination) return;
-    if (source.droppableId === destination?.droppableId) return;
-    let filter = true;
-    this.draggedDepartments.map((dept) => {
-      if (dept.name === destination.droppableId) {
-      }
-    });
-  }
   render() {
     const { departments, name, location, email, draggedDepartments } =
       this.state;
@@ -310,8 +309,88 @@ export default class CreateCompany extends Component<Props, State> {
                       ))}
                     </select>
                   </div>
-
                   <div className="col-md-10 col-md-offset-0 col-sm-18 col-sm-offset-3 col-xs-24">
+                    <label
+                      id="custTabs:j_idt287:j_idt289"
+                      className="ui-outputlabel ui-widget"
+                      htmlFor="custTabs:j_idt287:street1"
+                    >
+                      Drag And Drop:
+                    </label>
+                    <DragDropContext onDragEnd={this.onDragEnd}>
+                      <Droppable droppableId="droppable">
+                        {(provided, snapshot) => (
+                          <div
+                            ref={provided.innerRef}
+                            style={getListStyle(snapshot.isDraggingOver)}
+                          >
+                            Went well
+                            {departments.map((item, index) => (
+                              <Draggable
+                                key={item.id}
+                                draggableId={item.name}
+                                index={index}
+                              >
+                                {(provided, snapshot) => (
+                                  <div
+                                    ref={provided.innerRef}
+                                    {...provided.draggableProps}
+                                    {...provided.dragHandleProps}
+                                    style={getItemStyle(
+                                      snapshot.isDragging,
+                                      provided.draggableProps.style
+                                    )}
+                                  >
+                                    {item.name}
+                                  </div>
+                                )}
+                              </Draggable>
+                            ))}
+                            {provided.placeholder}
+                          </div>
+                        )}
+                      </Droppable>
+                      <Droppable droppableId="droppable2">
+                        {(provided, snapshot) => (
+                          <div
+                            ref={provided.innerRef}
+                            style={getListStyle(snapshot.isDraggingOver)}
+                          >
+                            To improve
+                            {draggedDepartments.map((item, index) => (
+                              <Draggable
+                                key={item.id}
+                                draggableId={item.name}
+                                index={index}
+                              >
+                                {(provided, snapshot) => (
+                                  <div
+                                    ref={provided.innerRef}
+                                    {...provided.draggableProps}
+                                    {...provided.dragHandleProps}
+                                    style={getItemStyle(
+                                      snapshot.isDragging,
+                                      provided.draggableProps.style
+                                    )}
+                                  >
+                                    {item.name}
+                                  </div>
+                                )}
+                              </Draggable>
+                            ))}
+                            {provided.placeholder}
+                          </div>
+                        )}
+                      </Droppable>
+                    </DragDropContext>
+                    <div
+                      id="custTabs:j_idt287:j_idt290"
+                      aria-live="polite"
+                      className="ui-message"
+                    ></div>
+                  </div>
+
+                  {/* <div className="col-md-10 col-md-offset-0 col-sm-18 col-sm-offset-3 col-xs-24">
                     <label
                       id="custTabs:j_idt287:j_idt289"
                       className="ui-outputlabel ui-widget"
@@ -367,7 +446,7 @@ export default class CreateCompany extends Component<Props, State> {
                     >
                       Added Departments:
                     </label>
-                    <DragDropContext onDragEnd={this.handleOnDragEnd}>
+                    <DragDropContext onDragEnd={this.onDragEnd}>
                       <Droppable droppableId="droppable2">
                         {(provided, snapshot) => (
                           <div
@@ -406,7 +485,7 @@ export default class CreateCompany extends Component<Props, State> {
                       aria-live="polite"
                       className="ui-message"
                     ></div>
-                  </div>
+                  </div> */}
 
                   {/* <div className="col-md-10 col-md-offset-0 col-sm-18 col-sm-offset-3 col-xs-24">
                     <label
