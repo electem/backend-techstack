@@ -11,6 +11,7 @@ import Blank from "../views/BlankView.vue";
 import NotFound from "../views/NotFound.vue";
 import School from "../views/School.vue";
 import Client from "../views/ClientView.vue";
+import EditSchool from "../views/EditSchoolForm.vue";
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
@@ -37,6 +38,11 @@ const routes: Array<RouteRecordRaw> = [
     path: "/forms",
     name: "Forms",
     component: Forms,
+  },
+  {
+    path: "/editschool/:id",
+    name: "EditSchool",
+    component: EditSchool,
   },
   {
     path: "/cards",

@@ -15,7 +15,7 @@ class SchoolDataService {
   async getAllStudents() {
     return await http.get("/student");
   }
-  async getSchoolById(id: number) {
+  async getSchoolById(id: string | string[]) {
     return await http.get(`/school/${id}`);
   }
   getAllTeacherss() {
@@ -36,6 +36,9 @@ class SchoolDataService {
   }
   async deleteSchool(id: number) {
     return await http.delete(`/school/${id}`);
+  }
+  async updateSchool(schoolData: School): Promise<School> {
+    return await http.put(`/school/`, schoolData);
   }
 }
 
