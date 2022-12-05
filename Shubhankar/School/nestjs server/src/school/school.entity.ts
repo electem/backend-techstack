@@ -31,7 +31,9 @@ export class School {
   @JoinTable()
   teachers!: Teacher[];
 
-  @OneToMany((_type) => Student, (student: Student) => student.school)
+  @OneToMany(() => Student, (student: Student) => student.school, {
+    onDelete: 'CASCADE',
+  })
   students!: Array<Student>;
 }
 
