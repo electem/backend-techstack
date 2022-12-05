@@ -306,7 +306,7 @@
   </header>
 </template>
 
-<script setup lang="ts">
+<script setup  lang="ts">
 import { ref } from "vue";
 import { useSidebar } from "../hooks/useSidebar";
 

@@ -5791,6 +5791,11 @@
     "uuid" "^8.3.2"
     "websocket-driver" "^0.7.4"
 
+"sortablejs@1.14.0":
+  "integrity" "sha512-pBXvQCs5/33fdN1/39pPL0NZF20LeRbLQ5jtnheIPN9JQAaufGjKdWduZn4U7wCtVuzKhmRkI0DFYHYRbB2H1w=="
+  "resolved" "https://registry.npmjs.org/sortablejs/-/sortablejs-1.14.0.tgz"
+  "version" "1.14.0"
+
 "source-map-js@^1.0.2":
   "integrity" "sha512-R0XvVJ9WusLiqTCEiGCmICCMplcCkIwwR11mOSD9CR5u+IXYdiseeEuXCVAjS54zqwkLcPNnmU4OeJ6tUrWhDw=="
   "resolved" "https://registry.npmjs.org/source-map-js/-/source-map-js-1.0.2.tgz"
@@ -6451,7 +6456,7 @@
   "resolved" "https://registry.npmjs.org/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.9.1.tgz"
   "version" "1.9.1"
 
-"vue@^2 || ^3.2.13", "vue@^3.0.0", "vue@^3.0.0-0 || ^2.6.0", "vue@^3.2.0", "vue@^3.2.25", "vue@> 3.0.0", "vue@>=3.0.0", "vue@3.2.31":
+"vue@^2 || ^3.2.13", "vue@^3.0.0", "vue@^3.0.0-0 || ^2.6.0", "vue@^3.0.1", "vue@^3.2.0", "vue@^3.2.25", "vue@> 3.0.0", "vue@>=3.0.0", "vue@3.2.31":
   "integrity" "sha512-odT3W2tcffTiQCy57nOT93INw1auq5lYLLYtWpPYQQYQOOdHiqFct9Xhna6GJ+pJQaF67yZABraH47oywkJgFw=="
   "resolved" "https://registry.npmjs.org/vue/-/vue-3.2.31.tgz"
   "version" "3.2.31"
@@ -6467,12 +6472,24 @@
   "resolved" "https://registry.npmjs.org/vue3-apexcharts/-/vue3-apexcharts-1.4.1.tgz"
   "version" "1.4.1"
 
+"vue3-draggable@^2.0.9":
+  "integrity" "sha512-OpjCSzGpkXsraBJzYrMS5LKXHThb0r+V8zItUNOZF7gZgdH0Cg2IL3XT0x4IhJdMaLvzRZCXE6UQj/459npJIw=="
+  "resolved" "https://registry.npmjs.org/vue3-draggable/-/vue3-draggable-2.0.9.tgz"
+  "version" "2.0.9"
+
 "vue3-easy-data-table@^1.5.14":
   "integrity" "sha512-C5zKzbJ7yUiXJMYRG8j8UnWewALqHlm3g6Ptcvsr21D/iK2bb9ON9/0KA2Ok942+3/mHnnjL0rv1lamONFCBrg=="
   "resolved" "https://registry.npmjs.org/vue3-easy-data-table/-/vue3-easy-data-table-1.5.14.tgz"
   "version" "1.5.14"
   dependencies:
     "vue" "^3.2.25"
+
+"vuedraggable@^4.1.0":
+  "integrity" "sha512-FU5HCWBmsf20GpP3eudURW3WdWTKIbEIQxh9/8GE806hydR9qZqRRxRE3RjqX7PkuLuMQG/A7n3cfj9rCEchww=="
+  "resolved" "https://registry.npmjs.org/vuedraggable/-/vuedraggable-4.1.0.tgz"
+  "version" "4.1.0"
+  dependencies:
+    "sortablejs" "1.14.0"
 
 "vuejs-paginate@^2.1.0":
   "integrity" "sha512-gnwyXlmCiDOu9MLWxN5UJ4PGijKGNOMpHG8ujsrynCzTJljn/rp7Jq0WiDGDAMi5/u0AHuYIHhced+tUW4jblA=="

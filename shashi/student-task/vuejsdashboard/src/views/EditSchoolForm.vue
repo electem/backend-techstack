@@ -3,7 +3,7 @@
     <!-- Breadcrumb -->
     <Breadcrumb breadcrumb="Add School" />
     <div class="mt-3">
-      <h4 class="text-gray-600">Add School</h4>
+      <h4 class="text-gray-600">Edit School</h4>
       <div class="mt-4">
         <div class="p-2 bg-white rounded-md shadow-md">
           <form>
@@ -15,16 +15,18 @@
                 <input
                   class="w-full mt-2 multiselect__tags"
                   type="text"
-                  v-model="school.schoolname"
+                  v-model="currentSchool.schoolname"
                   placeholder="Schoolname"
                 />
               </div>
               <div>
-                <label class="text-gray-700" for="address">School Address</label>
+                <label class="text-gray-700" for="address"
+                  >School Address</label
+                >
                 <input
                   class="w-full mt-2 multiselect__tags"
                   type="text"
-                  v-model="school.address"
+                  v-model="currentSchool.address"
                   placeholder="Address"
                 />
               </div>
@@ -33,7 +35,7 @@
                   class="form-control"
                   id="teacher"
                   required
-                  v-model="selectedTeachers"
+                  v-model="currentSchool.teacher"
                   name="teacher"
                   :options="teacherData"
                   :multiple="true"
@@ -52,7 +54,7 @@
                   class="form-control"
                   id="student"
                   required
-                  v-model="selectedStudents"
+                  v-model="currentSchool.students"
                   name="student"
                   :options="studentData"
                   :multiple="true"
@@ -81,10 +83,10 @@
                 </draggable>
               </div>
               <div class="col px-2 py-2 bg-light border rounded">
-                <h6>Drag to Add Students  ✅</h6>
+                <h6>Drag to Add Students ✅</h6>
                 <draggable
                   class="flip-transition-move"
-                  :list="dragAndDropStudentList"
+                  :list="currentSchool.students"
                   group="my-group"
                 >
                   <template #item="{ element }">
@@ -98,13 +100,13 @@
             <div class="flex justify-end mt-4">
               <button
                 class="px-3 py-1 mr-1 text-gray-200 bg-gray-800 rounded-md hover:bg-gray-700 focus:outline-none focus:bg-gray-700 margin-left"
-                @click="saveSchool"
+                @click="updateSchool()"
               >
-                Save
+                Update
               </button>
               <router-link :to="'/school'" custom v-slot="{ navigate }">
                 <button
-                  class="px-2 py-1  text-gray-200 bg-red-800 rounded-md hover:bg-red-700 focus:outline-none margin-left"
+                  class="px-2 py-1 text-gray-200 bg-red-800 rounded-md hover:bg-red-700 focus:outline-none margin-left"
                   @click="navigate"
                   role="link"
                 >
@@ -128,6 +130,7 @@ import School from "@/types/school";
 import { Teacher } from "@/types/teacher";
 import Multiselect from "@suadelabs/vue3-multiselect";
 import Draggable from "vuedraggable";
+import router from "@/router";
 
 export default defineComponent({
   name: "add-student",
@@ -137,41 +140,31 @@ export default defineComponent({
       successful: false,
       drag: ref(),
       message: "",
-
-      school: {
-        schoolname: "",
-        address: "",
-      } as School,
+      currentSchool: {} as School,
       teacherData: [] as Teacher[],
       studentData: [] as Student[],
+      filteredStudentData: [] as Student[],
       submitted: false,
       selectedTeachers: [] as Teacher[],
       selectedStudents: [] as Student[],
       dragAndDropStudentList: [] as Student[],
     };
   },
-  methods: {
-    getSchoolById(id:string | string[]) {
-      studentservice
+  methods: {  
+    getSchoolById(id: string | string[]) {
+      studentservice      
         .getSchoolById(id)
         .then((response) => {
-          this.school = response.data;
+          this.currentSchool = response.data;
           console.log(response);
+          this.studentData = this.studentData.filter((val) => {
+            return this.currentSchool.students.indexOf(val) == -1;
+          });
+          console.log(   this.filteredStudentData);
         })
         .catch((e: Error) => {
           console.log(e);
         });
-    },
-    saveSchool() {
-      let data = {
-        schoolid: this.school.schoolid,
-        schoolname: this.school.schoolname,
-        address: this.school.address,
-        teacher: this.selectedTeachers,
-        students: this.dragAndDropStudentList,
-      };
-      studentservice.createSchool(data);
-      console.log(data);
     },
     async retrieveTeachers() {
       await studentservice
@@ -187,27 +180,29 @@ export default defineComponent({
       studentservice
         .getAllStudents()
         .then((response) => {
-          this.studentData = response.data;
+          this.studentData = response.data;          
         })
         .catch((e: Error) => {
           console.log(e);
         });
     },
-    checkMove() {
-      console.log("dksjdhash");
-    },
-    newTutorial() {
-      this.submitted = false;
-      this.school = {} as School;
-    },
+    updateSchool() {    
+      studentservice.updateSchool(this.currentSchool)
+      .then((response) => {
+        console.log(response);
+        this.message = "The school was updated successfully!";  
+          
+      })
+      .catch((e: Error) => {
+        console.log(e);
+      });
+      router.push("/school");  
+    },    
   },
   mounted() {
     this.retrieveStudents();
     this.retrieveTeachers();
-    
-      this.getSchoolById(this.$route.params.id);
-    
-  
+    this.getSchoolById(this.$route.params.id);
   },
 });
 </script>
