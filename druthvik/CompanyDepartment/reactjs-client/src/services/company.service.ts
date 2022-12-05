@@ -1,8 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unused-expressions */
+
 import http from "../http-common";
 import { Company } from "../types/company.types";
 import { CompanyDelete } from "../types/companydelete.types";
+import authHeader from "./auth-header";
 const schooldelete = new CompanyDelete();
+
 class CompnayService {
   getAllCompanies(pageNumber: number, pageSize: number, searchString: string) {
     return http.get(
@@ -14,7 +17,7 @@ class CompnayService {
     return http.get("/company/company");
   }
   getAllDepartments() {
-    return http.get("/department");
+    return http.get("/department", { headers: authHeader() });
   }
 
   createCompany(company: Company) {

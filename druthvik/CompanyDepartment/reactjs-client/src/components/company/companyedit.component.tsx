@@ -70,7 +70,7 @@ export default class companyedit extends Component<Props, State> {
         console.log(response.data);
       })
       .catch((e: Error) => {
-        console.log(e);
+        alert(e.message);
       });
   }
   render() {

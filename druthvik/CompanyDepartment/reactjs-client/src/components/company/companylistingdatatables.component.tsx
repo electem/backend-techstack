@@ -1,12 +1,8 @@
-/* eslint-disable react/jsx-no-undef */
-/* eslint-disable jsx-a11y/anchor-has-content */
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import { ChangeEvent, Component } from "react";
 import DataTable from "react-data-table-component";
 import { Link } from "react-router-dom";
 import companyService from "../../services/company.service";
 import { Company } from "../../types/company.types";
-
 import "./company.css";
 import { CompanyDelete } from "../../types/companydelete.types";
 type Props = {};
@@ -57,6 +53,7 @@ export default class Companylistingdatables extends Component<Props, State> {
   }
   componentDidMount() {
     this.retrieveCompany();
+    console.log(this.companyLists);
   }
 
   getAllCompanies(pageNumber: number, pageSize: number, searchTitle: string) {
@@ -70,7 +67,7 @@ export default class Companylistingdatables extends Component<Props, State> {
         this.companyLists = this.state.company;
       })
       .catch((e: Error) => {
-        console.log(e);
+        alert(e.message);
       });
   }
 
@@ -109,7 +106,6 @@ export default class Companylistingdatables extends Component<Props, State> {
     console.log(ids);
     companyService.deleteCompany(ids);
   }
-
   async handleChangeRowsPerPages(pageSize: number) {
     const { searchTitle, pageNumber } = this.state;
     this.getAllCompanies(pageNumber, pageSize, searchTitle);
@@ -161,17 +157,19 @@ export default class Companylistingdatables extends Component<Props, State> {
         name: "Options",
         sortable: true,
         className: "text-center",
-        cell: () => (
-          <Link to={"companyedit/"}>
-            <i
-              style={{
-                color: "blue",
-                paddingRight: "20px",
-              }}
-              className="fa fa-edit fa-2x "
-            ></i>
-            <i style={{ color: "red" }} className="fa fa-trash fa-2x"></i>
-          </Link>
+        cell: (row: Company) => (
+          <>
+            <Link to={"companyedit/" + row.id}>
+              <i
+                style={{
+                  color: "blue",
+                  paddingRight: "20px",
+                }}
+                className="fa fa-edit fa-2x "
+              ></i>
+              <i style={{ color: "red" }} className="fa fa-trash fa-2x"></i>
+            </Link>
+          </>
         ),
       },
     ];
@@ -252,7 +250,6 @@ export default class Companylistingdatables extends Component<Props, State> {
                 </button>
                 <a
                   id="custTableForm:j_idt218:searchIconLinkCustomers"
-                  href="#"
                   className="ui-commandlink ui-widget"
                 ></a>
               </span>
@@ -272,7 +269,6 @@ export default class Companylistingdatables extends Component<Props, State> {
                 </button>
                 <a
                   id="custTableForm:j_idt218:customerSearchClose"
-                  href="#"
                   className="ui-commandlink ui-widget"
                 ></a>
               </span>

@@ -7,6 +7,7 @@ import Company from "./components/company/company.component";
 import CompanyCharts from "./components/company/company.chart";
 import Companylistingdatables from "./components/company/companylistingdatatables.component";
 import companyedit from "./components/company/companyedit.component";
+import Login from "./components/login.component";
 class App extends Component {
   render() {
     return (
@@ -139,6 +140,8 @@ class App extends Component {
               path={["/", "/companyList"]}
               component={Companylistingdatables}
             />
+            <Route path="/companyList" component={Companylistingdatables} />
+            <Route path="/login" component={Login} />
             <Route path="/company" component={Company} />
             <Route path="/companycharts" component={CompanyCharts} />
             <Route path="/companyList" component={Companylistingdatables} />
