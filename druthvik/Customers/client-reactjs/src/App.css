@@ -1,0 +1,49 @@
+.list {
+  text-align: left;
+  max-width: 750px;
+  margin: auto;
+}
+
+.submit-form {
+  max-width: 300px;
+  margin: auto;
+}
+
+.edit-form {
+  max-width: 300px;
+  margin: auto;
+}
+.profile-img-card {
+  width: 96px;
+  height: 96px;
+  margin: 0 auto 10px;
+  display: block;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+}
+.chart {
+  margin-top: 100px;
+  float: left;
+  height: 100px;
+  width: 500px;
+}
+
+.divChart {
+  margin-top: 100px;
+  float: right;
+  height: 100px;
+  width: 500px;
+}
+
+.marignleft {
+  margin-left: 10px;
+}
+
+.cancel {
+  background-color: #555555;
+  margin-left: 143px;
+}
+.marignleftstudent {
+  margin-left: 135px;
+}

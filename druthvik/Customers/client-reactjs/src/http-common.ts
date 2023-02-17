@@ -1,10 +1,9 @@
-/* eslint-disable @typescript-eslint/no-unused-expressions */
 import axios from "axios";
-const token = localStorage.getItem("token");
+import authHeader from "./services/auth-headers";
+
 export default axios.create({
   baseURL: "http://localhost:3000/",
   headers: {
     "Content-type": "application/json",
-    Authorization: `Bearer ${token}`,
   },
 });
