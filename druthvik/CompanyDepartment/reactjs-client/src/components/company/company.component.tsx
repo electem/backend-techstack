@@ -2,82 +2,88 @@
 /* eslint-disable jsx-a11y/anchor-has-content */
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable jsx-a11y/no-redundant-roles */
-import { ChangeEvent, Component } from "react";
-import * as Yup from "yup";
-import { Link } from "react-router-dom";
-import companyService from "../../services/company.service";
-import { Department } from "../../types/department.types";
-import { Company } from "../../types/company.types";
+import { ChangeEvent, Component } from 'react'
+import * as Yup from 'yup'
+import { Link } from 'react-router-dom'
+import companyService from '../../services/company.service'
+import { Department } from '../../types/department.types'
+import { Company } from '../../types/company.types'
 import {
   DragDropContext,
   Draggable,
-  Droppable,
   DropResult,
-} from "react-beautiful-dnd";
-import "./company.css";
-import { Formik, Field, Form, ErrorMessage } from "formik";
-type Props = {};
+  Droppable
+} from 'react-beautiful-dnd'
+import './company.css'
+import { ErrorMessage, Field, Form, Formik } from 'formik'
+type Props = {}
 type State = Company & {
-  departments: Array<Department>;
+  departments: Department[];
   loading: boolean;
   message: string;
-};
+}
 
 export default class CreateCompany extends Component<Props, State> {
-  departmentsLists: Department[] = [];
-  selectedDepartments: Department[] = [];
-  draggedDepartments: Department[] = [];
-  constructor(props: Props) {
-    super(props);
-    this.onChangeName = this.onChangeName.bind(this);
-    this.onChangeAddress = this.onChangeAddress.bind(this);
-    this.onChangeemail = this.onChangeemail.bind(this);
-    this.onDepartmentSelect = this.onDepartmentSelect.bind(this);
-    this.saveCompany = this.saveCompany.bind(this);
+  departmentsLists: Department[] = []
+  selectedDepartments: Department[] = []
+  draggedDepartments: Department[] = []
+  constructor (props: Props) {
+    super(props)
+    this.onChangeName = this.onChangeName.bind(this)
+    this.onChangeAddress = this.onChangeAddress.bind(this)
+    this.onChangeemail = this.onChangeemail.bind(this)
+    this.onDepartmentSelect = this.onDepartmentSelect.bind(this)
+    this.saveCompany = this.saveCompany.bind(this)
     this.state = {
       id: 0,
-      name: "",
-      email: "",
-      location: "",
+      name: '',
+      email: '',
+      location: '',
       departments: [],
       loading: false,
-      message: "",
-    };
+      message: ''
+    }
   }
-  validationSchema() {
+
+  validationSchema () {
     return Yup.object().shape({
-      name: Yup.string().required("This field is required!"),
-      email: Yup.string().required("This field is required!"),
-      phonenumber: Yup.number().required("This field is required!"),
-      departments: Yup.string().required("This field is required!"),
-    });
+      name: Yup.string().required('This field is required!'),
+      email: Yup.string().required('This field is required!'),
+      phonenumber: Yup.number().required('This field is required!'),
+      departments: Yup.string().required('This field is required!')
+    })
   }
-  componentDidMount() {
-    this.retrieveDepartment();
+
+  componentDidMount () {
+    this.retrieveDepartment()
   }
-  onChangeName(e: ChangeEvent<HTMLInputElement>) {
+
+  onChangeName (e: ChangeEvent<HTMLInputElement>) {
     this.setState({
-      name: e.target.value,
-    });
+      name: e.target.value
+    })
   }
-  onChangeAddress(e: ChangeEvent<HTMLInputElement>) {
+
+  onChangeAddress (e: ChangeEvent<HTMLInputElement>) {
     this.setState({
-      location: e.target.value,
-    });
+      location: e.target.value
+    })
   }
-  onChangeemail(e: ChangeEvent<HTMLInputElement>) {
+
+  onChangeemail (e: ChangeEvent<HTMLInputElement>) {
     this.setState({
-      email: e.target.value,
-    });
+      email: e.target.value
+    })
   }
+
   saveCompany = () => {
     const data: Company = {
       id: this.state.id,
       name: this.state.name,
       location: this.state.location,
       email: this.state.email,
-      department: this.state.department,
-    };
+      department: this.state.department
+    }
 
     companyService
       .createCompany(data)
@@ -86,39 +92,41 @@ export default class CreateCompany extends Component<Props, State> {
           name: response.data.name,
           location: response.data.location,
           email: response.data.email,
-          department: response.data.department,
-        });
+          department: response.data.department
+        })
       })
       .catch((e: Error) => {
-        alert(e.message);
-      });
-  };
-  retrieveDepartment() {
+        alert(e.message)
+      })
+  }
+
+  retrieveDepartment () {
     companyService
       .getAllDepartments()
       .then((response) => {
         this.setState({
-          departments: response.data,
-        });
-        this.departmentsLists = this.state.departments;
+          departments: response.data
+        })
+        this.departmentsLists = this.state.departments
       })
       .catch((e: Error) => {
-        alert(e.message);
-      });
-  }
-  onDepartmentSelect(event: ChangeEvent<HTMLSelectElement>) {
-    const select = event.target.value;
-    const departmentSelect = this.state.departments.filter(
-      (s) => s.name === select
-    );
-    this.selectedDepartments.push(departmentSelect[0]);
-    this.setState({
-      department: this.selectedDepartments,
-    });
+        alert(e.message)
+      })
   }
 
-  render() {
-    const { departments, name, location, email } = this.state;
+  onDepartmentSelect (event: ChangeEvent<HTMLSelectElement>) {
+    const select = event.target.value
+    const departmentSelect = this.state.departments.filter(
+      (s) => s.name === select
+    )
+    this.selectedDepartments.push(departmentSelect[0])
+    this.setState({
+      department: this.selectedDepartments
+    })
+  }
+
+  render () {
+    const { departments, name, location, email } = this.state
 
     return (
       <div>
@@ -281,7 +289,7 @@ export default class CreateCompany extends Component<Props, State> {
 
                   <div className="row">
                     <div className="col-xs-24 text-right close-button ">
-                      <Link to={"/companyList"}>
+                      <Link to={'/companyList'}>
                         <button
                           type="button"
                           data-toggle="collapse"
@@ -296,7 +304,7 @@ export default class CreateCompany extends Component<Props, State> {
                         href="#"
                         className="ui-commandlink ui-widget d-none"
                       ></a>
-                      <Link to={"/companyList"}>
+                      <Link to={'/companyList'}>
                         <button
                           onClick={this.saveCompany}
                           id="custTabs:j_idt331"
@@ -318,6 +326,6 @@ export default class CreateCompany extends Component<Props, State> {
           </div>
         </div>
       </div>
-    );
+    )
   }
 }

@@ -1,13 +1,13 @@
-import { ChangeEvent, Component } from "react";
-import DataTable from "react-data-table-component";
-import { Link } from "react-router-dom";
-import companyService from "../../services/company.service";
-import { Company } from "../../types/company.types";
-import "./company.css";
-import { CompanyDelete } from "../../types/companydelete.types";
+import { ChangeEvent, Component } from 'react';
+import DataTable from 'react-data-table-component';
+import { Link } from 'react-router-dom';
+import companyService from '../../services/company.service';
+import { Company } from '../../types/company.types';
+import './company.css';
+import { CompanyDelete } from '../../types/companydelete.types';
 type Props = {};
 type State = {
-  company: Array<Company>;
+  company: Company[];
   searchTitle: string;
   pageNumber: number;
   pageSize: number;
@@ -20,8 +20,8 @@ type State = {
 const tableCustomStyles = {
   headCells: {
     style: {
-      fontSize: "20px",
-      fontWeight: "bold",
+      fontSize: '20px',
+      fontWeight: 'bold',
     },
   },
 };
@@ -41,7 +41,7 @@ export default class Companylistingdatables extends Component<Props, State> {
     this.handleChangeRowsPerPages = this.handleChangeRowsPerPages.bind(this);
     this.state = {
       company: [],
-      searchTitle: "",
+      searchTitle: '',
       pageNumber: 1,
       pageSize: 5,
       noOfRecords: 0,
@@ -51,6 +51,7 @@ export default class Companylistingdatables extends Component<Props, State> {
       selectedCompanyRows: [],
     };
   }
+
   componentDidMount() {
     this.retrieveCompany();
     console.log(this.companyLists);
@@ -80,11 +81,13 @@ export default class Companylistingdatables extends Component<Props, State> {
     const { pageSize, searchTitle } = this.state;
     this.getAllCompanies(pageNumber, pageSize, searchTitle);
   }
+
   onChangeSearchTitle(e: ChangeEvent<HTMLInputElement>) {
     this.setState({
       searchTitle: e.target.value,
     });
   }
+
   retriveSerchedCompany() {
     this.setState({
       pageNumber: 1,
@@ -101,11 +104,13 @@ export default class Companylistingdatables extends Component<Props, State> {
     this.companyDeleteList = state.selectedRows;
     console.log(this.companyDeleteList);
   };
+
   handleDelete() {
     const ids = this.companyDeleteList.map((ids) => ids.id);
     console.log(ids);
     companyService.deleteCompany(ids);
   }
+
   async handleChangeRowsPerPages(pageSize: number) {
     const { searchTitle, pageNumber } = this.state;
     this.getAllCompanies(pageNumber, pageSize, searchTitle);
@@ -116,58 +121,58 @@ export default class Companylistingdatables extends Component<Props, State> {
 
     const columns = [
       {
-        name: "Id",
+        name: 'Id',
         sortable: true,
-        selector: "id",
+        selector: 'id',
         style: {
-          fontSize: "15px",
-          fontWeight: "heavy",
+          fontSize: '15px',
+          fontWeight: 'heavy',
         },
       },
       {
-        name: "Name",
+        name: 'Name',
         sortable: true,
-        selector: "name",
+        selector: 'name',
         style: {
-          fontSize: "15px",
-          fontWeight: "heavy",
+          fontSize: '15px',
+          fontWeight: 'heavy',
         },
       },
       {
-        name: "Location",
-        selector: "location",
+        name: 'Location',
+        selector: 'location',
         sortable: true,
-        className: "text-center",
+        className: 'text-center',
         style: {
-          fontSize: "15px",
-          fontWeight: "heavy",
+          fontSize: '15px',
+          fontWeight: 'heavy',
         },
       },
       {
-        name: "Email",
-        selector: "email",
+        name: 'Email',
+        selector: 'email',
         sortable: true,
-        className: "text-center",
+        className: 'text-center',
         style: {
-          fontSize: "15px",
-          fontWeight: "heavy",
+          fontSize: '15px',
+          fontWeight: 'heavy',
         },
       },
       {
-        name: "Options",
+        name: 'Options',
         sortable: true,
-        className: "text-center",
+        className: 'text-center',
         cell: (row: Company) => (
           <>
-            <Link to={"companyedit/" + row.id}>
+            <Link to={'companyedit/' + row.id}>
               <i
                 style={{
-                  color: "blue",
-                  paddingRight: "20px",
+                  color: 'blue',
+                  paddingRight: '20px',
                 }}
                 className="fa fa-edit fa-2x "
               ></i>
-              <i style={{ color: "red" }} className="fa fa-trash fa-2x"></i>
+              <i style={{ color: 'red' }} className="fa fa-trash fa-2x"></i>
             </Link>
           </>
         ),
@@ -189,7 +194,7 @@ export default class Companylistingdatables extends Component<Props, State> {
               </div>
 
               <div className="col-xs-12 float-right text-right">
-                <Link to={"/company"}>
+                <Link to={'/company'}>
                   <button
                     type="button"
                     className="btn buttonstyling mr-2"
@@ -208,7 +213,7 @@ export default class Companylistingdatables extends Component<Props, State> {
                     aria-expanded="false"
                   >
                     <i className="fa fa-gear Fs14 white"></i> Options
-                    <span className="caret"></span>{" "}
+                    <span className="caret"></span>{' '}
                     <span className="sr-only">Toggle Dropdown</span>
                   </button>
                   <ul className="dropdown-menu">
@@ -236,7 +241,7 @@ export default class Companylistingdatables extends Component<Props, State> {
 
         <br></br>
         <div className="BordRad3">
-          <div id="custom-toolbar" style={{ paddingBottom: "8px" }}>
+          <div id="custom-toolbar" style={{ paddingBottom: '8px' }}>
             <div className="input-group col-xs-24 HoverEffect">
               <input
                 type="hidden"
@@ -299,9 +304,9 @@ export default class Companylistingdatables extends Component<Props, State> {
                     paginationServer={true}
                     paginationPerPage={pageSize}
                     paginationRowsPerPageOptions={[5, 10, 15, 20, 25]}
-                    onChangePage={(page) => this.onChangePage(page)}
+                    onChangePage={async (page) => this.onChangePage(page)}
                     selectableRows
-                    onChangeRowsPerPage={(page) =>
+                    onChangeRowsPerPage={async (page) =>
                       this.handleChangeRowsPerPages(page)
                     }
                     onSelectedRowsChange={this.handleChange}
@@ -309,7 +314,7 @@ export default class Companylistingdatables extends Component<Props, State> {
                       <button
                         key="delete"
                         onClick={this.handleDelete}
-                        style={{ backgroundColor: "red" }}
+                        style={{ backgroundColor: 'red' }}
                       >
                         Delete
                       </button>

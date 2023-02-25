@@ -1,4 +1,4 @@
-import { Department } from "./department.types";
+import { Department } from './department.types';
 export class Company {
   id!: number;
   name?: string;

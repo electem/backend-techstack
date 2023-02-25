@@ -1,15 +1,15 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { Component } from "react";
-import { Switch, Route, Link } from "react-router-dom";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "./App.css";
-import Company from "./components/company/company.component";
-import CompanyCharts from "./components/company/company.chart";
-import Companylistingdatables from "./components/company/companylistingdatatables.component";
-import companyedit from "./components/company/companyedit.component";
-import Login from "./components/login.component";
+import { Component } from 'react'
+import { Link, Route, Switch } from 'react-router-dom'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import './App.css'
+import Company from './components/company/company.component'
+import CompanyCharts from './components/company/company.chart'
+import Companylistingdatables from './components/company/companylistingdatatables.component'
+import companyedit from './components/company/companyedit.component'
+import Login from './components/login.component'
 class App extends Component {
-  render() {
+  render () {
     return (
       <div id="header">
         <script src="js/bootstrap.min.js"></script>
@@ -35,7 +35,7 @@ class App extends Component {
         <div id="layout-topbar" className="ShadowGray">
           <div
             className="font-weight-bold fontfamily title"
-            style={{ textAlign: "center" }}
+            style={{ textAlign: 'center' }}
           >
             <h1>Company Management System</h1>
           </div>
@@ -82,8 +82,8 @@ class App extends Component {
 
         <ul className="BordRad3" id="layout-menu">
           <li>
-            <i style={{ color: "white" }}></i>
-            <Link to={"/companyList"} className="nav-link">
+            <i style={{ color: 'white' }}></i>
+            <Link to={'/companyList'} className="nav-link">
               Home
             </Link>
           </li>
@@ -118,8 +118,8 @@ class App extends Component {
           </li>
           <li className="fa fa-ellipsis-v menu-separator"></li>
           <li>
-            <i className="" style={{ color: "white" }}></i>
-            <Link to={"/companycharts"} className="nav-link">
+            <i className="" style={{ color: 'white' }}></i>
+            <Link to={'/companycharts'} className="nav-link">
               <i className="fa fa-bar-chart-o fa-1x"></i> Reports
             </Link>
           </li>
@@ -137,7 +137,7 @@ class App extends Component {
           <Switch>
             <Route
               exact
-              path={["/", "/companyList"]}
+              path={['/', '/companyList']}
               component={Companylistingdatables}
             />
             <Route path="/companyList" component={Companylistingdatables} />
@@ -149,8 +149,8 @@ class App extends Component {
           </Switch>
         </div>
       </div>
-    );
+    )
   }
 }
 
-export default App;
+export default App

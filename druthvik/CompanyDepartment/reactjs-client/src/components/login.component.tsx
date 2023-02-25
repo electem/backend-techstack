@@ -1,11 +1,10 @@
-import { Component } from "react";
-
-import { Formik, Field, Form, ErrorMessage } from "formik";
-import * as Yup from "yup";
-import AuthService from "../services/auth.service";
-import { RouteComponentProps } from "react-router-dom";
+import { Component } from 'react'
+import { ErrorMessage, Field, Form, Formik } from 'formik'
+import * as Yup from 'yup'
+import AuthService from '../services/auth.service'
+import { RouteComponentProps } from 'react-router-dom'
 interface RouterProps {}
-type Props = RouteComponentProps<RouterProps>;
+type Props = RouteComponentProps<RouterProps>
 
 type State = {
   redirect: string | null;
@@ -13,50 +12,50 @@ type State = {
   password: string;
   loading: boolean;
   message: string;
-};
+}
 
 export default class Login extends Component<Props, State> {
-  constructor(props: Props) {
-    super(props);
-    this.handleLogin = this.handleLogin.bind(this);
+  constructor (props: Props) {
+    super(props)
+    this.handleLogin = this.handleLogin.bind(this)
 
     this.state = {
       redirect: null,
-      username: "",
-      password: "",
+      username: '',
+      password: '',
       loading: false,
-      message: "",
-    };
+      message: ''
+    }
   }
 
-  componentDidMount() {
-    const currentUser = AuthService.getCurrentUser();
-    console.log(currentUser);
+  componentDidMount () {
+    const currentUser = AuthService.getCurrentUser()
+    console.log(currentUser)
   }
 
-  componentWillUnmount() {
-    window.location.reload();
+  componentWillUnmount () {
+    window.location.reload()
   }
 
-  validationSchema() {
+  validationSchema () {
     return Yup.object().shape({
-      username: Yup.string().required("This field is required!"),
-      password: Yup.string().required("This field is required!"),
-    });
+      username: Yup.string().required('This field is required!'),
+      password: Yup.string().required('This field is required!')
+    })
   }
 
-  handleLogin(formValue: { username: string; password: string }) {
-    const { username, password } = formValue;
+  handleLogin (formValue: { username: string; password: string }) {
+    const { username, password } = formValue
 
     this.setState({
-      message: "",
-      loading: true,
-    });
+      message: '',
+      loading: true
+    })
 
     AuthService.login(username, password).then(
       () => {
-        this.setState({});
-        this.props.history.push("/companyList");
+        this.setState({})
+        this.props.history.push('/companyList')
       },
       (error) => {
         const resMessage =
@@ -64,23 +63,23 @@ export default class Login extends Component<Props, State> {
             error.response.data &&
             error.response.data.message) ||
           error.message ||
-          error.toString();
+          error.toString()
 
         this.setState({
           loading: false,
-          message: resMessage,
-        });
+          message: resMessage
+        })
       }
-    );
+    )
   }
 
-  render() {
-    const { loading, message } = this.state;
+  render () {
+    const { loading, message } = this.state
 
     const initialValues = {
-      username: "",
-      password: "",
-    };
+      username: '',
+      password: ''
+    }
 
     return (
       <div className="col-md-12">
@@ -145,6 +144,6 @@ export default class Login extends Component<Props, State> {
           </Formik>
         </div>
       </div>
-    );
+    )
   }
 }
