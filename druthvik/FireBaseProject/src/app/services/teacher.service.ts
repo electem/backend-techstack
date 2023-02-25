@@ -26,11 +26,11 @@ export class TeacherService {
     return this.tutorialsRef;
   }
 
-  createTeacher(tutorial: Teacher): any {
+  createTeacher(tutorial: Teacher): Promise<Teacher> {
     return this.tutorialsRef.push(tutorial);
   }
 
-  updateTeacher(key: string, value: any): Promise<void> {
+  updateTeacher(key: string, value: any): Promise<Teacher> {
     return this.tutorialsRef.update(key, value);
   }
 
