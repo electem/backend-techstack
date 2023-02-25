@@ -1,0 +1,55 @@
+<div class="submit-form">
+  <div *ngIf="!submitted">
+    <div class="form-group">
+      <label for="title">name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="name"
+        required
+        [(ngModel)]="currentTeacher.name"
+        name="title"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="description">address</label>
+      <input
+        class="form-control"
+        id="address"
+        required
+        [(ngModel)]="currentTeacher.address"
+        name="description"
+      />
+    </div>
+    <div class="form-group">
+      <label for="description">phonenumber</label>
+      <input
+        class="form-control"
+        id="address"
+        required
+        [(ngModel)]="currentTeacher.phonenumber"
+        name="description"
+      />
+    </div>
+    <div class="form-group">
+      <label for="description">email</label>
+      <input
+        class="form-control"
+        id="address"
+        required
+        [(ngModel)]="currentTeacher.email"
+        name="description"
+      />
+    </div>
+
+    <button (click)="updateTeacher()" class="btn btn-success">Update</button>
+    <button (click)="deleteTeacher(currentTeacher.key)" class="btn btn-success">
+      Delete
+    </button>
+  </div>
+  <div *ngIf="!currentTeacher">
+    <br />
+    <p>Cannot access this Tutorial...</p>
+  </div>
+</div>
