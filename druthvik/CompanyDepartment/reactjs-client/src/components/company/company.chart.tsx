@@ -1,94 +1,96 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
-import { Component } from "react";
-import companyService from "../../services/company.service";
-import { Company } from "../../types/company.types";
-import { Chart, registerables } from "chart.js";
+import { Component } from 'react'
+import companyService from '../../services/company.service'
+import { Company } from '../../types/company.types'
+import { Chart, registerables } from 'chart.js'
 export default class CompanyCharts extends Component {
-  company: Company[] = [];
-  companyNames: string[] = [];
-  companyDepartmentCount: number[] = [];
-  componentDidMount() {
-    this.retrieveCompany();
+  company: Company[] = []
+  companyNames: string[] = []
+  companyDepartmentCount: number[] = []
+  componentDidMount () {
+    this.retrieveCompany()
   }
 
-  getcharts() {
-    Chart.register(...registerables);
-    new Chart("myChart", {
-      type: "bar",
+  getcharts () {
+    Chart.register(...registerables)
+    new Chart('myChart', {
+      type: 'bar',
       data: {
         labels: this.companyNames,
         datasets: [
           {
-            label: "No of Departments In Companies",
-            backgroundColor: ["rgba(255, 99, 132, 0.2)"],
-            borderColor: "rgba(255, 99, 132, 1)",
+            label: 'No of Departments In Companies',
+            backgroundColor: ['rgba(255, 99, 132, 0.2)'],
+            borderColor: 'rgba(255, 99, 132, 1)',
             data: this.companyDepartmentCount,
-            borderWidth: 1,
-          },
-        ],
+            borderWidth: 1
+          }
+        ]
       },
       options: {
         scales: {
           y: {
-            beginAtZero: true,
-          },
-        },
-      },
-    });
+            beginAtZero: true
+          }
+        }
+      }
+    })
   }
-  companyCharts() {
-    Chart.register(...registerables);
-    new Chart("MultiAxisChart", {
-      type: "line",
+
+  companyCharts () {
+    Chart.register(...registerables)
+    new Chart('MultiAxisChart', {
+      type: 'line',
       data: {
         labels: this.companyNames,
         datasets: [
           {
-            label: "No of Departments In Companies",
+            label: 'No of Departments In Companies',
             data: this.companyDepartmentCount,
-            backgroundColor: ["rgba(255, 99, 132, 0.2)"],
-            borderColor: "rgba(255, 99, 132, 1)",
+            backgroundColor: ['rgba(255, 99, 132, 0.2)'],
+            borderColor: 'rgba(255, 99, 132, 1)',
             tension: 0.4,
-            yAxisID: "teacherNumber",
-          },
-        ],
+            yAxisID: 'teacherNumber'
+          }
+        ]
       },
 
       options: {
         scales: {
           teacherNumber: {
             beginAtZero: false,
-            type: "linear",
-            position: "left",
+            type: 'linear',
+            position: 'left'
           },
           studentNumber: {
             beginAtZero: false,
-            type: "linear",
-            position: "right",
-          },
-        },
-      },
-    });
+            type: 'linear',
+            position: 'right'
+          }
+        }
+      }
+    })
   }
-  async retrieveCompany() {
+
+  async retrieveCompany () {
     await companyService.getCompanies().then((response) => {
-      this.company = response.data;
-      console.log(this.company);
-      this.companyNames = this.company.map((name) => name.name!);
+      this.company = response.data
+      console.log(this.company)
+      this.companyNames = this.company.map((name) => name.name!)
       this.companyDepartmentCount = this.company.map(
         (department) => department.department?.length!
-      );
-    });
-    this.getcharts();
-    this.companyCharts();
+      )
+    })
+    this.getcharts()
+    this.companyCharts()
   }
-  render() {
+
+  render () {
     return (
       <div>
         <div className="maincontent">
           <div className="row">
             <div className="col-lg-24">
-              <div className="col-xs-12" style={{ paddingLeft: "0" }}>
+              <div className="col-xs-12" style={{ paddingLeft: '0' }}>
                 <i className="fa fa-bar-chart-o fa-2x blue Fleft MarRight10 MarBottom10"></i>
 
                 <div className="font-weight-bold font">Company Analytics</div>
@@ -96,7 +98,7 @@ export default class CompanyCharts extends Component {
               </div>
               <div
                 className="col-xs-12"
-                style={{ float: "right", textAlign: "right" }}
+                style={{ float: 'right', textAlign: 'right' }}
               >
                 <div className="btn-group">
                   <button
@@ -177,11 +179,11 @@ export default class CompanyCharts extends Component {
         <div
           id="footer"
           className="maincontent"
-          style={{ marginTop: "-10px !important;" }}
+          style={{ marginTop: '-10px !important;' }}
         >
           <div className="TexAlCenter row">
             <div className="col-sm-2 col-xs-12">
-              <div style={{ paddingTop: "2px" }}>
+              <div style={{ paddingTop: '2px' }}>
                 <button
                   type="button"
                   className="btn btn-link"
@@ -198,7 +200,7 @@ export default class CompanyCharts extends Component {
               </div>
             </div>
             <div className="col-sm-1 col-xs-12">
-              <div style={{ paddingTop: "0px" }}>
+              <div style={{ paddingTop: '0px' }}>
                 <button
                   type="button"
                   className="btn btn-link"
@@ -213,6 +215,6 @@ export default class CompanyCharts extends Component {
           </div>
         </div>
       </div>
-    );
+    )
   }
 }

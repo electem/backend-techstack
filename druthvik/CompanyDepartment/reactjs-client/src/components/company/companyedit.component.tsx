@@ -1,80 +1,86 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable jsx-a11y/anchor-has-content */
-import { Component, ChangeEvent } from "react";
-import { Link, RouteComponentProps } from "react-router-dom";
-import { Company } from "../../types/company.types";
-import companyService from "../../services/company.service";
+import { ChangeEvent, Component } from 'react'
+import { Link, RouteComponentProps } from 'react-router-dom'
+import { Company } from '../../types/company.types'
+import companyService from '../../services/company.service'
 interface RouterProps {
   id: string;
 }
-type Props = RouteComponentProps<RouterProps>;
+type Props = RouteComponentProps<RouterProps>
 type State = {
   currentComany: Company;
-};
+}
 export default class companyedit extends Component<Props, State> {
-  constructor(props: Props) {
-    super(props);
-    this.onChangeName = this.onChangeName.bind(this);
-    this.onChangeLocation = this.onChangeLocation.bind(this);
-    this.onChangeEmail = this.onChangeEmail.bind(this);
+  constructor (props: Props) {
+    super(props)
+    this.onChangeName = this.onChangeName.bind(this)
+    this.onChangeLocation = this.onChangeLocation.bind(this)
+    this.onChangeEmail = this.onChangeEmail.bind(this)
     this.state = {
       currentComany: {
         id: 0,
-        name: "",
-        email: "",
-        location: ",",
-      },
-    };
+        name: '',
+        email: '',
+        location: ','
+      }
+    }
   }
-  componentDidMount() {
-    this.getCompanyById(this.props.match.params.id);
+
+  componentDidMount () {
+    this.getCompanyById(this.props.match.params.id)
   }
-  onChangeName(e: ChangeEvent<HTMLInputElement>) {
-    const name = e.target.value;
+
+  onChangeName (e: ChangeEvent<HTMLInputElement>) {
+    const name = e.target.value
 
     this.setState((prevState) => ({
       currentComany: {
         ...prevState.currentComany,
-        name: name,
-      },
-    }));
+        name
+      }
+    }))
   }
-  onChangeLocation(e: ChangeEvent<HTMLInputElement>) {
-    const address = e.target.value;
+
+  onChangeLocation (e: ChangeEvent<HTMLInputElement>) {
+    const address = e.target.value
 
     this.setState((prevState) => ({
       currentComany: {
         ...prevState.currentComany,
-        address: address,
-      },
-    }));
+        address
+      }
+    }))
   }
-  onChangeEmail(e: ChangeEvent<HTMLInputElement>) {
-    const email = e.target.value;
+
+  onChangeEmail (e: ChangeEvent<HTMLInputElement>) {
+    const email = e.target.value
 
     this.setState((prevState) => ({
       currentComany: {
         ...prevState.currentComany,
-        email: email,
-      },
-    }));
+        email
+      }
+    }))
   }
-  getCompanyById(id: string) {
+
+  getCompanyById (id: string) {
     companyService
       .getCompanyById(id)
       .then((response) => {
         this.setState({
-          currentComany: response.data,
-        });
-        console.log(response.data);
+          currentComany: response.data
+        })
+        console.log(response.data)
       })
       .catch((e: Error) => {
-        alert(e.message);
-      });
+        alert(e.message)
+      })
   }
-  render() {
-    const { currentComany } = this.state;
+
+  render () {
+    const { currentComany } = this.state
     return (
       <div>
         <div className=""></div>
@@ -256,7 +262,7 @@ export default class companyedit extends Component<Props, State> {
                   </div>
                   <div className="row">
                     <div className="col-xs-24 text-right close-button ">
-                      <Link to={"/company2"}>
+                      <Link to={'/company2'}>
                         <button
                           type="button"
                           data-toggle="collapse"
@@ -271,7 +277,7 @@ export default class companyedit extends Component<Props, State> {
                         href="#"
                         className="ui-commandlink ui-widget d-none"
                       ></a>
-                      <Link to={"/companyList"}>
+                      <Link to={'/companyList'}>
                         <button
                           id="custTabs:j_idt331"
                           className="ui-commandlink ui-widget btn btn-sm btn-primary link2btn"
@@ -292,6 +298,6 @@ export default class companyedit extends Component<Props, State> {
           </div>
         </div>
       </div>
-    );
+    )
   }
 }

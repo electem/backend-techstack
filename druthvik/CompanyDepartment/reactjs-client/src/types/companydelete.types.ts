@@ -1,3 +1,3 @@
 export class CompanyDelete {
-  ids?: number[];
+  ids?: number[]
 }
