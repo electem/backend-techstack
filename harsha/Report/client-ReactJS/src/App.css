@@ -1,0 +1,47 @@
+.search {
+  max-width: 1032px;
+}
+
+.row {
+  padding: 15px 0px;
+  justify-content: center;
+}
+
+.chart{
+  margin-top: 100px;
+  margin-left: 270px;
+  float: left;
+  width: 560px;
+  height: 500px;
+}
+
+.chart2{
+  margin-top: 100px;
+  width: 560px;
+  float: right;
+}
+
+.button {
+  padding-left: 1005px;
+}
+
+h2 {
+  text-align: center;
+}
+
+th ,td{
+  font-size: large;
+}
+
+.fa {
+  color: blue;
+  padding-right: 30px;
+}
+
+.icon {
+  color: red;
+}
+
+.action {
+  padding-right: 70px;
+}

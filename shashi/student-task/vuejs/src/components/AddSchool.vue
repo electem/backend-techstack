@@ -90,7 +90,6 @@
   import { defineComponent } from "vue";
   import studentservice from "@/services/studentservice";
   import { Student } from "@/types/student";
-  import ResponseData from "@/types/ResponseData";
   import School from "@/types/school";
 import { Teacher } from "@/types/teacher";
 import Multiselect from "@suadelabs/vue3-multiselect";
@@ -129,26 +128,22 @@ import * as yup from "yup";
     methods: {      
       saveSchool() {    
         let data = {
-            schoolname: this.school.schoolname,
+        schoolid:this.school.schoolid,
+        schoolname: this.school.schoolname,
         address: this.school.address,
         teacher: this.selectedTeachers,
-        student:this.selectedStudents
+        students:this.selectedStudents
         };
   
         studentservice
           .createSchool(data)
-          .then((response: ResponseData) => {
-            console.log(response.data);
-            this.submitted = true;
-          })
-          .catch((e: Error) => {
-            console.log(e);
-          });
+          this.submitted = true;      
+         
       },  
-      retrieveTeachers() {
-      studentservice
+    async  retrieveTeachers() {
+     await studentservice
         .getAllTeacherss()
-        .then((response: ResponseData) => {
+        .then((response) => {
           this.teacherData = response.data;
           console.log(response.data);
         })
@@ -159,7 +154,7 @@ import * as yup from "yup";
     retrieveStudents() {
       studentservice
         .getAllStudents()
-        .then((response: ResponseData) => {
+        .then((response) => {
           this.studentData = response.data;
           console.log(response.data);
         })

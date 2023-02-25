@@ -1,0 +1,18 @@
+body {
+	background-image: none !important;
+	background-color: transparent !important;
+}
+
+/*table { page-break-inside: auto !important; }
+tr    { page-break-inside: avoid !important; page-break-after: auto !important; }*/
+	
+@page {
+	background-image: none !important;
+	background-color: transparent !important;
+}
+
+@page {
+	margin: 0.25in !important;
+	orphans: 4; 
+	widows: 2;
+}

@@ -31,8 +31,8 @@ export class StudentsListingDatatables extends Component<Props, State> {
     this.retrieveStudents();
   }
   retrieveStudents() {
-    StudentDataService.getAll()
-      .then((response: any) => {
+    StudentDataService.getAllStudents()
+      .then((response) => {
         this.setState({
           students: response.data,
         });

@@ -13,7 +13,7 @@ import { TeacherService } from 'src/app/services/teacher.service';
 })
 export class CreateTeacherComponent implements OnInit {
   registerForm!: FormGroup;
-  submitted: boolean = false;
+  submitted!: boolean;
   schools: School[] = [];
   schoolsList: School[] = [];
   addedSchools: School[] = [];

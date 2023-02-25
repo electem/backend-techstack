@@ -89,7 +89,6 @@ import { defineComponent } from "vue";
 import studentservice from "@/services/studentservice";
 import { Teacher } from "@/types/teacher";
 import School from "@/types/school";
-import ResponseData from "@/types/ResponseData";
 export default defineComponent({
   name: "add-teacher",  
   data() {
@@ -121,14 +120,8 @@ export default defineComponent({
         school: this.selectedSchools,
       };
       studentservice
-        .createTeacher(data)
-        .then((response: ResponseData) => {
-          console.log(response.data);
-          this.submitted = true;
-        })
-        .catch((e: Error) => {
-          console.log(e);
-        });
+        .createTeacher(data)              
+          this.submitted = true;    
     },
     selectedSchoolMethod(school: School) {
       this.currentSchool = school;
@@ -136,8 +129,8 @@ export default defineComponent({
     },
     retrieveSchools() {
       studentservice
-        .getAll()
-        .then((response: ResponseData) => {
+        .getAllSchool()
+        .then((response) => {
           this.schoolList = response.data;
           console.log(response.data);
         })

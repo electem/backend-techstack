@@ -24,7 +24,6 @@ import {
   Plugin,
 } from "chart.js";
 import School from "@/types/school";
-import ResponseData from "@/types/ResponseData";
 import studentservice from "@/services/studentservice";
 
 ChartJS.register(Title, Tooltip, Legend, ArcElement, CategoryScale);
@@ -82,8 +81,8 @@ export default defineComponent({
   methods: {
    async setup() {
     await  studentservice
-        .getAll()
-        .then((response: ResponseData) => {
+        .getAllSchool()
+        .then((response) => {
           this.schoolList = response.data;
           console.log(response.data);
           this.schoolNames = this.schoolList.map((school) => school.schoolname);

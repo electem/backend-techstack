@@ -2,7 +2,6 @@
 import { defineComponent } from "vue";
 import studentservice from "@/services/studentservice";
 import School from "@/types/school";
-import ResponseData from "@/types/ResponseData";
 import Multiselect from "@suadelabs/vue3-multiselect";
 import { Student } from "@/types/student";
 import { Teacher } from "@/types/teacher";
@@ -21,12 +20,12 @@ export default defineComponent({
     };
   },
   methods: {
-    getSchool(id: any) {
+    getSchool(id) {
       studentservice
         .getSchoolById(id)
-        .then((response: ResponseData) => {
+        .then((response) => {
           this.currentSchool = response.data;
-          console.log(response.data);
+          console.log(response);
         })
         .catch((e: Error) => {
           console.log(e);
@@ -34,8 +33,8 @@ export default defineComponent({
     },
     updateSchool() {
         studentservice.updateSchool(this.currentSchool)
-        .then((response: ResponseData) => {
-          console.log(response.data);
+        .then((response) => {
+          console.log(response);
           this.message = "The tutorial was updated successfully!";
         })
         .catch((e: Error) => {
@@ -45,7 +44,7 @@ export default defineComponent({
     retrieveTeachers() {
       studentservice
         .getAllTeacherss()
-        .then((response: ResponseData) => {
+        .then((response) => {
           this.teacherData = response.data;
           console.log(response.data);
         })
@@ -56,7 +55,7 @@ export default defineComponent({
     retrieveStudents() {
       studentservice
         .getAllStudents()
-        .then((response: ResponseData) => {
+        .then((response) => {
           this.studentData = response.data;
           console.log(response.data);
         })
@@ -66,8 +65,8 @@ export default defineComponent({
     },
     deleteSchool() {
       studentservice.deleteSchool(this.currentSchool.schoolid)
-        .then((response: ResponseData) => {
-          console.log(response.data);
+        .then((response) => {
+          console.log(response);
           this.$router.push({ name: "schoolist" });
         })
         .catch((e: Error) => {
@@ -165,7 +164,7 @@ export default defineComponent({
 
   <div v-else>
     <br />
-    <p>Please click on a Tutorial...</p>
+    <p>Data is not binding...</p>
   </div>
 </template>
 <style src="vue-multiselect/dist/vue-multiselect.min.css">

@@ -35,14 +35,14 @@ export class ChartsComponent implements OnInit {
       return name.teacherName!;
     });
     this.schoolsCount = this.teachers.map((count) => {
-      return count.schools?.length!;
+      return count.schools!.length;
     });
     this.chartsForTeacherAndSchool();
   }
 
   chartsForTeacherAndSchool() {
     Chart.register(...registerables);
-    const myChart = new Chart('myChart', {
+    new Chart('myChart', {
       type: 'bar',
       data: {
         labels: [this.teacherNames],
@@ -82,17 +82,17 @@ export class ChartsComponent implements OnInit {
       return name.schoolName!;
     });
     this.teachersCount = this.schools.map((count) => {
-      return count.teachers?.length!;
+      return count.teachers!.length;
     });
     this.studentsCount = this.schools.map((count) => {
-      return count.students?.length!;
+      return count.students!.length;
     });
     this.chartForStudentAndTeacherAndSchool();
   }
 
   chartForStudentAndTeacherAndSchool() {
     Chart.register(...registerables);
-    var myMultiAxisChart = new Chart('myMultiAxisChart', {
+    new Chart('myMultiAxisChart', {
       type: 'line',
       data: {
         labels: this.schoolNames,

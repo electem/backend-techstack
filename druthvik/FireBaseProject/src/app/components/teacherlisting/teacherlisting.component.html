@@ -1,0 +1,46 @@
+<div class="col-md-6">
+  <ul class="list-group"></ul>
+  <td>
+    <button routerLink="/createteachers">Add Teachers</button>
+  </td>
+</div>
+<div class="container">
+  <br />
+  <table
+    class="table table-bordered table-hover table-bordered border-secondary"
+  >
+    <thead class="thead-light">
+      <tr class="active">
+        <th class="text-center" scope="col">Name</th>
+        <th class="text-center" scope="col">Address</th>
+        <th class="text-center" scope="col">Phonenumber</th>
+        <th class="text-center" scope="col">Email</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let teacher of teachers">
+      <tr>
+        <th class="text-center" scope="row">{{ teacher.name }}</th>
+        <th class="text-center" scope="row">{{ teacher.address }}</th>
+        <th class="text-center" scope="row">{{ teacher.phonenumber }}</th>
+        <th class="text-center" scope="row">{{ teacher.email }}</th>
+
+        <th class="text-center" scope="row">
+          <button
+            type="button"
+            class="btn btn-warning btn-sm mr-2"
+            routerLink="/teacher/{{ teacher.key }}"
+          >
+            Edit
+          </button>
+          <button
+            type="button"
+            class="btn btn-danger btn-sm mr-2 marignleft"
+            (click)="deleteTeacher(teacher.key)"
+          >
+            Delete
+          </button>
+        </th>
+      </tr>
+    </tbody>
+  </table>
+</div>

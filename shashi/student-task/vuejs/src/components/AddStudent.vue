@@ -137,7 +137,6 @@
 import { defineComponent } from "vue";
 import studentservice from "@/services/studentservice";
 import { Student } from "@/types/student";
-import ResponseData from "@/types/ResponseData";
 import School from "@/types/school";
 import http from "@/http-Studentcommon";
 export default defineComponent({
@@ -172,8 +171,8 @@ export default defineComponent({
       responseType: 'blob',
     });
   },
-    saveStudent() {
-      let data = {
+    async saveStudent() {
+      const data = {
         studentname: this.student.studentname,
         address: this.student.address,
         email: this.student.email,
@@ -181,11 +180,10 @@ export default defineComponent({
         dob: this.student.dob,
         phonenumber: this.student.phonenumber,
         school: this.student.school,
-      };
-      console.log("create url starts");
-      studentservice
+      };    
+     await studentservice
         .createStudent(data)
-        .then((response: ResponseData) => {
+        .then((response) => {
           console.log(response.data);
           let formData = new FormData();
           formData.append("image", this.file);
@@ -204,8 +202,8 @@ export default defineComponent({
     },
     retrieveSchools() {
       studentservice
-        .getAll()
-        .then((response: ResponseData) => {
+        .getAllSchool()
+        .then((response) => {
           this.schoolList = response.data;
           console.log(response.data);
         })

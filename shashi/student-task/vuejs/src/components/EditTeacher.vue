@@ -2,7 +2,6 @@
 import { defineComponent } from "vue";
 import studentservice from "@/services/studentservice";
 import { Teacher } from "@/types/teacher";
-import ResponseData from "@/types/ResponseData";
 import School from "@/types/school";
 
 export default defineComponent({
@@ -18,12 +17,12 @@ export default defineComponent({
     };
   },
   methods: {
-    getTeacherById(id: any) {
+    getTeacherById(id) {
       studentservice
         .getTeacherById(id)
-        .then((response: ResponseData) => {
+        .then((response) => {
           this.currentTeacher = response.data;
-          console.log(response.data);
+          console.log(response);
           for (const i of this.currentTeacher.school) {
             this.value.push(i.schoolid!);
           }
@@ -34,8 +33,8 @@ export default defineComponent({
     },
     retrieveSchools() {
       studentservice
-        .getAll()
-        .then((response: ResponseData) => {
+        .getAllSchool()
+        .then((response) => {
           this.schoolList = response.data;
           console.log(response.data);
         })
@@ -46,8 +45,8 @@ export default defineComponent({
     updateTeacher() {
       studentservice
         .updateTeacher(this.currentTeacher)
-        .then((response: ResponseData) => {
-          console.log(response.data);
+        .then((response) => {
+          console.log(response);
           this.message = "The teacher was updated successfully!";
         })
         .catch((e: Error) => {
@@ -69,8 +68,8 @@ export default defineComponent({
     },
     deleteTeacher() {
       studentservice.deleteTeacher(this.currentTeacher.teacherid)
-        .then((response: ResponseData) => {
-          console.log(response.data);
+        .then((response) => {
+          console.log(response);
           this.$router.push({ name: "teacherslist" });
         })
         .catch((e: Error) => {

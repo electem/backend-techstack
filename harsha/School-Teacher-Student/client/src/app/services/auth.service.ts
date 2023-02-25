@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { Login } from '../models/user-login.model';
 
@@ -21,13 +21,13 @@ export class AuthService {
         localStorage.setItem('tokens', data.token);
         return true;
       }),
-      catchError((error: any) => {
+      catchError(() => {
         return of(false);
       })
     );
   }
 
-  register(username: string, password: string): Observable<any> {
+  register(username: string, password: string) {
     return this.http.post(
       AUTH_API + 'register',
       {

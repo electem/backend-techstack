@@ -2,20 +2,20 @@ import http from "../http-common";
 import { TeacherData } from "../types/teacher.types";
 
 class TeacherDataService {
-  getAll() {
+  getAllTeachers() {
     return http.get<Array<TeacherData>>("/teacher");
   }
-  create(school: TeacherData) {
-    return http.post<TeacherData>("/teacher", school);
+  createTeacher(teacher: TeacherData) {
+    return http.post<TeacherData>("/teacher", teacher);
   }
-  get(id: string) {
+  getTeacherById(id: string) {
     return http.get<TeacherData>(`/teacher/${id}`);
   }
-  update(data: TeacherData, id: any) {
-    return http.put<any>(`/teacher/`, data);
+  updateTeacher(teacher: TeacherData, id: number) {
+    return http.put<TeacherData>(`/teacher/`, teacher);
   }
-  delete(id: any) {
-    return http.delete<any>(`/teacher/${id}`);
+  deleteTeacher(id: number) {
+    return http.delete(`/teacher/${id}`);
   }
 }
 
