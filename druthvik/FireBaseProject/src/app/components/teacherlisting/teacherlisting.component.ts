@@ -9,7 +9,7 @@ import { map } from 'rxjs/operators';
 })
 export class TeacherlistingComponent implements OnInit {
   teachers: Teacher[] = [];
-  teacher?: any;
+  teacher?:Teacher[];
 
   constructor(private teacherService: TeacherService) {}
 
