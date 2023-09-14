@@ -1,5 +1,5 @@
 <div>
-  <nav class="navbar navbar-expand-sm bg-primary navbar-dark">
+  <!-- <nav class="navbar navbar-expand-sm bg-primary navbar-dark">
     <div class="navbar-nav mr-auto"></div>
     <a href="#" class="navbar-brand">Welcome to EBS</a>
     <div class="navbar-nav mr-auto">
@@ -13,8 +13,20 @@
         <a routerLink="game" class="nav-link">Game</a>
       </li>
     </div>
-  </nav>
+  </nav> -->
+  <div class="menu-section">
 
+    <div (click)="toggle()" [ngClass]="!show ? 'open' : 'menu-btn'" class="menu-btn">
+      <div class="menu-btn__burger"></div>
+    </div>
+
+    <nav>
+      <ul role="navigation" class="hidden" [@openClose]="!show ? false : true" [ngClass]="!show ? 'openli' :'closeli'">
+        <li><a routerLink="customerlist" class="nav-link">Customer</a></li>
+        <li><a routerLink="customergroup" class="nav-link">Customer Group</a></li>
+      </ul>
+    </nav>
+  </div>
   <div class="container mt-3">
     <router-outlet></router-outlet>
   </div>

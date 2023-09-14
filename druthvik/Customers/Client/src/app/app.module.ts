@@ -15,8 +15,7 @@ import { CustomereditComponent } from './components/customeredit/customeredit.co
 import { AddcustomergroupComponent } from './components/addcustomergroup/addcustomergroup.component';
 import { CustomergrouplistComponent } from './components/customergrouplist/customergrouplist.component';
 import { EditcustomergroupComponent } from './components/editcustomergroup/editcustomergroup.component';
-import { GameplayerComponent } from './components/gameplayer/gameplayer.component';
-import { EditgameplayerComponent } from './components/editgameplayer/editgameplayer.component';
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [
@@ -29,9 +28,7 @@ import { EditgameplayerComponent } from './components/editgameplayer/editgamepla
     CustomereditComponent,
     CustomergrouplistComponent,
     AddcustomergroupComponent,
-    GameplayerComponent,
     EditcustomergroupComponent,
-    EditgameplayerComponent,
   ],
   imports: [
     BrowserModule,
@@ -39,6 +36,7 @@ import { EditgameplayerComponent } from './components/editgameplayer/editgamepla
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
+    BrowserAnimationsModule
   ],
   providers: [
     {
@@ -49,4 +47,4 @@ import { EditgameplayerComponent } from './components/editgameplayer/editgamepla
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
