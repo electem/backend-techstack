@@ -20,9 +20,12 @@ import com.example.manytomanymapping.repository.DepartmentRepository;
 @RestController
 @CrossOrigin
 public class DepartmentController {
+	
+
+
 
 	/**
-	 * Logger
+	 * Logger raghu testing
 	 */
 	private static final Logger LOG = LoggerFactory.getLogger(DepartmentController.class);
 
