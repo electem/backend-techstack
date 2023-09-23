@@ -21,6 +21,8 @@ import com.example.onetoonemapping.repository.PanelRepository;
 @CrossOrigin
 public class PanelController {
 
+//raghu
+
 	@Autowired
 	PanelRepository panelRepository;
 
